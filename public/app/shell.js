@@ -1,14 +1,17 @@
 // Barre latérale de Stamped. Elle lit l'état sans lancer l'agent.
 import { esc, ic, ilYA } from './ui.js';
 
-// Trois écrans autour des produits, et le classement d'un nouveau produit.
+// Les produits d'abord. Un produit ouvre son propre espace (vue d'ensemble, pourquoi ce code,
+// monde, dossier). Les envois n'apparaissent que si la boutique a des commandes ; l'éditeur
+// de la règle encodée est un outil d'expert, à part.
 const NAV = [
   { id: 'accueil', href: '/#/', lib: 'Products', ic: 'produits' },
-  { id: 'arbre', href: '/#/arbre', lib: 'Why this code', ic: 'arbre' },
-  { id: 'monde', href: '/#/monde', lib: 'World', ic: 'veille' },
+  { id: 'envois', href: '/#/envois', lib: 'Shipments', ic: 'commandes', si: 'envois' },
   { id: 'dossier', href: '/#/dossier', lib: 'Classify a product', ic: 'agent' },
 ];
-const OUTILS = [];
+const OUTILS = [
+  { id: 'arbre', href: '/#/arbre', lib: 'Rule editor', ic: 'arbre' },
+];
 
 // Le tampon de la marque Stamped (silhouette pleine, couleur du texte).
 export const tampon = (cls = '') => `<svg viewBox="0 0 64 64" class="${cls}" aria-hidden="true"><g transform="rotate(-14 32 32)" fill="currentColor"><path d="M32 4c6 0 10 4.5 10 10 0 4-2.5 7-5 9-1.5 1.5-1.5 4 0 7 2 4 5 7 9 8.5 2 .8 2 2.5 2 3.5v4c0 1.7-1.3 3-3 3H19c-1.7 0-3-1.3-3-3v-4c0-1 0-2.7 2-3.5 4-1.5 7-4.5 9-8.5 1.5-3 1.5-5.5 0-7-2.5-2-5-5-5-9 0-5.5 4-10 10-10z"/><rect x="17" y="52" width="30" height="5" rx="2.5"/></g></svg>`;
@@ -36,8 +39,9 @@ export function shellHtml(actif, infos = {}) {
     <button class="icobtn" id="replier" title="Collapse the sidebar">${ic('panneau')}</button>
   </div>
   <button class="side-new" data-action="nouveau">${ic('plus')}<span>New…</span>${ic('chevron')}</button>
-  <nav aria-label="Main navigation">${NAV.map(item).join('')}</nav>
-  ${OUTILS.length ? `<div class="sec">More</div><nav>${OUTILS.map(item).join('')}</nav>` : ''}
+  <nav aria-label="Main navigation">${NAV.filter((n) => !n.si || infos[n.si]).map(item).join('')}</nav>
+  <div class="sec">Expert</div>
+  <nav>${OUTILS.map(item).join('')}</nav>
   <div class="sec">Stores</div>
   <nav>${boutique}</nav>
   <div class="side-bas">${mode}

@@ -105,3 +105,5 @@ a.logo { text-decoration: none; }
 .side-top .nom small { margin-top: 2px; }
 .qui-edit { display: flex; gap: 6px; padding: 4px 0; }
 .qui-edit .saisie { height: 32px; }
+[hidden] { display: none !important; }
+a.btn { text-decoration: none; }

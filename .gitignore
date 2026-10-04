@@ -15,3 +15,6 @@ essais/modules/*.pdf
 essais/modules/*.png
 !public/data/produits/*.jpg
 !public/data/logos/*
+
+# état local des outils de brainstorming (contient un jeton de session)
+.superpowers/

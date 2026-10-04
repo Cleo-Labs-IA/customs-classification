@@ -41,7 +41,7 @@ export const PAYS = {
 };
 export const nomPays = (c) => PAYS[c] || c;
 // Drapeaux : icônes du paquet flag-icons (MIT), copiées dans public/data/drapeaux.
-const DRAPEAUX = new Set('FR DE ES IT NL BE GB US CA JP AU CH KR CN VN IN MX BR IE PT AT SE DK NO FI PL NZ SG AE LU GR'.split(' '));
+const DRAPEAUX = new Set('EU FR DE ES IT NL BE GB US CA JP AU CH KR CN VN IN MX BR IE PT AT SE DK NO FI PL NZ SG AE LU GR TW'.split(' '));
 export const drapeau = (c, cls = '') => (DRAPEAUX.has(c) ? `<img class="drapeau ${cls}" src="/data/drapeaux/${c.toLowerCase()}.svg" alt="" width="20" height="15" loading="lazy" decoding="async">` : `<span class="iso ${cls}">${esc(c)}</span>`);
 export const pays = (c) => `<span class="pays">${drapeau(c)}${esc(nomPays(c))}</span>`;
 // Vignette d'un produit : son image si le catalogue en a une, sinon ses initiales.

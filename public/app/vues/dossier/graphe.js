@@ -114,6 +114,16 @@ function champQuestion(fait) {
   return `<textarea class="saisie" name="${fait}" required maxlength="200" rows="2" placeholder="Seller's answer, in one sentence"></textarea>`;
 }
 
+// La question ouverte du moteur, au dernier tour, prête à recevoir la réponse du vendeur.
+export function questionHtml(D, suggestions) {
+  const t = D.tours[D.tours.length - 1], qs = (t && t.data.questions) || [];
+  if (!qs.length || t.repondu || D.occupe || D.contradictions.length || D.valide) return '';
+  const sug = suggestions(qs);
+  return `<form class="question-form" data-form="question"><span class="eyebrow">Missing information · question to the seller</span>
+    ${qs.map((q) => `<div class="champ"><label>${esc(q.question)}</label><p class="faint" style="font-size:12.5px">${esc(q.why || '')}</p>${champQuestion(q.fact)}${(sug[q.fact] || []).map((x) => `<button type="button" class="chip suggestion" data-suggestion="${esc(q.fact)}" data-valeur="${esc(x.valeur)}">${ic('agent')}${esc(x.libelle)}</button>`).join('')}</div>`).join('')}
+    <button class="btn noir" type="submit">Answer and reassess</button></form>`;
+}
+
 export function toursHtml(D, det, suggestions) {
   return D.tours.map((t, i) => {
     const d = t.data, cands = d.candidates || [], extra = (d.alternatives_set_aside || []).filter((a) => !cands.some((c) => c.code === a.code));
@@ -130,12 +140,7 @@ export function toursHtml(D, det, suggestions) {
     const qs = d.questions || [], dernierTour = i === D.tours.length - 1;
     let question = '';
     if (qs.length && t.repondu) question = `<div class="question-faite"><span class="eyebrow">Question to the seller · answer confirmed</span>${qs.map((q) => `<p>${esc(q.question)}</p>`).join('')}<div class="faits">${Object.entries(t.repondu).map(([k, v]) => `<div class="fait-l reponse"><span><b>${esc(libelleFait(k))}</b> ${esc(valeurFait(k, v))}</span><span class="prov">confirmed answer</span></div>`).join('')}</div></div>`;
-    else if (qs.length && dernierTour && !D.occupe && !D.contradictions.length && !D.valide) {
-      const sug = suggestions(qs);
-      question = `<form class="question-form" data-form="question"><span class="eyebrow">Missing information · question to the seller</span>
-        ${qs.map((q) => `<div class="champ"><label>${esc(q.question)}</label><p class="faint" style="font-size:12.5px">${esc(q.why || '')}</p>${champQuestion(q.fact)}${(sug[q.fact] || []).map((s) => `<button type="button" class="chip suggestion" data-suggestion="${esc(q.fact)}" data-valeur="${esc(s.valeur)}">${ic('agent')}${esc(s.libelle)}</button>`).join('')}</div>`).join('')}
-        <button class="btn noir" type="submit">Answer and reassess</button></form>`;
-    }
+    else if (qs.length && dernierTour) question = questionHtml(D, suggestions);
     return `${diff}<div class="tour-l"><span class="tour-pastille">${i === 0 ? 'First assessment' : 'New assessment'}${t.secondes ? ' · ' + num(t.secondes) + ' s' : ''}</span><span class="etat ${(SOURCES[t.source] || [0, 'pret'])[1]}">${esc(sourceTour(t))}</span></div>${grille}${question}`;
   }).join('');
 }

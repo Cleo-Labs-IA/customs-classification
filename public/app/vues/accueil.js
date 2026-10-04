@@ -1,72 +1,82 @@
-// Accueil : les produits de la boutique, chacun en trois temps lisibles d'un coup d'œil.
-// 1. ce qui est lu sur l'étiquette, 2. le code et pourquoi, 3. le monde (lignes tarifaires
-// par pays, exigences vérifiées). Tout le reste est derrière un lien.
-import { esc, ic, etat } from '../ui.js';
-import { fmtCode } from '../conformite.js';
-import { evaluer } from '../../arbre-moteur.js';
-import { regle } from '../regle.js';
-import { reponseTxt } from '../graphe-arbre.js';
+// Accueil : les produits de la boutique. Une carte par produit (photo, code, état, et où en
+// est son parcours), une carte pour en ajouter un, et l'état des envois en une ligne.
+import { esc, ic, etat, pluriel, nomPays, NIVEAU } from '../ui.js';
+import { fmtCode, cleAttestation } from '../conformite.js';
+import { estImage } from '../dossier/photo.js';
+import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
+import { etatProduit } from './produit-entete.js';
 
 export const titre = 'Products';
-let R = null, MONDE = null, rerendreLocal = () => {};
-regle().then((r) => { R = r; rerendreLocal(); });
+let MONDE = null, rerendreLocal = () => {};
 fetch('/data/monde-produits.json').then((r) => (r.ok ? r.json() : null)).then((m) => { MONDE = m; rerendreLocal(); }).catch(() => null);
 
-const CSS = `
-.prod-grand { display: grid; grid-template-columns: 300px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin-bottom: 16px; overflow: hidden; }
-.prod-grand > div { padding: 20px 22px; border-left: 1px solid var(--line); min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-.prod-grand > div:first-child { border-left: 0; padding: 0; background: var(--sunk); }
-.prod-grand > div:first-child { justify-content: center; }
-.prod-grand .photo { width: 100%; max-height: 320px; object-fit: contain; display: block; }
-.prod-grand h2 { font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: -.03em; margin: 0; }
-.prod-grand .temps { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-.prod-grand .lu { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
-.prod-grand .lu li { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); background: var(--sunk); border-radius: 6px; padding: 3px 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.prod-grand .chemin { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
-.prod-grand .chemin li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; color: var(--ink-2); }
-.prod-grand .chemin span.n { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); padding-top: 2px; }
-.prod-grand .chiffres { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
-.prod-grand .chiffres b { display: block; font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: -.04em; line-height: 1; }
-.prod-grand .chiffres span { font-size: 12px; color: var(--ink-3); }
-.prod-grand .bas { margin-top: auto; padding-top: 6px; }
-@media (max-width: 1250px) { .prod-grand { grid-template-columns: 220px minmax(0, 1fr) minmax(0, 1fr); } .prod-grand > div:last-child { grid-column: 2 / -1; border-top: 1px solid var(--line); } }
-@media (max-width: 820px) { .prod-grand { grid-template-columns: 1fr; } .prod-grand > div { border-left: 0; border-top: 1px solid var(--line); grid-column: auto !important; } }
-`;
-if (typeof document !== 'undefined') document.head.appendChild(Object.assign(document.createElement('style'), { textContent: CSS }));
+// Les quatre temps du parcours d'un produit, et où il en est.
+function etapes(p, e, s) {
+  const regles = e.code ? S.regles().filter((r) => r.effet.type === 'exigence' && (r.sh || []).some((c) => String(e.code).startsWith(c))) : [];
+  const repondues = regles.filter((r) => s.attestations[cleAttestation(p.sku, r.id)]).length;
+  const liste = [
+    [(p.etiquette || []).length ? 'fait' : 'attente', 'Label read', `${(p.etiquette || []).length} lines · ${(p.marques_vues || []).length} marks`],
+    [e.code ? 'fait' : 'attente', 'Code found', e.code ? e.regleSeule ? 'by the encoded rule' : (S.decisions()[p.sku] || {}).origine === 'convergence' ? 'engine and rule agree' : 'proposed' : 'not yet'],
+    [s.validations[p.sku] ? 'fait' : e.code ? 'encours' : 'attente', 'Signed', s.validations[p.sku] ? 'by ' + s.validations[p.sku].par : 'by a declarant'],
+    [regles.length && repondues === regles.length ? 'fait' : repondues ? 'encours' : 'attente', 'Evidence', regles.length ? `${repondues} of ${regles.length} markets` : 'after the code'],
+  ];
+  return `<ol class="pc-etapes">${liste.map(([st, t, sous]) => `<li class="${st}"><span class="pt">${st === 'fait' ? ic('check') : ''}</span><b>${t}</b><small>${esc(sous)}</small></li>`).join('')}</ol>`;
+}
 
-function carte(p, s) {
-  const crit = p.criteres || {}, res = R ? evaluer(R.arbre, Object.fromEntries(Object.entries(crit).map(([k, x]) => [k, x.valeur]))) : null;
-  const C = R ? Object.fromEntries(R.arbre.criteres.map((c) => [c.id, c])) : {}, v = s.validations[p.sku], m = MONDE && MONDE.produits[p.sku];
-  const lus = (p.etiquette || []).slice(0, 6), reste = (p.etiquette || []).length - lus.length;
-  const code = res && res.statut === 'code' ? res.code : null, noeud = code ? R.arbre.noeuds[res.noeud] : null;
-  const chemin = res ? res.chemin.map((x, i) => `<li><span class="n">${i + 1}</span><span>${esc((C[x.critere] || {}).libelle || x.critere)}: <b>${esc(String(reponseTxt(C[x.critere], x.valeur)).split(':')[0])}</b>${crit[x.critere] && crit[x.critere].kind === 'reponse' ? ' <span class="faint">(stated by the seller)</span>' : ''}</span></li>`).join('') : '';
-  return `<div class="carte prod-grand">
-    <div>${p.image ? `<img class="photo" src="${esc(p.image)}" alt="Photographed label of the product">` : ''}</div>
-    <div><span class="temps">1 · Read on the label</span><h2>${esc(p.nom)}</h2>
-      <ul class="lu">${lus.map((l) => `<li title="${esc(l)}">${esc(l)}</li>`).join('')}</ul>
-      <p class="faint" style="font-size:12.5px">${reste > 0 ? `${reste} more lines · ` : ''}${(p.marques_vues || []).length} conformity marks seen · ${(p.a_confirmer || []).length} point${(p.a_confirmer || []).length === 1 ? '' : 's'} a photo cannot establish</p>
-      <div class="bas"><a class="btn texte petit" href="/#/dossier?sku=${esc(p.sku)}">${ic('dossier')}Open the classification file</a></div></div>
-    <div><span class="temps">2 · The code, and why</span>
-      ${code ? `<div class="grand-code" style="font-size:40px">${esc(fmtCode(code))}</div><p class="muted" style="font-size:13px">${esc(noeud.libelle || '')}</p>` : `<p>${res ? etat('a_verifier', 'The rule is waiting for a fact') : 'Loading the rule'}</p>`}
-      <ol class="chemin">${chemin}</ol>
-      <p style="font-size:12.5px">${v ? etat('pret', 'Validated by ' + v.par) : etat('a_verifier', 'Not validated by a declarant yet')}</p>
-      <div class="bas"><a class="btn noir petit" href="/#/arbre?sku=${esc(p.sku)}">${ic('arbre')}See the reasoning as a graph</a></div></div>
-    <div><span class="temps">3 · The world</span>
-      ${m ? `<div class="chiffres"><div><b>${m.bilan.lignes_nationales}</b><span>countries with a national tariff line proposed under ${esc(fmtCode(m.code_regle))}</span></div>
-        <div><b>${m.bilan.desaccord}</b><span>countries where the engine alone proposes another code</span></div>
-        <div><b>${m.bilan.exigences}</b><span>requirements checked word for word against the official text</span></div>
-        <div><b>${m.bilan.marches_exigences}</b><span>markets covered by these requirements</span></div></div>` : `<p class="muted">${MONDE ? 'No world data is recorded for this product. It is recorded for the two products of the default store.' : 'Loading the world data'}</p>`}
-      <div class="bas"><a class="btn noir petit" href="/#/monde?sku=${esc(p.sku)}">${ic('veille')}Open the world view</a></div></div>
-  </div>`;
+function carte(p, s, ev, i) {
+  const e = etatProduit(p.sku, s), m = MONDE && MONDE.produits[p.sku];
+  const lignes = ev.lignes.filter((l) => l.sku === p.sku && l.expedition !== 'expediee');
+  return `<a class="carte produit-carte" href="#/produit?sku=${encodeURIComponent(p.sku)}" style="--i:${i}">
+    <div class="pc-photo v-${esc(p.teinte || 'gris')}">${p.image ? `<img src="${esc(p.image)}" alt="">` : `<span>${esc(p.sku.slice(0, 3))}</span>`}<span class="pc-origine">${ic('globe')}Made in ${esc(nomPays(p.origine || 'CN'))}</span></div>
+    <div class="pc-corps">
+      <span class="eyebrow">${esc(p.sku)}</span>
+      <h3>${esc(p.nom)}</h3>
+      <div class="pc-code">${e.code ? `<span class="code">${esc(fmtCode(e.code))}</span>` : ''}${etat(e.niveau, e.texte)}</div>
+      ${etapes(p, e, s)}
+      <div class="pc-pied">${ev.totaux.lignes ? `<span><b>${lignes.length}</b> order${lignes.length === 1 ? '' : 's'} waiting</span>` : ''}${m ? `<span><b>${m.bilan.marches_exigences}</b> markets checked</span><span><b>${m.bilan.consultes}</b> countries looked up</span>` : ''}<span class="pc-ouvrir">Open ${ic('droite')}</span></div>
+    </div></a>`;
+}
+
+function ajout() {
+  return `<div class="carte produit-ajout" id="produit-ajout" tabindex="0" role="button" aria-label="Add a product">
+    <span class="pa-ic">${ic('plus')}</span><h3>Add a product</h3>
+    <p>Drop a photo of the product, its label or a pictogram. Or paste a product page link, or a few lines.</p>
+    <div class="pa-actions"><label class="btn noir petit">${ic('fichier')}Choose an image<input type="file" accept="image/*,.heic,.heif" class="sr" id="ajout-photo"></label><a class="btn blanc petit" href="#/dossier">${ic('lien')}Link or text</a></div></div>`;
+}
+
+function bandeau(s, ev) {
+  const t = ev.totaux, pays = Object.keys(ev.parPays).length;
+  if (!s.boutique || !t.lignes) return '';
+  return `<a class="carte bandeau-envois" href="#/envois"><span class="bulle"></span><div><b>${esc(s.boutique.nom)}</b><small>${esc(s.boutique.plateforme)} · ${pluriel(t.lignes, 'order line', 'order lines')} to ship to ${pluriel(pays, 'country', 'countries')}</small></div>
+    <div class="be-compte">${['pret', 'a_verifier', 'bloque'].map((n) => `<span><i class="c-${n}"></i><b data-compte="${t.compte[n]}" data-cle="acc-${n}">${t.compte[n]}</b> ${NIVEAU[n].court.toLowerCase()}</span>`).join('')}</div><span class="be-aller">Shipments ${ic('droite')}</span></a>`;
 }
 
 export function rendre() {
-  const s = S.lire(), produits = Object.values(s.produits);
+  const s = S.lire(), produits = Object.values(s.produits), ev = S.evaluation();
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Your products</h1><p>From the photo of a label to a customs code you can check, then to what each country asks for.</p></div></div>
-    ${produits.length ? produits.map((p) => carte(p, s)).join('') : '<div class="agent"><span class="rond"></span><span class="txt">Loading the store</span></div>'}
-    <p class="faint" style="font-size:12.5px;max-width:860px">The rule that gives the code is drafted by AI from the official texts it cites and is not reviewed by a customs declarant. The engine proposals are recorded calls to the Cleo Legal API. Nothing here states that a product is compliant.</p>
+    <div class="titre"><div class="bloc"><h1>Your products</h1><p>Each product is read from the photo of its label, classified, then checked against what every market asks for. Open one to see its code, why, and the evidence each country needs.</p></div></div>
+    ${bandeau(s, ev)}
+    <div class="produits-galerie">${produits.length ? produits.map((p, i) => carte(p, s, ev, i)).join('') : '<div class="agent"><span class="rond"></span><span class="txt">Loading the store</span></div>'}${ajout()}</div>
+    <p class="faint" style="font-size:12.5px;max-width:860px;margin-top:18px">The rule that gives the code is drafted by AI from the official texts it cites and is not reviewed by a customs declarant. Engine proposals are ${S.fixes().mode === 'direct' ? 'live' : 'recorded'} calls to the Cleo Legal API. Nothing here states that a product is compliant.</p>
   </div>`;
 }
-export function brancher(racine, rerendre) { rerendreLocal = rerendre; }
+
+export function brancher(racine, rerendre) {
+  rerendreLocal = rerendre;
+  const zone = racine.querySelector('#produit-ajout');
+  if (!zone) return;
+  const vers = (entree) => { E.preparer(entree); location.hash = '#/dossier'; };
+  zone.addEventListener('click', (e) => { if (!e.target.closest('label, a, input')) location.hash = '#/dossier'; });
+  zone.addEventListener('keydown', (e) => { if (e.key === 'Enter') location.hash = '#/dossier'; });
+  racine.querySelector('#ajout-photo').addEventListener('change', (e) => { if (e.target.files[0]) vers({ fichier: e.target.files[0] }); });
+  zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('survol'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('survol'));
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault(); zone.classList.remove('survol');
+    const img = [...e.dataTransfer.files].find(estImage);
+    if (img) return vers({ fichier: img });
+    const lien = (e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text/plain') || '').trim().split('\n')[0];
+    if (lien) vers(/^https?:\/\//i.test(lien) ? { adresse: lien } : { texte: lien });
+  });
+}

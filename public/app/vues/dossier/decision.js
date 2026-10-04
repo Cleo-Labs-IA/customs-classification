@@ -6,8 +6,8 @@ import { esc, ic, nomPays, drapeau, etat } from '../../ui.js';
 import { fmtCode } from '../../conformite.js';
 import * as CF from '../../../conformite.js';
 import { premierRetenu, titre, libelleSource } from '../../dossier/logique.js';
-
 const TON = { keep: 'pret', warn: 'a_verifier', bad: 'bloque', out: 'en_attente' };
+
 const un = (n, mot) => `${n} ${mot}${n === 1 ? '' : 's'}`;
 const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
 const fmtIssue = (x) => (/^\d{6}$/.test(x) ? fmtCode(x) : x);
@@ -25,9 +25,6 @@ const CSS = `
 .dec-vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 10px 0 4px; }
 .dec-vs div { border: 1px solid var(--line-2); border-radius: var(--r-sm); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; color: var(--ink-3); }
 .dec-vs b { font-family: var(--mono); font-size: 22px; color: var(--ink); }
-.dec-bande { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-.dec-bande div { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; font-size: 11.5px; color: var(--ink-3); }
-@media (max-width: 1100px) { .dec-bande { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .dec-etat { margin-top: 14px; padding: 12px 14px; border-radius: var(--r); background: var(--warn-bg); color: var(--warn); font-size: 13.5px; }
 .dec-etat.ok { background: var(--ok-bg); color: var(--ok); }
 .dec-etat ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); }

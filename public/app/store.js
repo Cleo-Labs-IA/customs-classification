@@ -5,6 +5,9 @@ import { evaluer, aTraiter, avecValeurCommande } from './conformite.js';
 import { normaliserClassification } from './classification.js';
 import { versCommandes } from './csv.js';
 import { classifier, etatServeur } from './api.js';
+import { regle } from './regle.js';
+import { evaluer as parcourir } from '../arbre-moteur.js';
+import { decider } from '../decision.js';
 
 // v2 : la boutique par défaut porte les deux produits réels ; un état gardé par une version
 // précédente (anciens produits fictifs) est abandonné, la boutique par défaut est rechargée.
@@ -29,6 +32,9 @@ function changer(patch) {
   abonnes.forEach((fn) => fn(etat));
 }
 export const lire = () => etat;
+// La règle encodée, pour la décision de chaque produit ; son arrivée rejoue l'affichage.
+let R = null;
+regle().then((r) => { R = r; abonnes.forEach((fn) => fn(etat)); });
 export const fixes = () => statiques;
 export function abonner(fn) { abonnes.add(fn); return () => abonnes.delete(fn); }
 const note = (quoi, sku = null) => ({ journal: [{ le: new Date().toISOString(), par: etat.qui, quoi, sku }, ...etat.journal].slice(0, 300) });
@@ -74,7 +80,22 @@ function fusionnerValidationsDossier() {
 }
 
 export const regles = () => [...statiques.regles, ...etat.simulations];
-export const contexte = (s = etat) => ({ classifications: s.classifications, validations: s.validations, attestations: s.attestations, regles: [...statiques.regles, ...s.simulations], maintenant: Date.now() });
+// La décision de chaque produit, la même que dans son dossier : la réponse du moteur et la
+// règle encodée parcourue sur les faits établis depuis l'étiquette (p.criteres). Sans règle
+// applicable, pas de décision : le statut du moteur parle seul.
+export function decisions(s = etat) {
+  const out = {};
+  for (const p of Object.values(s.produits)) {
+    const cl = s.classifications[p.sku];
+    if (!R || !p.criteres || !cl || cl.enCours || cl.erreur) continue;
+    const res = parcourir(R.arbre, Object.fromEntries(Object.entries(p.criteres).map(([k, x]) => [k, x.valeur])));
+    if (res.statut === 'hors_perimetre' || res.statut === 'erreur') continue;
+    const d = decider({ moteur: { statut: cl.statut, code: cl.code, questions: (cl.questions || []).length }, regle: { statut: res.statut, code: res.code } });
+    out[p.sku] = { code: d.code, origine: d.origine, besoinArbitrage: d.besoinArbitrage, motif: d.motif, regle: { statut: res.statut, code: res.code || null } };
+  }
+  return out;
+}
+export const contexte = (s = etat) => ({ classifications: s.classifications, validations: s.validations, decisions: decisions(s), attestations: s.attestations, regles: [...statiques.regles, ...s.simulations], maintenant: Date.now() });
 export const evaluation = () => evaluer(etat.lignes, contexte());
 export const aFaire = () => aTraiter(evaluation(), contexte());
 
@@ -120,6 +141,13 @@ export function reinitialiser() { basculerFlux(false); changer({ ...VIDE, qui: e
 // ---------- classification (agent) ----------
 const file = [];
 let actifs = 0;
+// Le code que la règle encodée atteint seule sur les faits de l'étiquette, sans appel au moteur.
+export function codeRegle(sku, s = etat) {
+  const p = s.produits[sku];
+  if (!R || !p || !p.criteres) return null;
+  const res = parcourir(R.arbre, Object.fromEntries(Object.entries(p.criteres).map(([k, x]) => [k, x.valeur])));
+  return res.statut === 'code' ? res.code : null;
+}
 function paysPrincipal(sku) {
   const n = {};
   for (const l of etat.lignes) if (l.sku === sku) n[l.pays] = (n[l.pays] || 0) + 1;

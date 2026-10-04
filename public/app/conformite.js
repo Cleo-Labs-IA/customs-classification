@@ -20,10 +20,12 @@ export function dansZone(pays, zones = []) {
 }
 export const cleAttestation = (sku, regleId) => `${sku}|${regleId}`;
 
-// Le code sur lequel les règles s'appliquent : le code validé par une personne, sinon
-// le premier candidat retenu par le moteur, marqué provisoire.
-export function codeDuProduit(classification, validation) {
+// Le code sur lequel les règles s'appliquent : le code validé par une personne, sinon la
+// décision du dossier (moteur et règle encodée lus ensemble, public/decision.js), sinon le
+// premier candidat retenu par le moteur ; ces deux derniers restent provisoires.
+export function codeDuProduit(classification, validation, decision = null) {
   if (validation && validation.hs6) return { code: String(validation.hs6), provisoire: false };
+  if (decision) return { code: decision.code ? String(decision.code) : null, provisoire: true };
   // Tant que le moteur demande une information, son premier candidat n'est qu'une piste.
   if (classification && classification.code && classification.statut !== 'needs_information') return { code: String(classification.code), provisoire: true };
   return { code: null, provisoire: true };
@@ -45,8 +47,10 @@ export function phase(regle, maintenant) {
 }
 
 // Ce que dit la classification du produit, ramené à une raison.
-export function raisonClassification(cl, validation) {
+export function raisonClassification(cl, validation, decision = null) {
   if (validation && validation.hs6) return { niveau: 'pret', type: 'code_valide', texte: `Code ${fmtCode(validation.hs6)} validated by ${validation.par}` };
+  if (decision && decision.code) return { niveau: 'a_verifier', type: 'validation', texte: decision.origine === 'convergence' ? `Code ${fmtCode(decision.code)}: engine and encoded rule agree, to validate` : `Code ${fmtCode(decision.code)} proposed, to validate` };
+  if (decision && decision.besoinArbitrage) return { niveau: 'a_verifier', type: 'validation', texte: decision.motif || 'The engine and the encoded rule disagree: a declarant must decide' };
   if (!cl) return { niveau: 'en_attente', type: 'classification', texte: 'Classification not done yet' };
   if (cl.enCours) return { niveau: 'en_attente', type: 'classification', texte: 'Classification in progress' };
   if (cl.erreur) return { niveau: 'a_verifier', type: 'classification', texte: 'Classification failed: ' + cl.erreur };
@@ -107,12 +111,12 @@ function raisonRegle(regle, ph, ligne, valeur, ctx, provisoire) {
 }
 
 // État d'une ligne de commande.
-// ctx : { classification, validation, attestations, regles, maintenant }
+// ctx : { classification, validation, decision, attestations, regles, maintenant }
 export function etatLigne(ligne, ctx) {
   const c = { attestations: {}, regles: [], ...ctx };
-  const { code, provisoire } = codeDuProduit(c.classification, c.validation);
+  const { code, provisoire } = codeDuProduit(c.classification, c.validation, c.decision);
   const valeur = arrondi((ligne.quantite || 1) * (ligne.prixUnitaire || 0));
-  const raisons = [raisonClassification(c.classification, c.validation)];
+  const raisons = [raisonClassification(c.classification, c.validation, c.decision)];
   for (const r of c.regles) {
     if (!regleCouvre(r, { pays: ligne.pays, origine: ligne.origine, code })) continue;
     const ph = phase(r, c.maintenant);
@@ -146,7 +150,7 @@ const compteVide = () => ({ pret: 0, en_attente: 0, a_verifier: 0, bloque: 0 });
 // Évaluation d'un portefeuille de commandes.
 // ctx : { classifications: {sku}, validations: {sku}, attestations, regles, maintenant }
 export function evaluer(lignes, ctx) {
-  const evaluees = avecValeurCommande(lignes).map((l) => ({ ...l, etat: etatLigne(l, { classification: (ctx.classifications || {})[l.sku], validation: (ctx.validations || {})[l.sku], attestations: ctx.attestations || {}, regles: ctx.regles || [], maintenant: ctx.maintenant }) }));
+  const evaluees = avecValeurCommande(lignes).map((l) => ({ ...l, etat: etatLigne(l, { classification: (ctx.classifications || {})[l.sku], validation: (ctx.validations || {})[l.sku], decision: (ctx.decisions || {})[l.sku] || null, attestations: ctx.attestations || {}, regles: ctx.regles || [], maintenant: ctx.maintenant }) }));
   const parPays = {}, parProduit = {}, totaux = { lignes: 0, compte: compteVide(), surcout: 0, evitable: 0, valeur: 0 };
   for (const l of evaluees) {
     if (l.expedition === 'expediee') continue;
