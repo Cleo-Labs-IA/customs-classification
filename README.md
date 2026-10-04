@@ -2,7 +2,7 @@
 
 Une fiche produit et une destination en entrée. En sortie, un graphe de décision : candidats, candidats écartés, question au marchand, nouvelle évaluation, proposition avec ses textes et ses décisions officielles proches, puis validation par une personne habilitée et retour du code sur la fiche.
 
-Tout ce qui s'affiche à droite vient d'un appel en direct à `POST /v2/customs/classifications` de la Cleo Legal API. Rien n'est écrit à l'avance.
+En mode normal, les propositions du moteur viennent d'un appel à `POST /v2/customs/classifications` de la Cleo Legal API. L'aperçu de test séparé décrit ci-dessous utilise des données synthétiques, explicitement signalées.
 
     node server.mjs          # http://localhost:4318
     node sonde.mjs           # parcours complet dans un navigateur, captures sonde-*.png
@@ -26,12 +26,13 @@ Cas de test reproductible :
 - Fiche technique : `Converts 100-240 V AC to 20 V DC. Powers a laptop through USB-C. No battery, no generator and no mains socket outlets. Polycarbonate housing. Maximum output 65 W.`
 - Ajouter `[hs6]`, `[quota]`, `[question]` ou `[unsupported]` à la description pour exercer ces états. Pour `[question]`, laisser la fiche technique vide.
 - Utiliser `fail` comme nom de relecteur pour un échec de validation, ou `conflict` pour un conflit de version. Un autre nom permet le parcours nominal.
+- Le niveau initial est HS6 : son approbation n'autorise pas l'export de déclaration. Pour exercer l'export national, choisir « national tariff line » dans Decision, réévaluer ce nouveau périmètre, l'approuver puis contrôler la validité exacte du code dans Distribution.
 
 L'export CSV signifie « exporté pour import », pas « publié dans l'ERP ». Les connecteurs restent non connectés. La vérification des codes et de la couverture est déclenchée à la demande, pas une veille continue. Les pièces/versionnements locaux ne constituent pas un registre produit partagé. Le dossier de l'API et le dossier enrichi local ont des provenances distinctes.
 
 Tests du branchement (Node 22, sans réseau externe) :
 
-    node --test tests/customs-api.test.mjs tests/customs-routes.test.mjs tests/workflow.test.mjs tests/decision.test.mjs
+    node --test tests/customs-api.test.mjs tests/customs-routes.test.mjs tests/workflow.test.mjs tests/decision.test.mjs tests/workflow-fixture.test.mjs
 
 La suite historique inclut des tests en direct et des réponses brutes hors dépôt. Pour les tests d'applicabilité hors ligne : `APPLICABILITE_HORS_LIGNE=1`. Les fichiers `essais/modules/obligations-raw/` restent nécessaires aux tests historiques de droits. La recette navigateur doit distinguer données synthétiques, réponses enregistrées et appels réels.
 
