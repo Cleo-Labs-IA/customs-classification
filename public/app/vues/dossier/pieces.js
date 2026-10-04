@@ -44,10 +44,68 @@ function piecesJointes(p) {
   return photo || page ? `${photo}${page}` : `<div class="piece vide-piece">${ic('dossier')}<span>No document attached. A description alone is enough for a first assessment; a datasheet lets each characteristic be cited.</span></div>`;
 }
 
+// Source du produit : une boutique (import d'un export de commandes) ou un produit déposé.
+// Par défaut : le produit déposé. Le choix vit ici et bascule les deux panneaux sur place.
+let source = 'produit';
+const BOUTIQUES = [
+  { nom: 'Shopify', imp: 'shopify' }, { nom: 'Amazon' }, { nom: 'Etsy', imp: 'etsy' }, { nom: 'Temu' }, { nom: 'Shein' },
+];
+const CSS_SOURCE = `.source-choix{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
+.source-opt{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);cursor:pointer;font:inherit}
+.source-opt b{font-family:var(--display);font-size:17px;font-weight:600}
+.source-opt small{font-size:12.5px;opacity:.7}
+.source-opt:hover{border-color:var(--line-2)}
+.source-opt[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.source-panneau[hidden]{display:none}
+.source-tuiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:18px 22px 6px}
+.source-tuile{display:flex;flex-direction:column;gap:6px;text-align:left;min-height:96px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);font:inherit}
+.source-tuile b{font-family:var(--display);font-size:16px;font-weight:600}
+.source-tuile small{font-size:12.5px;opacity:.75}
+button.source-tuile{cursor:pointer}
+button.source-tuile:hover{border-color:var(--ink)}
+.source-tuile[aria-disabled="true"]{background:var(--sunk);border-style:dashed;border-color:var(--line-2);opacity:.65;cursor:not-allowed}
+.source-note{padding:8px 22px 20px;font-size:12.5px;margin:0}
+@media (max-width:900px){.source-tuiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.source-choix{grid-template-columns:1fr}}`;
+
+function appliquerSource() {
+  document.querySelectorAll('.source-choix [data-source]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.source === source)));
+  document.querySelectorAll('[data-panneau-source]').forEach((el) => { el.hidden = el.dataset.panneauSource !== source; });
+}
+if (typeof document !== 'undefined' && !document.getElementById('css-source-produit')) {
+  const st = document.createElement('style');
+  st.id = 'css-source-produit';
+  st.textContent = CSS_SOURCE;
+  document.head.appendChild(st);
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest && e.target.closest('.source-choix [data-source]');
+    if (!b) return;
+    source = b.dataset.source === 'boutique' ? 'boutique' : 'produit';
+    appliquerSource();
+  });
+}
+
+function choixSource() {
+  const opt = (id, titre, sous) => `<button type="button" class="source-opt" data-source="${id}" aria-pressed="${source === id}"><b>${titre}</b><small>${sous}</small></button>`;
+  return `<div class="source-choix" role="group" aria-label="Where the product comes from">
+      ${opt('boutique', 'Connect a store', 'Shopify, Amazon, Etsy, Temu, Shein')}
+      ${opt('produit', 'Upload a product', 'Photo, label, product page address or text')}
+    </div>
+    <div class="carte source-panneau" data-panneau-source="boutique" ${source === 'boutique' ? '' : 'hidden'}>
+      <div class="carte-tete"><h2>Connect a store</h2><span class="muted">choose a platform</span></div>
+      <div class="source-tuiles">${BOUTIQUES.map((x) => x.imp
+    ? `<button type="button" class="source-tuile" data-action="importer-source" data-source-import="${x.imp}"><b>${x.nom}</b><small>Import an orders export (CSV)</small></button>`
+    : `<div class="source-tuile" aria-disabled="true"><b>${x.nom}</b><small>Not connected yet</small></div>`).join('')}</div>
+      <p class="faint source-note">A live connection to these platforms is not available yet. Shopify and Etsy work today through an export file; any other platform works through Upload a product.</p>
+    </div>`;
+}
+
 export function piecesHtml(D, ia) {
   const p = D.pieces;
   return `<div class="page entre">
     <div class="titre"><div class="bloc"><h1>Your product record</h1><p>Give a photo of the label, a product page address or a few lines. The agent then takes the product through the six steps below, up to a code you can check and what each country requires.</p></div></div>
+    ${choixSource()}
+    <div class="source-panneau" data-panneau-source="produit" ${source === 'produit' ? '' : 'hidden'}>
     ${zoneDepot(D, ia)}
     <div class="grille-fiche">
       <form class="carte fiche-produit" data-form="fiche" autocomplete="off">
@@ -64,6 +122,7 @@ export function piecesHtml(D, ia) {
         </div>
       </form>
       <div class="carte"><div class="carte-tete"><h2>Attached documents</h2></div><div class="carte-corps pieces-jointes">${piecesJointes(p)}</div></div>
+    </div>
     </div>
   </div>`;
 }

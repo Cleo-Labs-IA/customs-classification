@@ -119,7 +119,7 @@ function menuNouveau(bouton) {
   el.className = 'menu';
   el.style.top = r.bottom + 6 + 'px';
   el.style.left = r.left + 'px';
-  el.innerHTML = `<button data-aller="#/dossier">${ic('agent')}<span><b>Classify a product</b><small>Photo, label, pictogram, product page address or text</small></span></button>
+  el.innerHTML = `<button data-action="classer-produit">${ic('agent')}<span><b>Classify a product</b><small>Connect a store or upload a product: photo, label, page address or text</small></span></button>
     <button data-action="importer">${ic('import')}<span><b>Import orders</b><small>CSV export from Shopify, Etsy or a spreadsheet</small></span></button>`;
   document.body.appendChild(el);
   setTimeout(() => document.addEventListener('click', function fermer(ev) { if (!el.contains(ev.target)) { el.remove(); document.removeEventListener('click', fermer); } }), 0);
@@ -134,6 +134,8 @@ document.addEventListener('click', async (e) => {
   const x = a.dataset.action;
   if (x === 'importer') ouvrirImport();
   else if (x === 'demo') ouvrirImport('demo');
+  else if (x === 'classer-produit') { E.nouveau(); location.hash = '#/dossier'; }
+  else if (x === 'importer-source') ouvrirImport(a.dataset.sourceImport);
   else if (x === 'nouveau') { e.stopPropagation(); menuNouveau(a); }
   else if (x === 'simuler') { e.stopPropagation(); menuSimulation(a); }
   else if (x === 'retirer-sim') { document.querySelector('.menu')?.remove(); S.retirerSimulations(); toast({ titre: 'Simulations removed', texte: 'Only official texts still apply.', icone: 'annuler' }); }
