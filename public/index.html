@@ -154,6 +154,12 @@ textarea{resize:vertical;min-height:74px}
 .concl b.c{font-family:var(--mono);font-size:19px}
 .todo{margin-top:6px;padding-left:18px;font-size:13.5px}
 .todo li{margin-bottom:3px}
+.prec{border-top:1px solid var(--rule);padding:7px 0}
+.prec:first-child{border-top:0;padding-top:0}
+.ob{border-top:1px solid var(--rule);padding:8px 0;font-size:13.5px}
+.ob:first-of-type{border-top:0}
+.comp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:13.5px;margin-top:6px}
+.comp .u{color:var(--warn)}
 .bench .line{grid-template-columns:minmax(0,1fr) auto}
 @media(max-width:600px){.addfact{grid-template-columns:1fr}.valid{grid-template-columns:1fr}.bench th,.bench td{padding:6px 4px;font-size:12px}}
 .bench th,.bench td{text-align:left;padding:7px 8px;border-top:1px solid var(--rule);vertical-align:top}
@@ -236,6 +242,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 
 <script type="module">
 import { evaluer, cle } from './arbre-moteur.js';
+import { dossierHtml } from './dossier.js';
 // Exemples : uniquement des fiches à soumettre. Les fiches techniques d'exemple décrivent
 // des produits fictifs. Aucun résultat n'est écrit à l'avance : tout vient des appels en direct.
 const DS_DOCK = 'Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.';
@@ -287,7 +294,7 @@ let ARBRE = null, TX = {};
   const get = (f) => fetch(dir + f).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   Promise.all([get('arbre.json'), get('textes.json')]).then(([a, t]) => { if (a && a.noeuds && t) { ARBRE = a; TX = Object.fromEntries(t.map((x) => [x.id, x])); } });
 }
-function fresh(product, facts) { return { product, facts, struck: [], conflicts: [], lecture: null, rounds: [], tests: [], others: [], crit: {}, critRejetes: 0, busy: null, error: null, saved: null, pendingCause: null }; }
+function fresh(product, facts) { return { product, facts, struck: [], conflicts: [], lecture: null, rounds: [], tests: [], others: [], crit: {}, critRejetes: 0, applic: {}, oblig: null, busy: null, error: null, saved: null, pendingCause: null }; }
 let PHOTO = null;
 $('photo').addEventListener('change', async (e) => {
   const f = e.target.files[0]; if (!f) return;
@@ -528,10 +535,11 @@ function render() {
         <dt>Précision</dt><dd>${level}${cov.hint ? `<br><span class="muted">${esc(cov.hint)}</span>` : ''}</dd>
         ${top ? `<dt>Justification</dt><dd>${esc(top.rationale || 'non fournie')}</dd>
         <dt>Sources</dt><dd>${(top.evidence || []).length ? top.evidence.map((e) => `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener">${esc(e.ref || e.kind)}</a>`).join(', ') : 'aucun extrait rendu'} <button type="button" class="btn ghost" style="margin-left:6px;padding:3px 9px" data-d="${detail(candDetail(top, d))}">Pour, contre, inconnu</button></dd>` : ''}
-        ${prec.length ? `<dt>Décisions officielles proches</dt><dd>${prec.slice(0, 3).map((x) => `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, ressemblance de texte ${num(x.similarity)})</span>`).join('<br>')}<br><span class="muted">Proches par le texte. Leur applicabilité à ce produit reste à vérifier.</span></dd>` : ''}
+        ${prec.length ? `<dt>Décisions officielles proches</dt><dd>${prec.slice(0, 3).map((x) => precHtmlLigne(x)).join('')}<span class="muted">Proches par le texte seulement. Une ressemblance n'est pas une preuve : vérifiez qu'elles portent sur un produit comparable.</span></dd>` : ''}
         ${undocumented.length ? `<dt>Sans pièce</dt><dd>${esc(undocumented.join(', '))} : saisie à la main, aucune pièce à l'appui.</dd>` : ''}
         <dt>Travail restant</dt><dd><ul class="todo" style="margin:0">${travailRestant().map((x) => `<li>${esc(x)}</li>`).join('')}</ul></dd>
         <dt>Interprétation</dt><dd><a href="/arbre">Passer ce dossier dans l'arbre d'interprétation</a></dd>
+        <dt>Dossier</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" id="lisible">Ouvrir le dossier lisible</button> <span class="muted">à imprimer ou enregistrer en PDF</span></dd>
         <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Réponse brute de l'API</h3><p class="muted">HTTP ${last.http} · ${num(last.seconds)} s${last.request_id ? ' · requête ' + esc(last.request_id) : ''}</p><h4>Requête</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Réponse</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">Voir la réponse brute</button></dd>
       </dl>
       ${S.saved ? `<div class="done"><span>Validé par ${esc(S.saved.validated_by)} et enregistré dans ce navigateur.</span><button type="button" class="btn ghost" id="dl">Télécharger le dossier</button></div>`
@@ -551,6 +559,7 @@ function render() {
       </div>
       ${S.tests.length ? `<table><tr><th>Essai</th><th>Avant → après</th><th>Verdict</th></tr>${S.tests.map((t) => `<tr><td><b>${esc(t.type)}</b><br><span class="muted">${esc(t.input)}</span></td><td>${esc(t.before)}<br>→ ${esc(t.after)}</td><td><span class="v ${t.tone}">${esc(t.verdict)}</span>${t.raw != null ? `<br><button type="button" class="btn ghost" style="padding:2px 8px;margin-top:4px" data-d="${detail(`<h3>${esc(t.type)}</h3><pre>${esc(JSON.stringify(t.raw, null, 1))}</pre>`)}">Détail</button>` : ''}</td></tr>`).join('')}</table>` : ''}
     </div>`);
+    parts.push(obligHtml());
     const rest = Object.keys(COUNTRIES).filter((c) => c !== p.dest);
     parts.push('<div class="link"></div>');
     parts.push(`<form class="node static bench" id="others"><div class="k">Mêmes pièces, autres destinations</div>
@@ -566,7 +575,7 @@ function render() {
   $('graph').innerHTML = `<div class="cols"><div><div class="coltitle">Pièces, faits et règle encodée</div><div class="flow">${centre}</div></div><div><div class="coltitle">Proposition, alternatives et travail restant</div><div class="flow">${(droite || '').replace(/^<div class="link"><\/div>/, '')}</div></div></div>`;
   const on = (id, fn) => { const el = $(id); if (el) el.addEventListener('submit', fn); };
   on('answers', onAnswer); on('validate', onValidate); on('addfact', onAddFact);
-  on('others', onOthers); on('t-ref', testReformuler); on('t-rm', testRetirer); on('t-con', testContredire);
+  on('others', onOthers); on('oblig', onOblig); on('t-ref', testReformuler); on('t-rm', testRetirer); on('t-con', testContredire);
   const dl = $('dl'); if (dl && dl.tagName === 'BUTTON') dl.addEventListener('click', download);
 }
 
@@ -607,6 +616,62 @@ function grapheHtml() {
   return head + `<div class="node static rule"><div class="k">Règle encodée · chemin suivi pour ce produit</div>${ver}${steps}${fin}
     ${reponses.length && !S.saved ? `<div class="hint" style="margin-top:8px">${reponses.length} réponse(s) donnée(s) dans cet écran. <a href="#" data-critreset="1">Les retirer</a></div>` : ''}
     ${S.critRejetes ? `<div class="hint">${S.critRejetes} valeur(s) écartée(s) à la lecture : passage cité introuvable mot pour mot.</div>` : ''}</div>`;
+}
+
+// Une décision officielle proche, avec le résultat de la vérification d'applicabilité quand elle a été faite.
+const VERDICT = { applicable: ['Comparable à ce produit', 'keep'], partiellement: ['Comparable en partie', 'warn'], non_applicable: ['Ne porte pas sur un produit comparable', 'bad'], non_verifiable: ['Non vérifiable', 'out'] };
+function precHtmlLigne(x) {
+  const a = S.applic[x.ruling_id];
+  let etat = S.saved ? '' : `<button type="button" class="btn ghost" style="padding:2px 8px;margin-left:6px" data-applic="${esc(x.ruling_id)}">Vérifier si elle s'applique</button>`;
+  if (a === 'encours') etat = ' <span class="muted">vérification en cours</span>';
+  else if (a && a.erreur) etat = ` <span class="tag bad">${esc(a.erreur)}</span>`;
+  else if (a) {
+    const v = VERDICT[a.verdict] || [a.verdict, 'warn'], cit = (o) => (o && o.citation ? `<blockquote>${esc(o.citation)}</blockquote>` : '<p class="muted">Les pièces du produit n\'en disent rien.</p>');
+    etat = ` <span class="tag ${v[1]}">${esc(v[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(x.ruling_id)}</h3><p><span class="tag ${v[1]}">${esc(v[0])}</span></p><p>${esc(a.motif || '')}</p>
+      <h4>La décision</h4><p>${esc(a.decision.juridiction || '')} · ${esc(a.decision.date || '')} · ${a.decision.revoquee === true ? 'révoquée' : a.decision.revoquee === false ? 'non révoquée' : 'révocation non vérifiable'} · ${a.meme_juridiction === true ? 'même pays que la destination' : a.meme_juridiction === false ? 'autre pays que la destination : elle n\'engage pas cette douane' : 'pays de destination non comparé'}</p>
+      <h4 class="pro">Points communs vérifiés</h4>${(a.points_communs || []).map((c) => `<p><b>${esc(c.aspect)}</b></p><p class="muted">Produit</p>${cit(c.produit)}<p class="muted">Décision</p>${cit(c.decision)}`).join('') || '<p class="muted">Aucun.</p>'}
+      <h4 class="con">Différences</h4>${(a.differences || []).map((c) => `<p><b>${esc(c.aspect)}</b>${c.decisive ? ' · décisive' : ''}</p><p class="muted">Produit</p>${cit(c.produit)}<p class="muted">Décision</p>${cit(c.decision)}${c.pourquoi_ca_compte ? `<p>${esc(c.pourquoi_ca_compte)}</p>` : ''}`).join('') || '<p class="muted">Aucune.</p>'}
+      <p class="muted">${a.rejetes || 0} élément(s) écarté(s) faute de citation exacte. Le code de la décision n'est jamais repris comme code du produit.</p>`)}">Détail</button>`;
+  }
+  return `<div class="prec"><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, ressemblance de texte ${num(x.similarity)})</span>${etat}</div>`;
+}
+async function verifierApplic(id) {
+  const last = S.rounds[S.rounds.length - 1], x = ((last.data.provenance || {}).precedents || []).find((q) => q.ruling_id === id);
+  if (!x) return;
+  S.applic[id] = 'encours'; render();
+  try { S.applic[id] = await post('/api/applicabilite', { produit: { description: effective(S.product.desc, 'description'), fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) }, decision: x, destination: S.product.dest }); }
+  catch (err) { S.applic[id] = { erreur: String(err.message || err).slice(0, 120) }; }
+  render();
+}
+
+// Obligations et droits pour la route : ce que l'API rend, avec ce qui est sourcé et ce qui ne l'est pas.
+function obligHtml() {
+  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
+  if (!top) return '';
+  const o = S.oblig, hs6 = String(top.code).slice(0, 6);
+  let body = `<form class="line" id="oblig" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px"><input name="v" type="number" min="0" step="any" placeholder="Valeur de la marchandise en USD (facultatif)"><button class="btn sm" type="submit" ${o === 'encours' ? 'disabled' : ''}>${o === 'encours' ? 'Appel en cours' : 'Interroger'}</button></form>`;
+  if (o && o.erreur) body += `<div class="err" style="margin-top:10px">${esc(o.erreur)}</div>`;
+  else if (o && o !== 'encours') {
+    const nonS = (o.obligations || []).filter((x) => !x.sourcee).length;
+    body += `<h4 class="k" style="margin-top:14px">Obligations (${(o.obligations || []).length})</h4>
+      ${(o.obligations || []).map((x) => `<div class="ob"><b>${esc(x.titre)}</b> <span class="tag ${x.sourcee ? 'keep' : 'warn'}">${x.sourcee ? 'texte source fourni' : 'déduite par un modèle, sans texte source'}</span>${x.autorite ? `<br><span class="muted">${esc(x.autorite)}</span>` : ''}${x.source_url ? ` <a href="${safeUrl(x.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>`).join('') || '<div class="muted">Aucune obligation rendue pour cette route.</div>'}
+      ${nonS ? `<div class="hint">${nonS} obligation(s) sans texte officiel : des pistes à vérifier, pas une liste d'obligations établies.</div>` : ''}
+      <h4 class="k" style="margin-top:14px">Droit de douane</h4>
+      ${o.droits ? `<div class="ob"><b>${o.droits.taux_min === o.droits.taux_max || o.droits.taux_max == null ? num(o.droits.taux) : num(o.droits.taux_min) + ' à ' + num(o.droits.taux_max)} ${esc(o.droits.unite || '%')}</b> · ${esc(o.droits.nature || '')}<br><span class="muted">${esc(o.droits.version || '')}${o.droits.ligne_exacte_connue === false ? ' · lu sur ' + esc(o.droits.lignes_lues) + ' lignes nationales du ' + esc(fmtCode(hs6)) + ', la ligne exacte du produit n\'est pas établie' : ''}</span>${o.droits.source_url ? ` <a href="${safeUrl(o.droits.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>` : '<div class="muted">Aucun taux établi.</div>'}
+      <h4 class="k" style="margin-top:14px">Coût à l'arrivée</h4>
+      ${o.cout ? `<div class="comp">${(o.cout.composantes || []).map((c) => `<span>${esc(c.nom)}${c.taux_pct != null ? ' (' + num(c.taux_pct) + ' %)' : ''}</span><span class="${c.connu ? '' : 'u'}">${c.connu ? num(c.montant) + ' ' + esc(o.cout.devise || '') : 'inconnu'}</span>`).join('')}<b>Total ${o.cout.partiel ? 'partiel' : ''}</b><b>${o.cout.total != null ? num(o.cout.total) + ' ' + esc(o.cout.devise || '') : 'non calculable'}</b></div>${o.cout.partiel ? '<div class="hint">Total partiel : les composantes inconnues n\'y sont pas comptées.</div>' : ''}` : '<div class="muted">Non calculé.</div>'}
+      ${(o.manquants || []).length ? `<h4 class="k" style="margin-top:14px">Ce qui manque</h4><ul class="todo">${o.manquants.map((m) => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}`;
+  }
+  return `<div class="link"></div><div class="node static bench"><div class="k">Obligations et droits · ${esc(COUNTRIES[S.product.origin])} → ${esc(COUNTRIES[S.product.dest])}</div>
+    <div class="s">Calculés sur le code à six chiffres ${esc(fmtCode(hs6))}, qui reste une proposition non validée. Un code national changerait le taux applicable.</div>${body}</div>`;
+}
+async function onOblig(e) {
+  e.preventDefault();
+  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data), v = parseFloat(new FormData(e.target).get('v'));
+  S.oblig = 'encours'; render();
+  try { S.oblig = await post('/api/obligations', { description: effective(S.product.desc, 'description'), sku: S.product.sku, hs6: String(top.code).slice(0, 6), origine: S.product.origin, destination: S.product.dest, valeur_usd: v > 0 ? v : undefined }); }
+  catch (err) { S.oblig = { erreur: String(err.message || err).slice(0, 200) }; }
+  render();
 }
 
 // Ce qu'il reste à faire avant qu'un déclarant puisse s'appuyer sur le dossier.
@@ -724,19 +789,25 @@ async function onOthers(e) {
   S.busy = null; render();
 }
 
+function ouvrirDossier() {
+  const d = S.saved || dossier(null), w = window.open('', '_blank');
+  if (w) { w.document.open(); w.document.write(dossierHtml(d)); w.document.close(); }
+  else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([dossierHtml(d)], { type: 'text/html' })); a.download = 'dossier-' + d.sku + '.html'; a.click(); }
+}
 function dossier(who) {
-  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
+  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data) || {};
   return {
     sku: S.product.sku, destination: S.product.dest, code: top.code, system: top.system, status_api: last.data.status, validated_by: who, request_id: last.request_id,
     pieces: { description: S.product.desc, fiche_technique: S.product.ds, passages_declares_faux: S.struck },
     caracteristiques: Object.fromEntries(Object.entries(S.facts).map(([k, f]) => [k, { valeur: f.value, provenance: KIND[f.kind], detail: f.origin, passages: f.quotes || [] }])),
     tours: S.rounds.map((r) => ({ cause: r.cause, statut: r.data.status, code_retenu: (topOf(r.data) || {}).code || null, confiance: (topOf(r.data) || {}).confidence ?? null, request_id: r.request_id, secondes: r.seconds })),
     preuves: (top.evidence || []).map((e) => ({ ref: e.ref, url: e.url, extrait: e.excerpt, version: e.source_version })),
-    decisions_officielles_proches: (last.data.provenance && last.data.provenance.precedents) || [],
+    decisions_officielles_proches: ((last.data.provenance && last.data.provenance.precedents) || []).map((x) => { const a = S.applic[x.ruling_id]; return a && a !== 'encours' && !a.erreur ? { ...x, applicabilite: a } : x; }),
+    obligations: S.oblig && S.oblig !== 'encours' && !S.oblig.erreur ? S.oblig : null,
     photo: S.product.photo ? { fichier: S.product.photo.name, non_lu: S.product.photo.illisible } : null,
     autres_destinations: S.others.map((o) => ({ pays: o.country, statut: o.status || null, code: o.top ? o.top.code : null, nomenclature: o.top ? o.top.system : null, request_id: o.request_id || null, erreur: o.error || null })),
     epreuves: S.tests.map(({ raw, ...t }) => t),
-    libelle: title(top), version_nomenclature: top.source_version || null, niveau_hint: (last.data.coverage || {}).hint || null,
+    libelle: top.code ? title(top) : '', version_nomenclature: top.source_version || null, niveau_hint: (last.data.coverage || {}).hint || null,
     alternatives: [...(last.data.candidates || []).filter((c) => c.set_aside_reason).map((c) => ({ code: c.code, libelle: title(c), raison: c.set_aside_reason })), ...(last.data.alternatives_set_aside || []).map((a) => ({ code: a.code, libelle: '', raison: a.set_aside_reason }))].filter((a, i, all) => all.findIndex((x) => x.code === a.code) === i),
     questions_restantes: [...(last.answered ? [] : (last.data.questions || []).map((q) => ({ question: q.question, pourquoi: q.why || '' }))), ...travailRestant().map((x) => ({ question: x, pourquoi: '' }))],
     graphe: grapheDossier(),
@@ -770,6 +841,8 @@ function download() {
 }
 
 $('graph').addEventListener('click', (e) => {
+  const ap = e.target.closest('[data-applic]'); if (ap) return verifierApplic(ap.dataset.applic);
+  if (e.target.closest('#lisible')) return ouvrirDossier();
   const cr = e.target.closest('[data-crit]'); if (cr) { const [k, v] = cr.dataset.crit.split(':'), c = ARBRE.criteres.find((x) => x.id === k); S.crit[k] = { valeur: c.type === 'bool' ? v === 'oui' : v, kind: 'reponse' }; return render(); }
   const rs = e.target.closest('[data-critreset]'); if (rs) { e.preventDefault(); S.crit = Object.fromEntries(Object.entries(S.crit).filter(([, x]) => x.kind !== 'reponse')); return render(); }
   const rm = e.target.closest('[data-rm]'); if (rm) { e.stopPropagation(); return removeFact(rm.dataset.rm); }

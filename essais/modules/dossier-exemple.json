@@ -1,0 +1,405 @@
+{
+  "_note": "Fixture de rendu pour public/dossier.js. Inventés : le produit et ses pièces, la personne, les identifiants de requête, les tours, les épreuves et les deux décisions. Réels : les textes de nomenclature (recopiés de essais/arbre/nc2026.txt, règlement d'exécution (UE) 2025/1926), le bloc obligations (rendu de lib/obligations.mjs sur les réponses de l'API enregistrées dans essais/modules/obligations-raw/cn-fr-*.json pour le code 850440 vers FR) et l'avertissement de l'API.",
+  "exemple": true,
+  "sku": "PA-65C1",
+  "destination": "FR",
+  "code": "850440",
+  "system": "hs6",
+  "status_api": "classified",
+  "validated_by": "Camille Durand",
+  "validated_at": "2026-10-04T11:42:00.000Z",
+  "request_id": "3f6c1a52-8d0e-4b7a-9c41-2e5d7a90b113",
+  "libelle": "Static converters",
+  "version_nomenclature": "HS2022-Comtrade-2026-09-23",
+  "niveau_hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries.",
+  "pieces": {
+    "description": "USB-C wall power adapter, 65 W, GaN, one USB-C Power Delivery port, EU plug. Powers and charges laptops, tablets and phones. Includes a built-in battery.",
+    "fiche_technique": "Model: PA-65C1\nInput: 100-240V~ 50/60Hz 1.5A\nOutput: 5V⎓3A / 9V⎓3A / 15V⎓3A / 20V⎓3.25A\nTotal output: 65W Max\nUSB-C Power Delivery 3.0\nCE",
+    "passages_declares_faux": [
+      {
+        "source": "description",
+        "quote": "Includes a built-in battery.",
+        "sujet": "Présence d'une batterie"
+      }
+    ]
+  },
+  "photo": {
+    "fichier": "etiquette-PA-65C1.jpg",
+    "non_lu": [
+      "Numéro de lot sous le code-barres, masqué par un reflet",
+      "Dernière ligne de l'étiquette, caractères trop petits"
+    ]
+  },
+  "caracteristiques": {
+    "function": {
+      "valeur": "converts mains alternating current into direct current delivered over USB-C",
+      "provenance": "Étiquette photographiée",
+      "detail": "Étiquette photographiée (etiquette-PA-65C1.jpg), lignes lues sur la photo puis relues par la personne",
+      "passages": [
+        "Input: 100-240V~ 50/60Hz 1.5A",
+        "Output: 5V⎓3A / 9V⎓3A / 15V⎓3A / 20V⎓3.25A"
+      ]
+    },
+    "power_w": {
+      "valeur": 65,
+      "provenance": "Étiquette photographiée",
+      "detail": "Étiquette photographiée (etiquette-PA-65C1.jpg), ligne lue sur la photo puis relue par la personne",
+      "passages": [
+        "Total output: 65W Max"
+      ]
+    },
+    "use": {
+      "valeur": "powers and charges laptops, tablets and phones",
+      "provenance": "Réponse confirmée",
+      "detail": "Réponse de la personne à la question posée au tour 1",
+      "passages": [
+        "Powers and charges laptops, tablets and phones."
+      ]
+    },
+    "weight_g": {
+      "valeur": 112,
+      "provenance": "Sans pièce",
+      "detail": "Saisi à la main",
+      "passages": []
+    }
+  },
+  "graphe": {
+    "version": "Arbre d'exemple a41c09e7 · Nomenclature combinée 2026",
+    "statut_version": "de référence, rédigée par IA, non relue par un déclarant",
+    "resultat": {
+      "statut": "information_manquante",
+      "code": null
+    },
+    "chemin": [
+      {
+        "question": "Le produit transforme-t-il un courant électrique en un autre (transformateur, convertisseur statique ou bobine) ?",
+        "reponse": "oui",
+        "textes": [
+          {
+            "ref": "Nomenclature combinée 2026, position 8504",
+            "texte": "Electrical transformers, static converters (for example, rectifiers) and inductors:",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926"
+          }
+        ],
+        "citation": "Input: 100-240V~ 50/60Hz 1.5A",
+        "source": "Fiche technique"
+      },
+      {
+        "question": "De quel type d'appareil s'agit-il au sein de la position 8504 ?",
+        "reponse": "convertisseur statique",
+        "textes": [
+          {
+            "ref": "Nomenclature combinée 2026, sous-position 8504 40",
+            "texte": "– Static converters:",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926"
+          }
+        ],
+        "citation": "Output: 5V⎓3A / 9V⎓3A / 15V⎓3A / 20V⎓3.25A",
+        "source": "fiche_technique"
+      }
+    ],
+    "blocage": {
+      "question": "Le produit est-il un chargeur d'accumulateurs, ou une alimentation qui fournit du courant continu à l'appareil branché ?",
+      "options": {
+        "chargeur d'accumulateurs": [
+          "85044060"
+        ],
+        "redresseur": [
+          "85044083"
+        ],
+        "autre convertisseur statique": [
+          "85044095"
+        ]
+      }
+    }
+  },
+  "alternatives": [
+    {
+      "code": "850431",
+      "libelle": "– – Having a power handling capacity not exceeding 1 kVA:",
+      "raison": "Sous-position des transformateurs : l'étiquette indique une sortie en courant continu, ce qu'un simple transformateur ne fournit pas."
+    },
+    {
+      "code": "850450",
+      "libelle": "– Other inductors",
+      "raison": "L'appareil est un bloc d'alimentation complet, pas une bobine isolée."
+    }
+  ],
+  "preuves": [
+    {
+      "ref": "Heading 8504",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+      "extrait": "Electrical transformers, static converters (for example, rectifiers) and inductors:",
+      "version": "32025R1926"
+    },
+    {
+      "ref": "Chapter 85 Note 2",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+      "extrait": "Headings 8501  to 8504  do not apply to goods described in heading 8511 , 8512 , 8540 , 8541  or 8542 .",
+      "version": "32025R1926"
+    }
+  ],
+  "decisions_officielles_proches": [
+    {
+      "ruling_id": "EXEMPLE-0001",
+      "source": "DECISION_INVENTEE",
+      "official_code": "8504409550",
+      "ruling_date": "2021-03-18",
+      "url": "https://example.org/decisions/exemple-0001",
+      "similarity": 0.612,
+      "applicabilite": {
+        "decision": {
+          "id": "EXEMPLE-0001",
+          "source": "DECISION_INVENTEE",
+          "juridiction": null,
+          "date": "2021-03-18",
+          "url": "https://example.org/decisions/exemple-0001",
+          "code": "8504409550",
+          "revoquee": null,
+          "texte_disponible": true,
+          "revoquee_par": [],
+          "modifiee_par": [],
+          "date_fin": null,
+          "expiree": null
+        },
+        "meme_juridiction": false,
+        "points_communs": [
+          {
+            "aspect": "Rôle électrique ou de données",
+            "produit": {
+              "source": "fiche_technique",
+              "citation": "Input: 100-240V~ 50/60Hz 1.5A"
+            },
+            "decision": {
+              "citation": "converts AC mains power to regulated DC output"
+            }
+          },
+          {
+            "aspect": "Fonction",
+            "produit": {
+              "source": "description",
+              "citation": "Powers and charges laptops, tablets and phones."
+            },
+            "decision": {
+              "citation": "used to power and recharge portable computers"
+            }
+          }
+        ],
+        "differences": [
+          {
+            "aspect": "Rôle électrique ou de données",
+            "produit": {
+              "source": "fiche_technique",
+              "citation": "Total output: 65W Max"
+            },
+            "decision": {
+              "citation": "rated output of 45 watts"
+            },
+            "pourquoi_ca_compte": "Certaines nomenclatures nationales découpent la sous-position selon la puissance.",
+            "decisive": false
+          },
+          {
+            "aspect": "Présentation à la vente",
+            "produit": null,
+            "decision": {
+              "citation": "imported with a detachable power cord"
+            },
+            "pourquoi_ca_compte": "Un assortiment vendu avec ses accessoires peut se classer autrement qu'un appareil seul.",
+            "decisive": false
+          }
+        ],
+        "rejetes": 1,
+        "hors_criteres": 0,
+        "verdict": "partiellement",
+        "motif": "2 points communs vérifiés et 2 différences à lever avant de s'appuyer sur la décision. La source ne permet pas de savoir si la décision a été révoquée. Décision d'une douane qui n'est pas celle du pays de destination : elle éclaire le raisonnement, elle ne l'engage pas."
+      }
+    },
+    {
+      "ruling_id": "EXEMPLE-0002",
+      "source": "DECISION_INVENTEE",
+      "official_code": "85044060",
+      "ruling_date": "2019-11-22",
+      "url": "https://example.org/decisions/exemple-0002?reference=chargeur-usb-multiport-pour-appareils-portables&langue=fr",
+      "similarity": 0.498
+    }
+  ],
+  "obligations": {
+    "route": {
+      "origine": "CN",
+      "destination": "FR"
+    },
+    "obligations": [
+      {
+        "titre": "CE Marking - Low Voltage Directive",
+        "complements": [],
+        "autorite": null,
+        "source_url": null,
+        "document_id": null,
+        "sourcee": false,
+        "citation_source": null,
+        "nature": "certification",
+        "reference": "Directive 2014/35/EU",
+        "categorie": "exigee_par_la_loi",
+        "obligatoire": true,
+        "origine": "deduite_par_un_modele"
+      },
+      {
+        "titre": "CE Marking - Electromagnetic Compatibility Directive",
+        "complements": [],
+        "autorite": null,
+        "source_url": null,
+        "document_id": null,
+        "sourcee": false,
+        "citation_source": null,
+        "nature": "certification",
+        "reference": "Directive 2014/30/EU",
+        "categorie": "exigee_par_la_loi",
+        "obligatoire": true,
+        "origine": "deduite_par_un_modele"
+      },
+      {
+        "titre": "Customs Declaration & Safety Data",
+        "complements": [],
+        "autorite": null,
+        "source_url": null,
+        "document_id": null,
+        "sourcee": false,
+        "citation_source": null,
+        "nature": "declaration",
+        "reference": "EU Customs Code (Regulation 952/2013)",
+        "categorie": "exigee_par_la_loi",
+        "obligatoire": true,
+        "origine": "deduite_par_un_modele"
+      },
+      {
+        "titre": "Harmonised Standard - Power Electronic Converters",
+        "complements": [],
+        "autorite": null,
+        "source_url": null,
+        "document_id": null,
+        "sourcee": false,
+        "citation_source": null,
+        "nature": "standard",
+        "reference": "EN 61800-1, EN 61800-2, EN 61800-3",
+        "categorie": "attendue_par_contrat",
+        "obligatoire": false,
+        "origine": "deduite_par_un_modele"
+      }
+    ],
+    "textes_catalogue": [],
+    "droits": {
+      "taux": 0,
+      "taux_min": 0,
+      "taux_max": 0,
+      "unite": "%",
+      "taux_specifique": null,
+      "nature": "taux de base, hors TVA, taxes et droits additionnels : ce n'est pas un coût complet",
+      "base_legale": "eu-taric-xi",
+      "source_url": "https://www.trade-tariff.service.gov.uk/xi/api/v2/commodities",
+      "version": "eu-taric-xi, en vigueur depuis le 2026-01-01",
+      "niveau_source": "mirror",
+      "pays_du_tarif": "EU",
+      "lignes_lues": 10,
+      "ligne_exacte_connue": false
+    },
+    "cout": null,
+    "manquants": [
+      "Le catalogue Cleo ne contient aucun texte pour ce code et ce pays.",
+      "4 obligation(s) sur 4 n'ont pas de texte officiel relu (4 déduite(s) par un modèle selon l'API) : elles restent à vérifier dans le texte officiel.",
+      "Le taux de base est le même (0 %) sur 10 lignes nationales sous le code 850440 ; la ligne exacte du produit n'est pas déterminée.",
+      "Le taux de base vient d'une source miroir (eu-taric-xi), pas directement de la source officielle du pays de destination.",
+      "Les droits additionnels (antidumping, compensateurs, sauvegarde, mesures visant un pays d'origine) ne sont pas renseignés par l'API pour cette ligne : leur absence n'est pas établie.",
+      "Le coût à l'arrivée n'est pas calculé : la valeur de la marchandise n'a pas été fournie."
+    ],
+    "etapes_en_echec": [],
+    "rejetes": 0,
+    "catalogue_ecartes": 0,
+    "ecartes": 0,
+    "chemin": "points_d_acces_separes",
+    "code": "850440"
+  },
+  "questions_restantes": [
+    {
+      "question": "Le produit est-il vendu comme chargeur d'accumulateurs ou comme alimentation d'appareil ?",
+      "pourquoi": "La réponse départage 8504 40 60 des autres lignes à huit chiffres de la sous-position."
+    },
+    {
+      "question": "Quel est le pays d'origine du produit ?",
+      "pourquoi": "L'origine conditionne les mesures de défense commerciale et les préférences tarifaires."
+    }
+  ],
+  "tours": [
+    {
+      "cause": "Première évaluation",
+      "statut": "needs_information",
+      "code_retenu": null,
+      "confiance": null,
+      "request_id": "9b1e44d0-7a35-4c1f-8f0a-51c2de6a7701",
+      "secondes": 7.9
+    },
+    {
+      "cause": "Réponse confirmée : usage",
+      "statut": "ambiguous",
+      "code_retenu": "850440",
+      "confiance": 0.58,
+      "request_id": "c27d90ab-13f4-4e6b-b2a8-6f0e4d1c9a52",
+      "secondes": 9.3
+    },
+    {
+      "cause": "Contradiction résolue (Présence d'une batterie) : « Includes a built-in battery. » déclaré faux",
+      "statut": "classified",
+      "code_retenu": "850440",
+      "confiance": 0.81,
+      "request_id": "3f6c1a52-8d0e-4b7a-9c41-2e5d7a90b113",
+      "secondes": 8.4
+    }
+  ],
+  "epreuves": [
+    {
+      "type": "Reformulation",
+      "input": "65 W GaN charger with a single USB-C port",
+      "before": "8504.40, proposition à faire valider",
+      "after": "8504.40, proposition à faire valider",
+      "tone": "ok",
+      "verdict": "Tient : même code retenu",
+      "request_id": "e5a0c3f7-2b64-4d98-a1c3-0d7f5b2e8c46"
+    },
+    {
+      "type": "Retrait",
+      "input": "Poids (g)",
+      "before": "8504.40, proposition à faire valider",
+      "after": "8504.40, proposition à faire valider",
+      "tone": "warn",
+      "verdict": "Aucun effet : cette information ne pesait pas dans la décision",
+      "request_id": "71d2b8e4-9c05-4f3a-8e67-4a1b9d0c2f35"
+    },
+    {
+      "type": "Contradiction",
+      "input": "Passive cable only, no electronics.",
+      "before": "aucune contradiction",
+      "after": "1 contradiction(s) signalée(s) : Nature de l'appareil",
+      "tone": "ok",
+      "verdict": "Tient : contradiction signalée"
+    }
+  ],
+  "autres_destinations": [
+    {
+      "pays": "DE",
+      "statut": "classified",
+      "code": "850440",
+      "nomenclature": "hs6",
+      "request_id": "0a8f6c21-5e7d-4b90-93c4-7d2e1f6b5a08",
+      "erreur": null
+    },
+    {
+      "pays": "US",
+      "statut": "unsupported_jurisdiction",
+      "code": null,
+      "nomenclature": null,
+      "request_id": "b4c9e1d3-6f28-4a75-8d10-3e5a7c9f2b64",
+      "erreur": null
+    }
+  ],
+  "avertissement": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+  "note_exemple": "Sont inventés : le produit et ses pièces, la personne qui valide, les identifiants de requête, les tours, les épreuves et les deux décisions. Sont réels : les textes de la nomenclature combinée 2026, et les obligations et droits, rendus par la Cleo Legal API pour le code 8504.40 vers la France."
+}

@@ -10,3 +10,6 @@ essais/arbre/nc2026.xhtml
 essais/arbre/nc2026.txt
 essais/photo-lecture.json
 essais/modules/obligations-raw/
+server.log
+essais/modules/*.pdf
+essais/modules/*.png

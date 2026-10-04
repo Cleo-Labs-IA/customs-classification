@@ -195,6 +195,9 @@ export async function handle(req, res) {
     }
     if (req.method === 'POST' && url.pathname === '/api/lire') return send(res, 200, await lire(await readJson(req)));
     if (req.method === 'POST' && url.pathname === '/api/criteres') return send(res, 200, await lireCriteres(await readJson(req)));
+    // modules chargés à la demande (ils importent ce fichier)
+    if (req.method === 'POST' && url.pathname === '/api/applicabilite') { const { applicabilite } = await import('./lib/applicabilite.mjs'); return send(res, 200, await applicabilite(await readJson(req))); }
+    if (req.method === 'POST' && url.pathname === '/api/obligations') { const { obligationsEtDroits } = await import('./lib/obligations.mjs'); const { brut, ...r } = await obligationsEtDroits(await readJson(req)); return send(res, 200, r); }
     if (req.method === 'POST' && url.pathname === '/api/photo') return send(res, 200, await lirePhoto(await readJson(req)));
     send(res, 404, { error: 'not found' });
   } catch (e) {
