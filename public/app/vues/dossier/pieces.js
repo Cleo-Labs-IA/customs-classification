@@ -48,7 +48,7 @@ function piecesJointes(p) {
 // Par défaut : le produit déposé. Le choix vit ici et bascule les deux panneaux sur place.
 let source = 'produit';
 const BOUTIQUES = [
-  { nom: 'Shopify', imp: 'shopify' }, { nom: 'Amazon' }, { nom: 'Etsy', imp: 'etsy' }, { nom: 'Temu' }, { nom: 'Shein' },
+  { nom: 'Shopify', imp: 'shopify', logo: 'shopify.png' }, { nom: 'Amazon', logo: 'amazon.jpg' }, { nom: 'Etsy', imp: 'etsy', logo: 'etsy.jpg' }, { nom: 'Temu', logo: 'temu.jpg' }, { nom: 'Shein', logo: 'shein.jpg' },
 ];
 const CSS_SOURCE = `.source-choix{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
 .source-opt{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);cursor:pointer;font:inherit}
@@ -60,6 +60,8 @@ const CSS_SOURCE = `.source-choix{display:grid;grid-template-columns:1fr 1fr;gap
 .source-tuiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:18px 22px 6px}
 .source-tuile{display:flex;flex-direction:column;gap:6px;text-align:left;min-height:96px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);color:var(--ink);font:inherit}
 .source-tuile b{font-family:var(--display);font-size:16px;font-weight:600}
+.source-tuile img{width:56px;height:56px;object-fit:contain;border-radius:10px;background:#fff;margin-bottom:4px}
+.source-tuile[aria-disabled="true"] img{filter:grayscale(.35)}
 .source-tuile small{font-size:12.5px;opacity:.75}
 button.source-tuile{cursor:pointer}
 button.source-tuile:hover{border-color:var(--ink)}
@@ -94,8 +96,8 @@ function choixSource() {
     <div class="carte source-panneau" data-panneau-source="boutique" ${source === 'boutique' ? '' : 'hidden'}>
       <div class="carte-tete"><h2>Connect a store</h2><span class="muted">choose a platform</span></div>
       <div class="source-tuiles">${BOUTIQUES.map((x) => x.imp
-    ? `<button type="button" class="source-tuile" data-action="importer-source" data-source-import="${x.imp}"><b>${x.nom}</b><small>Import an orders export (CSV)</small></button>`
-    : `<div class="source-tuile" aria-disabled="true"><b>${x.nom}</b><small>Not connected yet</small></div>`).join('')}</div>
+    ? `<button type="button" class="source-tuile" data-action="importer-source" data-source-import="${x.imp}"><img src="/data/logos/${x.logo}" alt=""><b>${x.nom}</b><small>Import an orders export (CSV)</small></button>`
+    : `<div class="source-tuile" aria-disabled="true"><img src="/data/logos/${x.logo}" alt=""><b>${x.nom}</b><small>Not connected yet</small></div>`).join('')}</div>
       <p class="faint source-note">A live connection to these platforms is not available yet. Shopify and Etsy work today through an export file; any other platform works through Upload a product.</p>
     </div>`;
 }
