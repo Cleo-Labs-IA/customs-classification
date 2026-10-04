@@ -24,11 +24,41 @@ export function acknowledgeApproval(version, response, { classificationId, code 
     throw new Error('The server did not acknowledge this classification, code and approval version. Refresh the review history before trying again.');
   return freeze({ ...clone(version), classificationId, approval: { reviewId: r.id, version: r.version, reviewer: r.reviewer, code, createdAt: r.created_at, scopeKey: version.scopeKey } });
 }
-export function selectedCode(decision, candidates = [], arbitration = null) {
+export function selectedCode(decision, candidates = [], arbitration = null, level = 'hs6') {
   if (!decision?.code) return { code: null, system: null };
   const code = decision.origine === 'arbitrage' ? String(arbitration?.code || decision.code).replace(/\D/g, '') : decision.code;
+  if (level !== 'national') return { code: String(code).slice(0, 6), system: 'hs6' };
   const candidate = candidates.find(c => !c.set_aside_reason && (decision.origine === 'arbitrage' ? String(c.code) === code : String(c.code).startsWith(code)));
   return candidate ? { code: String(candidate.code), system: candidate.system } : { code, system: 'hs6' };
+}
+export function validateCodeResponse(request, response, checkedAt = new Date().toISOString()) {
+  const data = response?.data;
+  if (!data || ['code', 'country', 'system'].some(k => data[k] !== request[k])) throw new Error('The returned code validation does not match the requested code, country and system. Export remains blocked.');
+  return { ...data, as_of: request.as_of, checkedAt };
+}
+export async function collectReviews(fetchPage) {
+  const reviews = [], seen = new Set();
+  let cursor = null;
+  do {
+    const response = await fetchPage(cursor), data = response?.data;
+    if (!Array.isArray(data?.reviews) || !Object.hasOwn(data, 'next_cursor')) throw new Error('The complete shared review history could not be verified.');
+    reviews.push(...data.reviews);
+    cursor = data.next_cursor;
+    if (cursor !== null) {
+      if (typeof cursor !== 'string' || !cursor || seen.has(cursor)) throw new Error('The review history returned an invalid or repeating cursor.');
+      seen.add(cursor);
+    }
+  } while (cursor !== null);
+  return { reviews, next_cursor: null };
+}
+export function approvalStillCurrent(version, data) {
+  const approval = version?.approval, reviews = data?.reviews;
+  if (!approval || !Array.isArray(reviews) || !reviews.length || reviews.some(r => !Number.isInteger(r.version) || r.version < 1)) return false;
+  const latest = reviews.reduce((a, r) => !a || r.version >= a.version ? r : a, null);
+  return latest.id === approval.reviewId && latest.version === approval.version && latest.decision === 'approved' && latest.approved_code === approval.code;
+}
+export function uncertainClassification({ persist, sent, status, readable = true }) {
+  return Boolean(persist && sent && (!status || status >= 500 || (status >= 200 && status < 300 && !readable)));
 }
 export function publishEligibility({ version, currentScope, identityConfirmed, system, validation, blockers = [], reviewRequired = false }) {
   const reasons = [...blockers], a = version?.approval, s = version?.scope;

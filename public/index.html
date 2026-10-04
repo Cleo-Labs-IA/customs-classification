@@ -225,7 +225,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
   <p style="flex:1;min-width:240px">One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.</p>
   <a href="/arbre" style="font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--ink-20);border-radius:8px;padding:6px 11px">Interpretation tree</a>
 </header>
-<div id="fixture-banner" class="workflow-banner" hidden>Fixture preview · replayed examples, no live classification or external publication.</div>
+<div id="fixture-banner" class="workflow-banner" hidden>Fixture preview · synthetic test data, no live classification or external publication.</div>
 <div class="workflow-shell">
   <div id="workflow-context" class="workflow-context"></div>
   <nav id="workflow-nav" aria-label="Product workflow"></nav>
@@ -286,7 +286,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 <aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
 
 <script type="module">
-import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility } from './workflow.js';
+import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification } from './workflow.js';
 import { evaluer, cle } from './arbre-moteur.js';
 import { dossierHtml } from './dossier.js';
 import { decider, arbitrageValide } from './decision.js';
@@ -419,7 +419,7 @@ async function post(path, body) {
     const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': code() }, body: JSON.stringify(body) });
     if (r.status === 401) { await askCode(n ? 'Code rejected.' : ''); continue; }
     const j = await r.json().catch(() => ({ error: 'Unreadable server response (' + r.status + ')' }));
-    if (!r.ok) throw new Error(j.error || 'Error ' + r.status);
+    if (!r.ok) { const err = new Error(typeof j.error === 'string' ? j.error : j.error?.message || 'Error ' + r.status); err.status = r.status; throw err; }
     return j;
   }
   throw new Error('Access code rejected');
@@ -441,16 +441,26 @@ async function toJpeg(file, max, q) {
   return { blob, url };
 }
 async function classify(desc, facts, country, persist = false) {
+  if (persist && W.classifyUncertain) throw new Error('An earlier classification may have been saved. Check shared history before another persisted assessment.');
   const body = { item_id: S.product.sku, description: desc, country: country || S.product.dest, as_of: S.product.asof, persist };
   if (Object.keys(facts).length) body.facts = factValues(facts);
-  const j = await post('/api/classify', body);
-  if (j.http !== 200 || !j.body || !j.body.data) throw new Error('The API responded ' + j.http + ': ' + JSON.stringify(j.body).slice(0, 300));
-  return { ...j, data: j.body.data };
+  try {
+    const j = await post('/api/classify', body);
+    if (j.http !== 200 || !j.body?.data || (persist && !j.body.data.classification_id)) { const err = new Error('The API responded ' + (j.http || 'without a readable acknowledgement') + ': ' + JSON.stringify(j.body || j).slice(0, 300)); err.status = j.http; err.readable = Boolean(j.body?.data && (!persist || j.body.data.classification_id)); throw err; }
+    return { ...j, data: j.body.data };
+  } catch (err) {
+    if (uncertainClassification({ persist, sent: true, status: err.status, readable: err.readable !== false })) {
+      W.classifyUncertain = true; W.classHistoryFetched = false;
+      W.notice = 'The classification request may have been saved, but no reliable acknowledgement arrived. Refresh shared history and check it before submitting another classification.';
+    }
+    throw err;
+  }
 }
 const lire = (desc, facts) => post('/api/lire', { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(facts) });
 
 // Un tour : lire les pièces, s'arrêter sur une contradiction, sinon classer.
 async function run(cause) {
+  if (W.classifyUncertain) { W.notice = 'Check shared classification history before another persisted assessment.'; render(); return; }
   clearApproval(); snapshotVersion();
   S.error = null; S.pendingCause = cause;
   try {
@@ -778,7 +788,7 @@ function decision() {
     regle: res && couvert ? { statut: res.statut, code: res.code } : res && res.statut === 'hors_perimetre' ? { statut: 'hors_perimetre' } : null,
     arbitrage: S.arbitrage, niveauRequis: S.niveau, niveauObtenu: top ? (top.system === 'hs6' ? 'hs6' : 'national') : null,
   };
-  const preliminary = decider(decisionInput), selected = selectedCode(preliminary, d.candidates || [], S.arbitrage);
+  const preliminary = decider(decisionInput), selected = selectedCode(preliminary, d.candidates || [], S.arbitrage, S.niveau);
   return decider({ ...decisionInput, niveauObtenu: selected.code && selected.code.length > 6 && selected.system !== 'hs6' ? 'national' : 'hs6' });
 }
 const codeLabel = (code) => { const n = ARBRE && Object.values(ARBRE.noeuds).find((x) => x.type === 'code' && x.code === code); const last = S.rounds[S.rounds.length - 1], c = last && (last.data.candidates || []).find((x) => String(x.code).slice(0, 6) === code); return (n && n.libelle) || (c && title(c)) || ''; };
@@ -817,7 +827,7 @@ function sceneHtml() {
   }
   const others = dec.blocages.filter((b) => !['question_regle', 'arbitrage'].includes(b.id));
   const state = S.saved ? `<div class="state ok"><b>API approval acknowledged for ${esc(S.saved.validated_by)}.</b> Review version ${esc(W.version.approval.version)}. The shared classification keeps this approval; the extended evidence file is saved in this browser.</div>`
-    : dec.peutValider ? `<div class="state ok"><b>The file is consistent: it can be validated.</b>${S.niveau === 'hs6' ? ' Validation covers the six-digit level; the national tariff line of the destination is not established.' : ''}</div>`
+    : dec.peutValider ? `<div class="state ok"><b>The file is consistent: it can be validated.</b>${S.niveau === 'hs6' ? ' Approval covers only the selected six-digit level.' + (top && top.system !== 'hs6' ? ' A national candidate is available; select national tariff line to review that full code.' : ' No national candidate was returned.') : ' Approval covers the selected national tariff line.'}</div>`
     : `<div class="state"><b>${dec.blocages.length} point${dec.blocages.length === 1 ? '' : 's'} to settle before validation</b><ul>${dec.blocages.map((b) => `<li>${esc(b.message)}</li>`).join('')}</ul>${others.some((b) => b.id === 'question_moteur') ? '<a href="#" data-open="raisonnement">Answer the engine\'s question in the reasoning below</a>' : ''}</div>`;
   const openQ = dec.blocages.filter((b) => ['question_regle', 'question_moteur', 'contradiction'].includes(b.id)).length;
   const cout = S.oblig && S.oblig !== 'encours' && !S.oblig.erreur ? S.oblig.cout : null, inconnus = cout ? (cout.composantes || []).filter((c) => !c.connu).length : 0;
@@ -1022,8 +1032,8 @@ async function onValidate(e) {
   W.apiBusy = true; W.notice = ''; render();
   try {
     // Read the actual review stream before every write; a failed read is not version zero.
-    const reviews = await api('/api/classifications/' + encodeURIComponent(target) + '/reviews');
-    const actualVersion = reviewVersionOf(reviews.data);
+    const reviews = await allReviews(target);
+    const actualVersion = reviewVersionOf(reviews);
     if (W.reviewVersion !== actualVersion) { W.reviewVersion = actualVersion; throw new Error('The review changed. Inspect the shared review history, then approve again with your preserved rationale.'); }
     attemptedWrite = true;
     const response = await api('/api/classifications/' + encodeURIComponent(target) + '/review', { method: 'POST', body: { decision: 'approved', reviewer: W.reviewText.who, comment: W.reviewText.comment, approved_code: selected.code, expected_version: actualVersion } });
@@ -1040,7 +1050,7 @@ async function onValidate(e) {
     W.notice = errorMessage(err);
     if (err.status === 409 || !err.status || (attemptedWrite && err.status >= 500)) {
       W.reviewUncertain = true;
-      try { const j = await api('/api/classifications/' + encodeURIComponent(target) + '/reviews'); W.reviewVersion = reviewVersionOf(j.data); W.notice += ' Shared reviews refreshed. Open review history and confirm you have checked it before another approval attempt.'; }
+      try { const reviews = await allReviews(target); W.reviewVersion = reviewVersionOf(reviews); W.notice += ' Shared reviews refreshed. Open review history and confirm you have checked it before another approval attempt.'; }
       catch { W.notice += ' Review refresh failed. Reconnect and refresh shared reviews before another attempt.'; }
     }
   } finally { W.apiBusy = false; }
@@ -1100,7 +1110,10 @@ function setScene(index) {
 }
 function currentSelection() {
   const last = S?.rounds.at(-1);
-  return last ? selectedCode(decision(), last.data.candidates || [], S.arbitrage) : { code: null, system: null };
+  return last ? selectedCode(decision(), last.data.candidates || [], S.arbitrage, S.niveau) : { code: null, system: null };
+}
+async function allReviews(id) {
+  return collectReviews(cursor => api('/api/classifications/' + encodeURIComponent(id) + '/reviews' + (cursor ? '?cursor=' + encodeURIComponent(cursor) : '')));
 }
 function reviewVersionOf(data) {
   if (!Array.isArray(data?.reviews)) throw new Error('Shared review history could not be verified.');
@@ -1134,6 +1147,7 @@ async function fetchHistory(append = false) {
   const j = await api('/api/classifications?' + q);
   if (!Array.isArray(j.data?.items)) throw new Error('The server returned no readable classification history.');
   W.history = append ? [...W.history, ...j.data.items] : j.data.items; W.historyCursor = j.data.next_cursor || null;
+  if (W.classifyUncertain) W.classHistoryFetched = true;
   W.notice = 'Shared classification history refreshed. These are API records; confirm product identity before reuse.';
 }
 function historyHtml() {
@@ -1166,7 +1180,8 @@ function renderWorkflow() {
   if (W.scene === 4) content = `<p>Resolve all blockers, record any arbitration and submit a named review. Success appears only after the shared API acknowledges this exact version and code.</p><p class="hint">A typed reviewer name attributes the review; it is not independent authentication of the reviewer.</p>${W.classificationId ? '<button type="button" class="btn ghost" data-api-reviews="' + esc(W.classificationId) + '">Open current shared reviews</button>' : '<p>Persist a classification for this evidence version before approval.</p>'}${W.reviewUncertain ? '<p class="workflow-warning">A review write or conflict needs reconciliation. Check shared reviews before trying again.</p><button type="button" class="btn ghost" data-action="reconcile">Refresh reviews and confirm I have checked them</button>' : ''}${!ready ? '<p>Complete the facts assessment first.</p>' : ''}`;
   if (W.scene === 5) content = distributionHtml();
   const reassess = S && !S.busy && !W.classificationId && W.identity?.confirmed && ready ? '<button type="button" class="btn sm" data-action="reassess">Reassess changed evidence</button>' : '';
-  $('workflow-panel').innerHTML = `<div class="workflow-heading"><div><p class="workflow-eyebrow">Product decision network · ${W.scene + 1} of 6</p><h2 id="workflow-title" tabindex="-1">${esc(STEPS[W.scene])}</h2></div>${S?.saved ? '<span class="tag keep">API approval acknowledged</span>' : '<span class="tag warn">Draft · not approved</span>'}</div>${content}<div class="workflow-navigation"><button type="button" class="btn ghost" data-scene="${W.scene - 1}" ${W.scene === 0 ? 'disabled' : ''}>Back</button>${reassess}<button type="button" class="btn ghost" data-scene="${W.scene + 1}" ${W.scene === 5 ? 'disabled' : ''}>${W.scene < 5 ? 'Continue to ' + esc(STEPS[W.scene + 1]) : 'Distribution'}</button></div>`;
+  const uncertain = W.classifyUncertain ? `<div class="workflow-warning"><p>A classification write needs reconciliation. Inspect the shared records before sending another request.</p>${[0, 5].includes(W.scene) ? '' : historyHtml()}${W.classHistoryFetched ? '<button type="button" class="btn ghost" data-action="confirm-classification-history">I checked the shared history; allow a new assessment</button>' : ''}</div>` : '';
+  $('workflow-panel').innerHTML = `<div class="workflow-heading"><div><p class="workflow-eyebrow">Product decision network · ${W.scene + 1} of 6</p><h2 id="workflow-title" tabindex="-1">${esc(STEPS[W.scene])}</h2></div>${S?.saved ? '<span class="tag keep">API approval acknowledged</span>' : '<span class="tag warn">Draft · not approved</span>'}</div>${content}${uncertain}<div class="workflow-navigation"><button type="button" class="btn ghost" data-scene="${W.scene - 1}" ${W.scene === 0 ? 'disabled' : ''}>Back</button>${reassess}<button type="button" class="btn ghost" data-scene="${W.scene + 1}" ${W.scene === 5 ? 'disabled' : ''}>${W.scene < 5 ? 'Continue to ' + esc(STEPS[W.scene + 1]) : 'Distribution'}</button></div>`;
   $('graph').hidden = [0, 1, 5].includes(W.scene) || !S;
   if (W.scene === 2) { const reason = $('graph').querySelector('[data-key="raisonnement"]'); if (reason) reason.open = true; }
   for (const el of $('fiche').querySelectorAll('input,select,textarea,button')) el.disabled = Boolean(S?.busy || W.apiBusy);
@@ -1193,10 +1208,10 @@ function restoreDraft(entryId) {
   clearApproval(); W.reviewRequired = true; W.notice = 'Restored as a new browser draft. Historical approvals remain available in the version history; confirm identity and reassess this draft.'; setScene(1);
 }
 async function openReviews(id) {
-  const j = await api('/api/classifications/' + encodeURIComponent(id) + '/reviews');
-  const v = reviewVersionOf(j.data);
+  const data = await allReviews(id);
+  const v = reviewVersionOf(data);
   if (id === W.classificationId) W.reviewVersion = v;
-  $('drawerBody').innerHTML = `<h3>Shared review history</h3><p><code>${esc(id)}</code></p>${j.data.reviews.map(r => `<article class="workflow-review"><b>${esc(r.decision)} · version ${esc(r.version)}</b><p>${esc(r.reviewer)} · ${esc(r.created_at)}</p><p>${esc(r.approved_code || '')}</p><blockquote>${esc(r.comment || 'No comment')}</blockquote></article>`).join('') || '<p>No reviews have been recorded.</p>'}`;
+  $('drawerBody').innerHTML = `<h3>Shared review history</h3><p><code>${esc(id)}</code></p>${data.reviews.map(r => `<article class="workflow-review"><b>${esc(r.decision)} · version ${esc(r.version)}</b><p>${esc(r.reviewer)} · ${esc(r.created_at)}</p><p>${esc(r.approved_code || '')}</p><blockquote>${esc(r.comment || 'No comment')}</blockquote></article>`).join('') || '<p>No reviews have been recorded.</p>'}`;
   $('drawer').classList.add('open'); $('closeDrawer').focus();
 }
 async function apiDossier(id, format = 'json') {
@@ -1211,6 +1226,7 @@ document.addEventListener('click', e => {
   const dossierButton = e.target.closest('[data-api-dossier]'); if (dossierButton) return withApi(() => apiDossier(dossierButton.dataset.apiDossier));
   const button = e.target.closest('[data-action]'); if (!button || button.disabled) return;
   const action = button.dataset.action;
+  if (action === 'confirm-classification-history' && W.classHistoryFetched) { W.classifyUncertain = false; W.classHistoryFetched = false; W.notice = 'History check confirmed. A new assessment will create a separate shared classification.'; return render(); }
   if (action === 'local-dossier') return ouvrirDossier();
   if (action === 'reassess') { W.scene = 2; return run('Reassessment of the current evidence version'); }
   if (action === 'reuse') {
@@ -1223,12 +1239,16 @@ document.addEventListener('click', e => {
   }
   if (action === 'change-detail') { $('drawerBody').innerHTML = '<h3>Returned catalogue changes</h3><pre>' + esc(JSON.stringify(W.changeCheck, null, 2)) + '</pre>'; $('drawer').classList.add('open'); return; }
   if (action === 'csv') {
+    return withApi(async () => {
+    const reviews = await allReviews(W.classificationId);
+    if (!approvalStillCurrent(W.version, reviews)) { W.reviewRequired = true; throw new Error('The shared review changed after this browser approval. Export is blocked; inspect the latest review and reassess the draft.'); }
     const eligibility = publishEligibility({ version: W.version, currentScope: currentScope(), identityConfirmed: W.identity?.confirmed, system: currentSelection().system, validation: W.validation, blockers: decision()?.blocages.map(b => b.message) || [], reviewRequired: W.reviewRequired });
     if (!eligibility.eligible) { W.notice = eligibility.reasons.join(' '); return renderWorkflow(); }
     const cell = value => '"' + String(value ?? '').replace(/^[=+@-]/, "'$&").replace(/"/g, '""') + '"';
     const rows = [['sku', 'origin', 'destination', 'effective_date', 'code', 'system', 'classification_id', 'review_version'], [S.product.sku, S.product.origin, S.product.dest, S.product.asof, W.version.approval.code, currentSelection().system, W.classificationId, W.version.approval.version]];
     downloadBlob(new Blob([rows.map(row => row.map(cell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), 'customs-import-' + S.product.sku + '.csv');
-    W.exportReceipt = 'Exported for import · ' + new Date().toISOString() + '. Import into your destination system is still required.'; return renderWorkflow();
+    W.exportReceipt = 'Exported for import · ' + new Date().toISOString() + '. Import into your destination system is still required.';
+    });
   }
   const since = $('changes-since')?.value;
   withApi(async () => {
@@ -1237,8 +1257,9 @@ document.addEventListener('click', e => {
     if (action === 'reconcile') { await openReviews(W.classificationId); W.reviewUncertain = false; W.notice = 'Shared reviews refreshed. Your reviewer and rationale are preserved. Submit a new review only after checking the history.'; }
     if (action === 'validate-code') {
       const selected = currentSelection(), q = new URLSearchParams({ code: selected.code, country: S.product.dest, system: selected.system, as_of: S.product.asof });
+      W.validation = null;
       const j = await api('/api/codes/validate?' + q);
-      W.validation = { ...j.data, code: selected.code, country: S.product.dest, system: selected.system, as_of: S.product.asof, checkedAt: new Date().toISOString() };
+      W.validation = validateCodeResponse(Object.fromEntries(q), j);
       if (!W.validation.exists || W.validation.status !== 'valid') W.reviewRequired = true;
     }
     if (action === 'changes') {
