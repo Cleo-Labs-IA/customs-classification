@@ -1,0 +1,604 @@
+{
+ "boutique": {
+  "nom": "Boutique démo",
+  "plateforme": "Shopify",
+  "devise": "EUR",
+  "origine": "CN"
+ },
+ "produits": [
+  {
+   "sku": "DOCK-PRO",
+   "nom": "Station d'accueil USB-C 8-en-1",
+   "description": "USB-C docking station for laptop",
+   "fiche_technique": "Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.",
+   "origine": "CN",
+   "prix": 89,
+   "teinte": "ardoise",
+   "image": "/data/produits/dock-pro.svg"
+  },
+  {
+   "sku": "CHG-65W",
+   "nom": "Chargeur GaN USB-C 65 W",
+   "description": "65 W GaN USB-C wall charger for laptops and phones, input 100-240 V AC, output 5-20 V DC",
+   "origine": "CN",
+   "prix": 39.9,
+   "teinte": "sable",
+   "image": "/data/produits/chg-65w.svg"
+  },
+  {
+   "sku": "PWR-20K",
+   "nom": "Batterie externe 20 000 mAh",
+   "description": "Portable power bank, 20000 mAh lithium-ion battery, USB-C PD 22.5 W output",
+   "origine": "CN",
+   "prix": 34.9,
+   "teinte": "corail",
+   "image": "/data/produits/pwr-20k.svg"
+  },
+  {
+   "sku": "BUDS-X",
+   "nom": "Écouteurs sans fil Bluetooth",
+   "description": "True wireless Bluetooth earbuds with microphone and charging case",
+   "origine": "CN",
+   "prix": 49,
+   "teinte": "lavande",
+   "image": "/data/produits/buds-x.svg"
+  },
+  {
+   "sku": "HDMI-2M",
+   "nom": "Câble HDMI 2.1, 2 m",
+   "description": "HDMI 2.1 cable, 2 m, fitted with connectors, 48 Gbps",
+   "origine": "CN",
+   "prix": 12.9,
+   "teinte": "menthe",
+   "image": "/data/produits/hdmi-2m.svg"
+  },
+  {
+   "sku": "ROBO-DOG",
+   "nom": "Chien robot interactif",
+   "description": "Interactive robot dog toy, battery powered, barks and moves on motorized base",
+   "origine": "CN",
+   "prix": 59,
+   "teinte": "peche",
+   "image": "/data/produits/robo-dog.svg"
+  },
+  {
+   "sku": "CLOCK-BRICK",
+   "nom": "Horloge murale à construire",
+   "description": "Buildable wall clock for kids, battery powered",
+   "origine": "CN",
+   "prix": 44.9,
+   "teinte": "ciel",
+   "image": "/data/produits/clock-brick.svg"
+  },
+  {
+   "sku": "BOTTLE-750",
+   "nom": "Gourde isotherme inox 750 ml",
+   "description": "Stainless steel vacuum insulated water bottle, 750 ml",
+   "origine": "VN",
+   "prix": 24.9,
+   "teinte": "olive",
+   "image": "/data/produits/bottle-750.svg"
+  }
+ ],
+ "reponses": {
+  "DOCK-PRO": {
+   "source": "enregistree",
+   "enregistree_le": "2026-10-04",
+   "request_id": "da2ccc02-3405-4211-a289-5920f6f73925",
+   "secondes": 8.8,
+   "envoye": {
+    "item_id": "DOCK-A",
+    "description": "USB-C docking station for laptop",
+    "country": "FR",
+    "facts": {
+     "function": "connects a laptop to peripherals: USB data transfer, Gigabit Ethernet network connection, HDMI video output and 100 W power delivery pass-through"
+    }
+   },
+   "data": {
+    "item_id": "DOCK-A",
+    "status": "ambiguous",
+    "query_facts": {
+     "function": "connects a laptop to peripherals: USB data transfer, Gigabit Ethernet network connection, HDMI video output and 100 W power delivery pass-through"
+    },
+    "missing_attributes": [],
+    "questions": [],
+    "candidates": [
+     {
+      "id": "81d1cae8-c0cc-4c89-aa2a-a5a34e617859",
+      "code": "851762",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "851762",
+      "chapter": 85,
+      "title": {
+       "en": "Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus"
+      },
+      "description": null,
+      "confidence": 0.05,
+      "rationale": "The HS6 subheading 851762 covers the same conversion and regeneration function, but it lacks the EU national line for France.",
+      "similarity": 0.277831160009259,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": null,
+      "ambiguous": true,
+      "reranker_confidence": 0.15
+     },
+     {
+      "id": "1db90fd0-a127-4cec-9f92-ab80d2c91ff7",
+      "code": "851769",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "851769",
+      "chapter": 85,
+      "title": {
+       "en": "Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6"
+      },
+      "description": null,
+      "confidence": 0.02,
+      "rationale": "The residual subheading 851769 covers other data transmission apparatus n.e.c. and could apply if the dock were not treated as a conversion device.",
+      "similarity": 0.283178376649461,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": "The dock's signal conversion and network function fits the specific 851762 subheading better than this residual one.",
+      "ambiguous": true,
+      "reranker_confidence": 0.09
+     }
+    ],
+    "dataset_version": null,
+    "coverage": {
+     "level": "hs6_only",
+     "national_systems": [],
+     "via_bloc": null,
+     "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+    },
+    "gate_hint": null,
+    "provenance": {
+     "question_config_version": "2026-09-24",
+     "families": [
+      "electrical-85"
+     ],
+     "reranker": "bedrock-sonnet-5.5",
+     "reranker_fallback": false,
+     "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+     "evidence_source": "index",
+     "evidence_rejected": 0,
+     "precedents": [
+      {
+       "ruling_id": "UK600011214",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471800000",
+       "ruling_date": "2024-09-02",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011214",
+       "similarity": 0.534
+      },
+      {
+       "ruling_id": "UK600012139",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471800000",
+       "ruling_date": "2025-01-27",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012139",
+       "similarity": 0.532
+      },
+      {
+       "ruling_id": "N307285",
+       "source": "US_CBP_CROSS",
+       "official_code": "8471801000",
+       "ruling_date": "2019-11-22",
+       "url": "https://rulings.cbp.gov/ruling/N307285",
+       "similarity": 0.527
+      },
+      {
+       "ruling_id": "UK600013803",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8517620000",
+       "ruling_date": "2025-10-23",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600013803",
+       "similarity": 0.493
+      },
+      {
+       "ruling_id": "UK600014762",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8517620000",
+       "ruling_date": "2026-01-15",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014762",
+       "similarity": 0.47
+      }
+     ],
+     "acceptance_checks": [
+      "calibrated_confidence_below_floor",
+      "chapter_margin",
+      "low_retrieval_similarity"
+     ]
+    },
+    "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+    "alternatives_set_aside": [
+     {
+      "code": "851769",
+      "set_aside_reason": "The dock's signal conversion and network function fits the specific 851762 subheading better than this residual one."
+     }
+    ]
+   }
+  },
+  "CHG-65W": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "CHG-65W",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "850440",
+      "system": "hs6",
+      "title": {
+       "en": "Electrical static converters"
+      },
+      "confidence": 0.82,
+      "rationale": "An AC to DC power supply that charges laptops and phones is a static converter of heading 8504.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     },
+     {
+      "code": "850490",
+      "system": "hs6",
+      "title": {
+       "en": "Parts of transformers and static converters"
+      },
+      "confidence": 0.04,
+      "rationale": "Applies to parts only.",
+      "set_aside_reason": "The product is a complete converter, not a part.",
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "PWR-20K": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "PWR-20K",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "850760",
+      "system": "hs6",
+      "title": {
+       "en": "Lithium-ion accumulators"
+      },
+      "confidence": 0.88,
+      "rationale": "A portable power bank is a lithium-ion accumulator with charging circuitry; the battery gives it its essential character.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "BUDS-X": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "BUDS-X",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "851830",
+      "system": "hs6",
+      "title": {
+       "en": "Headphones and earphones, whether or not combined with a microphone, and sets consisting of a microphone and one or more loudspeakers"
+      },
+      "confidence": 0.86,
+      "rationale": "Wireless earbuds with a microphone are earphones combined with a microphone.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     },
+     {
+      "code": "851762",
+      "system": "hs6",
+      "title": {
+       "en": "Machines for the reception, conversion and transmission or regeneration of voice, images or other data"
+      },
+      "confidence": 0.06,
+      "rationale": "The Bluetooth link is ancillary to the sound function.",
+      "set_aside_reason": "Note 3 to Section XVI: the principal function is sound reproduction.",
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "HDMI-2M": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "HDMI-2M",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "854442",
+      "system": "hs6",
+      "title": {
+       "en": "Other electric conductors, for a voltage not exceeding 1 000 V, fitted with connectors"
+      },
+      "confidence": 0.9,
+      "rationale": "An insulated cable fitted with HDMI connectors at both ends.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "ROBO-DOG": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "ROBO-DOG",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "950300",
+      "system": "hs6",
+      "title": {
+       "en": "Tricycles, scooters, pedal cars and similar wheeled toys; dolls; other toys; reduced-size models; puzzles of all kinds"
+      },
+      "confidence": 0.84,
+      "rationale": "A battery-powered robot dog designed for play is a toy of heading 9503.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "CLOCK-BRICK": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "CLOCK-BRICK",
+    "questions": [
+     {
+      "fact": "use",
+      "question": "Is the product mainly a construction toy for children, or a working wall clock that happens to be assembled?",
+      "why": "Heading 9503 covers toys and construction sets; heading 9105 covers clocks. The main purpose decides between them."
+     }
+    ],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "needs_information",
+    "candidates": [
+     {
+      "code": "950300",
+      "system": "hs6",
+      "title": {
+       "en": "Other toys; puzzles of all kinds"
+      },
+      "confidence": 0.41,
+      "rationale": "A construction set for children falls in heading 9503 when play is the main purpose.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     },
+     {
+      "code": "910521",
+      "system": "hs6",
+      "title": {
+       "en": "Wall clocks, electrically operated"
+      },
+      "confidence": 0.38,
+      "rationale": "Once assembled, a battery-powered wall clock falls in heading 9105.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  },
+  "BOTTLE-750": {
+   "source": "illustrative",
+   "data": {
+    "item_id": "BOTTLE-750",
+    "questions": [],
+    "coverage": {
+     "hint": "Illustrative response: HS6 only."
+    },
+    "advisory_disclaimer": "Illustrative response for the offline demonstration. Not issued by the Cleo Legal API.",
+    "status": "classified",
+    "candidates": [
+     {
+      "code": "961700",
+      "system": "hs6",
+      "title": {
+       "en": "Vacuum flasks and other vacuum vessels, complete"
+      },
+      "confidence": 0.91,
+      "rationale": "A double-walled vacuum insulated bottle is a vacuum flask of heading 9617.",
+      "set_aside_reason": null,
+      "source_version": "HS2022"
+     }
+    ]
+   }
+  }
+ },
+ "suites": {
+  "CLOCK-BRICK": [
+   {
+    "libelle": "Un jeu de construction pour enfants : l'horloge est le résultat du jeu",
+    "faits": {
+     "use": "construction toy for children, the clock is the result of the building activity"
+    },
+    "data": {
+     "status": "classified",
+     "candidates": [
+      {
+       "code": "950300",
+       "system": "hs6",
+       "title": {
+        "en": "Other toys; puzzles of all kinds"
+       },
+       "confidence": 0.79,
+       "rationale": "Sold and used as a construction toy for children: heading 9503.",
+       "set_aside_reason": null,
+       "source_version": "HS2022"
+      }
+     ]
+    }
+   },
+   {
+    "libelle": "Une horloge murale fonctionnelle, livrée en pièces à assembler",
+    "faits": {
+     "use": "working wall clock delivered in parts to assemble"
+    },
+    "data": {
+     "status": "classified",
+     "candidates": [
+      {
+       "code": "910521",
+       "system": "hs6",
+       "title": {
+        "en": "Wall clocks, electrically operated"
+       },
+       "confidence": 0.77,
+       "rationale": "An unassembled article is classified as the assembled article (GRI 2(a)): a battery-powered wall clock.",
+       "set_aside_reason": null,
+       "source_version": "HS2022"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "depart": {
+  "libelle": "État de départ de la démonstration : codes et pièces renseignés la veille par l'équipe démo.",
+  "validations": {
+   "HDMI-2M": {
+    "hs6": "854442",
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Code proposé par le moteur, relu et validé."
+   },
+   "CHG-65W": {
+    "hs6": "850440",
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Code proposé par le moteur, relu et validé."
+   },
+   "BOTTLE-750": {
+    "hs6": "961700",
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Code proposé par le moteur, relu et validé."
+   },
+   "ROBO-DOG": {
+    "hs6": "950300",
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Code proposé par le moteur, relu et validé."
+   },
+   "PWR-20K": {
+    "hs6": "850760",
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Code proposé par le moteur, relu et validé."
+   }
+  },
+  "attestations": {
+   "DOCK-PRO|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "CHG-65W|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "PWR-20K|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "HDMI-2M|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "ROBO-DOG|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "CLOCK-BRICK|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "BOTTLE-750|ue-gpsr": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+   },
+   "CHG-65W|jp-pse": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Marquage PSE (losange) et importateur déclaré au METI."
+   },
+   "PWR-20K|jp-pse": {
+    "reponse": false,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Le fournisseur n'a pas de certificat PSE pour ce modèle."
+   },
+   "ROBO-DOG|ue-jouets": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "Déclaration UE de conformité EN 71 du fournisseur, au dossier."
+   },
+   "BUDS-X|us-fcc": {
+    "reponse": true,
+    "par": "Équipe démo",
+    "le": "2026-10-03T16:20:00+02:00",
+    "motif": "FCC ID imprimé sur le boîtier de charge."
+   }
+  }
+ }
+}

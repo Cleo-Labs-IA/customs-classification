@@ -1,4 +1,26 @@
-# Mini app de classification douanière
+# Stamped : classification douanière et conformité des envois
+
+## Cockpit (page d'accueil, depuis le 04/10/2026)
+
+Une boutique importe ses commandes (export CSV Shopify, Etsy ou colonnes libres). Chaque produit est classé une fois sur la Cleo Legal API ; chaque ligne de commande est ensuite vérifiée pour son pays de livraison par les règles de la veille réglementaire, appliquées au code retenu. Chaque statut (prête, à vérifier, bloquée) renvoie à ce qui le fonde : la classification, un texte officiel, une réponse signée.
+
+    node server.mjs                          # http://localhost:4318 (Node 22)
+    node --test tests/conformite.test.mjs tests/csv.test.mjs tests/page.test.mjs tests/dossier.logique.test.mjs
+    node essais/demo/generer.mjs             # régénère la boutique de démonstration
+
+- **Vue d'ensemble** : répartition des lignes à expédier, carte des envois (encart Europe), échéances avec compte à rebours, journal signé.
+- **Commandes** : tableau par ligne, onglets par état, filtres pays et échéance. Seules les lignes prêtes partent.
+- **Produits** : matrice produit × destination ; un code se valide une fois, à six chiffres.
+- **Questions** : questions du moteur, codes à valider, pièces exigées par un pays. Avant de répondre, chaque réponse montre combien de lignes elle débloque ou bloque.
+- **Veille réglementaire** : `public/data/veille.json`, 11 textes officiels cités (GPSR, chargeur universel, jouets, droit fixe de 3 € de l'UE, fin du de minimis américain, CPSIA, FCC, PSE japonais, GST australienne, piles bouton, IATA lithium). Résumés rédigés par IA, à relire. « Simuler une annonce » publie un scénario fictif (hausse de droits à minuit à Washington, suspension en Australie), signalé comme tel partout.
+- **Moteur de conformité** : `public/app/conformite.js`, pur, partagé navigateur et tests.
+- **Données de démonstration** : la station d'accueil rejoue une réponse réelle de l'API enregistrée le 04/10/2026 ; sans clé d'API, les autres produits utilisent des réponses illustratives, marquées comme telles. Avec la clé, tout est classé en direct. Illustrations de produits dessinées pour l'app ; drapeaux du paquet flag-icons (MIT).
+- **Classer un produit** (`#/dossier`, aussi depuis la barre de la vue d'ensemble) : on dépose une photo, une étiquette ou un pictogramme (lecture par Claude sur Bedrock), on colle l'adresse d'une fiche produit (`POST /api/url`, `lib/page.mjs` : données schema.org, Open Graph et tableaux recopiés tels quels, sans modèle ; hôtes privés refusés, y compris après redirection ; une boutique qui refuse les robots est signalée, jamais contournée), ou on écrit quelques lignes. Puis le parcours complet du dossier historique : lecture des pièces, contradictions, tours du moteur, question au marchand, règle encodée, décisions proches, épreuves, obligations, autres destinations, dossier lisible, validation signée qui remonte dans le cockpit.
+- **Arbre d'interprétation** (`#/arbre`) : même moteur (`public/arbre-moteur.js`), édition signée, rejeu sur les 87 décisions, code généré, journal. Ouvert depuis un dossier, il reprend ses critères.
+- **Hors ligne** (sans `CLEO_API_KEY`) : six réponses réelles enregistrées le 04/10/2026 (`public/data/enregistrees.json`) sont rejouées quand les pièces envoyées sont exactement les mêmes, et l'écran le dit ; sinon une réponse illustrative du catalogue de démonstration, sinon une erreur explicite. Sans accès Bedrock, la lecture des photos, des pièces et des critères est signalée comme non faite.
+- Les anciennes adresses `/classer` et `/arbre` redirigent vers `#/dossier` et `#/arbre`.
+
+## Dossier de classification (`/classer`)
 
 Une fiche produit et une destination en entrée. En sortie, un graphe de décision : candidats, candidats écartés, question au marchand, nouvelle évaluation, proposition avec ses textes et ses décisions officielles proches, puis validation par une personne habilitée et retour du code sur la fiche.
 

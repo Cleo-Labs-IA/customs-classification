@@ -1,0 +1,125 @@
+{
+ "fixe_le": "2026-10-04",
+ "avertissement": "Chaque règle cite son texte officiel. Le résumé et la portée (codes, pays) sont rédigés par IA à partir de ce texte et ne sont pas relus par un juriste : ce sont des pistes à vérifier, pas un avis.",
+ "regles": [
+  {
+   "id": "ue-gpsr",
+   "titre": "Opérateur économique responsable dans l'UE",
+   "resume": "Un produit de consommation ne peut être mis sur le marché de l'UE que si un opérateur économique établi dans l'Union en répond, ses coordonnées figurant sur le produit, l'emballage ou un document joint. Les places de marché ont leurs propres obligations de contrôle.",
+   "juridictions": ["UE"], "sh": ["*"], "debut": "2024-12-13",
+   "nature": "texte_officiel",
+   "source": { "nom": "Règlement (UE) 2023/988 sur la sécurité générale des produits", "ref": "art. 16 et 22", "url": "https://eur-lex.europa.eu/eli/reg/2023/988/oj" },
+   "effet": { "type": "exigence", "question": "Un opérateur économique établi dans l'UE répond-il de ce produit, avec ses coordonnées sur le produit ou l'emballage ?", "si_oui": "Opérateur responsable dans l'UE désigné", "si_non_texte": "Aucun opérateur responsable dans l'UE : mise sur le marché impossible" }
+  },
+  {
+   "id": "ue-chargeur",
+   "titre": "Chargeur universel USB-C",
+   "resume": "Les écouteurs, casques, téléphones et autres appareils listés vendus dans l'UE doivent se recharger par un port USB-C et porter un pictogramme indiquant si un chargeur est fourni.",
+   "juridictions": ["UE"], "sh": ["851830", "851713"], "debut": "2024-12-28",
+   "nature": "texte_officiel",
+   "source": { "nom": "Directive (UE) 2022/2380, dite « chargeur universel »", "ref": "annexe I, partie I", "url": "https://eur-lex.europa.eu/eli/dir/2022/2380/oj" },
+   "effet": { "type": "exigence", "question": "Le produit se recharge-t-il par un port USB-C, avec le pictogramme « chargeur inclus ou non » ?", "si_oui": "Port USB-C et pictogramme conformes", "si_non_texte": "Sans port USB-C, vente interdite dans l'UE" }
+  },
+  {
+   "id": "ue-jouets",
+   "titre": "Sécurité des jouets : marquage CE",
+   "resume": "Un jouet mis sur le marché de l'UE porte le marquage CE et s'accompagne d'une déclaration UE de conformité établie par le fabricant.",
+   "juridictions": ["UE"], "sh": ["9503"], "debut": "2011-07-20",
+   "nature": "texte_officiel",
+   "source": { "nom": "Directive 2009/48/CE relative à la sécurité des jouets", "ref": "art. 15 à 17", "url": "https://eur-lex.europa.eu/eli/dir/2009/48/oj" },
+   "effet": { "type": "exigence", "question": "Le jouet porte-t-il le marquage CE, avec une déclaration UE de conformité au dossier ?", "si_oui": "Marquage CE et déclaration de conformité au dossier", "si_non_texte": "Sans marquage CE, jouet interdit à la vente dans l'UE" }
+  },
+  {
+   "id": "ue-3eur",
+   "titre": "Droit fixe de 3 € sur les petits colis",
+   "resume": "Depuis le 1er juillet 2026, un droit de douane fixe de 3 € s'applique à chaque article distinct d'un envoi de moins de 150 € entrant dans l'UE, jusqu'à l'entrée en vigueur du régime permanent.",
+   "juridictions": ["UE"], "origines_exclues": ["UE"], "sh": ["*"], "debut": "2026-07-01",
+   "nature": "texte_officiel",
+   "source": { "nom": "Conseil de l'UE, accord du 12 décembre 2025", "ref": "communiqué de presse", "url": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/12/customs-council-agrees-to-levy-customs-duty-on-small-parcels-as-of-1-july-2026/" },
+   "effet": { "type": "taxe_fixe", "montant": 3, "devise": "EUR", "valeur_max": 150, "libelle": "Droit fixe sur les envois de moins de 150 €" }
+  },
+  {
+   "id": "us-de-minimis",
+   "titre": "Fin de la franchise « de minimis » aux États-Unis",
+   "resume": "Depuis le 29 août 2025, les envois de 800 USD ou moins ne sont plus exonérés : les droits sont dus dès le premier dollar, quel que soit le pays d'origine.",
+   "juridictions": ["US"], "sh": ["*"], "debut": "2025-08-29",
+   "nature": "texte_officiel",
+   "source": { "nom": "Executive Order 14324, mise en œuvre par la CBP", "ref": "Federal Register 2025-16802", "url": "https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis" },
+   "effet": { "type": "info", "texte": "Aucune franchise : droits dus sur chaque envoi" }
+  },
+  {
+   "id": "us-cpsia",
+   "titre": "Certificat de produit pour enfants (CPC)",
+   "resume": "L'importateur d'un produit pour enfants certifie par écrit sa conformité aux règles de sécurité applicables, sur la base d'essais d'un laboratoire tiers agréé par la CPSC.",
+   "juridictions": ["US"], "sh": ["9503"], "debut": "2008-08-14",
+   "nature": "texte_officiel",
+   "source": { "nom": "Consumer Product Safety Act, section 14 ; 16 CFR part 1110", "ref": "Children's Product Certificate", "url": "https://www.cpsc.gov/Business--Manufacturing/Testing-Certification/Childrens-Product-Certificate" },
+   "effet": { "type": "exigence", "question": "Un certificat CPC fondé sur les essais d'un laboratoire agréé par la CPSC est-il disponible ?", "si_oui": "Certificat CPC disponible", "si_non_texte": "Sans certificat CPC, import refusable par la CBP" }
+  },
+  {
+   "id": "us-fcc",
+   "titre": "Autorisation FCC des appareils radio",
+   "resume": "Un appareil émettant des ondes radio (Bluetooth, Wi-Fi) doit disposer d'une autorisation d'équipement FCC avant d'être importé ou commercialisé aux États-Unis.",
+   "juridictions": ["US"], "sh": ["851830"], "debut": "1998-10-01",
+   "nature": "texte_officiel",
+   "source": { "nom": "47 CFR part 2, subpart J", "ref": "Equipment Authorization", "url": "https://www.fcc.gov/engineering-technology/laboratory-division/general/equipment-authorization" },
+   "effet": { "type": "exigence", "question": "L'appareil a-t-il un identifiant FCC (FCC ID) ou une déclaration de conformité du fournisseur ?", "si_oui": "Autorisation FCC au dossier", "si_non_texte": "Sans autorisation FCC, import interdit" }
+  },
+  {
+   "id": "jp-pse",
+   "titre": "Marquage PSE au Japon",
+   "resume": "Depuis le 1er février 2019, les batteries externes lithium-ion entrent dans le champ de la loi japonaise sur la sécurité des appareils électriques : fabrication, import et vente interdits sans conformité technique ni marquage PSE. Les adaptateurs secteur y sont également soumis.",
+   "juridictions": ["JP"], "sh": ["850760", "850440"], "debut": "2019-02-01",
+   "nature": "texte_officiel",
+   "source": { "nom": "Loi sur la sécurité des appareils et matériels électriques (METI)", "ref": "instructions réglementaires PSE", "url": "https://www.meti.go.jp/english/policy/economy/consumer/product_safety/pse_procedure/pdf/pse_regulatory-instructions.pdf" },
+   "effet": { "type": "exigence", "question": "Le produit porte-t-il le marquage PSE, avec un importateur déclaré au METI ?", "si_oui": "Marquage PSE et importateur déclaré", "si_non_texte": "Sans marquage PSE, import et vente interdits au Japon" }
+  },
+  {
+   "id": "au-gst",
+   "titre": "GST australienne sur les biens de faible valeur",
+   "resume": "Pour un bien d'une valeur en douane de 1 000 AUD ou moins vendu à un consommateur australien, la GST de 10 % est collectée à la vente par le vendeur ou par la place de marché.",
+   "juridictions": ["AU"], "sh": ["*"], "debut": "2018-07-01",
+   "nature": "texte_officiel",
+   "source": { "nom": "Australian Taxation Office", "ref": "GST on low value imported goods", "url": "https://www.ato.gov.au/businesses-and-organisations/international-tax-for-business/gst-for-non-resident-businesses/gst-on-low-value-imported-goods" },
+   "effet": { "type": "info", "texte": "GST de 10 % à collecter à la vente (valeur ≤ 1 000 AUD)" }
+  },
+  {
+   "id": "au-piles-bouton",
+   "titre": "Piles bouton : norme australienne obligatoire",
+   "resume": "Depuis le 22 juin 2022, un produit de consommation contenant des piles bouton ou plates doit avoir un compartiment sécurisé et avoir passé les essais prévus par la norme obligatoire.",
+   "juridictions": ["AU"], "sh": ["9503", "9105"], "debut": "2022-06-22",
+   "nature": "texte_officiel",
+   "source": { "nom": "Consumer Goods (Products Containing Button/Coin Batteries) Safety Standard", "ref": "ACCC, Product Safety Australia", "url": "https://www.productsafety.gov.au/business/search-mandatory-standards/button-and-coin-batteries-mandatory-standards/products-containing-button-and-coin-batteries-mandatory-safety-standard" },
+   "effet": { "type": "exigence", "question": "Sans piles bouton, ou avec un compartiment sécurisé et des essais selon la norme australienne : est-ce le cas ?", "si_oui": "Piles bouton : conforme ou non concerné", "si_non_texte": "Piles bouton non sécurisées : vente interdite en Australie" }
+  },
+  {
+   "id": "iata-lithium",
+   "titre": "Batteries lithium-ion seules par avion",
+   "resume": "Les batteries lithium-ion expédiées seules (UN 3480) sont interdites en soute d'avion passagers : avion cargo uniquement, état de charge de 30 % au plus, emballage et étiquetage prescrits.",
+   "juridictions": ["*"], "sh": ["850760"], "debut": "2016-04-01",
+   "nature": "texte_officiel",
+   "source": { "nom": "IATA, Dangerous Goods Regulations", "ref": "instruction d'emballage 965", "url": "https://www.iata.org/en/programs/cargo/dgr/lithium-batteries/" },
+   "effet": { "type": "exigence", "question": "L'envoi part-il par avion cargo ou par voie terrestre ou maritime, batterie chargée à 30 % au plus et étiquetée UN 3480 ?", "si_oui": "Transport conforme (UN 3480)", "si_non_texte": "Transport refusé par le transporteur" }
+  }
+ ],
+ "simulations": [
+  {
+   "id": "sim-us-hausse",
+   "titre": "Hausse de 30 points des droits sur l'électronique chinoise",
+   "resume": "Annonce fictive : à minuit, heure de Washington, +30 points de droits sur les chargeurs, batteries, appareils de communication et écouteurs originaires de Chine. Les marchandises chargées avant l'entrée en vigueur restent au taux actuel.",
+   "juridictions": ["US"], "origines": ["CN"], "sh": ["8504", "8507", "8517", "8518"], "debut": "minuit:America/New_York",
+   "nature": "simulation",
+   "source": { "nom": "Scénario de démonstration", "ref": "aucun texte officiel" },
+   "effet": { "type": "droit_additionnel", "points": 30, "exemption_en_transit": true }
+  },
+  {
+   "id": "sim-au-suspension",
+   "titre": "Suspension des batteries lithium en Australie",
+   "resume": "Annonce fictive : l'Australie suspend avec effet immédiat l'import des batteries lithium-ion vendues en ligne, le temps d'un rappel de sécurité.",
+   "juridictions": ["AU"], "sh": ["8507"], "debut": "maintenant",
+   "nature": "simulation",
+   "source": { "nom": "Scénario de démonstration", "ref": "aucun texte officiel" },
+   "effet": { "type": "interdiction", "texte": "Import suspendu en Australie (simulation)" }
+  }
+ ]
+}
