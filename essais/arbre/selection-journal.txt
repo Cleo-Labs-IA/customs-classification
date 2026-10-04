@@ -19,8 +19,10 @@ EXCLU H342925 : Batterie et chargeur d'outillage électroportatif : pas un appar
 EXCLU H344006 : Quasi-doublon de H342570 (mêmes chargeurs voiture et secteur, même importateur, même analyse)
 EXCLU N285628 : Capot inox d'un chargeur de batterie automobile : pièce de tôlerie, pas un chargeur
 EXCLU N286948 : Câbles détecteurs coaxiaux enterrés (détection d'intrusion), hors périmètre
+EXCLU N288932 : Modem LoRa pour capteurs de distance : équipement de réseau de capteurs, pas un adaptateur d'ordinateur ou de téléphone
 EXCLU N289330 : Rallonges 12 V d'allume-cigare : câblage de véhicule, hors périmètre
 EXCLU N292404 : Bornier à vis pour câble : composant de raccordement industriel
+EXCLU N297929 : Chaufferette rechargeable qui ne recharge aucun autre appareil : pas une batterie externe
 EXCLU N298747 : Quasi-doublons de N298750 (câbles USB/LVDS montés dans un véhicule, même requérant)
 EXCLU N298748 : Quasi-doublons de N298750 (câbles USB/LVDS montés dans un véhicule, même requérant)
 EXCLU N298753 : Quasi-doublons de N298752 (boîtier AUX/USB de console automobile, même requérant, même analyse)
@@ -55,18 +57,22 @@ EXCLU N312967 : Câbles internes ou propres à un ventilateur médical ou à un 
 EXCLU N312968 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N312969 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N312970 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N313253 : Pièces de modem (8517 70) : composants, pas un accessoire fini de connexion
 EXCLU N313573 : Bornes et stations de recharge de véhicules électriques, hors périmètre
 EXCLU N313684 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N313970 : Pièces de modem (8517 70) : composants, pas un accessoire fini de connexion
 EXCLU N314355 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
 EXCLU N314413 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N314440 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
 EXCLU N314533 : Lampe disco USB : luminaire d'ambiance, faux positif mot-clé
 EXCLU N314785 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N314870 : Pièces de modem (8517 70) : composants, pas un accessoire fini de connexion
 EXCLU N315081 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N315180 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N315436 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
 EXCLU N316097 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
 EXCLU N316160 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N316374 : Pièces de modem (8517 70) : composants, pas un accessoire fini de connexion
 EXCLU N316735 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
 EXCLU N316902 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
 EXCLU N316908 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
@@ -113,6 +119,7 @@ EXCLU N354596 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de
 EXCLU N355203 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
 EXCLU N355229 : Alimentation 760 W avec refroidissement d'un système laser, hors périmètre
 EXCLU N355321 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N355367 : Poste de conversion de tension sur châssis (transformateur industriel), hors périmètre
 EXCLU N356776 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
 EXCLU N356777 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
 EXCLU N356780 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
@@ -134,13 +141,12 @@ EXCLU N362750 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de
 EXCLU N362917 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
 EXCLU N363912 : Câbles de batterie et de masse de poids lourds, hors périmètre
 EXCLU N364038 : Cordon secteur haute-fidélité (C15/C19) : simple cordon d'alimentation, hors périmètre des câbles ordinateur / téléphone
-PLAFOND N300708 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N304253 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N304715 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N305608 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N305957 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N310490 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N325987 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N343619 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
-PLAFOND N359212 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N303914 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N304568 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N305211 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N305648 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N308133 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N319801 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N334094 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N356789 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
 PLAFOND N362423 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US

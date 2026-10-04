@@ -201,4 +201,4 @@ export async function handle(req, res) {
     send(res, 502, { error: String(e && e.message ? e.message : e) });
   }
 }
-export { send, DIR, KEY, API };
+export { send, DIR, KEY, API, converse, locate };

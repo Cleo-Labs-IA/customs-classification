@@ -65,7 +65,7 @@ const US_RETENUS = new Set([
   // HQ (raisonnement développé)
   'H273383', 'H287462', 'H298118', 'H319416', 'H322074', 'H328693', 'H337673', 'H341609', 'H342570', 'H343160', 'H348342',
   // NY
-  'N281995', 'N282038', 'N282039', 'N282047', 'N284202', 'N284888', 'N284892', 'N285505', 'N288408', 'N289786',
+  'N281995', 'N282038', 'N282039', 'N282047', 'N284052', 'N284202', 'N284888', 'N284892', 'N285505', 'N288408', 'N289786',
   'N290026', 'N290028', 'N290926', 'N292574', 'N296103', 'N296304', 'N296307', 'N298534', 'N298750', 'N298752',
   'N299351', 'N300708', 'N300797', 'N301141', 'N301143', 'N303514', 'N303914', 'N304098', 'N304253', 'N304568',
   'N304573', 'N304715', 'N305211', 'N305600', 'N305608', 'N305648', 'N305957', 'N305975', 'N306782', 'N306841',
@@ -127,6 +127,10 @@ ex('Lampe disco USB : luminaire d\'ambiance, faux positif mot-clé', 'N314533');
 ex('Kitchen Hub : écran connecté de cuisine (8471 41), pas un hub USB', 'N304114');
 ex('Mineur de cryptomonnaie, lecteur de transpondeurs, contrôle d\'accès biométrique, tablette kiosque : appareils autonomes, faux positifs texte', 'H310388', 'H310654', 'N289637', 'N307854');
 ex('Nettoyeur à ultrasons, appareil de spa, système d\'optogénétique, pédale d\'effet, répulsif à ultrasons : appareils autonomes, faux positifs texte', 'N321794', 'N335978', 'N350275', 'N347828', 'N348388');
+ex('Modem LoRa pour capteurs de distance : équipement de réseau de capteurs, pas un adaptateur d\'ordinateur ou de téléphone', 'N288932');
+ex('Chaufferette rechargeable qui ne recharge aucun autre appareil : pas une batterie externe', 'N297929');
+ex('Pièces de modem (8517 70) : composants, pas un accessoire fini de connexion', 'N313253', 'N313970', 'N314870', 'N316374');
+ex('Poste de conversion de tension sur châssis (transformateur industriel), hors périmètre', 'N355367');
 ex('Casque sans fil avec dongle USB : l\'article classé est le casque (8518), pas le dongle', 'H346387');
 
 // Découpe déterministe à 7000 caractères : faits / description, puis fin de l'analyse et conclusion.
