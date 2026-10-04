@@ -12,7 +12,7 @@ const ici = (p) => new URL(p, import.meta.url);
 const lus = JSON.parse(readFileSync(ici('../monde/produits.json'), 'utf8'));
 const PRODUITS = lus.map((p) => ({
   sku: p.sku, nom: p.nom, description: p.description, fiche_technique: p.etiquette.join('\n'), origine: p.origine, prix: p.prix, teinte: p.teinte,
-  image: `/data/produits/${p.sku.toLowerCase()}.jpg`, photo: p.photo, etiquette: p.etiquette, marques_vues: p.marques_vues, a_confirmer: p.a_confirmer, criteres: p.criteres,
+  image: `/data/produits/${p.sku.toLowerCase()}.jpg`, photo: p.photo, etiquette: p.etiquette, marques_vues: p.marques_vues, a_confirmer: p.a_confirmer, criteres: p.criteres, identite: p.identite,
 }));
 
 // Pseudo-hasard reproductible.
@@ -38,9 +38,10 @@ function commandes() {
   return rangs;
 }
 
-const champ = (x) => (/[",\n]/.test(String(x)) ? '"' + String(x).replace(/"/g, '""') + '"' : String(x));
+// Aucune commande inventée : la boutique par défaut ne porte que les deux produits. Les
+// commandes viennent d'un export réel importé par l'utilisateur.
 const entete = ['Name', 'Created at', 'Currency', 'Fulfillment Status', 'Lineitem quantity', 'Lineitem name', 'Lineitem price', 'Lineitem sku', 'Shipping Name', 'Shipping Country'];
-const csv = [entete.join(','), ...commandes().map((r) => [r.name, r.date, r.devise, r.statut, r.q, r.p.nom, r.p.prix.toFixed(2), r.p.sku, r.client, r.pays].map(champ).join(','))].join('\n') + '\n';
+const csv = entete.join(',') + '\n';
 writeFileSync(ici('../../public/data/demo-commandes.csv'), csv);
 
 const reponses = Object.fromEntries(PRODUITS.map((p) => {
@@ -59,4 +60,4 @@ const ENREGISTREES = [...['reformulation-1', 'reformulation-2', 'reformulation-3
   ...PRODUITS.map((p) => [`store-${p.sku}`, JSON.parse(readFileSync(ici(`./enr-${p.sku}.json`), 'utf8'))])]
   .map(([essai, r]) => ({ essai, enregistree_le: '2026-10-04', request_id: r.request_id, secondes: r.seconds, envoye: r.sent, data: r.body.data }));
 writeFileSync(ici('../../public/data/enregistrees.json'), JSON.stringify(ENREGISTREES));
-console.log(`${PRODUITS.length} products, ${csv.trim().split('\n').length - 1} order lines, ${ENREGISTREES.length} recorded responses written`);
+console.log(`${PRODUITS.length} products, no order line, ${ENREGISTREES.length} recorded responses written`);

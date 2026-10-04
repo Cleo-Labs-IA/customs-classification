@@ -51,8 +51,10 @@ const exigence = (e) => `<div class="exi"><h4>${esc(e.titre)}</h4><span>${marque
   <p class="src">${esc(SUJET[e.sujet] || e.sujet)} · <a href="${urlSure(e.url)}" target="_blank" rel="noopener">${esc(e.acte)}, ${esc(e.article)}</a> · quote found word for word in the official text on ${esc(e.verifie_le || '')}${e.en_vigueur ? ' · applies since ' + esc(e.en_vigueur) : ''}</p>${e.note ? `<p class="note">${esc(e.note)}</p>` : ''}</div>`;
 
 export function rendre() {
-  const s = S.lire(), produits = Object.values(s.produits).filter((p) => M && M.produits[p.sku]);
-  if (!M || !produits.length) return '<div class="page"><div class="titre"><div class="bloc"><h1>World</h1></div></div><div class="agent"><span class="rond"></span><span class="txt">Loading the world data</span></div></div>';
+  if (!M) return '<div class="page"><div class="titre"><div class="bloc"><h1>World</h1></div></div><div class="agent"><span class="rond"></span><span class="txt">Loading the world data</span></div></div>';
+  // les produits qui ont des données mondiales enregistrées, qu'ils soient ou non dans la boutique du navigateur
+  const s = S.lire(), catalogue = ((S.fixes().demo || {}).produits || []);
+  const produits = Object.keys(M.produits).map((k) => s.produits[k] || catalogue.find((p) => p.sku === k) || { sku: k, nom: k });
   if (familleVoulue) { const p = produits.find((x) => M.produits[x.sku].famille === familleVoulue); if (p) sku = p.sku; familleVoulue = null; }
   if (!sku || !M.produits[sku]) sku = produits[0].sku;
   const P = M.produits[sku], b = P.bilan, exig = M.reglementation.filter((e) => e.produits.includes(P.famille));

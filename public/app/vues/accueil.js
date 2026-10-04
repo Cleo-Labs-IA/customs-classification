@@ -56,7 +56,7 @@ function carte(p, s) {
       ${m ? `<div class="chiffres"><div><b>${m.bilan.lignes_nationales}</b><span>countries with a national tariff line proposed under ${esc(fmtCode(m.code_regle))}</span></div>
         <div><b>${m.bilan.desaccord}</b><span>countries where the engine alone proposes another code</span></div>
         <div><b>${m.bilan.exigences}</b><span>requirements checked word for word against the official text</span></div>
-        <div><b>${m.bilan.marches_exigences}</b><span>markets covered by these requirements</span></div></div>` : '<p class="muted">Loading the world data</p>'}
+        <div><b>${m.bilan.marches_exigences}</b><span>markets covered by these requirements</span></div></div>` : `<p class="muted">${MONDE ? 'No world data is recorded for this product. It is recorded for the two products of the default store.' : 'Loading the world data'}</p>`}
       <div class="bas"><a class="btn noir petit" href="/#/monde?sku=${esc(p.sku)}">${ic('veille')}Open the world view</a></div></div>
   </div>`;
 }

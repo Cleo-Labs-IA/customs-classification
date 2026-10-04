@@ -83,9 +83,7 @@ export function lancer() {
   if (kg > 0) faits.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: `Product record, "Weight" field (${p.kg} kg)` };
   const dims = Object.fromEntries([['length_mm', p.l], ['width_mm', p.w], ['height_mm', p.h]].map(([k, v]) => [k, parseFloat(v) * 10]).filter(([, v]) => v > 0));
   if (Object.keys(dims).length) faits.dimensions = { value: dims, kind: 'fiche', origin: 'Product record, "Dimensions" field' };
-  const modele = (String(p.ds).match(/Model\s*[:/][^:\n]*?:?\s*([A-Z0-9][A-Z0-9_-]{2,})\s*$/im) || String(p.ds).match(/Model:\s*(\S+)/i) || [])[1] || '';
-  D = { ...vierge(), pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits, etape: 2,
-    identite: { fabricant: '', modele, configuration: '', confirmee: false } };
+  D = { ...vierge(), pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits, etape: 2, identite: identiteLue(p) };
   chargerHistorique();
   return tour('First evaluation');
 }
@@ -240,6 +238,17 @@ export function rouvrirArbitrage() { D.arbitrage = null; D.oblig = null; notifie
 export function choisirNiveau(n) { D.niveau = n === 'national' ? 'national' : 'hs6'; notifier(); }
 
 // ---------- parcours, identité, historique partagé ----------
+// Identité préremplie : celle de la boutique quand le produit y figure, sinon ce que les lignes
+// de l'étiquette disent (fabricant, modèle, référence). Elle reste à confirmer par une personne.
+export function identiteLue(p) {
+  const connu = (S.lire().produits[String(p.sku || '').trim()] || ((S.fixes().demo || {}).produits || []).find((x) => x.sku === String(p.sku || '').trim()) || {}).identite;
+  if (connu) return { ...connu, confirmee: false, source: 'label' };
+  const lignes = String(p.ds || '').split('\n').map((x) => x.trim()).filter(Boolean);
+  const fabricant = lignes.find((x) => /\b(Co\.?,? ?Ltd\.?|Inc\.?|GmbH|Corp\.?|S\.?A\.?S?\.?|Limited|LLC)\b/i.test(x) && x.length < 80) || '';
+  const modele = ((lignes.find((x) => /^Model\b/i.test(x)) || '').match(/([A-Z0-9][A-Z0-9_-]{2,})\s*$/i) || [])[1] || '';
+  const reference = lignes.find((x) => /^[A-Z0-9]{4,}-[A-Z0-9-]{3,}$/.test(x)) || '';
+  return { fabricant: fabricant.replace(/ All rights reserved\.?$/i, ''), modele, configuration: reference, confirmee: false, source: fabricant || modele || reference ? 'label' : null };
+}
 export function aller(n) { D.etape = Math.max(1, Math.min(6, Number(n) || 1)); D.erreur = null; notifier(); }
 export function confirmerIdentite({ fabricant, modele, configuration }) {
   D.identite = { fabricant: String(fabricant || '').trim(), modele: String(modele || '').trim(), configuration: String(configuration || '').trim(), confirmee: true, le: new Date().toISOString() };

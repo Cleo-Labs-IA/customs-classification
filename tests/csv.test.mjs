@@ -64,11 +64,12 @@ test('file with no country column: explicit error, no line', () => {
   assert.match(r.erreur, /country/);
 });
 
-test('demo data set: every line is read', () => {
+test('default store: two products read from their labels, and no invented order', () => {
   const r = versCommandes(readFileSync(new URL('../public/data/demo-commandes.csv', import.meta.url), 'utf8'));
-  assert.equal(r.format, 'shopify');
-  assert.equal(r.ecartees.length, 0);
-  assert.ok(r.lignes.length >= 40);
+  assert.equal((r.lignes || []).length, 0);
+  const demo = JSON.parse(readFileSync(new URL('../public/data/demo.json', import.meta.url), 'utf8'));
+  assert.deepEqual(demo.produits.map((p) => p.sku), ['CHG-70W', 'NB-M1605N']);
+  for (const p of demo.produits) { assert.ok(p.etiquette.length > 3); assert.ok(p.identite.fabricant && p.identite.modele); assert.ok(p.etiquette.some((l) => l.includes(p.identite.modele))); }
 });
 
 test('classification: real API response mapped to the cockpit model', () => {

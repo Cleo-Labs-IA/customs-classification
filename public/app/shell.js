@@ -1,19 +1,14 @@
 // Barre latérale de Stamped. Elle lit l'état sans lancer l'agent.
 import { esc, ic, ilYA } from './ui.js';
 
-// Le parcours tient en quatre écrans ; le reste est rangé sous « More ».
+// Trois écrans autour des produits, et le classement d'un nouveau produit.
 const NAV = [
   { id: 'accueil', href: '/#/', lib: 'Products', ic: 'produits' },
   { id: 'arbre', href: '/#/arbre', lib: 'Why this code', ic: 'arbre' },
   { id: 'monde', href: '/#/monde', lib: 'World', ic: 'veille' },
-  { id: 'commandes', href: '/#/commandes', lib: 'Orders', ic: 'commandes' },
+  { id: 'dossier', href: '/#/dossier', lib: 'Classify a product', ic: 'agent' },
 ];
-const OUTILS = [
-  { id: 'dossier', href: '/#/dossier', lib: 'Classify a new product', ic: 'agent' },
-  { id: 'vue', href: '/#/envois', lib: 'Shipments overview', ic: 'accueil' },
-  { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
-  { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
-];
+const OUTILS = [];
 
 // Le tampon de la marque Stamped (silhouette pleine, couleur du texte).
 export const tampon = (cls = '') => `<svg viewBox="0 0 64 64" class="${cls}" aria-hidden="true"><g transform="rotate(-14 32 32)" fill="currentColor"><path d="M32 4c6 0 10 4.5 10 10 0 4-2.5 7-5 9-1.5 1.5-1.5 4 0 7 2 4 5 7 9 8.5 2 .8 2 2.5 2 3.5v4c0 1.7-1.3 3-3 3H19c-1.7 0-3-1.3-3-3v-4c0-1 0-2.7 2-3.5 4-1.5 7-4.5 9-8.5 1.5-3 1.5-5.5 0-7-2.5-2-5-5-5-9 0-5.5 4-10 10-10z"/><rect x="17" y="52" width="30" height="5" rx="2.5"/></g></svg>`;
@@ -27,7 +22,7 @@ export function shellHtml(actif, infos = {}) {
   const b = infos.boutique;
   const boutique = b
     ? `<div class="boutique"><span class="bulle"></span><div><b>${esc(b.nom)}</b><small>${infos.fluxDemo ? '<span class="dot live"></span>' : ''}${esc(b.plateforme)} · <span data-ilya="${esc(b.synchroLe)}">${esc(ilYA(b.synchroLe))}</span></small></div></div>
-       <div class="arbo"><button class="navitem" data-action="flux" style="width:100%" title="Simulated orders">${ic(infos.fluxDemo ? 'pause' : 'lecture')}<span>${infos.fluxDemo ? 'Stop the simulated stream' : 'Start a simulated order stream'}</span></button></div>`
+`
     : `<button class="boutique navitem" data-action="importer" style="width:100%"><span class="bulle creuse"></span><div><b>No store</b><small>Import a Shopify or Etsy export</small></div></button>`;
   const mode = infos.mode === 'direct'
     ? `<div class="mode" title="Each classification is a live call"><span class="dot live"></span><div><b>Live</b><small>${esc(String(infos.api || '').replace('https://', ''))}</small></div></div>`
@@ -38,13 +33,11 @@ export function shellHtml(actif, infos = {}) {
   <div class="side-top">
     <a class="logo" href="/#/" title="Stamped">${tampon()}</a>
     <div class="nom"><span class="marque">Stamped</span><small>Customs compliance</small></div>
-    <a class="icobtn" href="/#/veille" title="Regulatory watch">${ic('cloche')}${infos.alerte ? '<span class="pastille"></span>' : ''}</a>
     <button class="icobtn" id="replier" title="Collapse the sidebar">${ic('panneau')}</button>
   </div>
   <button class="side-new" data-action="nouveau">${ic('plus')}<span>New…</span>${ic('chevron')}</button>
   <nav aria-label="Main navigation">${NAV.map(item).join('')}</nav>
-  <div class="sec">More</div>
-  <nav>${OUTILS.map(item).join('')}</nav>
+  ${OUTILS.length ? `<div class="sec">More</div><nav>${OUTILS.map(item).join('')}</nav>` : ''}
   <div class="sec">Stores</div>
   <nav>${boutique}</nav>
   <div class="side-bas">${mode}

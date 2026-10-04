@@ -69,7 +69,7 @@ function historique(D) {
 export function identiteCarte(D) {
   const p = D.produit || {}, i = D.identite || {}, approuve = D.valide != null;
   return `<div class="carte"><div class="carte-tete"><h3>Identity</h3><span class="eyebrow">Step 2</span></div><div class="carte-corps">
-    <p class="muted" style="font-size:13px">Confirm which physical product this file is about: two variants of the same product can classify differently.</p>
+    <p class="muted" style="font-size:13px">Confirm which physical product this file is about: two variants of the same product can classify differently.</p>${i.source === 'label' && !i.confirmee ? '<p class="faint" style="font-size:12.5px">Prefilled from the label. Check it, correct it if needed, then confirm.</p>' : ''}
     ${i.confirmee || approuve ? lecture(i, p, approuve) : formulaire(i, p)}
     ${historique(D)}</div></div>`;
 }

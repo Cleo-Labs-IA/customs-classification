@@ -61,7 +61,12 @@
     "kind": "reponse"
    }
   },
-  "teinte": "sable"
+  "teinte": "sable",
+  "identite": {
+   "fabricant": "Salcomp (Shenzhen) Co., Ltd.",
+   "modele": "EMC 8425",
+   "configuration": "70 W, USB-C Power Delivery, ITE power supply"
+  }
  },
  {
   "sku": "NB-M1605N",
@@ -126,6 +131,11 @@
     "kind": "reponse"
    }
   },
-  "teinte": "ardoise"
+  "teinte": "ardoise",
+  "identite": {
+   "fabricant": "ASUSTeK Computer Inc.",
+   "modele": "M1605N",
+   "configuration": "M1605NAQ-SH269W, 68 W input, radio module MT7920"
+  }
  }
 ]

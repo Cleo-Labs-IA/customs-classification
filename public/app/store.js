@@ -6,7 +6,10 @@ import { normaliserClassification } from './classification.js';
 import { versCommandes } from './csv.js';
 import { classifier, etatServeur } from './api.js';
 
-const CLE = 'cleo-conformite-v1';
+// v2 : la boutique par défaut porte les deux produits réels ; un état gardé par une version
+// précédente (anciens produits fictifs) est abandonné, la boutique par défaut est rechargée.
+const CLE = 'cleo-conformite-v2';
+try { localStorage.removeItem('cleo-conformite-v1'); } catch { /* stockage indisponible */ }
 const VIDE = { boutique: null, lignes: [], produits: {}, classifications: {}, validations: {}, attestations: {}, simulations: [], journal: [], qui: 'Compliance team', fluxDemo: false };
 const CONCURRENCE = 3;
 
@@ -39,7 +42,7 @@ export async function demarrer() {
     demo, mode: serveur.mode, ia: serveur.ia, api: serveur.api,
   };
   // Boutique par défaut : sans commandes importées, la boutique de démonstration est chargée d'office.
-  if (!etat.lignes.length && demo && demo.produits && demo.produits.length && typeof document !== 'undefined') await importerDemo().catch(() => null);
+  if (!Object.keys(etat.produits).length && demo && demo.produits && demo.produits.length && typeof document !== 'undefined') await importerDemo().catch(() => null);
   fusionnerValidationsDossier();
   completerImages();
   // Une classification restée « en cours » à la fermeture de la page est relancée.
@@ -100,14 +103,14 @@ export async function importerDemo() {
   const texte = await fetch('/data/demo-commandes.csv').then((x) => x.text());
   const r = versCommandes(texte, { origine: demo.boutique.origine });
   const parSku = Object.fromEntries(demo.produits.map((p) => [p.sku, p]));
-  const lignes = idLignes(r.lignes.map((l) => ({ ...l, origine: (parSku[l.sku] || {}).origine || l.origine })));
+  const lignes = idLignes((r.lignes || []).map((l) => ({ ...l, origine: (parSku[l.sku] || {}).origine || l.origine })));
   const maintenant = new Date().toISOString();
   changer({
     ...VIDE, qui: etat.qui,
     boutique: { ...demo.boutique, importeLe: maintenant, synchroLe: maintenant, demo: true },
     lignes, produits: Object.fromEntries(demo.produits.map((p) => [p.sku, { ...p, faits: {} }])),
     validations: demo.depart.validations, attestations: demo.depart.attestations,
-    journal: [{ le: maintenant, par: etat.qui, quoi: `Import of the demo store: ${lignes.length} order lines` }, { le: maintenant, par: 'Demo store', quoi: demo.depart.libelle }],
+    journal: [{ le: maintenant, par: etat.qui, quoi: `Default store loaded: ${demo.produits.length} products, no order` }, { le: maintenant, par: 'Demo store', quoi: demo.depart.libelle }],
   });
   lancerClassifications();
   return r;
