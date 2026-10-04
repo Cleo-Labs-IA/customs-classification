@@ -75,8 +75,31 @@ export function grapheHtml(arbreComplet, { res = null, sel = null, modifie = () 
     const corps = n.type === 'code' ? `<b>${esc(fmtCode(n.code))}</b><small>${esc(court(n.libelle, 44))}</small>` : n.type === 'hors_perimetre' ? '<b>Out of scope</b><small>this tree does not decide</small>' : `<b>${esc((C[n.critere] || {}).libelle || n.critere)}</b>${n.suite ? `<small>${n.suite} more branches, not followed</small>` : ''}`;
     return `<button type="button" class="${cls}" data-n="${esc(id)}" style="left:${p.x}px;top:${p.y}px;width:${p.l}px;height:${HAUT}px" title="${esc(n.type === 'question' ? (C[n.critere] || {}).question || '' : n.type === 'code' ? n.libelle || '' : n.motif || '')}">${corps}</button>`;
   }).join('');
-  return `<div class="ga-cadre"><div class="ga" style="width:${largeur}px;height:${hauteur}px"><svg width="${largeur}" height="${hauteur}" aria-hidden="true">${traits}</svg>${etiquettes}${noeuds}</div></div>
+  const z = plein ? ajuste(largeur, hauteur) : 1;
+  return `<div class="ga-cadre ${plein ? 'plein' : ''}"><button type="button" class="ga-plein-btn" data-ga-plein>${plein ? 'Close full screen' : 'Full screen'}</button><div class="ga" data-l="${largeur}" data-h="${hauteur}" style="width:${largeur}px;height:${hauteur}px;zoom:${z}"><svg width="${largeur}" height="${hauteur}" aria-hidden="true">${traits}</svg>${etiquettes}${noeuds}</div></div>
     <p class="ga-legende"><span class="l on"></span>path followed by this product<span class="l"></span>other branches of the rule<span class="p stop"></span>waiting for a fact<span class="p fin"></span>conclusion</p>`;
+}
+
+// Plein écran : le graphe occupe la fenêtre et se réduit pour tenir en entier. L'état est
+// gardé ici pour survivre aux redessins de l'écran ; Échap ou le bouton referme.
+let plein = false;
+const ajuste = (l, h) => (typeof window === 'undefined' ? 1 : Math.min(1.6, (window.innerWidth - 48) / l, (window.innerHeight - 96) / h));
+function basculer(etat) {
+  plein = etat;
+  for (const c of document.querySelectorAll('.ga-cadre')) {
+    const g = c.querySelector('.ga'), b = c.querySelector('[data-ga-plein]');
+    c.classList.toggle('plein', plein);
+    if (g) g.style.zoom = plein ? ajuste(Number(g.dataset.l), Number(g.dataset.h)) : 1;
+    if (b) b.textContent = plein ? 'Close full screen' : 'Full screen';
+  }
+  document.documentElement.classList.toggle('ga-plein-ouvert', plein);
+}
+if (typeof document !== 'undefined' && !document.documentElement.dataset.gaEcoute) {
+  document.documentElement.dataset.gaEcoute = '1';
+  document.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('[data-ga-plein]')) { e.stopPropagation(); basculer(!plein); } }, true);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && plein) basculer(false); });
+  window.addEventListener('resize', () => { if (plein) basculer(true); });
+  window.addEventListener('hashchange', () => { if (plein) basculer(false); });
 }
 
 // Pourquoi ce code : chaque étape du chemin, avec le fait et le texte officiel.
@@ -100,6 +123,17 @@ export function raisonsHtml(arbre, res, { faits = {}, T = {}, source = (s) => s 
 export const CSS = `
 .ga-cadre { overflow: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--side); max-height: 720px; }
 .ga { position: relative; }
+.ga-cadre { position: relative; }
+.ga-plein-btn { position: sticky; top: 8px; left: calc(100% - 132px); z-index: 3; float: right; margin: 8px 8px -40px 0; height: 30px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--panel); font: inherit; font-size: 12.5px; font-weight: 500; color: var(--ink-2); cursor: pointer; }
+.ga-plein-btn:hover { border-color: var(--ink); color: var(--ink); }
+.ga-cadre.plein { position: fixed; inset: 0; z-index: 1000; max-height: none; border-radius: 0; border: 0; padding: 56px 24px 24px; background: var(--side); }
+.ga-cadre.plein .ga { margin: 0 auto; }
+.ga-cadre.plein .ga-plein-btn { position: fixed; top: 14px; right: 18px; left: auto; float: none; margin: 0; height: 34px; background: var(--ink); color: #fff; border-color: var(--ink); }
+html.ga-plein-ouvert { overflow: hidden; }
+/* le plein écran passe devant la barre du haut, la barre latérale et les cartes voisines */
+:has(.ga-cadre.plein):not(html):not(body) { z-index: 1000; }
+.carte:has(.ga-cadre.plein), .carte-corps:has(.ga-cadre.plein), .page:has(.ga-cadre.plein), .vue:has(.ga-cadre.plein), .main:has(.ga-cadre.plein), .col:has(.ga-cadre.plein), .cols-dossier:has(.ga-cadre.plein) { position: relative; }
+.page:has(.ga-cadre.plein) { animation: none; }
 .ga svg { position: absolute; inset: 0; }
 .ga svg path { fill: none; stroke: var(--line-2); stroke-width: 1.2; }
 .ga svg path.on { stroke: var(--ink); stroke-width: 2.6; }
