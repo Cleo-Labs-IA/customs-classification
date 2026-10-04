@@ -151,6 +151,33 @@ async function lirePhoto({ jpeg_base64 }) {
   return { lignes: (j.lignes || []).map(String), illisible: (j.illisible || []).map(String), description: String(j.description || ''), reference: String(j.reference || ''), model: BEDROCK_MODEL, seconds: Math.round((Date.now() - t0) / 100) / 10 };
 }
 
+// Lecture d'un dossier pour l'arbre d'interprétation : pour chaque critère de
+// l'arbre, la valeur que les pièces établissent, avec le passage qui l'établit.
+// Même règle que lire() : un passage introuvable mot pour mot est jeté, et un
+// critère que les pièces ne tranchent pas reste sans valeur.
+const CRIT_SYSTEM = `You read product documents for a customs file and fill a list of criteria. You never classify and never guess.
+You receive "pieces" (description, fiche_technique, caracteristiques: declared facts as key/value) and "criteres" (id, question, type bool or enum with allowed values).
+Return ONLY a JSON object: {"valeurs":[{"critere":"<id>","valeur":true|false|"<enum value>","source":"description|fiche_technique|caracteristique:<key>","citation":"verbatim passage"}]}
+Rules: answer a criterion only when a passage states it explicitly or makes it certain (a listed Ethernet port makes "has a network port" true). "citation" is copied character for character from the named source, under 250 characters. For a declared fact, source is "caracteristique:<key>" and citation is its value copied exactly. If the documents do not settle a criterion, leave it out. A missing mention is NOT a "false": answer false only when the documents say so.`;
+async function lireCriteres({ pieces = {}, criteres = [] }) {
+  const t0 = Date.now();
+  const description = String(pieces.description || ''), fiche_technique = String(pieces.fiche_technique || '');
+  const facts = Object.fromEntries(Object.entries(pieces.caracteristiques || {}).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]));
+  const liste = criteres.map((c) => ({ id: c.id, question: c.question, type: c.type, valeurs: (c.valeurs || []).map((x) => x.v) }));
+  const j = await converse({ system: CRIT_SYSTEM, content: [{ text: JSON.stringify({ pieces: { description, fiche_technique, caracteristiques: facts }, criteres: liste }) }], maxTokens: 3000 });
+  const sources = { description, fiche_technique };
+  for (const [k, v] of Object.entries(facts)) sources[`caracteristique:${k}`] = v;
+  const byId = Object.fromEntries(liste.map((c) => [c.id, c]));
+  const valeurs = {}; let rejected = 0;
+  for (const x of j.valeurs || []) {
+    const c = byId[x.critere], q = locate(sources[x.source], x.citation);
+    const okType = c && (c.type === 'bool' ? typeof x.valeur === 'boolean' : c.valeurs.includes(x.valeur));
+    if (!okType || !q) { rejected++; continue; }
+    valeurs[x.critere] = { valeur: x.valeur, source: x.source, citation: q };
+  }
+  return { valeurs, rejected, model: BEDROCK_MODEL, seconds: Math.round((Date.now() - t0) / 100) / 10 };
+}
+
 function allowed(req) {
   if (!APP_CODE) return true;
   const got = Buffer.from(String(req.headers['x-app-code'] || '')), want = Buffer.from(APP_CODE);
@@ -167,6 +194,7 @@ export async function handle(req, res) {
       return send(res, 200, await classify(await readJson(req)));
     }
     if (req.method === 'POST' && url.pathname === '/api/lire') return send(res, 200, await lire(await readJson(req)));
+    if (req.method === 'POST' && url.pathname === '/api/criteres') return send(res, 200, await lireCriteres(await readJson(req)));
     if (req.method === 'POST' && url.pathname === '/api/photo') return send(res, 200, await lirePhoto(await readJson(req)));
     send(res, 404, { error: 'not found' });
   } catch (e) {

@@ -6,3 +6,5 @@ sonde.mjs
 *.jpg
 server.log
 server.mjs
+public/data-dev
+tests
