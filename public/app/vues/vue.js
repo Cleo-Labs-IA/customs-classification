@@ -4,22 +4,9 @@ import { esc, ic, etat, pays, argent, nombre, pluriel, rebours, dateHeure, ilYA,
 import { carteHtml, brancherCarte } from './carte.js';
 import { ouvrir } from './tiroirs.js';
 import * as S from '../store.js';
-import * as E from '../dossier/etat.js';
-import { estImage } from '../dossier/photo.js';
+import { enteteEnvois } from './envois-entete.js';
 
-export const titre = 'Overview';
-
-// Dès la première vue : classer un produit à partir d'une image, d'une adresse ou d'un texte.
-function depotRapide() {
-  return `<form class="carte depot-rapide" id="depot-rapide" data-form="rapide">
-    <span class="depot-ic">${ic('agent')}</span>
-    <div class="depot-texte"><b>Classify a product</b><span>Drop a photo, a label or a pictogram, or paste the address of a product page.</span></div>
-    <div class="depot-champ"><input id="rapide" placeholder="https://… or a description" autocomplete="off" aria-label="Product page address or description">
-      <label class="btn blanc petit" title="Choose an image">${ic('fichier')}<span>Image</span><input type="file" accept="image/*,.heic,.heif" class="sr" id="rapide-photo"></label>
-      <button class="btn noir petit" type="submit">Classify${ic('droite')}</button></div>
-  </form>`;
-}
-function vers(entree) { E.preparer(entree); location.hash = '#/dossier'; }
+export const titre = 'Shipments';
 
 // Sans commandes : un état vide sobre, dans la page, avec les deux façons de commencer.
 const ILLU = `<svg class="illu" viewBox="0 0 300 220" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -36,8 +23,7 @@ function accueilVide() {
     ['Check', "Each country's rules apply to the code selected. Each reason cites its official text."],
   ];
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Shipment compliance</h1><p>Every order, checked for its country before it leaves.</p></div></div>
-    ${depotRapide()}
+    ${enteteEnvois('envois', 'Every order, checked for its country before it leaves.')}
     <div class="carte" style="overflow:hidden">
       <div class="accueil-vide"><div><span class="eyebrow">No orders</span><h3 style="margin-top:12px">Import a store's orders. <span>Stamped classifies each product and checks each shipment.</span></h3>
         <p>The same product ships to ten countries, each with its own codes, markings, certificates and duties. Each status shown links back to the rule behind it.</p>
@@ -94,8 +80,7 @@ export function rendre() {
   const ev = S.evaluation(), t = ev.totaux, items = S.aFaire();
   const nbPays = Object.keys(ev.parPays).length;
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Shipment compliance</h1><p><span data-compte="${t.lignes}" data-cle="lignes">${t.lignes}</span> line${t.lignes > 1 ? 's' : ''} to ship to ${pluriel(nbPays, 'country', 'countries')} · ${esc(s.boutique.nom)} (${esc(s.boutique.plateforme)}) · synced <span data-ilya="${esc(s.boutique.synchroLe)}">${esc(ilYA(s.boutique.synchroLe))}</span></p></div></div>
-    ${depotRapide()}
+    ${enteteEnvois('envois', `<span data-compte="${t.lignes}" data-cle="lignes">${t.lignes}</span> line${t.lignes > 1 ? 's' : ''} to ship to ${pluriel(nbPays, 'country', 'countries')} · ${esc(s.boutique.nom)} (${esc(s.boutique.plateforme)}) · synced <span data-ilya="${esc(s.boutique.synchroLe)}">${esc(ilYA(s.boutique.synchroLe))}</span>`)}
     ${repartition(t, ev)}
     <div class="grille">
       <div class="carte"><div class="carte-tete"><h2>Shipment map</h2><span class="muted">${ic('globe', 'faint')} click a country</span></div>${carteHtml(ev)}</div>
@@ -108,29 +93,7 @@ export function rendre() {
   </div>`;
 }
 
-function brancherDepot(racine) {
-  const f = racine.querySelector('#depot-rapide');
-  if (!f) return;
-  f.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const v = f.querySelector('#rapide').value.trim();
-    if (v) vers(/^https?:\/\//i.test(v) ? { adresse: v } : { texte: v });
-    else f.querySelector('#rapide').focus();
-  });
-  f.querySelector('#rapide-photo').addEventListener('change', (e) => { if (e.target.files[0]) vers({ fichier: e.target.files[0] }); });
-  f.addEventListener('dragover', (e) => { e.preventDefault(); f.classList.add('survol'); });
-  f.addEventListener('dragleave', () => f.classList.remove('survol'));
-  f.addEventListener('drop', (e) => {
-    e.preventDefault(); f.classList.remove('survol');
-    const img = [...e.dataTransfer.files].find(estImage);
-    if (img) return vers({ fichier: img });
-    const lien = (e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('text/plain') || '').trim().split('\n')[0];
-    if (lien) vers(/^https?:\/\//i.test(lien) ? { adresse: lien } : { texte: lien });
-  });
-}
-
 export function brancher(racine) {
-  brancherDepot(racine);
   const ev = S.lire().lignes.length ? S.evaluation() : null;
   if (ev) brancherCarte(racine, ev, (c) => ouvrir('pays', c));
   racine.querySelectorAll('tr[data-pays]').forEach((tr) => tr.addEventListener('click', () => ouvrir('pays', tr.dataset.pays)));

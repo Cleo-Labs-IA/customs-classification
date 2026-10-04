@@ -4,10 +4,11 @@ import { esc, ic, etat, pays, argent, nomPays, toast, pluriel, NIVEAU, vignette 
 import { fmtCode } from '../conformite.js';
 import { ouvrir } from './tiroirs.js';
 import * as S from '../store.js';
+import { enteteEnvois } from './envois-entete.js';
 
-export const titre = 'Orders';
+export const titre = 'Shipments';
 const ONGLETS = [['a_expedier', 'To ship'], ['bloque', 'Blocked'], ['a_verifier', 'To check'], ['pret', 'Ready'], ['expediees', 'Shipped'], ['toutes', 'All']];
-let f = { onglet: 'a_expedier', recherche: '', pays: '', echeance: '' };
+let f = { onglet: 'a_expedier', recherche: '', pays: '', echeance: '', produit: '' };
 const selection = new Set();
 
 const garde = {
@@ -22,7 +23,7 @@ const norme = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g
 
 // Les paramètres de l'adresse (#/commandes?pays=JP&niveau=bloque) priment à l'arrivée.
 export function entrer(params) {
-  f = { onglet: params.get('niveau') || (params.get('echeance') ? 'a_expedier' : f.onglet), recherche: '', pays: params.get('pays') || '', echeance: params.get('echeance') || '' };
+  f = { onglet: params.get('niveau') || (params.get('echeance') || params.get('produit') ? 'a_expedier' : f.onglet), recherche: '', pays: params.get('pays') || '', echeance: params.get('echeance') || '', produit: params.get('produit') || '' };
   if (f.onglet === 'en_attente') f.onglet = 'a_expedier';
   selection.clear();
 }
@@ -31,6 +32,7 @@ function filtrer(lignes, produits) {
   const q = norme(f.recherche.trim());
   return lignes.filter((l) => {
     if (f.pays && l.pays !== f.pays) return false;
+    if (f.produit && l.sku !== f.produit) return false;
     if (f.echeance && !l.etat.raisons.some((r) => r.regle === f.echeance && r.echeance)) return false;
     if (!q) return true;
     return norme([l.commande, l.produit, l.sku, nomPays(l.pays), l.client, (produits[l.sku] || {}).nom].join(' ')).includes(q);
@@ -60,11 +62,12 @@ export function rendre() {
   const pays = [...new Set(ev.lignes.map((l) => l.pays))].sort((a, b) => nomPays(a).localeCompare(nomPays(b), 'en'));
   const sel = [...selection].filter((id) => ev.lignes.some((l) => l.id === id && l.expedition !== 'expediee'));
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Orders</h1><p>Every item ordered, checked for its delivery country. Only ready lines ship: a line to check waits for its answer, a blocked line waits for the rule to be lifted.</p></div></div>
-    <div class="onglets" role="tablist">${ONGLETS.map(([k, lib]) => `<button role="tab" data-onglet="${k}" class="${f.onglet === k ? 'actif' : ''}">${lib}<sup>${base.filter(garde[k]).length}</sup></button>`).join('')}</div>
+    ${enteteEnvois('commandes', 'Every item ordered, checked for its delivery country. Only ready lines ship: a line to check waits for its answer, a blocked line waits for the rule to be lifted.')}
+    <div class="onglets petits" role="tablist">${ONGLETS.map(([k, lib]) => `<button role="tab" data-onglet="${k}" class="${f.onglet === k ? 'actif' : ''}">${lib}<sup>${base.filter(garde[k]).length}</sup></button>`).join('')}</div>
     <div class="outils">
       <label class="recherche">${ic('recherche')}<input id="recherche-commandes" placeholder="Order, product, country, customer…" value="${esc(f.recherche)}" autocomplete="off"></label>
       <label class="chip" style="position:relative">${ic('globe')}${f.pays ? esc(nomPays(f.pays)) : 'All countries'}${ic('chevron')}<select data-filtre="pays" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Filter by country"><option value="">All countries</option>${pays.map((c) => `<option value="${c}" ${f.pays === c ? 'selected' : ''}>${esc(nomPays(c))}</option>`).join('')}</select></label>
+      ${f.produit && s.produits[f.produit] ? `<button class="chip actif" data-retirer-filtre="produit">${esc(s.produits[f.produit].nom)}${ic('fermer')}</button>` : ''}
       ${f.pays ? `<button class="chip actif" data-retirer-filtre="pays">${esc(nomPays(f.pays))}${ic('fermer')}</button>` : ''}
       ${R ? `<button class="chip actif" data-retirer-filtre="echeance">${ic('horloge')}${esc(R.titre)}${ic('fermer')}</button>` : ''}
       <span class="espace"></span>

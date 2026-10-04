@@ -7,6 +7,7 @@ import { evaluer, verifier, rejouer, versCode, cle } from '../../arbre-moteur.js
 import { regle, decisionsOfficielles, versionDeTravail, garderVersion } from '../regle.js';
 import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
+import { enteteProduit } from './produit-entete.js';
 import { grapheHtml, raisonsHtml } from '../graphe-arbre.js';
 
 export const titre = 'Interpretation tree';
@@ -27,7 +28,10 @@ Promise.all([regle(), decisionsOfficielles()]).then(([r, d]) => {
 });
 
 // Depuis un dossier : les valeurs que ses pièces établissent, avec leurs passages.
+let modeProduit = false;
+export const titrePour = () => (modeProduit ? 'Products' : 'Rule editor');
 export function entrer(params) {
+  modeProduit = Boolean(params.get('sku'));
   if (params.get('sku')) return charger(params.get('sku'));
   if (!params.get('dossier')) return;
   const D = E.lire(), t = E.dernier();
@@ -47,22 +51,6 @@ function charger(sku) {
 }
 const produitsLus = () => { const cat = Object.values(S.lire().produits).filter((p) => p.criteres); return cat.length ? cat : ((S.fixes().demo || {}).produits || []).filter((p) => p.criteres); };
 
-function arbreHtmlListe(res) {
-  const chemin = new Set(res.chemin.map((s) => s.noeud)), crit = C();
-  const marche = (id, vus) => {
-    const n = arbre.noeuds[id];
-    if (!n) return `<div class="retour">missing node: ${esc(id)}</div>`;
-    if (vus.includes(id)) return `<div class="retour">back to ${esc(titreNoeud(id))}</div>`;
-    const atteint = chemin.has(id) || ((res.statut === 'code' || res.statut === 'hors_perimetre') && res.noeud === id);
-    const cls = ['nd', n.type !== 'question' ? 'feuille' : '', sel === id ? 'sel' : '', modifie(id) ? 'mod' : '', atteint ? 'on' : '', res.statut === 'information_manquante' && res.noeud === id ? 'stop' : ''].join(' ');
-    if (n.type === 'code') return `<button class="${cls}" data-n="${esc(id)}"><span class="code">${esc(fmtCode(n.code))}</span> <span>${esc(n.libelle || '')}</span></button>`;
-    if (n.type === 'hors_perimetre') return `<button class="${cls}" data-n="${esc(id)}"><b>Out of scope</b> <small>${esc(n.motif || '')}</small></button>`;
-    const c = crit[n.critere];
-    return `<button class="${cls}" data-n="${esc(id)}"><span class="q">${esc(c ? c.question : n.critere)}</span><span class="w">${esc(n.pourquoi || '')}</span><small>${(n.base || []).map((b) => esc((T[b] || {}).ref || b)).join(' · ')}</small></button>
-      <ul>${Object.entries(n.branches || {}).map(([v, cible]) => `<li><span class="br">${esc(brLib(c, v))}</span>${marche(cible, [...vus, id])}</li>`).join('')}</ul>`;
-  };
-  return `<div class="arbre"><ul><li>${marche(arbre.racine, [])}</li></ul></div>`;
-}
 
 function essaiHtml(res) {
   const crit = C(), utiles = new Set(res.chemin.map((s) => s.critere));
@@ -140,10 +128,10 @@ export function rendre() {
   const faits = Object.fromEntries(Object.entries(cites).map(([k, x]) => [k, { kind: x.kind || (x.source === 'file' ? 'reponse' : 'pieces'), citation: x.citation, source: x.source }]));
   const tete = res.statut === 'code' ? `<span class="grand-code" style="font-size:30px">${esc(fmtCode(res.code))}</span>` : res.statut === 'information_manquante' ? etat('a_verifier', 'A fact is missing') : etat('bloque', 'Out of scope');
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Interpretation tree</h1><p>How the customs rule is encoded, and why a product ends on its code. Each step cites the official text it applies.</p></div>
+    ${modeProduit && essai.sku ? `${enteteProduit(essai.sku, 'arbre')}${modifiee ? '<p class="note-l" style="margin:-6px 0 12px"><span class="tag sim">Working version of the rule</span> edited in the rule editor</p>' : ''}` : `<div class="titre"><div class="bloc"><h1>Rule editor</h1><p>How the customs rule is encoded, and why a product ends on its code. Each step cites the official text it applies. Edit a branch, sign it, and every official ruling is replayed.</p></div>
       <div style="display:flex;gap:8px;align-items:center">${modifiee ? '<span class="tag sim">Working version</span><button class="btn rouge petit" data-reinit>Revert to the reference tree</button>' : '<span class="tag contour">Reference tree</span>'}</div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${lus.map((p) => `<button class="chip ${essai.sku === p.sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}<button class="chip ${essai.sku ? '' : 'actif'}" data-vider>Free-form product</button></div>
-    <div class="carte"><div class="carte-tete"><h3>${esc(essai.nom)}</h3>${tete}</div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Click a node to read or edit it.</p><div class="carte-corps"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="chip ${entier ? '' : 'actif'}" data-entier="0">This product's path</button><button class="chip ${entier ? 'actif' : ''}" data-entier="1">The whole rule (${Object.keys(arbre.noeuds).length} nodes)</button></div>${grapheHtml(arbre, { res, sel, modifie, entier })}</div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${lus.map((p) => `<button class="chip ${essai.sku === p.sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}<button class="chip ${essai.sku ? '' : 'actif'}" data-vider>Free-form product</button></div>`}
+    <div class="carte"><div class="carte-tete"><h3>${modeProduit && essai.sku ? 'The path through the encoded rule' : esc(essai.nom)}</h3>${modeProduit && essai.sku ? '' : tete}</div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Click a node to read or edit it.</p><div class="carte-corps"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="chip ${entier ? '' : 'actif'}" data-entier="0">This product's path</button><button class="chip ${entier ? 'actif' : ''}" data-entier="1">The whole rule (${Object.keys(arbre.noeuds).length} nodes)</button></div>${grapheHtml(arbre, { res, sel, modifie, entier })}</div></div>
     <div class="cols-arbre" style="margin-top:14px">
       <div class="carte"><div class="carte-tete"><h3>Why this code</h3><span class="muted">${res.chemin.length} step${res.chemin.length === 1 ? '' : 's'}</span></div><p class="carte-sous">The question asked, the answer with the passage that establishes it, and the official text that turns the answer into a consequence.</p><div class="carte-corps">${raisonsHtml(arbre, res, { faits, T })}</div></div>
       <div class="col">${editeurHtml()}<details class="carte repli" ${rendre.ouvert ? 'open' : ''} data-repli><summary class="carte-tete"><h3>Change an answer, replay official rulings</h3></summary>${essaiHtml(res)}${basHtml()}</details></div>

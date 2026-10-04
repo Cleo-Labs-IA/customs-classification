@@ -14,3 +14,6 @@ server.log
 essais/modules/*.pdf
 essais/modules/*.png
 !public/data/produits/*.jpg
+
+# état local des outils de brainstorming (contient un jeton de session)
+.superpowers/

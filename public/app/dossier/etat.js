@@ -65,8 +65,11 @@ export async function lireAdresse(adresse) {
 }
 
 // Entrée depuis la vue d'ensemble : un fichier, une adresse ou un texte.
-export function preparer({ fichier, adresse, texte, pieces } = {}) {
-  D = vierge();
+// criteres : les critères de la règle déjà établis pour un produit du catalogue (lus sur
+// son étiquette, passage cité, ou déclarés par le vendeur) ; ils servent tant qu'aucune
+// lecture des pièces ne les remplace.
+export function preparer({ fichier, adresse, texte, pieces, criteres = null } = {}) {
+  D = { ...vierge(), criteresConnus: criteres };
   if (pieces) D.pieces = { ...D.pieces, ...pieces };
   if (texte) D.pieces = { ...D.pieces, desc: texte.slice(0, 1800) };
   notifier();
@@ -80,7 +83,7 @@ export function lancer() {
   if (kg > 0) faits.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: `Product record, "Weight" field (${p.kg} kg)` };
   const dims = Object.fromEntries([['length_mm', p.l], ['width_mm', p.w], ['height_mm', p.h]].map(([k, v]) => [k, parseFloat(v) * 10]).filter(([, v]) => v > 0));
   if (Object.keys(dims).length) faits.dimensions = { value: dims, kind: 'fiche', origin: 'Product record, "Dimensions" field' };
-  D = { ...vierge(), pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits };
+  D = { ...vierge(), criteresConnus: D.criteresConnus || null, pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits };
   return tour('First evaluation');
 }
 
@@ -108,11 +111,15 @@ async function tour(cause) {
     const lectureExigences = X && D.produit.dest === X.data.marche ? lectureIA('/api/criteres', { pieces: { description: desc(), fiche_technique: fiche(), caracteristiques: valeursFaits(D.faits) }, criteres: X.data.criteres.filter((c) => c.source !== 'projet') }).catch(() => null) : null;
     const [r, cr, ce] = await Promise.all([classifier({ sku: D.produit.sku, description: desc(), pays: D.produit.dest, faits: valeursFaits(D.faits) }), lectureCriteres, lectureExigences]);
     if (ce && ce.valeurs) D.conf = { ...D.conf, valeurs: { ...Object.fromEntries(Object.entries(ce.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...Object.fromEntries(Object.entries(D.conf.valeurs).filter(([, x]) => x.kind === 'reponse')) } };
+    const connus = Object.fromEntries(Object.entries(D.criteresConnus || {}).map(([k, x]) => [k, x.kind === 'reponse' ? { valeur: x.valeur, kind: 'reponse' } : { valeur: x.valeur, citation: x.citation, source: 'fiche_technique', kind: 'pieces' }]));
+    const repondu = Object.fromEntries(Object.entries(D.crit).filter(([, x]) => x.kind === 'reponse'));
     if (cr && !cr.erreur) {
       D.critRejetes = cr.rejected; D.critErreur = null;
-      const repondu = Object.fromEntries(Object.entries(D.crit).filter(([, x]) => x.kind === 'reponse'));
-      D.crit = { ...Object.fromEntries(Object.entries(cr.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...repondu };
-    } else if (cr) D.critErreur = cr.erreur;
+      D.crit = { ...connus, ...Object.fromEntries(Object.entries(cr.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...repondu };
+    } else {
+      if (cr) D.critErreur = Object.keys(connus).length ? null : cr.erreur;
+      D.crit = { ...connus, ...repondu };
+    }
     D.tours = [...D.tours, { ...r, cause, repondu: null, faits: structuredClone(D.faits) }];
     try { const t = premierRetenu(r.data); localStorage.setItem('dossier', JSON.stringify({ sku: D.produit.sku, description: desc(), fiche_technique: fiche(), caracteristiques: valeursFaits(D.faits), code_moteur: t ? t.code : null, crit: D.crit })); } catch { /* dossier non partagé avec l'arbre */ }
   } catch (e) { D.erreur = String(e.message || e); }

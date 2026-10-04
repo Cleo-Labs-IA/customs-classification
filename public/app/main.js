@@ -9,17 +9,20 @@ import * as S from './store.js';
 import { compter, brancherReflet, transition } from './effets.js';
 import * as vue from './vues/vue.js';
 import * as commandes from './vues/commandes.js';
-import * as produits from './vues/produits.js';
 import * as questions from './vues/questions.js';
 import * as veille from './vues/veille.js';
 import * as dossier from './vues/dossier.js';
 import * as arbre from './vues/arbre.js';
 import * as accueil from './vues/accueil.js';
 import * as monde from './vues/monde.js';
+import * as produit from './vues/produit.js';
 import * as E from './dossier/etat.js';
 
-const VUES = { '': accueil, envois: vue, monde, dossier, commandes, produits, questions, veille, arbre };
-const IDS = { '': 'accueil', envois: 'vue', monde: 'monde', dossier: 'dossier', commandes: 'commandes', produits: 'produits', questions: 'questions', veille: 'veille', arbre: 'arbre' };
+const VUES = { '': accueil, produit, envois: vue, monde, dossier, commandes, questions, veille, arbre };
+// L'entrée de la barre latérale allumée pour chaque écran. Les onglets d'un produit
+// (pourquoi ce code, monde, dossier) restent sous « Products ».
+const IDS = { '': 'accueil', produit: 'accueil', monde: 'accueil', envois: 'envois', commandes: 'envois', questions: 'questions', veille: 'veille', dossier: 'accueil', arbre: 'arbre' };
+const actifSide = () => (route.nom === 'arbre' && route.params.get('sku') ? 'accueil' : IDS[route.nom]);
 const shell = document.querySelector('.shell'), side = document.querySelector('.side'), main = document.querySelector('.main');
 let route = null;
 
@@ -30,16 +33,18 @@ function lireAdresse() {
 
 function rendreSide() {
   const s = S.lire(), F = S.fixes(), ev = s.lignes.length ? S.evaluation() : null;
-  const comptes = ev ? { commandes: ev.totaux.lignes, produits: Object.keys(s.produits).length, questions: S.aFaire().length, veille: s.simulations.length || '' } : {};
-  side.innerHTML = shellHtml(IDS[route.nom], { comptes, mode: F.mode, api: F.api, boutique: s.boutique, fluxDemo: s.fluxDemo, qui: s.qui, alerte: Boolean(ev && ev.echeances.length) || s.simulations.length > 0 });
+  const comptes = ev ? { accueil: Object.keys(s.produits).length, envois: ev.totaux.lignes, questions: S.aFaire().length, veille: s.simulations.length || '' } : {};
+  side.innerHTML = shellHtml(actifSide(), { comptes, mode: F.mode, api: F.api, boutique: s.boutique, fluxDemo: s.fluxDemo, qui: s.qui, alerte: Boolean(ev && ev.echeances.length) || s.simulations.length > 0 });
 }
 
 function topbar() {
   const s = S.lire(), V = VUES[route.nom];
-  const classer = route.nom === 'dossier' ? '' : `<button class="btn ${s.lignes.length ? 'blanc' : 'noir'}" data-aller="#/dossier">${ic('agent')}Classify a product</button>`;
-  const simuler = ['veille', 'envois', 'commandes'].includes(route.nom) ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>` : '';
-  const actions = s.lignes.length ? `${simuler}${classer}<button class="btn noir" data-action="importer">${ic('import')}Import</button>` : `${classer}<button class="btn ${classer ? 'blanc' : 'noir'}" data-action="importer">${ic('import')}Import</button>`;
-  return `<header class="topbar"><div class="fil">${s.boutique ? `${esc(s.boutique.nom)} ${ic('droite')}` : ''}<b>${esc(V.titre)}</b></div>${actions}</header>`;
+  // Une action principale par écran, là où elle a du sens.
+  const envois = ['envois', 'commandes', 'veille'].includes(route.nom);
+  const actions = route.nom === '' ? `<a class="btn noir" href="#/dossier">${ic('plus')}Add a product</a>`
+    : envois ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>${route.nom === 'veille' ? '' : `<button class="btn noir" data-action="importer">${ic('import')}Import orders</button>`}` : '';
+  const titre = V.titrePour ? V.titrePour() : V.titre;
+  return `<header class="topbar"><div class="fil">${s.boutique ? `${esc(s.boutique.nom)} ${ic('droite')}` : ''}<b>${esc(titre)}</b></div>${actions}</header>`;
 }
 
 // Rendu de la page courante. Un rendu suivant le premier garde la position de saisie

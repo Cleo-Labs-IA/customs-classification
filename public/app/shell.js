@@ -1,18 +1,16 @@
 // Barre latérale de Stamped. Elle lit l'état sans lancer l'agent.
 import { esc, ic, ilYA } from './ui.js';
 
-// Le parcours tient en quatre écrans ; le reste est rangé sous « More ».
+// Quatre écrans. Un produit ouvre son propre espace (vue d'ensemble, pourquoi ce code,
+// monde, dossier) ; l'éditeur de la règle encodée est un outil d'expert, à part.
 const NAV = [
   { id: 'accueil', href: '/#/', lib: 'Products', ic: 'produits' },
-  { id: 'arbre', href: '/#/arbre', lib: 'Why this code', ic: 'arbre' },
-  { id: 'monde', href: '/#/monde', lib: 'World', ic: 'veille' },
-  { id: 'commandes', href: '/#/commandes', lib: 'Orders', ic: 'commandes' },
-];
-const OUTILS = [
-  { id: 'dossier', href: '/#/dossier', lib: 'Classify a new product', ic: 'agent' },
-  { id: 'vue', href: '/#/envois', lib: 'Shipments overview', ic: 'accueil' },
+  { id: 'envois', href: '/#/envois', lib: 'Shipments', ic: 'commandes' },
   { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
   { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
+];
+const OUTILS = [
+  { id: 'arbre', href: '/#/arbre', lib: 'Rule editor', ic: 'arbre' },
 ];
 
 // Le tampon de la marque Stamped (silhouette pleine, couleur du texte).
@@ -43,7 +41,7 @@ export function shellHtml(actif, infos = {}) {
   </div>
   <button class="side-new" data-action="nouveau">${ic('plus')}<span>New…</span>${ic('chevron')}</button>
   <nav aria-label="Main navigation">${NAV.map(item).join('')}</nav>
-  <div class="sec">More</div>
+  <div class="sec">Expert</div>
   <nav>${OUTILS.map(item).join('')}</nav>
   <div class="sec">Stores</div>
   <nav>${boutique}</nav>

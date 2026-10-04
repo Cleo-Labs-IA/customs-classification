@@ -47,6 +47,9 @@ export function brancherReflet() {
 
 // Transition entre deux pages, quand le navigateur sait la faire.
 export function transition(fn) {
-  if (calme() || !document.startViewTransition) return fn();
-  return document.startViewTransition(fn);
+  if (calme() || !document.startViewTransition || document.visibilityState !== 'visible' || !transition.deja) { transition.deja = true; return fn(); }
+  // Une transition interrompue (navigation rapide, onglet masqué) n'est pas une erreur.
+  const t = document.startViewTransition(fn);
+  for (const p of [t.ready, t.finished, t.updateCallbackDone]) p.catch(() => {});
+  return t;
 }

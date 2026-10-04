@@ -164,3 +164,33 @@ test('an information rule with a value ceiling stays silent above the ceiling, a
   assert.ok(etatLigne(ligne(150), ctx).raisons.some((r) => r.regle === 'r'));
   assert.ok(!etatLigne(ligne(749), ctx).raisons.some((r) => r.regle === 'r'));
 });
+
+test('décision du dossier : le code sur lequel moteur et règle s\'accordent s\'applique, à valider', () => {
+  const cl = { statut: 'needs_information', code: '850440', candidats: [{ code: '850440' }], questions: [{ fait: 'function' }] };
+  const decision = { code: '850440', origine: 'convergence' };
+  assert.deepEqual(codeDuProduit(cl, null, decision), { code: '850440', provisoire: true });
+  const r = raisonClassification(cl, null, decision);
+  assert.equal(r.type, 'validation');
+  assert.equal(r.niveau, 'a_verifier');
+  assert.match(r.texte, /8504\.40/);
+  const e = etatLigne(ligne({ pays: 'JP' }), { classification: cl, decision, regles: [{ ...PSE, sh: ['850440'] }], maintenant: MAINTENANT });
+  assert.equal(e.code, '850440');
+  assert.ok(e.raisons.some((x) => x.regle === 'jp-pse'), 'les exigences du pays s\'appliquent au code de la décision');
+});
+
+test('décision à arbitrer : pas de code, la raison dit pourquoi', () => {
+  const decision = { code: null, besoinArbitrage: true, motif: 'The engine proposes 8517.62 and the encoded rule concludes 8471.80.' };
+  const r = raisonClassification({ statut: 'ambiguous', code: '851762', candidats: [{ code: '851762' }] }, null, decision);
+  assert.equal(r.type, 'validation');
+  assert.match(r.texte, /8471\.80/);
+  assert.deepEqual(codeDuProduit({ statut: 'ambiguous', code: '851762' }, null, decision), { code: null, provisoire: true });
+});
+
+test('la validation l\'emporte sur la décision', () => {
+  assert.deepEqual(codeDuProduit(null, { hs6: '850440', par: 'A' }, { code: '850450' }), { code: '850440', provisoire: false });
+});
+
+test('évaluation : la décision de chaque produit est transmise à ses lignes', () => {
+  const r = evaluer([ligne({ pays: 'JP' })], { classifications: { PWR: { statut: 'needs_information', code: '850760' } }, decisions: { PWR: { code: '850760', origine: 'convergence' } }, regles: [PSE], maintenant: MAINTENANT });
+  assert.equal(r.lignes[0].etat.code, '850760');
+});

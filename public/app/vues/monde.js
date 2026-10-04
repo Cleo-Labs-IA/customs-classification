@@ -4,8 +4,9 @@
 import { esc, ic, urlSure, drapeau, etat } from '../ui.js';
 import { fmtCode } from '../conformite.js';
 import * as S from '../store.js';
+import { enteteProduit } from './produit-entete.js';
 
-export const titre = 'World';
+export const titre = 'Products';
 let M = null, sku = null, ouvert = null, tout = false, familleVoulue = null, rerendreLocal = () => {};
 fetch('/data/monde-produits.json').then((r) => (r.ok ? r.json() : null)).then((m) => { M = m; rerendreLocal(); }).catch(() => null);
 
@@ -65,8 +66,8 @@ export function rendre() {
   }).join('');
   const autres = Object.entries(P.pays).filter(([, x]) => x.consulte).sort((a, b2) => (M.noms[a[0]] || a[0]).localeCompare(M.noms[b2[0]] || b2[0]));
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>World</h1><p>For one product: the tariff line each country would use, the base duty, and what each market requires, with the official sentence behind it.</p></div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">${produits.map((p) => `<button class="chip ${p.sku === sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}</div>
+    ${enteteProduit(sku, 'monde')}
+    <p class="muted" style="margin:-4px 0 16px;max-width:760px">The tariff line each country would use, the base duty, and what each market requires, with the official sentence behind it.</p>
     <div class="monde-tuiles"><div><b>${b.consultes}</b><span>countries looked up on the Cleo Legal API (${M.couverture.catalogue_national} have a national catalogue, ${M.couverture.six_chiffres} stop at six digits)</span></div>
       <div><b>${b.lignes_nationales}</b><span>countries where the engine proposes a national line under the rule's code ${esc(fmtCode(P.code_regle))}</span></div>
       <div><b>${b.desaccord}</b><span>countries where the engine alone proposes another code: the rule and its reasons decide</span></div>

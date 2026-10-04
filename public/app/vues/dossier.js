@@ -4,17 +4,19 @@ import { esc, ic, drapeau, nomPays, etat, toast } from '../ui.js';
 import { dossierHtml } from '../../dossier.js';
 import { donneesHorsLigne, suggestionsHorsLigne, etatServeur } from '../api.js';
 import { estImage } from '../dossier/photo.js';
-import { lireFait, travailRestant, premierRetenu, STATUT } from '../dossier/logique.js';
+import { lireFait, travailRestant, STATUT } from '../dossier/logique.js';
 import { versImprimable } from '../dossier/imprimable.js';
 import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
 import { ouvrirContenu } from './tiroirs.js';
+import { enteteProduit } from './produit-entete.js';
 import { piecesHtml, EXEMPLES } from './dossier/pieces.js';
 import { piecesCarte, faitsCarte, contradictionsCarte, regleCarte, toursHtml } from './dossier/graphe.js';
 import { propositionCarte, epreuvesCarte, obligationsCarte, destinationsCarte } from './dossier/outils.js';
 import { decisionCarte, exigencesCarte, exigencesDossier, exigencesClic } from './dossier/decision.js';
 
 export const titre = 'Classify a product';
+export const titrePour = () => (E.lire().produit && S.lire().produits[E.lire().produit.sku] ? 'Products' : 'Classify a product');
 let plusOuvert = false;
 let details = [], horsLigne = null, serveur = { mode: 'illustratif', ia: false };
 const det = (html) => { details.push(html); return details.length - 1; };
@@ -25,8 +27,16 @@ etatServeur().then((s) => { serveur = s; if (s.mode !== 'direct') donneesHorsLig
 export function entrer(params) {
   const sku = params.get('sku'), p = sku && S.lire().produits[sku];
   const dest = params.get('dest') || (p && (S.lire().lignes.find((l) => l.sku === sku) || {}).pays) || 'FR';
-  if (p) return E.preparer({ pieces: { sku, desc: p.description || p.nom, ds: p.fiche_technique || '', dest, origin: p.origine || 'CN' } });
-  if (params.get('desc')) E.preparer({ pieces: { sku: (sku || '').slice(0, 48), desc: params.get('desc').slice(0, 1800), ds: (params.get('ds') || '').slice(0, 12000), dest, origin: params.get('origin') || 'CN' } });
+  if (p) {
+    // déjà ouvert pour ce produit : on le retrouve tel quel
+    if (E.lire().produit && E.lire().produit.sku === sku) return;
+    E.preparer({ pieces: { sku, desc: p.description || p.nom, ds: p.fiche_technique || '', dest, origin: p.origine || 'CN' }, criteres: p.criteres || null });
+    return E.lancer();
+  }
+  if (params.get('desc')) return E.preparer({ pieces: { sku: (sku || '').slice(0, 48), desc: params.get('desc').slice(0, 1800), ds: (params.get('ds') || '').slice(0, 12000), dest, origin: params.get('origin') || 'CN' } });
+  // « Add a product » : une nouvelle fiche, pas le dossier d'un produit déjà ouvert
+  const ouvert = E.lire().produit;
+  if (!sku && ouvert && S.lire().produits[ouvert.sku]) E.nouveau();
 }
 
 const visuel = (P) => {
@@ -57,7 +67,8 @@ function dossierEcran(D) {
   const st = t ? STATUT[t.data.status] || [t.data.status, 'a_verifier'] : null, dec = pret ? E.decision() : null;
   const attente = !t && D.occupe ? `<div class="candidats-grille">${[1, 2, 3].map(() => '<div class="cand-carte"><span class="miroite" style="height:22px;width:90px"></span><span class="miroite" style="height:38px"></span><span class="miroite" style="height:6px"></span></div>').join('')}</div>` : '';
   return `<div class="page entre">
-    <div class="carte dossier-tete">${visuel(P)}<div class="infos"><span class="eyebrow">Classification file · ${esc(P.sku)}</span><h1>${esc(P.desc.length > 110 ? P.desc.slice(0, 108) + '…' : P.desc)}</h1>
+    ${S.lire().produits[P.sku] ? enteteProduit(P.sku, 'dossier') : ''}
+    <div class="carte dossier-tete" ${S.lire().produits[P.sku] ? 'hidden' : ''}>${visuel(P)}<div class="infos"><span class="eyebrow">Classification file · ${esc(P.sku)}</span><h1>${esc(P.desc.length > 110 ? P.desc.slice(0, 108) + '…' : P.desc)}</h1>
       <div class="route">${drapeau(P.origin)}${esc(nomPays(P.origin))} ${ic('droite')} ${drapeau(P.dest)}<b>${esc(nomPays(P.dest))}</b>${st ? etat(st[1], st[0]) : ''}${D.valide ? etat('pret', 'Validated') : ''}</div></div>
       <div class="actions">${t ? `<button class="btn blanc petit" data-action-dossier="imprimer">${ic('dossier')}${D.valide ? 'Export the validated file' : 'Export the file as it stands'}</button>` : ''}<button class="btn texte petit" data-action-dossier="nouveau">${ic('plus')}New product</button></div></div>
     ${etapes(D, res)}

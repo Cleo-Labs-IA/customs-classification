@@ -1,15 +1,20 @@
 # Stamped: customs classification and shipment compliance
 
-## The demo in four screens (since 4 Oct 2026)
+## The demo (since 4 Oct 2026)
 
 The default store holds two real products, read from their photographed labels: a 70 W USB-C power adapter and a notebook PC (model M1605N).
 
-- **Products** (home): for each product, what is read on the label, the code and the steps that lead to it, and the world figures.
-- **Why this code** (`#/arbre`): the encoded rule drawn as a graph. The path of the product is on one line, with the outcomes it did not take under each step; next to it, each step gives the question, the answer with the label passage that establishes it, and the official text. "The whole rule" shows the 33 nodes.
-- **World** (`#/monde`): per country, the tariff line the engine proposes and the base duty; per market, the requirements with the official sentence behind each.
-- **Orders**: each order line checked for its delivery country against the verified rules.
+Navigation: **Products**, **Shipments**, **Questions**, **Regulatory watch**; the rule editor sits apart, for experts.
 
-Everything else (classify a new product, shipments overview, questions, regulatory watch) sits under "More".
+- **Products** (home): one card per product (photo, code, state, and where it stands: label read, code found, signed, evidence per market), a card to add a product (photo, label, pictogram, product page link or text), and the store's shipments in one line.
+- **A product** (`#/produit?sku=…`) opens its own space, one header and four tabs:
+  - **Overview**: what the label says, the code with the steps that lead to it, *Validate and sign*, the evidence per market (Yes / No, signed; every order to that market follows), and the orders waiting.
+  - **Why this code** (`#/arbre?sku=…`): the encoded rule drawn as a graph, each step with its question, the label passage and the official text.
+  - **World** (`#/monde?sku=…`): per country, the tariff line the engine proposes and the base duty; per market, the requirements with the official sentence behind each.
+  - **Classification file** (`#/dossier?sku=…`): the full file, started from the facts already established on the label.
+- **Shipments**: an overview (map, deadlines) and the orders, behind one switch. Each order line is checked for its country against the verified rules, on the code of the product's single decision (engine and encoded rule read together, `public/decision.js`); a code validated by a person takes precedence.
+- **Questions**: everything still to decide, across products.
+- **Rule editor** (`#/arbre`): the free-form tree, signed edits, replay on the 87 official decisions.
 
 ### Where the data comes from
 
