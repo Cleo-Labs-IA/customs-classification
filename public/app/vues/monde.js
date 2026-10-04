@@ -5,6 +5,7 @@ import { esc, ic, urlSure, drapeau, etat } from '../ui.js';
 import { fmtCode } from '../conformite.js';
 import * as S from '../store.js';
 import { enteteProduit } from './produit-entete.js';
+import * as L from '../lexique.js';
 
 export const titre = 'Products';
 let M = null, sku = null, ouvert = null, tout = false, familleVoulue = null, rerendreLocal = () => {};
@@ -17,6 +18,7 @@ const CSS = `
 .monde-tuiles div { background: var(--panel); padding: 16px 18px; }
 .monde-tuiles b { display: block; font-family: var(--display); font-weight: 500; font-size: 34px; letter-spacing: -.045em; line-height: 1; }
 .monde-tuiles span { font-size: 12.5px; color: var(--ink-3); }
+.monde-tuiles .tuile-titre { display: block; font-family: inherit; font-size: 13.5px; font-weight: 550; letter-spacing: 0; color: var(--ink); margin: 8px 0 2px; line-height: 1.3; }
 @media (max-width: 980px) { .monde-tuiles { grid-template-columns: repeat(2, 1fr); } }
 .marche { border-top: 1px solid var(--line); }
 .marche:first-child { border-top: 0; }
@@ -39,13 +41,13 @@ if (typeof document !== 'undefined') document.head.appendChild(Object.assign(doc
 
 export function entrer(params) { if (params.get('sku')) sku = params.get('sku'); familleVoulue = params.get('famille'); ouvert = params.get('marche') || null; }
 
-const droit = (d) => (!d ? '<span class="faint">not read</span>' : `<b>${d.min === d.max ? d.min : d.min + ' to ' + d.max}${esc(d.unite || '%')}</b>${d.ligne_exacte ? '' : ' <span class="faint">range</span>'}`);
+const droit = (d) => { const x = L.droit(d); return !x.connu ? `<span class="faint" title="No duty rate was found for this line. It does not mean the duty is zero.">${x.texte}</span>` : `<b>${esc(x.texte)}</b>${x.approx ? ' <span class="faint" title="Read at a broader level than the exact tariff line">approx.</span>' : ''}`; };
 function ligne(x, codeRegle) {
-  if (!x || !x.consulte) return '<span class="faint">six digits only: no national catalogue is enabled</span>';
+  if (!x || !x.consulte) return '<span class="faint">Only the international 6-digit code is available here</span>';
   if (x.erreur) return '<span class="faint">the API did not answer for this country</span>';
-  if (!x.accord_regle) return `${etat('a_verifier', 'Engine proposes ' + fmtCode(x.hs6_moteur))}<small>differs from the rule (${esc(fmtCode(codeRegle))}): not usable without a declarant</small>`;
-  if (!x.ligne) return `<span class="code">${esc(fmtCode(codeRegle))}</span><small>six digits: the engine returned no national line</small>`;
-  return `<span class="code">${esc(x.ligne.code)}</span> <span class="faint">${esc(x.ligne.systeme)}</span><small title="${esc(x.ligne.libelle)}">${esc(x.ligne.libelle || 'no wording returned')} · confidence ${x.ligne.confiance ?? 'not given'}</small>`;
+  if (!x.accord_regle) return `${etat('a_verifier', 'Needs review')}<small>Our rule says ${esc(fmtCode(codeRegle))}, the Cleo engine suggests ${esc(fmtCode(x.hs6_moteur))} here. A declarant decides.</small>`;
+  if (!x.ligne) return `<span class="code">${esc(fmtCode(codeRegle))}</span><small>No national digits returned: use the 6-digit code</small>`;
+  return `<span class="code">${esc(x.ligne.code)}</span> <span class="faint" title="Tariff system: ${esc(x.ligne.systeme)}">${esc(L.systeme(x.ligne.systeme))}</span><small title="${esc(x.ligne.libelle)}">${esc(x.ligne.libelle || 'No description returned')}${L.confiance(x.ligne.confiance) ? ' · ' + L.confiance(x.ligne.confiance) : ''}</small>`;
 }
 const marque = (e) => (e.marque == null ? '' : e.vu_sur_etiquette ? etat('pret', e.marque + ': seen on the label') : etat('a_verifier', e.marque + ': not seen on the label'));
 const exigence = (e) => `<div class="exi"><h4>${esc(e.titre)}</h4><span>${marque(e)}</span><p class="quoi">${esc(e.exigence)}</p><blockquote>${esc(e.citation)}</blockquote>
@@ -60,7 +62,7 @@ export function rendre() {
   const marches = MARCHES.map(([m, nom, pays]) => {
     const liste = exig.filter((e) => e.marche === m), x = P.pays[pays], nonVues = liste.filter((e) => e.vu_sur_etiquette === false).length, vues = liste.filter((e) => e.vu_sur_etiquette === true).length;
     if (!liste.length) return '';
-    return `<div class="marche"><button type="button" data-marche="${m}" aria-expanded="${ouvert === m}"><span class="nom">${drapeau(pays === 'FR' ? 'EU' : pays)}${esc(nom)}</span><span class="ligne-t">${ligne(x, P.code_regle)}</span><span>${x && x.consulte && !x.erreur ? droit(x.droits) : '<span class="faint">not read</span>'}</span>
+    return `<div class="marche"><button type="button" data-marche="${m}" aria-expanded="${ouvert === m}"><span class="nom">${drapeau(pays === 'FR' ? 'EU' : pays)}${esc(nom)}</span><span class="ligne-t">${ligne(x, P.code_regle)}</span><span>${droit(x && x.consulte && !x.erreur ? x.droits : null)}</span>
       <span style="font-size:13px"><b>${liste.length}</b> requirement${liste.length === 1 ? '' : 's'} verified${vues || nonVues ? ` · ${vues} mark${vues === 1 ? '' : 's'} seen${nonVues ? `, <b style="color:var(--warn)">${nonVues} not seen</b>` : ''}` : ''}</span>${ic(ouvert === m ? 'chevron' : 'droite')}</button>
       ${ouvert === m ? `<div class="exig-liste">${liste.map(exigence).join('')}</div>` : ''}</div>`;
   }).join('');
@@ -68,11 +70,11 @@ export function rendre() {
   return `<div class="page entre">
     ${enteteProduit(sku, 'monde')}
     <p class="muted" style="margin:-4px 0 16px;max-width:760px">The tariff line each country would use, the base duty, and what each market requires, with the official sentence behind it.</p>
-    <div class="monde-tuiles"><div><b>${b.consultes}</b><span>countries looked up on the Cleo Legal API (${M.couverture.catalogue_national} have a national catalogue, ${M.couverture.six_chiffres} stop at six digits)</span></div>
-      <div><b>${b.lignes_nationales}</b><span>countries where the engine proposes a national line under the rule's code ${esc(fmtCode(P.code_regle))}</span></div>
-      <div><b>${b.desaccord}</b><span>countries where the engine alone proposes another code: the rule and its reasons decide</span></div>
-      <div><b>${b.exigences}</b><span>requirements verified against the official text, in ${b.marches_exigences} markets</span></div></div>
-    <div class="carte"><div class="carte-tete"><h3>Markets with verified requirements</h3><span class="muted">tariff line · base duty · requirements</span></div><p class="carte-sous">Each requirement quotes the official text; the quote was found word for word in the source by an independent check. A mark seen on a label is not proof of conformity.</p>${marches}</div>
+    <div class="monde-tuiles"><div><b>${b.lignes_nationales}</b><span><b class="tuile-titre">Countries with a full code</b>The national code follows from ${esc(fmtCode(P.code_regle))} and the engine agrees.</span></div>
+      <div><b>${b.desaccord}</b><span><b class="tuile-titre">Countries to review</b>The Cleo engine suggests a different code there. A declarant decides.</span></div>
+      <div><b>${b.exigences}</b><span><b class="tuile-titre">Market rules checked</b>Across ${b.marches_exigences} markets, each quoted from the official text.</span></div>
+      <div><b>${b.consultes}</b><span><b class="tuile-titre">Countries looked up</b>${M.couverture.six_chiffres} more only have the 6-digit international code.</span></div></div>
+    <div class="carte"><div class="carte-tete"><h3>Markets with verified requirements</h3><span class="muted">code · duty · rules</span></div><p class="carte-sous">Each requirement quotes the official text; the quote was found word for word in the source by an independent check. A mark seen on a label is not proof of conformity.</p>${marches}</div>
     <details class="carte repli" style="margin-top:14px" ${tout ? 'open' : ''} data-tout><summary class="carte-tete"><h3>All ${autres.length} countries looked up</h3></summary>
       <div class="table-cadre" style="box-shadow:none;border-radius:0"><table class="t"><thead><tr><th>Country</th><th>Tariff line proposed by the engine</th><th>Base duty</th></tr></thead><tbody>${tout ? autres.map(([c, x]) => `<tr><td>${esc(M.noms[c] || c)} <span class="faint">${esc(c)}</span></td><td class="ligne-t" style="font-size:13px">${ligne(x, P.code_regle)}</td><td>${x.erreur ? '' : droit(x.droits)}</td></tr>`).join('') : ''}</tbody></table></div></details>
     <p class="faint" style="font-size:12.5px;max-width:900px;margin-top:14px">Recorded on ${esc(M.fixe_le)}. Tariff lines are proposals of the engine, not validated by a declarant. Base duty excludes VAT, taxes and additional duties. The requirement list is not complete: the rules that could not be checked against an official text are left out, and listed in the project files.</p>

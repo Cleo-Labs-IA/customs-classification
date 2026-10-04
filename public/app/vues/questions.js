@@ -5,6 +5,7 @@ import { esc, ic, etat, argent, nomPays, pluriel, urlSure, zones, toast, NIVEAU,
 import { fmtCode, consequence, libelleFait, cleAttestation } from '../conformite.js';
 import { sourceClassif } from './tiroirs.js';
 import * as S from '../store.js';
+import * as L from '../lexique.js';
 
 export const titre = 'Questions';
 let choisi = null, codeChoisi = null, envoi = false;
@@ -52,11 +53,11 @@ function panneauValidation(it, s, lignes, ctx) {
   const c = code ? consequence(lignes, ctx, (x) => ({ validations: { ...x.validations, [it.sku]: { hs6: code.slice(0, 6), par: s.qui } } })) : null;
   return `<div class="sur"><span class="tag">${ic('check')}${LIB.validation}</span><span>${impactTexte(it)}</span></div>
     <h2>Which code to select for "${esc(p.nom)}"? <span class="gris">The engine proposes, an authorised person decides.</span></h2>
-    <p class="pourquoi">The validated code, at six digits, applies to all destinations. Each country's rules then apply to that code.</p>${cl.couverture ? `<p class="muted" style="font-size:12.5px;margin-top:6px">Coverage returned by the API: ${esc(cl.couverture)}</p>` : ''}
-    <form data-form="validation"><div class="candidats">${cands.map((x) => `<label class="candidat ${x.ecarte ? 'ecarte' : ''}"><input type="radio" name="code" value="${esc(x.code)}" ${x.code === code ? 'checked' : ''}><div><span class="code">${esc(fmtCode(x.code))}</span><p>${esc(x.titre)}</p><p>${x.ecarte ? 'Set aside by the engine: ' + esc(x.ecarte) : esc(x.justification)}</p></div><span class="conf">${x.confiance != null ? String(x.confiance) : ''}</span></label>`).join('')}</div>
+    <p class="pourquoi">Pick the code that describes the product, then sign. The 6-digit code applies to every destination; each country's rules are then checked on it.</p>${cl.couverture ? `<p class="muted" style="font-size:12.5px;margin-top:6px">${ic('info')} ${esc(L.couverture(cl.couverture))}</p>` : ''}
+    <form data-form="validation"><div class="candidats">${cands.map((x) => `<label class="candidat ${x.ecarte ? 'ecarte' : ''}"><input type="radio" name="code" value="${esc(x.code)}" ${x.code === code ? 'checked' : ''}><div><span class="code">${esc(fmtCode(x.code))}</span><p>${esc(x.titre)}</p><p>${x.ecarte ? 'Set aside by the engine: ' + esc(x.ecarte) : esc(x.justification)}</p></div><span class="conf" title="${x.confiance != null ? 'Score returned by the engine: ' + esc(String(x.confiance)) : ''}">${x.ecarte ? 'Set aside' : esc(L.confiance(x.confiance))}</span></label>`).join('')}</div>
     ${c ? `<p class="muted" style="margin-top:14px;font-size:13px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">Validate this code: ${mene(c)}</p>` : ''}
     <div class="champ"><label for="motif">Reason for the decision (optional)</label><input class="saisie" id="motif" name="motif" maxlength="200" placeholder="e.g. Main function: data transmission, note 3 to section XVI"></div>
-    <div style="display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap"><button class="btn noir" type="submit">${ic('check')}Validate and sign</button><span class="muted" style="font-size:12.5px">Signed "${esc(s.qui)}", timestamped, recorded in the log.</span></div></form>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap"><button class="btn noir" type="submit">${ic('check')}Validate and sign${c && c.changees ? ` · moves ${c.changees} line${c.changees === 1 ? '' : 's'} forward` : ''}</button><span class="muted" style="font-size:12.5px">Signed "${esc(s.qui)}", timestamped, recorded in the log.</span></div></form>
     <div class="source">${ic('agent')}<div><b>Classification engine</b><br><span class="muted">${esc(sourceClassif(cl))}</span>${cl.avertissement ? `<br><span class="faint" style="font-size:12px">${esc(cl.avertissement)}</span>` : ''}</div></div>`;
 }
 

@@ -5,9 +5,11 @@ import { fmtCode } from '../conformite.js';
 import { ouvrir } from './tiroirs.js';
 import * as S from '../store.js';
 import { enteteEnvois } from './envois-entete.js';
+import { STATUTS } from '../lexique.js';
 
 export const titre = 'Shipments';
-const ONGLETS = [['a_expedier', 'To ship'], ['bloque', 'Blocked'], ['a_verifier', 'To check'], ['pret', 'Ready'], ['expediees', 'Shipped'], ['toutes', 'All']];
+const ONGLETS = [['a_expedier', 'All to ship'], ['pret', 'Ready'], ['a_verifier', 'To check'], ['bloque', 'Blocked'], ['expediees', 'Shipped'], ['toutes', 'Everything']];
+const legende = () => `<p class="legende-statuts">${STATUTS.slice(0, 3).map(([n, lib, def]) => `<span><i class="c-${n}"></i><span><b>${lib}</b> · ${def}</span></span>`).join('')}</p>`;
 let f = { onglet: 'a_expedier', recherche: '', pays: '', echeance: '', produit: '' };
 const selection = new Set();
 
@@ -44,11 +46,11 @@ function ligneHtml(l, p, i = 0) {
   return `<tr style="--r:${i}" data-id="${esc(l.id)}" class="${selection.has(l.id) ? 'sel' : ''} ${exp ? 'expediee' : ''}">
     <td style="width:36px" data-stop>${exp ? '' : `<input type="checkbox" aria-label="Select ${esc(l.commande)}" data-sel="${esc(l.id)}" ${selection.has(l.id) ? 'checked' : ''}>`}</td>
     <td class="cmd"><b>${esc(l.commande)}</b><small>${esc(l.client || '')}</small></td>
+    <td>${exp ? '<span class="tag">Shipped</span>' : etat(e.niveau)}</td>
     <td>${pays(l.pays)}</td>
     <td class="produit"><div class="prod-cell">${vignette({ ...p, sku: l.sku }, 'petite')}<div><b>${esc(p.nom || l.produit)}</b><small>${esc(l.sku)}${l.quantite > 1 ? ' · ×' + l.quantite : ''}</small></div></div></td>
     <td class="num">${argent(e.valeur, l.devise, true)}</td>
-    <td>${e.code ? `<span class="code ${e.provisoire ? 'provisoire' : ''}" title="${e.provisoire ? 'Proposed by the engine, not validated' : 'Validated'}">${esc(fmtCode(e.code))}</span>` : '<span class="faint">-</span>'}</td>
-    <td>${exp ? '<span class="tag">Shipped</span>' : etat(e.niveau)}</td>
+    <td>${e.code ? `<span class="code ${e.provisoire ? 'provisoire' : ''}" title="${e.provisoire ? 'Proposed, not signed yet' : 'Signed by a declarant'}">${esc(fmtCode(e.code))}</span>${e.provisoire ? '<small class="faint" style="display:block;font-size:11px">not signed yet</small>' : ''}` : '<span class="faint">-</span>'}</td>
     <td class="raison" title="${esc(e.principale.texte)}">${esc(e.principale.texte)}</td>
     <td class="num">${e.surcout ? argent(e.surcout, l.devise, true) : e.evitable ? `<span style="color:var(--warn)" title="Avoidable before the deadline">${argent(e.evitable, l.devise, true)}</span>` : '<span class="faint">-</span>'}</td>
     <td style="width:28px">${ic('droite', 'chev')}</td></tr>`;
@@ -64,6 +66,7 @@ export function rendre() {
   return `<div class="page entre">
     ${enteteEnvois('commandes', 'Every item ordered, checked for its delivery country. Only ready lines ship: a line to check waits for its answer, a blocked line waits for the rule to be lifted.')}
     <div class="onglets petits" role="tablist">${ONGLETS.map(([k, lib]) => `<button role="tab" data-onglet="${k}" class="${f.onglet === k ? 'actif' : ''}">${lib}<sup>${base.filter(garde[k]).length}</sup></button>`).join('')}</div>
+    ${legende()}
     <div class="outils">
       <label class="recherche">${ic('recherche')}<input id="recherche-commandes" placeholder="Order, product, country, customer…" value="${esc(f.recherche)}" autocomplete="off"></label>
       <label class="chip" style="position:relative">${ic('globe')}${f.pays ? esc(nomPays(f.pays)) : 'All countries'}${ic('chevron')}<select data-filtre="pays" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Filter by country"><option value="">All countries</option>${pays.map((c) => `<option value="${c}" ${f.pays === c ? 'selected' : ''}>${esc(nomPays(c))}</option>`).join('')}</select></label>
@@ -73,7 +76,7 @@ export function rendre() {
       <span class="espace"></span>
       <span class="muted" style="font-size:12.5px">${pluriel(lignes.length, 'line', 'lines')}</span>
     </div>
-    <div class="table-cadre"><table class="t"><thead><tr><th data-stop><input type="checkbox" aria-label="Select all" data-tout ${lignes.length && lignes.filter((l) => l.expedition !== 'expediee').every((l) => selection.has(l.id)) ? 'checked' : ''}></th><th>Order</th><th>${ic('globe')}Destination</th><th>${ic('produits')}Product</th><th class="num">Value</th><th>HS code</th><th>Compliance</th><th>Main reason</th><th class="num">Extra cost</th><th></th></tr></thead>
+    <div class="table-cadre"><table class="t"><thead><tr><th data-stop><input type="checkbox" aria-label="Select all" data-tout ${lignes.length && lignes.filter((l) => l.expedition !== 'expediee').every((l) => selection.has(l.id)) ? 'checked' : ''}></th><th>Order</th><th>Status</th><th>${ic('globe')}Destination</th><th>${ic('produits')}Product</th><th class="num">Value</th><th>Customs code</th><th>What it waits for</th><th class="num">Extra cost</th><th></th></tr></thead>
       <tbody>${lignes.map((l, i) => ligneHtml(l, s.produits[l.sku] || {}, i)).join('') || `<tr><td colspan="10"><div class="vide" style="padding:36px">No lines in this view.</div></td></tr>`}</tbody></table></div>
     ${sel.length ? `<div class="flottant"><span>${pluriel(sel.length, 'line selected', 'lines selected')}</span><button class="btn blanc petit" data-expedier-sel>${ic('camion')}Ship the ready lines</button><button class="btn texte petit" data-vider>Clear selection</button></div>` : ''}
   </div>`;

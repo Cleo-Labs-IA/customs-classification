@@ -45,6 +45,30 @@ function ajout() {
     <div class="pa-actions"><label class="btn noir petit">${ic('fichier')}Choose an image<input type="file" accept="image/*,.heic,.heif" class="sr" id="ajout-photo"></label><a class="btn blanc petit" href="#/dossier">${ic('lien')}Link or text</a></div></div>`;
 }
 
+// What to do next, in the order the work has to happen: answer the engine, sign the codes,
+// confirm the documents each market asks for. Built from the open items, never invented.
+const ETAPES = [
+  ['question', 'Answer the engine', 'Missing facts about a product', 'question to answer', 'questions to answer'],
+  ['validation', 'Sign the codes', 'A declarant confirms each customs code', 'code to sign', 'codes to sign'],
+  ['exigence', 'Confirm market documents', 'Certificates and conditions each country asks for', 'document to confirm', 'documents to confirm'],
+];
+function prochaineEtape(ev) {
+  const items = S.aFaire(), pret = ev.totaux.compte.pret || 0;
+  if (!ev.totaux.lignes) return '';
+  const courante = ETAPES.findIndex(([t]) => items.some((i) => i.type === t));
+  const liste = ETAPES.map(([t, titre, aide, un, plusieurs], i) => {
+    const n = items.filter((x) => x.type === t), st = n.length ? (i === courante ? 'encours' : 'attente') : (courante === -1 || i < courante ? 'fait' : 'attente');
+    const premier = n[0], lien = premier ? `#/questions?item=${encodeURIComponent(premier.cle)}` : '#/questions';
+    return `<li class="${st}"><a href="${lien}"><span class="pt">${st === 'fait' ? ic('check') : i + 1}</span><span><b>${titre}</b><small>${n.length ? pluriel(n.length, un, plusieurs) : st === 'fait' ? 'Done' : aide}</small></span></a></li>`;
+  }).join('');
+  const action = courante === -1 ? '' : (() => { const it = items.find((i) => i.type === ETAPES[courante][0]); return `<a class="btn noir" href="#/questions?item=${encodeURIComponent(it.cle)}">${ETAPES[courante][1]} ${ic('droite')}</a>`; })();
+  return `<section class="carte guide" aria-label="Next step">
+    <div class="guide-tete"><div><span class="eyebrow">Next step</span><h2>${courante === -1 ? `All decided: ${pluriel(pret, 'line is', 'lines are')} ready to ship.` : `${ETAPES[courante][1]} to get your ${pluriel(ev.totaux.lignes, 'order line', 'order lines')} ready to ship.`}</h2>
+      <p class="muted">Nothing ships until a person has signed the code and each destination's rules are met. ${pret ? `${pluriel(pret, 'line is', 'lines are')} ready now.` : 'No line is ready yet.'}</p></div>${action}</div>
+    <ol class="guide-etapes">${liste}<li class="${pret ? 'fait' : 'attente'} fin"><a href="#/commandes"><span class="pt">${ic('camion')}</span><span><b>Ship</b><small>${pret ? pluriel(pret, 'line ready', 'lines ready') : 'Ready lines appear here'}</small></span></a></li></ol>
+  </section>`;
+}
+
 function bandeau(s, ev) {
   const t = ev.totaux, pays = Object.keys(ev.parPays).length;
   if (!s.boutique) return '';
@@ -55,7 +79,8 @@ function bandeau(s, ev) {
 export function rendre() {
   const s = S.lire(), produits = Object.values(s.produits), ev = S.evaluation();
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Your products</h1><p>Each product is read from the photo of its label, classified, then checked against what every market asks for. Open one to see its code, why, and the evidence each country needs.</p></div></div>
+    <div class="titre"><div class="bloc"><h1>Your products</h1><p>Stamped makes sure every product you ship abroad has a customs code you can defend, and tells you what each country asks for before the parcel leaves.</p></div></div>
+    ${prochaineEtape(ev)}
     ${bandeau(s, ev)}
     <div class="produits-galerie">${produits.length ? produits.map((p, i) => carte(p, s, ev, i)).join('') : '<div class="agent"><span class="rond"></span><span class="txt">Loading the store</span></div>'}${ajout()}</div>
     <p class="faint" style="font-size:12.5px;max-width:860px;margin-top:18px">The rule that gives the code is drafted by AI from the official texts it cites and is not reviewed by a customs declarant. Engine proposals are ${S.fixes().mode === 'direct' ? 'live' : 'recorded'} calls to the Cleo Legal API. Nothing here states that a product is compliant.</p>

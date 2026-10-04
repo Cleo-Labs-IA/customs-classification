@@ -38,7 +38,7 @@ function repartition(t, ev) {
   const pays = (n) => Object.entries(ev.parPays).filter(([, x]) => x.compte[n]).map(([c]) => c);
   const sous = (n) => { const p = pays(n); return p.length ? esc(p.slice(0, 4).map(nomPays).join(', ') + (p.length > 4 ? '…' : '')) : '-'; };
   return `<div class="repartition">${cellule('pret', sous('pret'))}${cellule('a_verifier', sous('a_verifier'))}${cellule('bloque', sous('bloque'))}${cellule('en_attente', t.compte.en_attente ? 'the agent is classifying the products' : 'none pending')}
-    <div data-bouge><span class="lib">${ic('euro')}Extra costs identified</span><span class="val"><span data-compte="${t.surcout}" data-cle="surcout" data-format="argent">${argent(t.surcout)}</span></span><span class="sous">${t.evitable ? `<b style="color:var(--ink)" data-compte="${t.evitable}" data-cle="evitable" data-format="argent">${argent(t.evitable)}</b> avoidable before the deadline` : 'fixed duties and increases in force'}</span></div></div>
+    <div data-bouge><span class="lib">${ic('euro')}Extra costs identified</span><span class="val"><span data-compte="${t.surcout}" data-cle="surcout" data-format="argent">${argent(t.surcout)}</span></span><span class="sous">${t.evitable ? `<b style="color:var(--ink)" data-compte="${t.evitable}" data-cle="evitable" data-format="argent">${argent(t.evitable)}</b> avoidable before the deadline` : t.surcout ? 'fixed duties and increases in force' : 'None found yet: duties are counted once codes are signed'}</span></div></div>
     <div class="barre">${['pret', 'en_attente', 'a_verifier', 'bloque'].map((n) => `<i class="c-${n}" style="flex-grow:${t.compte[n]}"></i>`).join('')}</div>`;
 }
 
