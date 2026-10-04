@@ -84,15 +84,15 @@ function versLigne(cellules, idx, format, precedente, defauts) {
   // Shopify ne répète pas les champs de la commande sur ses lignes suivantes.
   const herite = precedente && precedente.commande === commande;
   const produit = lire('produit');
-  if (!produit) return { raison: 'ligne sans produit' };
+  if (!produit) return { raison: 'row with no product' };
   const pays = codePays(lire('pays')) || (herite ? precedente.pays : null);
-  if (!pays) return { raison: `pays de livraison non reconnu (« ${lire('pays') || 'vide'} »)` };
+  if (!pays) return { raison: `shipping country not recognized ("${lire('pays') || 'empty'}")` };
   const quantite = nombre(lire('quantite') || '1');
-  if (!(quantite > 0)) return { raison: 'quantité illisible' };
+  if (!(quantite > 0)) return { raison: 'unreadable quantity' };
   const etat = lire('expedition') || (herite ? precedente.etatBrut : '');
   return {
     ligne: {
-      commande: commande || '—', date: lire('date') || (herite ? precedente.date : ''), sku: lire('sku') || versSku(produit), produit, quantite,
+      commande: commande || '-', date: lire('date') || (herite ? precedente.date : ''), sku: lire('sku') || versSku(produit), produit, quantite,
       prixUnitaire: nombre(lire('prix')) ?? 0, devise: (lire('devise') || (herite ? precedente.devise : '') || defauts.devise).toUpperCase(), pays,
       origine: codePays(lire('origine')) || defauts.origine, client: lire('client') || (herite ? precedente.client : ''),
       expedition: expedie(etat, format) ? 'expediee' : 'a_expedier', etatBrut: etat,
@@ -102,10 +102,10 @@ function versLigne(cellules, idx, format, precedente, defauts) {
 
 export function versCommandes(texte, { origine = 'CN', devise = 'EUR' } = {}) {
   const [entetes, ...rangs] = lireCsv(texte);
-  if (!entetes) return { format: null, lignes: [], ecartees: [], erreur: 'fichier vide' };
+  if (!entetes) return { format: null, lignes: [], ecartees: [], erreur: 'empty file' };
   const format = detecterFormat(entetes), idx = indexColonnes(entetes, format);
-  if (idx.produit === undefined) return { format, lignes: [], ecartees: [], erreur: 'aucune colonne de produit reconnue' };
-  if (idx.pays === undefined) return { format, lignes: [], ecartees: [], erreur: 'aucune colonne de pays de livraison reconnue' };
+  if (idx.produit === undefined) return { format, lignes: [], ecartees: [], erreur: 'no product column recognized' };
+  if (idx.pays === undefined) return { format, lignes: [], ecartees: [], erreur: 'no shipping country column recognized' };
   const lignes = [], ecartees = [];
   let prec = null;
   rangs.forEach((cellules, i) => {

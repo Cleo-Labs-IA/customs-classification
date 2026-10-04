@@ -37,7 +37,7 @@ function pinHtml(c, x, [cx, cy], k = 1, i = 0) {
 }
 
 export function carteHtml(evaluation) {
-  if (!MONDE) return '<div class="vide" style="height:340px"><div class="agent"><span class="rond"></span>Chargement de la carte</div></div>';
+  if (!MONDE) return '<div class="vide" style="height:340px"><div class="agent"><span class="rond"></span>Loading the map</div></div>';
   const par = evaluation.parPays, centre = Object.fromEntries(MONDE.pays.map((p) => [p.id, p.c]));
   const origines = new Set(evaluation.lignes.map((l) => l.origine));
   const terres = MONDE.pays.filter((p) => p.d).map((p) => {
@@ -53,8 +53,8 @@ export function carteHtml(evaluation) {
     <g class="encart"><rect class="fond-encart" x="${ENCART.x}" y="${ENCART.y}" width="${ENCART.l}" height="${ENCART.h}" rx="12"/>
     <svg x="${ENCART.x}" y="${ENCART.y}" width="${ENCART.l}" height="${ENCART.h}" viewBox="${EUROPE.x} ${EUROPE.y} ${EUROPE.l} ${EUROPE.h}">${terres}${arcs}${proches.map(([c, x], i) => pinHtml(c, x, centre[c], k, loin.length + i)).join('')}</svg>
     <text class="titre-encart" x="${ENCART.x + 12}" y="${ENCART.y + 18}">Europe</text></g>` : '';
-  return `<div class="monde" id="monde"><svg viewBox="0 0 ${MONDE.largeur} ${MONDE.hauteur}" role="img" aria-label="Carte des destinations et de leur état de conformité">${terres}${arcs}${orig}${loin.map(([c, x], i) => pinHtml(c, x, centre[c], 1, i)).join('')}${encart}</svg><div class="bulle-info" id="bulle"></div></div>
-    <div class="legende"><span><i class="c-pret"></i>Prêtes</span><span><i class="c-a_verifier"></i>À vérifier</span><span><i class="c-bloque"></i>Bloquées</span><span><i class="c-en_attente"></i>En cours</span><span style="margin-left:auto" class="faint">Le chiffre : lignes à expédier</span></div>`;
+  return `<div class="monde" id="monde"><svg viewBox="0 0 ${MONDE.largeur} ${MONDE.hauteur}" role="img" aria-label="Map of destinations and their compliance status">${terres}${arcs}${orig}${loin.map(([c, x], i) => pinHtml(c, x, centre[c], 1, i)).join('')}${encart}</svg><div class="bulle-info" id="bulle"></div></div>
+    <div class="legende"><span><i class="c-pret"></i>Ready</span><span><i class="c-a_verifier"></i>To check</span><span><i class="c-bloque"></i>Blocked</span><span><i class="c-en_attente"></i>In progress</span><span style="margin-left:auto" class="faint">The number: lines to ship</span></div>`;
 }
 
 // Infobulle et clic sur un pays.
@@ -66,7 +66,7 @@ export function brancherCarte(racine, evaluation, surPays) {
     if (!cible) { bulle.classList.remove('vu'); return; }
     const c = cible.dataset.pays, x = evaluation.parPays[c], box = monde.getBoundingClientRect();
     const det = ['bloque', 'a_verifier', 'en_attente', 'pret'].filter((n) => x.compte[n]).map((n) => `${x.compte[n]} ${NIVEAU[n].court.toLowerCase()}`).join(' · ');
-    bulle.innerHTML = `${drapeau(c)} <b>${esc(nomPays(c))}</b> · ${pluriel(x.lignes, 'ligne', 'lignes')}<br><span style="opacity:.75">${esc(det)}</span>`;
+    bulle.innerHTML = `${drapeau(c)} <b>${esc(nomPays(c))}</b> · ${pluriel(x.lignes, 'line', 'lines')}<br><span style="opacity:.75">${esc(det)}</span>`;
     bulle.style.left = e.clientX - box.left + 'px';
     bulle.style.top = e.clientY - box.top + 'px';
     bulle.classList.add('vu');

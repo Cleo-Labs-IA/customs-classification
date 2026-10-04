@@ -1,6 +1,6 @@
 {
  "boutique": {
-  "nom": "Boutique démo",
+  "nom": "Demo store",
   "plateforme": "Shopify",
   "devise": "EUR",
   "origine": "CN"
@@ -8,7 +8,7 @@
  "produits": [
   {
    "sku": "DOCK-PRO",
-   "nom": "Station d'accueil USB-C 8-en-1",
+   "nom": "8-in-1 USB-C docking station",
    "description": "USB-C docking station for laptop",
    "fiche_technique": "Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.",
    "origine": "CN",
@@ -18,7 +18,7 @@
   },
   {
    "sku": "CHG-65W",
-   "nom": "Chargeur GaN USB-C 65 W",
+   "nom": "65 W GaN USB-C charger",
    "description": "65 W GaN USB-C wall charger for laptops and phones, input 100-240 V AC, output 5-20 V DC",
    "origine": "CN",
    "prix": 39.9,
@@ -27,7 +27,7 @@
   },
   {
    "sku": "PWR-20K",
-   "nom": "Batterie externe 20 000 mAh",
+   "nom": "20,000 mAh power bank",
    "description": "Portable power bank, 20000 mAh lithium-ion battery, USB-C PD 22.5 W output",
    "origine": "CN",
    "prix": 34.9,
@@ -36,7 +36,7 @@
   },
   {
    "sku": "BUDS-X",
-   "nom": "Écouteurs sans fil Bluetooth",
+   "nom": "Bluetooth wireless earbuds",
    "description": "True wireless Bluetooth earbuds with microphone and charging case",
    "origine": "CN",
    "prix": 49,
@@ -45,7 +45,7 @@
   },
   {
    "sku": "HDMI-2M",
-   "nom": "Câble HDMI 2.1, 2 m",
+   "nom": "HDMI 2.1 cable, 2 m",
    "description": "HDMI 2.1 cable, 2 m, fitted with connectors, 48 Gbps",
    "origine": "CN",
    "prix": 12.9,
@@ -54,7 +54,7 @@
   },
   {
    "sku": "ROBO-DOG",
-   "nom": "Chien robot interactif",
+   "nom": "Interactive robot dog",
    "description": "Interactive robot dog toy, battery powered, barks and moves on motorized base",
    "origine": "CN",
    "prix": 59,
@@ -63,7 +63,7 @@
   },
   {
    "sku": "CLOCK-BRICK",
-   "nom": "Horloge murale à construire",
+   "nom": "Buildable wall clock",
    "description": "Buildable wall clock for kids, battery powered",
    "origine": "CN",
    "prix": 44.9,
@@ -72,7 +72,7 @@
   },
   {
    "sku": "BOTTLE-750",
-   "nom": "Gourde isotherme inox 750 ml",
+   "nom": "Insulated stainless steel bottle, 750 ml",
    "description": "Stainless steel vacuum insulated water bottle, 750 ml",
    "origine": "VN",
    "prix": 24.9,
@@ -453,7 +453,7 @@
  "suites": {
   "CLOCK-BRICK": [
    {
-    "libelle": "Un jeu de construction pour enfants : l'horloge est le résultat du jeu",
+    "libelle": "A construction toy for children: the clock is the result of the play",
     "faits": {
      "use": "construction toy for children, the clock is the result of the building activity"
     },
@@ -475,7 +475,7 @@
     }
    },
    {
-    "libelle": "Une horloge murale fonctionnelle, livrée en pièces à assembler",
+    "libelle": "A working wall clock, delivered in parts to assemble",
     "faits": {
      "use": "working wall clock delivered in parts to assemble"
     },
@@ -499,105 +499,105 @@
   ]
  },
  "depart": {
-  "libelle": "État de départ de la démonstration : codes et pièces renseignés la veille par l'équipe démo.",
+  "libelle": "Starting state of the demo: codes and documents filled in the day before by the demo team.",
   "validations": {
    "HDMI-2M": {
     "hs6": "854442",
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Code proposé par le moteur, relu et validé."
+    "motif": "Code proposed by the engine, reviewed and validated."
    },
    "CHG-65W": {
     "hs6": "850440",
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Code proposé par le moteur, relu et validé."
+    "motif": "Code proposed by the engine, reviewed and validated."
    },
    "BOTTLE-750": {
     "hs6": "961700",
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Code proposé par le moteur, relu et validé."
+    "motif": "Code proposed by the engine, reviewed and validated."
    },
    "ROBO-DOG": {
     "hs6": "950300",
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Code proposé par le moteur, relu et validé."
+    "motif": "Code proposed by the engine, reviewed and validated."
    },
    "PWR-20K": {
     "hs6": "850760",
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Code proposé par le moteur, relu et validé."
+    "motif": "Code proposed by the engine, reviewed and validated."
    }
   },
   "attestations": {
    "DOCK-PRO|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "CHG-65W|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "PWR-20K|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "HDMI-2M|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "ROBO-DOG|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "CLOCK-BRICK|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "BOTTLE-750|ue-gpsr": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Opérateur responsable : Passavant Démo SAS, Paris, indiqué sur l'emballage."
+    "motif": "Responsible operator: Passavant Démo SAS, Paris, shown on the packaging."
    },
    "CHG-65W|jp-pse": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Marquage PSE (losange) et importateur déclaré au METI."
+    "motif": "PSE marking (diamond) and importer declared to METI."
    },
    "PWR-20K|jp-pse": {
     "reponse": false,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Le fournisseur n'a pas de certificat PSE pour ce modèle."
+    "motif": "The supplier has no PSE certificate for this model."
    },
    "ROBO-DOG|ue-jouets": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "Déclaration UE de conformité EN 71 du fournisseur, au dossier."
+    "motif": "Supplier's EU declaration of conformity to EN 71, on file."
    },
    "BUDS-X|us-fcc": {
     "reponse": true,
-    "par": "Équipe démo",
+    "par": "Demo team",
     "le": "2026-10-03T16:20:00+02:00",
-    "motif": "FCC ID imprimé sur le boîtier de charge."
+    "motif": "FCC ID printed on the charging case."
    }
   }
  }

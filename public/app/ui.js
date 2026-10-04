@@ -4,21 +4,21 @@ export const urlSure = (u) => (/^https:\/\//.test(String(u || '')) ? esc(u) : '#
 export const $ = (sel, el = document) => el.querySelector(sel);
 export const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
 
-const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
-const nf2 = new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const nf = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
+const nf2 = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 export const nombre = (n) => nf.format(n || 0);
-export const argent = (n, devise = 'EUR', precis = false) => (precis ? nf2 : nf).format(n || 0) + ' ' + (devise === 'EUR' ? '€' : devise === 'USD' ? '$' : devise);
+export const argent = (n, devise = 'EUR', precis = false) => { const v = (precis ? nf2 : nf).format(n || 0); return devise === 'EUR' ? '€' + v : devise === 'USD' ? '$' + v : v + ' ' + devise; };
 export const pluriel = (n, un, plusieurs) => `${nombre(n)} ${n > 1 ? plusieurs : un}`;
 export function ilYA(iso, maintenant = Date.now()) {
   const s = Math.max(0, Math.round((maintenant - Date.parse(iso)) / 1000));
-  if (s < 10) return "à l'instant";
-  if (s < 60) return `il y a ${s} s`;
-  if (s < 3600) return `il y a ${Math.floor(s / 60)} min`;
-  if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`;
-  return `il y a ${Math.floor(s / 86400)} j`;
+  if (s < 10) return 'just now';
+  if (s < 60) return `${s} s ago`;
+  if (s < 3600) return `${Math.floor(s / 60)} min ago`;
+  if (s < 86400) return `${Math.floor(s / 3600)} h ago`;
+  return `${Math.floor(s / 86400)} d ago`;
 }
-const jourFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
-const heureFmt = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+const jourFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const heureFmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 export const jour = (iso) => jourFmt.format(new Date(iso));
 export const dateHeure = (iso) => heureFmt.format(new Date(iso));
 export function rebours(ms) {
@@ -27,17 +27,17 @@ export function rebours(ms) {
 }
 
 export const NIVEAU = {
-  pret: { court: 'Prête', long: 'Prêtes à partir', ic: 'check' },
-  a_verifier: { court: 'À vérifier', long: 'À vérifier', ic: 'alerte' },
-  bloque: { court: 'Bloquée', long: 'Bloquées', ic: 'stop' },
-  en_attente: { court: 'En cours', long: 'Classification en cours', ic: 'agent' },
+  pret: { court: 'Ready', long: 'Ready to ship', ic: 'check' },
+  a_verifier: { court: 'To check', long: 'To check', ic: 'alerte' },
+  bloque: { court: 'Blocked', long: 'Blocked', ic: 'stop' },
+  en_attente: { court: 'In progress', long: 'Classification in progress', ic: 'agent' },
 };
 export const etat = (n, texte) => `<span class="etat ${n}">${esc(texte || NIVEAU[n].court)}</span>`;
 
 export const PAYS = {
-  FR: 'France', DE: 'Allemagne', ES: 'Espagne', IT: 'Italie', NL: 'Pays-Bas', BE: 'Belgique', GB: 'Royaume-Uni', US: 'États-Unis', CA: 'Canada', JP: 'Japon', AU: 'Australie', CH: 'Suisse', KR: 'Corée du Sud',
-  CN: 'Chine', VN: 'Vietnam', IN: 'Inde', MX: 'Mexique', BR: 'Brésil', IE: 'Irlande', PT: 'Portugal', AT: 'Autriche', SE: 'Suède', DK: 'Danemark', NO: 'Norvège', FI: 'Finlande', PL: 'Pologne', NZ: 'Nouvelle-Zélande',
-  SG: 'Singapour', AE: 'Émirats arabes unis', LU: 'Luxembourg', GR: 'Grèce',
+  FR: 'France', DE: 'Germany', ES: 'Spain', IT: 'Italy', NL: 'Netherlands', BE: 'Belgium', GB: 'United Kingdom', US: 'United States', CA: 'Canada', JP: 'Japan', AU: 'Australia', CH: 'Switzerland', KR: 'South Korea',
+  CN: 'China', VN: 'Vietnam', IN: 'India', MX: 'Mexico', BR: 'Brazil', IE: 'Ireland', PT: 'Portugal', AT: 'Austria', SE: 'Sweden', DK: 'Denmark', NO: 'Norway', FI: 'Finland', PL: 'Poland', NZ: 'New Zealand',
+  SG: 'Singapore', AE: 'United Arab Emirates', LU: 'Luxembourg', GR: 'Greece',
 };
 export const nomPays = (c) => PAYS[c] || c;
 // Drapeaux : icônes du paquet flag-icons (MIT), copiées dans public/data/drapeaux.
@@ -46,7 +46,7 @@ export const drapeau = (c, cls = '') => (DRAPEAUX.has(c) ? `<img class="drapeau 
 export const pays = (c) => `<span class="pays">${drapeau(c)}${esc(nomPays(c))}</span>`;
 // Vignette d'un produit : son image si le catalogue en a une, sinon ses initiales.
 export const vignette = (p, cls = '') => `<div class="vignette v-${esc(p.teinte || 'gris')} ${cls}">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" decoding="async">` : esc(String(p.sku || '').slice(0, 3))}</div>`;
-export const zones = (z) => z.map((x) => (x === 'UE' ? 'Union européenne' : x === '*' ? 'Toutes destinations' : nomPays(x))).join(', ');
+export const zones = (z) => z.map((x) => (x === 'UE' ? 'European Union' : x === '*' ? 'All destinations' : nomPays(x))).join(', ');
 
 // Icônes au trait (24 × 24, trait 1,6), dessinées pour cette app.
 const P = {

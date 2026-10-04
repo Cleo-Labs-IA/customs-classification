@@ -34,8 +34,8 @@ function rendreSide() {
 
 function topbar() {
   const s = S.lire(), V = VUES[route.nom];
-  const classer = route.nom === 'dossier' ? '' : `<button class="btn ${s.lignes.length ? 'blanc' : 'noir'}" data-aller="#/dossier">${ic('agent')}Classer un produit</button>`;
-  const actions = s.lignes.length ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simuler une annonce</button>${classer}<button class="btn noir" data-action="importer">${ic('import')}Importer</button>` : `${classer}<button class="btn ${classer ? 'blanc' : 'noir'}" data-action="importer">${ic('import')}Importer</button>`;
+  const classer = route.nom === 'dossier' ? '' : `<button class="btn ${s.lignes.length ? 'blanc' : 'noir'}" data-aller="#/dossier">${ic('agent')}Classify a product</button>`;
+  const actions = s.lignes.length ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>${classer}<button class="btn noir" data-action="importer">${ic('import')}Import</button>` : `${classer}<button class="btn ${classer ? 'blanc' : 'noir'}" data-action="importer">${ic('import')}Import</button>`;
   return `<header class="topbar"><div class="fil">${s.boutique ? `${esc(s.boutique.nom)} ${ic('droite')}` : ''}<b>${esc(V.titre)}</b></div>${actions}</header>`;
 }
 
@@ -79,8 +79,8 @@ function menuSimulation(bouton) {
   el.className = 'menu';
   el.style.top = r.bottom + 8 + 'px';
   el.style.right = Math.max(10, innerWidth - r.right) + 'px';
-  el.innerHTML = F.modeles.map((m) => `<button data-sim="${esc(m.id)}" ${s.simulations.some((x) => x.id === m.id) ? 'disabled style="opacity:.45"' : ''}>${ic(m.effet.type === 'interdiction' ? 'stop' : 'horloge')}<span><b>${esc(m.titre)}</b><small>${esc(m.effet.type === 'interdiction' ? 'Effet immédiat' : 'Entrée en vigueur à minuit, heure de Washington')} · annonce fictive</small></span></button>`).join('')
-    + (s.simulations.length ? `<hr><button data-action="retirer-sim">${ic('annuler')}<span><b>Retirer les simulations</b><small>Revenir aux seuls textes officiels</small></span></button>` : '');
+  el.innerHTML = F.modeles.map((m) => `<button data-sim="${esc(m.id)}" ${s.simulations.some((x) => x.id === m.id) ? 'disabled style="opacity:.45"' : ''}>${ic(m.effet.type === 'interdiction' ? 'stop' : 'horloge')}<span><b>${esc(m.titre)}</b><small>${esc(m.effet.type === 'interdiction' ? 'Immediate effect' : 'Takes effect at midnight, Washington time')} · fictional announcement</small></span></button>`).join('')
+    + (s.simulations.length ? `<hr><button data-action="retirer-sim">${ic('annuler')}<span><b>Remove simulations</b><small>Go back to official texts only</small></span></button>` : '');
   document.body.appendChild(el);
   setTimeout(() => document.addEventListener('click', function fermer(e) { if (!el.contains(e.target)) { el.remove(); document.removeEventListener('click', fermer); } }), 0);
   el.addEventListener('click', (e) => {
@@ -91,7 +91,7 @@ function menuSimulation(bouton) {
     el.remove();
     const apres = S.evaluation(), m = F.modeles.find((x) => x.id === b.dataset.sim);
     const ech = apres.echeances.find((x) => x.regle === m.id);
-    toast({ titre: 'Annonce simulée : ' + m.titre, texte: ech ? `${ech.commandes} commandes concernées, ${Math.round(ech.evitable)} € évitables avant l'échéance` : `${apres.totaux.compte.bloque - avant.bloque} ligne(s) passent en bloquées`, niveau: m.effet.type === 'interdiction' ? 'bloque' : 'a_verifier', icone: 'eclair', duree: 7000 });
+    toast({ titre: 'Announcement simulated: ' + m.titre, texte: ech ? `${ech.commandes} orders affected, €${Math.round(ech.evitable)} avoidable before the deadline` : `${apres.totaux.compte.bloque - avant.bloque} line(s) become blocked`, niveau: m.effet.type === 'interdiction' ? 'bloque' : 'a_verifier', icone: 'eclair', duree: 7000 });
   });
 }
 
@@ -99,7 +99,7 @@ function menuSimulation(bouton) {
 function editerNom(bouton) {
   const f = document.createElement('form');
   f.className = 'qui-edit';
-  f.innerHTML = `<input class="saisie" maxlength="40" value="${esc(S.lire().qui)}" aria-label="Nom qui signe les réponses et validations"><button class="btn noir petit" type="submit">OK</button>`;
+  f.innerHTML = `<input class="saisie" maxlength="40" value="${esc(S.lire().qui)}" aria-label="Name that signs answers and validations"><button class="btn noir petit" type="submit">OK</button>`;
   bouton.replaceWith(f);
   const champ = f.querySelector('input');
   champ.focus(); champ.select();
@@ -116,8 +116,8 @@ function menuNouveau(bouton) {
   el.className = 'menu';
   el.style.top = r.bottom + 6 + 'px';
   el.style.left = r.left + 'px';
-  el.innerHTML = `<button data-aller="#/dossier">${ic('agent')}<span><b>Classer un produit</b><small>Photo, étiquette, pictogramme, adresse d'une fiche ou texte</small></span></button>
-    <button data-action="importer">${ic('import')}<span><b>Importer des commandes</b><small>Export CSV de Shopify, d'Etsy ou d'un tableur</small></span></button>`;
+  el.innerHTML = `<button data-aller="#/dossier">${ic('agent')}<span><b>Classify a product</b><small>Photo, label, pictogram, product page address or text</small></span></button>
+    <button data-action="importer">${ic('import')}<span><b>Import orders</b><small>CSV export from Shopify, Etsy or a spreadsheet</small></span></button>`;
   document.body.appendChild(el);
   setTimeout(() => document.addEventListener('click', function fermer(ev) { if (!el.contains(ev.target)) { el.remove(); document.removeEventListener('click', fermer); } }), 0);
   el.addEventListener('click', () => setTimeout(() => el.remove(), 0));
@@ -133,14 +133,14 @@ document.addEventListener('click', async (e) => {
   else if (x === 'demo') ouvrirImport('demo');
   else if (x === 'nouveau') { e.stopPropagation(); menuNouveau(a); }
   else if (x === 'simuler') { e.stopPropagation(); menuSimulation(a); }
-  else if (x === 'retirer-sim') { document.querySelector('.menu')?.remove(); S.retirerSimulations(); toast({ titre: 'Simulations retirées', texte: 'Seuls les textes officiels restent appliqués.', icone: 'annuler' }); }
+  else if (x === 'retirer-sim') { document.querySelector('.menu')?.remove(); S.retirerSimulations(); toast({ titre: 'Simulations removed', texte: 'Only official texts still apply.', icone: 'annuler' }); }
   else if (x === 'flux') S.basculerFlux(!S.lire().fluxDemo);
   else if (x === 'qui') editerNom(a);
 });
 
 window.addEventListener('nouvelle-commande', (e) => {
   const l = e.detail;
-  toast({ titre: `Nouvelle commande ${l.commande} → ${nomPays(l.pays)}`, texte: `${l.produit} · ${NIVEAU[l.etat.niveau].court} : ${l.etat.principale.texte}`, niveau: l.etat.niveau, icone: NIVEAU[l.etat.niveau].ic });
+  toast({ titre: `New order ${l.commande} → ${nomPays(l.pays)}`, texte: `${l.produit} · ${NIVEAU[l.etat.niveau].court}: ${l.etat.principale.texte}`, niveau: l.etat.niveau, icone: NIVEAU[l.etat.niveau].ic });
 });
 
 // Horloges : comptes à rebours chaque seconde ; un rebours qui passe zéro rejoue la vérification.

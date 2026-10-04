@@ -26,22 +26,22 @@ export async function post(chemin, body) {
     const r = await fetch(chemin, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': code() }, body: JSON.stringify(body) });
     if (r.status === 401) {
       let c = null;
-      try { c = prompt(n ? 'Code refusé. Code d\'accès :' : 'Code d\'accès :'); } catch { /* fenêtre de saisie indisponible */ }
+      try { c = prompt(n ? 'Code refused. Access code:' : 'Access code:'); } catch { /* fenêtre de saisie indisponible */ }
       if (!c) break;
       try { localStorage.setItem('code', c.trim()); } catch { /* code non mémorisé */ }
       continue;
     }
-    const j = await r.json().catch(() => ({ error: `réponse illisible du serveur (${r.status})` }));
-    if (!r.ok) throw new Error(j.error || 'erreur ' + r.status);
+    const j = await r.json().catch(() => ({ error: `unreadable server response (${r.status})` }));
+    if (!r.ok) throw new Error(j.error || 'error ' + r.status);
     return j;
   }
-  throw new Error("code d'accès refusé");
+  throw new Error('access code refused');
 }
 
 // Lectures par IA (photo, pièces, critères) : impossibles sans accès au modèle.
 export async function lectureIA(chemin, body) {
   const s = await etatServeur();
-  if (!s.ia) throw new Error("lecture par IA indisponible : l'accès au modèle (Bedrock) n'est pas posé sur ce serveur");
+  if (!s.ia) throw new Error('AI reading unavailable: access to the model (Bedrock) is not configured on this server');
   return post(chemin, body);
 }
 
@@ -51,7 +51,7 @@ export async function classifier({ sku, description, pays, faits = {} }) {
   if (Object.keys(faits).length) envoye.facts = faits;
   if ((await etatServeur()).mode === 'direct') {
     const j = await post('/api/classify', envoye);
-    if (j.http !== 200 || !j.body || !j.body.data) throw new Error(`l'API a répondu ${j.http} : ${JSON.stringify(j.body).slice(0, 240)}`);
+    if (j.http !== 200 || !j.body || !j.body.data) throw new Error(`the API answered ${j.http}: ${JSON.stringify(j.body).slice(0, 240)}`);
     return { data: j.body.data, source: 'direct', request_id: j.request_id, secondes: j.seconds, envoye, http: j.http, body: j.body, endpoint: j.endpoint };
   }
   const { enregistrees: liste, demo: d } = await donneesHorsLigne();
@@ -65,7 +65,7 @@ export async function classifier({ sku, description, pays, faits = {} }) {
     const r = d.reponses[sku];
     return { data: r.data, source: r.source || 'illustrative', enregistreeLe: r.enregistree_le || null, request_id: r.request_id || null, secondes: r.secondes || null, envoye, http: 200, body: { data: r.data } };
   }
-  throw new Error("hors ligne : la clé d'API n'est pas posée sur ce serveur, et aucune réponse n'a été enregistrée pour ces pièces");
+  throw new Error('offline: the API key is not configured on this server, and no response has been recorded for these documents');
 }
 
 // Hors ligne, les réponses qu'on peut rejouer pour une question du moteur : celles
@@ -75,7 +75,7 @@ export function suggestionsHorsLigne(donnees, { sku, description, faits = [] }) 
   const n = (x) => String(x || '').trim().replace(/\s+/g, ' ').toLowerCase(), out = {};
   for (const f of faits) {
     const liste = [];
-    for (const r of donnees.enregistrees) if (n(r.envoye.description) === n(description) && r.envoye.facts && r.envoye.facts[f]) liste.push({ libelle: 'Réponse enregistrée : ' + r.envoye.facts[f].slice(0, 90) + (r.envoye.facts[f].length > 90 ? '…' : ''), valeur: r.envoye.facts[f] });
+    for (const r of donnees.enregistrees) if (n(r.envoye.description) === n(description) && r.envoye.facts && r.envoye.facts[f]) liste.push({ libelle: 'Recorded response: ' + r.envoye.facts[f].slice(0, 90) + (r.envoye.facts[f].length > 90 ? '…' : ''), valeur: r.envoye.facts[f] });
     const p = (donnees.demo.produits || []).find((x) => x.sku === sku && n(x.description) === n(description));
     for (const s of (p && (donnees.demo.suites || {})[sku]) || []) if (s.faits[f]) liste.push({ libelle: s.libelle + ' (illustrative)', valeur: s.faits[f] });
     out[f] = liste.filter((x, i) => liste.findIndex((y) => y.valeur === x.valeur) === i);

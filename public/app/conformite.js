@@ -10,7 +10,7 @@ export const NIVEAUX = ['pret', 'en_attente', 'a_verifier', 'bloque'];
 const rang = (n) => NIVEAUX.indexOf(n);
 export const pire = (a, b) => (rang(b) > rang(a) ? b : a);
 
-const FAITS = { function: 'fonction du produit', use: 'usage prévu', material: 'matière', power_w: 'puissance', voltage_v: 'tension', weight_g: 'poids', composition: 'composition', dimensions: 'dimensions', audience: 'public visé', presentation: 'présentation' };
+const FAITS = { function: 'product function', use: 'intended use', material: 'material', power_w: 'power', voltage_v: 'voltage', weight_g: 'weight', composition: 'composition', dimensions: 'dimensions', audience: 'target audience', presentation: 'presentation' };
 export const libelleFait = (f) => FAITS[f] || f;
 export const fmtCode = (c) => { const s = String(c || ''); return s.length <= 6 ? s.replace(/^(\d{4})(\d{2})$/, '$1.$2') : s.replace(/^(\d{4})(\d{2})(.*)$/, '$1.$2.$3'); };
 const arrondi = (x) => Math.round(x * 100) / 100;
@@ -46,25 +46,25 @@ export function phase(regle, maintenant) {
 
 // Ce que dit la classification du produit, ramené à une raison.
 export function raisonClassification(cl, validation) {
-  if (validation && validation.hs6) return { niveau: 'pret', type: 'code_valide', texte: `Code ${fmtCode(validation.hs6)} validé par ${validation.par}` };
-  if (!cl) return { niveau: 'en_attente', type: 'classification', texte: 'Classification pas encore faite' };
-  if (cl.enCours) return { niveau: 'en_attente', type: 'classification', texte: 'Classification en cours' };
-  if (cl.erreur) return { niveau: 'a_verifier', type: 'classification', texte: 'Classification en échec : ' + cl.erreur };
+  if (validation && validation.hs6) return { niveau: 'pret', type: 'code_valide', texte: `Code ${fmtCode(validation.hs6)} validated by ${validation.par}` };
+  if (!cl) return { niveau: 'en_attente', type: 'classification', texte: 'Classification not done yet' };
+  if (cl.enCours) return { niveau: 'en_attente', type: 'classification', texte: 'Classification in progress' };
+  if (cl.erreur) return { niveau: 'a_verifier', type: 'classification', texte: 'Classification failed: ' + cl.erreur };
   const codes = (cl.candidats || []).filter((c) => !c.ecarte).map((c) => fmtCode(c.code));
   switch (cl.statut) {
-    case 'needs_information': return { niveau: 'a_verifier', type: 'question', texte: 'Information manquante : ' + ((cl.questions || []).map((q) => libelleFait(q.fait)).join(', ') || 'à préciser') };
-    case 'ambiguous': return { niveau: 'a_verifier', type: 'validation', texte: codes.length > 1 ? 'Plusieurs codes restent plausibles : ' + codes.join(', ') : `Code ${fmtCode(cl.code)} proposé, jugé ambigu par le moteur` };
-    case 'classified': case 'needs_review': return { niveau: 'a_verifier', type: 'validation', texte: `Code ${fmtCode(cl.code)} proposé, à valider` };
-    case 'unsupported_jurisdiction': return { niveau: 'a_verifier', type: 'classification', texte: 'Aucun code établi par le moteur' };
-    default: return { niveau: 'a_verifier', type: 'classification', texte: 'Classification à reprendre (' + (cl.statut || 'statut inconnu') + ')' };
+    case 'needs_information': return { niveau: 'a_verifier', type: 'question', texte: 'Missing information: ' + ((cl.questions || []).map((q) => libelleFait(q.fait)).join(', ') || 'to be specified') };
+    case 'ambiguous': return { niveau: 'a_verifier', type: 'validation', texte: codes.length > 1 ? 'Several codes remain plausible: ' + codes.join(', ') : `Code ${fmtCode(cl.code)} proposed, judged ambiguous by the engine` };
+    case 'classified': case 'needs_review': return { niveau: 'a_verifier', type: 'validation', texte: `Code ${fmtCode(cl.code)} proposed, to validate` };
+    case 'unsupported_jurisdiction': return { niveau: 'a_verifier', type: 'classification', texte: 'No code established by the engine' };
+    default: return { niveau: 'a_verifier', type: 'classification', texte: 'Classification to redo (' + (cl.statut || 'unknown status') + ')' };
   }
 }
 
 // Une exigence (marquage, certificat, condition d'expédition) : remplie, refusée ou sans réponse.
 function raisonExigence(regle, attestation, base) {
   const e = regle.effet;
-  if (attestation && attestation.reponse === true) return { ...base, niveau: 'pret', type: 'exigence_remplie', texte: e.si_oui || 'Exigence remplie : ' + regle.titre };
-  if (attestation && attestation.reponse === false) return { ...base, niveau: e.si_non || 'bloque', type: 'exigence_refusee', texte: e.si_non_texte || 'Exigence non remplie : ' + regle.titre };
+  if (attestation && attestation.reponse === true) return { ...base, niveau: 'pret', type: 'exigence_remplie', texte: e.si_oui || 'Requirement met: ' + regle.titre };
+  if (attestation && attestation.reponse === false) return { ...base, niveau: e.si_non || 'bloque', type: 'exigence_refusee', texte: e.si_non_texte || 'Requirement not met: ' + regle.titre };
   return { ...base, niveau: 'a_verifier', type: 'exigence', texte: e.question };
 }
 
@@ -74,25 +74,25 @@ function effetFinancier(regle, ph, ligne, valeur) {
   if (e.type === 'taxe_fixe') {
     if (ph !== 'en_vigueur' || expediee) return null;
     if (e.valeur_max && !((ligne.valeurCommande ?? valeur) < e.valeur_max)) return null;
-    return { surcout: e.montant, texte: `${e.libelle} : ${e.montant} ${e.devise || ''} par article`.trim() };
+    return { surcout: e.montant, texte: `${e.libelle}: ${e.montant} ${e.devise || ''} per item`.trim() };
   }
   // Une ligne déjà expédiée n'est plus exposée : partie avant l'entrée en vigueur, elle
   // relève de la clause « marchandises en transit » ; partie après, son coût est acquis.
   if (expediee) return null;
   const montant = arrondi((valeur * e.points) / 100);
-  if (ph === 'en_vigueur') return { surcout: montant, texte: `+${e.points} points de droits : ${montant} ${ligne.devise || ''}`.trim() };
-  return { evitable: montant, texte: `+${e.points} points de droits à l'entrée en vigueur : ${montant} ${ligne.devise || ''} évitables en expédiant avant`.trim() };
+  if (ph === 'en_vigueur') return { surcout: montant, texte: `+${e.points} points of duty: ${montant} ${ligne.devise || ''}`.trim() };
+  return { evitable: montant, texte: `+${e.points} points of duty when the measure takes effect: ${montant} ${ligne.devise || ''} avoidable by shipping before`.trim() };
 }
 
 function raisonRegle(regle, ph, ligne, valeur, ctx, provisoire) {
   const base = { regle: regle.id, sur_code_provisoire: provisoire && !(regle.sh || ['*']).includes('*') };
   const t = regle.effet.type;
   if (t === 'exigence') {
-    if (ph === 'a_venir') return { ...base, niveau: 'pret', type: 'a_venir', texte: 'À venir : ' + regle.titre };
+    if (ph === 'a_venir') return { ...base, niveau: 'pret', type: 'a_venir', texte: 'Upcoming: ' + regle.titre };
     return raisonExigence(regle, ctx.attestations[cleAttestation(ligne.sku, regle.id)], base);
   }
   if (t === 'interdiction') {
-    if (ph === 'a_venir') return { ...base, niveau: 'pret', type: 'a_venir', texte: 'À venir : ' + regle.titre, echeance: regle.debut };
+    if (ph === 'a_venir') return { ...base, niveau: 'pret', type: 'a_venir', texte: 'Upcoming: ' + regle.titre, echeance: regle.debut };
     return { ...base, niveau: 'bloque', type: 'interdiction', texte: regle.effet.texte || regle.titre };
   }
   if (t === 'droit_additionnel' || t === 'taxe_fixe') {

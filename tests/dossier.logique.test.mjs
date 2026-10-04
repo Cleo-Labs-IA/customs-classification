@@ -25,20 +25,20 @@ test('épreuves : verdicts mécaniques', () => {
   assert.equal(verdictRetrait(rep('ambiguous', '851762'), rep('ambiguous', '851762'), 'weight_g')[0], 'a_verifier');
   assert.equal(verdictRetrait(rep('ambiguous', '851762'), rep('classified', '847330'), 'function')[0], 'bloque');
   assert.equal(verdictContradiction(0)[0], 'bloque');
-  assert.equal(instantane(rep('ambiguous', '851762')), '8517.62, plusieurs codes restent plausibles');
+  assert.equal(instantane(rep('ambiguous', '851762')), '8517.62, several codes remain plausible');
 });
 
 test('travail restant : question ouverte, divergence avec la règle, six chiffres, validation', () => {
   const arbre = { criteres: [{ id: 'c1', question: 'Q ?' }] };
   const out = travailRestant({ dernier: { data: rep('needs_information', '851762', { questions: [{ fact: 'function' }] }), repondu: null }, regle: { statut: 'code', code: '847330' }, arbre, crit: { c1: { kind: 'reponse' } }, faits: { use: { kind: 'main' } }, photo: { illisible: ['ligne 3'] }, valide: false, nomDestination: 'France' });
   assert.deepEqual(out, [
-    'Répondre à la question du moteur : Fonction.',
-    'Trancher la divergence entre le moteur (8517.62) et la règle encodée (8473.30).',
-    'Documenter 1 réponse(s) donnée(s) sans pièce dans la règle encodée.',
-    'Appuyer par une pièce : Usage.',
-    'Relire sur le produit 1 élément(s) non lu(s) sur la photo.',
-    "Établir le code national de France : la proposition s'arrête à six chiffres.",
-    'Faire relire la règle encodée par un déclarant : elle est rédigée par IA.',
-    'Faire valider la proposition par une personne habilitée.',
+    'Answer the engine question: Function.',
+    'Resolve the divergence between the engine (8517.62) and the encoded rule (8473.30).',
+    'Document 1 answer(s) given without a supporting document in the encoded rule.',
+    'Back with a document: Use.',
+    'Check on the product 1 item(s) not read on the photo.',
+    'Establish the national code for France: the proposal stops at six digits.',
+    'Have the encoded rule reviewed by a customs declarant: it is drafted by AI.',
+    'Have the proposal validated by an authorised person.',
   ]);
 });

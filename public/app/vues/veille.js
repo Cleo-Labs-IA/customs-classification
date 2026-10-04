@@ -5,10 +5,10 @@ import { esc, ic, argent, jour, dateHeure, rebours, zones, urlSure, pluriel, nom
 import { phase, fmtCode } from '../conformite.js';
 import * as S from '../store.js';
 
-export const titre = 'Veille réglementaire';
+export const titre = 'Regulatory watch';
 let onglet = 'tout';
-const ONGLETS = [['tout', 'Tout'], ['en_vigueur', 'En vigueur'], ['a_venir', 'À venir'], ['simulation', 'Simulations']];
-const TYPES = { exigence: 'Pièce ou condition', interdiction: 'Interdiction', droit_additionnel: 'Hausse de droits', taxe_fixe: 'Droit fixe', info: 'Information' };
+const ONGLETS = [['tout', 'All'], ['en_vigueur', 'In force'], ['a_venir', 'Upcoming'], ['simulation', 'Simulations']];
+const TYPES = { exigence: 'Document or condition', interdiction: 'Ban', droit_additionnel: 'Duty increase', taxe_fixe: 'Fixed duty', info: 'Information' };
 
 // Ce qu'une règle fait aux lignes à expédier.
 function impact(r, ev) {
@@ -24,15 +24,15 @@ function impact(r, ev) {
 function regleHtml(r, ev, maintenant) {
   const ph = phase(r, maintenant), i = impact(r, ev), sim = r.nature === 'simulation';
   const quand = ph === 'a_venir'
-    ? `<div class="quand">${esc(dateHeure(r.debut))}<small>dans <span class="mono" data-rebours="${esc(r.debut)}">${rebours(Date.parse(r.debut) - maintenant)}</span></small></div>`
-    : `<div class="quand">${esc(jour(r.debut))}<small>${sim ? 'publiée ' + esc(dateHeure(r.publieeLe || r.debut)) : 'en vigueur'}</small></div>`;
-  const sh = (r.sh || ['*']).includes('*') ? '<span class="tag contour">tous produits</span>' : r.sh.map((c) => `<span class="tag contour mono">${esc(c.length >= 6 ? fmtCode(c) : c)}</span>`).join('');
+    ? `<div class="quand">${esc(dateHeure(r.debut))}<small>in <span class="mono" data-rebours="${esc(r.debut)}">${rebours(Date.parse(r.debut) - maintenant)}</span></small></div>`
+    : `<div class="quand">${esc(jour(r.debut))}<small>${sim ? 'published ' + esc(dateHeure(r.publieeLe || r.debut)) : 'in force'}</small></div>`;
+  const sh = (r.sh || ['*']).includes('*') ? '<span class="tag contour">all products</span>' : r.sh.map((c) => `<span class="tag contour mono">${esc(c.length >= 6 ? fmtCode(c) : c)}</span>`).join('');
   return `<article class="regle ${sim ? 'sim' : ''}">${quand}<div>
-    <div class="meta">${sim ? '<span class="tag sim">Simulation · annonce fictive</span>' : `<span class="tag">${ic('balance')}Texte officiel</span><span class="tag ia">Résumé IA, à relire</span>`}<span class="tag contour">${esc(TYPES[r.effet.type] || r.effet.type)}</span><span class="tag contour">${ic('globe')}${esc(zones(r.juridictions))}${r.origines ? ' · origine ' + esc(r.origines.map(nomPays).join(', ')) : ''}</span>${sh}</div>
+    <div class="meta">${sim ? '<span class="tag sim">Simulation · fictional announcement</span>' : `<span class="tag">${ic('balance')}Official text</span><span class="tag ia">AI summary, to review</span>`}<span class="tag contour">${esc(TYPES[r.effet.type] || r.effet.type)}</span><span class="tag contour">${ic('globe')}${esc(zones(r.juridictions))}${r.origines ? ' · origin ' + esc(r.origines.map(nomPays).join(', ')) : ''}</span>${sh}</div>
     <h3>${esc(r.titre)}</h3><p>${esc(r.resume)}</p>
-    <div class="impact-l">${i.lignes ? `<span><b>${pluriel(i.lignes, 'ligne', 'lignes')}</b> à expédier, ${pluriel(i.produits, 'produit', 'produits')}</span>` : '<span>Aucune commande en cours touchée</span>'}
-      ${i.bloquees ? `<span style="color:var(--bad)"><b style="color:inherit">${i.bloquees}</b> bloquée${i.bloquees > 1 ? 's' : ''}</span>` : ''}${i.attente ? `<span style="color:var(--warn)"><b style="color:inherit">${i.attente}</b> en attente d'une réponse</span>` : ''}
-      ${i.surcout ? `<span>surcoût <b>${argent(i.surcout)}</b></span>` : ''}${i.evitable ? `<span>évitable <b>${argent(i.evitable)}</b></span>` : ''}
+    <div class="impact-l">${i.lignes ? `<span><b>${pluriel(i.lignes, 'line', 'lines')}</b> to ship, ${pluriel(i.produits, 'product', 'products')}</span>` : '<span>No current order affected</span>'}
+      ${i.bloquees ? `<span style="color:var(--bad)"><b style="color:inherit">${i.bloquees}</b> blocked</span>` : ''}${i.attente ? `<span style="color:var(--warn)"><b style="color:inherit">${i.attente}</b> waiting for an answer</span>` : ''}
+      ${i.surcout ? `<span>extra cost <b>${argent(i.surcout)}</b></span>` : ''}${i.evitable ? `<span>avoidable <b>${argent(i.evitable)}</b></span>` : ''}
       <span class="espace"></span>${r.source.url ? `<a class="btn texte petit" href="${urlSure(r.source.url)}" target="_blank" rel="noopener">${esc(r.source.nom.length > 60 ? r.source.nom.slice(0, 58) + '…' : r.source.nom)}${ic('lien')}</a>` : `<span class="faint">${esc(r.source.nom)}</span>`}</div>
   </div></article>`;
 }
@@ -43,11 +43,11 @@ export function rendre() {
   const garde = { tout: () => true, en_vigueur: (r) => phase(r, maintenant) === 'en_vigueur', a_venir: (r) => phase(r, maintenant) === 'a_venir', simulation: (r) => r.nature === 'simulation' };
   const liste = toutes.filter(garde[onglet]);
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Veille réglementaire</h1><p>Les textes qui s'appliquent à vos envois, appliqués au code de chaque produit. Une nouvelle règle rejoue aussitôt la vérification de toutes les commandes en cours.</p></div>
-      <div style="display:flex;gap:8px">${S.lire().simulations.length ? `<button class="btn texte" data-action="retirer-sim">${ic('annuler')}Retirer les simulations</button>` : ''}<button class="btn noir" data-action="simuler">${ic('eclair')}Simuler une annonce</button></div></div>
+    <div class="titre"><div class="bloc"><h1>Regulatory watch</h1><p>The texts that apply to your shipments, applied to each product's code. A new rule immediately reruns the check on all current orders.</p></div>
+      <div style="display:flex;gap:8px">${S.lire().simulations.length ? `<button class="btn texte" data-action="retirer-sim">${ic('annuler')}Remove simulations</button>` : ''}<button class="btn noir" data-action="simuler">${ic('eclair')}Simulate an announcement</button></div></div>
     <div class="onglets">${ONGLETS.map(([k, l]) => `<button data-onglet="${k}" class="${onglet === k ? 'actif' : ''}">${l}<sup>${toutes.filter(garde[k]).length}</sup></button>`).join('')}</div>
-    <div class="source" style="margin:0 0 8px">${ic('info')}<div><b>${pluriel(F.regles.length, 'texte officiel suivi', 'textes officiels suivis')}, sources vérifiées le ${esc(jour(F.fixeLe || '2026-10-04'))}.</b><br><span class="muted">${esc(F.avertissement)}</span></div></div>
-    <div class="chrono">${liste.map((r) => regleHtml(r, ev, maintenant)).join('') || '<div class="vide">Aucune règle dans cette vue.</div>'}</div>
+    <div class="source" style="margin:0 0 8px">${ic('info')}<div><b>${pluriel(F.regles.length, 'official text tracked', 'official texts tracked')}, sources checked on ${esc(jour(F.fixeLe || '2026-10-04'))}.</b><br><span class="muted">${esc(F.avertissement)}</span></div></div>
+    <div class="chrono">${liste.map((r) => regleHtml(r, ev, maintenant)).join('') || '<div class="vide">No rule in this view.</div>'}</div>
   </div>`;
 }
 

@@ -6,11 +6,11 @@ const derniers = new Map();
 const DUREE = 1100;
 const sortie = (t) => 1 - Math.pow(1 - t, 4);
 
-const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
+const nf = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
 const FORMATS = {
   nombre: (n) => nf.format(Math.round(n)),
-  argent: (n) => nf.format(Math.round(n)) + ' €',
-  pct: (n) => nf.format(Math.round(n)) + ' %',
+  argent: (n) => '€' + nf.format(Math.round(n)),
+  pct: (n) => nf.format(Math.round(n)) + '%',
 };
 
 // Chaque élément [data-compte] roule de sa dernière valeur affichée (ou de zéro à

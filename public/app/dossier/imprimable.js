@@ -1,21 +1,28 @@
 // Le dossier dans la forme qu'attend le rendu imprimable (public/dossier.js, dossierHtml).
-import { premierRetenu, titre, PROVENANCE, libelleSource } from './logique.js';
+import { premierRetenu, titre, PROVENANCE } from './logique.js';
 
-const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Oui' : 'Non');
+const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
 
 function graphe(D, R, res) {
   if (!R || !res) return null;
   const C = Object.fromEntries(R.arbre.criteres.map((c) => [c.id, c]));
   return {
-    version: (R.arbre.titre || '') + ' · ' + (R.arbre.nomenclature || ''), statut_version: 'de référence, rédigée par IA, non relue par un déclarant',
+    version: (R.arbre.titre || '') + ' · ' + (R.arbre.nomenclature || ''), statut_version: 'reference version, drafted by AI from the cited texts, not reviewed by a customs declarant',
     resultat: { statut: res.statut, code: res.code || null },
-    chemin: res.chemin.map((s) => { const n = R.arbre.noeuds[s.noeud], f = D.crit[s.critere]; return { question: C[s.critere].question, reponse: brTxt(C[s.critere], s.valeur), textes: (n.base || []).map((b) => R.T[b]).filter(Boolean).map((x) => ({ ref: x.ref, texte: x.texte, url: x.url })), citation: f.citation || '', source: f.kind === 'reponse' ? 'réponse du marchand, sans pièce' : libelleSource(f.source) }; }),
+    chemin: res.chemin.map((s) => { const n = R.arbre.noeuds[s.noeud], f = D.crit[s.critere]; return { question: C[s.critere].question, reponse: brTxt(C[s.critere], s.valeur), textes: (n.base || []).map((b) => R.T[b]).filter(Boolean).map((x) => ({ ref: x.ref, texte: x.texte, url: x.url })), citation: f.citation || '', source: f.kind === 'reponse' ? 'merchant answer, no supporting document' : f.source }; }),
+    // « source » n'est pas affiché : c'est le jeton que public/dossier.js analyse (clé technique de la pièce, ou mention « no supporting document »).
     blocage: res.statut === 'information_manquante' ? { question: C[res.critere].question, options: res.options } : null,
   };
 }
 
-export function versImprimable(D, R, res, travail, qui) {
-  const t = D.tours[D.tours.length - 1], d = t.data, top = premierRetenu(d) || {};
+// dec : la décision du dossier (public/decision.js) ; conformite : la liste de travail des exigences, ou null.
+export function versImprimable(D, R, res, travail, qui, dec = null, conformite = null) {
+  const t = D.tours[D.tours.length - 1], d = t.data, moteur = premierRetenu(d) || {};
+  // le code du dossier est celui de la décision ; preuves et libellé suivent la lecture qui l'a produit
+  const meme = !dec || !dec.code || String(moteur.code || '').slice(0, 6) === dec.code;
+  const noeud = !meme && R ? Object.values(R.arbre.noeuds).find((n) => n.type === 'code' && n.code === dec.code) : null;
+  const textesRegle = !meme && R && res ? [...new Set(res.chemin.flatMap((s) => R.arbre.noeuds[s.noeud].base || []))].map((b) => R.T[b]).filter(Boolean) : [];
+  const top = meme ? moteur : { code: dec.code, system: 'hs6', title: { en: (noeud && noeud.libelle) || '' }, source_version: R ? R.arbre.nomenclature : null, evidence: textesRegle.map((x) => ({ ref: x.ref, url: x.url, excerpt: x.texte, source_version: x.source })) };
   return {
     sku: D.produit.sku, destination: D.produit.dest, code: top.code, system: top.system, status_api: d.status, validated_by: qui, request_id: t.request_id,
     pieces: { description: D.produit.desc, fiche_technique: D.produit.ds, passages_declares_faux: D.barres },
@@ -32,6 +39,8 @@ export function versImprimable(D, R, res, travail, qui) {
     alternatives: [...(d.candidates || []).filter((c) => c.set_aside_reason).map((c) => ({ code: c.code, libelle: titre(c), raison: c.set_aside_reason })), ...(d.alternatives_set_aside || []).map((a) => ({ code: a.code, libelle: '', raison: a.set_aside_reason }))].filter((a, i, tout) => tout.findIndex((x) => x.code === a.code) === i),
     questions_restantes: [...(t.repondu ? [] : (d.questions || []).map((q) => ({ question: q.question, pourquoi: q.why || '' }))), ...travail.map((x) => ({ question: x, pourquoi: '' }))],
     graphe: graphe(D, R, res),
+    decision: dec ? { origine: dec.origine, codes_en_presence: dec.codes, niveau_valide: D.niveau, blocages: dec.blocages.map((b) => b.message), arbitrage: dec.origine === 'arbitrage' ? D.arbitrage : null } : null,
+    conformite,
     avertissement: d.advisory_disclaimer || '',
   };
 }

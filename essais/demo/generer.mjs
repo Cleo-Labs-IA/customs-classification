@@ -14,14 +14,14 @@ const ici = (p) => new URL(p, import.meta.url);
 const DS_DOCK = 'Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.';
 
 const PRODUITS = [
-  { sku: 'DOCK-PRO', nom: "Station d'accueil USB-C 8-en-1", description: 'USB-C docking station for laptop', fiche_technique: DS_DOCK, origine: 'CN', prix: 89, teinte: 'ardoise' },
-  { sku: 'CHG-65W', nom: 'Chargeur GaN USB-C 65 W', description: '65 W GaN USB-C wall charger for laptops and phones, input 100-240 V AC, output 5-20 V DC', origine: 'CN', prix: 39.9, teinte: 'sable' },
-  { sku: 'PWR-20K', nom: 'Batterie externe 20 000 mAh', description: 'Portable power bank, 20000 mAh lithium-ion battery, USB-C PD 22.5 W output', origine: 'CN', prix: 34.9, teinte: 'corail' },
-  { sku: 'BUDS-X', nom: 'Écouteurs sans fil Bluetooth', description: 'True wireless Bluetooth earbuds with microphone and charging case', origine: 'CN', prix: 49, teinte: 'lavande' },
-  { sku: 'HDMI-2M', nom: 'Câble HDMI 2.1, 2 m', description: 'HDMI 2.1 cable, 2 m, fitted with connectors, 48 Gbps', origine: 'CN', prix: 12.9, teinte: 'menthe' },
-  { sku: 'ROBO-DOG', nom: 'Chien robot interactif', description: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', origine: 'CN', prix: 59, teinte: 'peche' },
-  { sku: 'CLOCK-BRICK', nom: 'Horloge murale à construire', description: 'Buildable wall clock for kids, battery powered', origine: 'CN', prix: 44.9, teinte: 'ciel' },
-  { sku: 'BOTTLE-750', nom: 'Gourde isotherme inox 750 ml', description: 'Stainless steel vacuum insulated water bottle, 750 ml', origine: 'VN', prix: 24.9, teinte: 'olive' },
+  { sku: 'DOCK-PRO', nom: '8-in-1 USB-C docking station', description: 'USB-C docking station for laptop', fiche_technique: DS_DOCK, origine: 'CN', prix: 89, teinte: 'ardoise' },
+  { sku: 'CHG-65W', nom: '65 W GaN USB-C charger', description: '65 W GaN USB-C wall charger for laptops and phones, input 100-240 V AC, output 5-20 V DC', origine: 'CN', prix: 39.9, teinte: 'sable' },
+  { sku: 'PWR-20K', nom: '20,000 mAh power bank', description: 'Portable power bank, 20000 mAh lithium-ion battery, USB-C PD 22.5 W output', origine: 'CN', prix: 34.9, teinte: 'corail' },
+  { sku: 'BUDS-X', nom: 'Bluetooth wireless earbuds', description: 'True wireless Bluetooth earbuds with microphone and charging case', origine: 'CN', prix: 49, teinte: 'lavande' },
+  { sku: 'HDMI-2M', nom: 'HDMI 2.1 cable, 2 m', description: 'HDMI 2.1 cable, 2 m, fitted with connectors, 48 Gbps', origine: 'CN', prix: 12.9, teinte: 'menthe' },
+  { sku: 'ROBO-DOG', nom: 'Interactive robot dog', description: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', origine: 'CN', prix: 59, teinte: 'peche' },
+  { sku: 'CLOCK-BRICK', nom: 'Buildable wall clock', description: 'Buildable wall clock for kids, battery powered', origine: 'CN', prix: 44.9, teinte: 'ciel' },
+  { sku: 'BOTTLE-750', nom: 'Insulated stainless steel bottle, 750 ml', description: 'Stainless steel vacuum insulated water bottle, 750 ml', origine: 'VN', prix: 24.9, teinte: 'olive' },
 ];
 
 for (const p of PRODUITS) p.image = `/data/produits/${p.sku.toLowerCase()}.svg`;
@@ -44,8 +44,8 @@ const ILLUSTRATIVES = {
 // Réponses illustratives après la question de l'horloge, selon la réponse choisie.
 const SUITES = {
   'CLOCK-BRICK': [
-    { libelle: 'Un jeu de construction pour enfants : l\'horloge est le résultat du jeu', faits: { use: 'construction toy for children, the clock is the result of the building activity' }, data: { status: 'classified', candidates: [cand('950300', 'Other toys; puzzles of all kinds', 0.79, 'Sold and used as a construction toy for children: heading 9503.')] } },
-    { libelle: 'Une horloge murale fonctionnelle, livrée en pièces à assembler', faits: { use: 'working wall clock delivered in parts to assemble' }, data: { status: 'classified', candidates: [cand('910521', 'Wall clocks, electrically operated', 0.77, 'An unassembled article is classified as the assembled article (GRI 2(a)): a battery-powered wall clock.')] } },
+    { libelle: 'A construction toy for children: the clock is the result of the play', faits: { use: 'construction toy for children, the clock is the result of the building activity' }, data: { status: 'classified', candidates: [cand('950300', 'Other toys; puzzles of all kinds', 0.79, 'Sold and used as a construction toy for children: heading 9503.')] } },
+    { libelle: 'A working wall clock, delivered in parts to assemble', faits: { use: 'working wall clock delivered in parts to assemble' }, data: { status: 'classified', candidates: [cand('910521', 'Wall clocks, electrically operated', 0.77, 'An unassembled article is classified as the assembled article (GRI 2(a)): a battery-powered wall clock.')] } },
   ],
 };
 
@@ -98,21 +98,21 @@ const reponses = {
   'DOCK-PRO': { source: 'enregistree', enregistree_le: '2026-10-04', request_id: enregistree.request_id, secondes: enregistree.seconds, envoye: enregistree.sent, data: enregistree.body.data },
   ...Object.fromEntries(Object.entries(ILLUSTRATIVES).map(([sku, d]) => [sku, { source: 'illustrative', data: { item_id: sku, questions: [], coverage: { hint: 'Illustrative response: HS6 only.' }, advisory_disclaimer: DISCLAIMER, ...d } }])),
 };
-const par = 'Équipe démo', le = '2026-10-03T16:20:00+02:00';
+const par = 'Demo team', le = '2026-10-03T16:20:00+02:00';
 const oui = (motif) => ({ reponse: true, par, le, motif }), non = (motif) => ({ reponse: false, par, le, motif });
 const depart = {
-  libelle: 'État de départ de la démonstration : codes et pièces renseignés la veille par l\'équipe démo.',
-  validations: Object.fromEntries([['HDMI-2M', '854442'], ['CHG-65W', '850440'], ['BOTTLE-750', '961700'], ['ROBO-DOG', '950300'], ['PWR-20K', '850760']].map(([sku, hs6]) => [sku, { hs6, par, le, motif: 'Code proposé par le moteur, relu et validé.' }])),
+  libelle: 'Starting state of the demo: codes and documents filled in the day before by the demo team.',
+  validations: Object.fromEntries([['HDMI-2M', '854442'], ['CHG-65W', '850440'], ['BOTTLE-750', '961700'], ['ROBO-DOG', '950300'], ['PWR-20K', '850760']].map(([sku, hs6]) => [sku, { hs6, par, le, motif: 'Code proposed by the engine, reviewed and validated.' }])),
   attestations: {
-    ...Object.fromEntries(['DOCK-PRO', 'CHG-65W', 'PWR-20K', 'HDMI-2M', 'ROBO-DOG', 'CLOCK-BRICK', 'BOTTLE-750'].map((sku) => [`${sku}|ue-gpsr`, oui('Opérateur responsable : Stamped Démo SAS, Paris, indiqué sur l\'emballage.')])),
-    'CHG-65W|jp-pse': oui('Marquage PSE (losange) et importateur déclaré au METI.'),
-    'PWR-20K|jp-pse': non('Le fournisseur n\'a pas de certificat PSE pour ce modèle.'),
-    'ROBO-DOG|ue-jouets': oui('Déclaration UE de conformité EN 71 du fournisseur, au dossier.'),
-    'BUDS-X|us-fcc': oui('FCC ID imprimé sur le boîtier de charge.'),
+    ...Object.fromEntries(['DOCK-PRO', 'CHG-65W', 'PWR-20K', 'HDMI-2M', 'ROBO-DOG', 'CLOCK-BRICK', 'BOTTLE-750'].map((sku) => [`${sku}|ue-gpsr`, oui('Responsible operator: Stamped Démo SAS, Paris, shown on the packaging.')])),
+    'CHG-65W|jp-pse': oui('PSE marking (diamond) and importer declared to METI.'),
+    'PWR-20K|jp-pse': non('The supplier has no PSE certificate for this model.'),
+    'ROBO-DOG|ue-jouets': oui("Supplier's EU declaration of conformity to EN 71, on file."),
+    'BUDS-X|us-fcc': oui('FCC ID printed on the charging case.'),
   },
 };
 writeFileSync(ici('../../public/data/demo.json'), JSON.stringify({
-  boutique: { nom: 'Boutique démo', plateforme: 'Shopify', devise: 'EUR', origine: 'CN' },
+  boutique: { nom: 'Demo store', plateforme: 'Shopify', devise: 'EUR', origine: 'CN' },
   produits: PRODUITS, reponses, suites: SUITES, depart,
 }, null, 1));
 // Réponses réelles de la Cleo Legal API enregistrées le 04/10/2026 (essais/*.json) :
@@ -123,4 +123,4 @@ const ENREGISTREES = ['reformulation-1', 'reformulation-2', 'reformulation-3', '
   return { essai: nom, enregistree_le: '2026-10-04', request_id: r.request_id, secondes: r.seconds, envoye: r.sent, data: r.body.data };
 });
 writeFileSync(ici('../../public/data/enregistrees.json'), JSON.stringify(ENREGISTREES));
-console.log('commandes, catalogue et réponses enregistrées écrits');
+console.log('orders, catalogue and recorded responses written');

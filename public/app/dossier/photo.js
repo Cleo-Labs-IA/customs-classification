@@ -6,7 +6,7 @@ async function convertisseurHeic() {
     const sc = document.createElement('script');
     sc.src = 'https://cdn.jsdelivr.net/npm/heic-to@1/dist/iife/heic-to.js';
     sc.onload = ok;
-    sc.onerror = () => ko(new Error('convertisseur HEIC indisponible'));
+    sc.onerror = () => ko(new Error('HEIC converter unavailable'));
     document.head.appendChild(sc);
   });
 }

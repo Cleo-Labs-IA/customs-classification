@@ -1,7 +1,7 @@
 // La règle encodée (arbre d'interprétation) et ses textes, chargés une fois pour tout
 // l'écran. La version de référence sert au dossier ; une version modifiée et signée dans
 // l'arbre reste une version de travail, gardée dans ce navigateur.
-const json = (f) => fetch('/data/' + f).then((r) => { if (!r.ok) throw new Error(f + ' absent'); return r.json(); });
+const json = (f) => fetch('/data/' + f).then((r) => { if (!r.ok) throw new Error(f + ' missing'); return r.json(); });
 let base = null, decisions = null;
 
 export async function regle() {

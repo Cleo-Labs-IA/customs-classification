@@ -5,8 +5,8 @@ import { fmtCode } from '../conformite.js';
 import { ouvrir } from './tiroirs.js';
 import * as S from '../store.js';
 
-export const titre = 'Commandes';
-const ONGLETS = [['a_expedier', 'À expédier'], ['bloque', 'Bloquées'], ['a_verifier', 'À vérifier'], ['pret', 'Prêtes'], ['expediees', 'Expédiées'], ['toutes', 'Toutes']];
+export const titre = 'Orders';
+const ONGLETS = [['a_expedier', 'To ship'], ['bloque', 'Blocked'], ['a_verifier', 'To check'], ['pret', 'Ready'], ['expediees', 'Shipped'], ['toutes', 'All']];
 let f = { onglet: 'a_expedier', recherche: '', pays: '', echeance: '' };
 const selection = new Set();
 
@@ -40,39 +40,39 @@ function filtrer(lignes, produits) {
 function ligneHtml(l, p, i = 0) {
   const e = l.etat, exp = l.expedition === 'expediee';
   return `<tr style="--r:${i}" data-id="${esc(l.id)}" class="${selection.has(l.id) ? 'sel' : ''} ${exp ? 'expediee' : ''}">
-    <td style="width:36px" data-stop>${exp ? '' : `<input type="checkbox" aria-label="Sélectionner ${esc(l.commande)}" data-sel="${esc(l.id)}" ${selection.has(l.id) ? 'checked' : ''}>`}</td>
+    <td style="width:36px" data-stop>${exp ? '' : `<input type="checkbox" aria-label="Select ${esc(l.commande)}" data-sel="${esc(l.id)}" ${selection.has(l.id) ? 'checked' : ''}>`}</td>
     <td class="cmd"><b>${esc(l.commande)}</b><small>${esc(l.client || '')}</small></td>
     <td>${pays(l.pays)}</td>
     <td class="produit"><div class="prod-cell">${vignette({ ...p, sku: l.sku }, 'petite')}<div><b>${esc(p.nom || l.produit)}</b><small>${esc(l.sku)}${l.quantite > 1 ? ' · ×' + l.quantite : ''}</small></div></div></td>
     <td class="num">${argent(e.valeur, l.devise, true)}</td>
-    <td>${e.code ? `<span class="code ${e.provisoire ? 'provisoire' : ''}" title="${e.provisoire ? 'Proposé par le moteur, non validé' : 'Validé'}">${esc(fmtCode(e.code))}</span>` : '<span class="faint">—</span>'}</td>
-    <td>${exp ? '<span class="tag">Expédiée</span>' : etat(e.niveau)}</td>
+    <td>${e.code ? `<span class="code ${e.provisoire ? 'provisoire' : ''}" title="${e.provisoire ? 'Proposed by the engine, not validated' : 'Validated'}">${esc(fmtCode(e.code))}</span>` : '<span class="faint">-</span>'}</td>
+    <td>${exp ? '<span class="tag">Shipped</span>' : etat(e.niveau)}</td>
     <td class="raison" title="${esc(e.principale.texte)}">${esc(e.principale.texte)}</td>
-    <td class="num">${e.surcout ? argent(e.surcout, l.devise, true) : e.evitable ? `<span style="color:var(--warn)" title="Évitable avant l'échéance">${argent(e.evitable, l.devise, true)}</span>` : '<span class="faint">—</span>'}</td>
+    <td class="num">${e.surcout ? argent(e.surcout, l.devise, true) : e.evitable ? `<span style="color:var(--warn)" title="Avoidable before the deadline">${argent(e.evitable, l.devise, true)}</span>` : '<span class="faint">-</span>'}</td>
     <td style="width:28px">${ic('droite', 'chev')}</td></tr>`;
 }
 
 export function rendre() {
   const s = S.lire();
-  if (!s.lignes.length) return `<div class="page"><div class="titre"><div class="bloc"><h1>Commandes</h1></div></div><div class="vide carte"><h3>Aucune commande</h3><p>Importez un export Shopify ou Etsy, ou chargez la boutique de démonstration.</p><div style="display:flex;gap:8px;margin-top:10px"><button class="btn noir" data-action="demo">Boutique de démonstration</button><button class="btn blanc" data-action="importer">Importer</button></div></div></div>`;
+  if (!s.lignes.length) return `<div class="page"><div class="titre"><div class="bloc"><h1>Orders</h1></div></div><div class="vide carte"><h3>No orders</h3><p>Import a Shopify or Etsy export, or load the demo store.</p><div style="display:flex;gap:8px;margin-top:10px"><button class="btn noir" data-action="demo">Demo store</button><button class="btn blanc" data-action="importer">Import</button></div></div></div>`;
   const ev = S.evaluation(), base = filtrer(ev.lignes, s.produits), lignes = base.filter(garde[f.onglet]);
   const R = f.echeance ? S.regles().find((r) => r.id === f.echeance) : null;
-  const pays = [...new Set(ev.lignes.map((l) => l.pays))].sort((a, b) => nomPays(a).localeCompare(nomPays(b), 'fr'));
+  const pays = [...new Set(ev.lignes.map((l) => l.pays))].sort((a, b) => nomPays(a).localeCompare(nomPays(b), 'en'));
   const sel = [...selection].filter((id) => ev.lignes.some((l) => l.id === id && l.expedition !== 'expediee'));
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Commandes</h1><p>Chaque article commandé, vérifié pour son pays de livraison. Seules les lignes prêtes partent : une ligne à vérifier attend sa réponse, une ligne bloquée attend que la règle soit levée.</p></div></div>
+    <div class="titre"><div class="bloc"><h1>Orders</h1><p>Every item ordered, checked for its delivery country. Only ready lines ship: a line to check waits for its answer, a blocked line waits for the rule to be lifted.</p></div></div>
     <div class="onglets" role="tablist">${ONGLETS.map(([k, lib]) => `<button role="tab" data-onglet="${k}" class="${f.onglet === k ? 'actif' : ''}">${lib}<sup>${base.filter(garde[k]).length}</sup></button>`).join('')}</div>
     <div class="outils">
-      <label class="recherche">${ic('recherche')}<input id="recherche-commandes" placeholder="Commande, produit, pays, client…" value="${esc(f.recherche)}" autocomplete="off"></label>
-      <label class="chip" style="position:relative">${ic('globe')}${f.pays ? esc(nomPays(f.pays)) : 'Tous les pays'}${ic('chevron')}<select data-filtre="pays" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Filtrer par pays"><option value="">Tous les pays</option>${pays.map((c) => `<option value="${c}" ${f.pays === c ? 'selected' : ''}>${esc(nomPays(c))}</option>`).join('')}</select></label>
+      <label class="recherche">${ic('recherche')}<input id="recherche-commandes" placeholder="Order, product, country, customer…" value="${esc(f.recherche)}" autocomplete="off"></label>
+      <label class="chip" style="position:relative">${ic('globe')}${f.pays ? esc(nomPays(f.pays)) : 'All countries'}${ic('chevron')}<select data-filtre="pays" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Filter by country"><option value="">All countries</option>${pays.map((c) => `<option value="${c}" ${f.pays === c ? 'selected' : ''}>${esc(nomPays(c))}</option>`).join('')}</select></label>
       ${f.pays ? `<button class="chip actif" data-retirer-filtre="pays">${esc(nomPays(f.pays))}${ic('fermer')}</button>` : ''}
       ${R ? `<button class="chip actif" data-retirer-filtre="echeance">${ic('horloge')}${esc(R.titre)}${ic('fermer')}</button>` : ''}
       <span class="espace"></span>
-      <span class="muted" style="font-size:12.5px">${pluriel(lignes.length, 'ligne', 'lignes')}</span>
+      <span class="muted" style="font-size:12.5px">${pluriel(lignes.length, 'line', 'lines')}</span>
     </div>
-    <div class="table-cadre"><table class="t"><thead><tr><th data-stop><input type="checkbox" aria-label="Tout sélectionner" data-tout ${lignes.length && lignes.filter((l) => l.expedition !== 'expediee').every((l) => selection.has(l.id)) ? 'checked' : ''}></th><th>Commande</th><th>${ic('globe')}Destination</th><th>${ic('produits')}Produit</th><th class="num">Valeur</th><th>Code SH</th><th>Conformité</th><th>Raison principale</th><th class="num">Surcoût</th><th></th></tr></thead>
-      <tbody>${lignes.map((l, i) => ligneHtml(l, s.produits[l.sku] || {}, i)).join('') || `<tr><td colspan="10"><div class="vide" style="padding:36px">Aucune ligne dans cette vue.</div></td></tr>`}</tbody></table></div>
-    ${sel.length ? `<div class="flottant"><span>${pluriel(sel.length, 'ligne sélectionnée', 'lignes sélectionnées')}</span><button class="btn blanc petit" data-expedier-sel>${ic('camion')}Expédier les lignes prêtes</button><button class="btn texte petit" data-vider>Désélectionner</button></div>` : ''}
+    <div class="table-cadre"><table class="t"><thead><tr><th data-stop><input type="checkbox" aria-label="Select all" data-tout ${lignes.length && lignes.filter((l) => l.expedition !== 'expediee').every((l) => selection.has(l.id)) ? 'checked' : ''}></th><th>Order</th><th>${ic('globe')}Destination</th><th>${ic('produits')}Product</th><th class="num">Value</th><th>HS code</th><th>Compliance</th><th>Main reason</th><th class="num">Extra cost</th><th></th></tr></thead>
+      <tbody>${lignes.map((l, i) => ligneHtml(l, s.produits[l.sku] || {}, i)).join('') || `<tr><td colspan="10"><div class="vide" style="padding:36px">No lines in this view.</div></td></tr>`}</tbody></table></div>
+    ${sel.length ? `<div class="flottant"><span>${pluriel(sel.length, 'line selected', 'lines selected')}</span><button class="btn blanc petit" data-expedier-sel>${ic('camion')}Ship the ready lines</button><button class="btn texte petit" data-vider>Clear selection</button></div>` : ''}
   </div>`;
 }
 
@@ -105,8 +105,8 @@ function expedierSelection() {
   selection.clear();
   if (ok.length) S.expedier(ok.map((l) => l.id));
   toast({
-    titre: ok.length ? pluriel(ok.length, 'ligne expédiée', 'lignes expédiées') : 'Aucune ligne expédiée',
-    texte: [evite ? `${argent(evite)} de droits évités avant l'échéance` : '', restees.length ? `${pluriel(restees.length, 'ligne reste', 'lignes restent')} (${pourquoi}) : seules les lignes prêtes partent` : ''].filter(Boolean).join(' · ') || 'Elles sortent de la file à expédier.',
+    titre: ok.length ? pluriel(ok.length, 'line shipped', 'lines shipped') : 'No line shipped',
+    texte: [evite ? `${argent(evite)} in duties avoided before the deadline` : '', restees.length ? `${pluriel(restees.length, 'line stays', 'lines stay')} (${pourquoi}): only ready lines ship` : ''].filter(Boolean).join(' · ') || 'They leave the to-ship queue.',
     niveau: restees.length ? 'a_verifier' : 'pret', icone: 'camion', duree: 7000,
   });
 }

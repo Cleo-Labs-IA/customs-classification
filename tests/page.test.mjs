@@ -16,12 +16,12 @@ test('adresses privées refusées, publiques acceptées', () => {
 test('adresse : protocole, identifiants, port et hôte vérifiés', () => {
   assert.equal(adresseAcceptee('https://shop.example.com/p/1').hostname, 'shop.example.com');
   assert.throws(() => adresseAcceptee('file:///etc/passwd'), /http/);
-  assert.throws(() => adresseAcceptee('https://user:pw@example.com'), /identifiants/);
+  assert.throws(() => adresseAcceptee('https://user:pw@example.com'), /credentials/);
   assert.throws(() => adresseAcceptee('https://example.com:8080/'), /port/);
-  assert.throws(() => adresseAcceptee('http://localhost/'), /local/);
-  assert.throws(() => adresseAcceptee('http://169.254.169.254/latest'), /privé/);
-  assert.throws(() => adresseAcceptee('http://intranet/'), /privé/);
-  assert.throws(() => adresseAcceptee('pas une adresse'), /illisible/);
+  assert.throws(() => adresseAcceptee('http://localhost/'), /local host/);
+  assert.throws(() => adresseAcceptee('http://169.254.169.254/latest'), /private host/);
+  assert.throws(() => adresseAcceptee('http://intranet/'), /private host/);
+  assert.throws(() => adresseAcceptee('pas une adresse'), /unreadable address/);
 });
 
 test('entités HTML décodées', () => {
@@ -60,25 +60,25 @@ const dnsPublic = async () => [{ address: '93.184.216.34', family: 4 }];
 
 test('lecture : une redirection vers une adresse privée est refusée', async () => {
   const fetchImpl = async () => reponse('', { status: 302, location: 'http://127.0.0.1/admin' });
-  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl, lookup: dnsPublic }), /privé/);
+  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl, lookup: dnsPublic }), /private host/);
 });
 
 test('lecture : un nom qui se résout en adresse privée est refusé', async () => {
   const lookup = async () => [{ address: '10.0.0.5', family: 4 }];
-  await assert.rejects(lirePage({ url: 'https://interne.example.com/' }, { fetchImpl: async () => reponse(HTML), lookup }), /privé/);
+  await assert.rejects(lirePage({ url: 'https://interne.example.com/' }, { fetchImpl: async () => reponse(HTML), lookup }), /private host/);
 });
 
 test('lecture : autre chose qu\'une page web est refusé, une page est lue', async () => {
-  await assert.rejects(lirePage({ url: 'https://shop.example.com/f.pdf' }, { fetchImpl: async () => reponse('%PDF', { type: 'application/pdf' }), lookup: dnsPublic }), /pas une page web/);
+  await assert.rejects(lirePage({ url: 'https://shop.example.com/f.pdf' }, { fetchImpl: async () => reponse('%PDF', { type: 'application/pdf' }), lookup: dnsPublic }), /not a web page/);
   const p = await lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl: async () => reponse(HTML), lookup: dnsPublic });
   assert.equal(p.sku, 'DOCK-PRO');
 });
 
 test('lecture : une boutique qui refuse les robots est signalée, sans contournement', async () => {
-  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl: async () => reponse('Forbidden', { status: 403 }), lookup: dnsPublic }), /refuse les lectures automatiques \(403\)/);
+  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl: async () => reponse('Forbidden', { status: 403 }), lookup: dnsPublic }), /refuses automated reading \(403\)/);
 });
 
 test('lecture : page trop lourde refusée', async () => {
   const gros = '<html><body>' + 'x'.repeat(5_100_000) + '</body></html>';
-  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl: async () => reponse(gros), lookup: dnsPublic }), /trop lourde/);
+  await assert.rejects(lirePage({ url: 'https://shop.example.com/p' }, { fetchImpl: async () => reponse(gros), lookup: dnsPublic }), /too large/);
 });

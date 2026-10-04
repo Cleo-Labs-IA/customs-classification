@@ -2,15 +2,15 @@
 import { esc, ic, ilYA } from './ui.js';
 
 const NAV = [
-  { id: 'vue', href: '/#/', lib: "Vue d'ensemble", ic: 'accueil' },
-  { id: 'dossier', href: '/#/dossier', lib: 'Classer un produit', ic: 'agent' },
-  { id: 'commandes', href: '/#/commandes', lib: 'Commandes', ic: 'commandes' },
-  { id: 'produits', href: '/#/produits', lib: 'Produits', ic: 'produits' },
+  { id: 'vue', href: '/#/', lib: 'Overview', ic: 'accueil' },
+  { id: 'dossier', href: '/#/dossier', lib: 'Classify a product', ic: 'agent' },
+  { id: 'commandes', href: '/#/commandes', lib: 'Orders', ic: 'commandes' },
+  { id: 'produits', href: '/#/produits', lib: 'Products', ic: 'produits' },
   { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
-  { id: 'veille', href: '/#/veille', lib: 'Veille réglementaire', ic: 'veille' },
+  { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
 ];
 const OUTILS = [
-  { id: 'arbre', href: '/#/arbre', lib: "Arbre d'interprétation", ic: 'arbre' },
+  { id: 'arbre', href: '/#/arbre', lib: 'Interpretation tree', ic: 'arbre' },
 ];
 
 // Le tampon de la marque Stamped (silhouette pleine, couleur du texte).
@@ -25,28 +25,28 @@ export function shellHtml(actif, infos = {}) {
   const b = infos.boutique;
   const boutique = b
     ? `<div class="boutique"><span class="bulle"></span><div><b>${esc(b.nom)}</b><small>${infos.fluxDemo ? '<span class="dot live"></span>' : ''}${esc(b.plateforme)} · <span data-ilya="${esc(b.synchroLe)}">${esc(ilYA(b.synchroLe))}</span></small></div></div>
-       <div class="arbo"><button class="navitem" data-action="flux" style="width:100%" title="Commandes simulées">${ic(infos.fluxDemo ? 'pause' : 'lecture')}<span>${infos.fluxDemo ? 'Arrêter le flux simulé' : 'Lancer un flux de commandes simulé'}</span></button></div>`
-    : `<button class="boutique navitem" data-action="importer" style="width:100%"><span class="bulle creuse"></span><div><b>Aucune boutique</b><small>Importer un export Shopify ou Etsy</small></div></button>`;
+       <div class="arbo"><button class="navitem" data-action="flux" style="width:100%" title="Simulated orders">${ic(infos.fluxDemo ? 'pause' : 'lecture')}<span>${infos.fluxDemo ? 'Stop the simulated stream' : 'Start a simulated order stream'}</span></button></div>`
+    : `<button class="boutique navitem" data-action="importer" style="width:100%"><span class="bulle creuse"></span><div><b>No store</b><small>Import a Shopify or Etsy export</small></div></button>`;
   const mode = infos.mode === 'direct'
-    ? `<div class="mode" title="Chaque classification est un appel en direct"><span class="dot live"></span><div><b>En direct</b><small>${esc(String(infos.api || '').replace('https://', ''))}</small></div></div>`
+    ? `<div class="mode" title="Each classification is a live call"><span class="dot live"></span><div><b>Live</b><small>${esc(String(infos.api || '').replace('https://', ''))}</small></div></div>`
     : infos.mode === 'illustratif'
-      ? `<div class="mode" title="Sans clé d'API, le cockpit rejoue une réponse enregistrée et des réponses illustratives"><span class="dot warn"></span><div><b>Hors ligne</b><small>Clé d'API absente : réponses enregistrées ou illustratives</small></div></div>`
+      ? `<div class="mode" title="Without an API key, the cockpit replays a recorded response and illustrative responses"><span class="dot warn"></span><div><b>Offline</b><small>No API key: recorded or illustrative responses</small></div></div>`
       : '';
   return `
   <div class="side-top">
     <a class="logo" href="/#/" title="Stamped">${tampon()}</a>
-    <div class="nom"><span class="marque">Stamped</span><small>Douane et conformité</small></div>
-    <a class="icobtn" href="/#/veille" title="Veille réglementaire">${ic('cloche')}${infos.alerte ? '<span class="pastille"></span>' : ''}</a>
-    <button class="icobtn" id="replier" title="Replier la barre">${ic('panneau')}</button>
+    <div class="nom"><span class="marque">Stamped</span><small>Customs compliance</small></div>
+    <a class="icobtn" href="/#/veille" title="Regulatory watch">${ic('cloche')}${infos.alerte ? '<span class="pastille"></span>' : ''}</a>
+    <button class="icobtn" id="replier" title="Collapse the sidebar">${ic('panneau')}</button>
   </div>
-  <button class="side-new" data-action="nouveau">${ic('plus')}<span>Nouveau…</span>${ic('chevron')}</button>
-  <nav aria-label="Navigation principale">${NAV.map(item).join('')}</nav>
-  <div class="sec">Outils d'expertise</div>
+  <button class="side-new" data-action="nouveau">${ic('plus')}<span>New…</span>${ic('chevron')}</button>
+  <nav aria-label="Main navigation">${NAV.map(item).join('')}</nav>
+  <div class="sec">Expert tools</div>
   <nav>${OUTILS.map(item).join('')}</nav>
-  <div class="sec">Boutiques</div>
+  <div class="sec">Stores</div>
   <nav>${boutique}</nav>
   <div class="side-bas">${mode}
-    <button class="qui" data-action="qui" title="Les réponses et validations sont signées de ce nom"><span class="avatar">${esc(initiales(infos.qui || 'Équipe conformité'))}</span><span style="text-align:left">${esc(infos.qui || 'Équipe conformité')}</span>${ic('chevron', 'faint')}</button>
+    <button class="qui" data-action="qui" title="Answers and validations are signed with this name"><span class="avatar">${esc(initiales(infos.qui || 'Compliance team'))}</span><span style="text-align:left">${esc(infos.qui || 'Compliance team')}</span>${ic('chevron', 'faint')}</button>
   </div>`;
 }
 
