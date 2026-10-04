@@ -206,6 +206,9 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
   </div>
 </main>
 
+<div id="gate" style="display:none;position:fixed;inset:0;background:rgba(246,243,236,.96);z-index:50;align-items:center;justify-content:center;padding:16px">
+  <form id="gateform" class="node static" style="max-width:380px"><div class="k">Accès réservé</div><div class="t">Code d'accès</div><div class="s" id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Entrer</button></form>
+</div>
 <aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Fermer">×</button><div id="drawerBody"></div></aside>
 
 <script>
@@ -259,13 +262,13 @@ $('photo').addEventListener('change', async (e) => {
   PHOTO = null;
   $('photobox').innerHTML = '<div class="loading"><div class="spin"></div>Lecture de la photo, une quinzaine de secondes.</div>';
   try {
-    const r = await fetch('/api/photo', { method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: f });
-    const j = await r.json(); if (!r.ok) throw new Error(j.error || 'Erreur ' + r.status);
+    const big = await toJpeg(f, 2400, 0.85), apercu = await toJpeg(big.blob, 700, 0.7);
+    const j = await post('/api/photo', { jpeg_base64: big.url.split(',')[1] });
     PHOTO = { name: f.name, lignes: j.lignes, illisible: j.illisible, reference: j.reference, seconds: j.seconds };
     $('ds').value = j.lignes.join('\n');
     if (!$('desc').value.trim()) $('desc').value = j.description;
     if (!$('sku').value.trim()) $('sku').value = (j.reference || f.name.replace(/\.[^.]+$/, '')).slice(0, 48);
-    $('photobox').innerHTML = `<div class="photo"><img src="${j.apercu}" alt=""><div><b>${j.lignes.length} ligne(s) lue(s)</b>, recopiées ci-dessous. Relisez et corrigez avant de classer.${j.illisible.length ? `<br><b>Non lu avec certitude :</b><ul>${j.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>`;
+    $('photobox').innerHTML = `<div class="photo"><img src="${apercu.url}" alt=""><div><b>${j.lignes.length} ligne(s) lue(s)</b>, recopiées ci-dessous. Relisez et corrigez avant de classer.${j.illisible.length ? `<br><b>Non lu avec certitude :</b><ul>${j.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>`;
   } catch (err) { $('photobox').innerHTML = '<div class="hint" style="color:var(--bad)">Photo non lue : ' + esc(err.message || err) + '</div>'; }
 });
 
@@ -279,7 +282,7 @@ $('samples').addEventListener('click', (e) => {
   PHOTO = null; $('photo').value = ''; $('photobox').innerHTML = ''; $('gtin').value = ''; $('dl').value = ''; $('dw').value = ''; $('dh').value = ''; $('kg').value = s.kg ?? '';
   resetCode();
 });
-fetch('/api/status').then((r) => r.json()).then((s) => { $('keystate').textContent = s.key_present ? 'Appels en direct sur ' + s.api.replace('https://', '') : "Clé d'API absente : la poser dans .env puis relancer le serveur."; });
+fetch('/api/status', { headers: { 'X-App-Code': code() } }).then((r) => r.json()).then((s) => { if (s.code_required && !s.code_ok) askCode(''); $('keystate').textContent = s.key_present ? 'Appels en direct sur ' + s.api.replace('https://', '') : "Clé d'API absente : la poser dans .env puis relancer le serveur."; });
 function resetCode() { $('hscode').className = 'hscode'; $('hscode').textContent = "Vide tant qu'une personne habilitée n'a pas validé"; }
 
 $('fiche').addEventListener('submit', (e) => {
@@ -303,11 +306,38 @@ function effective(text, source) {
 }
 const factValues = (facts) => Object.fromEntries(Object.entries(facts).map(([k, f]) => [k, f.value]));
 
+// Code d'accès de la version en ligne, gardé dans ce navigateur.
+const code = () => { try { return localStorage.getItem('code') || ''; } catch { return ''; } };
+function askCode(msg) {
+  $('gate').style.display = 'flex'; $('gatemsg').textContent = msg || '';
+  return new Promise((ok) => { $('gateform').onsubmit = (e) => { e.preventDefault(); try { localStorage.setItem('code', $('gatecode').value.trim()); } catch {} $('gate').style.display = 'none'; ok(); }; });
+}
 async function post(path, body) {
-  const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-  const j = await r.json();
-  if (!r.ok) throw new Error(j.error || 'Erreur ' + r.status);
-  return j;
+  for (let n = 0; n < 3; n++) {
+    const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': code() }, body: JSON.stringify(body) });
+    if (r.status === 401) { await askCode(n ? 'Code refusé.' : ''); continue; }
+    const j = await r.json().catch(() => ({ error: 'Réponse illisible du serveur (' + r.status + ')' }));
+    if (!r.ok) throw new Error(j.error || 'Erreur ' + r.status);
+    return j;
+  }
+  throw new Error("Code d'accès refusé");
+}
+// Prépare la photo dans le navigateur : JPEG redimensionné. Un HEIC que le
+// navigateur ne sait pas lire est d'abord converti par heic2any.
+async function toJpeg(file, max, q) {
+  let bmp;
+  try { bmp = await createImageBitmap(file); }
+  catch {
+    if (!window.heic2any) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js'; sc.onload = ok; sc.onerror = () => ko(new Error('convertisseur HEIC indisponible')); document.head.appendChild(sc); });
+    const out = await window.heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
+    bmp = await createImageBitmap(Array.isArray(out) ? out[0] : out);
+  }
+  const k = Math.min(1, max / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
+  c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+  c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  const blob = await new Promise((ok) => c.toBlob(ok, 'image/jpeg', q));
+  const url = await new Promise((ok) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.readAsDataURL(blob); });
+  return { blob, url };
 }
 async function classify(desc, facts, country) {
   const body = { item_id: S.product.sku, description: desc, country: country || S.product.dest };
@@ -460,7 +490,7 @@ function render() {
         ${undocumented.length ? `<dt>Sans pièce</dt><dd>${esc(undocumented.join(', '))} : saisie à la main, aucune pièce à l'appui.</dd>` : ''}
         <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Réponse brute de l'API</h3><p class="muted">HTTP ${last.http} · ${num(last.seconds)} s${last.request_id ? ' · requête ' + esc(last.request_id) : ''}</p><h4>Requête</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Réponse</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">Voir la réponse brute</button></dd>
       </dl>
-      ${S.saved ? `<div class="done"><span>Validé par ${esc(S.saved.validated_by)} et enregistré dans le catalogue.</span><button type="button" class="btn ghost" id="dl">Télécharger le dossier</button></div>`
+      ${S.saved ? `<div class="done"><span>Validé par ${esc(S.saved.validated_by)} et enregistré dans ce navigateur.</span><button type="button" class="btn ghost" id="dl">Télécharger le dossier</button></div>`
         : canValidate ? `<form class="valid" id="validate"><input id="who" required placeholder="Nom de la personne habilitée"><button class="btn ok" type="submit">Valider et enregistrer</button></form>`
         : `<p class="hint" style="margin-top:12px">${pending ? 'Répondez à la question pour obtenir une proposition validable.' : 'Rien à valider à ce stade.'}</p>`}
     </div>`);
@@ -607,7 +637,8 @@ function dossier(who) {
 async function onValidate(e) {
   e.preventDefault();
   const entry = dossier($('who').value.trim());
-  try { await post('/api/catalogue', entry); } catch (err) { S.error = 'Enregistrement refusé : ' + err.message; render(); return; }
+  entry.validated_at = new Date().toISOString();
+  try { const all = JSON.parse(localStorage.getItem('catalogue') || '[]').filter((r) => !(r.sku === entry.sku && r.destination === entry.destination)); all.push(entry); localStorage.setItem('catalogue', JSON.stringify(all)); } catch {}
   S.saved = entry;
   $('hscode').className = 'hscode set';
   $('hscode').innerHTML = `<b>${esc(fmtCode(entry.code))}</b><span>validé par ${esc(entry.validated_by)}</span>`;

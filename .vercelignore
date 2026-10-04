@@ -1,0 +1,8 @@
+.env
+essais
+catalogue.json
+sonde.mjs
+*.png
+*.jpg
+server.log
+server.mjs

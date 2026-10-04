@@ -3,3 +3,5 @@ catalogue.json
 node_modules
 *.png
 *.jpg
+.code-acces
+.vercel
