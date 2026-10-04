@@ -27,7 +27,7 @@ export const titrePour = () => (E.lire().produit && S.lire().produits[E.lire().p
 let details = [], horsLigne = null, serveur = { mode: 'illustratif', ia: false };
 const det = (html) => { details.push(html); return details.length - 1; };
 let MONDE = null;
-if (typeof fetch === 'function' && typeof document !== 'undefined') fetch('/data/monde-produits.json').then((r) => (r.ok ? r.json() : null)).then((m) => { MONDE = m; }).catch(() => null);
+if (typeof fetch === 'function' && typeof document !== 'undefined') fetch('/data/monde-produits.json').then((r) => (r.ok ? r.json() : null)).then((m) => { MONDE = m; E.redessiner(); }).catch(() => null);
 etatServeur().then((s) => { serveur = s; if (s.mode !== 'direct') donneesHorsLigne().then((d) => { horsLigne = d; }); });
 
 // Arrivée depuis une fiche produit du cockpit (#/dossier?sku=PWR-20K&dest=JP), ou depuis
@@ -205,8 +205,7 @@ export function rendre() {
   details = [];
   const D = E.lire();
   if (D.produit) return dossierEcran(D);
-  const fiche = piecesHtml(D, serveur.ia), i = fiche.indexOf('</div></div>') + '</div></div>'.length;
-  const html = fiche.slice(0, i) + parcours(D, null) + fiche.slice(i), sku = (D.pieces.sku || '').trim();
+  const html = piecesHtml(D, serveur.ia, MONDE).replace('<!--parcours-->', parcours(D, null)), sku = (D.pieces.sku || '').trim();
   return S.lire().produits[sku] ? html.replace('<div class="page entre">', '<div class="page entre">' + enteteProduit(sku, 'dossier')) : html;
 }
 
@@ -277,6 +276,7 @@ export function brancher(racine, rerendre) {
     if (b('[data-vue-dossier]')) { vue = ['tout', 'apercu'].includes(b('[data-vue-dossier]').dataset.vueDossier) ? b('[data-vue-dossier]').dataset.vueDossier : 'etapes'; return E.redessiner(); }
     if (vue === 'tout' && b('[data-etape]') && E.lire().produit) { const cible = document.getElementById('etape-' + b('[data-etape]').dataset.etape); if (cible) cible.scrollIntoView({ behavior: 'smooth', block: 'start' }); else document.querySelector('.main')?.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     if (b('[data-etape]')) { E.aller(b('[data-etape]').dataset.etape); document.querySelector('.main')?.scrollTo({ top: 0 }); return; }
+    if (b('[data-vers-depot]')) return document.getElementById('depart-produit')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (b('[data-identite-modifier]')) return E.modifierIdentite();
     if (b('[data-choisir]') && !b('input')) return racine.querySelector('#f-photo').click();
     if (b('[data-exemple]')) { const x = EXEMPLES[Number(b('[data-exemple]').dataset.exemple)]; return E.preparer({ pieces: { sku: x.sku, desc: x.desc, ds: x.ds || '', dest: x.dest, origin: x.origin, kg: x.kg || '' } }); }

@@ -68,7 +68,24 @@ button.source-tuile:hover{border-color:var(--ink)}
 .source-tuile[aria-disabled="true"]{background:var(--sunk);border-style:dashed;border-color:var(--line-2);opacity:.65;cursor:not-allowed}
 .source-note{padding:8px 22px 20px;font-size:12.5px;margin:0}
 @media (max-width:900px){.source-tuiles{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.source-choix{grid-template-columns:1fr}}`;
+@media (max-width:560px){.source-choix{grid-template-columns:1fr}}
+.accueil-classer{margin:18px 0 22px}
+.accueil-classer h1{font-family:var(--display);font-weight:500;font-size:44px;line-height:1.04;letter-spacing:-.045em;text-wrap:balance;max-width:900px;margin:10px 0 14px}
+.accueil-classer .chapo{font-size:16.5px;line-height:1.5;color:var(--ink-2);max-width:820px;margin:0 0 8px}
+.accueil-classer .chapo b{color:var(--ink);font-weight:600}
+.difficile{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 0}
+.difficile article{padding:16px 18px;border-radius:var(--r);background:var(--panel);box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;gap:6px}
+.difficile h3{font-family:var(--display);font-weight:600;font-size:16.5px;letter-spacing:-.02em;margin:0}
+.difficile p{font-size:13.5px;line-height:1.45;color:var(--ink-3);margin:0}
+.difficile .mesure{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:auto;padding-top:8px}
+.quatre-temps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0 0;padding:0}
+.quatre-temps li{padding:14px 16px;border-radius:var(--r);background:var(--sunk);display:flex;flex-direction:column;gap:4px}
+.quatre-temps .num{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.quatre-temps b{font-weight:600;font-size:14.5px;letter-spacing:-.01em}
+.quatre-temps span{font-size:13px;line-height:1.4;color:var(--ink-3)}
+.accueil-sous{font-family:var(--display);font-weight:500;font-size:21px;letter-spacing:-.02em;margin:26px 0 0}
+@media (max-width:1000px){.difficile{grid-template-columns:1fr}.quatre-temps{grid-template-columns:repeat(2,1fr)}.accueil-classer h1{font-size:34px}}
+@media (max-width:560px){.quatre-temps{grid-template-columns:1fr}}`;
 
 function appliquerSource() {
   document.querySelectorAll('.source-choix [data-source]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.source === source)));
@@ -102,12 +119,48 @@ function choixSource() {
     </div>`;
 }
 
-export function piecesHtml(D, ia) {
+// Accueil de « Classify a product », quand aucune fiche n'est commencée : le problème, ce qui
+// le rend difficile, et ce que l'app fait. Les chiffres viennent de public/data/monde-produits.json
+// (consultations réelles de l'API, essais/monde/enregistrer.mjs) ; sans ce fichier, la phrase
+// chiffrée ne s'affiche pas.
+const QUATRE_TEMPS = [
+  ['Gather missing information', 'The agent reads the photo, the label or the product page, quotes the passage behind each fact, and asks you only for the fact that decides.'],
+  ['Propose a customs code', 'Two readings side by side: the Cleo Legal API engine and a rule encoded from the official nomenclature. One decision comes out.'],
+  ['Explain the legal reasoning', 'The rule is drawn as a graph. Each step shows the official text, the fact from your documents, and where it leads.'],
+  ['Produce an evidence-backed dossier', 'A declarant reviews the file and signs it. The approved dossier exports with its code, its reasons and its evidence.'],
+];
+function accueil(monde) {
+  const c = monde && monde.couverture, chg = monde && monde.produits && monde.produits['CHG-70W'] && monde.produits['CHG-70W'].bilan;
+  const cartes = [
+    ['One product, one code per destination', 'The first six digits are shared worldwide. Each country then adds its own national digits, with its own wording and its own duty rate.',
+      c ? `${c.catalogue_national} of ${c.pays} countries with a national catalogue in this app` : ''],
+    ['The same product can be read two ways', 'A USB-C dock charges, carries data and drives a screen. Its heading depends on its principal function, a fact a catalogue line rarely states.',
+      chg ? `70 W charger of the demo: 8504.40 in ${chg.accord} of ${chg.consultes} countries looked up, another code proposed in ${chg.desaccord}` : ''],
+    ['A code needs its reasons', 'Sellers must justify the code they declare. A code holds when each step traces to an official text and to a passage of the product documents.', ''],
+  ];
+  return `<section class="accueil-classer">
+      <span class="eyebrow">Cleo · Customs classification</span>
+      <h1>From a product photo to a customs code you can justify</h1>
+      <p class="chapo"><b>Customs classification is a bottleneck for cross-border e-commerce:</b> sellers must find and justify the right code for each product and destination.</p>
+      <p class="chapo">Starting with a product photo, Cleo guides the end-to-end classification workflow: gather missing information, propose a customs code, explain the legal reasoning, and produce an evidence-backed dossier for human review and approval.</p>
+      <p style="margin:16px 0 0"><button class="btn noir" type="button" data-vers-depot>${ic('agent')}Classify a product</button></p>
+      <h2 class="accueil-sous">Why it is hard</h2>
+      <div class="difficile">${cartes.map(([t, texte, mesure]) => `<article><h3>${t}</h3><p>${texte}</p>${mesure ? `<p class="mesure">${esc(mesure)}</p>` : ''}</article>`).join('')}</div>
+      <h2 class="accueil-sous">What Cleo does</h2>
+      <ol class="quatre-temps">${QUATRE_TEMPS.map(([t, texte], i) => `<li><span class="num">${i + 1}</span><b>${t}</b><span>${texte}</span></li>`).join('')}</ol>
+      <h2 class="accueil-sous" id="depart-produit">Start with your product</h2>
+    </section>`;
+}
+
+export function piecesHtml(D, ia, monde = null) {
   const p = D.pieces;
   // une fiche déjà remplie (produit de la boutique, photo, page) s'ouvre toujours sur « Upload a product »
   if (String(p.desc || '').trim() || String(p.sku || '').trim() || p.photo || p.page) source = 'produit';
+  // une fiche déjà commencée garde son titre court ; l'accueil complet ne s'affiche que sur une fiche vide
+  const vide = !(String(p.desc || '').trim() || String(p.sku || '').trim() || p.photo || p.page);
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Your product record</h1><p>Give a photo of the label, a product page address or a few lines. The agent then takes the product through the six steps below, up to a code you can check and what each country requires.</p></div></div>
+    ${vide ? accueil(monde) : `<div class="titre"><div class="bloc"><h1>Your product record</h1><p>Give a photo of the label, a product page address or a few lines. The agent then takes the product through the six steps below, up to a code you can check and what each country requires.</p></div></div>`}
+    <!--parcours-->
     ${choixSource()}
     <div class="source-panneau" data-panneau-source="produit" ${source === 'produit' ? '' : 'hidden'}>
     ${zoneDepot(D, ia)}
