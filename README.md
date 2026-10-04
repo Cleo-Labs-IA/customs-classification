@@ -7,7 +7,33 @@ Tout ce qui s'affiche à droite vient d'un appel en direct à `POST /v2/customs/
     node server.mjs          # http://localhost:4318
     node sonde.mjs           # parcours complet dans un navigateur, captures sonde-*.png
 
-La clé d'API vit dans `.env` (`CLEO_API_KEY=...`), lue par le serveur, jamais envoyée au navigateur. Les validations s'écrivent dans `catalogue.json`, en local seulement : l'app n'enregistre rien dans l'API (`persist` n'est pas envoyé, la route `/review` n'est pas branchée).
+La clé d'API vit dans `.env` (`CLEO_API_KEY=...`), lue par le serveur, jamais envoyée au navigateur. Le parcours produit enregistre les classifications avec `persist:true` et soumet les validations à la route `/review` de la Legal API. L'historique et les dossiers JSON/PDF viennent de l'API. Les pièces et versions de travail restent enregistrées dans ce navigateur et sont signalées comme telles.
+
+## Parcours produit et aperçu local
+
+Le parcours en anglais suit capture, identité, faits, décision, validation, puis distribution. Une validation ne réussit dans l'interface qu'après l'accusé de réception de l'API. Les questions ouvertes, contradictions, arbitrages non résolus et niveaux nationaux manquants conservent leur blocage.
+
+Pour vérifier l'interface sans consommer de quota ni appeler un modèle :
+
+    node scripts/workflow-preview.mjs     # http://localhost:4362/ ; code : fixture
+
+Cet aperçu utilise uniquement un serveur local de données synthétiques et affiche « Fixture preview ». Il n'est pas une mesure de justesse de classification. Ses dossiers et validations disparaissent au redémarrage du serveur. La lecture de photos, les modèles d'applicabilité et le calcul des droits y sont désactivés.
+
+Cas de test reproductible :
+
+- SKU : `PREVIEW-CHARGER` ; origine `CN` ; destination `FR`.
+- Description : `External 65 W USB-C power adapter for a laptop`.
+- Fiche technique : `Converts 100-240 V AC to 20 V DC. Powers a laptop through USB-C. No battery, no generator and no mains socket outlets. Polycarbonate housing. Maximum output 65 W.`
+- Ajouter `[hs6]`, `[quota]`, `[question]` ou `[unsupported]` à la description pour exercer ces états. Pour `[question]`, laisser la fiche technique vide.
+- Utiliser `fail` comme nom de relecteur pour un échec de validation, ou `conflict` pour un conflit de version. Un autre nom permet le parcours nominal.
+
+L'export CSV signifie « exporté pour import », pas « publié dans l'ERP ». Les connecteurs restent non connectés. La vérification des codes et de la couverture est déclenchée à la demande, pas une veille continue. Les pièces/versionnements locaux ne constituent pas un registre produit partagé. Le dossier de l'API et le dossier enrichi local ont des provenances distinctes.
+
+Tests du branchement (Node 22, sans réseau externe) :
+
+    node --test tests/customs-api.test.mjs tests/customs-routes.test.mjs tests/workflow.test.mjs tests/decision.test.mjs
+
+La suite historique inclut des tests en direct et des réponses brutes hors dépôt. Pour les tests d'applicabilité hors ligne : `APPLICABILITE_HORS_LIGNE=1`. Les fichiers `essais/modules/obligations-raw/` restent nécessaires aux tests historiques de droits. La recette navigateur doit distinguer données synthétiques, réponses enregistrées et appels réels.
 
 ## Ce que l'écran fait de plus depuis le 04/10 (cadrage « décision vérifiable »)
 
