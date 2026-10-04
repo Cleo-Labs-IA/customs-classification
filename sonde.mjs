@@ -1,5 +1,6 @@
 // Sonde navigateur : joue les parcours contre les vrais services et capture chaque étape.
 //   node sonde.mjs photo <chemin>   |   node sonde.mjs contradiction
+//   URL_APP=https://cleo-customs-classifier.vercel.app/ node sonde.mjs ...   (version en ligne)
 import { createRequire } from 'node:module';
 const require = createRequire(process.env.HOME + '/cleo-chat/');
 const { chromium } = require('playwright');
@@ -21,7 +22,9 @@ async function repondre() {
     console.log('après réponse :', await etat());
   }
 }
-await p.goto('http://localhost:4318/');
+const URL_APP = process.env.URL_APP || 'http://localhost:4318/';
+if (process.env.URL_APP) { const { readFileSync } = await import('node:fs'); const c = readFileSync(new URL('./.code-acces', import.meta.url), 'utf8').trim(); await p.addInitScript((v) => localStorage.setItem('code', v), c); }
+await p.goto(URL_APP);
 if (mode === 'photo') {
   await p.setInputFiles('#photo', file);
   await p.waitForSelector('.photo', { timeout: 90000 });
