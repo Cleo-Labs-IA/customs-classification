@@ -38,6 +38,20 @@ export async function post(chemin, body) {
   throw new Error('access code refused');
 }
 
+// Lecture d'une route du serveur (historique partagé, revues, validation d'un code).
+export async function lire(chemin) {
+  const r = await fetch(chemin, { headers: { 'X-App-Code': code() } });
+  const j = await r.json().catch(() => ({ error: `unreadable server response (${r.status})` }));
+  if (!r.ok) throw new Error((j.error && (j.error.message || j.error)) || j.hint || 'error ' + r.status);
+  return j;
+}
+// Le dossier gardé par l'API (JSON ou PDF), téléchargé tel quel.
+export async function telecharger(chemin, nom) {
+  const r = await fetch(chemin, { headers: { 'X-App-Code': code() } });
+  if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error((j.error && (j.error.message || j.error)) || 'error ' + r.status); }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(await r.blob()); a.download = nom; a.click();
+}
+
 // Lectures par IA (photo, pièces, critères) : impossibles sans accès au modèle.
 export async function lectureIA(chemin, body) {
   const s = await etatServeur();
@@ -46,8 +60,10 @@ export async function lectureIA(chemin, body) {
 }
 
 // Classification : rend { data, source, request_id, secondes, envoye, http, body, endpoint }.
-export async function classifier({ sku, description, pays, faits = {} }) {
+// persister : l'API garde la classification et rend son identifiant (classification_id), sur lequel la revue sera enregistrée.
+export async function classifier({ sku, description, pays, faits = {}, persister = false, asOf = null }) {
   const envoye = { item_id: sku || 'PRODUIT', description, country: pays };
+  if (persister && (await etatServeur()).mode === 'direct') Object.assign(envoye, { persist: true, system: 'hs6', ...(asOf ? { as_of: asOf } : {}) });
   if (Object.keys(faits).length) envoye.facts = faits;
   if ((await etatServeur()).mode === 'direct') {
     const j = await post('/api/classify', envoye);

@@ -13,11 +13,15 @@ import { piecesHtml, EXEMPLES } from './dossier/pieces.js';
 import { piecesCarte, faitsCarte, contradictionsCarte, regleCarte, toursHtml } from './dossier/graphe.js';
 import { propositionCarte, epreuvesCarte, obligationsCarte, destinationsCarte } from './dossier/outils.js';
 import { decisionCarte, exigencesCarte, exigencesDossier, exigencesClic } from './dossier/decision.js';
+import { identiteCarte } from './dossier/identite.js';
+import { diffusionCarte, csvImport } from './dossier/diffusion.js';
 
 export const titre = 'Classify a product';
 let plusOuvert = false;
 let details = [], horsLigne = null, serveur = { mode: 'illustratif', ia: false };
 const det = (html) => { details.push(html); return details.length - 1; };
+let MONDE = null;
+if (typeof fetch === 'function' && typeof document !== 'undefined') fetch('/data/monde-produits.json').then((r) => (r.ok ? r.json() : null)).then((m) => { MONDE = m; }).catch(() => null);
 etatServeur().then((s) => { serveur = s; if (s.mode !== 'direct') donneesHorsLigne().then((d) => { horsLigne = d; }); });
 
 // Arrivée depuis une fiche produit du cockpit (#/dossier?sku=PWR-20K&dest=JP), ou depuis
@@ -26,6 +30,9 @@ export function entrer(params) {
   const sku = params.get('sku'), p = sku && S.lire().produits[sku];
   const dest = params.get('dest') || (p && (S.lire().lignes.find((l) => l.sku === sku) || {}).pays) || 'FR';
   if (p) return E.preparer({ pieces: { sku, desc: p.description || p.nom, ds: p.fiche_technique || '', dest, origin: p.origine || 'CN' } });
+  // la boutique n'est pas encore chargée (arrivée directe par l'adresse) : la même fiche vient des exemples
+  const ex = sku && EXEMPLES.find((x) => x.sku === sku);
+  if (ex && !E.lire().produit) return E.preparer({ pieces: { sku: ex.sku, desc: ex.desc, ds: ex.ds || '', dest: params.get('dest') || ex.dest, origin: ex.origin } });
   if (params.get('desc')) E.preparer({ pieces: { sku: (sku || '').slice(0, 48), desc: params.get('desc').slice(0, 1800), ds: (params.get('ds') || '').slice(0, 12000), dest, origin: params.get('origin') || 'CN' } });
 }
 
@@ -35,45 +42,89 @@ const visuel = (P) => {
   return `<div class="vignette v-${esc((cat && cat.teinte) || 'gris')} dossier-visuel">${src ? `<img src="${esc(src)}" alt="" referrerpolicy="no-referrer">` : esc(P.sku.slice(0, 3))}</div>`;
 };
 
-function etapes(D, res) {
-  const t = E.dernier(), d = t && t.data;
-  const lecture = D.contradictions.length ? 'attente' : D.lecture ? 'fait' : D.lectureErreur ? 'saute' : D.occupe ? 'encours' : 'attente';
-  const classif = !t ? (D.occupe && !D.contradictions.length ? 'encours' : 'attente') : (d.questions || []).length && !t.repondu ? 'attente' : 'fait';
-  const regle = !t || !res ? 'attente' : res.statut === 'code' ? 'fait' : res.statut === 'hors_perimetre' ? 'saute' : 'attente';
-  const dec = E.decision();
-  const valid = D.valide ? 'fait' : dec && dec.peutValider ? 'encours' : 'attente';
-  const liste = [['Documents', 'fait'], ['Document reading', lecture], ['Classification', classif], ['Encoded rule', regle], ['Signed validation', valid]];
-  return `<ol class="etapes-dossier">${liste.map(([l, e], i) => `<li class="${e}"><span class="pastille">${e === 'fait' ? ic('check') : e === 'saute' ? '-' : i + 1}</span><span>${l}</span></li>`).join('')}</ol>`;
+// Le parcours : six étapes, une seule à l'écran. Chaque étape dit ce qui s'y passe.
+const ETAPES = [
+  ['Product record', 'You give a photo of the label, a product page address or a few lines.'],
+  ['Identity', 'You confirm which physical product this file is about.'],
+  ['Facts', 'The agent reads the documents. Each fact cites its passage; you settle contradictions and answer the one question that decides.'],
+  ['Decision', 'One code, the rule drawn as a graph, and the reason for each choice.'],
+  ['Review', 'A declarant examines the file and signs. The approval is saved in the Cleo Legal API.'],
+  ['Distribution', 'Exports of the approved file, and what each country requires.'],
+];
+function etatsEtapes(D, dec) {
+  const t = E.dernier(), d = t && t.data, question = d && (d.questions || []).length && !t.repondu;
+  const faits = !D.produit ? 'attente' : D.contradictions.length || question ? 'toi' : D.occupe && !t ? 'encours' : t ? 'fait' : D.erreur ? 'toi' : 'encours';
+  const decision = !dec ? 'attente' : dec.blocages.some((b) => b.id === 'question_regle') ? 'toi' : dec.code || dec.blocages.some((b) => b.id === 'arbitrage') ? 'fait' : 'attente';
+  return [D.produit ? 'fait' : 'encours', !D.produit ? 'attente' : D.identite && D.identite.confirmee ? 'fait' : 'toi', faits, decision,
+    D.valide ? 'fait' : dec && (dec.peutValider || dec.blocages.some((b) => b.id === 'arbitrage')) ? 'toi' : 'attente', D.valide ? 'fait' : 'attente'];
 }
-
+const LIB_ETAT = { fait: 'done', toi: 'your turn', encours: 'in progress', attente: '' };
+function parcours(D, dec) {
+  const e = etatsEtapes(D, dec), n = D.produit ? D.etape : 1;
+  return `<ol class="parcours-6" aria-label="The six steps">${ETAPES.map(([nom], i) => `<li><button type="button" class="${e[i]} ${n === i + 1 ? 'ici' : ''}" data-etape="${i + 1}" ${D.produit || i === 0 ? '' : 'disabled'} ${n === i + 1 ? 'aria-current="step"' : ''}><span class="pastille">${e[i] === 'fait' ? ic('check') : i + 1}</span><span class="nom">${nom}</span><small>${LIB_ETAT[e[i]]}</small></button></li>`).join('')}</ol>`;
+}
 function suggestions(qs) {
   if (serveur.mode === 'direct') return {};
   return suggestionsHorsLigne(horsLigne, { sku: E.lire().produit.sku, description: E.lire().produit.desc, faits: qs.map((q) => q.fact) });
 }
 
+const CSS = `
+.parcours-6 { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; margin: 0 0 16px; padding: 0; border-radius: var(--r-lg); box-shadow: 0 0 0 1px var(--line); background: var(--panel); overflow: hidden; }
+.parcours-6 li { border-left: 1px solid var(--line); }
+.parcours-6 li:first-child { border-left: 0; }
+.parcours-6 button { width: 100%; height: 100%; display: grid; grid-template-columns: 26px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 9px; align-items: center; padding: 11px 14px; background: none; border: 0; font: inherit; text-align: left; cursor: pointer; color: var(--ink-3); }
+.parcours-6 button:disabled { cursor: default; opacity: .55; }
+.parcours-6 button:not(:disabled):hover { background: #FAF9F6; }
+.parcours-6 .pastille { grid-row: 1 / 3; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 11.5px; background: var(--sunk); color: var(--ink-3); }
+.parcours-6 .pastille svg { width: 13px; height: 13px; }
+.parcours-6 .nom { font-weight: 550; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.parcours-6 small { font-size: 11.5px; min-height: 14px; }
+.parcours-6 .fait .pastille { background: var(--ok-dot); color: #fff; }
+.parcours-6 .toi .pastille { background: var(--warn-bg); color: var(--warn); box-shadow: 0 0 0 2px var(--warn-dot); }
+.parcours-6 .toi small { color: var(--warn); font-weight: 550; }
+.parcours-6 .encours .pastille { background: var(--wait-bg); color: var(--wait); }
+.parcours-6 .ici { background: var(--ink); }
+.parcours-6 .ici .nom, .parcours-6 .ici small { color: #fff; }
+.parcours-6 button.ici:hover { background: var(--ink); }
+.etape-tete { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin: 0 2px 14px; }
+.etape-tete h2 { font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: -.035em; margin: 2px 0 4px; }
+.etape-tete p { margin: 0; color: var(--ink-3); font-size: 14.5px; max-width: 720px; }
+.etape-tete .nav { display: flex; gap: 8px; }
+@media (max-width: 1000px) { .parcours-6 { grid-template-columns: repeat(3, 1fr); } .parcours-6 li:nth-child(4) { border-left: 0; } .parcours-6 li:nth-child(n+4) { border-top: 1px solid var(--line); } }
+`;
+if (typeof document !== 'undefined') document.head.appendChild(Object.assign(document.createElement('style'), { textContent: CSS }));
+
 function dossierEcran(D) {
-  const P = D.produit, R = E.regleChargee(), res = E.resultatRegle(), t = E.dernier(), pret = t && !D.occupe && !D.contradictions.length;
+  const P = D.produit, R = E.regleChargee(), res = E.resultatRegle(), t = E.dernier(), pret = t && !D.occupe && !D.contradictions.length, n = D.etape;
   const travail = t ? travailRestant({ dernier: { data: t.data, repondu: t.repondu }, regle: res, arbre: R && R.arbre, crit: D.crit, faits: D.faits, photo: P.photo, valide: Boolean(D.valide), nomDestination: nomPays(P.dest) }) : [];
-  const st = t ? STATUT[t.data.status] || [t.data.status, 'a_verifier'] : null, dec = pret ? E.decision() : null;
-  const attente = !t && D.occupe ? `<div class="candidats-grille">${[1, 2, 3].map(() => '<div class="cand-carte"><span class="miroite" style="height:22px;width:90px"></span><span class="miroite" style="height:38px"></span><span class="miroite" style="height:6px"></span></div>').join('')}</div>` : '';
+  const st = t ? STATUT[t.data.status] || [t.data.status, 'a_verifier'] : null, dec = pret ? E.decision() : null, qui = S.lire().qui;
+  const attente = `<div class="agent bandeau"><span class="rond"></span><span class="txt">${esc(D.occupe || 'The agent is working on this product')}</span></div>`;
+  const pasEncore = (quoi) => `<div class="carte"><div class="carte-corps"><p class="muted">${quoi}</p>${D.occupe ? attente : ''}</div></div>`;
+  let corps;
+  if (n === 1) corps = `<div class="cols-dossier"><div class="col">${piecesCarte(D, det)}</div><div class="col"><div class="carte"><div class="carte-corps"><p>The record is in. The agent reads it and classifies the product while you confirm its identity.</p><p class="muted" style="font-size:13px">To change the record, start again with a new product.</p></div></div></div></div>`;
+  else if (n === 2) corps = identiteCarte(D) + (D.occupe ? attente : '');
+  else if (n === 3) corps = `<div class="cols-dossier"><div class="col"><span class="eyebrow col-titre">What the documents say</span>${piecesCarte(D, det)}${faitsCarte(D, det, Boolean(D.occupe || D.valide))}${contradictionsCarte(D)}</div>
+      <div class="col"><span class="eyebrow col-titre">What the engine asks and answers</span>${!t && D.occupe ? `<div class="candidats-grille">${[1, 2, 3].map(() => '<div class="cand-carte"><span class="miroite" style="height:22px;width:90px"></span><span class="miroite" style="height:38px"></span><span class="miroite" style="height:6px"></span></div>').join('')}</div>` : ''}${toursHtml(D, det, suggestions)}</div></div>`;
+  else if (n === 4) corps = dec ? decisionCarte(D, dec, R, res, qui, 'decision') + regleCarte(D, R, res, det) : pasEncore(D.contradictions.length ? 'Settle the contradictions in step 3 first: the decision comes after.' : 'The decision appears once the documents are read and the product is classified.');
+  else if (n === 5) corps = dec ? decisionCarte(D, dec, R, res, qui, 'revue') + `<details class="carte repli" data-plus ${plusOuvert ? 'open' : ''}><summary class="carte-tete"><h3>Evidence to examine before signing: engine reading, similar rulings, tests</h3></summary>${propositionCarte(D, det, travail) + epreuvesCarte(D, det)}</details>` : pasEncore('The review opens once a decision is on the table.');
+  else corps = dec ? `<div class="cols-dossier"><div class="col">${diffusionCarte(D, dec, MONDE)}</div><div class="col">${exigencesCarte(D, E.exigencesChargees(), det) + obligationsCarte(D, dec)}<details class="carte repli" data-plus ${plusOuvert ? 'open' : ''}><summary class="carte-tete"><h3>Same documents, other destinations</h3></summary>${destinationsCarte(D, det)}</details></div></div>` : pasEncore('Distribution opens once a decision is on the table.');
   return `<div class="page entre">
     <div class="carte dossier-tete">${visuel(P)}<div class="infos"><span class="eyebrow">Classification file · ${esc(P.sku)}</span><h1>${esc(P.desc.length > 110 ? P.desc.slice(0, 108) + '…' : P.desc)}</h1>
-      <div class="route">${drapeau(P.origin)}${esc(nomPays(P.origin))} ${ic('droite')} ${drapeau(P.dest)}<b>${esc(nomPays(P.dest))}</b>${st ? etat(st[1], st[0]) : ''}${D.valide ? etat('pret', 'Validated') : ''}</div></div>
-      <div class="actions">${t ? `<button class="btn blanc petit" data-action-dossier="imprimer">${ic('dossier')}${D.valide ? 'Export the validated file' : 'Export the file as it stands'}</button>` : ''}<button class="btn texte petit" data-action-dossier="nouveau">${ic('plus')}New product</button></div></div>
-    ${etapes(D, res)}
-    ${D.occupe ? `<div class="agent bandeau"><span class="rond"></span><span class="txt">${esc(D.occupe)}</span></div>` : ''}
+      <div class="route">${drapeau(P.origin)}${esc(nomPays(P.origin))} ${ic('droite')} ${drapeau(P.dest)}<b>${esc(nomPays(P.dest))}</b>${st ? etat(st[1], st[0]) : ''}${D.valide ? etat('pret', 'Approved') : ''}</div></div>
+      <div class="actions">${t ? `<button class="btn blanc petit" data-action-dossier="imprimer">${ic('dossier')}${D.valide ? 'Export the approved file' : 'Export the file as it stands'}</button>` : ''}<button class="btn texte petit" data-action-dossier="nouveau">${ic('plus')}New product</button></div></div>
+    ${parcours(D, dec)}
+    <div class="etape-tete"><div><span class="eyebrow">Step ${n} of 6</span><h2>${ETAPES[n - 1][0]}</h2><p>${ETAPES[n - 1][1]}</p></div>
+      <div class="nav">${n > 1 ? `<button class="btn blanc" data-etape="${n - 1}">Back</button>` : ''}${n < 6 ? `<button class="btn noir" data-etape="${n + 1}">Continue to ${ETAPES[n][0].toLowerCase()}${ic('droite')}</button>` : ''}</div></div>
     ${D.erreur ? `<div class="alerte-ligne">${ic('alerte')}<span>${esc(D.erreur)}</span></div>` : ''}
-    ${dec ? decisionCarte(D, dec, R, res, S.lire().qui) : ''}
-    <div class="cols-dossier">
-      <div class="col"><span class="eyebrow col-titre">Documents, facts and encoded rule</span>${piecesCarte(D, det)}${faitsCarte(D, det, Boolean(D.occupe || D.valide))}${contradictionsCarte(D)}${t && !D.contradictions.length ? regleCarte(D, R, res, det) : ''}</div>
-      <div class="col"><span class="eyebrow col-titre">Reasoning, requirements and consequences</span>${attente}${toursHtml(D, det, suggestions)}${pret ? exigencesCarte(D, E.exigencesChargees(), det) + obligationsCarte(D, dec) + `<details class="carte repli" data-plus ${plusOuvert ? 'open' : ''}><summary class="carte-tete"><h3>More checks: engine reading, tests, other destinations</h3></summary>${propositionCarte(D, det, travail) + epreuvesCarte(D, det) + destinationsCarte(D, det)}</details>` : ''}</div>
-    </div></div>`;
+    ${corps}</div>`;
 }
 
 export function rendre() {
   details = [];
   const D = E.lire();
-  return D.produit ? dossierEcran(D) : piecesHtml(D, serveur.ia);
+  if (D.produit) return dossierEcran(D);
+  const fiche = piecesHtml(D, serveur.ia), i = fiche.indexOf('</div></div>') + '</div></div>'.length;
+  return fiche.slice(0, i) + parcours(D, null) + fiche.slice(i);
 }
 
 function imprimer() {
@@ -104,6 +155,7 @@ function soumettre(f) {
     case 'fiche': if (!E.lire().pieces.desc.trim()) { toast({ titre: 'Description missing', texte: 'A customs description is required.', niveau: 'a_verifier', icone: 'alerte' }); return null; } return E.lancer();
     case 'fait': { const k = v('k'), val = lireFait(k, v('v')); return val == null ? null : E.ajouterFait(k, val); }
     case 'question': { const rep = {}; for (const [k, x] of new FormData(f).entries()) { const val = lireFait(k, x); if (val != null) rep[k] = val; } return Object.keys(rep).length ? E.repondre(rep) : null; }
+    case 'identite': return E.confirmerIdentite({ fabricant: v('fabricant'), modele: v('modele'), configuration: v('configuration') });
     case 'arbitrage': { const fd = new FormData(f), choix = fd.get('code'); return E.arbitrer({ code: choix === 'autre' ? fd.get('autre') : choix, raison: fd.get('raison'), qui: fd.get('qui'), elements: fd.getAll('vu') }); }
     case 'valider': return valider(v('v-qui') || f.querySelector('#v-qui').value, f.querySelector('#v-motif').value.trim());
     case 'ep-ref': return E.eprouverReformulation(v('v'));
@@ -115,15 +167,17 @@ function soumettre(f) {
   }
 }
 
-function valider(qui, motif) {
+async function valider(qui, motif) {
   const D = E.lire(), res = E.resultatRegle(), t = E.dernier(), dec = E.decision();
   // la validation est refusée tant que le dossier est incohérent ou incomplet
-  if (!dec || !dec.peutValider) return toast({ titre: 'Not validated', texte: 'This file cannot be validated yet: open points remain.', niveau: 'a_verifier', icone: 'alerte' });
+  if (!dec || !dec.peutValider) return toast({ titre: 'Not approved', texte: 'This file cannot be approved yet: open points remain.', niveau: 'a_verifier', icone: 'alerte' });
   const travail = travailRestant({ dernier: { data: t.data, repondu: t.repondu }, regle: res, arbre: E.regleChargee() && E.regleChargee().arbre, crit: D.crit, faits: D.faits, photo: D.produit.photo, valide: true, nomDestination: nomPays(D.produit.dest) });
   if (qui.trim() && qui.trim() !== S.lire().qui) S.nommer(qui);
   const dansCockpit = Boolean(S.lire().produits[D.produit.sku]);
-  if (!E.valider(qui.trim(), motif, { ...versImprimable(D, E.regleChargee(), res, travail, qui.trim(), dec, exigencesDossier(D, E.exigencesChargees())), cockpit: dansCockpit })) return;
-  toast({ titre: `Code ${dec.code.slice(0, 4)}.${dec.code.slice(4, 6)} validated`, texte: dansCockpit ? 'The cockpit now applies this code to the orders of this product.' : 'Signed, time-stamped, kept in this browser.', niveau: 'pret', icone: 'check' });
+  const ok = await E.valider(qui.trim(), motif, { ...versImprimable(D, E.regleChargee(), res, travail, qui.trim(), dec, exigencesDossier(D, E.exigencesChargees())), cockpit: dansCockpit });
+  if (!ok) return;
+  const r = E.lire().revue;
+  toast({ titre: `Code ${dec.code.slice(0, 4)}.${dec.code.slice(4, 6)} approved`, texte: r && !r.locale ? 'The Cleo Legal API acknowledged the review.' : 'Signed, time-stamped, kept in this browser.', niveau: 'pret', icone: 'check' });
 }
 
 export function brancher(racine) {
@@ -138,6 +192,8 @@ export function brancher(racine) {
   racine.addEventListener('submit', (e) => { e.preventDefault(); soumettre(e.target); });
   racine.addEventListener('click', (e) => {
     const t = e.target, b = (sel) => t.closest(sel);
+    if (b('[data-etape]')) { E.aller(b('[data-etape]').dataset.etape); document.querySelector('.main')?.scrollTo({ top: 0 }); return; }
+    if (b('[data-identite-modifier]')) return E.modifierIdentite();
     if (b('[data-choisir]') && !b('input')) return racine.querySelector('#f-photo').click();
     if (b('[data-exemple]')) { const x = EXEMPLES[Number(b('[data-exemple]').dataset.exemple)]; return E.preparer({ pieces: { sku: x.sku, desc: x.desc, ds: x.ds || '', dest: x.dest, origin: x.origin, kg: x.kg || '' } }); }
     if (b('[data-detail]') && !b('a')) return ouvrirContenu(`File ${ic('droite')} <b>${esc(D.produit ? D.produit.sku : '')}</b>`, details[Number(b('[data-detail]').dataset.detail)]);
@@ -152,7 +208,12 @@ export function brancher(racine) {
     if (b('[data-applic]')) return E.verifierApplicabilite(b('[data-applic]').dataset.applic);
     if (b('[data-suggestion]')) { const s = b('[data-suggestion]'), champ = racine.querySelector(`[name="${s.dataset.suggestion}"]`); if (champ) { champ.value = s.dataset.valeur; champ.focus(); } return; }
     const a = b('[data-action-dossier]');
-    if (a) return { imprimer, telecharger, nouveau: () => { E.nouveau(); document.querySelector('.main')?.scrollTo({ top: 0 }); } }[a.dataset.actionDossier]();
+    if (a) {
+      const api = (format) => E.dossierApi(format).catch((err) => toast({ titre: 'Dossier not downloaded', texte: String(err.message || err).slice(0, 200), niveau: 'a_verifier', icone: 'alerte' }));
+      const csv = () => { const texte = csvImport(E.lire(), E.decision()); if (!texte) return; const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([texte], { type: 'text/csv' })); l.download = `export-for-import-${E.lire().produit.sku}.csv`; l.click(); };
+      const actions = { imprimer, telecharger, csv, historique: () => E.chargerHistorique(), 'verifier-code': () => E.verifierCode(), 'dossier-api-pdf': () => api('pdf'), 'dossier-api-json': () => api('json'), nouveau: () => { E.nouveau(); document.querySelector('.main')?.scrollTo({ top: 0 }); } };
+      return actions[a.dataset.actionDossier] && actions[a.dataset.actionDossier]();
+    }
   });
   const zone = racine.querySelector('#depot-produit');
   if (zone) {

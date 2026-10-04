@@ -4,14 +4,17 @@
 // le produit classé, la règle encodée parcourue, la proposition éprouvée puis signée.
 import { evaluer } from '../../arbre-moteur.js';
 import { decider, arbitrageValide } from '../../decision.js';
-import { classifier, lectureIA, post } from '../api.js';
+import { classifier, lectureIA, post, lire as lireRoute, telecharger } from '../api.js';
+import { collectReviews } from '../../workflow.js';
 import { regle } from '../regle.js';
 import { versJpeg } from './photo.js';
 import { effectif, valeursFaits, premierRetenu, libelleFait, instantane, verdictReformulation, verdictRetrait, verdictContradiction } from './logique.js';
 import * as S from '../store.js';
 
 const piecesVides = () => ({ sku: '', gtin: '', desc: '', ds: '', dest: 'FR', origin: 'CN', l: '', w: '', h: '', kg: '', photo: null, page: null });
-const vierge = () => ({ pieces: piecesVides(), lit: null, erreurPieces: null, produit: null, faits: {}, barres: [], contradictions: [], lecture: null, lectureErreur: null, tours: [], epreuves: [], autres: [], crit: {}, critRejetes: 0, critErreur: null, applic: {}, oblig: null, arbitrage: null, niveau: 'hs6', conf: { valeurs: {}, declarees: [] }, occupe: null, erreur: null, valide: null });
+const vierge = () => ({ pieces: piecesVides(), lit: null, erreurPieces: null, produit: null, faits: {}, barres: [], contradictions: [], lecture: null, lectureErreur: null, tours: [], epreuves: [], autres: [], crit: {}, critRejetes: 0, critErreur: null, applic: {}, oblig: null, arbitrage: null, niveau: 'hs6', conf: { valeurs: {}, declarees: [] }, occupe: null, erreur: null, valide: null,
+  // parcours en six étapes : 1 fiche, 2 identité, 3 faits, 4 décision, 5 revue, 6 diffusion
+  etape: 1, identite: null, classificationId: null, revue: null, historique: null, historiqueErreur: null, codeVerifie: null, envoiRevue: false });
 let D = vierge();
 let R = null; // { arbre, textes, T } : la règle encodée de référence
 const abonnes = new Set();
@@ -80,7 +83,10 @@ export function lancer() {
   if (kg > 0) faits.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: `Product record, "Weight" field (${p.kg} kg)` };
   const dims = Object.fromEntries([['length_mm', p.l], ['width_mm', p.w], ['height_mm', p.h]].map(([k, v]) => [k, parseFloat(v) * 10]).filter(([, v]) => v > 0));
   if (Object.keys(dims).length) faits.dimensions = { value: dims, kind: 'fiche', origin: 'Product record, "Dimensions" field' };
-  D = { ...vierge(), pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits };
+  const modele = (String(p.ds).match(/Model\s*[:/][^:\n]*?:?\s*([A-Z0-9][A-Z0-9_-]{2,})\s*$/im) || String(p.ds).match(/Model:\s*(\S+)/i) || [])[1] || '';
+  D = { ...vierge(), pieces: p, produit: { ...p, sku: p.sku.trim() || 'PRODUCT', desc: p.desc.trim(), ds: p.ds.trim() }, faits, etape: 2,
+    identite: { fabricant: '', modele, configuration: '', confirmee: false } };
+  chargerHistorique();
   return tour('First evaluation');
 }
 
@@ -106,7 +112,9 @@ async function tour(cause) {
     D.occupe = 'Classification on the Cleo Legal API'; notifier();
     const lectureCriteres = R ? lectureIA('/api/criteres', { pieces: { description: desc(), fiche_technique: fiche(), caracteristiques: valeursFaits(D.faits) }, criteres: R.arbre.criteres }).catch((e) => ({ erreur: String(e.message || e) })) : null;
     const lectureExigences = X && D.produit.dest === X.data.marche ? lectureIA('/api/criteres', { pieces: { description: desc(), fiche_technique: fiche(), caracteristiques: valeursFaits(D.faits) }, criteres: X.data.criteres.filter((c) => c.source !== 'projet') }).catch(() => null) : null;
-    const [r, cr, ce] = await Promise.all([classifier({ sku: D.produit.sku, description: desc(), pays: D.produit.dest, faits: valeursFaits(D.faits) }), lectureCriteres, lectureExigences]);
+    const [r, cr, ce] = await Promise.all([classifier({ sku: D.produit.sku, description: desc(), pays: D.produit.dest, faits: valeursFaits(D.faits), persister: true, asOf: new Date().toISOString().slice(0, 10) }), lectureCriteres, lectureExigences]);
+    // l'identifiant de la classification gardée par l'API : la revue sera enregistrée dessus
+    D.classificationId = (r.data && r.data.classification_id) || null; D.revue = null;
     if (ce && ce.valeurs) D.conf = { ...D.conf, valeurs: { ...Object.fromEntries(Object.entries(ce.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...Object.fromEntries(Object.entries(D.conf.valeurs).filter(([, x]) => x.kind === 'reponse')) } };
     if (cr && !cr.erreur) {
       D.critRejetes = cr.rejected; D.critErreur = null;
@@ -231,13 +239,56 @@ export function arbitrer({ code, raison, qui, elements }) {
 export function rouvrirArbitrage() { D.arbitrage = null; D.oblig = null; notifier(); }
 export function choisirNiveau(n) { D.niveau = n === 'national' ? 'national' : 'hs6'; notifier(); }
 
-export function valider(qui, motif, dossier) {
+// ---------- parcours, identité, historique partagé ----------
+export function aller(n) { D.etape = Math.max(1, Math.min(6, Number(n) || 1)); D.erreur = null; notifier(); }
+export function confirmerIdentite({ fabricant, modele, configuration }) {
+  D.identite = { fabricant: String(fabricant || '').trim(), modele: String(modele || '').trim(), configuration: String(configuration || '').trim(), confirmee: true, le: new Date().toISOString() };
+  D.etape = 3; notifier();
+}
+export function modifierIdentite() { if (D.identite && !D.valide) { D.identite = { ...D.identite, confirmee: false }; notifier(); } }
+// Classifications déjà gardées par l'API pour ce SKU, sur ce compte : une suggestion, jamais une reprise automatique.
+export async function chargerHistorique() {
+  if (!D.produit) return;
+  const sku = D.produit.sku;
+  try { const j = await lireRoute('/api/classifications?item_id=' + encodeURIComponent(sku) + '&limit=10'); if (D.produit && D.produit.sku === sku) { D.historique = (j.data && (j.data.classifications || j.data.items || j.data)) || []; D.historiqueErreur = null; } }
+  catch (e) { D.historique = null; D.historiqueErreur = String(e.message || e).slice(0, 200); }
+  notifier();
+}
+export async function verifierCode() {
+  const dec = decision(); if (!dec || !dec.code) return;
+  D.codeVerifie = 'encours'; notifier();
+  const q = new URLSearchParams({ code: dec.code, country: D.produit.dest, system: 'hs6', as_of: new Date().toISOString().slice(0, 10) });
+  try { const j = await lireRoute('/api/codes/validate?' + q); D.codeVerifie = { ...(j.data || j), le: new Date().toISOString() }; }
+  catch (e) { D.codeVerifie = { erreur: String(e.message || e).slice(0, 200) }; }
+  notifier();
+}
+export const dossierApi = (format) => telecharger('/api/classifications/' + encodeURIComponent(D.classificationId) + '/dossier' + (format === 'pdf' ? '?format=pdf' : ''), `classification-${D.produit.sku}.${format === 'pdf' ? 'pdf' : 'json'}`);
+
+// La validation n'est acquise qu'après l'accusé de réception de l'API : même classification,
+// même code, revue « approved ». Sans identifiant de classification (hors ligne), elle reste
+// locale à ce navigateur et l'écran le dit.
+export async function valider(qui, motif, dossier) {
   const dec = decision();
   if (!dec || !dec.peutValider) { D.erreur = 'This file cannot be validated yet: open points remain.'; notifier(); return false; }
-  const entree = { ...dossier, validated_by: qui, validated_at: new Date().toISOString(), motif };
+  if (!D.identite || !D.identite.confirmee) { D.erreur = 'Confirm the identity of the product (step 2) before the review.'; notifier(); return false; }
+  let revue = { locale: true };
+  if (D.classificationId) {
+    D.envoiRevue = true; D.erreur = null; notifier();
+    try {
+      const id = D.classificationId, chemin = '/api/classifications/' + encodeURIComponent(id);
+      const passees = await collectReviews((curseur) => lireRoute(chemin + '/reviews' + (curseur !== null ? '?cursor=' + encodeURIComponent(curseur) : '')));
+      const version = passees.reviews.reduce((v, r) => Math.max(v, Number(r.version) || 0), 0);
+      const rep = await post(chemin + '/review', { decision: 'approved', reviewer: qui, ...(motif ? { comment: motif.slice(0, 2000) } : {}), approved_code: dec.code, expected_version: version });
+      const d = rep.data, r = d && d.review;
+      if (!r || d.classification_id !== id || d.review_status !== 'approved' || r.decision !== 'approved' || String(d.approved_code).replace(/\D/g, '') !== dec.code) throw new Error('The API did not acknowledge this approval. Nothing is validated. Check the review history before trying again.');
+      revue = { locale: false, classification_id: id, review_id: r.id, version: r.version, reviewer: r.reviewer, created_at: r.created_at, approved_code: d.approved_code };
+    } catch (e) { D.envoiRevue = false; D.erreur = 'Review not saved: ' + String(e.message || e).slice(0, 260); notifier(); return false; }
+    D.envoiRevue = false;
+  }
+  const entree = { ...dossier, validated_by: qui, validated_at: revue.created_at || new Date().toISOString(), motif, identite: D.identite, revue_api: revue.locale ? null : revue };
   try { const tout = JSON.parse(localStorage.getItem('catalogue') || '[]').filter((r) => !(r.sku === entree.sku && r.destination === entree.destination)); localStorage.setItem('catalogue', JSON.stringify([...tout, entree])); } catch { /* catalogue local non écrit */ }
   if (S.lire().produits[D.produit.sku]) S.valider(D.produit.sku, dec.code, motif || 'Validated in the classification file');
-  D.erreur = null; D.valide = entree;
+  D.erreur = null; D.valide = entree; D.revue = revue; D.etape = 6;
   notifier(); return true;
 }
 export const pieces = () => ({ description: desc(), fiche_technique: fiche() });

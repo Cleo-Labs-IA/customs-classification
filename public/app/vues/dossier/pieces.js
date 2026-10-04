@@ -47,7 +47,7 @@ function piecesJointes(p) {
 export function piecesHtml(D, ia) {
   const p = D.pieces;
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Classify a product</h1><p>A photo, a label, a pictogram, a product page URL or a few lines. Each characteristic kept cites the passage it comes from; a person settles any contradiction.</p></div></div>
+    <div class="titre"><div class="bloc"><h1>Your product record</h1><p>Give a photo of the label, a product page address or a few lines. The agent then takes the product through the six steps below, up to a code you can check and what each country requires.</p></div></div>
     ${zoneDepot(D, ia)}
     <div class="grille-fiche">
       <form class="carte fiche-produit" data-form="fiche" autocomplete="off">
@@ -60,7 +60,7 @@ export function piecesHtml(D, ia) {
           <div class="champs2"><div class="champ"><label for="f-dest">Destination</label>${choix('f-dest', p.dest)}</div><div class="champ"><label for="f-origin">Country of origin</label>${choix('f-origin', p.origin)}</div></div>
           <details class="plus"><summary>Dimensions and weight <span class="faint">optional</span></summary><div class="champs4">${[['l', 'L cm'], ['w', 'W cm'], ['h', 'H cm'], ['kg', 'kg']].map(([k, ph]) => `<input class="saisie" type="number" min="0" step="any" data-champ="${k}" placeholder="${ph}" value="${esc(p[k])}">`).join('')}</div></details>
           <p class="faint" style="font-size:12.5px;margin-top:12px">The origin stays on the record: classification does not use it, duties and country rules do.</p>
-          <div style="margin-top:18px"><button class="btn noir" type="submit" style="height:42px;padding:0 22px" ${D.lit ? 'disabled' : ''}>${ic('agent')}Classify this product</button></div>
+          <div style="margin-top:18px"><button class="btn noir" type="submit" style="height:42px;padding:0 22px" ${D.lit ? 'disabled' : ''}>${ic('agent')}Start: the agent reads and classifies</button></div>
         </div>
       </form>
       <div class="carte"><div class="carte-tete"><h2>Attached documents</h2></div><div class="carte-corps pieces-jointes">${piecesJointes(p)}</div></div>
