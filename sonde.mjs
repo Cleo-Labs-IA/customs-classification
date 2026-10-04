@@ -1,45 +1,61 @@
-// Sonde navigateur : joue le parcours complet contre l'API réelle et capture chaque étape.
+// Sonde navigateur : joue les parcours contre les vrais services et capture chaque étape.
+//   node sonde.mjs photo <chemin>   |   node sonde.mjs contradiction
 import { createRequire } from 'node:module';
 const require = createRequire(process.env.HOME + '/cleo-chat/');
 const { chromium } = require('playwright');
+const [mode, file] = process.argv.slice(2);
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
 const errs = [];
 p.on('pageerror', (e) => errs.push(String(e)));
 p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
-await p.goto('http://localhost:4318/');
-await p.click('.chip:nth-child(2)');
-await p.click('#go');
-await p.waitForSelector('.final', { timeout: 90000 });
-console.log('tour 1 :', await p.textContent('.final .tag'), '| questions :', await p.locator('#answers .qrow').count(), '| candidats :', await p.locator('.cand').count());
-await p.screenshot({ path: 'sonde-1-question.png', fullPage: true });
-if (await p.locator('#answers').count()) {
-  for (const i of await p.locator('#answers input').all()) {
-    const n = await i.getAttribute('name');
-    await i.fill(n === 'material' ? 'plastics' : n === 'use' ? 'toy for toddlers' : 'battery-operated sound toy');
+const idle = async () => { await p.waitForTimeout(400); await p.waitForSelector('.loading', { state: 'detached', timeout: 150000 }); };
+const etat = async () => ({ statut: await p.locator('.final .tag').count() ? await p.textContent('.final .tag') : null, code: await p.locator('.final .big').count() ? await p.textContent('.final .big') : null, erreur: await p.locator('.err').count() ? await p.textContent('.err') : null });
+const ANS = { function: 'AC/DC power adapter: converts 100-240 V mains to DC USB-C Power Delivery output to charge laptops', use: 'charging laptops and phones', material: 'plastics' };
+async function repondre() {
+  for (let n = 0; n < 3 && await p.locator('#answers').count(); n++) {
+    const qs = await p.locator('#answers .qrow .t').allTextContents();
+    for (const i of await p.locator('#answers input, #answers select').all()) { const k = await i.getAttribute('name'); if ((await i.evaluate((e) => e.tagName)) === 'SELECT') await i.selectOption({ index: 1 }); else await i.fill(ANS[k] || '1'); }
+    console.log('questions posées :', qs);
+    await p.click('#answers button'); await idle();
+    console.log('après réponse :', await etat());
   }
-  await p.click('#answers button');
-  await p.waitForSelector('.tour >> nth=1', { timeout: 90000 });
-  await p.waitForSelector('.final', { timeout: 90000 });
-  console.log('tour 2 :', await p.textContent('.final .tag'), '| code :', await p.locator('.final .big').count() ? await p.textContent('.final .big') : 'aucun');
 }
-await p.screenshot({ path: 'sonde-2-proposition.png', fullPage: true });
-await p.locator('.cand').first().click();
-await p.waitForTimeout(300);
-console.log('tiroir ouvert :', await p.locator('.drawer.open').count(), '| extraits :', await p.locator('.drawer blockquote').count());
-await p.screenshot({ path: 'sonde-3-tiroir.png' });
-await p.keyboard.press('Escape');
-await p.waitForTimeout(300);
-if (await p.locator('#validate').count()) {
-  await p.fill('#who', 'Sonde automatique');
-  await p.click('#validate button');
-  await p.waitForSelector('.done');
-  console.log('fiche après validation :', await p.textContent('#hscode'));
-} else console.log('validation : bouton absent (statut non validable)');
-await p.screenshot({ path: 'sonde-4-valide.png', fullPage: true });
-await p.setViewportSize({ width: 390, height: 844 });
-await p.waitForTimeout(200);
+await p.goto('http://localhost:4318/');
+if (mode === 'photo') {
+  await p.setInputFiles('#photo', file);
+  await p.waitForSelector('.photo', { timeout: 90000 });
+  console.log('description proposée :', await p.inputValue('#desc'));
+  console.log('étiquette lue :', JSON.stringify(await p.inputValue('#ds')));
+  await p.screenshot({ path: 'sonde-photo-1-fiche.png', fullPage: true });
+  await p.click('#go'); await idle();
+  console.log('caractéristiques :', await p.locator('.fact').allTextContents());
+  console.log('tour 1 :', await etat());
+  await repondre();
+  await p.click('#others button[type=submit]'); await idle();
+  console.log('autres destinations :', await p.locator('#others tr').allTextContents());
+  await p.fill('#t-ref input', 'USB-C wall charger for notebook computers'); await p.click('#t-ref button'); await idle();
+  if (await p.locator('#t-rm select:not([disabled])').count()) { await p.click('#t-rm button'); await idle(); }
+  await p.fill('#t-con input', 'This unit is a passive cable organiser with no electrical function.'); await p.click('#t-con button'); await idle();
+  console.log('épreuves :', await p.locator('.bench:not(#others) tr').allTextContents());
+  await p.screenshot({ path: 'sonde-photo-2-dossier.png', fullPage: true });
+} else {
+  await p.click('.chip:nth-child(3)'); await p.click('#go'); await idle();
+  console.log('caractéristiques :', await p.locator('.fact').allTextContents());
+  console.log('contradictions :', await p.locator('.conflict .one .t').allTextContents());
+  await p.screenshot({ path: 'sonde-contra-1.png', fullPage: true });
+  for (let n = 0; n < 5 && await p.locator('.conflict').count(); n++) { await p.locator('.conflict .one').first().locator('.side').nth(1).locator('button').click(); await idle(); }
+  console.log('description après résolution :', await p.locator('.node').first().locator('.s').first().innerHTML());
+  console.log('après résolution :', await etat());
+  await repondre();
+  await p.locator('.cand').first().click(); await p.waitForTimeout(300);
+  console.log('tiroir candidat :', await p.locator('.drawer h4').allTextContents());
+  await p.screenshot({ path: 'sonde-contra-2-tiroir.png' });
+  await p.keyboard.press('Escape');
+  if (await p.locator('.fact .rm').count()) { await p.locator('.fact .rm').first().click(); await idle(); console.log('après retrait :', await etat(), '| changements :', await p.locator('.diff .t').allTextContents()); }
+  await p.screenshot({ path: 'sonde-contra-3.png', fullPage: true });
+}
+await p.setViewportSize({ width: 390, height: 844 }); await p.waitForTimeout(200);
 console.log('débordement mobile (px) :', await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth));
-await p.screenshot({ path: 'sonde-5-mobile.png', fullPage: true });
 console.log('erreurs JS :', errs.length, errs.slice(0, 3));
 await b.close();
