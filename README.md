@@ -34,7 +34,7 @@ The workflow has six steps, one on screen at a time (`public/app/vues/dossier.js
 | 3. Facts | The agent reads the documents. Each fact cites its passage. You settle contradictions and answer the one question that decides. | Gather missing information |
 | 4. Decision | One code, the rule drawn as a graph, and the reason for each choice. | Propose a code, explain the legal reasoning |
 | 5. Review | A declarant examines the file and signs. The approval is saved in the Cleo Legal API. | Human review and approval |
-| 6. Distribution | Exports of the approved file, and what each country requires. | Evidence-backed dossier |
+| 6. Distribution | Exports of the approved file, what each country requires, and a draft declaration of conformity per market (`public/app/dossier/declaration.js`). Each draft is marked DRAFT and lists what the file has yet to establish. | Evidence-backed dossier |
 
 ### Two readings, one decision
 
