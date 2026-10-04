@@ -1,0 +1,146 @@
+EXCLU 32008R1143#1 : Cigarette électronique en assortiment (le chargeur n'est qu'un élément accessoire de l'ensemble)
+EXCLU 32010R0727#1 : Rallonge multiprise 220 V : distribution de courant secteur, pas un accessoire d'appareil électronique
+EXCLU 32011R0763#1 : Liseuse électronique : appareil autonome, pas un accessoire d'alimentation ou de connexion
+EXCLU 32012R1089#1 : Multi-commutateur satellite (signaux LNB) : distribution de signaux TV, hors périmètre
+EXCLU 32012R1123#1 : Détecteur infrarouge passif (8536 50) : interrupteur, hors périmètre
+EXCLU 32014R0115#1 : Écran tactile de commande électrique (8537) : commande industrielle, hors périmètre
+EXCLU 32014R0311#2 : Platine DJ avec lecteur CD : appareil audio autonome
+EXCLU 32015R1800#1 : Ordinateur de poche (8471 30) : machine de traitement de l'information elle-même, pas un accessoire
+EXCLU 32015R2315#1 : Boîte de jonction photovoltaïque : transport d'électricité de panneau solaire, hors périmètre
+EXCLU 32016R1958#1 : Bloc de 27 prises pour baie (PDU) : distribution de courant secteur, hors périmètre
+EXCLU 32018R2041#1 : Connecteurs de câble à clip génériques en cuivre : composant de raccordement de fils, pas un accessoire d'ordinateur ou de téléphone
+EXCLU 32019R0924#1 : Boîtier de fibres optiques avec connecteurs (8536 70) : infrastructure réseau optique, hors périmètre
+EXCLU 32020R1702#1 : Enrouleur de câble à intégrer dans un aspirateur : électroménager, hors périmètre
+EXCLU 32022R2076#1 : Faisceau de câbles pour kit mains libres automobile (8544 30) : câblage de véhicule, hors périmètre
+EXCLU H127136 : Câbles de monitorage patient (dispositif médical), hors périmètre
+EXCLU H330938 : Câble de transport d'énergie moyenne tension, hors périmètre
+EXCLU H342571 : Quasi-doublon de H342570 (mêmes chargeurs voiture et secteur, même importateur, même analyse)
+EXCLU H342925 : Batterie et chargeur d'outillage électroportatif : pas un appareil électronique du périmètre
+EXCLU H344006 : Quasi-doublon de H342570 (mêmes chargeurs voiture et secteur, même importateur, même analyse)
+EXCLU N285628 : Capot inox d'un chargeur de batterie automobile : pièce de tôlerie, pas un chargeur
+EXCLU N286948 : Câbles détecteurs coaxiaux enterrés (détection d'intrusion), hors périmètre
+EXCLU N289330 : Rallonges 12 V d'allume-cigare : câblage de véhicule, hors périmètre
+EXCLU N292404 : Bornier à vis pour câble : composant de raccordement industriel
+EXCLU N298747 : Quasi-doublons de N298750 (câbles USB/LVDS montés dans un véhicule, même requérant)
+EXCLU N298748 : Quasi-doublons de N298750 (câbles USB/LVDS montés dans un véhicule, même requérant)
+EXCLU N298753 : Quasi-doublons de N298752 (boîtier AUX/USB de console automobile, même requérant, même analyse)
+EXCLU N298754 : Quasi-doublons de N298752 (boîtier AUX/USB de console automobile, même requérant, même analyse)
+EXCLU N300768 : Système d'alimentation 10 à 19 kW pour site télécom : énergie d'infrastructure, pas une alimentation d'appareil
+EXCLU N301582 : Faisceaux de câbles de machines agricoles, hors périmètre
+EXCLU N301628 : Câble coaxial d'accéléromètre piézoélectrique (instrumentation), hors périmètre
+EXCLU N304114 : Kitchen Hub : écran connecté de cuisine (8471 41), pas un hub USB
+EXCLU N304597 : Câble de charge 12 V propre à un concentrateur d'oxygène : câble de dispositif médical, hors périmètre des câbles ordinateur / téléphone
+EXCLU N305510 : Alimentation 800 W intégrée de lit d'hôpital : équipement médical lourd, hors périmètre
+EXCLU N305616 : Chargeurs de batteries de dispositifs médicaux : quasi-doublons de N304715 (même requérant, même analyse)
+EXCLU N305620 : Chargeurs de batteries de dispositifs médicaux : quasi-doublons de N304715 (même requérant, même analyse)
+EXCLU N305623 : Câbles coaxiaux d'antenne ou de capteurs automobiles (CB, radar, caméras), hors périmètre
+EXCLU N305640 : Chargeurs de batteries de dispositifs médicaux : quasi-doublons de N304715 (même requérant, même analyse)
+EXCLU N305959 : Cadre photo à recharge sans fil : quasi-doublon de N305957 (même requérant, même jour)
+EXCLU N306110 : Chargeurs de batteries de fauteuil roulant : pas un appareil électronique du périmètre
+EXCLU N306125 : Chargeurs de batteries de dispositifs médicaux : quasi-doublons de N304715 (même requérant, même analyse)
+EXCLU N306126 : Chargeurs de batteries de dispositifs médicaux : quasi-doublons de N304715 (même requérant, même analyse)
+EXCLU N306740 : Câbles coaxiaux d'antenne ou de capteurs automobiles (CB, radar, caméras), hors périmètre
+EXCLU N308577 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N308578 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N308582 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N309284 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N310725 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N311388 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N311390 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N311393 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N312651 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N312961 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N312963 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N312967 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N312968 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N312969 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N312970 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N313573 : Bornes et stations de recharge de véhicules électriques, hors périmètre
+EXCLU N313684 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N314355 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N314413 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N314440 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N314533 : Lampe disco USB : luminaire d'ambiance, faux positif mot-clé
+EXCLU N314785 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N315081 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N315180 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N315436 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N316097 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N316160 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N316735 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N316902 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N316908 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N317006 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N317618 : Prise extérieure à disjoncteur différentiel avec interrupteur d'éclairage : appareillage d'installation, hors périmètre
+EXCLU N317690 : Alimentations médicales Respironics : quasi-doublons de N308133 (même requérant, même analyse 8504 contre 9019)
+EXCLU N318039 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N318176 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N318686 : Câbles coaxiaux d'antenne ou de capteurs automobiles (CB, radar, caméras), hors périmètre
+EXCLU N319769 : Câbles internes ou propres à un ventilateur médical ou à un appareil PPC, hors périmètre des câbles ordinateur / téléphone
+EXCLU N322021 : Alimentation de guirlande lumineuse LED : éclairage, pas un appareil électronique du périmètre
+EXCLU N322713 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N323400 : Station Yeti : quasi-doublon de N323399 (même requérant, même jour, même gamme)
+EXCLU N323675 : Convertisseur continu-continu 1200 V d'une borne de recharge de véhicule électrique, hors périmètre
+EXCLU N324397 : Bornes et stations de recharge de véhicules électriques, hors périmètre
+EXCLU N324842 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N326084 : Câbles de distribution d'énergie en aluminium (bâtiment / réseau), hors périmètre
+EXCLU N328617 : Passerelle Wi-Fi d'un programmateur d'arrosage : équipement réseau, pas un adaptateur de connexion
+EXCLU N330604 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N332833 : Câbles de distribution d'énergie en aluminium (bâtiment / réseau), hors périmètre
+EXCLU N334187 : Faisceau de trois fils à cosse et fiche DC : description trop mince pour savoir à quoi sert le produit
+EXCLU N337956 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N340642 : Batterie et chargeur d'outillage électroportatif : pas un appareil électronique du périmètre
+EXCLU N342021 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N344044 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N346114 : Câble interne à deux fils d'un casque d'aviation (alimentation par pile) : câblage interne, hors périmètre
+EXCLU N346832 : Bornes et stations de recharge de véhicules électriques, hors périmètre
+EXCLU N347094 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N349537 : Driver LED 800 W d'éclairage sportif, hors périmètre
+EXCLU N350116 : Bloc batterie de fauteuil ou canapé inclinable motorisé, hors périmètre
+EXCLU N351244 : Convertisseur analogique-numérique de chromatographe (instrument de laboratoire), hors périmètre
+EXCLU N351814 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N351853 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N351927 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N351928 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N352685 : Blocs batterie propres à un dispositif médical ou à un appareil (batterie interne, pas une batterie externe de recharge)
+EXCLU N353069 : Capteur de vitesse de roue avec câble (automobile), hors périmètre
+EXCLU N353127 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N353128 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N353129 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N353130 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N353131 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N354596 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N355203 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N355229 : Alimentation 760 W avec refroidissement d'un système laser, hors périmètre
+EXCLU N355321 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N356776 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N356777 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N356780 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N356923 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N356924 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N356962 : Cordon secteur avec disjoncteur de surintensité : distribution de courant, hors périmètre
+EXCLU N357418 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357419 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357420 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357423 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357425 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357426 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N357574 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N357575 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N359367 : Câbles de casques d'aviation vers l'intercom ou internes au casque (ni ordinateur ni téléphone)
+EXCLU N359729 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N361336 : Passerelle sans fil pour ventilateurs médicaux : équipement réseau, hors périmètre
+EXCLU N362750 : Câbles LAN / Ethernet et télécom en bobine ou sans analyse de connecteurs (8544 49) : câble au mètre, pas un câble de connexion fini
+EXCLU N362917 : Câbles chauffants, sous-marins, optiques ou haute tension et jeux de barres : hors périmètre
+EXCLU N363912 : Câbles de batterie et de masse de poids lourds, hors périmètre
+EXCLU N364038 : Cordon secteur haute-fidélité (C15/C19) : simple cordon d'alimentation, hors périmètre des câbles ordinateur / téléphone
+PLAFOND N300708 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N304253 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N304715 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N305608 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N305957 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N310490 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N325987 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N343619 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N359212 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
+PLAFOND N362423 : retiré, sous-position 850440 plafonnée à 30 % de l'échantillon US
