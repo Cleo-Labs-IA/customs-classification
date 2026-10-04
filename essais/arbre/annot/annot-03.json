@@ -1,0 +1,543 @@
+[
+ {
+  "id": "N284892",
+  "source": "US_CBP",
+  "date": "2017-04-17",
+  "url": "https://rulings.cbp.gov/ruling/N284892",
+  "code_officiel": "8517620050",
+  "hs6": "851762",
+  "produit": "Câbles optiques actifs QSFP+ à émetteurs-récepteurs intégrés",
+  "description": "The items in question are known as Quad Small Form-factor Pluggable (QSFP+) Active Optical Cables (AOC) (Model # FCI QSFP+FDR, 56 Gb/s, and Model # FCI QSFP+QDR, 40 Gb/s). These assemblies are comprised of a fiber optic cable with optical transceivers inside both cable connectors on each end. The transceivers are optical/electrical converters that convert electrical signals into optical signals, transmit the optical signals along the length of the fiber optic cable, and then convert the optical signals back into electrical signals at the opposite end.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The transceivers are optical/electrical converters that convert electrical signals into optical signals, transmit the optical signals along the length of the fiber optic cable, and then convert the optical signals back into electrical signals at the opposite end.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "The transceivers are optical/electrical converters that convert electrical signals into optical signals",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "These assemblies are comprised of a fiber optic cable with optical transceivers inside both cable connectors on each end.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N285505",
+  "source": "US_CBP",
+  "date": "2017-05-05",
+  "url": "https://rulings.cbp.gov/ruling/N285505",
+  "code_officiel": "8517620010",
+  "hs6": "851762",
+  "produit": "Modem USB 4G LTE",
+  "description": "The item concerned is the 4G LTE Global Modem (Model #USB730L). This electronic device is a plug and play modem which measures 83mm in height x 35mm in depth x 11.4mm in width. It incorporates an external type A USB 2.0 connector/plug with a rotator design that accommodates various USB port orientations. It also incorporates two LED indicators that signal network status and data usage. It is compatible with Windows® 7,8,10, MAC OS® x 10.6 or higher, and Linux® Ubuntu 10.4 or higher. It uses a secure 4G LTE connectivity protocol. This modem provides a personal connection to the internet with global connectivity in over 200 countries.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "This modem provides a personal connection to the internet with global connectivity in over 200 countries.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "This electronic device is a plug and play modem",
+    "appui": "terme"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "It is compatible with Windows® 7,8,10, MAC OS® x 10.6 or higher, and Linux® Ubuntu 10.4 or higher.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N288408",
+  "source": "US_CBP",
+  "date": "2017-08-16",
+  "url": "https://rulings.cbp.gov/ruling/N288408",
+  "code_officiel": "8507600020",
+  "hs6": "850760",
+  "produit": "Kits de charge avec batteries externes lithium-ion",
+  "description": "The Iridium Power Bank with High Speed Charging Station, item PBB102, consists of a power bank and a charging dock. The charging dock has a magnetic connector and acts as a cradle for the included power bank. The dock charges the power bank and at the base of the dock are three built in USB ports that allow for various electronic devices to be connected to the dock. The portable power bank is rectangular in shape and consists of a rechargeable lithium-ion battery that stores and provides energy to electronic devices.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The portable power bank is rectangular in shape and consists of a rechargeable lithium-ion battery that stores and provides energy to electronic devices.",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "The portable power banks are rechargeable lithium-ion batteries that store and provide energy to electronic devices.",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "The dock charges the power bank",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "N289786",
+  "source": "US_CBP",
+  "date": "2017-09-27",
+  "url": "https://rulings.cbp.gov/ruling/N289786",
+  "code_officiel": "8517620050",
+  "hs6": "851762",
+  "produit": "Adaptateur DisplayPort vers VGA pour ordinateur Surface (décision à trois produits)",
+  "description": "The first item is referred to as the Surface USB 3.0 Ethernet Adapter (Realtek RTL81538). This adapter is a 10/100/l000M Ethernet controller that combines a triple-speed IEEE 802.3 compliant Media Access Controller with a triple-speed Ethernet transceiver, a USB 3.0 bus controller and an embedded memory. The Ethernet adapter is used to convert data from USB to Ethernet. It connects to Microsoft “Surface” computers or other devices running Windows 10 and 8.1 via USS connector. It gives the device the capability to connect to a network via an Ethernet connection. It offers data transfer rates of up to 1 Gbps.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "It provides the computer with the capability to connect any VGA compatible display, monitor or projector, for sharing pictures, videos, etc.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "This adapter is a Display Port to VGA converter",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "computer using the device's mini display port connection",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "aucune",
+    "citation": "combines a DisplayPort input interface and an analog RGB DAC output",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N290026",
+  "source": "US_CBP",
+  "date": "2017-09-21",
+  "url": "https://rulings.cbp.gov/ruling/N290026",
+  "code_officiel": "8544429000",
+  "hs6": "854442",
+  "produit": "Câble adaptateur audio en Y, jack 3,5 mm vers deux RCA",
+  "description": "The item concerned is an audio “Y” adapter cable, item # 33568. This is an insulated electric cable that is manufactured in a “Y” shaped configuration. It incorporates a 3.5mm plug on one end. A single cable exits this plug and eventually splits into two cables. At the end of each of the two split cables is an RCA connector, one red and one white. The approximate length of this cable assembly is 6 feet.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The item concerned is an audio “Y” adapter cable, item # 33568.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "each cable has an internal insulated conductor and a secondary ground wire (not a surrounding shield)",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "each cable has an internal insulated conductor and a secondary ground wire (not a surrounding shield)",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N290028",
+  "source": "US_CBP",
+  "date": "2017-10-03",
+  "url": "https://rulings.cbp.gov/ruling/N290028",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câble S-Vidéo de six pieds",
+  "description": "Item concerned is a six foot S-Video Cable, item # 33597. The cable has a construction of four PVC insulated copper clad steel conductors that carry or transmit luminance and color. The cable allows for the transmission on two separate channels. The S-Video cables carry standard definition video at a resolution of 480i or 576i.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The cable has a construction of four PVC insulated copper clad steel conductors that carry or transmit luminance and color.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "The four conductors are wrapped in an outer jacket of PVC. Each end of the cable has an S-Video connector.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "audio_video",
+    "citation": "The S-Video cables are used to connect TV, VCR, DVD and other electronic components with S-Video connections together.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "The cable has a construction of four PVC insulated copper clad steel conductors that carry or transmit luminance and color.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N290926",
+  "source": "US_CBP",
+  "date": "2017-10-24",
+  "url": "https://rulings.cbp.gov/ruling/N290926",
+  "code_officiel": "8544300000",
+  "hs6": "854430",
+  "produit": "Câbles USB de rallonge pour faisceaux automobiles",
+  "description": "The merchandise is identified as USB cable assemblies, part numbers 09920289, 09920290, 09920291 and 09920292. Based on the submitted samples and information that you have provided these four USB cable assemblies are automobile extension cables identical in construction except for the length of the cables and the color of the USB connectors. Each cable is constructed from insulated electric conductors within an outer jacket. There are male connectors, type USB Mini-B, on each end.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "specifically designed to enable inter-device communication in any vehicle application requiring high speed data transfer and low power use",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "faisceau_vehicule",
+    "citation": "It is stated that the USB cable assemblies will be incorporated into wiring harnesses used in the automotive industry",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "these four USB cable assemblies are automobile extension cables",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "Each cable is constructed from insulated electric conductors within an outer jacket.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N292574",
+  "source": "US_CBP",
+  "date": "2017-12-21",
+  "url": "https://rulings.cbp.gov/ruling/N292574",
+  "code_officiel": "8471801000",
+  "hs6": "847180",
+  "produit": "Adaptateurs de format vidéo pour ordinateur",
+  "description": "There are five items under consideration which are described as adapters where each convert a display signal originating from an automatic data processing machine from one type of display format to another type of display format to be used with a display device. Each adapter consists of a male connector on one end and a female connector on the other end. All of the subject adapters are said to be used exclusively with ADP machines.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "each convert a display signal originating from an automatic data processing machine from one type of display format to another type of display format to be used with a display device",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "a PCBA which digitally converts the signal from the USB-C format to the HDMI format",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "All of the subject adapters are said to be used exclusively with ADP machines.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "aucune",
+    "citation": "Each adapter consists of a male connector on one end and a female connector on the other end.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N296103",
+  "source": "US_CBP",
+  "date": "2018-05-07",
+  "url": "https://rulings.cbp.gov/ruling/N296103",
+  "code_officiel": "8544200000",
+  "hs6": "854420",
+  "produit": "Câble audio/vidéo composante à cinq conducteurs coaxiaux",
+  "description": "The merchandise in question is referred to as a component audio/video cable (item #33606). The item consists of 5 cables that are joined together down the length of the product. There are five RCA-type connectors on each end of the cable. Each of the joined cables consist of a stranded central copper conductor that is surrounded by an insulating medium, which is then surrounded by a second stranded copper conductor (coaxial construction) all of which is encased in a black insulating outer jacket. These cables are used to interconnect audio and video equipment.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "These cables are used to interconnect audio and video equipment.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_coaxial",
+    "citation": "Each of the joined cables consist of a stranded central copper conductor that is surrounded by an insulating medium, which is then surrounded by a second stranded copper conductor (coaxial construction)",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "audio_video",
+    "citation": "These cables are used to interconnect audio and video equipment.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "The item consists of 5 cables that are joined together down the length of the product.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N296304",
+  "source": "US_CBP",
+  "date": "2018-05-04",
+  "url": "https://rulings.cbp.gov/ruling/N296304",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Adaptateur passif USB-C vers USB-A femelle sur câble",
+  "description": "The item concerned is a USB-C to USB-A Female Adapter (#SWU7113A/27). This device is used to connect older USB-A items to newer USB-C computers. It consists of a 6 inch long insulated electrical cable terminated with a USB-C 3.0 plug connector on one end and a USB-A 3.0 jack connector on the opposite end. This item does not contain an IC chip, it is a passive device.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "This device is used to connect older USB-A items to newer USB-C computers.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "This item does not contain an IC chip, it is a passive device.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "It consists of a 6 inch long insulated electrical cable terminated with a USB-C 3.0 plug connector on one end and a USB-A 3.0 jack connector on the opposite end.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "This device is used to connect older USB-A items to newer USB-C computers.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N296307",
+  "source": "US_CBP",
+  "date": "2018-05-04",
+  "url": "https://rulings.cbp.gov/ruling/N296307",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Adaptateur passif DVI vers HDMI sur câble court",
+  "description": "The item concerned is a DVI to HDMI Pigtail Adapter (Item SWV9200H/27, Jasco #39251). This device incorporates a 6 inch long insulated cable terminated with a DVI connector on one end and a HDMI connector on the opposite end. This item does not contain an IC chip. It’s a passive device that physically changes a DVI type connection into an HDMI type connection.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "passive device that physically changes a DVI type connection into an HDMI type connection.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "This item does not contain an IC chip.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "This device incorporates a 6 inch long insulated cable terminated with a DVI connector on one end and a HDMI connector on the opposite end.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N298534",
+  "source": "US_CBP",
+  "date": "2018-07-24",
+  "url": "https://rulings.cbp.gov/ruling/N298534",
+  "code_officiel": "8504408500",
+  "hs6": "850440",
+  "produit": "Chargeur sans fil à induction pour console centrale automobile",
+  "description": "The item concerned is referred to as a “Wireless Charge System”. It is a component of an automobile’s center console assembly. The purpose of the wireless charge system is to provide the driver or passenger with an easy means of charging smartphones or other similar devices. This power supply/charger uses wireless inductive charging technology to supply power to the internal batteries of a cellular telephone incorporating the same inductive charging technology.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The purpose of the wireless charge system is to provide the driver or passenger with an easy means of charging smartphones or other similar devices.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "This power supply/charger uses wireless inductive charging technology to supply power to the internal batteries of a cellular telephone incorporating the same inductive charging technology.",
+    "appui": "terme"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "supply power to the internal batteries of a cellular telephone",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "The sub-assembly is housed in a metal casing and contains two printed circuit boards, electrical connectors, a thermal pad, and board-to-board connector pins.",
+    "appui": "composition"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "The sub-assembly is housed in a metal casing and contains two printed circuit boards, electrical connectors, a thermal pad, and board-to-board connector pins.",
+    "appui": "composition"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "The sub-assembly is housed in a metal casing and contains two printed circuit boards, electrical connectors, a thermal pad, and board-to-board connector pins.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N298750",
+  "source": "US_CBP",
+  "date": "2018-07-27",
+  "url": "https://rulings.cbp.gov/ruling/N298750",
+  "code_officiel": "8544300000",
+  "hs6": "854430",
+  "produit": "Câbles USB à connecteurs automobiles, à installer dans un véhicule",
+  "description": "The first item concerned is a USB cable which will be installed within an automobile (Part # TYX1055). This cable incorporates 4 insulated conductors surrounded by a foil and braided wire shielding, internal strength members, an outer insulation jacket, foam padding, mounting clips and automotive spring lock type electrical connectors on each end.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "They are used to connect various automotive communication system components.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "faisceau_vehicule",
+    "citation": "foam padding, mounting clips and automotive spring lock type electrical connectors on each end.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The first item concerned is a USB cable which will be installed within an automobile (Part # TYX1055).",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "This cable incorporates 4 insulated conductors surrounded by a foil and braided wire shielding",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N298752",
+  "source": "US_CBP",
+  "date": "2018-07-27",
+  "url": "https://rulings.cbp.gov/ruling/N298752",
+  "code_officiel": "8517620050",
+  "hs6": "851762",
+  "produit": "Boîtiers AUX/USB pour console de véhicule",
+  "description": "The first item under consideration is identified as the AUX/USB Box PN TCX-1772 which is described as a plastic enclosure containing a printed circuit board assembly (PCBA), two electrical sockets on the back, two USB sockets on the front, and an auxiliary jack on the front. The intended purpose of this assembly is to be mounted in the console of a motor vehicle to provide a USB type power outlet and data interface to the vehicle’s head unit for personal electronics such as a smart phone or tablet.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "aucune_dominante",
+    "citation": "performs two distinct functions where neither function predominates over the other",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The intended purpose of this assembly is to be mounted in the console of a motor vehicle to provide a USB type power outlet and data interface to the vehicle’s head unit",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N299351",
+  "source": "US_CBP",
+  "date": "2018-08-14",
+  "url": "https://rulings.cbp.gov/ruling/N299351",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câbles USB-C et Lightning gainés de tissu",
+  "description": "The items in question are cables (Item #’s 53354-US, and 53355-US). The first item (Item # 53354-US) is a six foot fabric covered USB-C cable used for USB-C compatible devices only. This item will charge and sync USB-C equipped devices from standard USB-A equipped computers and chargers. USB 2.0 supports up to 480 Mbps transfer speeds. This device supports up to 15W charging power. The second item (Item # 53355-US) is a six foot fabric covered lightening connector cable. This item is designed to connect specifically to Apple® products, which include but are not limited to iPhones, iPads, and iPods.",
+  "motifs": "",
+  "criteres": {
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "is a six foot fabric covered USB-C cable used for USB-C compatible devices only",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N300708",
+  "source": "US_CBP",
+  "date": "2018-10-12",
+  "url": "https://rulings.cbp.gov/ruling/N300708",
+  "code_officiel": "8504409510",
+  "hs6": "850440",
+  "produit": "Chargeur à deux ports USB avec veilleuse LED",
+  "description": "The item concerned is referred to as a 2 USB Port Charger + Night Light. It has a white plastic housing, and it measures 2.5 inches in diameter, and 1 inch in depth. The front of the item contains two USB ports and a button for the LED night light.",
+  "motifs": "",
+  "criteres": {}
+ },
+ {
+  "id": "N300797",
+  "source": "US_CBP",
+  "date": "2018-10-12",
+  "url": "https://rulings.cbp.gov/ruling/N300797",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câble USB vers micro-USB gainé d'acier",
+  "description": "The item in question is a USB cable known as the Titan M. This cable assembly measures 39 inches in length. It is composed of insulated conductors (wire) covered in a dual layer of flexible, industrial strength steel with a permanently sealed USB connector on one end and a micro USB connector on the other end. The Titan M is used to both charge and transfer data (sync).",
+  "motifs": "",
+  "criteres": {
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "It is composed of insulated conductors (wire) covered in a dual layer of flexible, industrial strength steel with a permanently sealed USB connector on one end and a micro USB connector on the other end.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N301141",
+  "source": "US_CBP",
+  "date": "2018-11-05",
+  "url": "https://rulings.cbp.gov/ruling/N301141",
+  "code_officiel": "8517620020",
+  "hs6": "851762",
+  "produit": "Adaptateurs réseau sans fil USB et PCI-E",
+  "description": "The first item concerned is the “Archer T4U AC1300” wireless network adapter. This is a USB 3.0 network adapter with a folding external dual band PIFA antenna. This antenna arm has 2 high gain transmitters built-in allowing up to a 400 Mbp transmission rate on the 2.4GHz spectrum and up to a 867 Mbp transmission rate on the 5GHz spectrum. This device is compatible with the 802.11 a/b/g/n/ac wireless standards. Transmit power is <20dBm.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "This is a USB 3.0 network adapter with a folding external dual band PIFA antenna.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "This device is compatible with the 802.11 a/b/g/n/ac wireless standards.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "This antenna arm has 2 high gain transmitters built-in",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N301143",
+  "source": "US_CBP",
+  "date": "2018-11-07",
+  "url": "https://rulings.cbp.gov/ruling/N301143",
+  "code_officiel": "8471801000",
+  "hs6": "847180",
+  "produit": "Concentrateurs USB 3.0 avec ports de charge",
+  "description": "There are three items under consideration which are identified as USB (universal serial bus) Hubs, Model Numbers UH720, UH400, and UC430. Based on the information provided, each of the subject USB Hubs are self-contained and are connected directly to a personal computer (PC) to facilitate data transfer from various peripherals to the connected PC. The USB Hubs also provide device charging, however we are of the opinion that this is a subsidiary feature and not the principal function of the units.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "each of the subject USB Hubs are self-contained and are connected directly to a personal computer (PC) to facilitate data transfer from various peripherals to the connected PC",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "There are three items under consideration which are identified as USB (universal serial bus) Hubs, Model Numbers UH720, UH400, and UC430.",
+    "appui": "terme"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "connects to a user’s PC via the USB 3.0 Micro socket located on the rear of the device",
+    "appui": "explicite"
+   }
+  }
+ }
+]

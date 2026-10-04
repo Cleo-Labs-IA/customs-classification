@@ -1,0 +1,526 @@
+[
+ {
+  "id": "H273383",
+  "source": "US_CBP",
+  "date": "2018-02-27",
+  "url": "https://rulings.cbp.gov/ruling/H273383",
+  "code_officiel": "85176200",
+  "hs6": "851762",
+  "produit": "Câbles optiques actifs munis d'émetteurs-récepteurs",
+  "description": "The optical fiber cable assemblies at issue are optical fiber cables fitted with transceivers or with transceivers and connectors. Optical fiber cables allow digital data to be transmitted by rapid pulses of light through glass or plastic filament (fiber optics) and, therefore, at the speed of light. The light pulses translate into binary values that are read by a computer.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "They are used in structured cabling systems to transport aggregated data (from 40 to 56 Gbps) up to 4 kilometers",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "The optical fiber cable assemblies at issue are optical fiber cables fitted with transceivers or with transceivers and connectors.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "The transmission and reception of data are the principal functions of the OFCAs",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "H287462",
+  "source": "US_CBP",
+  "date": "2018-06-28",
+  "url": "https://rulings.cbp.gov/ruling/H287462",
+  "code_officiel": "85044070",
+  "hs6": "850440",
+  "produit": "Étuis en plastique pour iPad avec récepteur de charge par induction",
+  "description": "The subject charging sleeves are plastic iPad cases with internal electrical components that enable the sleeves to work as charging devices. The sleeves are designated as models “AM.2,” “AP.4,” “AP.3,” and “AM.5.” Each sleeve has a built-in connector that fits into the power ports of iPads, an inductor and various other electrical conditioning elements within the rear portion of the sleeves.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The subject charging sleeves are plastic iPad cases with internal electrical components that enable the sleeves to work as charging devices.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "The receivers’ electronic circuitry converts that alternating current into direct current that is then used to charge the internal batteries of iPads inserted into the sleeves.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "Each sleeve has a built-in connector that fits into the power ports of iPads",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "H298118",
+  "source": "US_CBP",
+  "date": "2018-09-25",
+  "url": "https://rulings.cbp.gov/ruling/H298118",
+  "code_officiel": "85076000",
+  "hs6": "850760",
+  "produit": "Batterie externe lithium-ion de 4000 mAh avec lampe intégrée",
+  "description": "The subject power bank is a universal, portable device which stores energy and acts as power source for electronic devices, including smart cell phones that incorporate a USB connection. The power bank device consists of a lithium-ion rechargeable battery\u0002 within a housing. The power bank is packaged with a micro USB charging cable and features a built-in flashlight and an LED indicator. The power bank can be recharged via its micro USB port using the included micro USB charging cable and another USB power source.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The subject power bank is a universal, portable device which stores energy and acts as power source for electronic devices",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "The power bank device consists of a lithium-ion rechargeable battery",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "The power bank can be recharged via its micro USB port using the included micro USB charging cable and another USB power source.",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "H319416",
+  "source": "US_CBP",
+  "date": "2021-07-01",
+  "url": "https://rulings.cbp.gov/ruling/H319416",
+  "code_officiel": "85444220",
+  "hs6": "854442",
+  "produit": "Câbles audio et vidéo munis de connecteurs (24 modèles)",
+  "description": "The cable described as NS-HZ303 is described as a 6’ 3.5 mm Mini Audio Cable. It incorporates male 3.5mm plugs on both ends. The cable consists of two bundles of several inner conductor strands surrounded by insulation and one bundle of cotton yarn strands. The bundles are collectively surrounded by an aluminum sheath, then a spiral shield and finally a paper sheath. That collective bundle is finally surrounded by a PVC jacket.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "Each cable is used to facilitate the transfer of voice, images or data.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "It incorporates male 3.5mm plugs on both ends. The cable consists of two bundles of several inner conductor strands surrounded by insulation",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "The cable consists of two bundles of several inner conductor strands surrounded by insulation and one bundle of cotton yarn strands.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "H322074",
+  "source": "US_CBP",
+  "date": "2022-05-20",
+  "url": "https://rulings.cbp.gov/ruling/H322074",
+  "code_officiel": "85437099",
+  "hs6": "854370",
+  "produit": "Chauffe-mains électriques rechargeables faisant aussi batterie externe",
+  "description": "The electric hand warmers are described as portable devices with internal warming capability and the ability to charge electronic devices. The 9S model is comprised of a 5200 mAh rechargeable lithium-ion battery, one output USB used for charging compatible devices, one input USB for charging the rechargeable lithium-ion battery, an LED light bar to show the heat setting and remaining charge in the lithium battery, a heating element, and a thermocouple wire within a handheld plastic enclosure.",
+  "motifs": "",
+  "criteres": {
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "The 9S model is comprised of a 5200 mAh rechargeable lithium-ion battery, one output USB used for charging compatible devices",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "one input USB for charging the rechargeable lithium-ion battery",
+    "appui": "alimentation"
+   },
+   "fonction_principale": {
+    "valeur": "autre",
+    "citation": "principal function is to perform a hand warming function.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "H328693",
+  "source": "US_CBP",
+  "date": "2025-08-20",
+  "url": "https://rulings.cbp.gov/ruling/H328693",
+  "code_officiel": "84718010",
+  "hs6": "847180",
+  "produit": "Station d'accueil USB Dell D3100",
+  "description": "The subject merchandise is a Dell D3100 “Dockport” USB docking station (“D3100” or “docking station”). Through a single connection, the docking station allows users to connect to the Internet, external devices, and up to three additional monitors. The D3100 features one USB 3.0 Type-B port for upstream input, and the following downstream outputs: • three USB 3.0 ports; • two USB 2.0 ports; • two HDMI ports; • one DisplayPort; • one RJ45 Gigabit Ethernet port; • one combination audio port for a headphone and microphone; and • one audio line out.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "Through a single connection, the docking station allows users to connect to the Internet, external devices, and up to three additional monitors.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "port_parmi_autres",
+    "citation": "three USB 3.0 ports; • two USB 2.0 ports; • two HDMI ports; • one DisplayPort; • one RJ45 Gigabit Ethernet port",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "The D3100 features one USB 3.0 Type-B port for upstream input",
+    "appui": "terme"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "USB docking station",
+    "appui": "terme"
+   }
+  }
+ },
+ {
+  "id": "H337673",
+  "source": "US_CBP",
+  "date": "2025-05-20",
+  "url": "https://rulings.cbp.gov/ruling/H337673",
+  "code_officiel": "84718010",
+  "hs6": "847180",
+  "produit": "Stations d'accueil universelles pour ordinateur portable et adaptateur USB vers HDMI",
+  "description": "The subject docking stations UD-3900H, UD-6950, and UD-6950H, and UD-6950PDH are universal laptop docking stations. The subject docking stations allow for combined audio, data, power, and video through one station. The docking stations include two USB 3.0 ports, audio in and out ports, four USB 2.0 ports, display ports, a host port, a power button, and a high-speed Gigabit Ethernet port for network connection.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The subject docking stations allow for combined audio, data, power, and video through one station.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "port_parmi_autres",
+    "citation": "The docking stations include two USB 3.0 ports, audio in and out ports, four USB 2.0 ports, display ports, a host port, a power button, and a high-speed Gigabit Ethernet port for network connection.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "The various USB ports allow for a laptop to connect to various peripheral devices including a monitor, hard drive, and speaker.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "are universal laptop docking stations",
+    "appui": "terme"
+   }
+  }
+ },
+ {
+  "id": "H341609",
+  "source": "US_CBP",
+  "date": "2024-10-21",
+  "url": "https://rulings.cbp.gov/ruling/H341609",
+  "code_officiel": "85176200",
+  "hs6": "851762",
+  "produit": "Câbles cuivre à attache directe (DAC) munis d'émetteurs-récepteurs",
+  "description": "The DACs consist of a twin-axial copper cable with two or more small form factor pluggable (SFP) transceivers terminating the cable at each end. The DACs are fitted with two to eight octal small form factor pluggable (OSFP) or quad small form factor pluggable (QSFP) transceivers, which contain an integrated EEPROM chip, “allow[ing] the module to identify itself and the type of cable attached to it in order to allow the active equipment to operate in the proper mode.”",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The media interface sends signals into the media, the copper cable, and receives the transmitted signals.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "they are designed with Tx/Rx circuitry that converts a host machine’s two-voltage binary signal to a modulated Pulse Amplitude Modulation, four level (PAM4) signal suitable to send over the copper cable media",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "The DACs consist of a twin-axial copper cable with two or more small form factor pluggable (SFP) transceivers terminating the cable at each end.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "H342570",
+  "source": "US_CBP",
+  "date": "2025-07-21",
+  "url": "https://rulings.cbp.gov/ruling/H342570",
+  "code_officiel": "85044095",
+  "hs6": "850440",
+  "produit": "Chargeurs USB pour allume-cigare et pour prise murale",
+  "description": "the subject merchandise consists of various car and wall chargers. The chargers are primarily plastic AC-DC static converters designed to be plugged into a standard cigarette lighter outlet in an automobile (car charger) or a standard wall outlet (wall charger). Protestant’s chargers typically feature one USB-A port or a USB-A and a USB-C port. The chargers provide a low amperage charge between 2.1-4.8 Amp.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "described as a 3.0A, USB quick wall charger, capable of charging smartphones, tablets and other devices at home.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "The chargers are primarily plastic AC-DC static converters",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "designed to be plugged into a standard cigarette lighter outlet in an automobile (car charger) or a standard wall outlet (wall charger).",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "Protestant’s chargers typically feature one USB-A port or a USB-A and a USB-C port.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "H343160",
+  "source": "US_CBP",
+  "date": "2024-12-10",
+  "url": "https://rulings.cbp.gov/ruling/H343160",
+  "code_officiel": "8504409550",
+  "hs6": "850440",
+  "produit": "Plante artificielle en pot servant de station de charge USB",
+  "description": "The iPP45 is an artificial succulent plant housed in a cylindrical plastic flowerpot that serves as an electric static converter with two USB-C sockets (20Watts (W) max shared)\u0002 and one 10 W USB-A socket on its side. An electrical cord extends from the bottom of the flowerpot and includes a universal 30 W power adapter.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "the iPP45 is described as an “Artificial Plant Charging Station with Multiple USB Charging Ports.”",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "housed in a cylindrical plastic flowerpot that serves as an electric static converter",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "An electrical cord extends from the bottom of the flowerpot and includes a universal 30 W power adapter.",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "with two USB-C sockets (20Watts (W) max shared)\u0002 and one 10 W USB-A socket on its side",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "H348342",
+  "source": "US_CBP",
+  "date": "2026-05-08",
+  "url": "https://rulings.cbp.gov/ruling/H348342",
+  "code_officiel": "84718010",
+  "hs6": "847180",
+  "produit": "Hub USB 3.0 à 7 ports (UH700)",
+  "description": "The fourth item is the USB 3.0 7-Port Hub (UH700). This [device] is used to expand the number of available USB ports on a PC. It measures 6.5 inches in width, 2.6 inches in depth, and .7 inches in height. The UH700 is equipped with 7 USB 3.0 ports and has a 10x data transfer speed. It supports systems such as Windows, Mac OS X and Linux systems. A built-in surge protector keeps both your devices and data safe in the process of transferring data.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "is used to expand the number of available USB ports on a PC.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "It supports systems such as Windows, Mac OS X and Linux systems.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "The fourth item is the USB 3.0 7-Port Hub (UH700).",
+    "appui": "terme"
+   },
+   "liaison_reseau": {
+    "valeur": "aucune",
+    "citation": "The UH700, however, is not actively transmitting or receiving within a wired or wireless network.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N281995",
+  "source": "US_CBP",
+  "date": "2017-01-12",
+  "url": "https://rulings.cbp.gov/ruling/N281995",
+  "code_officiel": "8544429090",
+  "hs6": "854442",
+  "produit": "Câble USB de charge logé dans un pompon porte-clés",
+  "description": "The merchandise in question is a USB/charging cable that is embedded within a tassle and attached to a metal key ring, style number DN-1207KF. This merchandise measures 7-inches in length, 1.25-inches in width, and .5-inches in depth. The USB cable, which has connectors on both ends, can connect to a cell phone and provide battery power when the USB end is connected to a power source. The tassle has an outer suface of polyvinyl chloride plastic sheeting.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "can connect to a cell phone and provide battery power when the USB end is connected to a power source",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "The USB cable, which has connectors on both ends",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "provide battery power when the USB end is connected to a power source",
+    "appui": "alimentation"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The USB cable, which has connectors on both ends, can connect to a cell phone",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N282038",
+  "source": "US_CBP",
+  "date": "2017-01-19",
+  "url": "https://rulings.cbp.gov/ruling/N282038",
+  "code_officiel": "8504409510",
+  "hs6": "850440",
+  "produit": "Chargeur mural USB à deux ports de 36 W",
+  "description": "this dual port USB wall charger is a static converter/rectifier that converts alternating current to direct current. It connects to a standard wall outlet and is used to power/charge various personal, USB enabled, electronic devices (i.e. cell phones, laptop computers, tablets, etc.). It is rectangular in shape with a 2-prong electrical plug on one side and two USB ports on the other side (USB-A and USB-C ports). This static converter/rectifier is rated at 36 W.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "is used to power/charge various personal, USB enabled, electronic devices",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "is a static converter/rectifier that converts alternating current to direct current",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "It connects to a standard wall outlet",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "It is rectangular in shape with a 2-prong electrical plug on one side and two USB ports on the other side (USB-A and USB-C ports).",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N282039",
+  "source": "US_CBP",
+  "date": "2017-01-11",
+  "url": "https://rulings.cbp.gov/ruling/N282039",
+  "code_officiel": "8507600020",
+  "hs6": "850760",
+  "produit": "Batterie externe lithium-ion de 6000 mAh avec lampe intégrée",
+  "description": "The iSmart is encased in an outer shell and features a USB port, a LED flashlight, and a LED indicator bar. The product is a portable charger that houses a printed circuit board and a lithium-ion battery that is re-chargeable and has a storage capacity of 6000mAh. The lithium-ion battery stores and supplies power to mobile devices, such as cell phones and tablets.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The lithium-ion battery stores and supplies power to mobile devices, such as cell phones and tablets.",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "a lithium-ion battery that is re-chargeable and has a storage capacity of 6000mAh",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N282047",
+  "source": "US_CBP",
+  "date": "2017-01-12",
+  "url": "https://rulings.cbp.gov/ruling/N282047",
+  "code_officiel": "8544429090",
+  "hs6": "854442",
+  "produit": "Câble USB de charge logé dans un pompon en cuir porte-clés",
+  "description": "It is a USB/charging cable that is embedded within a tassle and attached to a metal keychain clasp. The item measures 7 inches in length, 1.5 inches in width, and 1 inch in depth. The USB cable, which has connectors on both ends, can connect to a cell phone and provide battery power when the USB end is connected to a power source. The tassle is composed of black, silver, and purple leather strips.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "can connect to a cell phone and provide battery power when the USB end is connected to a power source",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "The USB cable, which has connectors on both ends",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "provide battery power when the USB end is connected to a power source",
+    "appui": "alimentation"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The USB cable, which has connectors on both ends, can connect to a cell phone",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N284052",
+  "source": "US_CBP",
+  "date": "2017-03-17",
+  "url": "https://rulings.cbp.gov/ruling/N284052",
+  "code_officiel": "8517620050",
+  "hs6": "851762",
+  "produit": "Modem USB externe 3G et 4G LTE",
+  "description": "This device is an external USB modem. It incorporates two externally accessible SIM card slots, two SMA Antenna Connection ports, a GPS antenna port, and a mini USB port. Its compatible networks include Verizon, T-Mobile, AT&T, Rogers and Sprint. It uses secure 3G or 4G LTE connectivity protocols.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "This device is an external USB modem.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "Its compatible networks include Verizon, T-Mobile, AT&T, Rogers and Sprint. It uses secure 3G or 4G LTE connectivity protocols.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N284202",
+  "source": "US_CBP",
+  "date": "2017-03-21",
+  "url": "https://rulings.cbp.gov/ruling/N284202",
+  "code_officiel": "8471801000",
+  "hs6": "847180",
+  "produit": "Organiseur de bureau à trois ports USB relié à un ordinateur",
+  "description": "The merchandise under consideration is referred to as a “Desktop Organizer W/3 USB” Mfg. Item #OMD19000 which consists of a printed circuit board assembly, three female USB ports, and a male USB cable in a plastic housing. The unit’s housing has multiple compartments to accommodate certain office supplies such as paper clips, pens and pencils, scissors, a notepad, and a mobile telephone.",
+  "motifs": "",
+  "criteres": {
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "On the rear of the unit is a male USB cable that a user would connect to a host personal computer (PC).",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N284888",
+  "source": "US_CBP",
+  "date": "2017-04-18",
+  "url": "https://rulings.cbp.gov/ruling/N284888",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câbles cuivre passifs QSFP munis de connecteurs",
+  "description": "These copper cable assemblies are comprised of 8 individually shielded parallel pair cables, a fully braided EMI shield and an insulating outer jacket. They incorporate a 38 position SMT mounted edge card connector on each end. The connectors incorporate a high performance printed circuit board (PCB) with gold plated contact pads.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "designed for the higher-bandwidth signal integrity associated with 10Gb/s, 14Gb/s and 28Gb/s per channel transmission",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "Quad Small Form-Factor Pluggable (QSFP/QSFP+) passive copper cable assemblies",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "These copper cable assemblies are comprised of 8 individually shielded parallel pair cables, a fully braided EMI shield and an insulating outer jacket. They incorporate a 38 position SMT mounted edge card connector on each end.",
+    "appui": "explicite"
+   }
+  }
+ }
+]

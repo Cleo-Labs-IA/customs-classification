@@ -1,0 +1,287 @@
+{
+  "titre": "Chargeurs, alimentations, batteries externes, stations d'accueil, hubs et câbles : arbre induit des décisions officielles",
+  "perimetre": "Alimentations et chargeurs pour appareils électroniques (adaptateurs secteur, chargeurs USB, chargeurs sans fil, batteries externes), stations d'accueil, réplicateurs de ports, hubs USB, adaptateurs, dongles et câbles munis de connecteurs pour ordinateurs et téléphones.",
+  "niveau": "hs6",
+  "nomenclature": "SH 2022",
+  "criteres": [
+    {
+      "id": "fonction_principale",
+      "libelle": "Fonction mise en avant",
+      "question": "Quelle fonction la fiche produit et l'emballage mettent-ils en avant en premier ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "alimenter", "libelle": "Fournir de l'énergie à un autre appareil (alimenter, charger, stocker du courant)" },
+        { "v": "transmettre_signaux", "libelle": "Faire passer des données, de la vidéo ou du son entre des appareils" },
+        { "v": "accessoire_ordinateur", "libelle": "Compléter un ordinateur ou une tablette (support, tapis de souris, module d'extension de calcul), la charge ou les ports étant annexes" },
+        { "v": "autre", "libelle": "Autre chose (chauffer, éclairer, ranger, décorer...)" },
+        { "v": "aucune_dominante", "libelle": "Plusieurs fonctions présentées à égalité, aucune ne ressort" }
+      ],
+      "aide": "Regarder le nom commercial, le rayon de vente et la première ligne de la fiche : c'est ce que les douanes ont retenu pour la plante chargeur, le chauffe-mains batterie ou le hub qui recharge aussi."
+    },
+    {
+      "id": "genere_electricite",
+      "libelle": "Produit sa propre électricité",
+      "question": "Le produit fabrique-t-il lui-même son électricité (panneau solaire, dynamo, manivelle) ?",
+      "type": "bool",
+      "aide": "Oui pour un chargeur solaire ou à manivelle ; non pour un produit qui se recharge ou s'alimente sur une prise, un port USB ou un allume-cigare."
+    },
+    {
+      "id": "batterie_integree",
+      "libelle": "Batterie qui alimente d'autres appareils",
+      "question": "Le produit contient-il une batterie ou des piles dont l'énergie est restituée à l'appareil branché, et de quel type ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "aucune", "libelle": "Aucune batterie ni pile" },
+        { "v": "lithium_ion", "libelle": "Batterie rechargeable lithium-ion ou lithium-polymère" },
+        { "v": "autre_rechargeable", "libelle": "Batterie rechargeable d'une autre chimie (NiMH, plomb...)" },
+        { "v": "non_rechargeable", "libelle": "Piles non rechargeables (alcalines...)" }
+      ],
+      "aide": "La chimie et la capacité (mAh, Wh) figurent sur l'étiquette ou la fiche de sécurité de la batterie."
+    },
+    {
+      "id": "convertit_courant",
+      "libelle": "Convertit le courant",
+      "question": "Le produit contient-il un circuit qui change la tension ou la nature du courant (secteur vers continu, 12 V vers 5 V, charge par induction) ?",
+      "type": "bool",
+      "aide": "Oui si la fiche indique une entrée et une sortie différentes (par exemple entrée 100-240 V CA, sortie 5 V CC) ; non pour un simple adaptateur de prise de voyage sans électronique."
+    },
+    {
+      "id": "prises_secteur_sortie",
+      "libelle": "Prises secteur en sortie",
+      "question": "Le produit offre-t-il aussi des prises secteur de sortie (multiprise, rallonge) en plus de ses ports de charge ?",
+      "type": "bool",
+      "aide": "Oui pour une rallonge ou un bloc multiprise avec ports USB ; non pour un chargeur qui n'a que des ports USB, un câble fixe ou une surface de charge."
+    },
+    {
+      "id": "electronique_active",
+      "libelle": "Électronique active sur le signal",
+      "question": "Le produit contient-il une puce ou un circuit qui convertit, régénère, répartit ou commute le signal ?",
+      "type": "bool",
+      "aide": "Non pour un câble ou un adaptateur passif qui ne fait que relier les contacts ; oui pour un hub, une station d'accueil, un convertisseur de format vidéo, un câble à émetteurs-récepteurs."
+    },
+    {
+      "id": "construction_passive",
+      "libelle": "Construction du produit passif",
+      "question": "Comment le produit sans électronique est-il construit ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "cable_connecteurs", "libelle": "Câble souple à conducteurs isolés, muni de connecteurs (USB, Lightning, HDMI, jack...)" },
+        { "v": "cable_coaxial", "libelle": "Câble coaxial muni de connecteurs" },
+        { "v": "faisceau_vehicule", "libelle": "Câble ou faisceau conçu pour être monté dans un véhicule, un avion ou un bateau" },
+        { "v": "bloc_fiches_prises", "libelle": "Bloc rigide de fiches et de prises, sans longueur de câble" },
+        { "v": "commutateur_mecanique", "libelle": "Boîtier à boutons mécaniques qui sélectionne une entrée" }
+      ],
+      "aide": "La coupe du câble (âme centrale entourée d'un second conducteur = coaxial) et le type de connecteurs (clips automobiles) se lisent sur le plan ou la fiche technique."
+    },
+    {
+      "id": "liaison_reseau",
+      "libelle": "Liaison réseau ou sans fil",
+      "question": "Quelle place occupe la liaison vers un réseau ou un appareil distant (Ethernet, Wi-Fi, Bluetooth, réseau mobile, fibre) dans le produit ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "aucune", "libelle": "Aucune interface réseau ni radio" },
+        { "v": "port_parmi_autres", "libelle": "Un port réseau à côté de ports plus nombreux destinés aux écrans et aux périphériques" },
+        { "v": "seule_fonction", "libelle": "Toutes les interfaces servent à cette liaison (modem, adaptateur Ethernet, Wi-Fi ou Bluetooth, câble à émetteurs-récepteurs)" }
+      ],
+      "aide": "Compter les ports sur la fiche : une station d'accueil avec un port RJ45 et dix ports USB ou vidéo relève de la deuxième réponse."
+    },
+    {
+      "id": "appareil_hote",
+      "libelle": "Appareil auquel il se branche",
+      "question": "À quel appareil le produit est-il destiné à être branché d'après sa fiche (port amont, pilotes, compatibilité annoncée) ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "ordinateur", "libelle": "Un ordinateur ou une tablette (compatibilité Windows, macOS, Linux, port hôte USB ou Thunderbolt)" },
+        { "v": "audio_video", "libelle": "Des appareils audio ou vidéo en général (téléviseur, décodeur, lecteur, caméra)" },
+        { "v": "autre", "libelle": "Un autre appareil (téléphone seul, véhicule, appareil médical, console de jeu)" }
+      ],
+      "aide": "La liste des systèmes compatibles et le type de port amont figurent sur la fiche produit."
+    }
+  ],
+  "racine": "q1",
+  "noeuds": {
+    "q1": {
+      "type": "question",
+      "critere": "fonction_principale",
+      "pourquoi": "Un appareil conçu pour plusieurs fonctions se classe comme s'il n'exerçait que sa fonction principale : c'est la première chose que les décisions établissent, avant tout autre test.",
+      "base": ["s16-n3", "rgi-1"],
+      "branches": {
+        "alimenter": "q2",
+        "transmettre_signaux": "q6",
+        "accessoire_ordinateur": "c847330",
+        "autre": "h_autre",
+        "aucune_dominante": "h_aucune"
+      }
+    },
+    "q2": {
+      "type": "question",
+      "critere": "genere_electricite",
+      "pourquoi": "Un produit qui réunit un générateur, une batterie et un convertisseur est une machine composite, que les douanes ne traitent pas comme un simple accumulateur.",
+      "base": ["s16-n3", "h8507"],
+      "branches": { "oui": "h_generateur", "non": "q3" }
+    },
+    "q3": {
+      "type": "question",
+      "critere": "batterie_integree",
+      "pourquoi": "La position 8507 couvre les accumulateurs même présentés avec des connecteurs et des circuits de protection, et ses sous-positions se distinguent par la chimie.",
+      "base": ["h8507", "c85-n3", "rgi-6"],
+      "branches": {
+        "aucune": "q4",
+        "lithium_ion": "c850760",
+        "autre_rechargeable": "c850780",
+        "non_rechargeable": "h_piles"
+      }
+    },
+    "q4": {
+      "type": "question",
+      "critere": "convertit_courant",
+      "pourquoi": "La position 8504 vise les convertisseurs statiques, alors qu'un produit qui ne fait que relier des contacts relève des appareils de connexion ou des câbles.",
+      "base": ["h8504", "h8536"],
+      "branches": { "oui": "q5", "non": "q7" }
+    },
+    "q5": {
+      "type": "question",
+      "critere": "prises_secteur_sortie",
+      "pourquoi": "Des prises de courant sont des appareils de connexion nommés à la position 8536 : réunies à un convertisseur, elles forment un ensemble composite dont la fonction principale doit être établie.",
+      "base": ["h8536", "s16-n3"],
+      "branches": { "oui": "h_multiprise", "non": "c850440" }
+    },
+    "q6": {
+      "type": "question",
+      "critere": "electronique_active",
+      "pourquoi": "Sans circuit qui accepte ou délivre des données, le produit n'est qu'un conducteur ou un connecteur et ne peut pas être une unité d'ordinateur.",
+      "base": ["c84-n6c", "h8544", "h8536"],
+      "branches": { "oui": "q8", "non": "q7" }
+    },
+    "q7": {
+      "type": "question",
+      "critere": "construction_passive",
+      "pourquoi": "La position 8544 vise les conducteurs isolés munis ou non de connecteurs, la position 8536 les fiches, prises et commutateurs : la construction décide entre les deux.",
+      "base": ["h8544", "h8536", "rgi-6"],
+      "branches": {
+        "cable_connecteurs": "c854442",
+        "cable_coaxial": "h_cable",
+        "faisceau_vehicule": "h_cable",
+        "bloc_fiches_prises": "c853669",
+        "commutateur_mecanique": "h_commutateur"
+      }
+    },
+    "q8": {
+      "type": "question",
+      "critere": "liaison_reseau",
+      "pourquoi": "Un appareil de communication dans un réseau est exclu de la position 8471 même s'il se branche sur un ordinateur, alors qu'un port réseau accessoire ne change pas la fonction principale.",
+      "base": ["c84-n6d2", "s16-n3", "h8517"],
+      "branches": {
+        "aucune": "q9",
+        "port_parmi_autres": "q9",
+        "seule_fonction": "c851762"
+      }
+    },
+    "q9": {
+      "type": "question",
+      "critere": "appareil_hote",
+      "pourquoi": "Une unité d'ordinateur doit être du type utilisé exclusivement ou principalement dans un système informatique et pouvoir s'y connecter.",
+      "base": ["c84-n6c", "h8543"],
+      "branches": {
+        "ordinateur": "c847180",
+        "audio_video": "c854370",
+        "autre": "h_hote"
+      }
+    },
+    "c850760": {
+      "type": "code",
+      "code": "850760",
+      "libelle": "Accumulateurs électriques au lithium-ion",
+      "motif": "La batterie externe stocke puis restitue l'énergie ; ses connecteurs et ses circuits de protection sont des composants auxiliaires de l'accumulateur.",
+      "base": ["h8507", "c85-n3", "sh850760"]
+    },
+    "c850780": {
+      "type": "code",
+      "code": "850780",
+      "libelle": "Autres accumulateurs électriques",
+      "motif": "Accumulateur rechargeable dont la chimie n'est pas le lithium-ion.",
+      "base": ["h8507", "c85-n3", "sh850780"]
+    },
+    "c850440": {
+      "type": "code",
+      "code": "850440",
+      "libelle": "Convertisseurs statiques",
+      "motif": "Le produit transforme le courant reçu pour alimenter ou charger un appareil, quel que soit l'appareil auquel il est destiné.",
+      "base": ["h8504", "sh850440"]
+    },
+    "c854442": {
+      "type": "code",
+      "code": "854442",
+      "libelle": "Autres conducteurs électriques, pour tensions n'excédant pas 1 000 V, munis de pièces de connexion",
+      "motif": "Câble passif à conducteurs isolés, muni de connecteurs à ses extrémités.",
+      "base": ["h8544", "sh85444x", "sh854442"]
+    },
+    "c853669": {
+      "type": "code",
+      "code": "853669",
+      "libelle": "Fiches et prises de courant, autres",
+      "motif": "Bloc de fiches et de prises sans électronique, dont la seule fonction est d'établir une connexion.",
+      "base": ["h8536", "sh85366x", "sh853669"]
+    },
+    "c851762": {
+      "type": "code",
+      "code": "851762",
+      "libelle": "Appareils pour la réception, la conversion et l'émission ou la transmission ou la régénération de la voix, d'images ou d'autres données",
+      "motif": "Le produit sert à communiquer dans un réseau filaire ou sans fil, ce qui l'écarte de la position 8471.",
+      "base": ["h8517", "sh85176x", "sh851762", "c84-n6d2"]
+    },
+    "c847180": {
+      "type": "code",
+      "code": "847180",
+      "libelle": "Autres unités de machines automatiques de traitement de l'information",
+      "motif": "Hub, station d'accueil ou adaptateur actif qui se branche sur un ordinateur et lui relie des périphériques ou des écrans.",
+      "base": ["h8471", "c84-n6c", "c84-n6c-al2", "sh847180"]
+    },
+    "c854370": {
+      "type": "code",
+      "code": "854370",
+      "libelle": "Autres machines et appareils électriques ayant une fonction propre",
+      "motif": "Répartiteur, sélecteur ou convertisseur actif de signaux audio ou vidéo qui n'est ni une unité d'ordinateur ni un appareil de réseau.",
+      "base": ["h8543", "sh854370"]
+    },
+    "c847330": {
+      "type": "code",
+      "code": "847330",
+      "libelle": "Parties et accessoires des machines de la position 8471",
+      "motif": "Accessoire destiné exclusivement ou principalement à un ordinateur ou une tablette, dont la charge ou les ports ne sont qu'une fonction annexe.",
+      "base": ["h8473", "sh847330", "s16-n3"]
+    },
+    "h_autre": {
+      "type": "hors_perimetre",
+      "motif": "La fonction mise en avant n'est ni l'alimentation ni la connexion (chauffe-mains, luminaire, rangement...) : le produit se classe selon cette fonction, hors de cet arbre."
+    },
+    "h_aucune": {
+      "type": "hors_perimetre",
+      "motif": "Aucune fonction ne domine : le classement se fait à la position placée la dernière parmi celles qui méritent d'être retenues (règle 3 c), ce qui demande une analyse au cas par cas."
+    },
+    "h_generateur": {
+      "type": "hors_perimetre",
+      "motif": "Chargeur qui produit sa propre électricité (solaire, manivelle) : machine composite à analyser au cas par cas, les douanes l'ayant classée en 8504 et non en 8507."
+    },
+    "h_piles": {
+      "type": "hors_perimetre",
+      "motif": "Bloc à piles non rechargeables : position 8506, dont le texte n'est pas repris dans cet arbre."
+    },
+    "h_multiprise": {
+      "type": "hors_perimetre",
+      "motif": "Multiprise ou rallonge avec ports de charge : position 8537 possible, dont le texte n'est pas repris dans cet arbre."
+    },
+    "h_cable": {
+      "type": "hors_perimetre",
+      "motif": "Câble coaxial (8544 20) ou faisceau pour véhicule (8544 30) : sous-positions dont le texte n'est pas repris dans cet arbre."
+    },
+    "h_commutateur": {
+      "type": "hors_perimetre",
+      "motif": "Commutateur mécanique sans électronique : sous-position 8536 50, dont le texte n'est pas repris dans cet arbre."
+    },
+    "h_hote": {
+      "type": "hors_perimetre",
+      "motif": "Interface active destinée à un téléphone, un véhicule ou un appareil médical : le classement dépend de l'appareil hôte et sort de cet arbre."
+    }
+  }
+}

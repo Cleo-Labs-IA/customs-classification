@@ -1,0 +1,170 @@
+[
+  {
+    "cible": "c850780 (et critère batterie_integree, valeur autre_rechargeable)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "La valeur « autre_rechargeable » donne en exemple le nickel-hydrure métallique et le plomb, et la branche mène au 8507 80. Or le 8507 80 est la sous-position résiduelle « Other accumulators » : la nomenclature nomme le plomb (8507 10 et 8507 20), le nickel-cadmium (8507 30) et le nickel-hydrure métallique (8507 50 00) dans des sous-positions de même niveau (vérifié dans essais/arbre/nc2026.txt, lignes 46966 à 47005). La règle 6 impose de comparer les sous-positions de même niveau selon leurs termes : les deux exemples cités par le critère ne peuvent pas tomber au 8507 80. Ces sous-positions nommées sont en outre absentes de textes.json.",
+    "correction": "Découper la valeur : plomb vers une sortie 8507 20, nickel-cadmium vers 8507 30, nickel-hydrure métallique vers 8507 50, et ne garder le 8507 80 que pour les technologies non nommées. Ajouter à textes.json les sous-positions 8507 10, 8507 20, 8507 30 et 8507 50, ou envoyer ces technologies en hors périmètre.",
+    "textes": "sh850780, rgi-6, h8507"
+  },
+  {
+    "cible": "q1 (ordre de l'arbre)",
+    "nature": "ordre_contraire_au_texte",
+    "constat": "La racine demande la fonction principale à tous les produits, avant toute lecture des termes des positions. La règle 1 fait passer en premier les termes des positions et les notes ; la note 3 de la section XVI ne s'applique qu'aux machines composites et aux machines conçues pour plusieurs fonctions, et la règle 3 seulement quand un produit paraît classable dans plusieurs positions. Un câble simple, un bloc de fiches ou une batterie seule n'ont pas de « fonction principale » à établir : ils se classent directement par le libellé (8544, 8536, 8507). L'arbre applique donc un test réservé aux produits à plusieurs fonctions à des produits qui n'en ont qu'une.",
+    "correction": "Poser d'abord une question de fait (le produit réunit-il plusieurs fonctions ou plusieurs composants ?) et n'ouvrir la question de la fonction principale que sur la réponse oui ; sinon aller directement aux questions physiques (batterie, conversion, électronique, construction).",
+    "textes": "rgi-1, s16-n3, rgi-3"
+  },
+  {
+    "cible": "critère fonction_principale (question, valeurs et aide)",
+    "nature": "critere_conclusion_juridique",
+    "constat": "« À quoi le produit sert-il avant tout » est la conclusion même de la note 3 de la section XVI, pas un fait lu sur une fiche. Trois valeurs contiennent le résultat : « même si le chargeur est logé dans un objet décoratif » tranche le caractère essentiel de la règle 3 b), « la charge ou les ports n'étant qu'un complément » tranche l'accessoire, et « aucune ne l'emporte » est le constat juridique qui ouvre la règle 3 c). L'aide (« un hub qui recharge aussi reste un hub, un chargeur caché dans une plante artificielle reste un chargeur ») dicte la réponse au lieu de décrire un fait.",
+    "correction": "Remplacer par des faits observables : liste des fonctions annoncées sur la fiche, nombre et type de ports, puissance de charge, présence d'un objet d'accueil non électrique. Laisser la conclusion (fonction principale, caractère essentiel) au nœud, avec son texte.",
+    "textes": "s16-n3, rgi-3b, rgi-3c"
+  },
+  {
+    "cible": "q1 (pourquoi)",
+    "nature": "formulation_inexacte",
+    "constat": "Trois écarts avec les textes cités. 1) « les décisions établissent ce point avant tout autre » : aucun des trois textes de la base n'est une décision, et la règle 1 dit le contraire (termes des positions et notes d'abord). 2) La note 3 commence par « Unless the context otherwise requires » et ne vise que des « machines » au sens de la note 5 : la phrase l'étend à tout « appareil conçu pour plusieurs fonctions » sans la réserve, alors que le critère couvre aussi une plante artificielle, un tapis de souris ou un support. 3) La règle 3 b) ne joue que pour les objets « which cannot be classified by reference to 3(a) » et « in so far as this criterion is applicable » : la phrase présente le caractère essentiel comme règle directe.",
+    "correction": "Réécrire : « Quand un produit réunit plusieurs machines ou plusieurs fonctions, la note 3 de la section XVI le classe, sauf contexte contraire, selon la fonction principale. Pour un objet composite qui n'est pas une machine, la règle 3 b) retient le composant qui donne le caractère essentiel, si la règle 3 a) ne suffit pas. » Retirer la mention des décisions ou citer leur identifiant, et ajouter s16-n5, rgi-3 et rgi-3a à la base.",
+    "textes": "s16-n3, s16-n5, rgi-1, rgi-3, rgi-3a, rgi-3b"
+  },
+  {
+    "cible": "h_aucune (motif)",
+    "nature": "formulation_inexacte",
+    "constat": "Le motif envoie tout produit sans fonction dominante à la règle 3 c). Pour une machine du chapitre 84, la note 8, deuxième alinéa, prévoit autre chose : la machine « for which no one purpose is the principal purpose » se classe au 8479, sous réserve de la note 3 de la section XVI. La règle 1 fait passer cette note avant la règle 3. De plus la règle 3 c) ne s'ouvre qu'après échec des règles 3 a) et 3 b), ce que le motif ne dit pas, et elle vise les positions « which equally merit consideration », pas « celles des fonctions en présence ». Le nœud n'a aucune base.",
+    "correction": "Motif : « Aucune fonction ne l'emporte : pour une machine du chapitre 84, la note 8 renvoie au 8479 ; sinon, après les règles 3 a) et 3 b), la règle 3 c) retient la dernière position parmi celles qui méritent également d'être retenues. » Ajouter une base : c84-n8-al2, rgi-3a, rgi-3b, rgi-3c.",
+    "textes": "rgi-3c, c84-n8-al2, rgi-1, rgi-3a, rgi-3b"
+  },
+  {
+    "cible": "q2 (pourquoi) et h_generateur",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le critère ne demande qu'une chose (le produit fabrique-t-il son électricité), mais le pourquoi suppose un produit qui réunit « un générateur, une batterie et un convertisseur ». Aucun texte de la base ne décrit un générateur : les positions 8501 et 8541 sont absentes de textes.json. La note 3 de la section XVI ne dit ni que la fonction principale « n'est plus celle d'un simple accumulateur », ni qu'elle s'établit « au cas par cas ». La phrase contredit aussi q1, qui vient de fixer la fonction principale à « alimenter ». Enfin le motif de h_generateur s'appuie sur une décision de la douane américaine sans identifiant ni base, alors que la note 2 du chapitre 85 (présente dans textes.json, non citée) écarte les positions 8501 à 8504 pour les articles décrits au 8541, ce qui touche directement un panneau solaire.",
+    "correction": "Pourquoi : « Un chargeur qui produit son courant réunit un générateur et d'autres fonctions ; la note 3 de la section XVI le classe selon la fonction principale, que cet arbre ne départage pas. » Ajouter à textes.json les positions 8501 et 8541, citer c85-n2, et donner au motif de h_generateur l'identifiant de la décision ou retirer la phrase sur la douane américaine.",
+    "textes": "s16-n3, h8504, h8507, c85-n2"
+  },
+  {
+    "cible": "q3 (ordre : batterie avant conversion)",
+    "nature": "ordre_contraire_au_texte",
+    "constat": "Dès qu'une batterie est présente, l'arbre conclut au 8507 sans jamais poser la question du convertisseur (q4). Une batterie externe ou une station d'énergie contient pourtant un convertisseur (élévateur de tension, onduleur). La note 3 du chapitre 85 ne range dans l'accumulateur que les composants auxiliaires « which contribute to the accumulator's function of storing and supplying energy or protect it from damage » et cite des connecteurs, des thermistances et des protections : elle ne cite ni convertisseur ni onduleur. Si le convertisseur dépasse l'auxiliaire, le produit est une machine composite et la note 3 de la section XVI exige de comparer 8504 et 8507 ; l'ordre des questions supprime cette comparaison.",
+    "correction": "Après la réponse lithium_ion ou autre technologie, demander un fait : le produit délivre-t-il une sortie secteur ou une puissance convertie au-delà de la simple restitution (onduleur, sorties 230 V) ? Si oui, sortie hors périmètre « machine composite 8504 ou 8507 » ; si non, 8507.",
+    "textes": "c85-n3, s16-n3, h8504, h8507"
+  },
+  {
+    "cible": "c850760 (motif)",
+    "nature": "formulation_inexacte",
+    "constat": "Le motif dit que la batterie reste un accumulateur « même présentée avec ses connecteurs, son câble et ses circuits de protection ». La note 3 du chapitre 85 cite les connecteurs électriques, les dispositifs de contrôle de la température et les dispositifs de protection des circuits ; elle ne cite pas de câble. Elle pose aussi une condition que le motif omet : ces composants doivent contribuer à la fonction de stockage et de fourniture d'énergie ou protéger l'accumulateur.",
+    "correction": "« Une batterie externe reste un accumulateur du 8507 lorsqu'elle est présentée avec des composants auxiliaires qui contribuent à stocker et fournir l'énergie ou qui la protègent (connecteurs, contrôle de température, protection des circuits) ; ses éléments lithium-ion la placent au 8507 60. »",
+    "textes": "c85-n3, h8507, sh850760"
+  },
+  {
+    "cible": "h_piles (motif)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le motif affirme que le bloc de piles relève « du 8506 ». La position 8506 n'est pas dans textes.json et le nœud n'a pas de base : l'affirmation ne peut être reliée à aucun texte du référentiel. Le seul texte voisin, la position 8507, ne parle que des accumulateurs.",
+    "correction": "Ajouter la position 8506 (« Primary cells and primary batteries ») à textes.json et la citer en base du nœud.",
+    "textes": "h8507"
+  },
+  {
+    "cible": "q4, critère convertit_courant et c850440",
+    "nature": "formulation_inexacte",
+    "constat": "Le critère demande si un circuit « change la tension ou la nature du courant » et la réponse oui mène toujours au 8504 40 « Static converters ». La position 8504 distingue trois familles : transformateurs, convertisseurs statiques et bobines d'induction. Un adaptateur qui ne fait qu'abaisser une tension alternative est un transformateur, pas un convertisseur statique, et ne peut pas recevoir le 8504 40 par la règle 6. Le pourquoi de q4 réduit de même le 8504 aux seuls convertisseurs statiques.",
+    "correction": "Question : « Le produit change-t-il la nature du courant (alternatif vers continu, continu vers continu, induction avec redressement) ? » et ajouter une valeur « abaisse seulement une tension alternative (transformateur) » vers une sortie hors périmètre. Pourquoi : « Le 8504 vise les transformateurs, les convertisseurs statiques et les bobines d'induction ; le 8504 40 ne reçoit que les convertisseurs statiques. »",
+    "textes": "h8504, sh850440, rgi-6"
+  },
+  {
+    "cible": "c850440 (base)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le motif tire « quel que soit l'appareil auquel il est destiné » de la note 2 a) de la section XVI. Cette note ne traite que des « parts of machines » (phrase introductive de la note 2) : un chargeur présenté seul n'est pas une partie de l'ordinateur ou du téléphone, il en est au plus un accessoire, et la note 2 ne parle pas des accessoires. Seule la note 6 E) du chapitre 84 soutient la phrase, et uniquement pour l'ordinateur.",
+    "correction": "Retirer s16-n2a de la base ou écrire : « quel que soit l'appareil auquel il est destiné : pour l'ordinateur, la note 6 E) du chapitre 84 renvoie à la position de la fonction propre. »",
+    "textes": "s16-n2, s16-n2a, c84-n6e"
+  },
+  {
+    "cible": "q5 (pourquoi) et h_multiprise (motif)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le pourquoi de q5 dit que les prises de courant « sont nommées au 8536 », puis la sortie h_multiprise affirme que « les décisions retiennent les tableaux de distribution du 8537 ». La position 8537 n'est pas dans textes.json, la sortie n'a pas de base et aucune décision n'est identifiée. Le texte cité (8536) désigne une autre position que celle retenue. La phrase contredit aussi q1 : la fonction principale est déjà fixée à « alimenter » quand on arrive à q5, et q5 dit qu'elle reste à établir.",
+    "correction": "Ajouter la position 8537 à textes.json, la citer en base de q5 et de h_multiprise, et écrire : « Un bloc qui réunit plusieurs prises du 8536 pour distribuer le courant peut relever du 8537 ; avec un convertisseur, c'est une machine composite au sens de la note 3 de la section XVI. »",
+    "textes": "h8536, s16-n3, h8504"
+  },
+  {
+    "cible": "q6 (pourquoi) et critère electronique_active",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Deux affirmations sans appui. 1) « dès qu'un circuit convertit ou répartit le signal, le produit devient un appareil classé selon sa fonction » : ni le 8544 ni le 8536 n'excluent un produit qui contient de l'électronique ; le 8536 vise précisément les appareils « for switching » des circuits, relais compris, et le critère range pourtant « commute » du côté qui sort du 8536. 2) « lui seul peut recevoir ou fournir des données comme une unité d'ordinateur » : la note 6 C) 3) exige que l'unité puisse accepter ou fournir des données sous une forme utilisable par le système, sans rien dire d'une puce ; elle ne réserve pas cette capacité aux produits à électronique active.",
+    "correction": "« Le 8544 couvre les conducteurs isolés munis ou non de connecteurs et le 8536 l'appareillage qui raccorde ou commute des circuits. Un produit qui traite le signal n'est décrit par aucun de ces deux libellés et se classe selon sa fonction. » Retirer la fin de phrase sur l'unité d'ordinateur et retirer c84-n6c de la base de q6, ou retirer « commute » du critère.",
+    "textes": "h8544, h8536, c84-n6c"
+  },
+  {
+    "cible": "critère construction_passive, valeur fibre_optique, et h_cable",
+    "nature": "formulation_inexacte",
+    "constat": "La valeur dit « Câble de fibres optiques sans émetteur-récepteur » et le motif l'envoie au 8544 70. La position 8544 ne couvre que les câbles de fibres optiques « made up of individually sheathed fibres » : la condition des fibres gainées une à une manque, alors qu'elle décide de l'entrée dans le 8544. Les sous-positions 8544 20, 8544 30 et 8544 70 nommées dans le motif sont absentes de textes.json et le nœud n'a pas de base. La valeur cable_connecteurs ajoute « à fils de cuivre », condition que ni le 8544 ni le 8544 42 ne posent.",
+    "correction": "Valeur : « Câble de fibres optiques dont chaque fibre est gainée individuellement, sans émetteur-récepteur ». Retirer « à fils de cuivre ». Ajouter 8544 20, 8544 30 et 8544 70 à textes.json et les citer en base de h_cable.",
+    "textes": "h8544, sh85444x, sh854442"
+  },
+  {
+    "cible": "q8 (pourquoi) et critère liaison_reseau",
+    "nature": "critere_conclusion_juridique",
+    "constat": "Les valeurs « Une interface réseau accessoire » et « Cette liaison est ce que le produit apporte » sont la conclusion de la note 3 de la section XVI (fonction principale ou non), pas un fait. Le pourquoi affirme qu'« un port réseau accessoire ne change pas la fonction principale au sens de la note 3 » : la note ne dit rien de tel, elle demande seulement d'identifier la fonction principale. L'aide propose de compter les ports, méthode absente du texte. Le pourquoi écrit aussi « même branchés sur un ordinateur » là où la note 6 D) dit « when presented separately, even if they meet all of the conditions set forth in note 6(C) ».",
+    "correction": "Valeurs factuelles : « aucune interface réseau ni radio », « une ou plusieurs interfaces réseau à côté de ports écran ou périphériques (indiquer le nombre de chaque type) », « uniquement des interfaces réseau ou de communication ». Pourquoi : « La note 6 D) 2) du chapitre 84 écarte du 8471 les appareils de transmission ou de réception de données présentés isolément, même s'ils remplissent les conditions de la note 6 C) ; quand cette fonction côtoie d'autres fonctions, la note 3 de la section XVI retient la fonction principale. »",
+    "textes": "s16-n3, c84-n6d, c84-n6d2"
+  },
+  {
+    "cible": "q8 et c847180 (frontière 8471 / 8517)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le critère limite l'exclusion de la note 6 D) 2) aux liaisons « vers un réseau ou une machine distante ». Le texte vise tout appareil « for the transmission or reception of voice, images or other data », le réseau n'étant introduit que par « including ». Un hub, une station d'accueil ou un adaptateur d'affichage actif transmettent des données et des images : rien dans c84-n6d2 ni dans le libellé du 8517 ne les fait sortir de l'exclusion. La distinction retenue vient de décisions, pas des textes cités, et le motif de c847180 n'écarte pas la note 6 D), qui prime pourtant sur la note 6 C) (« Subject to paragraph (D) and (E) »).",
+    "correction": "Citer en base de q8 et de c847180 le texte qui fonde la distinction (identifiant de la décision ou du règlement de classement, à ajouter à textes.json), ou écrire dans le motif que la lecture retenue est un choix d'interprétation et non le texte de la note. Ajouter c84-n6d à la base de c847180.",
+    "textes": "c84-n6d, c84-n6d2, c84-n6c, h8517"
+  },
+  {
+    "cible": "c851762 (motif)",
+    "nature": "formulation_inexacte",
+    "constat": "Le motif vise un appareil dont la fonction est « d'émettre, recevoir ou convertir » des données. Le 8517 62 exige « the reception, conversion and transmission or regeneration » : réception, conversion et émission ensemble, ou régénération. Un appareil qui ne fait que recevoir ou qu'émettre relève de l'autre sous-position de même niveau, le 8517 69, présente dans textes.json et non citée. Le libellé du 8517 réserve aussi les appareils des 8443, 8525, 8527 et 8528, réserve que le motif ne mentionne pas (récepteur audio Bluetooth, par exemple).",
+    "correction": "« Un appareil qui reçoit, convertit et émet des données sur un réseau ou une liaison de communication, ou qui les régénère, est écarté du 8471 par la note 6 D) 2) et répond au libellé du 8517 62 ; celui qui ne fait que recevoir ou qu'émettre relève du 8517 69, hors de cet arbre. » Ajouter sh851769 à la base.",
+    "textes": "sh851762, sh851769, sh85176x, h8517"
+  },
+  {
+    "cible": "q9 (pourquoi) et critère appareil_hote",
+    "nature": "formulation_inexacte",
+    "constat": "La note 6 C) pose trois conditions cumulatives ; le pourquoi n'en cite que deux et omet la troisième (accepter ou fournir des données sous une forme utilisable par le système). Le critère remplace le test « of a kind solely or principally used in an automatic data-processing system » par la « compatibilité annoncée » : une compatibilité Windows ou macOS sur la fiche n'établit ni l'usage exclusif ni l'usage principal, et un même adaptateur HDMI ou hub USB-C sert aussi un téléviseur ou un téléphone. Enfin « à défaut, l'appareil se classe selon sa fonction propre » attribue à la note 6 C) ce que dit la note 6 E), qui vise seulement les machines exerçant « a specific function other than data processing ».",
+    "correction": "Citer les trois conditions. Question : « D'après la fiche, le produit est-il annoncé pour les seuls ordinateurs, pour les ordinateurs et d'autres appareils, ou pour d'autres appareils ? », avec une valeur « usage mixte » menant à une sortie hors périmètre. Remplacer « à défaut » par « un appareil qui exerce une fonction propre autre que le traitement de l'information suit la note 6 E) ».",
+    "textes": "c84-n6c, c84-n6e"
+  },
+  {
+    "cible": "c847180 (motif et base)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le motif affirme que le produit « remplit les trois conditions de la note 6 C) » alors que l'arbre n'en vérifie qu'une, et par la compatibilité annoncée. Il affirme aussi qu'il n'est pas « une unité d'entrée, de sortie ou de mémoire », mais les sous-positions de même niveau 8471 60 et 8471 70 (et 8471 50), présentes dans textes.json, ne sont pas dans la base : la règle 6 impose de les comparer avant de retenir la sous-position résiduelle 8471 80. Un adaptateur d'affichage actif, qui envoie l'image vers l'écran, peut être lu comme une unité de sortie.",
+    "correction": "Ajouter sh847160, sh847170 et sh847150 à la base et dire dans le motif pourquoi chacune est écartée, ou ajouter un critère de fait (le produit sert-il à saisir, restituer ou stocker des données ?). Remplacer « remplit les trois conditions » par « à condition de remplir les trois conditions de la note 6 C) ».",
+    "textes": "sh847180, sh847160, sh847170, sh847150, c84-n6c, rgi-6"
+  },
+  {
+    "cible": "c854370 (motif)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le 8543 est une position résiduelle : « not specified or included elsewhere in this chapter ». Le motif affirme qu'« aucune autre position du chapitre 85 ne décrit sa fonction propre », mais la base ne contient aucun des textes à écarter. Un appareil qui « sélectionne » un signal répond aux termes du 8536 (« apparatus for switching »), et un appareil qui reçoit, convertit et retransmet ou régénère des images répond aux termes du 8517 62 (« including switching and routing apparatus »). La note 6 C) citée en base ne dit rien du 8543.",
+    "correction": "Ajouter h8517, sh851762 et h8536 à la base et écrire pour chacun le fait qui l'écarte, ou citer le règlement de classement qui retient le 8543 70 et l'ajouter à textes.json. Retirer c84-n6c ou préciser qu'il sert seulement à écarter le 8471.",
+    "textes": "h8543, sh854370, h8517, sh851762, h8536, c84-n6c"
+  },
+  {
+    "cible": "q10, critère fonction_principale (valeur porter_completer) et c847330",
+    "nature": "ordre_contraire_au_texte",
+    "constat": "La note 2 de la section XVI s'applique « Subject to note 1 to this section », et la note 1 n'est jamais interrogée. Les exemples du critère tombent sous ses exclusions : un support ou un cadre mural en métal est une partie d'usage général (note 1 g), position 8302), un pied ou un bras articulé relève du 9620 (note 1 q), un tapis de souris en caoutchouc ou en textile relève des notes 1 a) ou 1 e). La position 8473 exclut en outre « covers, carrying cases and the like », alors que la valeur dit « loger ». Enfin le « boîtier d'extension de calcul » qui échange des données avec l'unité centrale est une unité au sens de la note 6 C), classée au 8471 lorsqu'elle est présentée isolément, et la note 2 a) classe « in all cases » dans sa position un article qui est en lui-même un produit du 8471.",
+    "correction": "Avant q10, poser deux questions de fait : matière et nature de l'article (métal, plastique, caoutchouc, textile ; support, pied, housse) avec sortie hors périmètre pour les cas de la note 1 et les housses ; puis « l'article échange-t-il des données avec l'ordinateur ? » avec renvoi vers q8 si oui. Retirer « loger » et « boîtier d'extension de calcul » de la valeur. Ajouter s16-n1, s16-n1g et s16-n2 à la base de q10.",
+    "textes": "s16-n1, s16-n1g, s16-n2, s16-n2a, s16-n2b, h8473, c84-n6c, c84-n6c-al2"
+  },
+  {
+    "cible": "q10 (pourquoi et base) et c847330 (base)",
+    "nature": "base_ne_soutient_pas",
+    "constat": "Le pourquoi dit que le 8473 reçoit les parties et accessoires des « machines du 8471 » : la position vise les machines des « headings 8470 to 8472 », c'est la sous-position 8473 30 qui vise le 8471, et elle n'est pas dans la base de q10. La note 2 b) de la section XVI ne traite que des parties, pas des accessoires, alors que le nœud classe des accessoires. La note 6 C) définit les unités, pas les accessoires. Dans c847330, la note 3 de la section XVI est citée pour « la charge ou les ports ne sont qu'un complément », ce qu'elle ne dit pas et qui suppose une machine composite.",
+    "correction": "Pourquoi : « Le 8473 reçoit les parties et accessoires propres à être utilisés exclusivement ou principalement avec les machines des positions 8470 à 8472, et le 8473 30 ceux des machines du 8471. » Ajouter sh847330 à la base de q10, retirer c84-n6c, et dire que la note 2 b) ne couvre que les parties.",
+    "textes": "h8473, sh847330, s16-n2b, c84-n6c, s16-n3"
+  },
+  {
+    "cible": "h_hote (motif)",
+    "nature": "formulation_inexacte",
+    "constat": "Le motif parle d'un produit conçu pour « un téléphone, un véhicule, une console ou un appareil médical », mais la sortie reçoit aussi la branche audio_video de q10, que le motif ne décrit pas. Pour ces accessoires, la note 2 b) de la section XVI donne une règle précise que le motif ignore : les parties propres aux appareils des 8517 et 8525 à 8528 vont au 8517, celles du 8524 au 8529. La liste des positions en concurrence (8517, 8537, 8543, 9504) omet 8522 et 8529, et le 9504 relève de l'exclusion de la note 1 p), non citée. Le nœud n'a pas de base.",
+    "correction": "Ajouter au motif les appareils audio ou vidéo et les positions 8522 et 8529, et donner une base : s16-n2b, s16-n1p, h8517, h8543.",
+    "textes": "s16-n2b, s16-n1p, h8517, h8543"
+  },
+  {
+    "cible": "en-tête de l'arbre (champ nomenclature)",
+    "nature": "formulation_inexacte",
+    "constat": "L'arbre se déclare « SH 2022 », niveau hs6, mais tous les textes de la base viennent du règlement d'exécution (UE) 2025/1926, c'est-à-dire la nomenclature combinée 2026 de l'Union, avec des règles intitulées « Règles générales pour l'interprétation de la nomenclature combinée » et des sous-positions à huit chiffres (8471 30 00, 8507 60 00). Le texte cité n'est pas celui du Système harmonisé 2022.",
+    "correction": "Écrire « Nomenclature combinée 2026 (règlement d'exécution (UE) 2025/1926), codes arrêtés aux six premiers chiffres », ou remplacer les textes par ceux du Système harmonisé.",
+    "textes": "rgi-1, rgi-6, sh850760, sh847130"
+  }
+]

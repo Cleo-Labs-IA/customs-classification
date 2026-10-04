@@ -21,3 +21,16 @@ La clé d'API vit dans `.env` (`CLEO_API_KEY=...`), lue par le serveur, jamais e
 
     node sonde.mjs photo ~/Downloads/IMG_1022.HEIC
     node sonde.mjs contradiction
+
+## Règle encodée, arbre d'interprétation et modules (04/10/2026)
+
+- **Règle encodée au cœur du parcours** : `public/data/arbre.json` (9 critères, 28 nœuds, chargeurs, batteries externes, stations d'accueil, hubs, adaptateurs, câbles) est exécutée sur les faits que les pièces établissent (`POST /api/criteres`, chaque valeur avec son passage). Chaque étape montre la règle officielle, le fait vérifié, la conséquence. Un fait manquant devient une question qui dit où mène chaque réponse.
+- **Mode expert** : `/arbre`. Modifier une branche demande une lecture en une phrase et une signature ; le résultat, le code généré et le rejeu sur les décisions officielles se recalculent. La version modifiée reste une version de travail dans le navigateur.
+- **Mesure** (`node essais/arbre/assembler.mjs`) : 87 décisions officielles (13 règlements de classement UE, 74 décisions CBP), 38 reproduites dont 12 sur des faits tous explicites, 1 contredite, 35 non tranchées, 13 hors périmètre. Détail et limites : `essais/arbre/bilan.md`. L'arbre et les fiches sont rédigés par IA, non relus par un déclarant.
+- **Textes** : `public/data/textes.json`, 59 passages de la NC 2026 (règlement (UE) 2025/1926), vérifiés mot pour mot par `node essais/arbre/verifier-textes.mjs` (la source de 24 Mo se retélécharge, voir `construire-textes.mjs`).
+- **Modules** : `lib/applicabilite.mjs` (une décision proche porte-t-elle sur un produit comparable), `lib/obligations.mjs` (obligations, droits, coût, avec ce qui est sourcé ou non ; mesure dans `essais/modules/obligations-mesure.md`), `public/dossier.js` (dossier lisible et imprimable).
+
+    node --test tests/*.test.mjs
+    node sonde-arbre.mjs                       # page /arbre, données réelles
+    node sonde-parcours.mjs dock               # parcours complet, station d'accueil
+    node sonde-parcours.mjs chargeur <photo>   # parcours complet depuis une photo

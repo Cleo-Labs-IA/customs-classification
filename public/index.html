@@ -593,7 +593,7 @@ function grapheHtml() {
   const codes = new Set(Object.values(ARBRE.noeuds).filter((n) => n.type === 'code').map((n) => n.code));
   const ver = `<div class="ver">${esc(ARBRE.titre || '')} · ${esc(ARBRE.nomenclature || '')}, niveau 6 chiffres · version de référence, rédigée par IA à partir des textes cités, non relue par un déclarant. <a href="/arbre">Mode expert</a></div>`;
   const couvert = Object.keys(S.crit).length || (top && codes.has(String(top.code).slice(0, 6)));
-  if (res.statut === 'hors_perimetre' || !couvert) return head + `<div class="node static rule"><div class="k">Règle encodée</div><div class="t">Cette règle ne couvre pas ce produit</div><div class="s">${esc(res.statut === 'hors_perimetre' ? (ARBRE.noeuds[res.noeud] || {}).motif || '' : "Les pièces n'établissent aucun des critères de la règle. Elle porte sur : " + (ARBRE.perimetre || ''))}</div>${ver}</div>`;
+  if (!couvert || (res.statut === 'hors_perimetre' && !res.chemin.length)) return head + `<div class="node static rule"><div class="k">Règle encodée</div><div class="t">Cette règle ne couvre pas ce produit</div><div class="s">${esc(res.statut === 'hors_perimetre' ? (ARBRE.noeuds[res.noeud] || {}).motif || '' : "Les pièces n'établissent aucun des critères de la règle. Elle porte sur : " + (ARBRE.perimetre || ''))}</div>${ver}</div>`;
   const steps = res.chemin.map((s) => {
     const n = ARBRE.noeuds[s.noeud], c = C[s.critere], f = S.crit[s.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
     const fait = f.kind === 'reponse' ? `<b>${esc(brTxt(c, s.valeur))}</b> · réponse confirmée par le marchand` : `<b>${esc(brTxt(c, s.valeur))}</b> · <q>${esc(f.citation)}</q> <span class="muted">(${esc(SRC_FR(f.source))})</span>`;
@@ -607,6 +607,8 @@ function grapheHtml() {
     const n = ARBRE.noeuds[res.noeud], c = C[res.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
     fin = `<div class="block"><div class="k">Point de blocage · un fait manque</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></div>
       ${S.saved ? '' : `<div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>mène à ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div>`}</div>`;
+  } else if (res.statut === 'hors_perimetre') {
+    fin = `<div class="concl div"><div class="k">Conclusion de la règle</div><b>Ce produit sort du périmètre de la règle</b><div class="s">${esc((ARBRE.noeuds[res.noeud] || {}).motif || '')}</div><div style="margin-top:6px">La règle ne conclut pas. La proposition du moteur reste seule, à faire vérifier.</div></div>`;
   } else {
     const n = ARBRE.noeuds[res.noeud], same = top && String(top.code).slice(0, 6) === res.code;
     fin = `<div class="concl ${same ? '' : 'div'}"><div class="k">Conclusion de la règle</div><b class="c">${esc(fmtCode(res.code))}</b> ${esc(n.libelle || '')}<div class="s">${esc(n.motif || '')}</div>

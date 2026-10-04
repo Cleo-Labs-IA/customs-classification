@@ -1,0 +1,304 @@
+{
+  "titre": "Chargeurs, batteries externes, stations d'accueil, hubs, adaptateurs et câbles pour ordinateurs et téléphones",
+  "perimetre": "Alimentations et chargeurs pour appareils électroniques (adaptateurs secteur, chargeurs USB, chargeurs sans fil, batteries externes), stations d'accueil, réplicateurs de ports, hubs USB, adaptateurs de connexion et câbles munis de connecteurs pour ordinateurs et téléphones, pour des tensions n'excédant pas 1 000 V.",
+  "niveau": "hs6",
+  "nomenclature": "SH 2022",
+  "criteres": [
+    {
+      "id": "constitution",
+      "libelle": "Constitution du produit",
+      "question": "De quoi le produit est-il fait : un câble qui ne fait que conduire, un bloc de connecteurs sans électronique, ou un appareil contenant des composants qui convertissent, stockent ou traitent le courant ou le signal ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "cable_passif", "libelle": "Câble isolé muni de connecteurs, sans composant qui convertit ou modifie le courant ou le signal" },
+        { "v": "connecteur_passif", "libelle": "Fiche, prise ou adaptateur de connecteurs sans cordon (y compris à plusieurs sorties), sans composant électronique, sans interrupteur ni protection" },
+        { "v": "bloc_prises", "libelle": "Multiprise ou rallonge à plusieurs prises secteur, avec ou sans ports USB, ou boîtier à interrupteur ou sélecteur mécanique" },
+        { "v": "appareil_actif", "libelle": "Appareil contenant un circuit électronique, un transformateur, une bobine ou des éléments de batterie" }
+      ],
+      "aide": "Regarder la fiche technique : présence d'une carte électronique, d'une puce de conversion, d'une bobine ou d'une batterie, ou seulement des fils et des contacts."
+    },
+    {
+      "id": "type_cable",
+      "libelle": "Type de câble",
+      "question": "De quel type de câble s'agit-il ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "coaxial", "libelle": "Câble coaxial (âme centrale entourée d'un second conducteur concentrique)" },
+        { "v": "faisceau_vehicule", "libelle": "Câble ou faisceau conçu pour être monté dans un véhicule, un avion ou un bateau" },
+        { "v": "fibre_optique", "libelle": "Câble de fibres optiques" },
+        { "v": "autre_cuivre", "libelle": "Autre câble à conducteurs isolés (USB, HDMI, audio, alimentation), tension n'excédant pas 1 000 V" }
+      ],
+      "aide": "La construction du câble et son lieu de montage figurent sur la fiche technique."
+    },
+    {
+      "id": "pluralite_fonctions",
+      "libelle": "Une ou plusieurs fonctions",
+      "question": "Le produit assure-t-il une seule fonction, ou plusieurs (par exemple charger et relier des périphériques, stocker de l'énergie et chauffer, charger et afficher) ? S'il en assure plusieurs, l'une d'elles donne-t-elle son nom au produit et mobilise-t-elle l'essentiel de ses composants, les autres étant annexes ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "une_seule", "libelle": "Une seule fonction" },
+        { "v": "plusieurs_une_domine", "libelle": "Plusieurs fonctions, dont une donne son nom au produit et les autres sont annexes (voyant, lampe d'appoint, port de charge secondaire, rangement)" },
+        { "v": "plusieurs_sans_dominante", "libelle": "Plusieurs fonctions d'importance comparable, aucune ne l'emporte" }
+      ],
+      "aide": "Comparer le nom commercial, l'emballage et la notice : quelle fonction est vendue, lesquelles ne sont que des compléments."
+    },
+    {
+      "id": "fonction_principale",
+      "libelle": "Fonction unique ou dominante",
+      "question": "Que fait le produit (sa fonction unique, ou celle qui domine s'il en a plusieurs) ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "conversion_courant", "libelle": "Convertir le courant pour alimenter ou charger un appareil (secteur vers continu, continu vers continu, charge par induction)" },
+        { "v": "stockage_energie", "libelle": "Stocker de l'énergie dans une batterie interne et la restituer (batterie externe, station d'énergie portable)" },
+        { "v": "accueil_liaison", "libelle": "Accueillir un appareil hôte, le compléter ou lui relier des périphériques, des écrans ou des ports (station d'accueil, hub, réplicateur de ports, adaptateur d'affichage, répartiteur ou convertisseur de signal vidéo, support)" },
+        { "v": "communication_reseau", "libelle": "Émettre, recevoir ou convertir des données sur un réseau ou une liaison de communication (Ethernet, Wi-Fi, Bluetooth, cellulaire, liaison série, émetteur-récepteur intégré à un câble)" },
+        { "v": "autre", "libelle": "Autre fonction (chauffer, éclairer, diffuser du son, distribuer le secteur, ranger)" }
+      ],
+      "aide": "Répondre par ce que fait l'appareil d'après sa fiche technique, pas par le nom de la position tarifaire."
+    },
+    {
+      "id": "chimie_batterie",
+      "libelle": "Type de batterie",
+      "question": "Quelle est la technologie des éléments de batterie contenus dans le produit ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "lithium_ion", "libelle": "Rechargeable au lithium-ion (y compris lithium-polymère)" },
+        { "v": "autre_rechargeable", "libelle": "Rechargeable d'une autre technologie (nickel-hydrure métallique, plomb, etc.)" },
+        { "v": "non_rechargeable", "libelle": "Piles non rechargeables (alcalines, etc.)" }
+      ],
+      "aide": "La technologie est indiquée sur l'étiquette de la batterie et sur la fiche de données de sécurité."
+    },
+    {
+      "id": "appareil_hote",
+      "libelle": "Appareil auquel le produit se raccorde",
+      "question": "À quel appareil le produit est-il conçu pour se raccorder, exclusivement ou principalement ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "ordinateur", "libelle": "Un ordinateur (portable, de bureau, tablette PC, serveur)" },
+        { "v": "audio_video", "libelle": "Des équipements audio ou vidéo (téléviseur, décodeur, lecteur, caméra, régie), sans ordinateur" },
+        { "v": "telephone_ou_autre", "libelle": "Un téléphone, une console de jeux ou un autre appareil" }
+      ],
+      "aide": "Voir les compatibilités annoncées : systèmes d'exploitation pris en charge, port amont vers un PC, ou sources vidéo."
+    },
+    {
+      "id": "echange_donnees",
+      "libelle": "Échange de données avec l'ordinateur",
+      "question": "Le produit, une fois branché, reçoit-il de l'ordinateur ou lui fournit-il des données (signal USB, vidéo, audio, réseau) ?",
+      "type": "bool",
+      "aide": "Non si le produit ne fait que porter, loger ou alimenter l'ordinateur ou ses accessoires (support, tapis de souris, bras)."
+    },
+    {
+      "id": "role_unite",
+      "libelle": "Rôle dans le système informatique",
+      "question": "Quel rôle le produit joue-t-il lui-même vis-à-vis de l'ordinateur ?",
+      "type": "enum",
+      "valeurs": [
+        { "v": "entree_sortie", "libelle": "Il saisit lui-même des données ou les restitue à l'utilisateur (clavier, pavé tactile, écran tactile, lecteur intégré)" },
+        { "v": "stockage", "libelle": "Il conserve lui-même des données (disque ou mémoire intégrés)" },
+        { "v": "interconnexion", "libelle": "Il ne fait que relier l'ordinateur à d'autres unités, écrans ou ports (hub, station d'accueil, réplicateur de ports, adaptateur d'affichage, commutateur clavier-écran-souris)" },
+        { "v": "traitement", "libelle": "Il calcule ou traite lui-même les données (processeur ou carte graphique externe)" }
+      ],
+      "aide": "Lister ce que le produit contient : uniquement des ports et un contrôleur, ou aussi un clavier, un écran, un disque, un processeur graphique."
+    }
+  ],
+  "racine": "q1",
+  "noeuds": {
+    "q1": {
+      "type": "question",
+      "critere": "constitution",
+      "pourquoi": "La règle 1 classe d'abord selon les termes des positions : le 8544 vise les conducteurs isolés munis ou non de connecteurs, le 8536 l'appareillage qui ne fait que raccorder des circuits, et les autres positions des chapitres 84 et 85 des appareils définis par leur fonction.",
+      "base": ["rgi-1", "h8544", "h8536", "s16-n5"],
+      "branches": {
+        "cable_passif": "q_cable",
+        "connecteur_passif": "c853669",
+        "bloc_prises": "h_distribution",
+        "appareil_actif": "q2"
+      }
+    },
+    "q_cable": {
+      "type": "question",
+      "critere": "type_cable",
+      "pourquoi": "À l'intérieur du 8544, la règle 6 compare les sous-positions de même niveau : les câbles coaxiaux, les jeux de fils pour véhicules et les fibres optiques ont leurs propres sous-positions, distinctes des autres conducteurs pour tensions n'excédant pas 1 000 V.",
+      "base": ["rgi-6", "h8544", "sh85444x"],
+      "branches": {
+        "coaxial": "h_cable",
+        "faisceau_vehicule": "h_cable",
+        "fibre_optique": "h_cable",
+        "autre_cuivre": "c854442"
+      }
+    },
+    "c854442": {
+      "type": "code",
+      "code": "854442",
+      "libelle": "Autres conducteurs électriques, pour tensions n'excédant pas 1 000 V, munis de pièces de connexion",
+      "motif": "Un câble isolé muni de connecteurs qui ne fait que conduire le courant ou le signal répond au libellé du 8544 puis de la sous-position 8544 42, même s'il sert à la fois aux données et à la charge.",
+      "base": ["h8544", "sh85444x", "sh854442", "rgi-6"]
+    },
+    "h_cable": {
+      "type": "hors_perimetre",
+      "motif": "Câble coaxial (8544 20), jeu de fils pour véhicules (8544 30) ou câble de fibres optiques (8544 70) : ces sous-positions ne sont pas couvertes par cet arbre."
+    },
+    "c853669": {
+      "type": "code",
+      "code": "853669",
+      "libelle": "Fiches et prises de courant, autres, pour une tension n'excédant pas 1 000 V",
+      "motif": "Un adaptateur sans câble ni électronique, dont le seul effet est d'établir une connexion entre deux formats de fiche ou de prise, est un appareillage pour le raccordement des circuits électriques du 8536, sous-position des fiches et prises.",
+      "base": ["h8536", "sh85366x", "sh853669", "rgi-6"]
+    },
+    "h_distribution": {
+      "type": "hors_perimetre",
+      "motif": "Multiprise, bloc de prises secteur avec ou sans ports USB, ou boîtier à interrupteur mécanique : ces articles relèvent des interrupteurs (8536 50) ou des tableaux de distribution (8537), non couverts par cet arbre."
+    },
+    "q2": {
+      "type": "question",
+      "critere": "pluralite_fonctions",
+      "pourquoi": "La note 3 de la section XVI impose de classer une machine à plusieurs fonctions comme si elle n'assurait que sa fonction principale : il faut donc savoir s'il y a plusieurs fonctions et si l'une d'elles domine avant de lire les positions.",
+      "base": ["s16-n3", "s16-n5"],
+      "branches": {
+        "une_seule": "q3",
+        "plusieurs_une_domine": "q3",
+        "plusieurs_sans_dominante": "h_sans_dominante"
+      }
+    },
+    "h_sans_dominante": {
+      "type": "hors_perimetre",
+      "motif": "Aucune fonction ne l'emporte : la note 3 de la section XVI ne désigne pas de position et le classement se fait par la règle 3 c), dans la dernière position par ordre de numérotation parmi celles des fonctions en présence, ce que cet arbre ne calcule pas."
+    },
+    "q3": {
+      "type": "question",
+      "critere": "fonction_principale",
+      "pourquoi": "La fonction unique ou principale désigne la position : convertir le courant (8504), stocker l'énergie (8507), transmettre des données (8517), ou servir d'unité à un ordinateur (8471), sachant que la note 6 E) du chapitre 84 renvoie à leur propre position les appareils qui travaillent avec un ordinateur mais assurent une fonction propre autre que le traitement de l'information.",
+      "base": ["s16-n3", "c84-n6e", "c84-n6d2", "h8504", "h8507", "h8517", "h8471"],
+      "branches": {
+        "conversion_courant": "c850440",
+        "stockage_energie": "q_chimie",
+        "accueil_liaison": "q_hote",
+        "communication_reseau": "c851762",
+        "autre": "h_autre_fonction"
+      }
+    },
+    "c850440": {
+      "type": "code",
+      "code": "850440",
+      "libelle": "Convertisseurs statiques",
+      "motif": "Un appareil dont la fonction unique ou principale est de convertir le courant pour alimenter ou charger (adaptateur secteur, chargeur USB, chargeur de voiture, chargeur à induction) est un convertisseur statique du 8504, y compris lorsqu'il est destiné à un ordinateur.",
+      "base": ["h8504", "sh850440", "c84-n6e", "s16-n2a", "rgi-6"]
+    },
+    "q_chimie": {
+      "type": "question",
+      "critere": "chimie_batterie",
+      "pourquoi": "Le 8507 ne vise que les accumulateurs, c'est-à-dire des éléments rechargeables, et la règle 6 départage ses sous-positions selon la technologie de l'accumulateur.",
+      "base": ["h8507", "c85-n3", "rgi-6", "sh850760", "sh850780"],
+      "branches": {
+        "lithium_ion": "c850760",
+        "autre_rechargeable": "c850780",
+        "non_rechargeable": "h_pile"
+      }
+    },
+    "c850760": {
+      "type": "code",
+      "code": "850760",
+      "libelle": "Accumulateurs au lithium-ion",
+      "motif": "Une batterie externe dont la fonction est de stocker puis de fournir de l'énergie reste un accumulateur du 8507 même présentée avec ses connecteurs, son câble et ses circuits de protection, et ses éléments lithium-ion la placent au 8507 60.",
+      "base": ["h8507", "c85-n3", "sh850760", "rgi-6"]
+    },
+    "c850780": {
+      "type": "code",
+      "code": "850780",
+      "libelle": "Autres accumulateurs",
+      "motif": "Une batterie externe rechargeable dont la technologie n'est nommée par aucune sous-position spécifique du 8507 relève de la sous-position résiduelle des autres accumulateurs.",
+      "base": ["h8507", "c85-n3", "sh850780", "rgi-6"]
+    },
+    "h_pile": {
+      "type": "hors_perimetre",
+      "motif": "Bloc de piles non rechargeables : il ne s'agit pas d'un accumulateur du 8507 mais de piles du 8506, position non couverte par cet arbre."
+    },
+    "c851762": {
+      "type": "code",
+      "code": "851762",
+      "libelle": "Appareils pour la réception, la conversion et l'émission, la transmission ou la régénération de la voix, d'images ou d'autres données, y compris les appareils de commutation et de routage",
+      "motif": "Un appareil dont la fonction unique ou principale est d'émettre, recevoir ou convertir des données sur un réseau ou une liaison de communication est exclu du 8471 par la note 6 D) 2) du chapitre 84 et répond au libellé du 8517 62.",
+      "base": ["h8517", "c84-n6d2", "sh85176x", "sh851762", "rgi-6"]
+    },
+    "h_autre_fonction": {
+      "type": "hors_perimetre",
+      "motif": "La fonction unique ou principale (chauffer, éclairer, diffuser du son, distribuer le secteur, ranger) relève d'une position que cet arbre ne couvre pas."
+    },
+    "q_hote": {
+      "type": "question",
+      "critere": "appareil_hote",
+      "pourquoi": "La note 6 C) 1) du chapitre 84 n'admet comme unité du 8471 qu'un article du type utilisé exclusivement ou principalement dans un système informatique, et la note 5 du chapitre 85 range les smartphones parmi les téléphones du 8517, non parmi les ordinateurs.",
+      "base": ["c84-n6c", "c85-n5", "h8471"],
+      "branches": {
+        "ordinateur": "q_donnees",
+        "audio_video": "c854370",
+        "telephone_ou_autre": "h_hote_autre"
+      }
+    },
+    "c854370": {
+      "type": "code",
+      "code": "854370",
+      "libelle": "Autres machines et appareils électriques ayant une fonction propre, non dénommés ni compris ailleurs dans le chapitre 85",
+      "motif": "Un appareil actif qui répartit, sélectionne ou convertit un signal entre équipements audio ou vidéo n'est ni une unité d'ordinateur ni un simple appareillage de connexion : sa fonction propre n'est décrite par aucune autre position du chapitre 85.",
+      "base": ["h8543", "sh854370", "c84-n6c", "rgi-6"]
+    },
+    "h_hote_autre": {
+      "type": "hors_perimetre",
+      "motif": "Station d'accueil ou adaptateur conçu pour un téléphone, une console ou un autre appareil qui n'est pas un ordinateur : les positions en concurrence (8517, 8543, 9504, 8537) ne sont pas départagées par cet arbre."
+    },
+    "q_donnees": {
+      "type": "question",
+      "critere": "echange_donnees",
+      "pourquoi": "La note 6 C) 2) et 3) du chapitre 84 exige qu'une unité soit connectable à l'unité centrale et capable de recevoir ou de fournir des données utilisables par le système ; à défaut, l'article destiné à l'ordinateur n'en est qu'un accessoire du 8473.",
+      "base": ["c84-n6c", "h8473"],
+      "branches": {
+        "oui": "q_role",
+        "non": "c847330"
+      }
+    },
+    "c847330": {
+      "type": "code",
+      "code": "847330",
+      "libelle": "Parties et accessoires des machines du n° 8471",
+      "motif": "Un article conçu exclusivement ou principalement pour un ordinateur mais qui n'échange aucune donnée avec lui n'est pas une unité du 8471 : c'est un accessoire reconnaissable des machines du 8471.",
+      "base": ["h8473", "sh847330", "s16-n2b", "rgi-6"]
+    },
+    "q_role": {
+      "type": "question",
+      "critere": "role_unite",
+      "pourquoi": "Une unité présentée isolément se classe au 8471, et la règle 6 départage ensuite les sous-positions selon que l'unité est d'entrée ou de sortie, de mémoire, ou une autre unité.",
+      "base": ["c84-n6c-al2", "rgi-6", "sh847160", "sh847170", "sh847180"],
+      "branches": {
+        "entree_sortie": "c847160",
+        "stockage": "c847170",
+        "interconnexion": "c847180",
+        "traitement": "h_traitement"
+      }
+    },
+    "c847160": {
+      "type": "code",
+      "code": "847160",
+      "libelle": "Unités d'entrée ou de sortie, pouvant comporter, sous la même enveloppe, des unités de mémoire",
+      "motif": "Une unité qui saisit elle-même des données ou les restitue à l'utilisateur est une unité d'entrée ou de sortie du 8471 60.",
+      "base": ["h8471", "c84-n6c", "c84-n6c-al2", "sh847160", "rgi-6"]
+    },
+    "c847170": {
+      "type": "code",
+      "code": "847170",
+      "libelle": "Unités de mémoire",
+      "motif": "Une unité qui conserve elle-même les données de l'ordinateur est une unité de mémoire du 8471 70.",
+      "base": ["h8471", "c84-n6c", "c84-n6c-al2", "sh847170", "rgi-6"]
+    },
+    "c847180": {
+      "type": "code",
+      "code": "847180",
+      "libelle": "Autres unités de machines automatiques de traitement de l'information",
+      "motif": "Un hub, une station d'accueil, un réplicateur de ports ou un adaptateur d'affichage qui relie l'ordinateur à ses périphériques remplit les trois conditions de la note 6 C) sans être une unité d'entrée, de sortie ou de mémoire : c'est une autre unité du 8471 80.",
+      "base": ["h8471", "c84-n6c", "c84-n6c-al2", "sh847180", "rgi-6"]
+    },
+    "h_traitement": {
+      "type": "hors_perimetre",
+      "motif": "Boîtier qui calcule ou traite lui-même les données (carte graphique externe, unité de traitement) : le choix entre unité de traitement du 8471 50 et accessoire du 8473 30 n'est pas couvert par cet arbre."
+    }
+  }
+}

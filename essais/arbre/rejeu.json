@@ -1,0 +1,634 @@
+{
+ "total": 87,
+ "reproduit": 38,
+ "contredit": 1,
+ "non_tranche": 35,
+ "hors_perimetre": 13,
+ "par_source": {
+  "EU_REGLEMENT": {
+   "total": 13,
+   "reproduit": 8,
+   "contredit": 0,
+   "non_tranche": 3,
+   "hors_perimetre": 2
+  },
+  "US_CBP": {
+   "total": 74,
+   "reproduit": 30,
+   "contredit": 1,
+   "non_tranche": 32,
+   "hors_perimetre": 11
+  }
+ },
+ "lignes": [
+  {
+   "id": "32018R1785#1",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32017R1465#1",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32017R1166#1",
+   "hs6": "854370",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "appareil_hote"
+  },
+  {
+   "id": "32016R2224#1",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32016R0666#1",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32016R0615#1",
+   "hs6": "853710",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "32015R2319#1",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "32014R0457#1",
+   "hs6": "854370",
+   "obtenu": "854370",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32014R0457#2",
+   "hs6": "854370",
+   "obtenu": "854370",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32014R0457#3",
+   "hs6": "853650",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "32012R1110#1",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32012R1112#1",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "32008R1142#1",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "electronique_active"
+  },
+  {
+   "id": "N363538",
+   "hs6": "850760",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "H348342",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N360577",
+   "hs6": "851762",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N359291",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N359212",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N356502",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N356452",
+   "hs6": "853710",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N356371",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N352984",
+   "hs6": "847330",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "H328693",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H342570",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N349898",
+   "hs6": "847330",
+   "obtenu": "847330",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N349433",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H337673",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N346959",
+   "hs6": "850760",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "H343160",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N343619",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "H341609",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N342905",
+   "hs6": "850610",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N339123",
+   "hs6": "853669",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N334999",
+   "hs6": "853669",
+   "obtenu": "853669",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N332683",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N328742",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H322074",
+   "hs6": "854370",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N325987",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N323399",
+   "hs6": "850760",
+   "obtenu": "850760",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H319416",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N319727",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N316909",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N315544",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N310490",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N307285",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N307161",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N306841",
+   "hs6": "850760",
+   "obtenu": "850760",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N307014",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "electronique_active"
+  },
+  {
+   "id": "N306782",
+   "hs6": "847330",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "appareil_hote"
+  },
+  {
+   "id": "N305957",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N305975",
+   "hs6": "854370",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N305600",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N305608",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N304715",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N304573",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N304253",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N304098",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N303514",
+   "hs6": "853669",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N301143",
+   "hs6": "847180",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "liaison_reseau"
+  },
+  {
+   "id": "N301141",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N300708",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N300797",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "H298118",
+   "hs6": "850760",
+   "obtenu": "850760",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N299351",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N298750",
+   "hs6": "854430",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N298752",
+   "hs6": "851762",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N298534",
+   "hs6": "850440",
+   "obtenu": "850440",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H287462",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  },
+  {
+   "id": "N296103",
+   "hs6": "854420",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N296304",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N296307",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "H273383",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N292574",
+   "hs6": "847180",
+   "obtenu": "847180",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N290926",
+   "hs6": "854430",
+   "obtenu": null,
+   "verdict": "hors_perimetre",
+   "critere_manquant": null
+  },
+  {
+   "id": "N290028",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N289786",
+   "hs6": "851762",
+   "obtenu": "847180",
+   "verdict": "contredit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N290026",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N288408",
+   "hs6": "850760",
+   "obtenu": "850760",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N285505",
+   "hs6": "851762",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "electronique_active"
+  },
+  {
+   "id": "N284888",
+   "hs6": "854442",
+   "obtenu": "854442",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N284892",
+   "hs6": "851762",
+   "obtenu": "851762",
+   "verdict": "reproduit",
+   "critere_manquant": null
+  },
+  {
+   "id": "N284202",
+   "hs6": "847180",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "fonction_principale"
+  },
+  {
+   "id": "N284052",
+   "hs6": "851762",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "electronique_active"
+  },
+  {
+   "id": "N282038",
+   "hs6": "850440",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N281995",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N282047",
+   "hs6": "854442",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "batterie_integree"
+  },
+  {
+   "id": "N282039",
+   "hs6": "850760",
+   "obtenu": null,
+   "verdict": "non_tranche",
+   "critere_manquant": "genere_electricite"
+  }
+ ]
+}

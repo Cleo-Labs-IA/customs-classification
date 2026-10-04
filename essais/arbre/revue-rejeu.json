@@ -1,0 +1,611 @@
+[
+ {
+  "cible": "32017R1465#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « consisting of an adapter with a cable of a length of approximately 180 cm and a charging plate ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440. Le règlement applique la règle 3 c) entre sous-positions à 8 chiffres : sans effet au niveau SH6.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "32017R1166#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : appareil_hote=audio_video (déduction) « The apparatus is designed to convert video signals from SDI format to HDMI format. ». Rejeu complété q1/q6/q8/q9 : 854370, officiel 854370.",
+  "correction": "Ajouter appareil_hote=audio_video. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "c84-n6c, c84-n6e, h8543"
+ },
+ {
+  "cible": "32016R0666#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « The housing is equipped with a plug to connect to the AC and with an electrical cable of 1,5 m fitted with a DC-connector ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "32016R0615#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : fonction_principale=aucune_dominante (explicite) « none of the functions is considered to be the principal function of the apparatus within the meaning of note 3 to Section XVI ». Rejeu complété q1 : h_aucune, officiel 853710. La sortie h_aucune est cohérente avec le 8537 retenu par la règle 3 c) ; le verdict devient hors_perimetre, pas reproduit.",
+  "correction": "Ajouter fonction_principale=aucune_dominante.",
+  "textes": "s16-n3, rgi-3b, rgi-1"
+ },
+ {
+  "cible": "32015R2319#1",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3 exige un fait que la décision ne constate pas.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "32014R0457#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : liaison_reseau=aucune (énumération) « A digital electronic apparatus with one High-Definition Multimedia Interface (HDMI) input and eight HDMI outputs ». Rejeu complété q1/q6/q8/q9 : 854370, officiel 854370.",
+  "correction": "Ajouter liaison_reseau=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "c84-n6d2, s16-n3, h8517"
+ },
+ {
+  "cible": "32014R0457#2",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : liaison_reseau=aucune (énumération) « A digital electronic apparatus with four High-Definition Multimedia Interfaces (HDMI) inputs, one HDMI output and a button for selecting the input ». Rejeu complété q1/q6/q8/q9 : 854370, officiel 854370.",
+  "correction": "Ajouter liaison_reseau=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "c84-n6d2, s16-n3, h8517"
+ },
+ {
+  "cible": "32012R1110#1",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « comprising a car cigarette adapter, two USB interfaces and a light indicator ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "32008R1142#1",
+  "nature": "arbre",
+  "constat": "Texte muet sur electronique_active (q6). Par hypothèse, q1/q6/q7 donnerait 854442, officiel 854442.",
+  "correction": "Ne rien ajouter par inférence. q6 exige un fait que la décision ne constate pas.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N363538",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2). Par hypothèse, q1/q2/q3 donnerait 850760, officiel 850760.",
+  "correction": "Ne rien ajouter par inférence. q2 exige un fait que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "H348342",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « The fourth item is the USB 3.0 7-Port Hub (UH700). » ; liaison_reseau=aucune (explicite) « The UH700, however, is not actively transmitting or receiving within a wired or wireless network. ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180. Texte source tronqué à 7 000 caractères.",
+  "correction": "Ajouter electronique_active=oui, liaison_reseau=aucune. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c, c84-n6d2, s16-n3, h8517"
+ },
+ {
+  "cible": "N359291",
+  "nature": "arbre",
+  "constat": "Texte muet sur convertit_courant (q4). Lisible en revanche : genere_electricite=non (déduction) « a USB-C port for charging cables » ; prises_secteur_sortie=non (énumération) « a sub-PCBA that manages indicator status and facilitates battery interface, and a USB-C port for charging cables ». Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440. Même après correction de q2, q4 reste sans réponse : le texte ne dit pas que le chargeur convertit le courant.",
+  "correction": "Ne rien ajouter par inférence. q4 exige un fait que la décision ne constate pas.",
+  "textes": "h8504, h8536, h8544"
+ },
+ {
+  "cible": "N359212",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « It is comprised of a 2-prong power plug for household electrical outlets and a female output port for connecting DC power plugs. ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N356502",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « This cable consists of a length of insulated conductors with a Universal Accessory Connector (UAC) on one end and a Lightning connector on the other end ». Rejeu complété q1/q6/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N356452",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « The subject device is comprised of a braided power cord terminated at one end with a standard electrical wall plug. ». Rejeu complété q1/q2/q3/q4/q5 : h_multiprise, officiel 853710. La sortie h_multiprise est cohérente avec le 8537 officiel ; le verdict devient hors_perimetre.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N356371",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « The part is comprised of a length of insulated cable with a 3.5mm audio connector at each end. ». Rejeu complété q1/q6/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "H328693",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « The subject merchandise is a Dell D3100 “Dockport” USB docking station ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180.",
+  "correction": "Ajouter electronique_active=oui. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "H342570",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3 exige un fait que la décision ne constate pas.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N349433",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « described as an plastic housing containing circuitry to electrically convert AC to DC ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "H337673",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « are universal laptop docking stations ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180. La décision couvre deux produits (stations d'accueil et adaptateur USB vers HDMI) ; la fiche n'annote que les stations.",
+  "correction": "Ajouter electronique_active=oui. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N346959",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2). Par hypothèse, q1/q2/q3 donnerait 850760, officiel 850760.",
+  "correction": "Ne rien ajouter par inférence. q2 exige un fait que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "H343160",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3 exige un fait que la décision ne constate pas.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N343619",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : fonction_principale=alimenter (déduction) « users can plug electrical devices into the USB sockets to receive converted DC power » ; batterie_integree=aucune (énumération) « described as a plastic housing with LED night lights, two USB Type-A output sockets, and a two prong wall plug ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440. CBP ne dit pas laquelle des deux fonctions (chargeur, veilleuse) l'emporte ; seule la charge est décrite « in use ».",
+  "correction": "Ajouter fonction_principale=alimenter, batterie_integree=aucune. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "s16-n3, rgi-3b, rgi-1, h8507, c85-n3"
+ },
+ {
+  "cible": "N339123",
+  "nature": "arbre",
+  "constat": "CBP classe sur la seule construction (« a disassembled electrical connector having a plastic housing with two female RJ45 sockets on one side, and a male DB25 connector on the other side ») ; aucune fonction d'alimentation ou de signal n'est dite. q1 exige un choix que le texte ne permet pas ; les deux branches finissent pourtant à q7 puis au 853669 officiel.",
+  "correction": "q1 : même défaut que N303514 (valeur « raccorder » ou construction d'abord). Ne pas inventer une fonction.",
+  "textes": "h8536, sh853669, rgi-1"
+ },
+ {
+  "cible": "N334999",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non, batterie_integree=aucune (explicite) « there are no fuses, switches, or other electrical apparatus inside the plug’s housing ». Rejeu complété q1/q2/q3/q4/q7 : 853669, officiel 853669.",
+  "correction": "Ajouter genere_electricite=non, batterie_integree=aucune.",
+  "textes": "s16-n3, h8504, h8507, c85-n3"
+ },
+ {
+  "cible": "N328742",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « only functions to provide DC power for charging various types of electronic devices ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "H322074",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : fonction_principale=autre (explicite) « The subject merchandise’s principal function is to perform a hand warming function. ». Rejeu complété q1 : h_autre, officiel 854370. Le lot 04 a mis « autre » sur le même produit (N305975), le lot 02 a laissé vide. Le verdict devient hors_perimetre, pas reproduit.",
+  "correction": "Ajouter fonction_principale=autre.",
+  "textes": "s16-n3, rgi-3b, rgi-1"
+ },
+ {
+  "cible": "N325987",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (énumération) « a rectangular plastic enclosure housing a printed circuit board assembly, with a two-prong electrical plug on one side and two USB Type-A sockets on the other side ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter batterie_integree=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N323399",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non (déduction) « The unit is recharged using an 8mm charge port or High Power Port. ». Rejeu complété q1/q2/q3 : 850760, officiel 850760. La batterie décide à q3 avant les prises secteur (point ouvert n° 3 de la synthèse).",
+  "correction": "Ajouter genere_electricite=non. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "H319416",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « The cable consists of two bundles of several inner conductor strands surrounded by insulation and one bundle of cotton yarn strands. ». Rejeu complété q1/q6/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N315544",
+  "nature": "arbre",
+  "constat": "Objet composite « combination cellphone stand, holder, and charging cable » ; CBP retient le 8544 42 sans dire quel composant l'emporte. « porter_completer » mènerait par q10 à h_hote, « aucune_dominante » à h_aucune : l'arbre ne peut pas atteindre le 854442 officiel sans présumer le résultat.",
+  "correction": "Aucune valeur à ajouter. À compter à part (texte sans motif) ; point ouvert n° 1 de la synthèse.",
+  "textes": "s16-n3, rgi-3b, h8544"
+ },
+ {
+  "cible": "N310490",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), convertit_courant (q4), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q4, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536, h8544"
+ },
+ {
+  "cible": "N307285",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « identified as the VT4000 Dual 4K Universal Docking Station (VT4000) ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180.",
+  "correction": "Ajouter electronique_active=oui. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N307161",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2). Lisible en revanche : batterie_integree=aucune, prises_secteur_sortie=non (énumération) « containing rectifying apparatus and having multiple output cable harnesses ». Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2 exige un fait que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "N306841",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non (énumération) « a wall charger, a micro USB charge cable, a female 12V output adapter, and a 12V car charger ». Rejeu complété q1/q2/q3 : 850760, officiel 850760. Deux produits (ensemble démarreur classé par la règle 3 b), et batterie externe).",
+  "correction": "Ajouter genere_electricite=non. Négatif par énumération : règle à écrire.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "N307014",
+  "nature": "arbre",
+  "constat": "Texte muet sur electronique_active (q6). Par hypothèse, q1/q6/q7 donnerait 854442, officiel 854442.",
+  "correction": "Ne rien ajouter par inférence. q6 exige un fait que la décision ne constate pas.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N306782",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : appareil_hote=ordinateur (déduction) « placed on a desk surface for the purpose of interacting with the user’s mouse, or other input unit ». Rejeu complété q1/q10 : 847330, officiel 847330. Le texte ne nomme pas l'ordinateur, seulement la souris « or other input unit ».",
+  "correction": "Ajouter appareil_hote=ordinateur. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "c84-n6c, c84-n6e, h8543"
+ },
+ {
+  "cible": "N305957",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "h8507, c85-n3, h8536, s16-n3, h8504"
+ },
+ {
+  "cible": "N305600",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "h8507, c85-n3, h8536, s16-n3, h8504"
+ },
+ {
+  "cible": "N305608",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), convertit_courant (q4), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q4, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536, h8544"
+ },
+ {
+  "cible": "N304715",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), convertit_courant (q4), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q4, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536, h8544"
+ },
+ {
+  "cible": "N304573",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), convertit_courant (q4), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q4, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536, h8544"
+ },
+ {
+  "cible": "N304253",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536"
+ },
+ {
+  "cible": "N304098",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2), batterie_integree (q3), convertit_courant (q4), prises_secteur_sortie (q5). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q2, q3, q4, q5 exigent des faits que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536, h8544"
+ },
+ {
+  "cible": "N303514",
+  "nature": "arbre",
+  "constat": "Le texte donne une fonction que q1 ne propose pas : « As its sole function is to make electrical connections, it will be classified accordingly. » Ni alimenter ni transmettre_signaux ne se cite. Le reste se lit (« There are no electrical components inside the adapter that converts, alters, amplifies, or conditions the applied voltage. ») et mènerait au 853669 officiel.",
+  "correction": "q1 : ajouter une valeur « raccorder » (établir une connexion) menant à q7, ou poser la construction avant la fonction pour les articles sans électronique.",
+  "textes": "h8536, sh853669, rgi-1"
+ },
+ {
+  "cible": "N301143",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : liaison_reseau=aucune (énumération) « On the front of the device are seven standard USB 3.0 ports ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180.",
+  "correction": "Ajouter liaison_reseau=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "c84-n6d2, s16-n3, h8517"
+ },
+ {
+  "cible": "N301141",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (explicite) « This antenna arm has 2 high gain transmitters built-in ». Rejeu complété q1/q6/q8 : 851762, officiel 851762. Quatre produits, dont deux cartes PCI-E internes : la fiche ne les distingue pas.",
+  "correction": "Ajouter electronique_active=oui.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N300708",
+  "nature": "arbre",
+  "constat": "Le texte ne porte aucun fait exploitable : « The front of the item contains two USB ports and a button for the LED night light. » Ni fonction, ni conversion, ni alimentation ne sont décrites ; les cinq critères du chemin sont muets. Fiche vide à juste titre.",
+  "correction": "Aucune. Retirer ce témoin du dénominateur ou le compter « texte insuffisant » ; ne pas le compléter d'après N343619.",
+  "textes": "h8504"
+ },
+ {
+  "cible": "N300797",
+  "nature": "arbre",
+  "constat": "« The Titan M is used to both charge and transfer data (sync). » Deux fonctions sans primauté dite : q1 force un choix, et « aucune_dominante » enverrait à tort hors périmètre alors que le motif de c854442 dit « même s'il sert à la fois aux données et à la charge ». Par q6/q7 le câble arrive au 854442 officiel.",
+  "correction": "q1 : pour un câble passif, la fonction ne départage rien (les deux branches mènent à q7) ; poser la construction avant, ou envoyer « aucune_dominante » vers q7 quand le produit est un câble.",
+  "textes": "h8544, sh854442, rgi-1"
+ },
+ {
+  "cible": "N299351",
+  "nature": "arbre",
+  "constat": "« This item will charge and sync USB-C equipped devices from standard USB-A equipped computers and chargers. » Charge et données sans primauté ; q1 ne se tranche pas. Le texte ne dit rien non plus sur l'absence d'électronique (q6).",
+  "correction": "q1 : même défaut que N300797. Ne rien ajouter par inférence.",
+  "textes": "h8544, sh854442, rgi-1"
+ },
+ {
+  "cible": "N298750",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « This cable incorporates 4 insulated conductors surrounded by a foil and braided wire shielding ». Rejeu complété q1/q6/q7 : h_cable, officiel 854430. La sortie h_cable est cohérente avec le 8544 30 officiel ; le verdict devient hors_perimetre.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N298534",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non, batterie_integree=aucune, prises_secteur_sortie=non (énumération) « The sub-assembly is housed in a metal casing and contains two printed circuit boards, electrical connectors, a thermal pad, and board-to-board connector pins. ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter genere_electricite=non, batterie_integree=aucune, prises_secteur_sortie=non. Négatif par énumération : règle à écrire.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536"
+ },
+ {
+  "cible": "H287462",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non (explicite) « a separately imported and separately sold “charging base” » ; batterie_integree=aucune, prises_secteur_sortie=non (énumération) « Each sleeve has a built-in connector that fits into the power ports of iPads, an inductor and various other electrical conditioning elements ». Rejeu complété q1/q2/q3/q4/q5 : 850440, officiel 850440.",
+  "correction": "Ajouter genere_electricite=non, batterie_integree=aucune, prises_secteur_sortie=non. Négatif par énumération : règle à écrire.",
+  "textes": "s16-n3, h8504, h8507, c85-n3, h8536"
+ },
+ {
+  "cible": "N296103",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « The item consists of 5 cables that are joined together down the length of the product. ». Rejeu complété q1/q6/q7 : h_cable, officiel 854420. La sortie h_cable est cohérente avec le 8544 20 officiel ; le verdict devient hors_perimetre.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N292574",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : liaison_reseau=aucune (énumération) « Each adapter consists of a male connector on one end and a female connector on the other end. ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180.",
+  "correction": "Ajouter liaison_reseau=aucune. Négatif par énumération : règle à écrire.",
+  "textes": "c84-n6d2, s16-n3, h8517"
+ },
+ {
+  "cible": "N290926",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « Each cable is constructed from insulated electric conductors within an outer jacket. ». Rejeu complété q1/q6/q7 : h_cable, officiel 854430. La sortie h_cable est cohérente avec le 8544 30 officiel ; le verdict devient hors_perimetre.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N290028",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « The cable has a construction of four PVC insulated copper clad steel conductors that carry or transmit luminance and color. ». Rejeu complété q1/q6/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N289786 (adaptateur Ethernet)",
+  "nature": "annotation",
+  "constat": "Décision à trois produits fondue en une fiche : electronique_active cite l'adaptateur Ethernet, appareil_hote cite l'adaptateur HDMI. Pour l'Ethernet, liaison_reseau=seule_fonction se lit : « It gives the device the capability to connect to a network via an Ethernet connection. » Chemin q1/q6/q8 : 851762, code officiel.",
+  "correction": "Scinder en trois fiches (#1 Ethernet, #2 HDMI, #3 VGA) et annoter #1 avec liaison_reseau=seule_fonction.",
+  "textes": "c84-n6d2, h8517, sh851762"
+ },
+ {
+  "cible": "N289786 (adaptateurs HDMI et VGA)",
+  "nature": "divergence",
+  "constat": "Divergence propre à l'autorité : CBP exclut du 8471 deux convertisseurs d'affichage (« The VGA and HDMI Adapters are apparatus used in the transmission or reception of voice, images, or other data and as such, pursuant to Chapter 84 Note 5(D)(ii), are excluded ») alors que N292574 (2017) et H337673 (2025) classent les mêmes au 8471 80. Annotés fidèlement (liaison_reseau=aucune), ils donnent 847180 : contredit.",
+  "correction": "Garder comme divergence déclarée (point ouvert n° 4 de la synthèse). Ne pas forcer liaison_reseau=seule_fonction pour retrouver le 851762.",
+  "textes": "c84-n6d2, c84-n6c, h8517, h8471"
+ },
+ {
+  "cible": "N290026",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=non (énumération) « each cable has an internal insulated conductor and a secondary ground wire (not a surrounding shield) ». Rejeu complété q1/q6/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter electronique_active=non. Négatif par énumération : règle à écrire.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N288408",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : genere_electricite=non (déduction) « The dock charges the power bank ». Rejeu complété q1/q2/q3 : 850760, officiel 850760.",
+  "correction": "Ajouter genere_electricite=non. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "N285505",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « This electronic device is a plug and play modem ». Rejeu complété q1/q6/q8 : 851762, officiel 851762.",
+  "correction": "Ajouter electronique_active=oui. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N284202",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : fonction_principale=transmettre_signaux (déduction) « the Desktop Organizer permits up to three peripheral devices to be simultaneously connected to the PC for access to the device and its data » ; electronique_active=oui, liaison_reseau=aucune (énumération) « consists of a printed circuit board assembly, three female USB ports, and a male USB cable in a plastic housing ». Rejeu complété q1/q6/q8/q9 : 847180, officiel 847180. Fragile : la valeur « porter_completer » (objet de rangement dont les ports sont un complément) se défend aussi et mènerait par q10 au 847330, soit un « contredit ». CBP ne dit pas quelle fonction l'emporte.",
+  "correction": "Ajouter fonction_principale=transmettre_signaux, electronique_active=oui, liaison_reseau=aucune. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "s16-n3, rgi-3b, rgi-1, h8544, h8536, c84-n6c, c84-n6d2, h8517"
+ },
+ {
+  "cible": "N284052",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : electronique_active=oui (déduction) « This device is an external USB modem. ». Rejeu complété q1/q6/q8 : 851762, officiel 851762.",
+  "correction": "Ajouter electronique_active=oui. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8544, h8536, c84-n6c"
+ },
+ {
+  "cible": "N282038",
+  "nature": "arbre",
+  "constat": "Texte muet sur batterie_integree (q3). Par hypothèse, q1/q2/q3/q4/q5 donnerait 850440, officiel 850440.",
+  "correction": "Ne rien ajouter par inférence. q3 exige un fait que la décision ne constate pas.",
+  "textes": "h8507, c85-n3"
+ },
+ {
+  "cible": "N281995",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (déduction) « provide battery power when the USB end is connected to a power source » ; convertit_courant=non (énumération) « The USB cable, which has connectors on both ends ». Rejeu complété q1/q2/q3/q4/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter batterie_integree=aucune, convertit_courant=non. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8507, c85-n3, h8504, h8536, h8544"
+ },
+ {
+  "cible": "N282047",
+  "nature": "annotation",
+  "constat": "Au texte, pas dans la fiche : batterie_integree=aucune (déduction) « provide battery power when the USB end is connected to a power source » ; convertit_courant=non (énumération) « The USB cable, which has connectors on both ends ». Rejeu complété q1/q2/q3/q4/q7 : 854442, officiel 854442.",
+  "correction": "Ajouter batterie_integree=aucune, convertit_courant=non. Déduction : à admettre ou refuser par règle écrite.",
+  "textes": "h8507, c85-n3, h8504, h8536, h8544"
+ },
+ {
+  "cible": "N282039",
+  "nature": "arbre",
+  "constat": "Texte muet sur genere_electricite (q2). Par hypothèse, q1/q2/q3 donnerait 850760, officiel 850760.",
+  "correction": "Ne rien ajouter par inférence. q2 exige un fait que la décision ne constate pas.",
+  "textes": "s16-n3, h8504, h8507"
+ },
+ {
+  "cible": "32012R1112#1 (tirage 1 sur 4)",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente. fonction_principale=transmettre_signaux tient par le « also » du texte (« It also makes it possible to supply electrical power »).",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "32016R2224#1",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente sur le chemin q1/q6/q8. Hors chemin : le texte dit « a built-in rechargeable battery » ; batterie_integree reste « aucune » au sens du critère (l'énergie n'est pas restituée à un autre appareil), non annoté.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "32018R1785#1",
+  "nature": "reannotation",
+  "constat": "Une valeur différente, hors chemin : liaison_reseau=seule_fonction sur un câble passif ; le critère vise une interface ou des émetteurs-récepteurs que le produit n'a pas (« The cables do not have any additional functions »). Je mettrais « aucune » ou rien. Sans effet sur le verdict (q6 non, q7).",
+  "correction": "Retirer liaison_reseau de la fiche.",
+  "textes": ""
+ },
+ {
+  "cible": "H273383",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente. Citation de liaison_reseau faible (liste de séries) ; meilleure : « The transmission and reception of data are the principal functions of the OFCAs ».",
+  "correction": "Remplacer la citation.",
+  "textes": ""
+ },
+ {
+  "cible": "H298118 (tirage 1 sur 4)",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente. La lampe intégrée ne change rien : « it is clear that the sole function of the power bank is that of a battery ».",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "H341609",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N284888",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente. Point de vigilance : « The connectors incorporate a high performance printed circuit board (PCB) with gold plated contact pads » ; electronique_active=non ne tient que parce que le texte dit « passive ».",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N284892",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N296304 (tirage 1 sur 4)",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente (« This item does not contain an IC chip, it is a passive device. »).",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N296307",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N316909",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N332683",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente. Le boîtier contient carte mère, mémoire et SSD ; la fonction retenue est celle que CBP énonce (« functions to interconnect peripherals »).",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N349898 (tirage 1 sur 4)",
+  "nature": "reannotation",
+  "constat": "Aucune valeur différente.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "N352984",
+  "nature": "reannotation",
+  "constat": "Valeur fragile : fonction_principale=porter_completer ne se lit pas dans le texte (« designed to enhance the computational and graphical performance of a host desktop or laptop ») ; elle ne tient que par la parenthèse « boîtier d'extension de calcul » ajoutée au libellé d'après cette décision (synthèse, « Écarté »). Sur la seule question, je répondrais « autre », soit h_autre. Reproduction circulaire.",
+  "correction": "Déclarer la valeur comme fragile ; ne pas compter ce témoin comme preuve indépendante de q1.",
+  "textes": ""
+ },
+ {
+  "cible": "ensemble (réannotation)",
+  "nature": "reannotation",
+  "constat": "15 décisions « reproduit » demandées, 14 existent (rejeu.json : reproduit=14). Les 14 ont été relues ; le tirage 1 sur 4 par identifiant donne 32012R1112#1, H298118, N296304, N349898. Bilan : 1 valeur différente sans effet (32018R1785#1), 1 valeur circulaire (N352984), 12 sans écart.",
+  "correction": "Aucune.",
+  "textes": ""
+ },
+ {
+  "cible": "ensemble (convention des lots)",
+  "nature": "annotation",
+  "constat": "La règle sur les faits négatifs varie d'une fiche à l'autre. genere_electricite=non est tiré 25 fois d'un passage d'alimentation (« plugged into a standard wall outlet ») et prises_secteur_sortie=non 15 fois d'une énumération, mais batterie_integree=aucune n'est posé qu'une fois alors que 29 fiches en ont besoin. electronique_active=non est tiré de « consists of insulated twisted wires » sur 32012R1112#1 (reproduit) et laissé vide sur 14 câbles ou connecteurs décrits de la même façon.",
+  "correction": "Écrire une règle unique : un négatif se cite soit sur une phrase explicite, soit sur une énumération de composition, et se marque comme tel. Réannoter les 87 avec cette règle plutôt que corriger fiche par fiche.",
+  "textes": ""
+ },
+ {
+  "cible": "ensemble (q2, q3, q6 : faits négatifs)",
+  "nature": "arbre",
+  "constat": "33 des 67 non tranchés s'arrêtent à q2 (17) ou q3 (16), 17 à q6 : l'arbre exige l'absence de générateur, de batterie ou de puce avant d'arriver au fait que l'autorité constate (convertisseur, câble). Les décisions ne constatent presque jamais une absence.",
+  "correction": "Choix à faire par les juristes, pas par le rejeu : soit demander le fait positif en premier (« contient une batterie ? », « produit son courant ? » avec non par défaut déclaré), soit garder l'ordre et créer un verdict « reproduit sous hypothèse d'absence » compté à part. Inverser q3 et q4 ne marche pas : une station d'énergie convertit aussi.",
+  "textes": "h8504, h8507, c85-n3, h8544"
+ },
+ {
+  "cible": "ensemble (contredit = 0)",
+  "nature": "divergence",
+  "constat": "Le zéro contredit ne prouve pas l'arbre : il vient de fiches incomplètes. Une fois N289786 scindée, ses adaptateurs HDMI et VGA contredisent (847180 contre 851762 officiel) ; N284202 contredirait sous « porter_completer ». Édition : les décisions de 2017 à 2019 citent la note 5 du chapitre 84 (aujourd'hui note 6) et « headings 8469 to 8472 » ; aucun écart de code SH6 relevé dans les 81 décisions relues.",
+  "correction": "Scinder N289786 et publier le contredit qui en résulte, au lieu de 0.",
+  "textes": "c84-n6c, c84-n6d2"
+ },
+ {
+  "cible": "ensemble (textes sources)",
+  "nature": "annotation",
+  "constat": "15 des 87 textes de candidats.json sont coupés à 7 000 caractères, dont 11 avec un « [...] » au milieu du raisonnement. Une citation située dans la partie coupée ne peut pas être retrouvée mot pour mot.",
+  "correction": "Recharger le texte intégral des décisions tronquées avant de réannoter.",
+  "textes": ""
+ }
+]

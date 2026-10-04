@@ -1,0 +1,466 @@
+[
+ {
+  "id": "N303514",
+  "source": "US_CBP",
+  "date": "2019-03-27",
+  "url": "https://rulings.cbp.gov/ruling/N303514",
+  "code_officiel": "8536698000",
+  "hs6": "853669",
+  "produit": "Adaptateur de prise secteur américaine vers européenne, sans électronique",
+  "description": "the Universal Power Adapter, PN AD-00077-001 which is described as a an electrical plug having a U.S. format three-prong male plug on one side and a European two-prong female receptacle on the top.  There are no electrical components inside the adapter that converts, alters, amplifies, or conditions the applied voltage.",
+  "motifs": "",
+  "criteres": {
+   "convertit_courant": {
+    "valeur": "non",
+    "citation": "There are no electrical components inside the adapter that converts, alters, amplifies, or conditions the applied voltage.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "bloc_fiches_prises",
+    "citation": "an electrical plug having a U.S. format three-prong male plug on one side and a European two-prong female receptacle on the top",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N304098",
+  "source": "US_CBP",
+  "date": "2019-05-06",
+  "url": "https://rulings.cbp.gov/ruling/N304098",
+  "code_officiel": "8504407018",
+  "hs6": "850440",
+  "produit": "Bloc d'alimentation en rack pour centres de données et serveurs",
+  "description": "the Power Supply Unit (PSU), ZT Part # PS-2302-1A1U-LF, which is described as a rack mountable PSU that supplies both main output DC power as well as standby DC power.  Based in the information provided, the PSU provides 2.5kW, 12.5V / 200A for main power output and 30W, 12V / 2.5A for standby power applications.  You state that the PSU is used to supply power to data center and server equipment racks.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "a rack mountable PSU that supplies both main output DC power as well as standby DC power",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N304253",
+  "source": "US_CBP",
+  "date": "2019-05-21",
+  "url": "https://rulings.cbp.gov/ruling/N304253",
+  "code_officiel": "8504409520",
+  "hs6": "850440",
+  "produit": "Alimentation 24 V pour concentrateur d'oxygène portable",
+  "description": "a MANGO120S-24-ING DC Power Supply that is described as a 24 VDC, 5 Amp power supply for use with a Portable Oxygen Concentrator (POC).  The subject power supply is said to provide power exclusively to a POC and is permanently embossed stating its limited use as a medical AC/DC Adapter for the Inogen POC.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "a 24 VDC, 5 Amp power supply for use with a Portable Oxygen Concentrator (POC)",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "permanently embossed stating its limited use as a medical AC/DC Adapter for the Inogen POC",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The subject power supply is said to provide power exclusively to a POC",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N304573",
+  "source": "US_CBP",
+  "date": "2019-06-13",
+  "url": "https://rulings.cbp.gov/ruling/N304573",
+  "code_officiel": "8504407001",
+  "hs6": "850440",
+  "produit": "Adaptateur d'alimentation par Ethernet pour machines de traitement de l'information",
+  "description": "the ELO-KIT-POE-ADAPTER Part Number E615169 that you describe as a power over Ethernet (POE) adapter for use with automatic data processing machines.  You state that the subject POE adapter has a maximum output of 30 Watts and is packaged with mounting hardware and an instruction sheet.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "a power over Ethernet (POE) adapter for use with automatic data processing machines",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "for use with automatic data processing machines",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N304715",
+  "source": "US_CBP",
+  "date": "2019-06-24",
+  "url": "https://rulings.cbp.gov/ruling/N304715",
+  "code_officiel": "8504409550",
+  "hs6": "850440",
+  "produit": "Chargeurs de batteries pour concentrateurs d'oxygène portables",
+  "description": "the Battery Charger Model BA-303, which is described as a 16.8 VDC, 45 Watt charger for batteries used exclusively with a Portable Oxygen Concentrator (POC).  The function of the battery charger is to charge lithium batteries for the Inogen G3 POC and we would note that the unit does not supply power directly to the POC machine.  The battery charger, which has two specialized connectors where users insert an Inogen G3 POC battery, is equipped with status indicators showing the charge level of the inserted battery.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The function of the battery charger is to charge lithium batteries for the Inogen G3 POC",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "charger for batteries used exclusively with a Portable Oxygen Concentrator (POC)",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N305600",
+  "source": "US_CBP",
+  "date": "2019-08-28",
+  "url": "https://rulings.cbp.gov/ruling/N305600",
+  "code_officiel": "8504408500",
+  "hs6": "850440",
+  "produit": "Rangement de bureau à tiroirs avec socle de charge sans fil",
+  "description": "a plastic square desk caddy with 3 drawers.  The caddy contains a wireless charging base incorporated into the top for users to place their personal electronics for the purpose of wirelessly charging the device.  On the side of the caddy is a micro USB port which allows users to plug the caddy into a USB socket to receive power.  You state that the caddy is imported with the top drawer containing paper clips, the middle and bottom drawer containing assorted sticky notes, and a USB cable to connect the device to a power source.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The caddy contains a wireless charging base incorporated into the top for users to place their personal electronics for the purpose of wirelessly charging the device",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "for users to place their personal electronics for the purpose of wirelessly charging the device",
+    "appui": "terme"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "a micro USB port which allows users to plug the caddy into a USB socket to receive power",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "N305608",
+  "source": "US_CBP",
+  "date": "2019-08-28",
+  "url": "https://rulings.cbp.gov/ruling/N305608",
+  "code_officiel": "8504409510",
+  "hs6": "850440",
+  "produit": "Alimentation multi-sorties pour pédales d'effets d'instruments à cordes",
+  "description": "the RockBoard ISO Power Block V10 Multi-Power Supply, which is described as a compact power supply for use with electric string musical instrument effects pedals.  The subject power supply has eight 9 V outputs, two 18 V outputs, and is stated to provide 2,000 mA for a total output of 27 Watts.  The subject power supply is imported with the connection cables as well as a mains adapter.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "a compact power supply for use with electric string musical instrument effects pedals",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N305957",
+  "source": "US_CBP",
+  "date": "2019-09-17",
+  "url": "https://rulings.cbp.gov/ruling/N305957",
+  "code_officiel": "8504408500",
+  "hs6": "850440",
+  "produit": "Cadre photo avec socle de charge sans fil",
+  "description": "a plastic wireless charging base having a photo display and a kick stand on the back side to allow for it to be displayed on a desk or shelf.  The wireless charging pad has a small ledge to support a user’s smart mobile device for the purpose of receiving a wireless charge.  The wireless charging pad is powered through a micro USB cable which is provided with the frame.  We would note that the subject photo frame consists of a slot where users insert a printed photo and the device does not contain any LCD/LED display or memory for the storage of pictures.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "a plastic wireless charging base having a photo display and a kick stand on the back side",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "smart mobile device for the purpose of receiving a wireless charge",
+    "appui": "terme"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "The wireless charging pad is powered through a micro USB cable which is provided with the frame",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "N305975",
+  "source": "US_CBP",
+  "date": "2019-09-17",
+  "url": "https://rulings.cbp.gov/ruling/N305975",
+  "code_officiel": "8543709960",
+  "hs6": "854370",
+  "produit": "Chauffe-mains rechargeable faisant aussi batterie externe",
+  "description": "the Rechargeable Heat Bank, item number V36402, and is described as a rechargeable heat and power bank.  The heat and power bank is a rechargeable, pocket-sized, portable hand warmer with six heat settings that is powered by a 5200 MAh lithium-ion battery which allows for up to nine hours of heat per charge.  The heat bank uses heating elements that can warm on either one or both sides and can heat up to 120 degrees Fehrenheit. You state that, when charged, the lithium-ion battery can also be used to charge external devices, such as smart phones or tablets, via USB connection.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "autre",
+    "citation": "portable hand warmer with six heat settings that is powered by a 5200 MAh lithium-ion battery",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "when charged, the lithium-ion battery can also be used to charge external devices, such as smart phones or tablets, via USB connection",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N306782",
+  "source": "US_CBP",
+  "date": "2019-10-31",
+  "url": "https://rulings.cbp.gov/ruling/N306782",
+  "code_officiel": "8473305100",
+  "hs6": "847330",
+  "produit": "Tapis de souris avec charge sans fil par induction",
+  "description": "The PowerTrack is constructed of cellular plastic with a covering of polyester microfiber, has an embedded 10 W wireless inductive charging coil, LED status indicators, and a USB port for connecting to a power source.  In use, the PowerTrack is placed on a desk surface for the purpose of interacting with the user’s mouse, or other input unit, while also charging their personal electronic devices.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "porter_completer",
+    "citation": "In use, the PowerTrack is placed on a desk surface for the purpose of interacting with the user’s mouse, or other input unit, while also charging their personal electronic devices",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "has an embedded 10 W wireless inductive charging coil",
+    "appui": "terme"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "a USB port for connecting to a power source",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "N306841",
+  "source": "US_CBP",
+  "date": "2019-11-12",
+  "url": "https://rulings.cbp.gov/ruling/N306841",
+  "code_officiel": "8507600020",
+  "hs6": "850760",
+  "produit": "Démarreur de secours avec batterie portable, et batterie externe",
+  "description": "The ChargeUp Auto 12V Jump Starter and Power Pack, product number CY2075CHAUT, consists of battery terminal alligator clips with an adapter, a wall charger, a micro USB charge cable, a female 12V output adapter, and a 12V car charger and a portable battery unit that features USB ports and a connector that directly connects to the adapter of the battery terminal alligator clips. The battery unit consists of a 12,000 mAh lithium polymer battery and is designed to store and provide power to electronic devices and vehicles with an engine capacity up to 5.0L (5,000cc) petrol or 2.5L (2,500cc) diesel.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "is designed to store and provide power to electronic devices and vehicles",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "The battery unit consists of a 12,000 mAh lithium polymer battery",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "a wall charger, a micro USB charge cable, a female 12V output adapter, and a 12V car charger",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N307014",
+  "source": "US_CBP",
+  "date": "2019-11-06",
+  "url": "https://rulings.cbp.gov/ruling/N307014",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câble d'extension vidéo VGA/SVGA pour écran",
+  "description": "the VGA/SGA Monitor Extension Cable, Item 26845.  The cable is meant to connect an output display monitor (i.e. computer monitor, television) to a computer via the SVGA port on each.  A video signal is then transmitted from the computer to the output unit through the subject cable.  The cable can be of various lengths and is fitted with a 15-pin SVGA connector at each end.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "A video signal is then transmitted from the computer to the output unit through the subject cable.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "The cable can be of various lengths and is fitted with a 15-pin SVGA connector at each end.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "The cable is meant to connect an output display monitor (i.e. computer monitor, television) to a computer via the SVGA port on each",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N307161",
+  "source": "US_CBP",
+  "date": "2019-11-21",
+  "url": "https://rulings.cbp.gov/ruling/N307161",
+  "code_officiel": "8504406018",
+  "hs6": "850440",
+  "produit": "Bloc d'alimentation interne de 850 W pour ordinateur personnel",
+  "description": "a Power Supply for a Personal Computer,  Model No. HP1-F850GD-F14C, which is described as a steel enclosure measuring 140 mm by 150 mm by 86 mm containing rectifying apparatus and having multiple output cable harnesses for connecting to various components within an automatic data processing machine.  The subject switching power supply is intended to be installed internally and has a maximum power output of 850 Watts.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The subject switching power supply is intended to be installed internally and has a maximum power output of 850 Watts",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "containing rectifying apparatus and having multiple output cable harnesses",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "for connecting to various components within an automatic data processing machine",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N307285",
+  "source": "US_CBP",
+  "date": "2019-11-22",
+  "url": "https://rulings.cbp.gov/ruling/N307285",
+  "code_officiel": "8471801000",
+  "hs6": "847180",
+  "produit": "Stations d'accueil USB pour ordinateur, deux écrans et périphériques",
+  "description": "the VT4000 Dual 4K Universal Docking Station (VT4000), Item #901005, which is described as a plastic enclosure having two HDMI ports, two DisplayPorts, audio lines in/out, one RJ45 Ethernet Port, six USB 3.0 Ports, and a single USB-C Port.  The principal function of the VT4000 is to provide users with the ability to connect an automatic data processing (ADP) machine to two display monitors, and up to eleven accessories and peripherals through a single USB-C input connection.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The principal function of the VT4000 is to provide users with the ability to connect an automatic data processing (ADP) machine to two display monitors, and up to eleven accessories and peripherals through a single USB-C input connection",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "port_parmi_autres",
+    "citation": "two HDMI ports, two DisplayPorts, audio lines in/out, one RJ45 Ethernet Port, six USB 3.0 Ports, and a single USB-C Port",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "allow the connected ADP machine to interface and control the attached units",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "identified as the VT4000 Dual 4K Universal Docking Station (VT4000)",
+    "appui": "terme"
+   }
+  }
+ },
+ {
+  "id": "N310490",
+  "source": "US_CBP",
+  "date": "2020-03-19",
+  "url": "https://rulings.cbp.gov/ruling/N310490",
+  "code_officiel": "8504409540",
+  "hs6": "850440",
+  "produit": "Alimentation régulée de 850 W pour machines de jeu",
+  "description": "the Power Supply-AC, Model No. YGEB0850AM-1A00P10, which is described as a 254 mm by 152.4 mm by 76.2 mm regulated power supply that is intended to be used with gaming machines.  The power supply is equipped with two output connectors, each having multiple 24 VDC outputs, and has a maximum power output of 850 W.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "regulated power supply that is intended to be used with gaming machines",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "intended to be used with gaming machines",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N315544",
+  "source": "US_CBP",
+  "date": "2020-11-10",
+  "url": "https://rulings.cbp.gov/ruling/N315544",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Support de téléphone combiné à un câble de charge rigide",
+  "description": "a combination cellphone stand, holder, and charging cable.  The item consists of a plastic housing and a rigid charging cable with a USB connector at one end and either a USB-C or a Micro-USB connector at the other.  The holder is attached via adhesive to the back of a cell phone and the cable is slid within.  The rigid nature allows the cable to be manipulated in the holder to function as phone stand.  The cable can also be removed from the holder and used to charge or sync the cell phone.",
+  "motifs": "",
+  "criteres": {
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "The cable can also be removed from the holder and used to charge or sync the cell phone.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N316909",
+  "source": "US_CBP",
+  "date": "2021-01-28",
+  "url": "https://rulings.cbp.gov/ruling/N316909",
+  "code_officiel": "8517620090",
+  "hs6": "851762",
+  "produit": "Câble adaptateur USB vers DB9 (RS-232) pour ventilateur médical",
+  "description": "This cable assembly incorporates an adapter module consisting of a custom printed circuit board assembly (PCBA), a USB male connector on one end, and a DB9 male connector on the other end. The adapter module facilitates the conversion of a USB communication signal to an RS-232 communication signal and vice versa. Additionally, the module creates an isolation barrier for both the power and communication signals. It also converts power in the form of a linear regulator, creating the 3.3 volts it needs to run.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "is a custom cable that was designed to connect the Trilogy EVO Ventilator to a PC or host device",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "The adapter module facilitates the conversion of a USB communication signal to an RS-232 communication signal and vice versa.",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "seule_fonction",
+    "citation": "The adapter module facilitates the conversion of a USB communication signal to an RS-232 communication signal and vice versa.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "It also converts power in the form of a linear regulator, creating the 3.3 volts it needs to run.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "is designed to be used exclusively with the Trilogy EVO series of ventilators",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N319727",
+  "source": "US_CBP",
+  "date": "2021-06-08",
+  "url": "https://rulings.cbp.gov/ruling/N319727",
+  "code_officiel": "8504409580",
+  "hs6": "850440",
+  "produit": "Borne de recharge solaire pour téléphones, avec batterie",
+  "description": "a powder coated stainless steel pole with mounting plates that incorporate a 45 W photovoltaic (PV) panel at the top.  The Charging Pole measures 106 inches in height and has a small round 28-inch steel table surrounding the pole, where users can place their electronic devices during charging.  Incorporated into the Charging Pole are a charge controller, a 30 Ah lithium-ion battery, three USB outlets, and one Qi charging pad.  \r\rIn your letter, you state that the Charging Pole does not connect to the electrical grid and functions as a stand-alone charger",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "the Charging Pole does not connect to the electrical grid and functions as a stand-alone charger",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": true,
+    "citation": "the power generated by the PV panel is provided solely to the charge controller for distribution to the various USB/Qi ports",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "Incorporated into the Charging Pole are a charge controller, a 30 Ah lithium-ion battery, three USB outlets, and one Qi charging pad.",
+    "appui": "explicite"
+   }
+  }
+ }
+]

@@ -1,0 +1,619 @@
+[
+ {
+  "id": "N323399",
+  "source": "US_CBP",
+  "date": "2022-01-13",
+  "url": "https://rulings.cbp.gov/ruling/N323399",
+  "code_officiel": "8507600020",
+  "hs6": "850760",
+  "produit": "Stations d'énergie portables à batterie lithium-ion",
+  "description": "The items under consideration are Yeti Portable Power Stations, model numbers 200x, 500x, 1000, 1500x, 3000x, and 6000x. Each model is functionally similar, providing backup and portable power to electronic devices through a variety of ports. The Yeti 200x Portable Power Station contains a 200 watt-hour rechargeable lithium-ion battery encased in a housing with an AC output port, an 8mm charge port, USB ports, 12V ports, and an LCD display that indicates the battery level.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "Each model is functionally similar, providing backup and portable power to electronic devices through a variety of ports.",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "contains a 200 watt-hour rechargeable lithium-ion battery encased in a housing",
+    "appui": "explicite"
+   },
+   "prises_secteur_sortie": {
+    "valeur": true,
+    "citation": "encased in a housing with an AC output port, an 8mm charge port, USB ports, 12V ports",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "The unit is recharged using an 8mm charge port or High Power Port.",
+    "appui": "alimentation"
+   }
+  }
+ },
+ {
+  "id": "N325987",
+  "source": "US_CBP",
+  "date": "2022-05-11",
+  "url": "https://rulings.cbp.gov/ruling/N325987",
+  "code_officiel": "8504409550",
+  "hs6": "850440",
+  "produit": "Chargeur mural à deux ports USB-A",
+  "description": "The item under consideration is referred to as the Wall Outlet USB-A Dual Port Charger (Wall Charger), SKU 33112501. The Wall Charger is described as a rectangular plastic enclosure housing a printed circuit board assembly, with a two-prong electrical plug on one side and two USB Type-A sockets on the other side. In use, the Wall Charger is plugged into a standard receptacle and rectifies/converts alternating current to direct current. You state that the Wall Charger can be utilized to charge various electronic devices, such as tablets, watches, speakers, phones, etc.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "You state that the Wall Charger can be utilized to charge various electronic devices, such as tablets, watches, speakers, phones, etc.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "the Wall Charger is plugged into a standard receptacle and rectifies/converts alternating current to direct current",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "In use, the Wall Charger is plugged into a standard receptacle",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "with a two-prong electrical plug on one side and two USB Type-A sockets on the other side",
+    "appui": "composition"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "a rectangular plastic enclosure housing a printed circuit board assembly, with a two-prong electrical plug on one side and two USB Type-A sockets on the other side",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N328742",
+  "source": "US_CBP",
+  "date": "2022-10-21",
+  "url": "https://rulings.cbp.gov/ruling/N328742",
+  "code_officiel": "8504409580",
+  "hs6": "850440",
+  "produit": "Adaptateur allume-cigare 12 V à deux ports USB-A",
+  "description": "The merchandise under consideration is identified as the Adapter, PN CAT-DC2USB-BLK, which is described as a 3.5 A DC-DC having two female USB Type-A socket connectors on one side and 12 V vehicle accessory electrical plug on the other. The subject Adapter is intended to be used in a vehicle for charging personal electronics.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The subject Adapter is intended to be used in a vehicle for charging personal electronics.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "described as a 3.5 A DC-DC having two female USB Type-A socket connectors on one side and 12 V vehicle accessory electrical plug on the other",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "12 V vehicle accessory electrical plug on the other",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "the subject Adapter is equipped with two USB Type-A sockets and only functions to provide DC power for charging various types of electronic devices",
+    "appui": "composition"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "described as a 3.5 A DC-DC having two female USB Type-A socket connectors on one side and 12 V vehicle accessory electrical plug on the other",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N332683",
+  "source": "US_CBP",
+  "date": "2023-05-11",
+  "url": "https://rulings.cbp.gov/ruling/N332683",
+  "code_officiel": "8471801000",
+  "hs6": "847180",
+  "produit": "Commutateur clavier, écran et souris (KVM)",
+  "description": "The merchandise under consideration is identified as the Emerald DeskVue, PN EMD5004-R (KVM Switch), which is described as a plastic enclosure containing a motherboard printed circuit board assembly (PCBA), a memory PCBA, a solid-state storage drive (SSD), and a cooling fan. On the side of the KVM Switch are numerous USB ports, and on the rear of the enclosure are two RJ-45 Ethernet ports, three HDMI ports, and two coaxial connectors. The KVM Switch functions to interconnect peripherals, such as a keyboard, display, mouse, and more, to an automatic data processing machine.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "The KVM Switch functions to interconnect peripherals, such as a keyboard, display, mouse, and more, to an automatic data processing machine.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "a plastic enclosure containing a motherboard printed circuit board assembly (PCBA), a memory PCBA, a solid-state storage drive (SSD), and a cooling fan",
+    "appui": "explicite"
+   },
+   "liaison_reseau": {
+    "valeur": "port_parmi_autres",
+    "citation": "On the side of the KVM Switch are numerous USB ports, and on the rear of the enclosure are two RJ-45 Ethernet ports, three HDMI ports, and two coaxial connectors.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "to interconnect peripherals, such as a keyboard, display, mouse, and more, to an automatic data processing machine",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N334999",
+  "source": "US_CBP",
+  "date": "2023-09-08",
+  "url": "https://rulings.cbp.gov/ruling/N334999",
+  "code_officiel": "8536698000",
+  "hs6": "853669",
+  "produit": "Adaptateur de prise en cube, une fiche et trois prises",
+  "description": "The merchandise under consideration is identified as the Plug Adapter, PN 115825, which is described as a plastic cube having one male Type-B three-prong plug on one side, and one female Type-B electrical socket each on three corresponding sides. Internally, the Plug Adapter has electrical tabs and contacts that allow for external plugs to be inserted to receive power. We would note that there are no fuses, switches, or other electrical apparatus inside the plug",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "the Plug Adapter has electrical tabs and contacts that allow for external plugs to be inserted to receive power",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "bloc_fiches_prises",
+    "citation": "a plastic cube having one male Type-B three-prong plug on one side, and one female Type-B electrical socket each on three corresponding sides",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "non",
+    "citation": "there are no fuses, switches, or other electrical apparatus inside the plug",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "there are no fuses, switches, or other electrical apparatus inside the plug",
+    "appui": "explicite"
+   },
+   "prises_secteur_sortie": {
+    "valeur": true,
+    "citation": "one female Type-B electrical socket each on three corresponding sides",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "there are no fuses, switches, or other electrical apparatus inside the plug",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "there are no fuses, switches, or other electrical apparatus inside the plug",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N339123",
+  "source": "US_CBP",
+  "date": "2024-04-18",
+  "url": "https://rulings.cbp.gov/ruling/N339123",
+  "code_officiel": "8536698000",
+  "hs6": "853669",
+  "produit": "Adaptateur modulaire DB25 mâle vers deux prises RJ45",
+  "description": "The merchandise under consideration is identified as the Modular Adapter, DB25 Male / Dual RJ45 (8x8) Jack (Adapter), PN RA2588M, which is described as a disassembled electrical connector having a plastic housing with two female RJ45 sockets on one side, and a male DB25 connector on the other side. Based on the information provided, the two connectors are not attached at importation as each RJ45 electrical conductor extends from the back as a wire and male pin. In use, the end user determines the desired pinout on the DB25 connector by inserting the pin into the appropriate location according to their specific design.",
+  "motifs": "",
+  "criteres": {
+   "construction_passive": {
+    "valeur": "bloc_fiches_prises",
+    "citation": "a disassembled electrical connector having a plastic housing with two female RJ45 sockets on one side, and a male DB25 connector on the other side",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N342905",
+  "source": "US_CBP",
+  "date": "2024-10-16",
+  "url": "https://rulings.cbp.gov/ruling/N342905",
+  "code_officiel": "8506100090",
+  "hs6": "850610",
+  "produit": "Bloc de secours à trois piles alcalines AAA, fiche micro-USB",
+  "description": "The Pop Charger is described as an emergency battery pack with a nominal capacity of 1000 mAh and an output voltage of 5 VDC at 0.8 A. According to your submission, the subject battery pack is marketed for Android devices, consisting of a plastic housing, a male micro-USB connector, and three non-rechargeable AAA alkaline batteries. Since the battery pack does not have a charging port, the AAA batteries need to be replaced once they are depleted.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The Pop Charger is described as an emergency battery pack with a nominal capacity of 1000 mAh and an output voltage of 5 VDC at 0.8 A.",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "non_rechargeable",
+    "citation": "three non-rechargeable AAA alkaline batteries",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "Since the battery pack does not have a charging port, the AAA batteries need to be replaced once they are depleted.",
+    "appui": "explicite"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "consisting of a plastic housing, a male micro-USB connector, and three non-rechargeable AAA alkaline batteries",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N343619",
+  "source": "US_CBP",
+  "date": "2024-11-08",
+  "url": "https://rulings.cbp.gov/ruling/N343619",
+  "code_officiel": "8504409550",
+  "hs6": "850440",
+  "produit": "Chargeur mural à deux ports USB avec veilleuse LED",
+  "description": "The merchandise under consideration is identified as the Dual USB Charger + Night Light Plug-in (Charger), SKU # 39097401, which is described as a plastic housing with LED night lights, two USB Type-A output sockets, and a two prong wall plug. In use, the Charger is plugged into a standard wall outlet where users can plug electrical devices into the USB sockets to receive converted DC power.",
+  "motifs": "",
+  "criteres": {
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "users can plug electrical devices into the USB sockets to receive converted DC power",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "In use, the Charger is plugged into a standard wall outlet",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "a plastic housing with LED night lights, two USB Type-A output sockets, and a two prong wall plug",
+    "appui": "composition"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "described as a plastic housing with LED night lights, two USB Type-A output sockets, and a two prong wall plug",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N346959",
+  "source": "US_CBP",
+  "date": "2025-04-01",
+  "url": "https://rulings.cbp.gov/ruling/N346959",
+  "code_officiel": "8507600020",
+  "hs6": "850760",
+  "produit": "Bloc batterie lithium-ion rechargeable pour trottinette-valise",
+  "description": "The merchandise under consideration is referred to as a rechargeable lithium-ion battery pack, model number EL-2500-PB1, which is described as a portable device for storing and supplying electricity. It consists of twelve cylindrical battery cells enclosed in a rectangular housing with a built-in USB-C cable, DC connector port, RC connector port, power button, and LED indicator lights. The battery pack has an output voltage of 5 VDC (USB-C), an output voltage of 37 VDC (DC port), a nominal capacity of 2600 mAh, and a nominal energy of 96.2 Wh. The battery pack is used to power electric luggage scooters but can also be used to power electronic devices, such as tablets and smartphones.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "which is described as a portable device for storing and supplying electricity",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "referred to as a rechargeable lithium-ion battery pack",
+    "appui": "explicite"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "enclosed in a rectangular housing with a built-in USB-C cable, DC connector port, RC connector port, power button, and LED indicator lights",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N349433",
+  "source": "US_CBP",
+  "date": "2025-06-10",
+  "url": "https://rulings.cbp.gov/ruling/N349433",
+  "code_officiel": "8504409510",
+  "hs6": "850440",
+  "produit": "Adaptateur secteur à cordon USB-C fixe",
+  "description": "The merchandise under consideration is referred to as the Power Adapter (Adapter), Part Number 115867, which is described as an plastic housing containing circuitry to electrically convert AC to DC. The Adapter has a Type-A two-prong AC male plug on one side and a permanently affixed 6’ cord, with a male USB-C plug. In use, the Adapter is intended to be plugged into a wall outlet where the USB-C plug delivers power to various machines of the user",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "In use, the Adapter is intended to be plugged into a wall outlet where the USB-C plug delivers power to various machines",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "plastic housing containing circuitry to electrically convert AC to DC",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "the Adapter is intended to be plugged into a wall outlet",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "The Adapter has a Type-A two-prong AC male plug on one side and a permanently affixed 6’ cord, with a male USB-C plug",
+    "appui": "composition"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "described as an plastic housing containing circuitry to electrically convert AC to DC",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N349898",
+  "source": "US_CBP",
+  "date": "2025-06-27",
+  "url": "https://rulings.cbp.gov/ruling/N349898",
+  "code_officiel": "8473305100",
+  "hs6": "847330",
+  "produit": "Supports muraux et de bureau pour tablette, avec adaptateur réseau",
+  "description": "The first item under consideration is identified as the SURFACE MOUNT System iPadA16BK, SKU 70810, which is described as an aluminum bezel that is used to encase a tablet personal computer (PC) and provide a physical mounting capability on a wall or flat surface. The SURFACE MOUNT System iPadA16BK is imported with a USB-C adapter cable and an iPort POE+ network adapter. In use, a tablet PC is placed inside the SURFACE MOUNT System iPadA16BK and secured to the wall for interaction with users. The SURFACE MOUNT System iPadA16BK is specifically designed for the tablet PC by positioning microphone/speaker holes and charging port alignments.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "porter_completer",
+    "citation": "an aluminum bezel that is used to encase a tablet personal computer (PC) and provide a physical mounting capability on a wall or flat surface",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "The SURFACE MOUNT System iPadA16BK is specifically designed for the tablet PC by positioning microphone/speaker holes and charging port alignments.",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N352984",
+  "source": "US_CBP",
+  "date": "2025-09-17",
+  "url": "https://rulings.cbp.gov/ruling/N352984",
+  "code_officiel": "8473305100",
+  "hs6": "847330",
+  "produit": "Boîtier externe de carte graphique (eGPU) avec ports d'accueil",
+  "description": "The merchandise under consideration is identified as the AORUS RTX 5090 AI Box, model GV-N5090IXEB-32GD. The RTX 5090 is described as an external graphics processing unit (eGPU), designed to enhance the computational and graphical performance of a host desktop or laptop.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "autre",
+    "citation": "designed to enhance the computational and graphical performance of a host desktop or laptop",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "ordinateur",
+    "citation": "designed to enhance the computational and graphical performance of a host desktop or laptop",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": true,
+    "citation": "also provides docking functionality by expanding input/output connectivity",
+    "appui": "terme"
+   },
+   "liaison_reseau": {
+    "valeur": "port_parmi_autres",
+    "citation": "expanding input/output connectivity with one ethernet port, three display port outputs, one HDMI 2.1 output, two Thunderbolt™ 5 type-C ports, and two USB 3.2 Gen 2 type-A ports",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N356371",
+  "source": "US_CBP",
+  "date": "2025-12-04",
+  "url": "https://rulings.cbp.gov/ruling/N356371",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câble audio auxiliaire jack 3,5 mm pour casque d'aviation",
+  "description": "The merchandise under consideration is identified by part number 301-00002-000.A2 and is described as an auxiliary cable for use with aviation headsets. The part is comprised of a length of insulated cable with a 3.5mm audio connector at each end. You state that the cable allows the pilot to connect their smartphone or other audio inputs to the aviation headset. This allows the pilot to use the headset to make phone calls, listen to music, and receive critical alerts from navigational applications without relying on a Bluetooth connection.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "You state that the cable allows the pilot to connect their smartphone or other audio inputs to the aviation headset.",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "The part is comprised of a length of insulated cable with a 3.5mm audio connector at each end.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "The part is comprised of a length of insulated cable with a 3.5mm audio connector at each end.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N356452",
+  "source": "US_CBP",
+  "date": "2025-12-10",
+  "url": "https://rulings.cbp.gov/ruling/N356452",
+  "code_officiel": "8537109170",
+  "hs6": "853710",
+  "produit": "Rallonge électrique à deux prises secteur et trois ports USB",
+  "description": "The merchandise under consideration is identified as the USB-Charging Extension Cord, item number 81597. The subject device is comprised of a braided power cord terminated at one end with a standard electrical wall plug. At the other end of the cable is a plastic housing, which incorporates two standard AC receptacles as well as three USB charging ports. Within the enclosure are the necessary electrical components that protect and convert the electrical power signals. The device is used to power and charge various devices.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "The device is used to power and charge various devices.",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "Within the enclosure are the necessary electrical components that protect and convert the electrical power signals.",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "a braided power cord terminated at one end with a standard electrical wall plug",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": true,
+    "citation": "a plastic housing, which incorporates two standard AC receptacles as well as three USB charging ports",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "The subject device is comprised of a braided power cord terminated at one end with a standard electrical wall plug. At the other end of the cable is a plastic housing, which incorporates two standard AC receptacles as well as three USB charging ports.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N356502",
+  "source": "US_CBP",
+  "date": "2025-12-12",
+  "url": "https://rulings.cbp.gov/ruling/N356502",
+  "code_officiel": "8544422000",
+  "hs6": "854442",
+  "produit": "Câbles adaptateurs Lightning, USB-C et USB-A pour casque d'aviation",
+  "description": "There are three cables at issue with this request. The first is identified as the Lightning Adaptor, part number 300-00053-000.A2. This cable consists of a length of insulated conductors with a Universal Accessory Connector (UAC) on one end and a Lightning connector on the other end. The second item is identified as the USB C Adaptor, part number 300-00054-000.A3. This cable is comprised of a length of insulated conductors with a UAC plug on one end and a USB C connector on the other end. The final item is identified as the USB A Adaptor, part number 300-00055-000.B1. The cable is composed of a length of insulated conductors with a UAC plug on one end and a USB A connector on the other end.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "transmettre_signaux",
+    "citation": "to smartphones, tablets, and various other input devices in order to listen to music, make phone calls, and listen to navigational alerts via the headsets",
+    "appui": "explicite"
+   },
+   "construction_passive": {
+    "valeur": "cable_connecteurs",
+    "citation": "This cable consists of a length of insulated conductors with a Universal Accessory Connector (UAC) on one end and a Lightning connector on the other end.",
+    "appui": "explicite"
+   },
+   "electronique_active": {
+    "valeur": false,
+    "citation": "This cable consists of a length of insulated conductors with a Universal Accessory Connector (UAC) on one end and a Lightning connector on the other end",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N359212",
+  "source": "US_CBP",
+  "date": "2026-03-23",
+  "url": "https://rulings.cbp.gov/ruling/N359212",
+  "code_officiel": "8504409510",
+  "hs6": "850440",
+  "produit": "Adaptateur secteur 120 V vers 12 V continu pour réveil",
+  "description": "The merchandise under consideration is identified as an AC Adaptor, model number ACX012, which you describe as a power adapter used exclusively with the Futuristic Alarm Clock. The power adapter is designed to convert 120V AC to 12V DC with a maximum output under 50 Watts. It is comprised of a 2-prong power plug for household electrical outlets and a female output port for connecting DC power plugs. The subject adapter is intended to be used with the Futuristic Alarm Clock and an optional pillow vibrator device.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "describe as a power adapter used exclusively with the Futuristic Alarm Clock",
+    "appui": "explicite"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "citation": "The power adapter is designed to convert 120V AC to 12V DC with a maximum output under 50 Watts.",
+    "appui": "explicite"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "citation": "a 2-prong power plug for household electrical outlets",
+    "appui": "alimentation"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "It is comprised of a 2-prong power plug for household electrical outlets and a female output port for connecting DC power plugs.",
+    "appui": "composition"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "a power adapter used exclusively with the Futuristic Alarm Clock",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "It is comprised of a 2-prong power plug for household electrical outlets and a female output port for connecting DC power plugs.",
+    "appui": "composition"
+   }
+  }
+ },
+ {
+  "id": "N359291",
+  "source": "US_CBP",
+  "date": "2026-03-24",
+  "url": "https://rulings.cbp.gov/ruling/N359291",
+  "code_officiel": "8504409580",
+  "hs6": "850440",
+  "produit": "Chargeur autonome pour batterie de casque d'aviation",
+  "description": "The merchandise under consideration is identified as Assembly, Battery Charger, Part number 801-00002-000.A1, which is a standalone battery charger for the lithium-ion battery exclusively used in Lightspeed Delta Zulu aviation headsets. The battery charger is comprised of a main Printed Circuit Board Assembly (PCBA) responsible for battery charging control, a sub-PCBA that manages indicator status and facilitates battery interface, and a USB-C port for charging cables.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "which is a standalone battery charger for the lithium-ion battery exclusively used in Lightspeed Delta Zulu aviation headsets",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "citation": "We note that the lithium-ion battery is not imported with the subject battery charger.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "the lithium-ion battery exclusively used in Lightspeed Delta Zulu aviation headsets",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N360577",
+  "source": "US_CBP",
+  "date": "2026-04-24",
+  "url": "https://rulings.cbp.gov/ruling/N360577",
+  "code_officiel": "8517620090",
+  "hs6": "851762",
+  "produit": "Ensemble chargeur porté au cou, station d'accueil et étui pour implant",
+  "description": "The charger is a wireless device that is worn around the neck. It contains a rechargeable lithium-ion battery and a Bluetooth radio transceiver. The charger is used to charge the implant at home and to program the implant during clinic visits.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "aucune_dominante",
+    "citation": "the charger is used to both charge the implant and to transmit and receive data to and from the implant",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "It contains a rechargeable lithium-ion battery and a Bluetooth radio transceiver.",
+    "appui": "explicite"
+   },
+   "appareil_hote": {
+    "valeur": "autre",
+    "citation": "intended solely for use with the SetPoint System, which is an implantable neuro stimulation medical device",
+    "appui": "explicite"
+   }
+  }
+ },
+ {
+  "id": "N363538",
+  "source": "US_CBP",
+  "date": "2026-08-06",
+  "url": "https://rulings.cbp.gov/ruling/N363538",
+  "code_officiel": "8507600090",
+  "hs6": "850760",
+  "produit": "Batterie externe lithium-ion à quatre ports USB",
+  "description": "The merchandise under consideration is the Green Cell PowerPlay Ultra Power Bank, model number PBGC04, a device that features a compact rectangular case with two USB-C ports, two USB-A ports, and LED indicators. The power bank uses lithium-ion chemistry, has a combined maximum output of 128 W, a nominal capacity of 26,800 mAh, and is compatible with various fast charging technologies.",
+  "motifs": "",
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "citation": "marketed and sold as a multi-port power bank for charging laptops, tablets, cameras, smartphones, and similar devices",
+    "appui": "explicite"
+   },
+   "batterie_integree": {
+    "valeur": "lithium_ion",
+    "citation": "The power bank uses lithium-ion chemistry",
+    "appui": "explicite"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "citation": "a compact rectangular case with two USB-C ports, two USB-A ports, and LED indicators",
+    "appui": "composition"
+   }
+  }
+ }
+]
