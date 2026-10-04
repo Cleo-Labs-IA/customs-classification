@@ -48,7 +48,7 @@ function ajout() {
 function bandeau(s, ev) {
   const t = ev.totaux, pays = Object.keys(ev.parPays).length;
   if (!s.boutique) return '';
-  return `<a class="carte bandeau-envois" href="#/envois"><span class="bulle"></span><div><b>${esc(s.boutique.nom)}</b><small>${esc(s.boutique.plateforme)} · ${pluriel(t.lignes, 'order line', 'order lines')} to ship to ${pluriel(pays, 'country', 'countries')}</small></div>
+  return `<a class="carte bandeau-envois" href="#/"><span class="bulle"></span><div><b>${esc(s.boutique.nom)}</b><small>${esc(s.boutique.plateforme)} · ${pluriel(t.lignes, 'order line', 'order lines')} to ship to ${pluriel(pays, 'country', 'countries')}</small></div>
     <div class="be-compte">${['pret', 'a_verifier', 'bloque'].map((n) => `<span><i class="c-${n}"></i><b data-compte="${t.compte[n]}" data-cle="acc-${n}">${t.compte[n]}</b> ${NIVEAU[n].court.toLowerCase()}</span>`).join('')}</div><span class="be-aller">Shipments ${ic('droite')}</span></a>`;
 }
 

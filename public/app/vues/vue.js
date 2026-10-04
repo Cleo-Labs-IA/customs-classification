@@ -5,6 +5,7 @@ import { carteHtml, brancherCarte } from './carte.js';
 import { ouvrir } from './tiroirs.js';
 import * as S from '../store.js';
 import { enteteEnvois } from './envois-entete.js';
+import { zoneNouveau, brancherZone } from '../depot.js';
 
 export const titre = 'Shipments';
 
@@ -24,6 +25,7 @@ function accueilVide() {
   ];
   return `<div class="page entre">
     ${enteteEnvois('envois', 'Every order, checked for its country before it leaves.')}
+    ${zoneNouveau()}
     <div class="carte" style="overflow:hidden">
       <div class="accueil-vide"><div><span class="eyebrow">No orders</span><h3 style="margin-top:12px">Import a store's orders. <span>Stamped classifies each product and checks each shipment.</span></h3>
         <p>The same product ships to ten countries, each with its own codes, markings, certificates and duties. Each status shown links back to the rule behind it.</p>
@@ -81,6 +83,7 @@ export function rendre() {
   const nbPays = Object.keys(ev.parPays).length;
   return `<div class="page entre">
     ${enteteEnvois('envois', `<span data-compte="${t.lignes}" data-cle="lignes">${t.lignes}</span> line${t.lignes > 1 ? 's' : ''} to ship to ${pluriel(nbPays, 'country', 'countries')} · ${esc(s.boutique.nom)} (${esc(s.boutique.plateforme)}) · synced <span data-ilya="${esc(s.boutique.synchroLe)}">${esc(ilYA(s.boutique.synchroLe))}</span>`)}
+    ${zoneNouveau()}
     ${repartition(t, ev)}
     <div class="grille">
       <div class="carte"><div class="carte-tete"><h2>Shipment map</h2><span class="muted">${ic('globe', 'faint')} click a country</span></div>${carteHtml(ev)}</div>
@@ -94,6 +97,7 @@ export function rendre() {
 }
 
 export function brancher(racine) {
+  brancherZone(racine);
   const ev = S.lire().lignes.length ? S.evaluation() : null;
   if (ev) brancherCarte(racine, ev, (c) => ouvrir('pays', c));
   racine.querySelectorAll('tr[data-pays]').forEach((tr) => tr.addEventListener('click', () => ouvrir('pays', tr.dataset.pays)));

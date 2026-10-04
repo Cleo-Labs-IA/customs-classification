@@ -31,7 +31,7 @@ export function enteteProduit(sku, actif) {
   const e = etatProduit(sku, s), autres = Object.values(s.produits).filter((x) => x.sku !== sku);
   const lien = (ONGLETS.find(([id]) => id === actif) || ONGLETS[0])[2];
   return `<div class="produit-tete">
-    <a class="retour-lien" href="#/">${ic('droite', 'tourne')}All products</a>
+    <a class="retour-lien" href="#/produits">${ic('droite', 'tourne')}All products</a>
     <div class="produit-ligne">
       <div class="vignette v-${esc(p.teinte || 'gris')} produit-photo">${p.image ? `<img src="${esc(p.image)}" alt="">` : esc(sku.slice(0, 3))}</div>
       <div class="produit-nom"><span class="eyebrow">${esc(sku)} · made in ${esc(nomPays(p.origine || 'CN'))}</span><h1>${esc(p.nom)}</h1></div>

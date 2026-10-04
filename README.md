@@ -4,15 +4,17 @@
 
 The default store holds two real products, read from their photographed labels: a 70 W USB-C power adapter and a notebook PC (model M1605N).
 
-Navigation: **Products**, **Shipments**, **Questions**, **Regulatory watch**; the rule editor sits apart, for experts.
+Navigation: **Shipments** (first view), **Products**, **Questions**, **Regulatory watch**; the rule editor sits apart, for experts.
 
-- **Products** (home): one card per product (photo, code, state, and where it stands: label read, code found, signed, evidence per market), a card to add a product (photo, label, pictogram, product page link or text), and the store's shipments in one line.
+To classify a new product, drop a photo, a label, a pictogram or a product page link on the *New* zone of the first view, or anywhere in the app: a full-window drop target appears and opens the classification file (`public/app/depot.js`).
+
+- **Products** (`#/produits`): one card per product (photo, code, state, and where it stands: label read, code found, signed, evidence per market), a card to add a product (photo, label, pictogram, product page link or text), and the store's shipments in one line.
 - **A product** (`#/produit?sku=…`) opens its own space, one header and four tabs:
   - **Overview**: what the label says, the code with the steps that lead to it, *Validate and sign*, the evidence per market (Yes / No, signed; every order to that market follows), and the orders waiting.
   - **Why this code** (`#/arbre?sku=…`): the encoded rule drawn as a graph, each step with its question, the label passage and the official text.
   - **World** (`#/monde?sku=…`): per country, the tariff line the engine proposes and the base duty; per market, the requirements with the official sentence behind each.
   - **Classification file** (`#/dossier?sku=…`): the full file, started from the facts already established on the label.
-- **Shipments**: an overview (map, deadlines) and the orders, behind one switch. Each order line is checked for its country against the verified rules, on the code of the product's single decision (engine and encoded rule read together, `public/decision.js`); a code validated by a person takes precedence.
+- **Shipments** (first view, `#/`): the *New* drop zone, an overview (map, deadlines) and the orders, behind one switch. Each order line is checked for its country against the verified rules, on the code of the product's single decision (engine and encoded rule read together, `public/decision.js`); a code validated by a person takes precedence.
 - **Questions**: everything still to decide, across products.
 - **Rule editor** (`#/arbre`): the free-form tree, signed edits, replay on the 87 official decisions.
 

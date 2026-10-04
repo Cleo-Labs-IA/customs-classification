@@ -7,6 +7,7 @@ import { rafraichir as rafraichirTiroir, fermer as fermerTiroir } from './vues/t
 import { ouvrirImport } from './vues/import.js';
 import * as S from './store.js';
 import { compter, brancherReflet, transition } from './effets.js';
+import { brancherDepotGlobal } from './depot.js';
 import * as vue from './vues/vue.js';
 import * as commandes from './vues/commandes.js';
 import * as questions from './vues/questions.js';
@@ -18,10 +19,11 @@ import * as monde from './vues/monde.js';
 import * as produit from './vues/produit.js';
 import * as E from './dossier/etat.js';
 
-const VUES = { '': accueil, produit, envois: vue, monde, dossier, commandes, questions, veille, arbre };
+// La première vue est celle des envois ; les produits ont leur propre adresse.
+const VUES = { '': vue, envois: vue, produits: accueil, produit, monde, dossier, commandes, questions, veille, arbre };
 // L'entrée de la barre latérale allumée pour chaque écran. Les onglets d'un produit
 // (pourquoi ce code, monde, dossier) restent sous « Products ».
-const IDS = { '': 'accueil', produit: 'accueil', monde: 'accueil', envois: 'envois', commandes: 'envois', questions: 'questions', veille: 'veille', dossier: 'accueil', arbre: 'arbre' };
+const IDS = { '': 'envois', envois: 'envois', commandes: 'envois', produits: 'accueil', produit: 'accueil', monde: 'accueil', questions: 'questions', veille: 'veille', dossier: 'accueil', arbre: 'arbre' };
 const actifSide = () => (route.nom === 'arbre' && route.params.get('sku') ? 'accueil' : IDS[route.nom]);
 const shell = document.querySelector('.shell'), side = document.querySelector('.side'), main = document.querySelector('.main');
 let route = null;
@@ -40,9 +42,9 @@ function rendreSide() {
 function topbar() {
   const s = S.lire(), V = VUES[route.nom];
   // Une action principale par écran, là où elle a du sens.
-  const envois = ['envois', 'commandes', 'veille'].includes(route.nom);
-  const actions = route.nom === '' ? `<a class="btn noir" href="#/dossier">${ic('plus')}Add a product</a>`
-    : envois ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>${route.nom === 'veille' ? '' : `<button class="btn noir" data-action="importer">${ic('import')}Import orders</button>`}` : '';
+  const envois = ['', 'envois', 'commandes', 'veille'].includes(route.nom);
+  const actions = route.nom === 'produits' ? `<a class="btn noir" href="#/dossier">${ic('plus')}Add a product</a>`
+    : envois ? `<button class="btn texte" data-action="simuler" title="Simulate an announcement">${ic('eclair')}<span class="lib-btn">Simulate an announcement</span></button>${route.nom === 'veille' ? '' : `<button class="btn noir" data-action="importer" title="Import orders">${ic('import')}<span class="lib-btn">Import orders</span></button>`}` : '';
   const titre = V.titrePour ? V.titrePour() : V.titre;
   return `<header class="topbar"><div class="fil">${s.boutique ? `${esc(s.boutique.nom)} ${ic('droite')}` : ''}<b>${esc(titre)}</b></div>${actions}</header>`;
 }
@@ -168,6 +170,7 @@ main.addEventListener('scroll', () => main.classList.toggle('defile', main.scrol
 
 brancherRepli(shell);
 brancherReflet();
+brancherDepotGlobal();
 S.abonner(planifier);
 E.abonner(planifier);
 window.addEventListener('hashchange', naviguer);

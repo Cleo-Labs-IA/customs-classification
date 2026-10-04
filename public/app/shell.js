@@ -4,8 +4,8 @@ import { esc, ic, ilYA } from './ui.js';
 // Quatre écrans. Un produit ouvre son propre espace (vue d'ensemble, pourquoi ce code,
 // monde, dossier) ; l'éditeur de la règle encodée est un outil d'expert, à part.
 const NAV = [
-  { id: 'accueil', href: '/#/', lib: 'Products', ic: 'produits' },
-  { id: 'envois', href: '/#/envois', lib: 'Shipments', ic: 'commandes' },
+  { id: 'envois', href: '/#/', lib: 'Shipments', ic: 'commandes' },
+  { id: 'accueil', href: '/#/produits', lib: 'Products', ic: 'produits' },
   { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
   { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
 ];
