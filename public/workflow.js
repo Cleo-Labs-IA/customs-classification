@@ -31,6 +31,9 @@ export function selectedCode(decision, candidates = [], arbitration = null, leve
   const candidate = candidates.find(c => !c.set_aside_reason && (decision.origine === 'arbitrage' ? String(c.code) === code : String(c.code).startsWith(code)));
   return candidate ? { code: String(candidate.code), system: candidate.system } : { code, system: 'hs6' };
 }
+export function classificationRequestScope({ country, asOf, level, persist = false }) {
+  return { country, as_of: asOf, persist, ...(persist && level === 'hs6' ? { system: 'hs6' } : {}) };
+}
 export function validateCodeResponse(request, response, checkedAt = new Date().toISOString()) {
   const data = response?.data;
   if (!data || ['code', 'country', 'system'].some(k => data[k] !== request[k])) throw new Error('The returned code validation does not match the requested code, country and system. Export remains blocked.');

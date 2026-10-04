@@ -286,7 +286,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 <aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
 
 <script type="module">
-import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification } from './workflow.js';
+import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope } from './workflow.js';
 import { evaluer, cle } from './arbre-moteur.js';
 import { dossierHtml } from './dossier.js';
 import { decider, arbitrageValide } from './decision.js';
@@ -442,7 +442,7 @@ async function toJpeg(file, max, q) {
 }
 async function classify(desc, facts, country, persist = false) {
   if (persist && W.classifyUncertain) throw new Error('An earlier classification may have been saved. Check shared history before another persisted assessment.');
-  const body = { item_id: S.product.sku, description: desc, country: country || S.product.dest, as_of: S.product.asof, persist };
+  const body = { item_id: S.product.sku, description: desc, ...classificationRequestScope({ country: country || S.product.dest, asOf: S.product.asof, level: S.niveau, persist }) };
   if (Object.keys(facts).length) body.facts = factValues(facts);
   try {
     const j = await post('/api/classify', body);

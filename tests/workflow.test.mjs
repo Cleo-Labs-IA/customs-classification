@@ -6,6 +6,7 @@ const identity = fn('createIdentity'), version = fn('createVersion'), scopeKey =
 const acknowledge = fn('acknowledgeApproval'), eligible = fn('publishEligibility'), selectedCode = fn('selectedCode');
 const validateCodeResponse = fn('validateCodeResponse'), collectReviews = fn('collectReviews');
 const approvalStillCurrent = fn('approvalStillCurrent'), uncertainClassification = fn('uncertainClassification');
+const classificationRequestScope = fn('classificationRequestScope');
 const scope = { product: { sku: 'DOCK', configuration: 'with Ethernet' }, facts: { function: { value: 'hub' } }, criteria: {}, origin: 'CN', destination: 'FR', effectiveDate: '2026-10-04', ruleVersion: 'rules-v1', requiredLevel: 'national' };
 const base = () => version({ identityId: 'product-1', scope, id: 'draft-1', now: '2026-10-04T08:00:00Z' });
 const ack = { data: { classification_id: 'classification-1', review_status: 'approved', approved_code: '8471800000', review_version: 1, review: { id: 'review-1', decision: 'approved', reviewer: 'Jane Doe', approved_code: '8471800000', version: 1, created_at: '2026-10-04T09:00:00Z' } } };
@@ -59,6 +60,17 @@ test('the selected approval level governs the actual submitted code even with a 
   assert.deepEqual(selectedCode(decision, candidates, null, 'hs6'), { code: '850440', system: 'hs6' });
   assert.deepEqual(selectedCode(decision, candidates, null, 'national'), { code: '85044090', system: 'cn8' });
   assert.deepEqual(selectedCode({ ...decision, origine: 'arbitrage' }, candidates, { code: '85044090' }, 'hs6'), { code: '850440', system: 'hs6' });
+});
+test('persisted classification explicitly requests HS6 when approval is HS6 and lets destination select the national catalogue otherwise', () => {
+  const request = { country: 'FR', asOf: '2026-10-04', persist: true };
+  const hs6 = classificationRequestScope({ ...request, level: 'hs6' });
+  assert.deepEqual(hs6, { country: 'FR', as_of: '2026-10-04', persist: true, system: 'hs6' });
+  assert.deepEqual(selectedCode({ code: '850440', origine: 'moteur' }, [{ code: '850440', system: hs6.system }], null, 'hs6'), { code: '850440', system: 'hs6' });
+  const national = classificationRequestScope({ ...request, level: 'national' });
+  assert.deepEqual(national, { country: 'FR', as_of: '2026-10-04', persist: true });
+  assert.equal(Object.hasOwn(national, 'system'), false);
+  assert.deepEqual(selectedCode({ code: '850440', origine: 'moteur' }, [{ code: '85044090', system: 'cn8' }], null, 'national'), { code: '85044090', system: 'cn8' });
+  assert.deepEqual(classificationRequestScope({ ...request, level: 'hs6', persist: false }), { country: 'FR', as_of: '2026-10-04', persist: false });
 });
 test('mismatched upstream code validation cannot be rewritten into a valid export check', () => {
   const request = { code: '8471800000', country: 'FR', system: 'taric', as_of: scope.effectiveDate };
