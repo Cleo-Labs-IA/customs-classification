@@ -7,6 +7,7 @@ import { donneesHorsLigne, suggestionsHorsLigne, etatServeur } from '../api.js';
 import { estImage } from '../dossier/photo.js';
 import { lireFait, travailRestant, STATUT } from '../dossier/logique.js';
 import { versImprimable } from '../dossier/imprimable.js';
+import { declarationsHtml } from '../dossier/declaration.js';
 import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
 import { ouvrirContenu } from './tiroirs.js';
@@ -16,7 +17,7 @@ import { piecesCarte, faitsCarte, contradictionsCarte, regleCarte, toursHtml, qu
 import { propositionCarte, epreuvesCarte, obligationsCarte, destinationsCarte } from './dossier/outils.js';
 import { decisionCarte, exigencesCarte, exigencesDossier, exigencesClic } from './dossier/decision.js';
 import { identiteCarte } from './dossier/identite.js';
-import { diffusionCarte, csvImport } from './dossier/diffusion.js';
+import { diffusionCarte, declarationsCarte, csvImport } from './dossier/diffusion.js';
 
 export const titre = 'Classify a product';
 let plusOuvert = false;
@@ -167,7 +168,7 @@ function dossierEcran(D) {
   const corpsDecision = (mode) => (dec ? decisionCarte(D, dec, R, res, qui, mode) + regleCarte(D, R, res, det) : pasEncore(D.contradictions.length ? 'Settle the contradictions in step 3 first: the decision comes after.' : 'The decision appears once the documents are read and the product is classified.'));
   const preuves = () => repli('Evidence to examine before signing: engine reading, similar rulings, tests', propositionCarte(D, det, travail) + epreuvesCarte(D, det));
   const corpsRevue = (seul) => (dec ? (seul ? '' : decisionCarte(D, dec, R, res, qui, 'revue')) + preuves() : pasEncore('The review opens once a decision is on the table.'));
-  const corpsDiffusion = () => (dec ? `<div class="cols-dossier"><div class="col">${diffusionCarte(D, dec, MONDE)}</div><div class="col">${(dansPerimetreFR(dec, res) ? exigencesCarte(D, E.exigencesChargees(), det) : horsPerimetreFR(P)) + obligationsCarte(D, dec)}${repli('Same documents, other destinations', destinationsCarte(D, det))}</div></div>` : pasEncore('Distribution opens once a decision is on the table.'));
+  const corpsDiffusion = () => (dec ? `<div class="cols-dossier"><div class="col">${declarationsCarte(D, dec, MONDE)}${diffusionCarte(D, dec, MONDE)}</div><div class="col">${(dansPerimetreFR(dec, res) ? exigencesCarte(D, E.exigencesChargees(), det) : horsPerimetreFR(P)) + obligationsCarte(D, dec)}${repli('Same documents, other destinations', destinationsCarte(D, det))}</div></div>` : pasEncore('Distribution opens once a decision is on the table.'));
   const titreEtape = (i, html) => `<h3 class="section-etape" id="etape-${i}"><span class="num">Step ${i}</span>${ETAPES[i - 1][0]}</h3>${html}`;
   const catalogue = Boolean(S.lire().produits[P.sku]), a = attention(D, res), squelette = !t && D.occupe ? `<div class="candidats-grille">${[1, 2, 3].map(() => '<div class="cand-carte"><span class="miroite" style="height:22px;width:90px"></span><span class="miroite" style="height:38px"></span><span class="miroite" style="height:6px"></span></div>').join('')}</div>` : '';
   const sections = {
@@ -216,6 +217,14 @@ function imprimer() {
   const doc = dossierHtml(D.valide || versImprimable(D, E.regleChargee(), res, travail, null, E.decision(), dansPerimetreFR(E.decision(), res) ? exigencesDossier(D, E.exigencesChargees()) : null)), w = window.open('', '_blank');
   if (w) { w.document.open(); w.document.write(doc); w.document.close(); return; }
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([doc], { type: 'text/html' })); a.download = `classification-file-${D.produit.sku}.html`; a.click();
+}
+// Les projets de déclaration de conformité, une page par marché, dans un nouvel onglet.
+function declarations() {
+  const D = E.lire(), doc = declarationsHtml(D, E.decision(), MONDE);
+  if (!doc) return toast({ titre: 'No declaration drafted', texte: 'No verified requirement is recorded for this code.', niveau: 'a_verifier', icone: 'alerte' });
+  const w = window.open('', '_blank');
+  if (w) { w.document.open(); w.document.write(doc); w.document.close(); return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([doc], { type: 'text/html' })); a.download = `declarations-of-conformity-draft-${D.produit.sku}.html`; a.click();
 }
 function telecharger() {
   const D = E.lire(), a = document.createElement('a');
@@ -296,7 +305,7 @@ export function brancher(racine, rerendre) {
     if (a) {
       const api = (format) => E.dossierApi(format).catch((err) => toast({ titre: 'Dossier not downloaded', texte: String(err.message || err).slice(0, 200), niveau: 'a_verifier', icone: 'alerte' }));
       const csv = () => { const texte = csvImport(E.lire(), E.decision()); if (!texte) return; const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([texte], { type: 'text/csv' })); l.download = `export-for-import-${E.lire().produit.sku}.csv`; l.click(); };
-      const actions = { imprimer, telecharger, csv, historique: () => E.chargerHistorique(), 'verifier-code': () => E.verifierCode(), 'dossier-api-pdf': () => api('pdf'), 'dossier-api-json': () => api('json'), nouveau: () => { E.nouveau(); document.querySelector('.main')?.scrollTo({ top: 0 }); } };
+      const actions = { imprimer, telecharger, declarations, csv, historique: () => E.chargerHistorique(), 'verifier-code': () => E.verifierCode(), 'dossier-api-pdf': () => api('pdf'), 'dossier-api-json': () => api('json'), nouveau: () => { E.nouveau(); document.querySelector('.main')?.scrollTo({ top: 0 }); } };
       return actions[a.dataset.actionDossier] && actions[a.dataset.actionDossier]();
     }
   });
