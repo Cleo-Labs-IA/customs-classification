@@ -1,4 +1,4 @@
-# Cleo Customs Classification
+#  Customs Classification
 
 Selling internationally means researching customs codes, chasing missing product details and assembling paperwork for each destination. E-commerce sellers can spend hours on this work without knowing whether their classification will be accepted.
 
@@ -57,7 +57,7 @@ These are public posts by sellers, importers and customs brokers. Each quote lin
 - **The same product can be read two ways.** A USB-C dock charges, carries data and drives a screen; its heading depends on its principal function. On the demo's 70 W charger, one lookup per country on the Cleo Legal API returned 8504.40 in 68 of 111 countries and another code in the 43 others.
 - **The deciding fact is rarely in the product title.** It sits on a label, in a datasheet or on a product page, and two documents can contradict each other.
 
-## What Cleo does about it
+## What does about it
 
 | The pain | What the app does |
 | --- | --- |
