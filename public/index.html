@@ -286,7 +286,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 <aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
 
 <script type="module">
-import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope, collectChanges } from './workflow.js';
+import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope, collectChanges, scopeResetPatch } from './workflow.js';
 import { evaluer, cle } from './arbre-moteur.js';
 import { dossierHtml } from './dossier.js';
 import { decider, arbitrageValide } from './decision.js';
@@ -1076,7 +1076,8 @@ function currentScope() {
 function clearApproval() {
   if (W.version?.approval) W.version = createVersion({ previous: W.version, scope: currentScope(), id: crypto.randomUUID() });
   if (S) { S.saved = null; S.arbitrage = null; }
-  W.classificationId = null; W.reviewVersion = null; W.validation = null; W.exportReceipt = null; W.reviewUncertain = false;
+  W.classificationId = null; W.reviewVersion = null; W.reviewUncertain = false;
+  Object.assign(W, scopeResetPatch(W, S?.product.sku || $('sku').value.trim()));
   resetCode();
 }
 function snapshotVersion() {
@@ -1143,10 +1144,12 @@ async function withApi(action) {
 async function fetchHistory(append = false) {
   const sku = S?.product.sku || $('sku').value.trim();
   if (!sku) throw new Error('Enter a SKU to find its shared classification history.');
+  if (W.historyItemId !== sku) append = false;
   const q = new URLSearchParams({ item_id: sku, limit: '20' }); if (append && W.historyCursor) q.set('cursor', W.historyCursor);
   const j = await api('/api/classifications?' + q);
   if (!Array.isArray(j.data?.items)) throw new Error('The server returned no readable classification history.');
   W.history = append ? [...W.history, ...j.data.items] : j.data.items; W.historyCursor = j.data.next_cursor || null;
+  W.historyItemId = sku;
   if (W.classifyUncertain) W.classHistoryFetched = true;
   W.notice = 'Shared classification history refreshed. These are API records; confirm product identity before reuse.';
 }

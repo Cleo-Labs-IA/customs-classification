@@ -91,6 +91,11 @@ export function approvalStillCurrent(version, data) {
 export function uncertainClassification({ persist, sent, status, readable = true }) {
   return Boolean(persist && sent && (!status || status >= 500 || (status >= 200 && status < 300 && !readable)));
 }
+export function scopeResetPatch(state, itemId) {
+  const sameItem = state.historyItemId === itemId;
+  return { validation: null, changeCheck: null, exportReceipt: null,
+    history: sameItem ? state.history : [], historyCursor: sameItem ? state.historyCursor : null, historyItemId: sameItem ? itemId : null };
+}
 export function publishEligibility({ version, currentScope, identityConfirmed, system, validation, blockers = [], reviewRequired = false }) {
   const reasons = [...blockers], a = version?.approval, s = version?.scope;
   if (!identityConfirmed) reasons.push('Confirm the physical product identity.');

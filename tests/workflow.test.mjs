@@ -10,6 +10,7 @@ const validateCodeResponse = fn('validateCodeResponse'), collectReviews = fn('co
 const approvalStillCurrent = fn('approvalStillCurrent'), uncertainClassification = fn('uncertainClassification');
 const classificationRequestScope = fn('classificationRequestScope');
 const collectChanges = fn('collectChanges');
+const scopeResetPatch = fn('scopeResetPatch');
 const scope = { product: { sku: 'DOCK', configuration: 'with Ethernet' }, facts: { function: { value: 'hub' } }, criteria: {}, origin: 'CN', destination: 'FR', effectiveDate: '2026-10-04', ruleVersion: 'rules-v1', requiredLevel: 'national' };
 const base = () => version({ identityId: 'product-1', scope, id: 'draft-1', now: '2026-10-04T08:00:00Z' });
 const ack = { data: { classification_id: 'classification-1', review_status: 'approved', approved_code: '8471800000', review_version: 1, review: { id: 'review-1', decision: 'approved', reviewer: 'Jane Doe', approved_code: '8471800000', version: 1, created_at: '2026-10-04T09:00:00Z' } } };
@@ -157,6 +158,15 @@ test('only uncertain persisted classification acknowledgements require history r
   assert.equal(uncertainClassification({ persist: true, sent: true, status: 429 }), false);
   assert.equal(uncertainClassification({ persist: false, sent: true, status: null }), false);
   assert.equal(uncertainClassification({ persist: true, sent: false, status: null }), false);
+});
+test('a successor clears current validity, change coverage and export receipt while retaining same-SKU shared history', () => {
+  const prior = { validation: { code: '850440' }, changeCheck: { tracked: false, checkedAt: '2026-10-04' }, exportReceipt: 'exported', historyItemId: 'SKU-A', history: [{ item_id: 'SKU-A' }], historyCursor: 'older' };
+  const same = scopeResetPatch(prior, 'SKU-A');
+  assert.equal(same.validation, null); assert.equal(same.changeCheck, null); assert.equal(same.exportReceipt, null);
+  assert.deepEqual(same.history, prior.history); assert.equal(same.historyCursor, 'older');
+  assert.equal(prior.changeCheck.tracked, false);
+  const other = scopeResetPatch(prior, 'SKU-B');
+  assert.deepEqual(other.history, []); assert.equal(other.historyCursor, null); assert.equal(other.historyItemId, null);
 });
 test('export needs current approval, a valid full national code and no unresolved review trigger', () => {
   const current = acknowledge(base(), ack, { classificationId: 'classification-1', code: '8471800000' });
