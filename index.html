@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classification douanière · Cleo</title>
+<style>
+:root{
+  --ink:#0008CF; --ink-08:rgba(0,8,207,.08); --ink-20:rgba(0,8,207,.2);
+  --paper:#F6F3EC; --card:#FFFFFF; --black:#141414; --g7:#44443F; --g5:#7B7A73; --rule:rgba(20,20,20,.13);
+  --ok:#0B7A3E; --ok-bg:#E6F3EB; --warn:#8A5A00; --warn-bg:#FBF0D9; --off:#8C8B85; --off-bg:#EEECE6; --bad:#A3261B; --bad-bg:#F8E4E1;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--paper);color:var(--black);font-size:14.5px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+header{display:flex;align-items:baseline;gap:14px;padding:18px 28px;border-bottom:1px solid var(--rule)}
+header h1{font-size:18px;font-weight:650;letter-spacing:-.01em}
+header p{color:var(--g5);font-size:13.5px}
+main{display:grid;grid-template-columns:400px minmax(0,1fr);gap:24px;padding:24px 28px 80px;align-items:start;max-width:1500px;margin:0 auto}
+@media(max-width:980px){main{grid-template-columns:1fr;padding:16px}}
+
+/* fiche produit */
+.fiche{background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden;position:sticky;top:16px}
+@media(max-width:980px){.fiche{position:static}}
+.fiche section{padding:18px 20px;border-bottom:1px solid var(--rule)}
+.fiche section:last-child{border-bottom:0}
+.fiche h2{font-size:15px;font-weight:650;margin-bottom:12px}
+label{display:block;font-size:12.5px;color:var(--g7);margin:10px 0 4px}
+label small{color:var(--g5)}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--rule);border-radius:7px;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--ink);box-shadow:0 0 0 3px var(--ink-08)}
+textarea{resize:vertical;min-height:74px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dims{display:grid;grid-template-columns:1fr 1fr 1fr 1.1fr;gap:8px}
+.hint{font-size:12px;color:var(--g5);margin-top:4px}
+.hscode{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px dashed var(--rule);border-radius:7px;color:var(--g5);min-height:40px;background:#FBFAF7}
+.hscode.set{border-style:solid;border-color:var(--ok);background:var(--ok-bg);color:var(--black)}
+.hscode b{font-family:var(--mono);font-size:15px}
+.samples{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:11px 16px;font-weight:600;cursor:pointer;width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ok{background:var(--ok)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink-20);width:auto;padding:8px 12px}
+
+/* graphe */
+.graph{min-height:420px}
+.empty{border:1px dashed var(--rule);border-radius:12px;padding:56px 28px;text-align:center;color:var(--g5)}
+.empty b{display:block;color:var(--black);font-size:17px;margin-bottom:6px}
+.flow{display:flex;flex-direction:column;align-items:center}
+.link{width:2px;height:22px;background:var(--rule)}
+.tour{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);background:var(--paper);padding:2px 10px;border:1px solid var(--rule);border-radius:999px}
+.node{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:13px 16px;width:min(100%,560px);cursor:pointer;text-align:left;transition:border-color .12s, box-shadow .12s}
+.node:hover,.cand:hover{border-color:var(--ink);box-shadow:0 0 0 3px var(--ink-08)}
+.node .k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin-bottom:4px}
+.node .t{font-weight:600}
+.node .s{color:var(--g7);font-size:13.5px;margin-top:2px}
+.node.static{cursor:default}
+.node.static:hover{border-color:var(--rule);box-shadow:none}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.fact{font-size:12.5px;border-radius:6px;padding:3px 8px;background:var(--off-bg);cursor:pointer;border:1px solid transparent}
+.fact:hover{border-color:var(--ink)}
+.fact.ans{background:var(--ink-08);color:var(--ink)}
+.cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;width:100%;position:relative;padding-top:14px}
+.cands::before{content:"";position:absolute;top:0;left:12%;right:12%;height:2px;background:var(--rule)}
+.cand{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:12px 14px;cursor:pointer;text-align:left;position:relative}
+.cand::before{content:"";position:absolute;top:-14px;left:50%;width:2px;height:14px;background:var(--rule)}
+.cand .code{font-family:var(--mono);font-size:17px;font-weight:650}
+.cand .ttl{font-size:12.5px;color:var(--g7);margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cand.out{background:var(--off-bg);color:var(--off)}
+.cand.out .code{text-decoration:line-through}
+.cand.out .ttl{color:var(--off)}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;border-radius:5px;padding:2px 7px;margin-top:8px}
+.tag.keep{background:var(--ok-bg);color:var(--ok)}
+.tag.out{background:#E2DFD7;color:var(--g7)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.bad{background:var(--bad-bg);color:var(--bad)}
+.conf{float:right;font-size:12px;color:var(--g5);margin-top:3px}
+.q{border-left:3px solid var(--warn);background:var(--warn-bg)}
+.q .why{font-size:12.5px;color:var(--g7);margin:6px 0 8px}
+.q input,.q select{margin-top:2px}
+.q .qrow{margin-top:12px}
+.q .qrow:first-of-type{margin-top:6px}
+.final{border:2px solid var(--ink);cursor:default}
+.final .big{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:.02em;margin:4px 0}
+.final .kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin-top:12px;font-size:13.5px}
+.final .kv dt{color:var(--g5)}
+.final a,.drawer a{color:var(--ink)}
+.valid{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px}
+.valid .btn{width:auto}
+.done{margin-top:12px;padding:10px 12px;border-radius:8px;background:var(--ok-bg);color:var(--ok);font-weight:600}
+.loading{display:flex;align-items:center;gap:10px;color:var(--g7);padding:14px 0}
+.spin{width:16px;height:16px;border:2px solid var(--ink-20);border-top-color:var(--ink);border-radius:50%;animation:r 0.8s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:10px;padding:12px 14px;width:min(100%,560px)}
+.note{font-size:12px;color:var(--g5);max-width:560px;text-align:center;margin-top:18px}
+
+/* tiroir de détail */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:var(--card);border-left:1px solid var(--rule);box-shadow:-18px 0 40px rgba(0,0,0,.08);transform:translateX(105%);transition:transform .18s;overflow:auto;padding:22px 24px 40px;z-index:20}
+.drawer.open{transform:none}
+.drawer h3{font-size:17px;margin:2px 36px 4px 0}
+.drawer h4{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin:20px 0 6px}
+.drawer p{margin-bottom:8px}
+.drawer .x{position:absolute;top:16px;right:18px;border:0;background:var(--off-bg);border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px}
+.drawer blockquote{border-left:3px solid var(--ink-20);padding:8px 12px;background:#FBFAF7;font-size:13.5px;white-space:pre-wrap;margin:6px 0}
+.drawer pre{background:#17181C;color:#E9E8E3;border-radius:8px;padding:12px;font-family:var(--mono);font-size:12px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.drawer ul{padding-left:18px}
+.drawer li{margin-bottom:6px}
+.muted{color:var(--g5)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Classification douanière</h1>
+  <p>Une fiche produit et une destination. En retour : un code proposé avec ses preuves, ou la question qui manque.</p>
+</header>
+
+<main>
+  <form class="fiche" id="fiche" autocomplete="off">
+    <section>
+      <h2>Fiche produit</h2>
+      <div class="samples" id="samples"></div>
+      <div class="row">
+        <div><label for="sku">SKU</label><input id="sku" required maxlength="48"></div>
+        <div><label for="gtin">GTIN <small>(facultatif)</small></label><input id="gtin" maxlength="48"></div>
+      </div>
+      <label>Dimensions et poids <small>(facultatif)</small></label>
+      <div class="dims">
+        <input id="dl" type="number" min="0" step="any" placeholder="L cm">
+        <input id="dw" type="number" min="0" step="any" placeholder="l cm">
+        <input id="dh" type="number" min="0" step="any" placeholder="H cm">
+        <input id="kg" type="number" min="0" step="any" placeholder="kg">
+      </div>
+    </section>
+    <section>
+      <h2>Expédition et douane</h2>
+      <label for="desc">Description pour la douane</label>
+      <textarea id="desc" required maxlength="2000" placeholder="ex. station d'accueil USB-C pour ordinateur portable"></textarea>
+      <div class="hint">Le produit, sa matière et son usage, comme sur la fiche du catalogue.</div>
+      <div class="row">
+        <div><label for="dest">Destination</label><select id="dest"></select></div>
+        <div><label for="origin">Pays d'origine</label><select id="origin"></select></div>
+      </div>
+      <div class="hint">L'origine reste sur la fiche. La classification ne l'utilise pas.</div>
+      <label>Catégorie / code douanier</label>
+      <div class="hscode" id="hscode">Vide tant qu'une personne habilitée n'a pas validé</div>
+    </section>
+    <section>
+      <button class="btn" id="go" type="submit">Classer ce produit</button>
+      <div class="hint" id="keystate"></div>
+    </section>
+  </form>
+
+  <div class="graph" id="graph">
+    <div class="empty"><b>Le graphe de décision s'affiche ici</b>Choisissez un exemple ou remplissez la fiche, puis lancez la classification. Chaque case s'ouvre au clic.</div>
+  </div>
+</main>
+
+<aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Fermer">×</button><div id="drawerBody"></div></aside>
+
+<script>
+// Exemples : uniquement des fiches à soumettre. Aucun résultat n'est écrit à l'avance,
+// tout ce qui s'affiche à droite vient de l'appel en direct.
+const SAMPLES = [
+  { label: 'Station USB-C', sku: 'DOCK-PRO', desc: 'USB-C docking station for laptop', dest: 'FR', origin: 'CN' },
+  { label: 'Jouet parlant', sku: 'TOY-FARM-01', desc: "Fisher-Price See 'n Say The Farmer Says talking animal sounds toy", dest: 'US', origin: 'CN' },
+  { label: 'Horloge à construire', sku: 'CLOCK-BRICK', desc: 'LEGO buildable wall clock for kids, battery powered', dest: 'US', origin: 'CN', kg: 0.4 },
+  { label: 'Poupée animée Halloween', sku: 'HALLO-DOLL', desc: 'Halloween animated doll with spinning head, light-up eyes and spooky sounds, battery operated', dest: 'GB', origin: 'CN' },
+  { label: 'Chien robot', sku: 'ROBO-DOG', desc: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', dest: 'US', origin: 'CN' },
+  { label: 'Détecteur de métaux enfant', sku: 'KID-DETECT', desc: 'Kids metal detector, STEM educational toy for children 6+, with sound and light alarm', dest: 'GB', origin: 'CN' },
+];
+const COUNTRIES = { FR: 'France', DE: 'Allemagne', ES: 'Espagne', IT: 'Italie', NL: 'Pays-Bas', GB: 'Royaume-Uni', US: 'États-Unis', CA: 'Canada', JP: 'Japon', AU: 'Australie', CH: 'Suisse', KR: 'Corée du Sud', CN: 'Chine', VN: 'Vietnam', IN: 'Inde', MX: 'Mexique' };
+const STATUS = {
+  classified: ['Proposition à faire valider', 'keep'],
+  needs_review: ['Proposition à faire relire', 'warn'],
+  needs_information: ['Informations nécessaires', 'warn'],
+  ambiguous: ['Plusieurs codes restent plausibles', 'warn'],
+  unsupported_jurisdiction: ['Aucun candidat retenu pour cette destination', 'bad'],
+  stale_dataset: ['Nomenclature à rafraîchir', 'bad'],
+};
+const FACT_FR = { material: 'Matière', sole_material: 'Matière de la semelle', upper_material: 'Matière de la tige', composition: 'Composition', function: 'Fonction', use: 'Usage', process: 'Procédé', dimensions: 'Dimensions', thickness_mm: 'Épaisseur (mm)', weight_g: 'Poids (g)', power_w: 'Puissance (W)', engine_displacement_cc: 'Cylindrée (cm³)', voltage_v: 'Tension (V)', presentation: 'Présentation', audience: 'Public' };
+const NUM_FACTS = ['thickness_mm', 'weight_g', 'power_w', 'engine_displacement_cc', 'voltage_v'];
+const ENUM_FACTS = { presentation: ['bulk', 'retail_pack', 'retail_set', 'unassembled', 'other'], audience: ['men', 'women', 'boys', 'girls', 'babies', 'unisex', 'not_applicable'] };
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = (u) => (/^https:\/\//.test(String(u || '')) ? esc(u) : '#');
+const fmtCode = (c) => { c = String(c || ''); return c.length <= 6 ? c.replace(/^(\d{4})(\d{2})$/, '$1.$2') : c.replace(/^(\d{4})(\d{2})(.*)$/, '$1.$2.$3'); };
+const pct = (n) => (typeof n === 'number' ? String(n).replace('.', ',') : 'non fournie');
+
+// état : la fiche soumise, les faits (avec leur provenance), les tours d'appel
+let state = { product: null, facts: {}, origin: {}, rounds: [], busy: false, error: null, saved: null };
+let details = [];
+
+function fill(sel, def) {
+  sel.innerHTML = Object.entries(COUNTRIES).map(([k, v]) => `<option value="${k}">${esc(v)} (${k})</option>`).join('');
+  sel.value = def;
+}
+fill($('dest'), 'FR'); fill($('origin'), 'CN');
+$('samples').innerHTML = SAMPLES.map((s, i) => `<button type="button" class="chip" data-s="${i}">${esc(s.label)}</button>`).join('');
+$('samples').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-s]'); if (!b) return;
+  const s = SAMPLES[b.dataset.s];
+  $('sku').value = s.sku; $('desc').value = s.desc; $('dest').value = s.dest; $('origin').value = s.origin;
+  $('gtin').value = ''; $('dl').value = ''; $('dw').value = ''; $('dh').value = ''; $('kg').value = s.kg ?? '';
+  resetCode();
+});
+fetch('/api/status').then((r) => r.json()).then((s) => {
+  $('keystate').textContent = s.key_present ? 'Appel en direct sur ' + s.api.replace('https://', '') : 'Clé d\'API absente : la poser dans .env puis relancer le serveur.';
+});
+
+function resetCode() { $('hscode').className = 'hscode'; $('hscode').textContent = "Vide tant qu'une personne habilitée n'a pas validé"; }
+
+// Les faits tirés de la fiche : seuls ceux que l'API accepte, avec le champ d'où ils viennent.
+function factsFromFiche() {
+  const facts = {}, origin = {};
+  const kg = parseFloat($('kg').value);
+  if (kg > 0) { facts.weight_g = Math.round(kg * 1000); origin.weight_g = 'Fiche produit, champ « Poids » (' + $('kg').value + ' kg)'; }
+  const d = { length_mm: parseFloat($('dl').value) * 10, width_mm: parseFloat($('dw').value) * 10, height_mm: parseFloat($('dh').value) * 10 };
+  const dims = Object.fromEntries(Object.entries(d).filter(([, v]) => v > 0));
+  if (Object.keys(dims).length) { facts.dimensions = dims; origin.dimensions = 'Fiche produit, champ « Dimensions »'; }
+  return { facts, origin };
+}
+
+$('fiche').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = factsFromFiche();
+  state = { product: { sku: $('sku').value.trim(), gtin: $('gtin').value.trim(), desc: $('desc').value.trim(), dest: $('dest').value, origin: $('origin').value }, facts: f.facts, origin: f.origin, rounds: [], busy: false, error: null, saved: null };
+  resetCode();
+  run();
+});
+
+async function run() {
+  state.busy = true; state.error = null; render();
+  const body = { item_id: state.product.sku, description: state.product.desc, country: state.product.dest };
+  if (Object.keys(state.facts).length) body.facts = state.facts;
+  try {
+    const r = await fetch('/api/classify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json();
+    if (!r.ok || j.http !== 200 || !j.body || !j.body.data) state.error = j.error || ('L\'API a répondu ' + j.http + ' : ' + JSON.stringify(j.body).slice(0, 300));
+    else state.rounds.push({ ...j, data: j.body.data, answered: null });
+  } catch (err) { state.error = String(err.message || err); }
+  state.busy = false; render();
+}
+
+function detail(html) { details.push(html); return details.length - 1; }
+function openDetail(i) { $('drawerBody').innerHTML = details[i]; $('drawer').classList.add('open'); }
+$('closeDrawer').onclick = () => $('drawer').classList.remove('open');
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('drawer').classList.remove('open'); });
+
+function factValue(k, v) {
+  if (k === 'dimensions') return Object.entries(v).map(([a, b]) => a.replace('_mm', '') + ' ' + b + ' mm').join(' × ');
+  if (k === 'composition') return v.map((c) => c.material + (c.percent != null ? ' ' + c.percent + ' %' : '')).join(', ');
+  return String(v);
+}
+
+function evidenceHtml(c) {
+  const ev = c.evidence || [];
+  if (!ev.length) return '<p class="muted">L\'API n\'a rendu aucun extrait de texte pour ce candidat.</p>';
+  return ev.map((e) => `<p><b>${esc(e.ref || e.kind)}</b> · <a href="${safeUrl(e.url)}" target="_blank" rel="noopener">texte officiel</a>${e.source_version ? ' <span class="muted">(' + esc(e.source_version) + ')</span>' : ''}</p><blockquote>${esc(e.excerpt)}</blockquote>`).join('');
+}
+
+function candDetail(c, out) {
+  return `<h3>${esc(fmtCode(c.code))}</h3><p class="muted">${esc((c.title && (c.title.fr || c.title.en)) || '')}</p>
+    <h4>Statut dans ce tour</h4><p>${out ? 'Écarté' : 'Reste plausible'} · confiance rendue par l'API : ${pct(c.confidence)}</p>
+    ${c.set_aside_reason ? `<h4>Pourquoi il est écarté</h4><p>${esc(c.set_aside_reason)}</p>` : ''}
+    ${c.rationale ? `<h4>Justification</h4><p>${esc(c.rationale)}</p>` : ''}
+    <h4>Textes cités</h4>${evidenceHtml(c)}
+    <h4>Nomenclature</h4><p>${esc(c.system)} · version ${esc(c.source_version || 'non indiquée')}${c.valid_from ? ' · valable depuis le ' + esc(c.valid_from) : ''}${(c.gri || []).length ? ' · ' + esc(c.gri.join(', ')) : ''}</p>`;
+}
+
+function render() {
+  details = [];
+  const g = $('graph'), p = state.product;
+  if (!p) return;
+  const parts = [];
+  const last = state.rounds[state.rounds.length - 1];
+
+  // 1. produit
+  const first = state.rounds[0];
+  parts.push(`<button class="node" data-d="${detail(`<h3>${esc(p.sku)}</h3><p>${esc(p.desc)}</p><h4>Destination</h4><p>${esc(COUNTRIES[p.dest])} (${p.dest})</p><h4>Origine</h4><p>${esc(COUNTRIES[p.origin])} (${p.origin}). Gardée sur la fiche, non envoyée à la classification.</p>${first ? `<h4>Requête envoyée</h4><pre>POST ${esc(first.endpoint)}\n${esc(JSON.stringify(first.sent, null, 1))}</pre>` : ''}`)}">
+    <div class="k">Produit</div><div class="t">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div class="s">${esc(p.desc)}</div></button>`);
+
+  // 2. caractéristiques connues
+  const fk = Object.keys(state.facts);
+  parts.push('<div class="link"></div>');
+  parts.push(`<div class="node static"><div class="k">Caractéristiques connues</div>
+    ${fk.length ? `<div class="facts">${fk.map((k) => `<span class="fact ${state.origin[k].startsWith('Réponse') ? 'ans' : ''}" data-d="${detail(`<h3>${esc(FACT_FR[k] || k)}</h3><p>${esc(factValue(k, state.facts[k]))}</p><h4>Provenance</h4><p>${esc(state.origin[k])}</p><h4>Champ transmis à l'API</h4><pre>facts.${esc(k)} = ${esc(JSON.stringify(state.facts[k]))}</pre>`)}">${esc(FACT_FR[k] || k)} : ${esc(factValue(k, state.facts[k]))}</span>`).join('')}</div>`
+      : '<div class="s">Seulement la description. Aucune caractéristique structurée sur la fiche.</div>'}</div>`);
+
+  // 3. un bloc par tour
+  state.rounds.forEach((r, i) => {
+    const d = r.data, cands = d.candidates || [], extra = (d.alternatives_set_aside || []).filter((a) => !(d.candidates || []).some((c) => c.code === a.code));
+    parts.push('<div class="link"></div>');
+    parts.push(`<span class="tour">${i === 0 ? 'Première évaluation' : 'Nouvelle évaluation'} · ${String(r.seconds).replace('.', ',')} s</span>`);
+    parts.push('<div class="link"></div>');
+    if (!cands.length && !extra.length) {
+      parts.push(`<div class="node static"><div class="k">Candidats</div><div class="s">L'API n'a rendu aucun candidat à ce tour.${d.gate_hint ? ' Motif rendu : ' + esc(d.gate_hint) : ''}</div></div>`);
+    } else {
+      parts.push('<div class="cands">' + cands.map((c) => {
+        const out = Boolean(c.set_aside_reason);
+        return `<button class="cand ${out ? 'out' : ''}" data-d="${detail(candDetail(c, out))}"><span class="conf">${pct(c.confidence)}</span><div class="code">${esc(fmtCode(c.code))}</div><div class="ttl">${esc((c.title && (c.title.fr || c.title.en)) || '')}</div><span class="tag ${out ? 'out' : 'keep'}">${out ? 'Écarté' : 'Reste plausible'}</span></button>`;
+      }).join('') + extra.map((a) => `<button class="cand out" data-d="${detail(`<h3>${esc(fmtCode(a.code))}</h3><h4>Pourquoi il est écarté</h4><p>${esc(a.set_aside_reason)}</p>`)}"><div class="code">${esc(fmtCode(a.code))}</div><div class="ttl">${esc(a.set_aside_reason)}</div><span class="tag out">Écarté</span></button>`).join('') + '</div>');
+    }
+
+    const qs = d.questions || [];
+    if (qs.length) {
+      parts.push('<div class="link"></div>');
+      if (r.answered) {
+        parts.push(`<div class="node static"><div class="k">Question au marchand · réponse documentée</div>${qs.map((q) => `<div class="s">${esc(q.question)}</div>`).join('')}<div class="facts">${Object.entries(r.answered).map(([k, v]) => `<span class="fact ans">${esc(FACT_FR[k] || k)} : ${esc(factValue(k, v))}</span>`).join('')}</div></div>`);
+      } else if (i === state.rounds.length - 1) {
+        parts.push(`<form class="node static q" id="answers"><div class="k">Information manquante · question au marchand</div>
+          ${qs.map((q) => `<div class="qrow"><div class="t">${esc(q.question)}</div><div class="why">${esc(q.why || '')}</div>${inputFor(q.fact)}</div>`).join('')}
+          <div style="margin-top:14px"><button class="btn" type="submit">Répondre et réévaluer</button></div></form>`);
+      }
+    }
+  });
+
+  if (state.busy) { parts.push('<div class="link"></div><div class="loading"><div class="spin"></div>Appel en cours sur l\'API. Comptez une vingtaine de secondes.</div>'); }
+  if (state.error) { parts.push('<div class="link"></div><div class="err">' + esc(state.error) + '</div>'); }
+
+  // 4. proposition
+  if (last && !state.busy) {
+    const d = last.data, st = STATUS[d.status] || [d.status, 'warn'];
+    const top = (d.candidates || []).find((c) => !c.set_aside_reason);
+    const canValidate = top && (d.status === 'classified' || d.status === 'needs_review');
+    const pending = (d.questions || []).length && !last.answered;
+    const prec = (d.provenance && d.provenance.precedents) || [];
+    const cov = d.coverage || {};
+    const level = top ? (top.system === 'hs6' ? 'Niveau international, 6 chiffres' : 'Nomenclature de destination (' + esc(top.system) + ')') : 'Sans objet';
+    parts.push('<div class="link"></div>');
+    parts.push(`<div class="node final"><div class="k">${pending ? 'Proposition provisoire' : 'Proposition'}</div>
+      ${top ? `<div class="big">${esc(fmtCode(top.code))}</div><div class="s">${esc((top.title && (top.title.fr || top.title.en)) || '')}</div>` : '<div class="t">Pas de code proposé</div>'}
+      <span class="tag ${st[1]}">${esc(st[0])}</span>
+      <dl class="kv">
+        <dt>Précision</dt><dd>${level}${cov.hint ? `<br><span class="muted">${esc(cov.hint)}</span>` : ''}</dd>
+        ${top ? `<dt>Justification</dt><dd>${esc(top.rationale || 'non fournie')}</dd>
+        <dt>Sources</dt><dd>${(top.evidence || []).length ? top.evidence.map((e) => `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener">${esc(e.ref || e.kind)}</a>`).join(', ') : 'aucun extrait rendu'} <button type="button" class="btn ghost" style="margin-left:6px;padding:3px 9px" data-d="${detail(candDetail(top, false))}">Lire les extraits</button></dd>` : ''}
+        ${prec.length ? `<dt>Décisions officielles proches</dt><dd>${prec.slice(0, 3).map((x) => `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, similarité ${pct(x.similarity)})</span>`).join('<br>')}</dd>` : ''}
+        <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Réponse brute de l'API</h3><p class="muted">HTTP ${last.http} · ${String(last.seconds).replace('.', ',')} s${last.request_id ? ' · requête ' + esc(last.request_id) : ''}</p><h4>Requête</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Réponse</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">Voir la réponse brute</button></dd>
+      </dl>
+      ${state.saved ? `<div class="done">Validé par ${esc(state.saved.validated_by)} et enregistré dans le catalogue.</div>`
+        : canValidate ? `<form class="valid" id="validate"><input id="who" required placeholder="Nom de la personne habilitée"><button class="btn ok" type="submit">Valider et enregistrer</button></form>`
+        : `<p class="hint" style="margin-top:12px">${pending ? 'Répondez à la question pour obtenir une proposition validable.' : 'Rien à valider à ce stade.'}</p>`}
+    </div>`);
+    if (d.advisory_disclaimer) parts.push(`<p class="note">${esc(d.advisory_disclaimer)}</p>`);
+  }
+
+  g.innerHTML = '<div class="flow">' + parts.join('') + '</div>';
+  const a = $('answers'); if (a) a.addEventListener('submit', onAnswer);
+  const v = $('validate'); if (v) v.addEventListener('submit', onValidate);
+}
+
+function inputFor(fact) {
+  if (ENUM_FACTS[fact]) return `<select name="${fact}" required><option value="">Choisir</option>${ENUM_FACTS[fact].map((o) => `<option>${o}</option>`).join('')}</select>`;
+  if (NUM_FACTS.includes(fact)) return `<input name="${fact}" type="number" min="0" step="any" required placeholder="${esc(FACT_FR[fact])}">`;
+  if (fact === 'dimensions') return `<div class="dims" style="grid-template-columns:1fr 1fr 1fr"><input name="dimensions.length_mm" type="number" min="0" step="any" placeholder="L mm"><input name="dimensions.width_mm" type="number" min="0" step="any" placeholder="l mm"><input name="dimensions.height_mm" type="number" min="0" step="any" placeholder="H mm"></div>`;
+  if (fact === 'composition') return `<input name="composition" required placeholder="ex. plastics 70, metal 30">`;
+  return `<input name="${fact}" required maxlength="200" placeholder="${esc(FACT_FR[fact] || fact)}">`;
+}
+
+function onAnswer(e) {
+  e.preventDefault();
+  const answered = {};
+  for (const [name, raw] of new FormData(e.target).entries()) {
+    const v = String(raw).trim(); if (!v) continue;
+    if (name.startsWith('dimensions.')) { const n = parseFloat(v); if (n > 0) (answered.dimensions ||= {})[name.split('.')[1]] = n; }
+    else if (name === 'composition') answered.composition = v.split(',').map((x) => { const m = x.trim().match(/^(.*?)(?:\s+(\d+(?:\.\d+)?)\s*%?)?$/); return m[2] ? { material: m[1].trim(), percent: parseFloat(m[2]) } : { material: m[1].trim() }; }).filter((c) => c.material);
+    else if (NUM_FACTS.includes(name)) { const n = parseFloat(v); if (n > 0) answered[name] = n; }
+    else answered[name] = v;
+  }
+  if (!Object.keys(answered).length) return;
+  const n = state.rounds.length;
+  state.rounds[n - 1].answered = answered;
+  for (const k of Object.keys(answered)) { state.facts[k] = answered[k]; state.origin[k] = 'Réponse du marchand à la question du tour ' + n; }
+  run();
+}
+
+async function onValidate(e) {
+  e.preventDefault();
+  const last = state.rounds[state.rounds.length - 1], top = last.data.candidates.find((c) => !c.set_aside_reason);
+  const entry = { sku: state.product.sku, destination: state.product.dest, code: top.code, system: top.system, status_api: last.data.status, validated_by: $('who').value.trim(), request_id: last.request_id, facts: state.facts };
+  const r = await fetch('/api/catalogue', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) });
+  if (!r.ok) { state.error = 'Enregistrement refusé : ' + (await r.text()).slice(0, 200); render(); return; }
+  state.saved = entry;
+  $('hscode').className = 'hscode set';
+  $('hscode').innerHTML = `<b>${esc(fmtCode(top.code))}</b><span>validé par ${esc(entry.validated_by)}</span>`;
+  render();
+}
+
+$('graph').addEventListener('click', (e) => { const t = e.target.closest('[data-d]'); if (t) openDetail(Number(t.dataset.d)); });
+</script>
+</body>
+</html>

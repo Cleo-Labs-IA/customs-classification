@@ -1,0 +1,4 @@
+.env
+catalogue.json
+node_modules
+*.png
