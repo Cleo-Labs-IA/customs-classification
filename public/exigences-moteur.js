@@ -39,15 +39,27 @@ export function role(data, valeurs) {
 export function vuSurEtiquette(preuve, lignes) {
   const reperes = preuve.reperes_etiquette || [];
   for (const l of lignes || []) for (const r of reperes) {
-    const re = new RegExp('(^|[^A-Za-z0-9])' + r.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^A-Za-z0-9])', 'i');
+    const re = new RegExp('(^|[^A-Za-z0-9])' + r.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^A-Za-z0-9])'); // case-sensitive: "CE" is a marking, "ce" is a word
     if (re.test(l)) return l;
   }
   return null;
 }
 
+// An answer that is not among the values a criterion lists is not an answer: it is dropped,
+// so the question stays open instead of silently failing a condition.
+export function admises(data, valeurs) {
+  const C = Object.fromEntries((data.criteres || []).map((c) => [c.id, c])), out = {};
+  for (const [k, v] of Object.entries(valeurs || {})) {
+    const c = C[k]; if (!c) continue;
+    if (c.type === 'bool' ? typeof v === 'boolean' : (c.valeurs || []).some((x) => x.v === v)) out[k] = v;
+  }
+  return out;
+}
+
 // Turns the rules into work: for each requirement, why it applies, what evidence it calls for,
 // what the file already holds, what is missing and who must act.
 export function evaluerExigences(data, { valeurs = {}, etiquette = [], declarees = [] } = {}) {
+  valeurs = admises(data, valeurs);
   const R = role(data, valeurs);
   const lignes = (data.exigences || []).map((e) => {
     const t = tester(e.applicable_si, valeurs);

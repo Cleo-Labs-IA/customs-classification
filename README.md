@@ -34,3 +34,11 @@ La clé d'API vit dans `.env` (`CLEO_API_KEY=...`), lue par le serveur, jamais e
     node sonde-arbre.mjs                       # page /arbre, données réelles
     node sonde-parcours.mjs dock               # parcours complet, station d'accueil
     node sonde-parcours.mjs chargeur <photo>   # parcours complet depuis une photo
+
+## Single decision, arbitration, market access (4 Oct 2026, app now in English)
+
+- **One decision at the top of the page** (`public/decision.js`, tested): engine and encoded rule are read together. Validation is refused while a question is open, the two readings disagree, a contradiction is unresolved, or a national line is required and not established. A divergence is settled by a signed arbitration (code retained, reason, elements examined, name), which goes into the readable file.
+- **Photo triage**: observed, to confirm, cannot be deduced from a photo.
+- **Market access requirements for France** (`public/data/exigences.json`, engine `public/exigences-moteur.js`, rendering `public/conformite.js`): 20 requirement lines, 76 duties, 3 roles, 18 questions, grounded in 171 passages of EU acts checked word for word (`node essais/conformite/verifier-textes.mjs`). For each requirement: why it concerns the product, the duty, the evidence expected, what the file holds, what is missing, who acts. Limits in `essais/conformite/bilan.md`: no French national rule could be downloaded, no standards, drafted by AI, not reviewed by a lawyer.
+- Probes: `node sonde-parcours.mjs dock`, `node sonde-parcours.mjs chargeur <photo>`, `node sonde-epreuves.mjs`, `node sonde-conformite.mjs`, `node sonde-arbre.mjs`, `node sonde-regle.mjs`.
+- Screen tests without API quota: `node essais/rejouer-api.mjs essais/avec-fait-1.json 4341` then `CLEO_BASE_URL=http://localhost:4341 PORT=4340 node server.mjs`. It replays one saved real response; it is not a measurement of the engine.

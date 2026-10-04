@@ -52,3 +52,13 @@ test('structure check: sound file, then defects', () => {
   const pb = verifierExigences(B, [{ id: 't1' }]).join(' | ');
   assert.match(pb, /unknown criterion "x"/); assert.match(pb, /unknown role "zz"/); assert.match(pb, /unknown text "t9"/);
 });
+
+test('an answer outside the listed values is not an answer: the question stays open', () => {
+  const r = evaluerExigences(D, { valeurs: { secteur: true, radio: false, marque: 'ancienne_valeur' } });
+  assert.equal(r.role.etat, 'a_determiner'); assert.ok(r.questions.includes('marque'));
+  assert.equal(evaluerExigences(D, { valeurs: { secteur: 'yes', radio: false } }).lignes[0].etat, 'a_determiner'); // a string is not a yes/no answer
+});
+test('a lowercase "ce" inside a sentence is not the CE marking', () => {
+  assert.equal(vuSurEtiquette({ reperes_etiquette: ['CE'] }, ['voir ce document', 'Class II device ce']), null);
+  assert.equal(vuSurEtiquette({ reperes_etiquette: ['CE'] }, ['CE 0123']), 'CE 0123');
+});

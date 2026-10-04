@@ -1,0 +1,208 @@
+{
+ "date_revue": "2026-10-04",
+ "fichiers_relus": [
+  "public/data/exigences.json",
+  "public/data/textes-conformite.json",
+  "essais/conformite/actes.md",
+  "essais/conformite/sources/*.txt"
+ ],
+ "methode": "Each role, requirement and obligation read against the text id it cites and against the downloaded act in essais/conformite/sources. Quotes in 'constat' are verbatim from textes-conformite.json or, where stated, from the downloaded source file.",
+ "controles_sans_defaut": [
+  "110/110 entries of textes-conformite.json found word for word in the downloaded source of the stated version (white space normalised); every text id used in exigences.json exists.",
+  "Versions: the consolidated versions used are the latest listed in sources/consolidated-versions.csv on or before 2026-10-04 (LVD, EMC and RED 2026-05-30, RoHS 2026-07-01, WEEE 2024-04-08, Regulation 2019/1020 2026-08-12, GPSR 2026-05-29).",
+  "Application dates: Regulation 2019/1782 applies from 1 April 2020 and is in force on 2026-10-04 (eps-art9, eps2-art8); Regulation 2025/2052 is not treated as binding (eps2-art10); laptops under the common charger rules since 28 April 2026 (cc-art2-1); Regulation 2019/1020 Article 4 since 16 July 2021 (msr-art44); GPSR since 13 December 2024 (gpsr-art52).",
+  "Directive 2009/125/EC: Articles 2, 3(1), 4, 5, 8 and Annexes IV and VI are in the list kept alive by espr-art79-1-b; Annex VI and Article 8(3) quoted from the 2012 consolidation, the latest listed.",
+  "GPSR: Article 19 is in Chapter III, Section 2 of the downloaded text, outside the parts set aside by gpsr-art2-1-b.",
+  "LVD scope: 100-240 V AC falls in lvd-art1; importer, distributor and manufacturer duties under LVD and EMC are each placed on the role the article names; no importer or distributor duty was found labelled as a manufacturer duty in the LVD, EMC, RoHS, market surveillance, GPSR or RED requirements.",
+  "No sentence of exigences.json states that a product is compliant; the 'CE' label hint is attached to a marking to be checked, not to a conformity conclusion."
+ ],
+ "lacunes": [
+  "Consolidated version 02025R2052-20251124: HTTP 404 from the Publications Office in English, French and German; EUR-Lex returns an empty HTTP 202 to scripted requests. Not compared.",
+  "French law (transposition of the LVD, EMC, RoHS, RED and WEEE Directives, language rules): not downloaded, so no statement of this review rests on it.",
+  "Annexes II and III of Directive 2014/30/EU, Annex VI of Directive 2011/65/EU and Annex Ia Part III of Directive 2014/53/EU are named by evidence items but were not compared item by item."
+ ],
+ "constats": [
+  {
+   "cible": "roles (fabricant / importateur / distributeur), combination marque=origine + etablissement_vendeur=hors_ue + approvisionnement=hors_ue",
+   "gravite": "important",
+   "texte_id": "lvd-art2-6",
+   "constat": "No role is assigned to a seller established outside the Union who sells the original brand straight from a third country (the usual cross-border marketplace case). 'importateur' requires an establishment in the Union and 'distributeur' requires approvisionnement in (ue_autre_etat, france), so every obligation (all are filtered by role) disappears: msr-operateur-existe, gpsr-offre, weee-distance-*. Yet lvd-art2-6 defines the distributor as \"any natural or legal person in the supply chain, other than the manufacturer or the importer, who makes electrical equipment available on the market\" with no establishment condition, msr-art6 says \"Products offered for sale online or through other means of distance sales shall be deemed to be made available on the market if the offer is targeted at end users in the Union\", msr-art4-1 lets the product be placed on the market \"only if there is an economic operator established in the Union\", and weee-art3-1-f (iv) makes this seller a producer. The silence reads as 'nothing applies'.",
+   "correction": "Add a branch for this combination: at least the distributor role (lvd-art2-6 + msr-art6) when vente_a_distance is true, with msr-art4-1/4-2/4-4 (an authorised representative or fulfilment service provider in the Union must exist), gpsr-art19 and the WEEE distance-seller requirement; or show an explicit 'role not determined by the source texts' result instead of an empty list."
+  },
+  {
+   "cible": "roles.fabricant (base eco-art2-6) and eps-ecoconception obligations eps-fab-dossier, eps-fab-ce-declaration, eps-fab-conservation, eps-fab-* (qui_agit: 'This also holds when another company makes the product and you sell it under your own name or trade mark')",
+   "gravite": "important",
+   "texte_id": "eco-art2-6",
+   "constat": "The own-brand rule of the LVD, EMC and RoHS (lvd-art10, emc-art11, rohs-art11) has no counterpart in the quoted ecodesign texts. eco-art2-6 reads: \"'Manufacturer' means the natural or legal person who manufactures products covered by this Directive and is responsible for their conformity ... under the manufacturer's own name or trademark\"; a non-maker only becomes a manufacturer \"In the absence of a manufacturer as defined in the first sentence of this point or of an importer as defined in point 8\". Point 8 (downloaded source, not in textes-conformite.json) reads: \"'Importer' means any natural or legal person established in the Community who places a product from a third country on the Community market in the course of his business\". An own-brand seller established in the Union who buys from a third-country factory is therefore an importer under Directive 2009/125/EC (duties of eco-art4), and the fallback sentence does not make him a manufacturer. The qui_agit sentence and the citation of eco-art2-6 as a basis for the 'fabricant' role say more than the article.",
+   "correction": "Remove eco-art2-6 from the base of roles.fabricant or state its limit; in the eps-ecoconception obligations replace 'This also holds when another company makes the product...' by the text's own rule (manufacturer = the person who manufactures; otherwise the importer under Article 2(8) and Article 4; otherwise the person placing on the market). Add Article 2, point 8 of Directive 2009/125/EC to textes-conformite.json and let eps-ecoconception-importateur (eco-art4) also apply when marque=propre, approvisionnement=hors_ue and the seller is established in the Union."
+  },
+  {
+   "cible": "criteres.appareil_alimente and eps-ecoconception.applicable_si / eps-ecoconception-importateur.applicable_si",
+   "gravite": "important",
+   "texte_id": "eps-annex1-2",
+   "constat": "The ecodesign requirement applies only when appareil_alimente = informatique_domestique, because only point 2 of Annex I was extracted. eps-art2-1 (f) says the device \"is used with electrical and electronic household and office equipment included in Annex I\", and Annex I of the downloaded source (32019R1782) has four points: \"1. Household appliances\", \"2. Information technology equipment...\", \"3. Consumer equipment: — Radio sets, — Video cameras, ...\" and \"4. Electrical and electronic toys, leisure and sports equipment: ... — Game consoles, including hand-held game consoles\". A charger for a shaver, a speaker, a camera or a game console is in scope of Regulation (EU) 2019/1782 but the data silently drops the whole requirement (the aide tells the user to leave the question unanswered).",
+   "correction": "Extract Annex I points 1, 3 and 4 into textes-conformite.json and add the matching values to appareil_alimente; until then the unanswered case must be shown as 'not determined', never as 'not applicable'."
+  },
+  {
+   "cible": "weee-producteur-vente-distance, obligations weee-distance-registre / -marquage / -financement (qui_agit: 'You, as the producer for France, register in the French register of producers')",
+   "gravite": "important",
+   "texte_id": "weee-art16-2-a",
+   "constat": "For the distance seller established in another Member State the Directive does not leave the choice of acting in person. weee-art16-2-a already says \"each producer, or each authorised representative where appointed under Article 17, is registered\", and Article 17(2) of the downloaded source (02012L0019-20240408, not in textes-conformite.json) reads: \"Each Member State shall ensure that a producer as defined in Article 3(1)(f)(iv) and established on its territory, which sells EEE to another Member State in which it is not established, appoints an authorised representative in that Member State as the person responsible for fulfilling the obligations of that producer\", with 17(3): \"Appointment of an authorised representative shall be by written mandate.\" The qui_agit omits this appointment and the written mandate is missing from the evidence. Article 17(2) is worded for producers established in a Member State; nothing in the source texts covers the third-country seller, which the data treats the same way.",
+   "correction": "Add Article 17(2) and (3) of Directive 2012/19/EU to the texts; for etablissement_vendeur=ue_autre add the obligation 'appoint an authorised representative in France by written mandate' with the mandate as evidence; for hors_ue say that the Directive text obtained does not settle who registers."
+  },
+  {
+   "cible": "criteres.radio = true (effect on lvd.applicable_si and emc.applicable_si)",
+   "gravite": "important",
+   "texte_id": "red-art1-4",
+   "constat": "Answering 'yes' to the radio question removes the LVD requirement (aucun radio=true) and the EMC requirement (radio must be false) and puts nothing in their place: no requirement of Directive 2014/53/EU for the charger itself exists in exigences.json. red-art1-4 says \"Radio equipment falling within the scope of this Directive shall not be subject to Directive 2014/35/EU, except as set out in point (a) of Article 3(1) of this Directive\": the safety and conformity duties move to Directive 2014/53/EU, they do not vanish. A wireless or connected charger would get a shorter list than a plain one.",
+   "correction": "Make radio=true an explicit out-of-perimeter result ('Directive 2014/53/EU applies to the product itself; not covered by this file'), or encode the RED manufacturer/importer/distributor articles."
+  },
+  {
+   "cible": "criteres.radio (question: '... (Wi-Fi, Bluetooth, NFC, wireless charging)')",
+   "gravite": "mineur",
+   "texte_id": "red-art2-1-1",
+   "constat": "red-art2-1-1 defines radio equipment as a product which \"intentionally emits and/or receives radio waves for the purpose of radio communication and/or radiodetermination\". The question drops the purpose condition and gives 'wireless charging' as an example; no downloaded provision says that wireless power transfer is radio communication or radiodetermination.",
+   "correction": "Quote the purpose condition in the question and remove 'wireless charging' from the examples, or mark it as not settled by the source texts."
+  },
+  {
+   "cible": "rohs obligations rohs-fab-declaration, rohs-fab-conservation, rohs-fab-coordonnees, rohs-imp-coordonnees, rohs-imp-conservation (resume and qui_agit); texts rohs-art7-c, rohs-art7-d, rohs-art7-h, rohs-art9-d, rohs-art9-g",
+   "gravite": "mineur",
+   "texte_id": "rohs-art7-c",
+   "constat": "Articles 7 and 9 of Directive 2011/65/EU open with \"Member States shall ensure that:\" (downloaded source 02011L0065-20260701: \"Article 7 Obligations of manufacturers Member States shall ensure that: (a) when placing EEE on the market, manufacturers ensure...\"). The five quoted points are cut after these words and the resumes state the duties as bearing directly on the manufacturer or importer, whereas rohs-art10-a, rohs-art11 and all WEEE entries keep the words and the WEEE qui_agit warn that the binding wording is in French law. Same legal structure, two treatments.",
+   "correction": "Prefix the five text entries with the introductory words (as done for rohs-art10-a) and add to each qui_agit the caveat already used for WEEE: the Directive is addressed to Member States, the French transposition is not in the source texts."
+  },
+  {
+   "cible": "rohs.pourquoi ('must not contain the Annex II substances above the listed values')",
+   "gravite": "mineur",
+   "texte_id": "rohs-art4-1",
+   "constat": "rohs-art4-1 only says EEE \"does not contain the substances listed in Annex II\"; the tolerance comes from Article 4(2), present in the downloaded source but not in textes-conformite.json: \"For the purposes of this Directive, no more than the maximum concentration value by weight in homogeneous materials as specified in Annex II shall be tolerated.\" The pourquoi relies on it without a text id, and drops 'by weight in homogeneous materials'. Exemptions (Article 4(6), Annexes III and IV) are not extracted either.",
+   "correction": "Add Article 4(2) to the texts and cite it in rohs.base; word the pourquoi with 'by weight in homogeneous materials'."
+  },
+  {
+   "cible": "rohs-fab-conservation.preuves.doc_technique_rohs ('Technical documentation, restricted substances part (Directive 2011/65/EU, Article 7)')",
+   "gravite": "mineur",
+   "texte_id": "rohs-art7-d",
+   "constat": "The duty to draw up this documentation is Article 7(b), which is in the downloaded source but not in textes-conformite.json: \"manufacturers draw up the required technical documentation and carry out the internal production control procedure in line with module A of Annex II to Decision No 768/2008/EC or have it carried out\". Only the keeping duty (rohs-art7-d) is quoted, so no obligation tells the own-brand seller to draw the file up or to carry out the procedure, unlike lvd-fab-evaluation and emc-fab-evaluation.",
+   "correction": "Add Article 7(b) as a text and as a 'fabricant' obligation with doc_technique_rohs as evidence."
+  },
+  {
+   "cible": "rohs-dis-verification (qui_agit and preuves)",
+   "gravite": "mineur",
+   "texte_id": "rohs-art10-a",
+   "constat": "rohs-art10-a makes the distributor verify \"that the manufacturer and the importer have complied with the requirements set out in points (g) and (h) of Article 7 and in point (d) of Article 9\". Point (g) (downloaded source) is the identification duty: \"manufacturers ensure that their EEE bears a type, batch or serial number or other element allowing its identification\". The qui_agit lists only the CE marking and the name and address details, and the evidence list has no identification_produit; the 'required documents in a language which can be easily understood' are also left out of the qui_agit.",
+   "correction": "Add identification_produit to the evidence and mention the identification element and the accompanying documents in the qui_agit; add Article 7(g) to the texts."
+  },
+  {
+   "cible": "rohs (importateur): no verification obligation",
+   "gravite": "mineur",
+   "texte_id": "rohs-art9-d",
+   "constat": "Article 9(b) of the downloaded source is not encoded: \"importers, before placing an EEE on the market, ensure that the appropriate conformity assessment procedure has been carried out by the manufacturer, and that they further ensure that the manufacturer has drawn up the technical documentation, that the EEE bears the CE marking and is accompanied by the required documents\". When the LVD requirement is off (input below 50 V AC and 75 V DC) the importer sees this check only under the EMC Directive.",
+   "correction": "Add Article 9(b) as a text and as an 'importateur' obligation mirroring lvd-imp-verification."
+  },
+  {
+   "cible": "emc-imp-verification.preuves and emc-dis-verification.preuves",
+   "gravite": "mineur",
+   "texte_id": "emc-art9-2",
+   "constat": "emc-art9-2 and emc-art10-2 refer to \"the requirements set out in Article 7(5) and (6)\". Article 7(5) (downloaded source, not in textes-conformite.json) is the identification duty: \"Manufacturers shall ensure that apparatus which they have placed on the market bear a type, batch or serial number or other element allowing their identification\". The EMC evidence lists carry nom_adresse_fabricant (7(6)) but not identification_produit, while the parallel LVD obligations carry both. There is also no 'fabricant' obligation for Article 7(5).",
+   "correction": "Add Article 7(5) of Directive 2014/30/EU to the texts, add identification_produit to both evidence lists and an emc-fab-identification obligation."
+  },
+  {
+   "cible": "emc.pourquoi and emc.base ('with no radio function it is not radio equipment as defined in Directive 2014/53/EU')",
+   "gravite": "mineur",
+   "texte_id": "emc-art2-1",
+   "constat": "The provision that makes the radio question relevant to the EMC Directive is not quoted. In the downloaded consolidated text it is Article 2(2)(a): \"This Directive shall not apply to: (a) equipment covered by Directive 1999/5/EC\", read with Article 50 of Directive 2014/53/EU: \"References to the repealed Directive shall be construed as references to this Directive\". The base cites only emc-art2-1 and red-art2-1-1, so the exclusion is asserted without its text.",
+   "correction": "Add EMC Article 2(2)(a) and RED Article 50 to the texts and to emc.base."
+  },
+  {
+   "cible": "preuves.notice_instructions_securite (libelle: '... (including the information referred to in Article 18 of Directive 2014/30/EU) ...') used in lvd-fab-notice, lvd-imp-notice, lvd-dis-verification",
+   "gravite": "mineur",
+   "texte_id": "lvd-art6-7",
+   "constat": "lvd-art6-7, lvd-art8-4 and lvd-art9-2 name \"instructions and safety information\" only; Article 18 of Directive 2014/30/EU is named by emc-art7-7 and emc-art10-2, not by the LVD articles, and its content is not in textes-conformite.json (source: \"Apparatus shall be accompanied by information on any specific precautions that must be taken when the apparatus is assembled, installed, maintained or used...\"). One shared label attributes to the LVD obligations an item their article does not name.",
+   "correction": "Split the evidence: 'instructions and safety information' for the LVD obligations, 'instructions and the information referred to in Article 18' for the EMC ones, and add Article 18 to the texts."
+  },
+  {
+   "cible": "lvd-fab-documentation.resume ('with at least a general description, drawings and schemes, ...')",
+   "gravite": "mineur",
+   "texte_id": "lvd-annex3-2",
+   "constat": "lvd-annex3-2 says \"The technical documentation shall, where applicable, contain at least the following elements\". The resume drops 'where applicable' and so turns every listed element into an unconditional requirement.",
+   "correction": "Write 'containing, where applicable, at least ...'."
+  },
+  {
+   "cible": "criteres.hors_champ_basse_tension (question and aide)",
+   "gravite": "mineur",
+   "texte_id": "lvd-annex2",
+   "constat": "The aide says the list is 'quoted as written', but lvd-annex2 reads \"Specialised electrical equipment, for use on ships, aircraft or railways, which complies with the safety provisions drawn up by international bodies in which the Member States participate\" and the question drops that condition (and the item \"Radio-electrical interference\"). The aide also asserts 'A charger that plugs into a socket is a power supply, not a \"plug or socket outlet\" sold as such': no downloaded provision says so; actes.md itself leaves the Annex II exclusions 'to be answered by the seller'.",
+   "correction": "Restore the condition on ships, aircraft and railways equipment, drop 'quoted as written' or quote in full, and present the plug sentence as the project's reading, not as the text."
+  },
+  {
+   "cible": "msr-operateur-existe.qui_agit and msr-designation.qui_agit",
+   "gravite": "mineur",
+   "texte_id": "msr-art4-1",
+   "constat": "msr-art4-1 sets a condition on the product (\"may be placed on the market only if there is an economic operator established in the Union\") and msr-art4-2 is a definition (\"the economic operator referred to in paragraph 1 means any of the following\"); neither names who must 'establish which operator exists' or 'arrange for one of these operators'. Unlike msr-operateur-coordonnees, these two qui_agit do not say 'The provision names no person'.",
+   "correction": "Open both qui_agit with 'The provision names no person.' as done for msr-art4-4."
+  },
+  {
+   "cible": "msr-designation.preuves.mandat_operateur_ue ('... or the document identifying the importer or the fulfilment service provider established in the Union that handles the product')",
+   "gravite": "mineur",
+   "texte_id": "msr-art4-2",
+   "constat": "msr-art4-2 names one document only: \"an authorised representative who has a written mandate from the manufacturer\". No 'document identifying the importer or the fulfilment service provider' is named by Article 4; that half of the evidence item is invented and duplicates operateur_ue_identifie (type information).",
+   "correction": "Limit the evidence to the written mandate (authorised representative case) and keep the importer / fulfilment service provider as the 'information' item operateur_ue_identifie."
+  },
+  {
+   "cible": "weee-*-registre.preuves.enregistrement_registre_producteurs ('Proof of registration in the French register of producers ...', type document)",
+   "gravite": "mineur",
+   "texte_id": "weee-art16-2-a",
+   "constat": "weee-art16-2-a requires that each producer \"is registered as required\"; it names no proof, certificate or number, and the French register and its procedure are listed as not obtained in actes.md. The item is presented as a document to hold although the article names none (compare financement_deee, which says so).",
+   "correction": "Reword as 'Registration as producer in the national register (Article 16(2)(a) names no document; the French procedure is not sourced)' and type it 'information'."
+  },
+  {
+   "cible": "weee-marque-financement, weee-intro-financement, weee-distance-financement (no condition on acheteurs_consommateurs)",
+   "gravite": "mineur",
+   "texte_id": "weee-art12-1",
+   "constat": "weee-art12-1 is limited to \"WEEE from private households\". The obligation is shown whatever the answer to acheteurs_consommateurs, and the definition that would justify it for a charger sold to businesses is not in textes-conformite.json (Article 3(1)(h) of the source: \"Waste from EEE likely to be used by both private households and users other than private households shall in any event be considered to be WEEE from private households\").",
+   "correction": "Add Article 3(1)(h) to the texts and cite it in the pourquoi of the three WEEE requirements."
+  },
+  {
+   "cible": "eps-notice-site.qui_agit ('on a free access website (yours, or that of the manufacturer or its authorised representative)')",
+   "gravite": "mineur",
+   "texte_id": "eps-annex2-2b",
+   "constat": "eps-annex2-2b says \"instruction manuals for end-users (where applicable), and free access websites of manufacturers, importers or authorised representatives shall include the following information\". It does not say that the importer is discharged when the information is on someone else's website; the qui_agit adds that alternative. The lists of items (2(a) nameplate: output power, output voltage, output current; 2(b) website and manual) are in the downloaded source 32019R1782 but not extracted, so the evidence items plaque_ecoconception, info_ecoconception_notice and info_ecoconception_site cannot be checked item by item.",
+   "correction": "Start the qui_agit with 'The provision names no person' and remove the bracket, or flag it as the project's reading; extract the 2(a) and 2(b) tables."
+  },
+  {
+   "cible": "eps-ecoconception.pourquoi ('is repealed with effect from 14 December 2028') and criteres.date_mise_sur_marche value a_partir_du_2028_12_14",
+   "gravite": "mineur",
+   "texte_id": "eps2-art8",
+   "constat": "eps2-art8 reads \"Regulation (EU) 2019/1782 is repealed with effect from 14 December 2028 except for the provisions laid down in Article 9 of this Regulation\". Article 9(1) and (2) of the downloaded source keep parts of Regulation (EU) 2019/1782 alive after that date: \"Annexes I, II and III to Regulation (EU) 2019/1782 shall continue to apply to spare part EPS until 14 December 2033\" and \"Point 1 of Annex II to Regulation (EU) 2019/1782 shall continue to apply to EPS with a USB-PD port with a nameplate output power higher than 100 W until 14 December 2030\". The pourquoi drops the exception and the date criterion switches the whole requirement off from 14 December 2028. No effect on the reference date 2026-10-04.",
+   "correction": "Add 'except as provided in Article 9 of Regulation (EU) 2025/2052' and quote Article 9(1) and (2); show the post-2028 branch as 'not covered by this file'."
+  },
+  {
+   "cible": "texts eps2-art8, eps2-art9-3, eps2-art10 (version 32025R2052, original OJ text) and actes.md line 'original OJ text (no consolidated version in English)'",
+   "gravite": "mineur",
+   "texte_id": "eps2-art9-3",
+   "constat": "sources/consolidated-versions.csv lists a consolidated version 02025R2052-20251124, which signals a corrigendum or amendment published since the original. The Publications Office returned HTTP 404 for it in English, French and German (XHTML, HTML and PDF) on 2026-10-04, so the three dates that drive the ecodesign reasoning (14 December 2025, 14 December 2028) could not be compared with the corrected text. For Regulation (EU) 2019/1782 the same check was possible: the French consolidated text 02019R1782-20191025 was downloaded and its only correction mark (C1, OJ L 56, 27.2.2020, p. 42) sits in Article 7 (review), so the quoted provisions of that Regulation are not affected in that language.",
+   "correction": "Obtain the corrigendum to Regulation (EU) 2025/2052 from the Official Journal and compare Articles 8, 9 and 10; record in actes.md that a consolidated version exists but could not be downloaded."
+  },
+  {
+   "cible": "roles.importateur.base and roles.distributeur.base (lvd-art2-5, lvd-art2-6, lvd-art2-1, lvd-art2-2 only)",
+   "gravite": "mineur",
+   "texte_id": "lvd-art2-5",
+   "constat": "The three roles drive obligations under seven acts but the importer and distributor definitions are quoted from Directive 2014/35/EU only. When the LVD requirement is not applicable (tension_entree = sous_50_ac_75_dc) the roles still filter the EMC, RoHS, ecodesign, market surveillance, GPSR and RED obligations with no definition from those acts in textes-conformite.json (for example Article 3, points 9 and 10 of Regulation (EU) 2019/1020 in the downloaded source: \"'distributor' means any natural or legal person in the supply chain, other than the manufacturer or the importer, who makes a product available on the market\").",
+   "correction": "Add the importer and distributor definitions of Regulation (EU) 2019/1020 (and of Directives 2014/30/EU and 2011/65/EU) to the texts and to the role bases."
+  },
+  {
+   "cible": "lvd, emc, rohs requirements: traceability records not listed (missing obligation for all three roles)",
+   "gravite": "mineur",
+   "texte_id": "lvd-art9-2",
+   "constat": "The file lists what each role 'must hold' but leaves out Article 11 of Directive 2014/35/EU, present in the downloaded source and absent from textes-conformite.json: \"Economic operators shall, on request, identify the following to the market surveillance authorities: (a) any economic operator who has supplied them with electrical equipment; (b) any economic operator to whom they have supplied electrical equipment. Economic operators shall be able to present the information referred to in the first paragraph for 10 years after they have been supplied with the electrical equipment and for 10 years after they have supplied the electrical equipment.\" This is a record every role, the distributor included, has to keep. texte_id points to the nearest quoted provision because the article itself is not in the texts.",
+   "correction": "Add Article 11 of Directive 2014/35/EU as a text and as an obligation for the three roles, with 'identity of the supplier and of the business customers, kept 10 years' as evidence."
+  },
+  {
+   "cible": "texts quoted but used by no obligation: gpsr-art20-3, lvd-art6-1, lvd-art17-1, lvd-art15-4 (cited only inside a qui_agit), eps-art4-1, eps-annex2-2c",
+   "gravite": "mineur",
+   "texte_id": "gpsr-art20-3",
+   "constat": "gpsr-art20-3 places a duty on two of the roles (\"The importers and the distributors which have knowledge of an accident caused by a product that they placed or made available on the market shall without undue delay inform the manufacturer thereof\") and sits in Chapter III, Section 2, which Article 2(1)(b) does not set aside; no obligation carries it. lvd-art17-1 is the source of the evidence label 'CE marking on the product or its data plate' (\"affixed visibly, legibly and indelibly to the electrical equipment or to its data plate\") but is cited nowhere, so the label cannot be traced; it also drops 'visibly, legibly and indelibly' and the packaging fallback. lvd-art6-1 (design in accordance with the safety objectives) is the manufacturer's first duty and is not encoded.",
+   "correction": "Add a gpsr-accident obligation for importateur and distributeur (applicable when acheteurs_consommateurs is true); cite lvd-art17-1 in the obligations that carry marquage_ce and complete the label; add lvd-art6-1 as a 'fabricant' obligation."
+  }
+ ]
+}

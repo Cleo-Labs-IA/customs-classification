@@ -1,0 +1,109 @@
+<h2>Workflow cible · Customs Decision Network</h2>
+<p class="subtitle">Le produit n’est plus « obtenir un code ». Il crée, valide, distribue et maintient une identité douanière réutilisable.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Du produit physique à une décision qui circule</div>
+  <div class="mockup-body" style="padding:20px">
+    <div style="display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:10px;align-items:stretch;font-size:12px">
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">01 · Capture</div><strong>Créer ou retrouver le produit</strong>
+        <p>Photo, GTIN, SKU, fiche fournisseur, données ERP.</p>
+        <span style="color:#20753a">Déjà présent en partie</span>
+      </div>
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">02 · Identity</div><strong>Construire l’identité canonique</strong>
+        <p>Modèle exact, version, fabricant, configuration, doublons et produits apparentés.</p>
+        <span style="color:#946b2d">À ajouter</span>
+      </div>
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">03 · Facts</div><strong>Établir les faits vérifiés</strong>
+        <p>Chaque caractéristique cite sa pièce. Inconnu et contradiction restent visibles.</p>
+        <span style="color:#20753a">Force actuelle</span>
+      </div>
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">04 · Resolve</div><strong>Fermer le prochain manque</strong>
+        <p>Une seule question décisive, adressée à la bonne personne ou au fournisseur.</p>
+        <span style="color:#946b2d">À orchestrer</span>
+      </div>
+      <div style="border:2px solid #0008cf;border-radius:10px;padding:12px;background:#f3f3ff">
+        <div class="label">05 · Decide</div><strong>Créer la décision douanière</strong>
+        <p>Produit + origine + destination + date → code au niveau réellement disponible.</p>
+        <span style="color:#0008cf">Cœur de valeur</span>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:22px;margin:10px 0">↓</div>
+
+    <div style="display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:10px;align-items:stretch;font-size:12px">
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">06 · Defend</div><strong>Constituer la preuve</strong>
+        <p>Règles, passages, alternatives, précédents comparables et limites.</p>
+        <span style="color:#20753a">Déjà présent en partie</span>
+      </div>
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">07 · Approve</div><strong>Faire arbitrer et signer</strong>
+        <p>Le professionnel tranche une divergence et enregistre son motif.</p>
+        <span style="color:#20753a">Refonte en cours</span>
+      </div>
+      <div style="border:2px solid #0008cf;border-radius:10px;padding:12px;background:#f3f3ff">
+        <div class="label">08 · Publish</div><strong>Distribuer la décision</strong>
+        <p>Shopify, ERP, TMS, courtier et transporteur reçoivent la même version approuvée.</p>
+        <span style="color:#946b2d">À rendre visible</span>
+      </div>
+      <div style="border:1px solid #bbb;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">09 · Monitor</div><strong>Surveiller les dépendances</strong>
+        <p>Changement produit, règle, code ou précédent → décision impactée et revue ciblée.</p>
+        <span style="color:#946b2d">À ajouter</span>
+      </div>
+      <div style="border:2px solid #151515;border-radius:10px;padding:12px;background:#fff">
+        <div class="label">10 · Reuse</div><strong>Réutiliser sans repartir de zéro</strong>
+        <p>Un produit ou cas analogue retrouve les faits, règles et décisions déjà validés.</p>
+        <span style="color:#151515">Le moat</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split" style="margin-top:22px">
+  <div class="mockup">
+    <div class="mockup-header">À conserver de l’app</div>
+    <div class="mockup-body">
+      <ul>
+        <li>Photo et lecture de l’étiquette</li>
+        <li>Faits avec provenance</li>
+        <li>Contradictions bloquantes</li>
+        <li>Règle et décisions comparables</li>
+        <li>Arbitrage et dossier exportable</li>
+      </ul>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-header">À rendre central</div>
+    <div class="mockup-body">
+      <ul>
+        <li>Une identité persistante par produit</li>
+        <li>Une décision versionnée par route et date</li>
+        <li>Les systèmes qui utilisent cette décision</li>
+        <li>Les changements qui la rendent obsolète</li>
+        <li>Les décisions réutilisées sur d’autres produits</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px">
+  <div class="label">Scène finale de la démo</div>
+  <h3>“Customs identity created”</h3>
+  <p>Au lieu de finir sur un code, l’écran montre : décision approuvée, preuve attachée, systèmes synchronisés et surveillance active. C’est ce passage qui transforme le classifieur en réseau.</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="approve-workflow-b" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content"><h3>Valider ce workflow</h3><p>La prochaine étape sera de dessiner les écrans exacts de la démo de cinq minutes.</p></div>
+  </div>
+  <div class="option" data-choice="revise-workflow-b" onclick="toggleSelect(this)">
+    <div class="letter">↺</div>
+    <div class="content"><h3>Le modifier</h3><p>Indique dans le terminal l’étape qui ne correspond pas à ta vision.</p></div>
+  </div>
+</div>

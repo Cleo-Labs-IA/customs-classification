@@ -1,0 +1,148 @@
+{
+  "titre": "Adversarial case review of public/data/exigences.json",
+  "date": "2026-10-04",
+  "avertissement": "Drafted by AI from the downloaded official texts, not reviewed by a compliance lawyer. Nothing here says that a product complies. A marking seen on a label is recorded as seen, never as proof.",
+  "methode": {
+    "script": "essais/conformite/cas-epreuve.mjs",
+    "commande": "node essais/conformite/cas-epreuve.mjs",
+    "oracle": "The expected result of each case was written from the provisions (public/data/textes-conformite.json and essais/conformite/sources/*.txt) before the engine was run on it, and was not changed after the run. The only edit after the first run changes which provisions are printed next to a line-state mismatch.",
+    "extraits_verifies": "56 of 56 verbatim extracts found in their source by the script (39 in catalogue entries, 17 in downloaded acts outside the catalogue)",
+    "fichiers_lus": {
+      "public/data/exigences.json": "md5 7913656f7e74a112539f69c7a12a3621",
+      "public/exigences-moteur.js": "md5 70dfa42d76bb41b68dbe36fa496a6867",
+      "public/data/textes-conformite.json": "md5 28786612de8067c3cb4b0f1cf980438b"
+    },
+    "note": "Other teams were editing the data files during this review. The figures below hold for the checksums above; re-run the script after any change."
+  },
+  "bilan": { "cas": 14, "cas_concordants": 7, "cas_avec_ecart": 7, "ecarts": 16, "constats": 10 },
+  "cas": [
+    { "id": "C1", "titre": "Own-brand seller established outside the EU, online to consumers in France, no representative", "lecture": "manufacturer; 8 lines apply, including the designation of a Union operator and WEEE producer by distance selling", "moteur": "role fabricant, 8 applicable, 0 to determine, 6 not applicable, 23 evidence items missing", "ecarts": 0 },
+    { "id": "C2a", "titre": "French reseller of the original brand, shop sale, importer upstream in another Member State", "lecture": "distributor; WEEE producer under point (iii)", "moteur": "role distributeur, 6 applicable, 8 not applicable, 8 missing", "ecarts": 0 },
+    { "id": "C2b", "titre": "Same reseller, importer upstream in France", "lecture": "distributor; not a WEEE producer", "moteur": "role distributeur, 5 applicable, 9 not applicable, 5 missing", "ecarts": 0 },
+    { "id": "C3", "titre": "French reseller importing directly from a third country, online to consumers", "lecture": "importer; Union operator of Article 4; ecodesign importer duty; copy of the declaration to hold", "moteur": "role importateur, 9 applicable, 5 not applicable, 20 missing", "ecarts": 0 },
+    { "id": "C4", "titre": "Charger supplied with a laptop, French reseller, online to consumers", "lecture": "distributor; offer without charger and pictogram expected", "moteur": "role distributeur, 7 applicable, 7 not applicable, 11 missing", "ecarts": 0 },
+    { "id": "C5", "titre": "12 V car charger, imported, online to consumers", "lecture": "low voltage and ecodesign out, EMC and RoHS in; general safety requirement must be shown", "moteur": "role importateur, 6 applicable, 8 not applicable, 14 missing", "ecarts": 1 },
+    { "id": "C6", "titre": "Mains charger with Bluetooth or Wi-Fi, imported, online to consumers", "lecture": "low voltage and EMC replaced by the radio equipment Directive, which must be shown; CE marking check still expected", "moteur": "role importateur, 7 applicable, 7 not applicable, 16 missing; no radio equipment line; CE marking not asked anywhere", "ecarts": 2 },
+    { "id": "C7", "titre": "Power bank under the own brand of a French seller, online to consumers", "lecture": "manufacturer; battery Regulation and general safety requirement must be shown", "moteur": "role fabricant, 6 applicable, 8 not applicable, 16 missing; nothing about batteries", "ecarts": 2 },
+    { "id": "C8", "titre": "Nothing known", "lecture": "every line is a question, no line not applicable, no role, no evidence", "moteur": "role to determine, 0 applicable, 14 to determine, 0 not applicable, 17 questions of 17", "ecarts": 0 },
+    { "id": "C9", "titre": "Importer of C3 with a label showing CE", "lecture": "CE marking seen on label, declaration of conformity still missing", "moteur": "2 markings seen (CE, model), 18 missing instead of 20, declaration and technical documentation still missing, 0 declared", "ecarts": 0 },
+    { "id": "C9n", "titre": "Negative control: French text on the label, no CE marking", "lecture": "CE marking missing", "moteur": "CE marking seen on the line \"Ne pas jeter ce produit avec les ordures ménagères\"", "ecarts": 1 },
+    { "id": "C10", "titre": "Seller outside the EU, original brand, shipping directly to consumers in France", "lecture": "WEEE producer under point (iv), Article 19 offer items, Union operator condition: all three are work for the seller", "moteur": "role none, 8 lines applicable, 0 duty, 0 evidence missing", "ecarts": 8 },
+    { "id": "C11a", "titre": "Unit first supplied before 1 April 2020", "lecture": "ecodesign undetermined (an earlier act applied, not downloaded)", "moteur": "ecodesign not applicable", "ecarts": 1 },
+    { "id": "C11b", "titre": "Unit first supplied on or after 14 December 2028", "lecture": "ecodesign continues under Regulation (EU) 2025/2052", "moteur": "ecodesign not applicable, nothing in its place", "ecarts": 1 }
+  ],
+  "constats": [
+    {
+      "cible": "public/data/exigences.json: no line for Directive 2014/53/EU when radio = true (lines lvd and emc)",
+      "gravite": "high",
+      "cas": ["C6"],
+      "qui_a_tort": "data file",
+      "constat": "With radio = true the lines lvd and emc become \"not applicable\" and nothing replaces them. The Directive that takes radio equipment out of the Low Voltage Directive keeps the same safety objectives \"with no voltage limit applying\" (Article 3(1)(a)) and gives the manufacturer the technical documentation, EU declaration of conformity and CE marking duties (Article 10(3)) and the importer its checks (Article 12(2)). The work list for a Bluetooth or Wi-Fi charger therefore loses the safety and EMC file with no warning; a distributor of such a charger gets 3 applicable lines and 1 duty. The synthesis lists this as a gap, but the output does not tell the seller.",
+      "texte_id": "red-art1-4",
+      "textes_hors_catalogue": ["Directive 2014/53/EU, Articles 3(1)(a), 10(3), 12(2), 50 (sources/02014L0053-20260530.txt)", "Directive 2014/30/EU, Article 2(2)(a) (sources/02014L0030-20260530.txt)"],
+      "correction": "Add Articles 3(1), 10, 12 and 13 of Directive 2014/53/EU to textes-conformite.json and a line \"radio equipment\" with applicable_si radio = true and duties per role. Until then, add the line with a single duty of type information stating that the radio equipment duties are not encoded, so that the subject shows as applicable instead of disappearing."
+    },
+    {
+      "cible": "public/data/exigences.json: importer duties when radio = true (obligations rohs-imp-*, no CE marking check left)",
+      "gravite": "medium",
+      "cas": ["C6"],
+      "qui_a_tort": "data file",
+      "constat": "For the importer of a charger with a radio function, the evidence marquage_ce is not asked anywhere: the only CE marking checks of an importer sit in lvd-imp-verification and emc-imp-verification, both removed. Article 12(2) of Directive 2014/53/EU requires the importer to ensure that \"the radio equipment bears the CE marking\".",
+      "texte_id": "red-art1-4",
+      "textes_hors_catalogue": ["Directive 2014/53/EU, Article 12(2) (sources/02014L0053-20260530.txt)"],
+      "correction": "Carry the CE marking check in the radio equipment line of the previous finding (importer: Article 12(2); distributor: Article 13(2))."
+    },
+    {
+      "cible": "public/data/exigences.json: no battery criterion and no line for Regulation (EU) 2023/1542",
+      "gravite": "high",
+      "cas": ["C7"],
+      "qui_a_tort": "data file",
+      "constat": "A power bank goes through the 17 questions without any of them detecting a battery, and comes out with 6 applicable lines and no mention of the battery Regulation. That Regulation \"shall also apply to batteries that are incorporated into or added to products\" (Article 1(3)) and requires the manufacturer to \"draw up an EU declaration of conformity in accordance with Article 18 and affix the CE marking\" (Article 38(3)); an own-brand seller is a manufacturer under Article 44(a). Article 4(5) of Regulation (EU) 2019/1020, already in the catalogue, names Regulation (EU) 2023/1542. The perimeter sentence says \"no battery\" but nothing in the questions enforces it.",
+      "texte_id": "msr-art4-5",
+      "textes_hors_catalogue": ["Regulation (EU) 2023/1542, Article 1(3), Article 3 (definition of battery), Article 38(3), Article 44(a) (sources/02023R1542-20260813.txt)"],
+      "correction": "Add a criterion batterie (bool, \"Does the product contain or consist of a battery?\") and a line for Regulation (EU) 2023/1542 applicable when it is true, after adding Articles 1(3), 13, 18, 38, 41, 42 and 44 to the catalogue. Until the duties are encoded, the line carries one duty of type information saying so."
+    },
+    {
+      "cible": "public/data/exigences.json: no safety line when the Low Voltage Directive is out because of the voltage (tension_entree = sous_50_ac_75_dc)",
+      "gravite": "medium",
+      "cas": ["C5", "C7"],
+      "qui_a_tort": "data file; the reading depends on which risks the remaining acts cover, a point a lawyer should confirm",
+      "constat": "For a 12 V car charger or a USB-powered product sold to consumers, lvd is correctly \"not applicable\", but no safety line remains. Under Article 2(1) of Regulation (EU) 2023/988, where a product is under harmonisation legislation, \"Chapter II does not apply insofar as the risks or categories of risks covered by Union harmonisation legislation are concerned\": electrical safety is not a risk covered by the EMC or RoHS Directives, so the general safety requirement of Article 5 (\"Economic operators shall place or make available on the market only safe products\") remains for it. The file uses Regulation (EU) 2023/988 only for Article 19.",
+      "texte_id": "gpsr-art2-1",
+      "textes_hors_catalogue": ["Regulation (EU) 2023/988, Article 5 (sources/02023R0988-20260529.txt)"],
+      "correction": "Add Article 5 to the catalogue and a line \"general safety requirement\" applicable when tension_entree = sous_50_ac_75_dc, radio = false and acheteurs_consommateurs = true. Article 2(1)(b) (gpsr-art2-1-b) still sets aside Chapter III, Section 1, so the line names no role-specific document: one duty of type information."
+    },
+    {
+      "cible": "public/data/exigences.json: roles (a seller outside the EU under the original brand matches none) and the roles lists of weee-distance-*, gpsr-offre, msr-operateur-existe",
+      "gravite": "high",
+      "cas": ["C10"],
+      "qui_a_tort": "data file",
+      "constat": "A seller established in a third country that ships the original brand directly to consumers in France gets role \"none\", 8 lines \"applicable\", 0 duty and 0 evidence missing: an empty work list that reads as nothing to do. Three duties do not depend on being manufacturer, importer or distributor: (1) point (iv) of the WEEE producer definition covers whoever \"sells EEE by means of distance communication directly to private households ... and is established in another Member State or in a third country\"; (2) Article 19 of Regulation (EU) 2023/988 binds \"economic operators\" that make products available online; (3) the product \"may be placed on the market only if there is an economic operator established in the Union\". Because every obligation is filtered by role, all three vanish. The synthesis records the case as unresolved; the output does not.",
+      "texte_id": "weee-art3-1-f",
+      "textes_liees": ["weee-art16-1", "gpsr-art19", "msr-art4-1", "msr-art4-2", "lvd-art2-6"],
+      "correction": "Add a fourth role for marque = origine, etablissement_vendeur = hors_ue, approvisionnement = hors_ue (labelled as a seller outside the Union, with the note that its qualification as distributor is arguable under lvd-art2-6) and add it to the roles of weee-distance-registre, weee-distance-marquage, weee-distance-financement, gpsr-offre, msr-operateur-existe and msr-operateur-coordonnees. In the engine or the page, a line that is applicable with no duty should say \"no duty encoded for your situation\" and should not count as resolved."
+    },
+    {
+      "cible": "public/data/exigences.json: exigence eps-ecoconception-importateur, applicable_si",
+      "gravite": "low",
+      "cas": ["C10"],
+      "qui_a_tort": "data file",
+      "constat": "The line \"the importer stands in for a manufacturer outside the Union\" is \"applicable\" for a seller established outside the Union. Article 4 of Directive 2009/125/EC binds \"the importer\", defined in Article 2, point 8 as a person \"established in the Community\". The condition does not test etablissement_vendeur.",
+      "texte_id": "eco-art4",
+      "textes_hors_catalogue": ["Directive 2009/125/EC, Article 2, point 8 (sources/02009L0125-20121204.txt)"],
+      "correction": "Add { critere: etablissement_vendeur, parmi: [france, ue_autre] } to applicable_si, as msr-taches-importateur already does, and add Article 2, point 8 to the catalogue as the basis."
+    },
+    {
+      "cible": "public/exigences-moteur.js: vuSurEtiquette (case-insensitive match), with reperes_etiquette [\"CE\"] in public/data/exigences.json",
+      "gravite": "medium",
+      "cas": ["C9n"],
+      "qui_a_tort": "engine",
+      "constat": "The label line \"Ne pas jeter ce produit avec les ordures ménagères\" is returned as the CE marking seen on the label, because the marker is matched with the \"i\" flag and \"ce\" is a French word. On a French-market label this turns any sentence containing \"ce\" into a marking \"seen\" and lowers the missing count by one. The sentence \"Conforme aux exigences CE\" is also counted as the marking. The positive case works as intended (C9: CE seen, declaration of conformity and technical documentation still missing, 0 declared).",
+      "texte_id": "lvd-art8-2",
+      "correction": "Match markers case-sensitively (drop the \"i\" flag, or let each evidence item say whether its markers are case-sensitive and set it for \"CE\"), and add the French sentence to tests/exigences.test.mjs as a negative control."
+    },
+    {
+      "cible": "public/data/exigences.json: exigence eps-ecoconception, value avant_2020_04_01 of date_mise_sur_marche",
+      "gravite": "low",
+      "cas": ["C11a"],
+      "qui_a_tort": "data file for the wording \"not applicable\"; the reading is limited, since the earlier act was not downloaded",
+      "constat": "A unit first supplied before 1 April 2020 gets ecodesign \"not applicable\". The downloaded Regulation itself says \"Regulation (EC) No 278/2009 is repealed as from 1 April 2020\" (Article 8) and names it as an ecodesign act on external power supplies: before that date another act applied. What it required is not in the sources, so the line is undetermined, not excluded.",
+      "texte_id": "eps-art9",
+      "textes_hors_catalogue": ["Regulation (EU) 2019/1782, Article 8 (sources/32019R1782.txt)"],
+      "correction": "Remove the value from the question or make it lead to \"to determine\" with the reason \"the act that applied before 1 April 2020 is not in the source texts\"."
+    },
+    {
+      "cible": "public/data/exigences.json: exigence eps-ecoconception, value a_partir_du_2028_12_14 of date_mise_sur_marche",
+      "gravite": "low",
+      "cas": ["C11b"],
+      "qui_a_tort": "data file",
+      "constat": "A unit first supplied on or after 14 December 2028 gets ecodesign \"not applicable\" and no other ecodesign line, while the catalogue holds the provisions saying that Regulation (EU) 2025/2052 \"shall apply from 14 December 2028\" and repeals Regulation (EU) 2019/1782 from that date. Ecodesign duties change act; they do not stop.",
+      "texte_id": "eps2-art10",
+      "textes_liees": ["eps2-art8", "eps2-art1-1"],
+      "correction": "Add a line for Regulation (EU) 2025/2052 applicable for that date value, with one duty of type information saying its requirements (Annexes II and III) are not yet extracted."
+    },
+    {
+      "cible": "public/data/exigences.json: critere radio, question text (\"wireless charging\" given as an example of a radio function)",
+      "gravite": "low",
+      "cas": [],
+      "qui_a_tort": "undetermined: found by reading, no case run; the provision does not settle it",
+      "constat": "The question counts wireless charging as a radio function. The definition in the catalogue speaks of radio waves emitted or received \"for the purpose of radio communication and/or radiodetermination\"; it does not mention power transfer. A seller of a wireless charging pad who answers yes loses the low voltage and EMC lines (see the first finding) on the strength of an example that no catalogued provision supports.",
+      "texte_id": "red-art2-1-1",
+      "correction": "Remove \"wireless charging\" from the question, or source it with an official text and add that text to the catalogue."
+    }
+  ],
+  "concordances_a_noter": [
+    "C8: with no fact, 14 lines are \"to determine\", 0 \"not applicable\", and all 17 criteria are asked.",
+    "C9: \"CE\" on the label gives marquage_ce = seen on label (line \"CE\"); declaration_ue_conformite, acces_doc_technique, declaration_ce_ecoconception and doc_technique_ecoconception stay missing; nothing is counted as declared; the missing count drops by exactly the two markings seen (20 to 18).",
+    "C2a, C2b, C4: for a distributor the lines msr-operateur-ue and eps-ecoconception are \"applicable\" with no duty. This matches the reading (no distributor duty in Article 4 of Regulation (EU) 2019/1020 or in Directive 2009/125/EC as downloaded), but the page must say it, as in finding 5."
+  ],
+  "lacunes": [
+    "French law: none obtained (see synthese.md). Every WEEE duty and every \"language determined by France\" rests on a Directive addressed to Member States.",
+    "C4: the laptop itself (radio equipment, battery) is outside the file; only the charger and the bundle offer were read.",
+    "C5: whether vehicle-specific Union legislation displaces the EMC Directive for an in-car accessory under Article 2(3) of Directive 2014/30/EU was not examined; no such act was downloaded.",
+    "C7: whether Directive 2011/65/EU applies to the battery part of a power bank was not examined; the case expects the RoHS line for the electronics only.",
+    "C5, C7: which risks the EMC and RoHS Directives \"cover\" within the meaning of Article 2(1) of Regulation (EU) 2023/988 is a legal judgment; the finding assumes electrical safety is not among them.",
+    "Directive 2014/53/EU, Articles 10, 12, 13; Regulation (EU) 2023/1542; Regulation (EU) 2023/988, Article 5; Directive 2009/125/EC, Article 2 point 8; Regulation (EU) 2019/1782, Article 8: downloaded, quoted here from sources/, not in textes-conformite.json.",
+    "Not run: modification of a product already on the market, a manufacturer in the Union with supply from a third country, a seller in another Member State, business-only buyers under WEEE Article 13."
+  ]
+}
