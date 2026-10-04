@@ -33,7 +33,7 @@ function regleHtml(r, ev, maintenant) {
     <div class="impact-l">${i.lignes ? `<span><b>${pluriel(i.lignes, 'line', 'lines')}</b> to ship, ${pluriel(i.produits, 'product', 'products')}</span>` : '<span>No current order affected</span>'}
       ${i.bloquees ? `<span style="color:var(--bad)"><b style="color:inherit">${i.bloquees}</b> blocked</span>` : ''}${i.attente ? `<span style="color:var(--warn)"><b style="color:inherit">${i.attente}</b> waiting for an answer</span>` : ''}
       ${i.surcout ? `<span>extra cost <b>${argent(i.surcout)}</b></span>` : ''}${i.evitable ? `<span>avoidable <b>${argent(i.evitable)}</b></span>` : ''}
-      <span class="espace"></span>${r.source.url ? `<a class="btn texte petit" href="${urlSure(r.source.url)}" target="_blank" rel="noopener">${esc(r.source.nom.length > 60 ? r.source.nom.slice(0, 58) + '…' : r.source.nom)}${ic('lien')}</a>` : `<span class="faint">${esc(r.source.nom)}</span>`}</div>
+      <span class="espace"></span>${r.exigences ? `<a class="btn texte petit" href="/#/monde?marche=${esc(r.marche)}&famille=${esc(r.famille)}">Read the ${r.exigences.length} quoted text${r.exigences.length === 1 ? '' : 's'}${ic('droite')}</a>` : r.source.url ? `<a class="btn texte petit" href="${urlSure(r.source.url)}" target="_blank" rel="noopener">${esc(r.source.nom.length > 60 ? r.source.nom.slice(0, 58) + '…' : r.source.nom)}${ic('lien')}</a>` : `<span class="faint">${esc(r.source.nom)}</span>`}</div>
   </div></article>`;
 }
 

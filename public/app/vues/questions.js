@@ -74,7 +74,7 @@ function panneauExigence(it, s, lignes, ctx) {
       <button class="reponse" type="submit" name="v" value="0"><b>No</b><span class="mene">${mene(non)}</span><span class="faint" style="font-size:12px">${esc(R.effet.si_non_texte || '')}</span></button>
     </div>
     <div class="champ"><label for="motif">Document or reference (optional)</label><input class="saisie" id="motif" name="motif" maxlength="200" placeholder="e.g. Certificate no. 2026-PSE-0412, EU declaration of conformity dated 12/03/2026"></div></form>
-    <div class="source">${ic('balance')}<div><b>${esc(R.source.nom)}</b>${R.source.ref ? ' · ' + esc(R.source.ref) : ''}<br>${R.source.url ? `<a href="${urlSure(R.source.url)}" target="_blank" rel="noopener">Read the official text ${ic('lien')}</a>` : '<span class="muted">No official text: demo scenario.</span>'}</div></div>`;
+    <div class="source">${ic('balance')}<div><b>${esc(R.source.nom)}</b>${R.source.ref ? ' · ' + esc(R.source.ref) : ''}<br>${R.exigences ? `<a href="/#/monde?marche=${esc(R.marche)}&famille=${esc(R.famille)}">Read the ${R.exigences.length} quoted text${R.exigences.length === 1 ? '' : 's'} ${ic('droite')}</a>` : R.source.url ? `<a href="${urlSure(R.source.url)}" target="_blank" rel="noopener">Read the official text ${ic('lien')}</a>` : '<span class="muted">No official text: demo scenario.</span>'}</div></div>`;
 }
 
 export function rendre() {

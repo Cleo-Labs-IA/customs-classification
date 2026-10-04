@@ -1,16 +1,18 @@
 // Barre latérale de Stamped. Elle lit l'état sans lancer l'agent.
 import { esc, ic, ilYA } from './ui.js';
 
+// Le parcours tient en quatre écrans ; le reste est rangé sous « More ».
 const NAV = [
-  { id: 'vue', href: '/#/', lib: 'Overview', ic: 'accueil' },
-  { id: 'dossier', href: '/#/dossier', lib: 'Classify a product', ic: 'agent' },
+  { id: 'accueil', href: '/#/', lib: 'Products', ic: 'produits' },
+  { id: 'arbre', href: '/#/arbre', lib: 'Why this code', ic: 'arbre' },
+  { id: 'monde', href: '/#/monde', lib: 'World', ic: 'veille' },
   { id: 'commandes', href: '/#/commandes', lib: 'Orders', ic: 'commandes' },
-  { id: 'produits', href: '/#/produits', lib: 'Products', ic: 'produits' },
-  { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
-  { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
 ];
 const OUTILS = [
-  { id: 'arbre', href: '/#/arbre', lib: 'Interpretation tree', ic: 'arbre' },
+  { id: 'dossier', href: '/#/dossier', lib: 'Classify a new product', ic: 'agent' },
+  { id: 'vue', href: '/#/envois', lib: 'Shipments overview', ic: 'accueil' },
+  { id: 'questions', href: '/#/questions', lib: 'Questions', ic: 'questions' },
+  { id: 'veille', href: '/#/veille', lib: 'Regulatory watch', ic: 'veille' },
 ];
 
 // Le tampon de la marque Stamped (silhouette pleine, couleur du texte).
@@ -41,7 +43,7 @@ export function shellHtml(actif, infos = {}) {
   </div>
   <button class="side-new" data-action="nouveau">${ic('plus')}<span>New…</span>${ic('chevron')}</button>
   <nav aria-label="Main navigation">${NAV.map(item).join('')}</nav>
-  <div class="sec">Expert tools</div>
+  <div class="sec">More</div>
   <nav>${OUTILS.map(item).join('')}</nav>
   <div class="sec">Stores</div>
   <nav>${boutique}</nav>

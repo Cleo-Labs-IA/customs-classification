@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160"><defs><filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2"/></filter><linearGradient id="d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E2E1DC"/></linearGradient>
-<linearGradient id="e" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCDBD6"/></linearGradient></defs><ellipse cx="80" cy="134" rx="46" ry="6" fill="#131312" opacity=".16" filter="url(#f)"/>
-<path d="M40 76c0-18 14-30 40-30s40 12 40 30z" fill="#EFEEEA" stroke="#DDDCD6"/>
-<rect x="36" y="74" width="88" height="56" rx="26" fill="url(#d)"/>
-<rect x="36.5" y="74.5" width="87" height="55" rx="25.5" fill="none" stroke="#fff"/>
-<ellipse cx="80" cy="80" rx="36" ry="5" fill="#CFCEC8"/>
-<circle cx="80" cy="112" r="1.8" fill="#5BD08F"/>
-<g><rect x="57" y="68" width="9" height="30" rx="4.5" fill="url(#e)"/><circle cx="58" cy="64" r="12" fill="url(#e)"/><circle cx="53" cy="62" r="3.5" fill="#B9B8B2"/><circle cx="58" cy="64" r="11.5" fill="none" stroke="#fff"/></g>
-<g transform="rotate(18 100 70)"><rect x="98" y="66" width="9" height="30" rx="4.5" fill="url(#e)"/><circle cx="102" cy="62" r="12" fill="url(#e)"/><circle cx="107" cy="60" r="3.5" fill="#B9B8B2"/></g></svg>

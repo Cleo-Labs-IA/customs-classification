@@ -1,105 +1,720 @@
 {
  "fixe_le": "2026-10-04",
- "avertissement": "Each rule cites its official text. The summary and the scope (codes, countries) are written by AI from that text and are not reviewed by a lawyer: they are leads to check, not advice.",
+ "avertissement": "Every rule quotes its official text, and each quote was found word for word in the source by an independent check. The list is not complete: rules that could not be checked against an official text are left out. Nothing here states that a product is compliant.",
  "regles": [
   {
-   "id": "ue-gpsr",
-   "titre": "Responsible economic operator in the EU",
-   "resume": "A consumer product can be placed on the EU market only if an economic operator established in the Union is responsible for it, with its contact details on the product, the packaging or an accompanying document. Marketplaces have their own control obligations.",
-   "juridictions": ["UE"], "sh": ["*"], "debut": "2024-12-13",
+   "id": "exig-eu-charger",
+   "titre": "European Union: 10 verified requirements for a power adapter",
+   "resume": "Low voltage safety file and CE · EMC conformity assessment and CE · External power supply efficiency limits · USB-C interoperable power supplies from 2028 · Restricted substances file and CE · Crossed-out bin symbol on equipment · Producer registration for distance sellers · Information required in online offers · Economic operator established in the Union · Meaning of the CE marking. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "UE"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
    "nature": "texte_officiel",
-   "source": { "nom": "Regulation (EU) 2023/988 on general product safety", "ref": "Art. 16 and 22", "url": "https://eur-lex.europa.eu/eli/reg/2023/988/oj" },
-   "effet": { "type": "exigence", "question": "Is an economic operator established in the EU responsible for this product, with its contact details on the product or the packaging?", "si_oui": "Responsible operator in the EU designated", "si_non_texte": "No responsible operator in the EU: the product cannot be placed on the market" }
+   "source": {
+    "nom": "10 official texts, quoted word for word",
+    "ref": "Directive 2014/35/EU (low voltage); Directive 2014/30/EU (electromagnetic compatibility); Commission Regulation (EU) 2019/1782 (ecodesign, external power supplies); and others",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014L0035"
+   },
+   "exigences": [
+    "eu-lvd-fabricant",
+    "eu-emc-fabricant",
+    "eu-eps-ecoconception-2019",
+    "eu-eps-usb-c-2028",
+    "eu-rohs-fabricant",
+    "eu-deee-symbole",
+    "eu-deee-vente-distance",
+    "eu-rgsp-vente-en-ligne",
+    "eu-operateur-responsable",
+    "eu-marquage-ce"
+   ],
+   "marche": "EU",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 10 requirements checked for European Union?",
+    "si_oui": "Evidence held for the verified requirements of European Union",
+    "si_non_texte": "Evidence missing for European Union: the order waits"
+   }
   },
   {
-   "id": "ue-chargeur",
-   "titre": "USB-C common charger",
-   "resume": "Earbuds, headphones, phones and the other listed devices sold in the EU must charge through a USB-C port and carry a pictogram showing whether a charger is supplied.",
-   "juridictions": ["UE"], "sh": ["851830", "851713"], "debut": "2024-12-28",
+   "id": "exig-eu-laptop",
+   "titre": "European Union: 10 verified requirements for a notebook computer",
+   "resume": "Radio equipment essential requirements · USB-C charging port for laptops · Ecodesign requirements for notebook computers · Restricted substances file and CE · Crossed-out bin symbol on equipment · Producer registration for distance sellers · Separate collection symbol on batteries · Information required in online offers · Economic operator established in the Union · Meaning of the CE marking. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "UE"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
    "nature": "texte_officiel",
-   "source": { "nom": "Directive (EU) 2022/2380, known as the \"common charger\" directive", "ref": "Annex I, Part I", "url": "https://eur-lex.europa.eu/eli/dir/2022/2380/oj" },
-   "effet": { "type": "exigence", "question": "Does the product charge through a USB-C port, with the \"charger included or not\" pictogram?", "si_oui": "USB-C port and pictogram compliant", "si_non_texte": "Without a USB-C port, sale prohibited in the EU" }
+   "source": {
+    "nom": "10 official texts, quoted word for word",
+    "ref": "Directive 2014/53/EU (radio equipment); Directive (EU) 2022/2380 amending Directive 2014/53/EU (common charger); Commission Regulation (EU) No 617/2013 (ecodesign, computers and computer servers); and others",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014L0053"
+   },
+   "exigences": [
+    "eu-red-exigences",
+    "eu-chargeur-commun-laptop",
+    "eu-ordinateur-ecoconception",
+    "eu-rohs-fabricant",
+    "eu-deee-symbole",
+    "eu-deee-vente-distance",
+    "eu-batteries-symbole",
+    "eu-rgsp-vente-en-ligne",
+    "eu-operateur-responsable",
+    "eu-marquage-ce"
+   ],
+   "marche": "EU",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 10 requirements checked for European Union?",
+    "si_oui": "Evidence held for the verified requirements of European Union",
+    "si_non_texte": "Evidence missing for European Union: the order waits"
+   }
   },
   {
-   "id": "ue-jouets",
-   "titre": "Toy safety: CE marking",
-   "resume": "A toy placed on the EU market bears the CE marking and comes with an EU declaration of conformity drawn up by the manufacturer.",
-   "juridictions": ["UE"], "sh": ["9503"], "debut": "2011-07-20",
+   "id": "exig-gb-charger",
+   "titre": "United Kingdom: 4 verified requirements for a power adapter",
+   "resume": "Electrical equipment safety objectives · CE marking accepted in Great Britain · Restricted substances in equipment · Crossed out bin symbol in UK. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "GB"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
    "nature": "texte_officiel",
-   "source": { "nom": "Directive 2009/48/EC on the safety of toys", "ref": "Art. 15 to 17", "url": "https://eur-lex.europa.eu/eli/dir/2009/48/oj" },
-   "effet": { "type": "exigence", "question": "Does the toy bear the CE marking, with an EU declaration of conformity on file?", "si_oui": "CE marking and declaration of conformity on file", "si_non_texte": "Without CE marking, the toy cannot be sold in the EU" }
+   "source": {
+    "nom": "4 official texts, quoted word for word",
+    "ref": "The Electrical Equipment (Safety) Regulations 2016 (S.I. 2016/1101); The Restriction of the Use of Certain Hazardous Substances in Electrical and Electronic Equipment Regulations 2012 (S.I. 2012/3032); The Waste Electrical and Electronic Equipment Regulations 2013 (S.I. 2013/3113)",
+    "url": "https://www.legislation.gov.uk/uksi/2016/1101/regulation/4"
+   },
+   "exigences": [
+    "gb-securite-electrique",
+    "gb-marquage-ce-reconnu",
+    "gb-rohs",
+    "gb-deee-symbole"
+   ],
+   "marche": "GB",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 4 requirements checked for United Kingdom?",
+    "si_oui": "Evidence held for the verified requirements of United Kingdom",
+    "si_non_texte": "Evidence missing for United Kingdom: the order waits"
+   }
+  },
+  {
+   "id": "exig-gb-laptop",
+   "titre": "United Kingdom: 3 verified requirements for a notebook computer",
+   "resume": "Radio equipment essential requirements · Restricted substances in equipment · Crossed out bin symbol in UK. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "GB"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "3 official texts, quoted word for word",
+    "ref": "The Radio Equipment Regulations 2017 (S.I. 2017/1206); The Restriction of the Use of Certain Hazardous Substances in Electrical and Electronic Equipment Regulations 2012 (S.I. 2012/3032); The Waste Electrical and Electronic Equipment Regulations 2013 (S.I. 2013/3113)",
+    "url": "https://www.legislation.gov.uk/uksi/2017/1206/regulation/7"
+   },
+   "exigences": [
+    "gb-equipement-radio",
+    "gb-rohs",
+    "gb-deee-symbole"
+   ],
+   "marche": "GB",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 3 requirements checked for United Kingdom?",
+    "si_oui": "Evidence held for the verified requirements of United Kingdom",
+    "si_non_texte": "Evidence missing for United Kingdom: the order waits"
+   }
+  },
+  {
+   "id": "exig-ch-charger",
+   "titre": "Switzerland: 4 verified requirements for a power adapter",
+   "resume": "CE marking optional, declaration required · Swiss or CE conformity marking · Restricted substances in equipment · External power supply efficiency (Switzerland). Each one quotes its official text in the World view.",
+   "juridictions": [
+    "CH"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "4 official texts, quoted word for word",
+    "ref": "Ordonnance sur les matériels électriques à basse tension (OMBT), RS 734.26; Ordinance on Electromagnetic Compatibility (OEMC), SR 734.5; Chemical Risk Reduction Ordinance (ORRChem), SR 814.81, Annex 2.18; and others",
+    "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2016/17/20230101/fr/html/fedlex-data-admin-ch-eli-cc-2016-17-20230101-fr-html-9.html"
+   },
+   "exigences": [
+    "ch-basse-tension-ce",
+    "ch-cem-marquage",
+    "ch-substances-appareils",
+    "ch-efficacite-alimentation"
+   ],
+   "marche": "CH",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 4 requirements checked for Switzerland?",
+    "si_oui": "Evidence held for the verified requirements of Switzerland",
+    "si_non_texte": "Evidence missing for Switzerland: the order waits"
+   }
+  },
+  {
+   "id": "exig-ch-laptop",
+   "titre": "Switzerland: 3 verified requirements for a notebook computer",
+   "resume": "Conformity marking on radio equipment · Restricted substances in equipment · Computer energy efficiency (Switzerland). Each one quotes its official text in the World view.",
+   "juridictions": [
+    "CH"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "3 official texts, quoted word for word",
+    "ref": "Ordinance on Telecommunications Installations (TIO), SR 784.101.2; Chemical Risk Reduction Ordinance (ORRChem), SR 814.81, Annex 2.18; Ordonnance sur les exigences relatives à l’efficacité énergétique (OEEE), RS 730.02, annexe 2.3",
+    "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2016/24/20240815/en/html/fedlex-data-admin-ch-eli-cc-2016-24-20240815-en-html-9.html"
+   },
+   "exigences": [
+    "ch-installations-radio",
+    "ch-substances-appareils",
+    "ch-efficacite-ordinateur"
+   ],
+   "marche": "CH",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 3 requirements checked for Switzerland?",
+    "si_oui": "Evidence held for the verified requirements of Switzerland",
+    "si_non_texte": "Evidence missing for Switzerland: the order waits"
+   }
+  },
+  {
+   "id": "exig-us-charger",
+   "titre": "United States: 5 verified requirements for a power adapter",
+   "resume": "FCC authorization before marketing digital devices · DOE efficiency standard for external power supplies · Efficiency level marking on the power supply · Country of origin marking on imports · No duty-free de minimis entry. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "US"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "5 official texts, quoted word for word",
+    "ref": "47 CFR 15.101; 10 CFR 430.32(w); 10 CFR 430.32(w)(4); and others",
+    "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-47?part=15&section=15.101"
+   },
+   "exigences": [
+    "us-fcc-15-101-unintentional",
+    "us-doe-eps-standard",
+    "us-doe-eps-marking",
+    "us-cbp-origin-marking",
+    "us-de-minimis-suspension"
+   ],
+   "marche": "US",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 5 requirements checked for United States?",
+    "si_oui": "Evidence held for the verified requirements of United States",
+    "si_non_texte": "Evidence missing for United States: the order waits"
+   }
+  },
+  {
+   "id": "exig-us-laptop",
+   "titre": "United States: 6 verified requirements for a notebook computer",
+   "resume": "FCC authorization before marketing digital devices · FCC certification of the radio transmitter · California appliance efficiency certification by manufacturer · Country of origin marking on imports · No duty-free de minimis entry · Lithium battery must pass UN 38.3. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "US"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "6 official texts, quoted word for word",
+    "ref": "47 CFR 15.101; 47 CFR 15.201; California Public Resources Code, Section 25402; and others",
+    "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-47?part=15&section=15.101"
+   },
+   "exigences": [
+    "us-fcc-15-101-unintentional",
+    "us-fcc-15-201-intentional",
+    "us-ca-prc-25402-certification",
+    "us-cbp-origin-marking",
+    "us-de-minimis-suspension",
+    "us-phmsa-lithium-un383"
+   ],
+   "marche": "US",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 6 requirements checked for United States?",
+    "si_oui": "Evidence held for the verified requirements of United States",
+    "si_non_texte": "Evidence missing for United States: the order waits"
+   }
+  },
+  {
+   "id": "exig-ca-charger",
+   "titre": "Canada: 3 verified requirements for a power adapter",
+   "resume": "Compliance with Canadian radio technical standards · Energy efficiency standard for imported power supplies · Electrical safety certification mark (British Columbia). Each one quotes its official text in the World view.",
+   "juridictions": [
+    "CA"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "3 official texts, quoted word for word",
+    "ref": "Radiocommunication Act (R.S.C., 1985, c. R-2); Energy Efficiency Act (S.C. 1992, c. 36), with Energy Efficiency Regulations, 2016 (SOR/2016-311), sections 586 to 589; Electrical Safety Regulation, B.C. Reg. 100/2004",
+    "url": "https://laws-lois.justice.gc.ca/eng/acts/R-2/section-4.html"
+   },
+   "exigences": [
+    "ca-radiocom-act-4-3",
+    "ca-energy-efficiency-act-s4",
+    "ca-bc-electrical-certification-mark"
+   ],
+   "marche": "CA",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 3 requirements checked for Canada?",
+    "si_oui": "Evidence held for the verified requirements of Canada",
+    "si_non_texte": "Evidence missing for Canada: the order waits"
+   }
+  },
+  {
+   "id": "exig-ca-laptop",
+   "titre": "Canada: 6 verified requirements for a notebook computer",
+   "resume": "Compliance with Canadian radio technical standards · ISED certification and Radio Equipment List · Host label showing the module IC number · ICES-003 emission limits for IT equipment · Electrical safety certification mark (British Columbia) · Dangerous goods by air follow ICAO. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "CA"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "6 official texts, quoted word for word",
+    "ref": "Radiocommunication Act (R.S.C., 1985, c. R-2); RSS-Gen, Issue 6, General Requirements for Compliance of Radio Apparatus; ICES-003, Issue 7, Information Technology Equipment (including Digital Apparatus); and others",
+    "url": "https://laws-lois.justice.gc.ca/eng/acts/R-2/section-4.html"
+   },
+   "exigences": [
+    "ca-radiocom-act-4-3",
+    "ca-ised-rss-gen-rel-listing",
+    "ca-ised-rss-gen-host-label",
+    "ca-ised-ices-003",
+    "ca-bc-electrical-certification-mark",
+    "ca-tdg-air-icao"
+   ],
+   "marche": "CA",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 6 requirements checked for Canada?",
+    "si_oui": "Evidence held for the verified requirements of Canada",
+    "si_non_texte": "Evidence missing for Canada: the order waits"
+   }
+  },
+  {
+   "id": "exig-mx-charger",
+   "titre": "Mexico: 2 verified requirements for a power adapter",
+   "resume": "NOM-001 safety conformity for power supplies · NOM-029 efficiency certificate for power supplies. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "MX"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "NOM-001-SCFI-2018, Aparatos electrónicos-Requisitos de seguridad y métodos de prueba; NOM-029-ENER-2017, Eficiencia energética de fuentes de alimentación externa. Límites, métodos de prueba, marcado y etiquetado",
+    "url": "https://sidof.segob.gob.mx/notas/docFuente/5572453"
+   },
+   "exigences": [
+    "mx-nom-001-scfi-2018",
+    "mx-nom-029-ener-2017"
+   ],
+   "marche": "MX",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for Mexico?",
+    "si_oui": "Evidence held for the verified requirements of Mexico",
+    "si_non_texte": "Evidence missing for Mexico: the order waits"
+   }
+  },
+  {
+   "id": "exig-mx-laptop",
+   "titre": "Mexico: 2 verified requirements for a notebook computer",
+   "resume": "NOM-019 safety of data processing equipment · Homologation of radio equipment in Mexico. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "MX"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "NOM-019-SCFI-1998, Seguridad de equipo de procesamiento de datos; Ley en Materia de Telecomunicaciones y Radiodifusión",
+    "url": "https://sidof.segob.gob.mx/notas/docFuente/4902685"
+   },
+   "exigences": [
+    "mx-nom-019-scfi-1998",
+    "mx-lmtr-art-271-homologacion"
+   ],
+   "marche": "MX",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for Mexico?",
+    "si_oui": "Evidence held for the verified requirements of Mexico",
+    "si_non_texte": "Evidence missing for Mexico: the order waits"
+   }
+  },
+  {
+   "id": "exig-jp-charger",
+   "titre": "Japan: 4 verified requirements for a power adapter",
+   "resume": "DC power supply is a specified appliance · Conformity assessment by a registered body · No sale without the PSE labelling · Importer must notify its business. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "JP"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "4 official texts, quoted word for word",
+    "ref": "Order for Enforcement of the Electrical Appliances and Materials Safety Act (Cabinet Order No. 324 of 1962); Electrical Appliances and Materials Safety Act (Act No. 234 of 1961)",
+    "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/2817/en"
+   },
+   "exigences": [
+    "jp-denan-scope-dc-power-supply",
+    "jp-denan-conformity-assessment",
+    "jp-denan-pse-sale-restriction",
+    "jp-denan-importer-notification"
+   ],
+   "marche": "JP",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 4 requirements checked for Japan?",
+    "si_oui": "Evidence held for the verified requirements of Japan",
+    "si_non_texte": "Evidence missing for Japan: the order waits"
+   }
+  },
+  {
+   "id": "exig-jp-laptop",
+   "titre": "Japan: 2 verified requirements for a notebook computer",
+   "resume": "Radio equipment needs the technical conformity mark · VCCI voluntary emission control for members. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "JP"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "Radio Act (Act No. 131 of 1950), Chapter 3 technical standards, as explained by the Ministry of Internal Affairs and Communications; VCCI Council Rules for Voluntary Control Measures (technical requirements VCCI-CISPR 32)",
+    "url": "https://www.tele.soumu.go.jp/e/sys/others/inbound/index.htm"
+   },
+   "exigences": [
+    "jp-radio-technical-conformity-mark",
+    "jp-vcci-voluntary-emc"
+   ],
+   "marche": "JP",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for Japan?",
+    "si_oui": "Evidence held for the verified requirements of Japan",
+    "si_non_texte": "Evidence missing for Japan: the order waits"
+   }
+  },
+  {
+   "id": "exig-kr-laptop",
+   "titre": "South Korea: 2 verified requirements for a notebook computer",
+   "resume": "Conformity assessment before import or sale · Indicate conformity assessment on equipment and packaging. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "KR"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "Radio Waves Act (Republic of Korea)",
+    "url": "https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=54864&type=part&key=43"
+   },
+   "exigences": [
+    "kr-radio-waves-conformity-assessment",
+    "kr-radio-waves-conformity-indication"
+   ],
+   "marche": "KR",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for South Korea?",
+    "si_oui": "Evidence held for the verified requirements of South Korea",
+    "si_non_texte": "Evidence missing for South Korea: the order waits"
+   }
+  },
+  {
+   "id": "exig-au-charger",
+   "titre": "Australia: 4 verified requirements for a power adapter",
+   "resume": "Level 3 equipment registered and RCM marked · Responsible Supplier must be locally established · External power supply energy standard scope · GST on low value imported goods. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "AU"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "4 official texts, quoted word for word",
+    "ref": "Electrical Equipment Safety System (EESS), Level 3 in-scope electrical equipment; AS/NZS 4417.1; Electrical Equipment Safety System (EESS), Responsible Supplier registration; Greenhouse and Energy Minimum Standards (External Power Supplies) Determination 2014, under the Greenhouse and Energy Minimum Standards Act 2012; and others",
+    "url": "https://www.eess.gov.au/registration/registration-in-scope-electrical-equipment/level-3/"
+   },
+   "exigences": [
+    "au-eess-level3-registration-rcm",
+    "au-eess-responsible-supplier-local",
+    "au-gems-external-power-supply-scope",
+    "au-gst-low-value-imported-goods"
+   ],
+   "marche": "AU",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 4 requirements checked for Australia?",
+    "si_oui": "Evidence held for the verified requirements of Australia",
+    "si_non_texte": "Evidence missing for Australia: the order waits"
+   }
+  },
+  {
+   "id": "exig-au-laptop",
+   "titre": "Australia: 2 verified requirements for a notebook computer",
+   "resume": "ACMA supplier steps and compliance label · GST on low value imported goods. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "AU"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "Radiocommunications Act 1992; Radiocommunications Equipment (General) Rules 2021; Radiocommunications Labelling (Electromagnetic Compatibility) Notice 2017; A New Tax System (Goods and Services Tax) Act 1999, low value imported goods rules, as explained by the ATO",
+    "url": "https://www.acma.gov.au/know-what-you-must-do"
+   },
+   "exigences": [
+    "au-acma-supplier-steps-label",
+    "au-gst-low-value-imported-goods"
+   ],
+   "marche": "AU",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for Australia?",
+    "si_oui": "Evidence held for the verified requirements of Australia",
+    "si_non_texte": "Evidence missing for Australia: the order waits"
+   }
+  },
+  {
+   "id": "exig-nz-laptop",
+   "titre": "New Zealand: 2 verified requirements for a notebook computer",
+   "resume": "Supplier Declaration of Conformity required · R-NZ or RCM compliance label. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "NZ"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "2 official texts, quoted word for word",
+    "ref": "Radiocommunications Act 1989 product compliance framework; Radiocommunications Act 1989 product compliance framework, labelling requirements",
+    "url": "https://www.rsm.govt.nz/business-individuals/supplier-compliance/steps/step-4"
+   },
+   "exigences": [
+    "nz-rsm-supplier-declaration",
+    "nz-rsm-rnz-label"
+   ],
+   "marche": "NZ",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 2 requirements checked for New Zealand?",
+    "si_oui": "Evidence held for the verified requirements of New Zealand",
+    "si_non_texte": "Evidence missing for New Zealand: the order waits"
+   }
+  },
+  {
+   "id": "exig-tw-charger",
+   "titre": "Taiwan: 3 verified requirements for a power adapter",
+   "resume": "Commodity inspection before import · Commodity Inspection Mark before supply · RoHS presence marking in BSMI identifier. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "TW"
+   ],
+   "sh": [
+    "850440"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "3 official texts, quoted word for word",
+    "ref": "The Commodity Inspection Act (Taiwan); Taiwan Commodity Inspection Schemes for Electrical and Electronic Products, Information Booklet version 1.87 (under the Commodity Inspection Act and the Regulations Governing the Use of Commodity Inspection Mark); CNS 15663 Section 5 'Marking of presence', as applied in the Taiwan Commodity Inspection Schemes for Electrical and Electronic Products, Information Booklet version 1.87",
+    "url": "https://www.bsmi.gov.tw/wSite/record/file_actData.jsp?fileuuid=77769&filename=f1747880033548.pdf"
+   },
+   "exigences": [
+    "tw-commodity-inspection-import",
+    "tw-bsmi-commodity-inspection-mark",
+    "tw-bsmi-rohs-presence-marking"
+   ],
+   "marche": "TW",
+   "famille": "charger",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 3 requirements checked for Taiwan?",
+    "si_oui": "Evidence held for the verified requirements of Taiwan",
+    "si_non_texte": "Evidence missing for Taiwan: the order waits"
+   }
+  },
+  {
+   "id": "exig-tw-laptop",
+   "titre": "Taiwan: 3 verified requirements for a notebook computer",
+   "resume": "Commodity inspection before import · Commodity Inspection Mark before supply · RoHS presence marking in BSMI identifier. Each one quotes its official text in the World view.",
+   "juridictions": [
+    "TW"
+   ],
+   "sh": [
+    "847130"
+   ],
+   "debut": "2020-01-01",
+   "nature": "texte_officiel",
+   "source": {
+    "nom": "3 official texts, quoted word for word",
+    "ref": "The Commodity Inspection Act (Taiwan); Taiwan Commodity Inspection Schemes for Electrical and Electronic Products, Information Booklet version 1.87 (under the Commodity Inspection Act and the Regulations Governing the Use of Commodity Inspection Mark); CNS 15663 Section 5 'Marking of presence', as applied in the Taiwan Commodity Inspection Schemes for Electrical and Electronic Products, Information Booklet version 1.87",
+    "url": "https://www.bsmi.gov.tw/wSite/record/file_actData.jsp?fileuuid=77769&filename=f1747880033548.pdf"
+   },
+   "exigences": [
+    "tw-commodity-inspection-import",
+    "tw-bsmi-commodity-inspection-mark",
+    "tw-bsmi-rohs-presence-marking"
+   ],
+   "marche": "TW",
+   "famille": "laptop",
+   "effet": {
+    "type": "exigence",
+    "question": "Do you hold the evidence for the 3 requirements checked for Taiwan?",
+    "si_oui": "Evidence held for the verified requirements of Taiwan",
+    "si_non_texte": "Evidence missing for Taiwan: the order waits"
+   }
   },
   {
    "id": "ue-3eur",
-   "titre": "Flat €3 duty on small parcels",
-   "resume": "Since 1 July 2026, a flat customs duty of €3 applies to each distinct item in a shipment worth less than €150 entering the EU, until the permanent regime takes effect.",
-   "juridictions": ["UE"], "origines_exclues": ["UE"], "sh": ["*"], "debut": "2026-07-01",
+   "titre": "EUR 3 customs duty per item on small consignments",
+   "resume": "From 1 July 2026 until 1 July 2028, a customs duty of EUR 3 per item applies to consignments whose intrinsic value does not exceed EUR 150, only where the seller uses the Import One-Stop Shop or the goods travel in a postal consignment. Other consignments pay the normal tariff. The origin of the goods plays no part.",
+   "juridictions": [
+    "UE"
+   ],
+   "sh": [
+    "*"
+   ],
+   "debut": "2026-07-01",
+   "fin": "2028-07-01",
    "nature": "texte_officiel",
-   "source": { "nom": "Council of the EU, agreement of 12 December 2025", "ref": "press release", "url": "https://www.consilium.europa.eu/en/press/press-releases/2025/12/12/customs-council-agrees-to-levy-customs-duty-on-small-parcels-as-of-1-july-2026/" },
-   "effet": { "type": "taxe_fixe", "montant": 3, "devise": "EUR", "valeur_max": 150, "libelle": "Flat duty on shipments under €150" }
+   "source": {
+    "nom": "Council Regulation (EU) 2026/382",
+    "ref": "Article 2",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32026R0382",
+    "citation": "shall apply instead of the relief eliminated pursuant to Article 1 of this Regulation, where: (a) the importation of the goods is exempt from VAT in accordance with Article 143(1), point (ca), of Directive 2006/112/EC; or (b) the goods are in a postal consignment as defined in Article 1, point (24), of Delegated Regulation (EU) 2015/2446.",
+    "verifie_le": "2026-10-04"
+   },
+   "effet": {
+    "type": "info",
+    "valeur_max": 150,
+    "texte": "EUR 3 of duty per item if the sale goes through the Import One-Stop Shop or by post (consignment up to EUR 150)"
+   }
   },
   {
    "id": "us-de-minimis",
-   "titre": "End of the de minimis exemption in the United States",
-   "resume": "Since 29 August 2025, shipments of 800 USD or less are no longer exempt: duties are due from the first dollar, whatever the country of origin.",
-   "juridictions": ["US"], "sh": ["*"], "debut": "2025-08-29",
+   "titre": "No de minimis exemption in the United States",
+   "resume": "Imports valued at 800 USD or less no longer enter duty free, whatever the country of origin. The ordinary duty of the product applies. Shipments through the international postal network follow a separate regime.",
+   "juridictions": [
+    "US"
+   ],
+   "sh": [
+    "*"
+   ],
+   "debut": "2025-08-29",
    "nature": "texte_officiel",
-   "source": { "nom": "Executive Order 14324, implemented by CBP", "ref": "Federal Register 2025-16802", "url": "https://www.federalregister.gov/documents/2025/09/02/2025-16802/notice-of-implementation-of-the-presidents-executive-order-14324-suspending-duty-free-de-minimis" },
-   "effet": { "type": "info", "texte": "No exemption: duties due on every shipment" }
-  },
-  {
-   "id": "us-cpsia",
-   "titre": "Children's Product Certificate (CPC)",
-   "resume": "The importer of a children's product certifies in writing that it complies with the applicable safety rules, based on testing by a third-party laboratory accepted by the CPSC.",
-   "juridictions": ["US"], "sh": ["9503"], "debut": "2008-08-14",
-   "nature": "texte_officiel",
-   "source": { "nom": "Consumer Product Safety Act, section 14 ; 16 CFR part 1110", "ref": "Children's Product Certificate", "url": "https://www.cpsc.gov/Business--Manufacturing/Testing-Certification/Childrens-Product-Certificate" },
-   "effet": { "type": "exigence", "question": "Is a CPC based on testing by a CPSC-accepted laboratory available?", "si_oui": "CPC available", "si_non_texte": "Without a CPC, CBP can refuse the import" }
-  },
-  {
-   "id": "us-fcc",
-   "titre": "FCC authorization for radio devices",
-   "resume": "A device that emits radio waves (Bluetooth, Wi-Fi) must have an FCC equipment authorization before it is imported or marketed in the United States.",
-   "juridictions": ["US"], "sh": ["851830"], "debut": "1998-10-01",
-   "nature": "texte_officiel",
-   "source": { "nom": "47 CFR part 2, subpart J", "ref": "Equipment Authorization", "url": "https://www.fcc.gov/engineering-technology/laboratory-division/general/equipment-authorization" },
-   "effet": { "type": "exigence", "question": "Does the device have an FCC identifier (FCC ID) or a supplier's declaration of conformity?", "si_oui": "FCC authorization on file", "si_non_texte": "Without FCC authorization, import prohibited" }
-  },
-  {
-   "id": "jp-pse",
-   "titre": "PSE marking in Japan",
-   "resume": "Since 1 February 2019, lithium-ion power banks fall within the scope of the Japanese law on the safety of electrical appliances: manufacture, import and sale are prohibited without technical conformity and PSE marking. AC adapters are also covered.",
-   "juridictions": ["JP"], "sh": ["850760", "850440"], "debut": "2019-02-01",
-   "nature": "texte_officiel",
-   "source": { "nom": "Electrical Appliance and Material Safety Act (METI)", "ref": "PSE regulatory instructions", "url": "https://www.meti.go.jp/english/policy/economy/consumer/product_safety/pse_procedure/pdf/pse_regulatory-instructions.pdf" },
-   "effet": { "type": "exigence", "question": "Does the product bear the PSE marking, with an importer declared to METI?", "si_oui": "PSE marking and declared importer", "si_non_texte": "Without PSE marking, import and sale prohibited in Japan" }
+   "source": {
+    "nom": "CBP interim final rule, Federal Register 2026-12670",
+    "ref": "Summary",
+    "url": "https://www.federalregister.gov/documents/2026/06/24/2026-12670/indefinite-suspension-of-the-de-minimis-exemption-for-merchandise-arriving-through-all-modes-other",
+    "citation": "This document amends the U.S. Customs and Border Protection (CBP) regulations to implement an indefinite suspension of the de minimis administrative exemption for imports valued at $800 or less arriving via all modes other than through the international postal network.",
+    "verifie_le": "2026-10-04"
+   },
+   "effet": {
+    "type": "info",
+    "texte": "No de minimis exemption: the ordinary duty of the product applies"
+   }
   },
   {
    "id": "au-gst",
-   "titre": "Australian GST on low value goods",
-   "resume": "For goods with a customs value of 1,000 AUD or less sold to an Australian consumer, the 10% GST is collected at the point of sale by the seller or by the marketplace.",
-   "juridictions": ["AU"], "sh": ["*"], "debut": "2018-07-01",
+   "titre": "Australian GST on low value imported goods",
+   "resume": "For goods with a customs value of 1,000 AUD or less sold to a consumer in Australia, the 10% GST is charged at the sale by the seller or by the marketplace. A non-resident seller must register only if its turnover from sales connected with Australia reaches 75,000 AUD.",
+   "juridictions": [
+    "AU"
+   ],
+   "sh": [
+    "*"
+   ],
+   "debut": "2018-07-01",
    "nature": "texte_officiel",
-   "source": { "nom": "Australian Taxation Office", "ref": "GST on low value imported goods", "url": "https://www.ato.gov.au/businesses-and-organisations/international-tax-for-business/gst-for-non-resident-businesses/gst-on-low-value-imported-goods" },
-   "effet": { "type": "info", "texte": "10% GST to collect at the point of sale (value ≤ 1,000 AUD)" }
-  },
-  {
-   "id": "au-piles-bouton",
-   "titre": "Button batteries: mandatory Australian standard",
-   "resume": "Since 22 June 2022, a consumer product containing button or coin batteries must have a secure compartment and must have passed the tests set by the mandatory standard.",
-   "juridictions": ["AU"], "sh": ["9503", "9105"], "debut": "2022-06-22",
-   "nature": "texte_officiel",
-   "source": { "nom": "Consumer Goods (Products Containing Button/Coin Batteries) Safety Standard", "ref": "ACCC, Product Safety Australia", "url": "https://www.productsafety.gov.au/business/search-mandatory-standards/button-and-coin-batteries-mandatory-standards/products-containing-button-and-coin-batteries-mandatory-safety-standard" },
-   "effet": { "type": "exigence", "question": "No button batteries, or a secure compartment and testing to the Australian standard: is that the case?", "si_oui": "Button batteries: compliant or not concerned", "si_non_texte": "Unsecured button batteries: sale prohibited in Australia" }
-  },
-  {
-   "id": "iata-lithium",
-   "titre": "Lithium-ion batteries shipped alone by air",
-   "resume": "Lithium-ion batteries shipped alone (UN 3480) are forbidden in the hold of passenger aircraft: cargo aircraft only, state of charge of 30% at most, prescribed packaging and labelling.",
-   "juridictions": ["*"], "sh": ["850760"], "debut": "2016-04-01",
-   "nature": "texte_officiel",
-   "source": { "nom": "IATA, Dangerous Goods Regulations", "ref": "Packing Instruction 965", "url": "https://www.iata.org/en/programs/cargo/dgr/lithium-batteries/" },
-   "effet": { "type": "exigence", "question": "Does the shipment go by cargo aircraft, or by land or sea, with the battery charged to 30% at most and labelled UN 3480?", "si_oui": "Compliant transport (UN 3480)", "si_non_texte": "Transport refused by the carrier" }
+   "source": {
+    "nom": "Australian Taxation Office",
+    "ref": "GST on low value imported goods",
+    "url": "https://www.ato.gov.au/businesses-and-organisations/international-tax-for-business/gst-for-non-resident-businesses/gst-on-low-value-imported-goods",
+    "citation": "If you are a non-resident business and you sell goods into Australia with a customs value of A$1,000 or less, GST applies and you will have to collect this from your customer and send the GST to us.",
+    "verifie_le": "2026-10-04"
+   },
+   "effet": {
+    "type": "info",
+    "texte": "10% GST charged at the sale if the customs value is 1,000 AUD or less and the seller is registered (turnover of 75,000 AUD or more)"
+   }
   }
  ],
  "simulations": [
@@ -107,19 +722,50 @@
    "id": "sim-us-hausse",
    "titre": "30-point increase in duties on Chinese electronics",
    "resume": "Fictional announcement: at midnight, Washington time, +30 points of duty on chargers, batteries, communication devices and earbuds originating in China. Goods loaded before the measure takes effect stay at the current rate.",
-   "juridictions": ["US"], "origines": ["CN"], "sh": ["8504", "8507", "8517", "8518"], "debut": "minuit:America/New_York",
+   "juridictions": [
+    "US"
+   ],
+   "origines": [
+    "CN"
+   ],
+   "sh": [
+    "8504",
+    "8507",
+    "8517",
+    "8518"
+   ],
+   "debut": "minuit:America/New_York",
    "nature": "simulation",
-   "source": { "nom": "Demonstration scenario", "ref": "no official text" },
-   "effet": { "type": "droit_additionnel", "points": 30, "exemption_en_transit": true }
+   "source": {
+    "nom": "Demonstration scenario",
+    "ref": "no official text"
+   },
+   "effet": {
+    "type": "droit_additionnel",
+    "points": 30,
+    "exemption_en_transit": true
+   }
   },
   {
    "id": "sim-au-suspension",
    "titre": "Suspension of lithium batteries in Australia",
    "resume": "Fictional announcement: Australia suspends with immediate effect the import of lithium-ion batteries sold online, for the duration of a safety recall.",
-   "juridictions": ["AU"], "sh": ["8507"], "debut": "maintenant",
+   "juridictions": [
+    "AU"
+   ],
+   "sh": [
+    "8507"
+   ],
+   "debut": "maintenant",
    "nature": "simulation",
-   "source": { "nom": "Demonstration scenario", "ref": "no official text" },
-   "effet": { "type": "interdiction", "texte": "Import suspended in Australia (simulation)" }
+   "source": {
+    "nom": "Demonstration scenario",
+    "ref": "no official text"
+   },
+   "effet": {
+    "type": "interdiction",
+    "texte": "Import suspended in Australia (simulation)"
+   }
   }
  ]
 }

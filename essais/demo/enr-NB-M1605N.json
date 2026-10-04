@@ -1,0 +1,292 @@
+{
+ "http": 200,
+ "request_id": "a5de17f5-ddc2-41f0-803c-b952794830e7",
+ "seconds": 7.4,
+ "endpoint": "https://api.legaldata.cleolabs.co/v2/customs/classifications",
+ "sent": {
+  "item_id": "NB-M1605N",
+  "description": "Notebook PC, model M1605N, portable computer with built-in keyboard and display, input 20 V 3.4 A 68 W, contains Wi-Fi and Bluetooth radio module MT7920",
+  "country": "FR"
+ },
+ "body": {
+  "data": {
+   "item_id": "NB-M1605N",
+   "status": "needs_information",
+   "query_facts": {},
+   "missing_attributes": [
+    "function",
+    "use"
+   ],
+   "questions": [
+    {
+     "fact": "function",
+     "question": "What does the machine do (e.g. pump liquids, compress gas, generate mechanical power, cut or shape material, refrigerate)?",
+     "why": "Headings within chapter 84 split by the machine's function (pumps, compressors, engines, refrigerating equipment, machine tools, and so on).",
+     "discriminates": "heading"
+    },
+    {
+     "fact": "use",
+     "question": "What is the machine used for, or in which application (e.g. agricultural, industrial, domestic)?",
+     "why": "National lines within many chapter 84 subheadings split further by end use or application.",
+     "discriminates": "national_line"
+    }
+   ],
+   "candidates": [
+    {
+     "id": "5f426d79-6269-4e12-8f55-23f0246a55e3",
+     "code": "847130",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "847130",
+     "chapter": 84,
+     "title": {
+      "en": "Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display"
+     },
+     "description": null,
+     "confidence": 0.89,
+     "rationale": "A notebook PC with a built-in keyboard and display that weighs under 10 kg is the textbook case for 8471.30. The ADP-machine definition is met (E3), and the Wi-Fi/Bluetooth module does not change the classification.",
+     "similarity": 0.435855465500949,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [
+      {
+       "kind": "chapter_note",
+       "ref": "Chapter 84 Note 6",
+       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+       "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+       "source_version": "32025R1926"
+      },
+      {
+       "kind": "chapter_note",
+       "ref": "Chapter 84 Note 8",
+       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+       "excerpt": "A machine which is used for more than one purpose is, for the purposes of classification, to be treated as if its principal purpose were its sole purpose.\n\nSubject to note 2 to this chapter and note 3 to Section XVI, a machine the principal purpose of which is not described in any heading or for which no one purpose is the principal purpose is, unless the context otherwise requires, to be classified in heading 8479 .",
+       "source_version": "32025R1926"
+      }
+     ],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1",
+      "GRI 6"
+     ],
+     "set_aside_reason": null,
+     "ambiguous": false,
+     "reranker_confidence": 0.96
+    },
+    {
+     "id": "eb0489e5-138d-4e65-bee7-201b89270969",
+     "code": "847141",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "847141",
+     "chapter": 84,
+     "title": {
+      "en": "Automatic data processing machines; comprising in the same housing at least a central processing unit and an input and output unit, whether or not combined, n.e.c. in item no. 8471.30"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8471.41 covers ADP machines with a CPU and an input/output unit in the same housing, n.e.c. in 8471.30. The portable sub-type is more specific, so this code is excluded for this product.",
+     "similarity": 0.360520331312208,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [
+      {
+       "kind": "chapter_note",
+       "ref": "Chapter 84 Note 6",
+       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+       "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+       "source_version": "32025R1926"
+      }
+     ],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1",
+      "GRI 6"
+     ],
+     "set_aside_reason": "The portable subheading 8471.30 is the specific provision, which takes 8471.41 out of consideration.",
+     "ambiguous": false,
+     "reranker_confidence": 0.02
+    },
+    {
+     "id": "1e4ad86f-3bda-421c-8a47-9ba67b82b5dc",
+     "code": "847160",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "847160",
+     "chapter": 84,
+     "title": {
+      "en": "Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8471.60 covers input or output units presented separately. The notebook is a complete computer, not a peripheral unit.",
+     "similarity": 0.388530935784968,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [
+      {
+       "kind": "chapter_note",
+       "ref": "Chapter 84 Note 6",
+       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+       "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+       "source_version": "32025R1926"
+      }
+     ],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1"
+     ],
+     "set_aside_reason": "It is a complete ADP machine, not an input or output unit.",
+     "ambiguous": false,
+     "reranker_confidence": 0.01
+    },
+    {
+     "id": "1db90fd0-a127-4cec-9f92-ab80d2c91ff7",
+     "code": "851769",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "851769",
+     "chapter": 85,
+     "title": {
+      "en": "Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8517.69 covers wireless communication apparatus. The radio module is only an ancillary function of the computer.",
+     "similarity": 0.405415658496048,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": false,
+     "gri": [
+      "GRI 1",
+      "GRI 3(b)"
+     ],
+     "set_aside_reason": "The essential character is data processing, not communication.",
+     "ambiguous": false,
+     "reranker_confidence": 0.005
+    },
+    {
+     "id": "3d3094a2-620b-4688-b9e7-3431d8073b54",
+     "code": "852852",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "852852",
+     "chapter": 85,
+     "title": {
+      "en": "Monitors; other than cathode-ray tube; capable of directly connecting to and designed for use with an automatic data processing machine of heading 84.71"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8528.52 covers monitors that connect to an ADP machine. The display here is built into the computer and is not a standalone monitor.",
+     "similarity": 0.35143539826261,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": false,
+     "gri": [
+      "GRI 1"
+     ],
+     "set_aside_reason": "The display is integrated into the computer and is not a separate monitor.",
+     "ambiguous": false,
+     "reranker_confidence": 0.003
+    }
+   ],
+   "dataset_version": null,
+   "coverage": {
+    "level": "hs6_only",
+    "national_systems": [],
+    "via_bloc": null,
+    "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+   },
+   "gate_hint": null,
+   "provenance": {
+    "question_config_version": "2026-09-24",
+    "families": [
+     "machinery-84"
+    ],
+    "reranker": "bedrock-sonnet-5.5",
+    "reranker_fallback": false,
+    "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+    "evidence_source": "index",
+    "evidence_rejected": 0,
+    "precedents": [
+     {
+      "ruling_id": "UK600011920",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8471300000",
+      "ruling_date": "2024-11-29",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011920",
+      "similarity": 0.521
+     },
+     {
+      "ruling_id": "UK600011922",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8471300000",
+      "ruling_date": "2024-11-29",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011922",
+      "similarity": 0.507
+     },
+     {
+      "ruling_id": "UK600010300",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8471410000",
+      "ruling_date": "2024-05-01",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600010300",
+      "similarity": 0.488
+     },
+     {
+      "ruling_id": "UK600012601",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8471410000",
+      "ruling_date": "2025-04-10",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012601",
+      "similarity": 0.469
+     },
+     {
+      "ruling_id": "UK600012357",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8471300000",
+      "ruling_date": "2025-02-18",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012357",
+      "similarity": 0.45
+     }
+    ],
+    "acceptance_checks": [
+     "calibrated_confidence_below_floor",
+     "low_retrieval_similarity"
+    ]
+   },
+   "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+   "alternatives_set_aside": [
+    {
+     "code": "847141",
+     "set_aside_reason": "The portable subheading 8471.30 is the specific provision, which takes 8471.41 out of consideration."
+    },
+    {
+     "code": "847160",
+     "set_aside_reason": "It is a complete ADP machine, not an input or output unit."
+    },
+    {
+     "code": "851769",
+     "set_aside_reason": "The essential character is data processing, not communication."
+    },
+    {
+     "code": "852852",
+     "set_aside_reason": "The display is integrated into the computer and is not a separate monitor."
+    }
+   ]
+  },
+  "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability."
+ }
+}

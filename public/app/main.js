@@ -14,10 +14,12 @@ import * as questions from './vues/questions.js';
 import * as veille from './vues/veille.js';
 import * as dossier from './vues/dossier.js';
 import * as arbre from './vues/arbre.js';
+import * as accueil from './vues/accueil.js';
+import * as monde from './vues/monde.js';
 import * as E from './dossier/etat.js';
 
-const VUES = { '': vue, dossier, commandes, produits, questions, veille, arbre };
-const IDS = { '': 'vue', dossier: 'dossier', commandes: 'commandes', produits: 'produits', questions: 'questions', veille: 'veille', arbre: 'arbre' };
+const VUES = { '': accueil, envois: vue, monde, dossier, commandes, produits, questions, veille, arbre };
+const IDS = { '': 'accueil', envois: 'vue', monde: 'monde', dossier: 'dossier', commandes: 'commandes', produits: 'produits', questions: 'questions', veille: 'veille', arbre: 'arbre' };
 const shell = document.querySelector('.shell'), side = document.querySelector('.side'), main = document.querySelector('.main');
 let route = null;
 
@@ -35,7 +37,8 @@ function rendreSide() {
 function topbar() {
   const s = S.lire(), V = VUES[route.nom];
   const classer = route.nom === 'dossier' ? '' : `<button class="btn ${s.lignes.length ? 'blanc' : 'noir'}" data-aller="#/dossier">${ic('agent')}Classify a product</button>`;
-  const actions = s.lignes.length ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>${classer}<button class="btn noir" data-action="importer">${ic('import')}Import</button>` : `${classer}<button class="btn ${classer ? 'blanc' : 'noir'}" data-action="importer">${ic('import')}Import</button>`;
+  const simuler = ['veille', 'envois', 'commandes'].includes(route.nom) ? `<button class="btn texte" data-action="simuler">${ic('eclair')}Simulate an announcement</button>` : '';
+  const actions = s.lignes.length ? `${simuler}${classer}<button class="btn noir" data-action="importer">${ic('import')}Import</button>` : `${classer}<button class="btn ${classer ? 'blanc' : 'noir'}" data-action="importer">${ic('import')}Import</button>`;
   return `<header class="topbar"><div class="fil">${s.boutique ? `${esc(s.boutique.nom)} ${ic('droite')}` : ''}<b>${esc(V.titre)}</b></div>${actions}</header>`;
 }
 

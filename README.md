@@ -1,5 +1,28 @@
 # Stamped: customs classification and shipment compliance
 
+## The demo in four screens (since 4 Oct 2026)
+
+The default store holds two real products, read from their photographed labels: a 70 W USB-C power adapter and a notebook PC (model M1605N).
+
+- **Products** (home): for each product, what is read on the label, the code and the steps that lead to it, and the world figures.
+- **Why this code** (`#/arbre`): the encoded rule drawn as a graph. The path of the product is on one line, with the outcomes it did not take under each step; next to it, each step gives the question, the answer with the label passage that establishes it, and the official text. "The whole rule" shows the 33 nodes.
+- **World** (`#/monde`): per country, the tariff line the engine proposes and the base duty; per market, the requirements with the official sentence behind each.
+- **Orders**: each order line checked for its delivery country against the verified rules.
+
+Everything else (classify a new product, shipments overview, questions, regulatory watch) sits under "More".
+
+### Where the data comes from
+
+    node essais/monde/enregistrer.mjs        # real lookups on the Cleo Legal API, 112 countries with a national catalogue
+    node essais/monde/verifier.mjs <file>    # re-downloads each official source and looks for the quote word for word
+    node essais/monde/assembler.mjs          # public/data/monde-produits.json
+    node essais/monde/construire-veille.mjs  # public/data/veille.json, from verified entries only
+    node essais/demo/generer.mjs             # default store: the two products and their orders
+
+- Regulations: 62 requirements in 11 markets (`essais/monde/reglementation-*.json`), each with a quote found word for word in the official text. The gaps (rules that could not be checked) are listed in the `.md` file next to each JSON file.
+- The 11 rules of the former regulatory watch were audited claim by claim (`essais/monde/veille-audit.md`): 34 confirmed, 20 inexact, 6 unsupported out of 60. The watch now only applies verified rules.
+- Limits: the encoded rule is drafted by AI and not reviewed by a customs declarant; tariff lines are proposals of the engine; the requirement list is not complete; nothing states that a product is compliant.
+
 ## Cockpit (home page, since 4 Oct 2026)
 
 A shop imports its orders (Shopify or Etsy CSV export, or free columns). Each product is classified once on the Cleo Legal API; each order line is then checked for its delivery country by the rules of the regulatory watch, applied to the retained code. Each status (ready, to check, blocked) points to what it rests on: the classification, an official text, a signed answer.

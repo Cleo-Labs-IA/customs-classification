@@ -3,13 +3,13 @@
 import { esc, ic, PAYS, drapeau, pluriel } from '../../ui.js';
 
 const DS_DOCK = 'Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.';
+const ETIQ_CHG = ['Input: 100-240V~1.8A(1.80A) 50-60Hz', 'USB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A', '70.0W 45.0W 27.0W 15.0W', 'ITE Power Supply', 'Salcomp (Shenzhen) Co., Ltd.', 'EMC 8425', 'cULus LISTED E135498', 'SAA-230413-EA'].join('\n');
+const ETIQ_NB = ['Model: M1605N', 'Notebook PC', 'Input: +20V 3.4A, 68W', 'CEC ID: M1605N_68W', 'ASUSTeK Computer Inc.', 'CAN ICES (B) / NMB (B)', 'Made in China', 'Contains MT7920', 'FCC ID: RAS-MT7920', 'IC: 7542A-MT7920', 'R-C-MD6-MT7920', 'CCAF24Y10090T8', 'R 217-241406', 'T D240049217', 'M1605NAQ-SH269W', 'MFD: 2025-12'].join('\n');
 export const EXEMPLES = [
-  { libelle: 'USB-C dock, description only', sku: 'DOCK-PRO', desc: 'USB-C docking station for laptop', dest: 'FR', origin: 'CN', image: '/data/produits/dock-pro.svg' },
-  { libelle: 'USB-C dock with datasheet', sku: 'DOCK-PRO-DS', desc: 'USB-C docking station for laptop', ds: DS_DOCK, dest: 'FR', origin: 'CN', image: '/data/produits/dock-pro.svg' },
-  { libelle: 'Catalogue and datasheet that contradict each other', sku: 'DOCK-STAND', desc: 'USB-C charging stand for laptop, power only, no data ports, no network, no video output', ds: DS_DOCK, dest: 'FR', origin: 'CN', image: '/data/produits/dock-pro.svg' },
-  { libelle: 'Robot dog', sku: 'ROBO-DOG', desc: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', dest: 'US', origin: 'CN', image: '/data/produits/robo-dog.svg' },
-  { libelle: 'Buildable clock', sku: 'CLOCK-BRICK', desc: 'Buildable wall clock for kids, battery powered', dest: 'US', origin: 'CN', kg: '0.4', image: '/data/produits/clock-brick.svg' },
-  { libelle: 'Talking toy', sku: 'TOY-FARM-01', desc: "Fisher-Price See 'n Say The Farmer Says talking animal sounds toy", dest: 'US', origin: 'CN' },
+  { libelle: 'USB-C power adapter 70 W (photographed label)', sku: 'CHG-70W', desc: 'USB-C power adapter 70 W, external AC to DC power supply for information technology equipment, input 100-240 V AC, USB Power Delivery output 5 V to 20.6 V DC', ds: ETIQ_CHG, dest: 'FR', origin: 'CN', image: '/data/produits/chg-70w.jpg' },
+  { libelle: 'Notebook PC M1605N (photographed label)', sku: 'NB-M1605N', desc: 'Notebook PC, model M1605N, portable computer with built-in keyboard and display, input 20 V 3.4 A 68 W, contains Wi-Fi and Bluetooth radio module MT7920', ds: ETIQ_NB, dest: 'FR', origin: 'CN', image: '/data/produits/nb-m1605n.jpg' },
+  { libelle: 'Ambiguous case: USB-C dock with datasheet', sku: 'DOCK-PRO-DS', desc: 'USB-C docking station for laptop', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
+  { libelle: 'Catalogue and datasheet that contradict each other', sku: 'DOCK-STAND', desc: 'USB-C charging stand for laptop, power only, no data ports, no network, no video output', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
 ];
 const PAYS_FICHE = ['FR', 'DE', 'ES', 'IT', 'NL', 'GB', 'US', 'CA', 'JP', 'AU', 'CH', 'KR', 'CN', 'VN', 'IN', 'MX'];
 

@@ -15,6 +15,7 @@ import { propositionCarte, epreuvesCarte, obligationsCarte, destinationsCarte } 
 import { decisionCarte, exigencesCarte, exigencesDossier, exigencesClic } from './dossier/decision.js';
 
 export const titre = 'Classify a product';
+let plusOuvert = false;
 let details = [], horsLigne = null, serveur = { mode: 'illustratif', ia: false };
 const det = (html) => { details.push(html); return details.length - 1; };
 etatServeur().then((s) => { serveur = s; if (s.mode !== 'direct') donneesHorsLigne().then((d) => { horsLigne = d; }); });
@@ -65,7 +66,7 @@ function dossierEcran(D) {
     ${dec ? decisionCarte(D, dec, R, res, S.lire().qui) : ''}
     <div class="cols-dossier">
       <div class="col"><span class="eyebrow col-titre">Documents, facts and encoded rule</span>${piecesCarte(D, det)}${faitsCarte(D, det, Boolean(D.occupe || D.valide))}${contradictionsCarte(D)}${t && !D.contradictions.length ? regleCarte(D, R, res, det) : ''}</div>
-      <div class="col"><span class="eyebrow col-titre">Reasoning, requirements and consequences</span>${attente}${toursHtml(D, det, suggestions)}${pret ? propositionCarte(D, det, travail) + exigencesCarte(D, E.exigencesChargees(), det) + obligationsCarte(D, dec) + epreuvesCarte(D, det) + destinationsCarte(D, det) : ''}</div>
+      <div class="col"><span class="eyebrow col-titre">Reasoning, requirements and consequences</span>${attente}${toursHtml(D, det, suggestions)}${pret ? exigencesCarte(D, E.exigencesChargees(), det) + obligationsCarte(D, dec) + `<details class="carte repli" data-plus ${plusOuvert ? 'open' : ''}><summary class="carte-tete"><h3>More checks: engine reading, tests, other destinations</h3></summary>${propositionCarte(D, det, travail) + epreuvesCarte(D, det) + destinationsCarte(D, det)}</details>` : ''}</div>
     </div></div>`;
 }
 
@@ -133,6 +134,7 @@ export function brancher(racine) {
     if (e.target.matches('[data-niveau]')) return E.choisirNiveau(e.target.value);
     if (e.target.dataset.champ && e.target.tagName === 'SELECT') { E.saisir(e.target.dataset.champ, e.target.value); e.target.previousElementSibling.outerHTML = drapeau(e.target.value); }
   });
+  racine.addEventListener('toggle', (e) => { if (e.target.matches && e.target.matches('[data-plus]')) plusOuvert = e.target.open; }, true);
   racine.addEventListener('submit', (e) => { e.preventDefault(); soumettre(e.target); });
   racine.addEventListener('click', (e) => {
     const t = e.target, b = (sel) => t.closest(sel);

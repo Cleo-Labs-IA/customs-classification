@@ -5,17 +5,17 @@ import { versCommandes } from '../csv.js';
 import * as S from '../store.js';
 
 const SOURCES = [
-  { id: 'demo', titre: 'Demo store', sous: '8 products, around fifty orders to 12 countries', ic: 'lecture' },
+  { id: 'demo', titre: 'Demo store', sous: '2 products read from their labels, around fifty orders to 14 countries', ic: 'lecture' },
   { id: 'shopify', titre: 'Shopify', sous: 'Orders › Export › CSV', ic: 'fichier' },
   { id: 'etsy', titre: 'Etsy', sous: 'Shop › Settings › Downloads', ic: 'fichier' },
   { id: 'csv', titre: 'Other CSV file', sous: 'Product, country, quantity, price columns', ic: 'fichier' },
 ];
 let m = null;
-const DEMO_IMAGES = new Set(['DOCK-PRO', 'CHG-65W', 'PWR-20K', 'BUDS-X', 'HDMI-2M', 'ROBO-DOG', 'CLOCK-BRICK', 'BOTTLE-750']);
+const DEMO_IMAGES = new Set(['CHG-70W', 'NB-M1605N']);
 
 function lignesApercu() {
   if (m.source === 'demo' || !m.resultat) {
-    return [['CHG-65W', 'GaN USB-C charger 65 W', 'JP'], ['PWR-20K', 'Power bank 20,000 mAh', 'US'], ['BUDS-X', 'Wireless earbuds', 'FR'], ['ROBO-DOG', 'Interactive robot dog', 'AU'], ['HDMI-2M', 'HDMI 2.1 cable, 2 m', 'DE']];
+    return [['CHG-70W', 'USB-C power adapter, 70 W', 'JP'], ['NB-M1605N', 'Notebook PC, model M1605N', 'US'], ['CHG-70W', 'USB-C power adapter, 70 W', 'FR'], ['NB-M1605N', 'Notebook PC, model M1605N', 'AU'], ['CHG-70W', 'USB-C power adapter, 70 W', 'DE']];
   }
   return m.resultat.lignes.slice(0, 5).map((l) => [l.sku, l.produit, l.pays]);
 }
@@ -23,7 +23,7 @@ function visuel() {
   const rangs = lignesApercu();
   const droite = (i) => (m.etape === 0 ? drapeau(rangs[i][2]) : m.etape === 1 ? '<span class="miroite" style="width:64px;height:20px;display:block">.</span>' : `<span class="etat ${['pret', 'bloque', 'a_verifier', 'a_verifier', 'pret'][i]}">${['Ready', 'Blocked', 'To check', 'To check', 'Ready'][i]}</span>`);
   return `<div class="mini"><div class="tete"><span class="logo" style="width:22px;height:22px;border-radius:6px"><span style="font-size:12px;font-weight:600">S</span></span>${m.etape === 2 ? 'Check by country' : 'Orders imported'}<span class="espace"></span><span class="faint mono" style="font-size:11px">${m.etape === 0 ? 'CSV' : m.etape === 1 ? 'reading' : 'rules'}</span></div>
-    ${rangs.map((r, i) => `<div class="ligne apparait" style="animation-delay:${i * 70}ms"><div style="display:flex;gap:10px;align-items:center;min-width:0">${vignette({ sku: r[0], teinte: ['sable', 'corail', 'lavande', 'peche', 'menthe'][i], image: DEMO_IMAGES.has(r[0]) ? `/data/produits/${r[0].toLowerCase()}.svg` : null }, 'petite')}<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r[1])}</span></div>${droite(i)}</div>`).join('')}</div>`;
+    ${rangs.map((r, i) => `<div class="ligne apparait" style="animation-delay:${i * 70}ms"><div style="display:flex;gap:10px;align-items:center;min-width:0">${vignette({ sku: r[0], teinte: ['sable', 'corail', 'lavande', 'peche', 'menthe'][i], image: DEMO_IMAGES.has(r[0]) ? `/data/produits/${r[0].toLowerCase()}.jpg` : null }, 'petite')}<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r[1])}</span></div>${droite(i)}</div>`).join('')}</div>`;
 }
 
 function etape0() {

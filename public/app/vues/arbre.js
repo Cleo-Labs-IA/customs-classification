@@ -7,9 +7,11 @@ import { evaluer, verifier, rejouer, versCode, cle } from '../../arbre-moteur.js
 import { regle, decisionsOfficielles, versionDeTravail, garderVersion } from '../regle.js';
 import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
+import { grapheHtml, raisonsHtml } from '../graphe-arbre.js';
 
 export const titre = 'Interpretation tree';
 let REF = null, TEXTES = [], T = {}, DECISIONS = [], arbre = null, journal = [], pret = false, rerendreLocal = () => {};
+let entier = false;
 let valeurs = {}, cites = {}, sel = null, onglet = 'decisions', essai = { nom: 'Free-form product', hs6: null, moteur: null }, msg = null, brouillon = null;
 const garder = () => garderVersion(REF, arbre, journal);
 const C = () => Object.fromEntries(arbre.criteres.map((c) => [c.id, c]));
@@ -26,6 +28,7 @@ Promise.all([regle(), decisionsOfficielles()]).then(([r, d]) => {
 
 // Depuis un dossier : les valeurs que ses pièces établissent, avec leurs passages.
 export function entrer(params) {
+  if (params.get('sku')) return charger(params.get('sku'));
   if (!params.get('dossier')) return;
   const D = E.lire(), t = E.dernier();
   if (!D.produit) return;
@@ -34,7 +37,17 @@ export function entrer(params) {
   essai = { nom: `File ${D.produit.sku}: ${Object.keys(valeurs).length} criterion(criteria) established, the others stay unknown`, hs6: null, moteur: t && t.data.candidates && t.data.candidates.find((c) => !c.set_aside_reason) ? String(t.data.candidates.find((c) => !c.set_aside_reason).code) : null };
 }
 
-function arbreHtml(res) {
+// Les produits de la boutique : leurs critères lus sur l'étiquette (passage cité) ou déclarés par le vendeur.
+function charger(sku) {
+  const p = S.lire().produits[sku] || ((S.fixes().demo || {}).produits || []).find((x) => x.sku === sku);
+  if (!p || !p.criteres) return;
+  valeurs = Object.fromEntries(Object.entries(p.criteres).map(([k, x]) => [k, x.valeur]));
+  cites = Object.fromEntries(Object.entries(p.criteres).map(([k, x]) => [k, { kind: x.kind, citation: x.kind === 'reponse' ? 'stated by the seller, no document supports it' : x.citation, source: x.kind === 'reponse' ? 'seller' : 'label, photo ' + (p.photo || '') }]));
+  essai = { nom: p.nom, sku, hs6: null, moteur: null };
+}
+const produitsLus = () => { const cat = Object.values(S.lire().produits).filter((p) => p.criteres); return cat.length ? cat : ((S.fixes().demo || {}).produits || []).filter((p) => p.criteres); };
+
+function arbreHtmlListe(res) {
   const chemin = new Set(res.chemin.map((s) => s.noeud)), crit = C();
   const marche = (id, vus) => {
     const n = arbre.noeuds[id];
@@ -122,13 +135,18 @@ function basHtml() {
 
 export function rendre() {
   if (!pret) return '<div class="page"><div class="titre"><div class="bloc"><h1>Interpretation tree</h1></div></div><div class="agent"><span class="rond"></span><span class="txt">Loading the tree, the texts and the decisions</span></div></div>';
-  const res = evaluer(arbre, valeurs), modifiee = JSON.stringify(arbre) !== JSON.stringify(REF);
+  const res = evaluer(arbre, valeurs), modifiee = JSON.stringify(arbre) !== JSON.stringify(REF), lus = produitsLus();
+  if (!essai.sku && !Object.keys(valeurs).length && lus.length && !rendre.fait) { rendre.fait = true; charger(lus[0].sku); return rendre(); }
+  const faits = Object.fromEntries(Object.entries(cites).map(([k, x]) => [k, { kind: x.kind || (x.source === 'file' ? 'reponse' : 'pieces'), citation: x.citation, source: x.source }]));
+  const tete = res.statut === 'code' ? `<span class="grand-code" style="font-size:30px">${esc(fmtCode(res.code))}</span>` : res.statut === 'information_manquante' ? etat('a_verifier', 'A fact is missing') : etat('bloque', 'Out of scope');
   return `<div class="page entre">
-    <div class="titre"><div class="bloc"><h1>Interpretation tree</h1><p>${esc(REF.perimetre || '')} The rule is data: edit a branch and everything is recomputed.</p></div>
+    <div class="titre"><div class="bloc"><h1>Interpretation tree</h1><p>How the customs rule is encoded, and why a product ends on its code. Each step cites the official text it applies.</p></div>
       <div style="display:flex;gap:8px;align-items:center">${modifiee ? '<span class="tag sim">Working version</span><button class="btn rouge petit" data-reinit>Revert to the reference tree</button>' : '<span class="tag contour">Reference tree</span>'}</div></div>
-    <div class="cols-arbre">
-      <div class="carte"><div class="carte-tete"><h3>${esc(arbre.titre || 'Tree')}</h3></div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Orange bar: edited node.</p><div class="carte-corps">${arbreHtml(res)}</div></div>
-      <div class="col">${essaiHtml(res)}${editeurHtml()}${basHtml()}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${lus.map((p) => `<button class="chip ${essai.sku === p.sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}<button class="chip ${essai.sku ? '' : 'actif'}" data-vider>Free-form product</button></div>
+    <div class="carte"><div class="carte-tete"><h3>${esc(essai.nom)}</h3>${tete}</div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Click a node to read or edit it.</p><div class="carte-corps"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="chip ${entier ? '' : 'actif'}" data-entier="0">This product's path</button><button class="chip ${entier ? 'actif' : ''}" data-entier="1">The whole rule (${Object.keys(arbre.noeuds).length} nodes)</button></div>${grapheHtml(arbre, { res, sel, modifie, entier })}</div></div>
+    <div class="cols-arbre" style="margin-top:14px">
+      <div class="carte"><div class="carte-tete"><h3>Why this code</h3><span class="muted">${res.chemin.length} step${res.chemin.length === 1 ? '' : 's'}</span></div><p class="carte-sous">The question asked, the answer with the passage that establishes it, and the official text that turns the answer into a consequence.</p><div class="carte-corps">${raisonsHtml(arbre, res, { faits, T })}</div></div>
+      <div class="col">${editeurHtml()}<details class="carte repli" ${rendre.ouvert ? 'open' : ''} data-repli><summary class="carte-tete"><h3>Change an answer, replay official rulings</h3></summary>${essaiHtml(res)}${basHtml()}</details></div>
     </div></div>`;
 }
 
@@ -157,6 +175,8 @@ export function brancher(racine, rerendre) {
     if (b('[data-v]')) { const [k, v] = b('[data-v]').dataset.v.split(':'); valeurs = { ...valeurs }; if (v === '') delete valeurs[k]; else valeurs[k] = v === 'oui'; delete cites[k]; return rerendre(); }
     if (b('[data-rb]')) { e.stopPropagation(); brouillon = { ...brouillon, base: (brouillon.base || []).filter((x) => x !== b('[data-rb]').dataset.rb) }; return enGardant(racine, rerendre); }
     if (b('[data-t]')) { const x = T[b('[data-t]').dataset.t]; racine.querySelector('#texte-cite').innerHTML = x ? `<blockquote><b>${esc(x.ref)}</b>\n${esc(x.texte)}\n<a href="${urlSure(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></blockquote>` : ''; return; }
+    if (b('[data-entier]')) { entier = b('[data-entier]').dataset.entier === '1'; return rerendre(); }
+    if (b('[data-produit]')) { sel = null; charger(b('[data-produit]').dataset.produit); return rerendre(); }
     if (b('[data-n]')) { sel = b('[data-n]').dataset.n; brouillon = null; msg = null; return rerendre(); }
     if (b('[data-onglet]')) { onglet = b('[data-onglet]').dataset.onglet; return rerendre(); }
     if (b('tr[data-d]')) { const d = DECISIONS.find((x) => x.id === b('tr[data-d]').dataset.d); valeurs = Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, x.valeur])); cites = Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, { citation: x.citation, source: d.id + (x.appui && x.appui !== 'explicite' ? ', inferred value: ' + x.appui : '') }])); essai = { nom: d.id + ': ' + d.produit, hs6: d.hs6, moteur: null }; document.querySelector('.main')?.scrollTo({ top: 0, behavior: 'smooth' }); return rerendre(); }
@@ -166,10 +186,11 @@ export function brancher(racine, rerendre) {
     if (t.id === 'revenir') { arbre = { ...arbre, noeuds: { ...arbre.noeuds, [sel]: structuredClone(REF.noeuds[sel]) } }; brouillon = null; journal = [...journal, { qui: S.lire().qui, quand: new Date().toLocaleString('en-GB'), noeud: sel, lecture: 'Reverted to the reference text', changement: 'revert', avant: '', apres: rejouer(arbre, DECISIONS).reproduit + '/' + DECISIONS.length }]; garder(); return rerendre(); }
     if (t.id === 'supprimer') { if (Object.values(arbre.noeuds).some((n) => n.type === 'question' && Object.values(n.branches || {}).includes(sel))) { msg = 'This node is still the target of a branch.'; return rerendre(); } const nd = { ...arbre.noeuds }; delete nd[sel]; arbre = { ...arbre, noeuds: nd }; sel = null; brouillon = null; garder(); return rerendre(); }
     if (b('[data-reinit]')) { arbre = structuredClone(REF); journal = []; sel = null; brouillon = null; garder(); return rerendre(); }
-    if (b('[data-vider]')) { valeurs = {}; cites = {}; essai = { nom: 'Free-form product', hs6: null, moteur: null }; return rerendre(); }
+    if (b('[data-vider]')) { rendre.fait = true; valeurs = {}; cites = {}; essai = { nom: 'Free-form product', hs6: null, moteur: null }; return rerendre(); }
     if (b('[data-ajout]')) { const q = b('[data-ajout]').dataset.ajout === 'question'; sel = nouvelId(q ? 'q' : 'c'); arbre = { ...arbre, noeuds: { ...arbre.noeuds, [sel]: q ? { type: 'question', critere: arbre.criteres[0].id, pourquoi: '', base: [], branches: {} } : { type: 'code', code: '', libelle: '', motif: '', base: [] } } }; brouillon = null; return rerendre(); }
     if (b('[data-telecharger]')) return b('[data-telecharger]').dataset.telecharger === 'json' ? telecharger('interpretation-tree.json', JSON.stringify({ ...arbre, journal }, null, 1), 'application/json') : telecharger('classify.js', versCode(arbre), 'text/javascript');
   });
+  racine.addEventListener('toggle', (e) => { if (e.target.matches && e.target.matches('[data-repli]')) rendre.ouvert = e.target.open; }, true);
   racine.addEventListener('change', (e) => {
     const t = e.target;
     if (t.dataset.s) { valeurs = { ...valeurs }; if (t.value) valeurs[t.dataset.s] = t.value; else delete valeurs[t.dataset.s]; delete cites[t.dataset.s]; return rerendre(); }

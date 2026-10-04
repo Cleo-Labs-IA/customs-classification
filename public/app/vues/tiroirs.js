@@ -60,7 +60,7 @@ export function raisonHtml(r, sku, avecActions = true) {
   const R = r.regle ? regle(r.regle) : null, cl = S.lire().classifications[sku];
   const a = R ? S.lire().attestations[`${sku}|${R.id}`] : null;
   let detail = '';
-  if (R) detail = `${R.nature === 'simulation' ? '<span class="tag sim">Simulation</span> ' : ''}${esc(R.source.nom)}${R.source.ref ? ', ' + esc(R.source.ref) : ''}${R.source.url ? ` · <a href="${urlSure(R.source.url)}" target="_blank" rel="noopener">official text</a>` : ''}`;
+  if (R) detail = `${R.nature === 'simulation' ? '<span class="tag sim">Simulation</span> ' : ''}${esc(R.source.nom)}${R.source.ref ? ', ' + esc(R.source.ref) : ''}${R.exigences ? ` · <a href="/#/monde?marche=${esc(R.marche)}&famille=${esc(R.famille)}">the ${R.exigences.length} quoted text${R.exigences.length === 1 ? '' : 's'}</a>` : R.source.url ? ` · <a href="${urlSure(R.source.url)}" target="_blank" rel="noopener">official text</a>` : ''}`;
   else if (r.type === 'code_valide') detail = esc((S.lire().validations[sku] || {}).motif || '');
   else detail = esc(sourceClassif(cl));
   if (a) detail += `<br>Answer "${a.reponse ? 'yes' : 'no'}" from ${esc(a.par)}, ${esc(ilYA(a.le))}${a.motif ? ': ' + esc(a.motif) : ''}`;

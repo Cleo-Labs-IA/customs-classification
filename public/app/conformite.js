@@ -100,6 +100,8 @@ function raisonRegle(regle, ph, ligne, valeur, ctx, provisoire) {
     if (!f) return null;
     return { ...base, niveau: 'pret', type: f.evitable ? 'echeance' : 'surcout', texte: f.texte, surcout: f.surcout || 0, evitable: f.evitable || 0, echeance: f.evitable ? regle.debut : undefined };
   }
+  // un seuil de valeur d'envoi, quand le texte en fixe un
+  if (t === 'info' && regle.effet.valeur_max != null && !((ligne.valeurCommande ?? valeur) <= regle.effet.valeur_max)) return null;
   if (t === 'info' && ph === 'en_vigueur') return { ...base, niveau: 'pret', type: 'info', texte: regle.effet.texte || regle.titre };
   return null;
 }

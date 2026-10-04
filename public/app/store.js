@@ -38,6 +38,8 @@ export async function demarrer() {
     regles: (veille && veille.regles) || [], modeles: (veille && veille.simulations) || [], avertissement: (veille && veille.avertissement) || '', fixeLe: veille && veille.fixe_le,
     demo, mode: serveur.mode, ia: serveur.ia, api: serveur.api,
   };
+  // Boutique par défaut : sans commandes importées, la boutique de démonstration est chargée d'office.
+  if (!etat.lignes.length && demo && demo.produits && demo.produits.length && typeof document !== 'undefined') await importerDemo().catch(() => null);
   fusionnerValidationsDossier();
   completerImages();
   // Une classification restée « en cours » à la fermeture de la page est relancée.
@@ -105,12 +107,12 @@ export async function importerDemo() {
     boutique: { ...demo.boutique, importeLe: maintenant, synchroLe: maintenant, demo: true },
     lignes, produits: Object.fromEntries(demo.produits.map((p) => [p.sku, { ...p, faits: {} }])),
     validations: demo.depart.validations, attestations: demo.depart.attestations,
-    journal: [{ le: maintenant, par: etat.qui, quoi: `Import of the demo store: ${lignes.length} order lines` }, { le: demo.depart.validations['HDMI-2M'].le, par: 'Demo team', quoi: demo.depart.libelle }],
+    journal: [{ le: maintenant, par: etat.qui, quoi: `Import of the demo store: ${lignes.length} order lines` }, { le: maintenant, par: 'Demo store', quoi: demo.depart.libelle }],
   });
   lancerClassifications();
   return r;
 }
-export function reinitialiser() { basculerFlux(false); changer({ ...VIDE, qui: etat.qui }); }
+export function reinitialiser() { basculerFlux(false); changer({ ...VIDE, qui: etat.qui }); return importerDemo(); }
 
 // ---------- classification (agent) ----------
 const file = [];

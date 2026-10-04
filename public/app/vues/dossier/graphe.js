@@ -3,6 +3,7 @@
 // Chaque case s'ouvre dans le tiroir ; chaque ligne reprend un champ de la réponse.
 import { esc, ic, urlSure } from '../../ui.js';
 import { fmtCode } from '../../conformite.js';
+import { grapheHtml } from '../../graphe-arbre.js';
 import { STATUT, CONTROLES, PROVENANCE, FAITS_AJOUTABLES, FAITS_LISTES, FAITS_NUMERIQUES, libelleFait, libelleSource, titre, premierRetenu, valeurFait } from '../../dossier/logique.js';
 
 const num = (n) => (typeof n === 'number' ? String(n) : 'not provided');
@@ -83,7 +84,7 @@ export function regleCarte(D, R, res, det) {
       <p>${t ? (meme ? 'The engine proposes the same code: the two lines of reasoning converge.' : `The engine proposes <b class="code">${esc(fmtCode(String(t.code).slice(0, 6)))}</b>: the two lines of reasoning diverge, to be decided by an authorised person.`) : 'The engine kept no code for this destination.'}</p></div>`;
   }
   const rep = Object.values(D.crit).filter((x) => x.kind === 'reponse').length;
-  return `<div class="carte">${tete(version)}<div class="carte-corps chemin">${etapes}${fin}
+  return `<div class="carte">${tete(version)}<div class="carte-corps chemin">${grapheHtml(A, { res })}${etapes}${fin}
     ${rep && !D.valide ? `<p class="faint" style="margin-top:10px;font-size:12.5px">${rep} answer(s) given on this screen. <button class="lien-detail" data-retirer-crit>Remove them</button></p>` : ''}
     ${D.critRejetes ? `<p class="faint" style="font-size:12.5px">${D.critRejetes} value(s) set aside: cited passage not found word for word.</p>` : ''}
     ${D.critErreur ? `<p class="note-l">${ic('info')}Criteria not read: ${esc(D.critErreur)}. Answer the blocking point to move forward in the rule.</p>` : ''}</div></div>`;

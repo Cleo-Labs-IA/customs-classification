@@ -155,3 +155,12 @@ test('ready line: the reason shown first is the extra cost, not the validated co
   assert.equal(e.niveau, 'pret');
   assert.equal(e.principale.type, 'surcout');
 });
+
+test('an information rule with a value ceiling stays silent above the ceiling, and speaks at or below it', () => {
+  const regle = { id: 'r', titre: 'T', juridictions: ['UE'], sh: ['*'], debut: '2026-07-01', effet: { type: 'info', valeur_max: 150, texte: 'small consignment' } };
+  const ctx = { classification: { statut: 'classified', code: '850440' }, regles: [regle], maintenant: Date.parse('2026-10-04') };
+  const ligne = (prix) => ({ sku: 'A', pays: 'FR', origine: 'CN', quantite: 1, prixUnitaire: prix, devise: 'EUR' });
+  assert.ok(etatLigne(ligne(59), ctx).raisons.some((r) => r.regle === 'r'));
+  assert.ok(etatLigne(ligne(150), ctx).raisons.some((r) => r.regle === 'r'));
+  assert.ok(!etatLigne(ligne(749), ctx).raisons.some((r) => r.regle === 'r'));
+});

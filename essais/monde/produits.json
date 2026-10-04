@@ -1,0 +1,131 @@
+[
+ {
+  "sku": "CHG-70W",
+  "nom": "USB-C power adapter, 70 W",
+  "photo": "IMG_1022",
+  "description": "USB-C power adapter 70 W, external AC to DC power supply for information technology equipment, input 100-240 V AC, USB Power Delivery output 5 V to 20.6 V DC",
+  "etiquette": [
+   "Input: 100-240V~1.8A(1.80A) 50-60Hz",
+   "USB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A",
+   "70.0W 45.0W 27.0W 15.0W",
+   "ITE Power Supply",
+   "Salcomp (Shenzhen) Co., Ltd.",
+   "EMC 8425",
+   "cULus LISTED E135498",
+   "SAA-230413-EA"
+  ],
+  "marques_vues": [
+   "CE",
+   "crossed-out wheeled bin",
+   "EAC",
+   "RCM",
+   "cULus Listed",
+   "NOM-NYCE",
+   "efficiency level VI",
+   "PSE (diamond)",
+   "Class II double square"
+  ],
+  "a_confirmer": [
+   "First output value read as 20.6V: the digits are partly blurred on the photo",
+   "Name printed inside the PSE mark: not legible",
+   "Country of origin: not printed on the visible face"
+  ],
+  "faits_envoyes": {
+   "function": "converts mains alternating current (100-240 V) into direct current (5 V to 20.6 V, USB Power Delivery) to power and charge another device",
+   "power_w": 70
+  },
+  "origine": "CN",
+  "prix": 59,
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "alimenter",
+    "kind": "pieces",
+    "citation": "ITE Power Supply"
+   },
+   "genere_electricite": {
+    "valeur": false,
+    "kind": "pieces",
+    "citation": "Input: 100-240V~1.8A(1.80A) 50-60Hz"
+   },
+   "batterie_integree": {
+    "valeur": "aucune",
+    "kind": "reponse"
+   },
+   "convertit_courant": {
+    "valeur": "convertisseur",
+    "kind": "pieces",
+    "citation": "USB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A"
+   },
+   "prises_secteur_sortie": {
+    "valeur": false,
+    "kind": "reponse"
+   }
+  },
+  "teinte": "sable"
+ },
+ {
+  "sku": "NB-M1605N",
+  "nom": "Notebook PC, model M1605N",
+  "photo": "IMG_1023",
+  "description": "Notebook PC, model M1605N, portable computer with built-in keyboard and display, input 20 V 3.4 A 68 W, contains Wi-Fi and Bluetooth radio module MT7920",
+  "etiquette": [
+   "Model: M1605N",
+   "Notebook PC",
+   "Input: +20V 3.4A, 68W",
+   "CEC ID: M1605N_68W",
+   "ASUSTeK Computer Inc.",
+   "CAN ICES (B) / NMB (B)",
+   "Made in China",
+   "Contains MT7920",
+   "FCC ID: RAS-MT7920",
+   "IC: 7542A-MT7920",
+   "R-C-MD6-MT7920",
+   "CCAF24Y10090T8",
+   "R 217-241406",
+   "T D240049217",
+   "M1605NAQ-SH269W",
+   "MFD: 2025-12"
+  ],
+  "marques_vues": [
+   "CE",
+   "FCC",
+   "EAC",
+   "UKCA",
+   "VCCI",
+   "cULus Listed",
+   "RCM (R-NZ)",
+   "KC",
+   "BSMI RoHS",
+   "NCC",
+   "Japan technical conformity mark",
+   "crossed-out wheeled bin"
+  ],
+  "a_confirmer": [
+   "Keyboard and display in the same unit: stated by the seller, a label does not show it",
+   "Weight: not printed on the label",
+   "Battery type and capacity: not printed on the label"
+  ],
+  "faits_envoyes": {
+   "function": "portable automatic data processing machine: runs programs installed by the user, with central processing unit, keyboard and display in one unit",
+   "use": "general purpose personal computing"
+  },
+  "origine": "CN",
+  "prix": 749,
+  "criteres": {
+   "fonction_principale": {
+    "valeur": "traiter_donnees",
+    "kind": "pieces",
+    "citation": "Notebook PC"
+   },
+   "programmable_librement": {
+    "valeur": true,
+    "kind": "reponse"
+   },
+   "portable_complet": {
+    "valeur": true,
+    "kind": "reponse"
+   }
+  },
+  "teinte": "ardoise"
+ }
+]
