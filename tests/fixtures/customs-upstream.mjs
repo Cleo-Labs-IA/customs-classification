@@ -42,7 +42,7 @@ export function createFixtureUpstream() {
         if (description.includes('[quota]')) return fixtureJson(res, 402, { error: { code: 'free_quota_exhausted', message: 'Synthetic quota error. Remove [quota] to continue the fixture.' } });
         const needs = description.includes('[question]') && !body.facts?.function;
         const unsupported = description.includes('[unsupported]');
-        const hs6 = description.includes('[hs6]');
+        const hs6 = body.system === 'hs6' || description.includes('[hs6]');
         const candidate = { id: 'fixture-candidate', code: hs6 ? '850440' : '85044090', system: hs6 ? 'hs6' : 'cn8', country: hs6 ? null : body.country, hs6_parent: '850440', chapter: 85, title: { en: 'Synthetic test candidate: static converter' }, confidence: null, rationale: 'Synthetic response used to verify the interface. This is not a legal classification.', source_version: 'fixture-catalog-2026', evidence: [], gri: [], set_aside_reason: null };
         const id = randomUUID();
         const data = { item_id: body.item_id, status: unsupported ? 'unsupported_jurisdiction' : needs ? 'needs_information' : 'needs_review', query_facts: body.facts || {}, missing_attributes: needs ? ['function'] : [], questions: needs ? [{ fact: 'function', question: 'What does the product do?', why: 'Synthetic missing-fact branch.', discriminates: ['850440', '853669'] }] : [], candidates: unsupported ? [] : [candidate], dataset_version: 'fixture-catalog-2026', coverage: { level: unsupported ? 'none' : hs6 ? 'hs6_only' : 'national', national_systems: hs6 || unsupported ? [] : ['cn8'], hint: 'Synthetic coverage for interaction testing only.' }, provenance: { question_config_version: 'fixture', families: [], precedents: [], acceptance_checks: [] }, advisory_disclaimer: 'Fixture preview: synthetic data, not a live classification.' };
@@ -62,12 +62,18 @@ export function createFixtureUpstream() {
           const b = await readBody(req);
           if (/fail/i.test(b.reviewer)) return fixtureJson(res, 503, { error: { code: 'fixture_failure', message: 'Synthetic review error. Use another reviewer name to retry.' } });
           if (/conflict/i.test(b.reviewer) || b.expected_version !== r.reviews.length) return fixtureJson(res, 409, { error: { code: 'review_version_conflict', message: 'Synthetic review conflict. Refresh review history.' } });
+          if (r.review_status === 'approved' && b.decision !== 'changes_requested') return fixtureJson(res, 409, { error: { code: 'review_locked', message: 'Request changes before re-approving this record.' } });
           if (b.decision === 'approved' && ['needs_information', 'unsupported_jurisdiction'].includes(r.data.status)) return fixtureJson(res, 409, { error: { code: 'review_blocked', message: 'Resolve the classification before approval.' } });
+          if (b.decision === 'approved' && r.request.system !== 'hs6' && String(b.approved_code || '').replace(/[\s.]/g, '').length <= 6) return fixtureJson(res, 409, { error: { code: 'national_line_required', message: 'This fixture national request requires a national code.' } });
           const review = { id: randomUUID(), ...b, version: r.reviews.length + 1, created_at: new Date().toISOString() };
           r.reviews.push(review); r.review_status = b.decision; r.approved_code = b.decision === 'approved' ? b.approved_code : null; r.approved_at = b.decision === 'approved' ? review.created_at : null;
           return fixtureJson(res, 201, { data: { classification_id: r.id, review, review_status: r.review_status, approved_code: r.approved_code, approved_at: r.approved_at, review_version: review.version } });
         }
-        if (match[2] === 'reviews') return fixtureJson(res, 200, { data: { classification_id: r.id, reviews: r.reviews, next_cursor: null } });
+        if (match[2] === 'reviews') {
+          const after = Number(u.searchParams.get('cursor') || 0), limit = Number(u.searchParams.get('limit') || 50);
+          const remaining = r.reviews.filter(review => review.version > after), page = remaining.slice(0, limit);
+          return fixtureJson(res, 200, { data: { classification_id: r.id, reviews: page, next_cursor: remaining.length > page.length ? page.at(-1).version : null } });
+        }
         if (match[2] === 'dossier') {
           if (u.searchParams.get('format') === 'pdf') { res.writeHead(200, { 'Content-Type': 'application/pdf', 'Cache-Control': 'no-store' }); return res.end(pdf()); }
           return fixtureJson(res, 200, { data: { classification_id: r.id, dossier_source: 'fixture_snapshot', item_id: r.request.item_id, description: r.request.description, country: r.request.country, system: r.data.candidates[0]?.system, as_of: r.request.as_of, created_at: r.created_at, query_facts: r.data.query_facts, dataset_versions: ['fixture-catalog-2026'], sources_and_licences: [], item: { status: r.data.status, retained_candidate: r.data.candidates[0], questions: r.data.questions }, review: { status: r.review_status, approved_code: r.approved_code, version: r.reviews.length, latest_review: r.reviews.at(-1) || null }, advisory_disclaimer: r.data.advisory_disclaimer } });

@@ -44,3 +44,31 @@ test('preview error scenarios fail explicitly and never record an approval', asy
   assert.deepEqual(review.body.data.reviews, []);
   assert.ok(FIXTURE_DATASHEET.includes('No battery'));
 });
+
+test('fixture respects explicit HS6 scope and the upstream national-review guard', async () => {
+  const request = client(createFixtureUpstream());
+  const hs = await request('/v2/customs/classifications', { description: FIXTURE_DESCRIPTION, country: 'FR', system: 'hs6', persist: true });
+  assert.equal(hs.body.data.candidates[0].system, 'hs6');
+  const approved = await request(`/v2/customs/classifications/${hs.body.data.classification_id}/review`, { decision: 'approved', reviewer: 'Fixture reviewer', approved_code: '850440', expected_version: 0 });
+  assert.equal(approved.status, 201);
+  const national = await request('/v2/customs/classifications', { description: FIXTURE_DESCRIPTION, country: 'FR', persist: true });
+  const rejected = await request(`/v2/customs/classifications/${national.body.data.classification_id}/review`, { decision: 'approved', reviewer: 'Fixture reviewer', approved_code: '850440', expected_version: 0 });
+  assert.equal(rejected.status, 409);
+  assert.equal(rejected.body.error.code, 'national_line_required');
+});
+
+test('fixture locks approvals, reopens only on changes_requested and paginates review versions', async () => {
+  const request = client(createFixtureUpstream());
+  const result = await request('/v2/customs/classifications', { description: FIXTURE_DESCRIPTION, country: 'FR', persist: true });
+  const path = `/v2/customs/classifications/${result.body.data.classification_id}`;
+  const approval = { decision: 'approved', reviewer: 'Fixture reviewer', approved_code: '85044090', expected_version: 0 };
+  assert.equal((await request(path + '/review', approval)).status, 201);
+  assert.equal((await request(path + '/review', { ...approval, expected_version: 1 })).body.error.code, 'review_locked');
+  assert.equal((await request(path + '/review', { decision: 'changes_requested', reviewer: 'Fixture reviewer', expected_version: 1 })).status, 201);
+  const first = (await request(path + '/reviews?limit=1')).body.data;
+  assert.deepEqual(first.reviews.map(x => x.version), [1]);
+  assert.equal(first.next_cursor, 1);
+  const second = (await request(path + '/reviews?limit=1&cursor=1')).body.data;
+  assert.deepEqual(second.reviews.map(x => x.version), [2]);
+  assert.equal(second.next_cursor, null);
+});
