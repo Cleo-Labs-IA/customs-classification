@@ -307,7 +307,7 @@ function effective(text, source) {
 const factValues = (facts) => Object.fromEntries(Object.entries(facts).map(([k, f]) => [k, f.value]));
 
 // Code d'accès de la version en ligne, gardé dans ce navigateur.
-const code = () => { try { return localStorage.getItem('code') || ''; } catch { return ''; } };
+function code() { try { return localStorage.getItem('code') || ''; } catch { return ''; } }
 function askCode(msg) {
   $('gate').style.display = 'flex'; $('gatemsg').textContent = msg || '';
   return new Promise((ok) => { $('gateform').onsubmit = (e) => { e.preventDefault(); try { localStorage.setItem('code', $('gatecode').value.trim()); } catch {} $('gate').style.display = 'none'; ok(); }; });
@@ -323,14 +323,13 @@ async function post(path, body) {
   throw new Error("Code d'accès refusé");
 }
 // Prépare la photo dans le navigateur : JPEG redimensionné. Un HEIC que le
-// navigateur ne sait pas lire est d'abord converti par heic2any.
+// navigateur ne sait pas lire est d'abord converti par la bibliothèque heic-to.
 async function toJpeg(file, max, q) {
   let bmp;
   try { bmp = await createImageBitmap(file); }
   catch {
-    if (!window.heic2any) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.4/heic2any.min.js'; sc.onload = ok; sc.onerror = () => ko(new Error('convertisseur HEIC indisponible')); document.head.appendChild(sc); });
-    const out = await window.heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
-    bmp = await createImageBitmap(Array.isArray(out) ? out[0] : out);
+    if (!window.HeicTo) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/heic-to@1/dist/iife/heic-to.js'; sc.onload = ok; sc.onerror = () => ko(new Error('convertisseur HEIC indisponible')); document.head.appendChild(sc); });
+    bmp = await createImageBitmap(await window.HeicTo({ blob: file, type: 'image/jpeg', quality: 0.9 }));
   }
   const k = Math.min(1, max / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
   c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
