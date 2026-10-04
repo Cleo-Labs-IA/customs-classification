@@ -39,20 +39,48 @@ export function validateCodeResponse(request, response, checkedAt = new Date().t
   if (!data || ['code', 'country', 'system'].some(k => data[k] !== request[k])) throw new Error('The returned code validation does not match the requested code, country and system. Export remains blocked.');
   return { ...data, as_of: request.as_of, checkedAt };
 }
-export async function collectReviews(fetchPage) {
+function cursorValue(value, seen) {
+  if (typeof value === 'number') {
+    if (!Number.isSafeInteger(value) || value < 0) throw new Error('The API returned a malformed cursor.');
+    value = String(value);
+  }
+  if (typeof value !== 'string' || !value || value.length > 2048 || value.trim() !== value || /[\u0000-\u001f]/.test(value)) throw new Error('The API returned a malformed cursor.');
+  if (/^[+-]?\d+(?:\.\d+)?$/.test(value)) {
+    const numeric = Number(value);
+    if (!Number.isSafeInteger(numeric) || numeric < 0) throw new Error('The API returned a malformed cursor.');
+    value = String(numeric);
+  }
+  if (seen.has(value)) throw new Error('The API returned a repeating cursor.');
+  seen.add(value);
+  return value;
+}
+export async function collectReviews(fetchPage, { maxPages = 100 } = {}) {
   const reviews = [], seen = new Set();
-  let cursor = null;
+  let cursor = null, pages = 0;
   do {
+    if (++pages > maxPages) throw new Error('Shared review history exceeded the page limit; complete history was not verified.');
     const response = await fetchPage(cursor), data = response?.data;
     if (!Array.isArray(data?.reviews) || !Object.hasOwn(data, 'next_cursor')) throw new Error('The complete shared review history could not be verified.');
     reviews.push(...data.reviews);
     cursor = data.next_cursor;
-    if (cursor !== null) {
-      if (typeof cursor !== 'string' || !cursor || seen.has(cursor)) throw new Error('The review history returned an invalid or repeating cursor.');
-      seen.add(cursor);
-    }
+    if (cursor !== null) cursor = cursorValue(cursor, seen);
   } while (cursor !== null);
   return { reviews, next_cursor: null };
+}
+export async function collectChanges(fetchPage, { maxPages = 100 } = {}) {
+  const changes = [], seen = new Set(), hints = new Set();
+  let cursor = null, pages = 0, tracked = true;
+  do {
+    if (++pages > maxPages) throw new Error('Code changes exceeded the page limit; the check is incomplete.');
+    const response = await fetchPage(cursor);
+    if (!Array.isArray(response?.data) || typeof response.has_more !== 'boolean' || typeof response.tracked !== 'boolean' || !Object.hasOwn(response, 'next_cursor')) throw new Error('The code-change page is malformed; the check is incomplete.');
+    if (response.has_more !== (response.next_cursor !== null)) throw new Error('The code-change pagination is inconsistent; the check is incomplete.');
+    changes.push(...response.data);
+    tracked = tracked && response.tracked;
+    if (response.hint) hints.add(String(response.hint));
+    cursor = response.next_cursor === null ? null : cursorValue(response.next_cursor, seen);
+  } while (cursor !== null);
+  return { data: changes, tracked, hint: [...hints].join(' '), has_more: false, next_cursor: null, complete: true };
 }
 export function approvalStillCurrent(version, data) {
   const approval = version?.approval, reviews = data?.reviews;

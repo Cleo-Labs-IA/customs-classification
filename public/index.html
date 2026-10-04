@@ -286,7 +286,7 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 <aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
 
 <script type="module">
-import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope } from './workflow.js';
+import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope, collectChanges } from './workflow.js';
 import { evaluer, cle } from './arbre-moteur.js';
 import { dossierHtml } from './dossier.js';
 import { decider, arbitrageValide } from './decision.js';
@@ -1113,7 +1113,7 @@ function currentSelection() {
   return last ? selectedCode(decision(), last.data.candidates || [], S.arbitrage, S.niveau) : { code: null, system: null };
 }
 async function allReviews(id) {
-  return collectReviews(cursor => api('/api/classifications/' + encodeURIComponent(id) + '/reviews' + (cursor ? '?cursor=' + encodeURIComponent(cursor) : '')));
+  return collectReviews(cursor => api('/api/classifications/' + encodeURIComponent(id) + '/reviews' + (cursor !== null ? '?cursor=' + encodeURIComponent(cursor) : '')));
 }
 function reviewVersionOf(data) {
   if (!Array.isArray(data?.reviews)) throw new Error('Shared review history could not be verified.');
@@ -1163,7 +1163,7 @@ function distributionHtml() {
   return `<p>${S?.saved ? 'Approval is recorded in the shared API. Export the approved scope and keep the evidence with it.' : 'An approved dossier becomes available after the API acknowledges the review. The pre-classification evidence file remains available.'}</p>
     <div class="workflow-grid"><article><h3>Approved dossier</h3><p>${S?.saved ? 'Shared API approval acknowledged' : 'Awaiting API approval'}</p><button type="button" class="btn ghost" data-action="approved-json" ${S?.saved ? '' : 'disabled'}>Download approved dossier JSON</button><button type="button" class="btn ghost" data-action="approved-pdf" ${S?.saved ? '' : 'disabled'}>Download approved dossier PDF</button></article><article><h3>Extended evidence</h3><p>Local file includes the photo reading, facts, rule and arbitration. Saved in this browser.</p><button type="button" class="btn ghost" data-action="local-dossier" ${S?.rounds.length ? '' : 'disabled'}>Open ${S?.saved ? 'extended evidence' : 'pre-classification'} dossier</button></article></div>
     <div class="workflow-grid"><article><h3>Export for import</h3><p>${W.exportReceipt ? esc(W.exportReceipt) : 'No export yet'}</p>${eligibility.eligible ? '<p>Approved national code checked for this date and destination.</p>' : '<ul>' + eligibility.reasons.map(r => '<li>' + esc(r) + '</li>').join('') + '</ul>'}<button type="button" class="btn sm" data-action="csv" ${eligibility.eligible ? '' : 'disabled'}>Export CSV for import</button></article><article><h3>Connected destinations</h3><p>Shopify · Not connected</p><p>ERP · Not connected</p><p class="hint">No delivery or publication receipt exists.</p></article></div>
-    <article class="workflow-checks"><h3>Check code and changes</h3><p>On-demand checks only. Coverage comes from the selected catalogue; cited rulings and product facts are not continuously monitored.</p><div class="workflow-actions"><button type="button" class="btn ghost" data-action="validate-code" ${selected.code ? '' : 'disabled'}>Check code validity</button><label for="changes-since">Changes since<input id="changes-since" type="date" value="${esc(S?.product.asof || $('asof').value)}"></label><button type="button" class="btn ghost" data-action="changes" ${selected.code ? '' : 'disabled'}>Check code changes</button></div><p>${W.validation ? 'Last validity check: ' + esc(W.validation.checkedAt) + ' · ' + esc(W.validation.status) + (W.validation.exists ? ' · code exists' : ' · code not confirmed') : 'Code validity has not been checked.'}</p><p>${W.changeCheck ? 'Last change check: ' + esc(W.changeCheck.checkedAt) + ' · ' + esc(W.changeCheck.tracked ? 'Catalogue change feed available' : 'No tracked coverage') + ' · ' + esc(W.changeCheck.hint || '') : 'No change check yet.'}</p>${W.changeCheck?.data?.length ? '<button type="button" class="btn ghost" data-action="change-detail">Inspect returned changes</button>' : ''}</article>
+    <article class="workflow-checks"><h3>Check code and changes</h3><p>On-demand checks only. Coverage comes from the selected catalogue; cited rulings and product facts are not continuously monitored.</p><div class="workflow-actions"><button type="button" class="btn ghost" data-action="validate-code" ${selected.code ? '' : 'disabled'}>Check code validity</button><label for="changes-since">Changes since<input id="changes-since" type="date" value="${esc(S?.product.asof || $('asof').value)}"></label><button type="button" class="btn ghost" data-action="changes" ${selected.code ? '' : 'disabled'}>Check code changes</button></div><p>${W.validation ? 'Last validity check: ' + esc(W.validation.checkedAt) + ' · ' + esc(W.validation.status) + (W.validation.exists ? ' · code exists' : ' · code not confirmed') : 'Code validity has not been checked.'}</p><p>${W.changeCheck ? 'Last change check: ' + esc(W.changeCheck.checkedAt) + ' · ' + (W.changeCheck.complete === false ? 'Incomplete check; export blocked. ' + esc(W.changeCheck.error) : esc(W.changeCheck.tracked ? 'All catalogue change pages checked' : 'No tracked coverage') + ' · ' + esc(W.changeCheck.hint || '')) : 'No change check yet.'}</p>${W.changeCheck?.data?.length ? '<button type="button" class="btn ghost" data-action="change-detail">Inspect returned changes</button>' : ''}</article>
     <div class="workflow-actions"><button type="button" class="btn ghost" data-action="reuse" ${S ? '' : 'disabled'}>Reuse verified facts in a new draft</button></div><details><summary>Browser version history</summary>${browserHistoryHtml()}</details>${historyHtml()}`;
 }
 function renderWorkflow() {
@@ -1264,9 +1264,16 @@ document.addEventListener('click', e => {
     }
     if (action === 'changes') {
       const selected = currentSelection(), q = new URLSearchParams({ since: since || S.product.asof, country: S.product.dest, system: selected.system });
-      const j = await api('/api/codes/changes?' + q);
-      W.changeCheck = { ...j, checkedAt: new Date().toISOString() };
-      if (Array.isArray(j.data) && j.data.some(change => JSON.stringify(change).includes(selected.code))) { W.reviewRequired = true; W.notice = 'A returned catalogue change mentions this code. Review it before a new export; the historical approval is preserved.'; }
+      W.changeCheck = null;
+      try {
+        const j = await collectChanges(cursor => { const page = new URLSearchParams(q); if (cursor !== null) page.set('cursor', cursor); return api('/api/codes/changes?' + page); });
+        W.changeCheck = { ...j, checkedAt: new Date().toISOString() };
+        if (j.data.some(change => JSON.stringify(change).includes(selected.code))) { W.reviewRequired = true; W.notice = 'A returned catalogue change mentions this code. Review it before a new export; the historical approval is preserved.'; }
+      } catch (err) {
+        W.reviewRequired = true;
+        W.changeCheck = { complete: false, checkedAt: new Date().toISOString(), error: String(err.message || err) };
+        throw new Error('Code-change check incomplete. Export is blocked until review. ' + String(err.message || err));
+      }
     }
   });
 });

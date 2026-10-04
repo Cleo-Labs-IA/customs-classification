@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { Readable } from 'node:stream';
+import { createFixtureUpstream } from './fixtures/customs-upstream.mjs';
 const model = await import('../public/workflow.js').catch(() => ({}));
 const fn = name => model[name] || (() => assert.fail(`Missing workflow behavior: ${name}`));
 const identity = fn('createIdentity'), version = fn('createVersion'), scopeKey = fn('scopeKey');
@@ -7,6 +9,7 @@ const acknowledge = fn('acknowledgeApproval'), eligible = fn('publishEligibility
 const validateCodeResponse = fn('validateCodeResponse'), collectReviews = fn('collectReviews');
 const approvalStillCurrent = fn('approvalStillCurrent'), uncertainClassification = fn('uncertainClassification');
 const classificationRequestScope = fn('classificationRequestScope');
+const collectChanges = fn('collectChanges');
 const scope = { product: { sku: 'DOCK', configuration: 'with Ethernet' }, facts: { function: { value: 'hub' } }, criteria: {}, origin: 'CN', destination: 'FR', effectiveDate: '2026-10-04', ruleVersion: 'rules-v1', requiredLevel: 'national' };
 const base = () => version({ identityId: 'product-1', scope, id: 'draft-1', now: '2026-10-04T08:00:00Z' });
 const ack = { data: { classification_id: 'classification-1', review_status: 'approved', approved_code: '8471800000', review_version: 1, review: { id: 'review-1', decision: 'approved', reviewer: 'Jane Doe', approved_code: '8471800000', version: 1, created_at: '2026-10-04T09:00:00Z' } } };
@@ -88,15 +91,57 @@ test('review collection reads every oldest-first page before exposing current ve
   const calls = [];
   const data = await collectReviews(async cursor => {
     calls.push(cursor);
-    return { data: cursor ? { reviews: [{ version: 3 }], next_cursor: null } : { reviews: [{ version: 1 }, { version: 2 }], next_cursor: 'page-2' } };
+    return { data: cursor !== null ? { reviews: [{ version: 3 }], next_cursor: null } : { reviews: [{ version: 1 }, { version: 2 }], next_cursor: 2 } };
   });
-  assert.deepEqual(calls, [null, 'page-2']);
+  assert.deepEqual(calls, [null, '2']);
   assert.equal(Math.max(...data.reviews.map(r => r.version)), 3);
   assert.equal(data.next_cursor, null);
 });
 test('failed or repeating review pages refuse to return a partial review history', async () => {
   await assert.rejects(() => collectReviews(async cursor => { if (cursor) throw new Error('offline'); return { data: { reviews: [{ version: 1 }], next_cursor: 'next' } }; }), /offline/);
   await assert.rejects(() => collectReviews(async () => ({ data: { reviews: [{ version: 1 }], next_cursor: 'same' } })), /cursor/);
+});
+test('production numeric review cursors including zero are followed and malformed numbers fail closed', async () => {
+  const calls = [];
+  const result = await collectReviews(async cursor => { calls.push(cursor); return { data: { reviews: [{ version: calls.length }], next_cursor: calls.length === 1 ? 0 : calls.length === 2 ? 2 : null } }; });
+  assert.deepEqual(calls, [null, '0', '2']);
+  assert.equal(result.reviews.at(-1).version, 3);
+  for (const cursor of [-1, 1.5, Infinity, {}, true]) await assert.rejects(() => collectReviews(async () => ({ data: { reviews: [], next_cursor: cursor } })), /cursor/);
+  let calls2 = 0;
+  await assert.rejects(() => collectReviews(async () => ({ data: { reviews: [], next_cursor: ++calls2 === 1 ? 2 : '2' } })), /cursor/);
+});
+test('actual upstream fixture feeds numeric multi-page review history into the collector', async () => {
+  const handler = createFixtureUpstream();
+  const request = async (method, url, body) => {
+    const req = Readable.from(body ? [Buffer.from(JSON.stringify(body))] : []); req.method = method; req.url = url;
+    let status, result;
+    await handler(req, { writeHead(code) { status = code; }, end(value) { result = JSON.parse(value); } });
+    assert.ok(status >= 200 && status < 300);
+    return result;
+  };
+  const classification = await request('POST', '/v2/customs/classifications', { description: 'Synthetic collector test', country: 'FR', system: 'hs6', persist: true });
+  const path = '/v2/customs/classifications/' + classification.data.classification_id;
+  for (let i = 0; i < 3; i++) await request('POST', path + '/review', { decision: 'changes_requested', reviewer: 'Collector test', expected_version: i });
+  const cursors = [];
+  const collected = await collectReviews(async cursor => { const page = await request('GET', path + '/reviews?limit=1' + (cursor !== null ? '&cursor=' + encodeURIComponent(cursor) : '')); cursors.push(page.data.next_cursor); return page; });
+  assert.deepEqual(cursors, [1, 2, null]);
+  assert.deepEqual(collected.reviews.map(review => review.version), [1, 2, 3]);
+});
+test('change checks include a relevant code on a later page and report complete only after the last page', async () => {
+  const calls = [];
+  const result = await collectChanges(async cursor => { calls.push(cursor); return cursor === null ? { data: [{ code: '11111111' }], tracked: true, has_more: true, next_cursor: 50 } : { data: [{ code: '85044090', change: 'expired' }], tracked: true, has_more: false, next_cursor: null }; });
+  assert.deepEqual(calls, [null, '50']);
+  assert.equal(result.complete, true);
+  assert.equal(result.has_more, false);
+  assert.equal(result.data.some(change => change.code === '85044090'), true);
+});
+test('partial, malformed, repeating or over-bound change feeds never return a complete check', async () => {
+  await assert.rejects(() => collectChanges(async cursor => { if (cursor !== null) throw new Error('second page unavailable'); return { data: [], tracked: true, has_more: true, next_cursor: 50 }; }), /second page unavailable/);
+  for (const page of [{ data: [], tracked: true }, { data: [], tracked: true, has_more: true, next_cursor: null }, { data: [], tracked: true, has_more: false, next_cursor: 50 }, { data: [], tracked: true, has_more: true, next_cursor: -1 }]) await assert.rejects(() => collectChanges(async () => page));
+  await assert.rejects(() => collectChanges(async () => ({ data: [], tracked: true, has_more: true, next_cursor: 50 })), /cursor/);
+  let count = 0;
+  await assert.rejects(() => collectChanges(async () => ({ data: [], tracked: true, has_more: true, next_cursor: ++count }), { maxPages: 2 }), /page limit/);
+  assert.equal(count, 2);
 });
 test('export refuses a superseding shared review even when the browser still has an approval', () => {
   const current = acknowledge(base(), ack, { classificationId: 'classification-1', code: '8471800000' });
