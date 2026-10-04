@@ -441,8 +441,13 @@ export function dossierHtml(d) {
   const codeArbre = lireCode(res.code);
   const ecartArbre = plat(res.statut) === 'code' && divergent(c, codeArbre)
     ? `The code the interpretation tree leads to (${esc(code(res.code))}) is not the code ${esc(code(d.code))} returned by the API. Both cannot be right at once: the discrepancy must be resolved before any use.` : '';
+  // Décision unique : quand un déclarant a arbitré, c'est son code qui figure au dossier, avec sa raison.
+  const decis = objet(d.decision), arb = decis ? objet(decis.arbitrage) : null, enPresence = decis ? objet(decis.codes_en_presence) || {} : {};
+  const arbitre = Boolean(arb && plat(arb.qui) && plat(arb.raison) && lireCode(arb.code).ok && plat(decis.origine) === 'arbitrage');
+  const blocArbitrage = arbitre ? `<div class="alerte-bloc"><strong>Arbitration by ${esc(plat(arb.qui))}${plat(arb.quand) ? ' on ' + esc(plat(arb.quand).slice(0, 10)) : ''}.</strong> Code retained: ${esc(code(arb.code))}. Engine: ${plat(enPresence.moteur) ? esc(code(enPresence.moteur)) : 'no code'}. Encoded rule: ${plat(enPresence.regle) ? esc(code(enPresence.regle)) : 'no conclusion'}.<br>Reason given: ${esc(plat(arb.raison))}${tableau(arb.elements).length ? `<br>Elements examined: ${tableau(arb.elements).map((x) => esc(plat(x))).join(', ')}` : ''}</div>` : '';
+  const origineTxt = decis ? { convergence: 'The engine and the encoded rule reach the same code.', moteur: 'Code proposed by the engine; no encoded rule concluded on this product.', arbitrage: 'Code retained by a declarant after arbitration between two readings.' }[plat(decis.origine)] || '' : '';
   const st = plat(d.status_api);
-  const ferme = PROPOSITIONS.includes(st);
+  const ferme = PROPOSITIONS.includes(st) || arbitre || (decis && plat(decis.origine) === 'convergence');
   const reserve = !c.ok ? '' : ferme ? '' : st
     ? `Status returned by the API: ${statut(d.status_api)}. The API does not present this code as a settled proposal.`
     : 'The status returned by the API is not provided: nothing indicates that this code is a retained proposal.';
@@ -452,7 +457,7 @@ export function dossierHtml(d) {
   const conclusion = section(2, 'Conclusion', `<div class="conclusion">
 ${blocCode}
 <div class="lib">${plat(d.libelle) ? esc(plat(d.libelle)) : '<span class="nr">Heading description not provided</span>'}</div>
-${reserve ? `<div class="alerte-bloc">${reserve}</div>` : ''}${ecartArbre ? `<div class="alerte-bloc">${ecartArbre}</div>` : ''}
+${origineTxt ? `<p class="d">${esc(origineTxt)}</p>` : ''}${blocArbitrage}${reserve && !arbitre ? `<div class="alerte-bloc">${reserve}</div>` : ''}${ecartArbre && !arbitre ? `<div class="alerte-bloc">${ecartArbre}</div>` : ''}
 <dl class="fiche">
 <dt>Status returned by the API</dt><dd>${statut(d.status_api)}</dd>
 <dt>Validation</dt><dd>${phraseStatut}</dd>

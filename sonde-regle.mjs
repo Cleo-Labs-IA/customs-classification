@@ -7,6 +7,9 @@ await p.goto((process.env.URL_APP || 'http://localhost:4318/') + (process.argv[2
 await p.waitForTimeout(800);
 await p.click('.chip:nth-child(2)'); await p.click('#go');
 await p.waitForTimeout(500); await p.waitForSelector('.loading', { state: 'detached', timeout: 150000 });
+// the reasoning, duties and tests sit behind collapsed sections: open them all for this probe
+const ouvrir = () => p.evaluate(() => document.querySelectorAll('details.more').forEach((d) => { d.open = true; }));
+await ouvrir(); await p.waitForTimeout(150);
 const regle = async () => (await p.locator('.rule').innerText()).replace(/\n+/g, ' | ').slice(0, 700);
 console.log('RULE:', await regle());
 for (let i = 0; i < 3 && await p.locator('.block .opts button').count(); i++) {

@@ -5,6 +5,7 @@
 // entree = { conflits, moteur: { statut, code, questions }, regle: { statut, code } | null,
 //            arbitrage: { code, raison, qui } | null, niveauRequis: 'hs6' | 'national', niveauObtenu: 'hs6' | 'national' | null }
 
+const pt = (c) => c.slice(0, 4) + '.' + c.slice(4);
 const hs6 = (c) => (c ? String(c).replace(/\D/g, '').slice(0, 6) : null);
 export const arbitrageValide = (a) => Boolean(a && /^\d{6}$/.test(hs6(a.code) || '') && String(a.raison || '').trim().length >= 20 && String(a.qui || '').trim().length >= 2);
 
@@ -18,13 +19,13 @@ export function decider({ conflits = 0, moteur = {}, regle = null, arbitrage = n
   // which code is on the table, and where it comes from
   let code = null, origine = null, besoinArbitrage = false, motif = null;
   if (m && r && m === r) { code = m; origine = 'convergence'; }
-  else if (m && r) { besoinArbitrage = true; motif = `The engine proposes ${m} and the encoded rule concludes ${r}.`; }
-  else if (r && !m) { besoinArbitrage = true; motif = `The encoded rule concludes ${r} and the engine retained no code.`; }
+  else if (m && r) { besoinArbitrage = true; motif = `The engine proposes ${pt(m)} and the encoded rule concludes ${pt(r)}.`; }
+  else if (r && !m) { besoinArbitrage = true; motif = `The encoded rule concludes ${pt(r)} and the engine retained no code.`; }
   else if (m && !r) {
     const couvert = regle && regle.statut !== 'hors_perimetre';
     if (couvert) { /* rule still open: the engine code is provisional, the open question already blocks */ code = m; origine = 'moteur'; }
     else if (moteur.statut === 'classified' || moteur.statut === 'needs_review') { code = m; origine = 'moteur'; }
-    else { besoinArbitrage = true; motif = `The engine alone proposes ${m} without settling on it, and no encoded rule covers this product.`; }
+    else { besoinArbitrage = true; motif = `The engine alone proposes ${pt(m)} without settling on it, and no encoded rule covers this product.`; }
   } else add('aucun_code', 'No code is proposed by the engine or by the encoded rule.');
 
   if (besoinArbitrage) {

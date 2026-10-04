@@ -1,0 +1,1853 @@
+{
+  "titre": "Requirements for placing an external power supply or USB-C charger on the French market",
+  "marche": "FR",
+  "perimetre": "Mains-powered external power supply or USB-C charger (AC input, DC output) sold in France, unchanged under the original brand or under the seller's own brand, alone or supplied with another device; Union acts only, read on the reference date.",
+  "date_reference": "2026-10-04",
+  "criteres": [
+    {
+      "id": "tension_entree",
+      "question": "What input voltage is the product designed for?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "moins_50",
+          "libelle": "Below 50 V AC"
+        },
+        {
+          "v": "50_1000",
+          "libelle": "Between 50 and 1 000 V AC (for instance 100-240 V mains)"
+        },
+        {
+          "v": "plus_1000",
+          "libelle": "Above 1 000 V AC"
+        }
+      ],
+      "aide": "Read the INPUT line of the rating label, for instance \"100-240V~ 50/60Hz\".",
+      "source": "produit"
+    },
+    {
+      "id": "fonction_radio",
+      "question": "Does the product intentionally emit or receive radio waves (Wi-Fi, Bluetooth, NFC, wireless charging)?",
+      "type": "bool",
+      "aide": "Look at the datasheet: a plain wired charger has no radio function.",
+      "source": "produit"
+    },
+    {
+      "id": "batterie",
+      "question": "Does the product contain a battery or ship with one?",
+      "type": "bool",
+      "aide": "Recorded for the file only: no rule uses it yet, because Regulation (EU) 2023/1542 on batteries is not in the text catalogue.",
+      "source": "produit"
+    },
+    {
+      "id": "type_appareil",
+      "question": "Which of these describes the product?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "alimentation_externe",
+          "libelle": "External power supply or charger: its own enclosure, converts AC mains input into a lower voltage DC or AC output for a separate device"
+        },
+        {
+          "v": "alimentation_interne",
+          "libelle": "Power supply built into the enclosure of the device it powers"
+        },
+        {
+          "v": "convertisseur_tension",
+          "libelle": "Voltage converter"
+        },
+        {
+          "v": "onduleur",
+          "libelle": "Uninterruptible power supply"
+        },
+        {
+          "v": "chargeur_batterie_sans_alimentation",
+          "libelle": "Battery charger without power supply function"
+        },
+        {
+          "v": "convertisseur_eclairage",
+          "libelle": "Lighting converter"
+        },
+        {
+          "v": "injecteur_poe",
+          "libelle": "Active power over Ethernet injector"
+        },
+        {
+          "v": "station_accueil",
+          "libelle": "Docking station for an autonomous appliance"
+        }
+      ],
+      "aide": "The first value repeats the definition of Article 2(1) of Regulation (EU) 2019/1782; the last six are the device types its Article 1(2) excludes.",
+      "source": "produit"
+    },
+    {
+      "id": "puissance_sortie_250w_max",
+      "question": "Is the output power printed on the nameplate 250 W or less?",
+      "type": "bool",
+      "aide": "Read the OUTPUT line of the rating label, for instance \"20V 3.25A\" or \"65W\".",
+      "source": "produit"
+    },
+    {
+      "id": "usage_appareil_alimente",
+      "question": "What kind of device is the product used with?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "informatique_domestique",
+          "libelle": "Information technology equipment intended primarily for use at home (phone, tablet, laptop, printer, set-top box)"
+        },
+        {
+          "v": "dispositif_medical",
+          "libelle": "A medical device"
+        }
+      ],
+      "aide": "Leave unanswered for any other device: the other points of Annex I to Regulation (EU) 2019/1782 are not in the text catalogue.",
+      "source": "projet"
+    },
+    {
+      "id": "equipement_special",
+      "question": "Is the product one of these: equipment for use in an explosive atmosphere, equipment for radiology and medical purposes, electrical part for lifts, electricity meter, plug or socket outlet for domestic use, electric fence controller, specialised equipment for ships, aircraft or railways, custom built evaluation kit for research and development professionals?",
+      "type": "bool",
+      "aide": "The list is Annex II to Directive 2014/35/EU, quoted as written.",
+      "source": "produit"
+    },
+    {
+      "id": "marque",
+      "question": "Under which brand do you sell the product?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "propre",
+          "libelle": "My own name or trade mark"
+        },
+        {
+          "v": "origine",
+          "libelle": "The original brand, product unchanged"
+        }
+      ],
+      "aide": "The brand that the buyer reads on the product and its packaging.",
+      "source": "projet"
+    },
+    {
+      "id": "etablissement_vendeur",
+      "question": "Where is your company established?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "france",
+          "libelle": "In France"
+        },
+        {
+          "v": "ue_autre",
+          "libelle": "In another EU Member State"
+        },
+        {
+          "v": "hors_ue",
+          "libelle": "Outside the EU"
+        }
+      ],
+      "aide": "The country of the registered office of the company that sells.",
+      "source": "projet"
+    },
+    {
+      "id": "approvisionnement",
+      "question": "Where do you get the product from?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "hors_ue",
+          "libelle": "From outside the EU: nobody has placed it on the EU market before me"
+        },
+        {
+          "v": "ue_autre_etat",
+          "libelle": "From a supplier established in another EU Member State, who has already placed it on the EU market"
+        },
+        {
+          "v": "france",
+          "libelle": "From a supplier established in France, who has already placed it on the EU market"
+        }
+      ],
+      "aide": "Look at the supplier invoice: the country of the company that sold you the goods.",
+      "source": "projet"
+    },
+    {
+      "id": "fabricant_etabli_ue",
+      "question": "Is the manufacturer named on the product established in the EU?",
+      "type": "bool",
+      "aide": "Read the manufacturer address printed on the product, its packaging or the accompanying document.",
+      "source": "produit"
+    },
+    {
+      "id": "fourniture",
+      "question": "How is the product supplied to the buyer?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "seul",
+          "libelle": "Alone"
+        },
+        {
+          "v": "avec_appareil_liste",
+          "libelle": "With a radio-equipped device of one of these kinds: handheld mobile phone, tablet, digital camera, headphones, headset, handheld videogame console, portable speaker, e-reader, keyboard, mouse, portable navigation system, earbuds, laptop"
+        },
+        {
+          "v": "avec_autre_appareil",
+          "libelle": "With another device"
+        }
+      ],
+      "aide": "The list of devices is Annex Ia, Part I, point 1 of Directive 2014/53/EU.",
+      "source": "projet"
+    },
+    {
+      "id": "vente_a_distance",
+      "question": "Do you offer the product online or through other means of distance sales directly to consumers or other end users in France?",
+      "type": "bool",
+      "aide": "Your own web shop, a marketplace listing or mail order aimed at buyers in France.",
+      "source": "projet"
+    },
+    {
+      "id": "date_mise_sur_marche",
+      "question": "When is the product placed on the EU market?",
+      "type": "enum",
+      "valeurs": [
+        {
+          "v": "avant_2028_12_14",
+          "libelle": "From 1 April 2020 and before 14 December 2028"
+        },
+        {
+          "v": "a_partir_2028_12_14",
+          "libelle": "On or after 14 December 2028"
+        }
+      ],
+      "aide": "The date on which each unit is first made available on the EU market.",
+      "source": "projet"
+    }
+  ],
+  "roles": [
+    {
+      "id": "fabricant",
+      "libelle": "Manufacturer",
+      "si": {
+        "tous": [
+          {
+            "critere": "marque",
+            "parmi": [
+              "propre"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You sell the product under your own name or trade mark: the manufacturer is the person who has equipment designed or manufactured and markets it under his name or trade mark, and an importer or distributor who places equipment on the market under his name or trade mark is considered a manufacturer and takes on the manufacturer's obligations.",
+      "base": [
+        "lvd-art2-3",
+        "lvd-art10",
+        "emc-art11",
+        "rohs-art11",
+        "eco-art2-6"
+      ]
+    },
+    {
+      "id": "importateur",
+      "libelle": "Importer",
+      "si": {
+        "tous": [
+          {
+            "critere": "marque",
+            "parmi": [
+              "origine"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "france",
+              "ue_autre"
+            ]
+          },
+          {
+            "critere": "approvisionnement",
+            "parmi": [
+              "hors_ue"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You are established in the Union and you are the first to make available on the Union market a product that comes from a third country, under the original brand: that is the definition of the importer.",
+      "base": [
+        "lvd-art2-5",
+        "lvd-art2-2"
+      ]
+    },
+    {
+      "id": "distributeur",
+      "libelle": "Distributor",
+      "si": {
+        "tous": [
+          {
+            "critere": "marque",
+            "parmi": [
+              "origine"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You make the product available under the original brand and you are neither its manufacturer nor its importer as defined (someone else already placed it on the Union market, or you are not established in the Union): the distributor is any person in the supply chain, other than the manufacturer or the importer, who makes equipment available on the market.",
+      "base": [
+        "lvd-art2-6",
+        "lvd-art2-1",
+        "lvd-art2-5"
+      ]
+    }
+  ],
+  "exigences": [
+    {
+      "id": "lvd",
+      "titre": "Electrical safety of mains-voltage equipment",
+      "acte": {
+        "nom": "Directive 2014/35/EU (Low Voltage Directive)",
+        "celex": "32014L0035",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "equipement_special",
+            "parmi": [
+              false
+            ]
+          }
+        ],
+        "aucun": [
+          {
+            "critere": "fonction_radio",
+            "parmi": [
+              true
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive applies to electrical equipment designed for use with a voltage rating between 50 and 1 000 V AC, other than the equipment listed in Annex II; the product takes mains voltage in that range, is none of the Annex II items, and has no radio function (radio equipment under Directive 2014/53/EU is not subject to this Directive).",
+      "base": [
+        "lvd-art1",
+        "lvd-annex2",
+        "red-art1-4",
+        "lvd-art3"
+      ],
+      "obligations": [
+        {
+          "id": "lvd-fab-evaluation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art6-2",
+          "resume": "Manufacturers draw up the technical documentation, carry out the conformity assessment procedure of Annex III or have it carried out and, once compliance with the safety objectives is demonstrated, draw up an EU declaration of conformity and affix the CE marking.",
+          "qui_agit": "You, as manufacturer, compile the technical documentation, have the assessment carried out, sign the EU declaration of conformity and affix the CE marking.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lvd-fab-conservation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art6-3",
+          "resume": "Manufacturers keep the technical documentation and the EU declaration of conformity for 10 years after the equipment has been placed on the market.",
+          "qui_agit": "You, as manufacturer, keep both documents for 10 years.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "lvd-fab-identification",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art6-5",
+          "resume": "Manufacturers ensure that the equipment bears a type, batch or serial number or other element allowing its identification, or, where size or nature does not allow it, that the information is on the packaging or in an accompanying document.",
+          "qui_agit": "You, as manufacturer, have the identification element printed on the product.",
+          "preuves": [
+            {
+              "id": "identification_type_lot_serie",
+              "libelle": "Type, batch or serial number on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "lvd-fab-coordonnees",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art6-6",
+          "resume": "Manufacturers indicate on the equipment their name, registered trade name or registered trade mark and a single postal address at which they can be contacted, or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as manufacturer, have your own name and postal address printed on the product.",
+          "preuves": [
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "lvd-fab-notice",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art6-7",
+          "resume": "Manufacturers ensure that the equipment is accompanied by instructions and safety information in a language easily understood by consumers and other end-users, as determined by the Member State concerned.",
+          "qui_agit": "You, as manufacturer, supply the instructions and safety information with each unit, in the language determined by France.",
+          "preuves": [
+            {
+              "id": "notice_securite_langue",
+              "libelle": "Instructions and safety information in the language determined by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "lvd-fab-declaration-langue",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "lvd-art15-2",
+          "resume": "The EU declaration of conformity follows the model structure of Annex IV, is continuously updated and is translated into the language or languages required by the Member State in which the equipment is placed or made available on the market.",
+          "qui_agit": "You, as manufacturer, keep the declaration up to date and have it translated as France requires.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite_traduite",
+              "libelle": "EU declaration of conformity translated into the language or languages required by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "lvd-imp-verification",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "lvd-art8-2",
+          "resume": "Before placing equipment on the market, importers ensure that the manufacturer has carried out the conformity assessment procedure and drawn up the technical documentation, that the equipment bears the CE marking and is accompanied by the required documents, and that the manufacturer has complied with Article 6(5) and (6).",
+          "qui_agit": "You, as importer, check these points with the manufacturer before the first sale in the Union.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            },
+            {
+              "id": "identification_type_lot_serie",
+              "libelle": "Type, batch or serial number on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            },
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "lvd-imp-coordonnees",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "lvd-art8-3",
+          "resume": "Importers indicate on the equipment their name, registered trade name or registered trade mark and the postal address at which they can be contacted, or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as importer, add your own name and postal address.",
+          "preuves": [
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "lvd-imp-notice",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "lvd-art8-4",
+          "resume": "Importers ensure that the equipment is accompanied by instructions and safety information in a language easily understood by consumers and other end-users, as determined by the Member State concerned.",
+          "qui_agit": "You, as importer, make sure each unit ships with the instructions and safety information in the language determined by France.",
+          "preuves": [
+            {
+              "id": "notice_securite_langue",
+              "libelle": "Instructions and safety information in the language determined by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "lvd-imp-conservation",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "lvd-art8-8",
+          "resume": "For 10 years after the equipment has been placed on the market, importers keep a copy of the EU declaration of conformity at the disposal of the market surveillance authorities and ensure that the technical documentation can be made available to them on request.",
+          "qui_agit": "You, as importer, obtain a copy of the declaration from the manufacturer, keep it for 10 years and secure access to the technical documentation.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "lvd-dis-verification",
+          "roles": [
+            "distributeur"
+          ],
+          "texte": "lvd-art9-2",
+          "resume": "Before making equipment available on the market, distributors verify that it bears the CE marking, that it is accompanied by the required documents and by instructions and safety information in a language easily understood in the Member State of sale, and that the manufacturer and the importer have complied with Article 6(5) and (6) and Article 8(3).",
+          "qui_agit": "You, as distributor, check each of these items on the product and its packaging before selling.",
+          "preuves": [
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            },
+            {
+              "id": "notice_securite_langue",
+              "libelle": "Instructions and safety information in the language determined by France",
+              "type": "document"
+            },
+            {
+              "id": "identification_type_lot_serie",
+              "libelle": "Type, batch or serial number on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            },
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            },
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "emc",
+      "titre": "Electromagnetic compatibility",
+      "acte": {
+        "nom": "Directive 2014/30/EU (Electromagnetic Compatibility Directive)",
+        "celex": "32014L0030",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "type_appareil",
+            "parmi": [
+              "alimentation_externe",
+              "convertisseur_tension",
+              "onduleur",
+              "chargeur_batterie_sans_alimentation",
+              "convertisseur_eclairage",
+              "injecteur_poe",
+              "station_accueil"
+            ]
+          },
+          {
+            "critere": "fonction_radio",
+            "parmi": [
+              false
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive applies to equipment, which includes any apparatus: a finished appliance made available as a single functional unit, intended for the end-user and liable to generate electromagnetic disturbance or to be affected by it; the product is a finished unit sold to end-users. The radio question is asked because Article 2(2)(a) sets aside radio equipment: that provision was downloaded but is not in the text catalogue (see gaps).",
+      "base": [
+        "emc-art2-1",
+        "emc-art3-1-1",
+        "emc-art3-1-2",
+        "emc-art6",
+        "emc-annex1-1"
+      ],
+      "obligations": [
+        {
+          "id": "emc-fab-evaluation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "emc-art7-2",
+          "resume": "Manufacturers draw up the technical documentation, carry out the relevant conformity assessment procedure or have it carried out and, once compliance is demonstrated, draw up an EU declaration of conformity and affix the CE marking.",
+          "qui_agit": "You, as manufacturer, compile the technical documentation, have the assessment carried out, sign the EU declaration of conformity and affix the CE marking.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "emc-fab-coordonnees",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "emc-art7-6",
+          "resume": "Manufacturers indicate on the apparatus their name, registered trade name or registered trade mark and a single postal address at which they can be contacted, or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as manufacturer, have your own name and postal address printed on the product.",
+          "preuves": [
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "emc-fab-notice",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "emc-art7-7",
+          "resume": "Manufacturers ensure that the apparatus is accompanied by instructions and the information referred to in Article 18 in a language easily understood by consumers and other end-users, as determined by the Member State concerned.",
+          "qui_agit": "You, as manufacturer, supply these instructions and information with each unit, in the language determined by France.",
+          "preuves": [
+            {
+              "id": "notice_informations_cem",
+              "libelle": "Instructions and the information referred to in Article 18 of Directive 2014/30/EU, in the language determined by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "emc-fab-declaration-langue",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "emc-art15-2",
+          "resume": "The EU declaration of conformity follows the model structure of Annex IV, is continuously updated and is translated into the language or languages required by the Member State in which the apparatus is placed or made available on the market.",
+          "qui_agit": "You, as manufacturer, keep the declaration up to date and have it translated as France requires.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite_traduite",
+              "libelle": "EU declaration of conformity translated into the language or languages required by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "emc-imp-verification",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "emc-art9-2",
+          "resume": "Before placing apparatus on the market, importers ensure that the manufacturer has carried out the conformity assessment procedure and drawn up the technical documentation, that the apparatus bears the CE marking and is accompanied by the required documents, and that the manufacturer has complied with Article 7(5) and (6).",
+          "qui_agit": "You, as importer, check these points with the manufacturer before the first sale in the Union.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            },
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "emc-imp-coordonnees",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "emc-art9-3",
+          "resume": "Importers indicate on the apparatus their name, registered trade name or registered trade mark and the postal address at which they can be contacted, or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as importer, add your own name and postal address.",
+          "preuves": [
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "emc-dis-verification",
+          "roles": [
+            "distributeur"
+          ],
+          "texte": "emc-art10-2",
+          "resume": "Before making apparatus available on the market, distributors verify that it bears the CE marking, that it is accompanied by the required documents and by instructions and the information referred to in Article 18 in a language easily understood in the Member State of sale, and that the manufacturer and the importer have complied with Article 7(5) and (6) and Article 9(3).",
+          "qui_agit": "You, as distributor, check each of these items on the product and its packaging before selling.",
+          "preuves": [
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            },
+            {
+              "id": "notice_informations_cem",
+              "libelle": "Instructions and the information referred to in Article 18 of Directive 2014/30/EU, in the language determined by France",
+              "type": "document"
+            },
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            },
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rohs",
+      "titre": "Restriction of hazardous substances in electrical equipment",
+      "acte": {
+        "nom": "Directive 2011/65/EU (RoHS Directive)",
+        "celex": "32011L0065",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive applies to electrical and electronic equipment in the Annex I categories, whose category 11 takes any equipment not covered by the others; the product depends on electric current to work and is designed for a voltage not exceeding 1 000 V AC. Equipment placed on the market must not contain the Annex II substances above the listed values.",
+      "base": [
+        "rohs-art2-1",
+        "rohs-art3-1",
+        "rohs-annex1",
+        "rohs-art4-1",
+        "rohs-annex2"
+      ],
+      "obligations": [
+        {
+          "id": "rohs-fab-declaration",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "rohs-art7-c",
+          "resume": "Where compliance with the applicable requirements has been demonstrated, manufacturers draw up an EU declaration of conformity and affix the CE marking on the finished product; a single technical documentation may be drawn up with other Union legislation.",
+          "qui_agit": "You, as manufacturer, cover this Directive in the EU declaration of conformity and affix the CE marking.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rohs-fab-conservation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "rohs-art7-d",
+          "resume": "Manufacturers keep the technical documentation and the EU declaration of conformity for 10 years after the equipment has been placed on the market.",
+          "qui_agit": "You, as manufacturer, keep both documents for 10 years.",
+          "preuves": [
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            },
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "rohs-fab-coordonnees",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "rohs-art7-h",
+          "resume": "Manufacturers indicate their name, registered trade name or registered trade mark and a single contact address on the equipment or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as manufacturer, have your own name and address printed on the product.",
+          "preuves": [
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "rohs-fab-declaration-langue",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "rohs-art13-2",
+          "resume": "The EU declaration of conformity has the model structure and elements of Annex VI, is updated and is translated into the language or languages required by the Member State on the market of which the product is placed or made available.",
+          "qui_agit": "You, as manufacturer, keep the declaration up to date and have it translated as France requires.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite_traduite",
+              "libelle": "EU declaration of conformity translated into the language or languages required by France",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "rohs-imp-coordonnees",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "rohs-art9-d",
+          "resume": "Importers indicate their name, registered trade name or registered trade mark and their contact address on the equipment or, where that is not possible, on its packaging or in an accompanying document.",
+          "qui_agit": "You, as importer, add your own name and address.",
+          "preuves": [
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "rohs-imp-conservation",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "rohs-art9-g",
+          "resume": "For 10 years following the placing on the market, importers keep a copy of the EU declaration of conformity at the disposal of the market surveillance authorities and ensure that the technical documentation can be made available to them on request.",
+          "qui_agit": "You, as importer, obtain a copy of the declaration from the manufacturer, keep it for 10 years and secure access to the technical documentation.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "rohs-dis-verification",
+          "roles": [
+            "distributeur"
+          ],
+          "texte": "rohs-art10-a",
+          "resume": "Distributors act with due care, in particular by verifying that the equipment bears the CE marking, that it is accompanied by the required documents in a language easily understood in the Member State of sale, and that the manufacturer and the importer have complied with points (g) and (h) of Article 7 and point (d) of Article 9.",
+          "qui_agit": "You, as distributor, check the CE marking and the manufacturer and importer details on the product before selling.",
+          "preuves": [
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            },
+            {
+              "id": "nom_adresse_fabricant",
+              "libelle": "Manufacturer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            },
+            {
+              "id": "nom_adresse_importateur",
+              "libelle": "Importer name, registered trade name or trade mark and postal address on the product (or on its packaging or an accompanying document)",
+              "type": "marquage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eps-ecoconception",
+      "titre": "Ecodesign of external power supplies",
+      "acte": {
+        "nom": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies)",
+        "celex": "32019R1782",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "type_appareil",
+            "parmi": [
+              "alimentation_externe"
+            ]
+          },
+          {
+            "critere": "puissance_sortie_250w_max",
+            "parmi": [
+              true
+            ]
+          },
+          {
+            "critere": "usage_appareil_alimente",
+            "parmi": [
+              "informatique_domestique"
+            ]
+          },
+          {
+            "critere": "date_mise_sur_marche",
+            "parmi": [
+              "avant_2028_12_14"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Regulation sets ecodesign requirements for placing external power supplies on the market: a device in its own enclosure that converts AC mains input into a lower voltage DC or AC output for a separate device, with a nameplate output power not exceeding 250 W, used with Annex I equipment such as information technology equipment for home use. It applies from 1 April 2020 and is repealed with effect from 14 December 2028 by Regulation (EU) 2025/2052; a unit placed on the market until then that meets Regulation (EU) 2025/2052 is considered to comply with it.",
+      "base": [
+        "eps-art1-1",
+        "eps-art2-1",
+        "eps-art1-2",
+        "eps-annex1-2",
+        "eps-art9",
+        "eps2-art8",
+        "eps2-art9-3",
+        "eps2-art10",
+        "espr-art79-1",
+        "espr-art79-1-b",
+        "eco-art3-1"
+      ],
+      "obligations": [
+        {
+          "id": "eps-fab-ce-declaration",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eco-art5-1",
+          "resume": "Before the product is placed on the market, a CE marking is affixed and an EC declaration of conformity is issued, whereby the manufacturer or its authorised representative ensures and declares that the product complies with all relevant provisions of the implementing measure.",
+          "qui_agit": "You, as manufacturer (or your authorised representative), issue the EC declaration of conformity and affix the CE marking before the first sale.",
+          "preuves": [
+            {
+              "id": "declaration_ce_ecoconception",
+              "libelle": "EC declaration of conformity referring to Regulation (EU) 2019/1782, with the elements of Annex VI to Directive 2009/125/EC",
+              "type": "document"
+            },
+            {
+              "id": "marquage_ce",
+              "libelle": "CE marking on the product or its data plate",
+              "type": "marquage",
+              "reperes_etiquette": [
+                "CE"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eps-fab-documentation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eps-art4-2",
+          "resume": "For the conformity assessment, the technical documentation contains the declared values of the parameters listed in Annex II, point 2(c).",
+          "qui_agit": "You, as manufacturer, compile the ecodesign technical documentation with the declared values.",
+          "preuves": [
+            {
+              "id": "documentation_technique_ecoconception",
+              "libelle": "Ecodesign technical documentation with the declared values and the measurement results (no-load power, average active efficiency)",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "eps-fab-consommation-vide",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eps-annex2-1a",
+          "resume": "From 1 April 2020, the no-load condition power consumption must not exceed the value set in the table for the type of external power supply and its output power.",
+          "qui_agit": "You, as manufacturer, have the no-load power consumption measured and record the result in the technical documentation.",
+          "preuves": [
+            {
+              "id": "documentation_technique_ecoconception",
+              "libelle": "Ecodesign technical documentation with the declared values and the measurement results (no-load power, average active efficiency)",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "eps-fab-rendement",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eps-annex2-1b",
+          "resume": "From 1 April 2020, the average active efficiency must be not less than the value set in the table for the type of external power supply and its output power.",
+          "qui_agit": "You, as manufacturer, have the average active efficiency measured and record the result in the technical documentation.",
+          "preuves": [
+            {
+              "id": "documentation_technique_ecoconception",
+              "libelle": "Ecodesign technical documentation with the declared values and the measurement results (no-load power, average active efficiency)",
+              "type": "document"
+            }
+          ]
+        },
+        {
+          "id": "eps-fab-plaque",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eps-annex2-2a",
+          "resume": "From 1 April 2020, the nameplate includes the information listed in Annex II, point 2(a).",
+          "qui_agit": "You, as manufacturer, have the listed information printed on the nameplate.",
+          "preuves": [
+            {
+              "id": "plaque_signaletique_ecoconception",
+              "libelle": "Ecodesign information on the nameplate (Annex II, point 2(a) of Regulation (EU) 2019/1782)",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "eps-information-notice-site",
+          "roles": [
+            "fabricant",
+            "importateur"
+          ],
+          "texte": "eps-annex2-2b",
+          "resume": "From 1 April 2020, instruction manuals for end-users, where applicable, and free access websites of manufacturers, importers or authorised representatives include the information listed in Annex II, point 2(b), in the order set out.",
+          "qui_agit": "You, as manufacturer or importer, publish the listed information on your free access website and, where there is a manual, in the manual.",
+          "preuves": [
+            {
+              "id": "information_notice_site_ecoconception",
+              "libelle": "Ecodesign information in the instruction manual and on a free access website (Annex II, point 2(b) of Regulation (EU) 2019/1782)",
+              "type": "information"
+            }
+          ]
+        },
+        {
+          "id": "eps-fab-conservation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "eco-art8-3",
+          "resume": "The manufacturer or its authorised representative keeps the conformity assessment documents and the declarations of conformity available for inspection for 10 years after the last unit has been manufactured, and makes them available within 10 days of a request by the competent authority.",
+          "qui_agit": "You, as manufacturer (or your authorised representative), keep these documents and can produce them within 10 days.",
+          "preuves": [
+            {
+              "id": "documentation_technique_ecoconception",
+              "libelle": "Ecodesign technical documentation with the declared values and the measurement results (no-load power, average active efficiency)",
+              "type": "document"
+            },
+            {
+              "id": "declaration_ce_ecoconception",
+              "libelle": "EC declaration of conformity referring to Regulation (EU) 2019/1782, with the elements of Annex VI to Directive 2009/125/EC",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eps-ecoconception-importateur",
+      "titre": "Ecodesign: importer standing in for a manufacturer outside the Union",
+      "acte": {
+        "nom": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies)",
+        "celex": "32019R1782",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "type_appareil",
+            "parmi": [
+              "alimentation_externe"
+            ]
+          },
+          {
+            "critere": "puissance_sortie_250w_max",
+            "parmi": [
+              true
+            ]
+          },
+          {
+            "critere": "usage_appareil_alimente",
+            "parmi": [
+              "informatique_domestique"
+            ]
+          },
+          {
+            "critere": "date_mise_sur_marche",
+            "parmi": [
+              "avant_2028_12_14"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "origine"
+            ]
+          },
+          {
+            "critere": "approvisionnement",
+            "parmi": [
+              "hors_ue"
+            ]
+          },
+          {
+            "critere": "fabricant_etabli_ue",
+            "parmi": [
+              false
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The product is an external power supply covered by Regulation (EU) 2019/1782, it comes from outside the Union and its manufacturer is not established there: in the absence of an authorised representative, Directive 2009/125/EC puts the manufacturer's ecodesign duties on the importer. Article 4 of that Directive still applies to products regulated by implementing measures.",
+      "base": [
+        "eps-art1-1",
+        "eps-art2-1",
+        "eco-art4",
+        "espr-art79-1",
+        "espr-art79-1-b"
+      ],
+      "obligations": [
+        {
+          "id": "eps-imp-conformite",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "eco-art4",
+          "resume": "Where the manufacturer is not established in the Union and has no authorised representative, the importer ensures that the product placed on the market complies with the Directive and the applicable implementing measure, and keeps and makes available the EC declaration of conformity and the technical documentation.",
+          "qui_agit": "You, as importer, unless the manufacturer has an authorised representative in the Union, obtain and keep the EC declaration of conformity and the ecodesign technical documentation.",
+          "preuves": [
+            {
+              "id": "declaration_ce_ecoconception",
+              "libelle": "EC declaration of conformity referring to Regulation (EU) 2019/1782, with the elements of Annex VI to Directive 2009/125/EC",
+              "type": "document"
+            },
+            {
+              "id": "documentation_technique_ecoconception",
+              "libelle": "Ecodesign technical documentation with the declared values and the measurement results (no-load power, average active efficiency)",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "msr-operateur-ue",
+      "titre": "An economic operator established in the Union",
+      "acte": {
+        "nom": "Regulation (EU) 2019/1020 (market surveillance and compliance of products)",
+        "celex": "32019R1020",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "Article 4 covers products subject to the acts it lists, among them Directives 2009/125/EC, 2011/65/EU, 2014/30/EU and 2014/35/EU; the product is electrical equipment under Directive 2011/65/EU. Such a product may be placed on the market only if an economic operator established in the Union is responsible for it. An online offer directed at a Member State counts as making available on the market.",
+      "base": [
+        "msr-art4-5",
+        "msr-art4-1",
+        "msr-art6",
+        "msr-art44",
+        "rohs-art3-1"
+      ],
+      "obligations": [
+        {
+          "id": "msr-operateur-existe",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "msr-art4-2",
+          "resume": "The economic operator required for the product is a manufacturer established in the Union, an importer where the manufacturer is not established in the Union, an authorised representative with a written mandate from the manufacturer, or, failing those, a fulfilment service provider established in the Union for the products it handles.",
+          "qui_agit": "You identify which of these four operators exists for the product before it is sold in France.",
+          "preuves": [
+            {
+              "id": "operateur_ue_identifie",
+              "libelle": "Identity of the economic operator established in the Union for this product: EU manufacturer, importer, authorised representative or EU fulfilment service provider",
+              "type": "information"
+            }
+          ]
+        },
+        {
+          "id": "msr-operateur-coordonnees",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "msr-art4-4",
+          "resume": "The name, registered trade name or registered trade mark and the contact details, including the postal address, of that economic operator are indicated on the product or on its packaging, the parcel or an accompanying document.",
+          "qui_agit": "You check that these details are present on the product, its packaging, the parcel or an accompanying document; the Article does not say which operator must put them there.",
+          "preuves": [
+            {
+              "id": "coordonnees_operateur_ue",
+              "libelle": "Name, registered trade name or trade mark and contact details, including the postal address, of the Union economic operator on the product, its packaging, the parcel or an accompanying document",
+              "type": "marquage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "msr-fabricant-hors-ue",
+      "titre": "Own-brand seller outside the Union: designate a Union economic operator",
+      "acte": {
+        "nom": "Regulation (EU) 2019/1020 (market surveillance and compliance of products)",
+        "celex": "32019R1020",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "propre"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "hors_ue"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You are the manufacturer and you are not established in the Union, so you cannot be the Union economic operator yourself: the product may be placed on the market only if an importer, an authorised representative holding your written mandate, or a Union fulfilment service provider is responsible for the Article 4(3) tasks.",
+      "base": [
+        "msr-art4-1",
+        "msr-art4-5",
+        "msr-art4-3"
+      ],
+      "obligations": [
+        {
+          "id": "msr-designation",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "msr-art4-2",
+          "resume": "Where the manufacturer is not established in the Union, the economic operator is the importer, an authorised representative with a written mandate from the manufacturer designating it to perform the Article 4(3) tasks, or, failing those, a fulfilment service provider established in the Union for the products it handles.",
+          "qui_agit": "You, as manufacturer outside the Union, arrange for one of these operators and give it access to the declaration of conformity and the technical documentation.",
+          "preuves": [
+            {
+              "id": "mandat_ecrit_mandataire",
+              "libelle": "Written mandate designating an authorised representative, or the document identifying the importer or the EU fulfilment service provider handling the product",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "msr-taches-fabricant-ue",
+      "titre": "Own-brand seller in the Union: tasks of the Union economic operator",
+      "acte": {
+        "nom": "Regulation (EU) 2019/1020 (market surveillance and compliance of products)",
+        "celex": "32019R1020",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "propre"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "france",
+              "ue_autre"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You are the manufacturer and you are established in the Union: a manufacturer established in the Union is the economic operator responsible for the Article 4(3) tasks.",
+      "base": [
+        "msr-art4-2",
+        "msr-art4-1",
+        "msr-art4-5"
+      ],
+      "obligations": [
+        {
+          "id": "msr-taches-fabricant-ue",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "msr-art4-3",
+          "resume": "The Union economic operator verifies that the EU declaration of conformity and the technical documentation have been drawn up, keeps the declaration at the disposal of the market surveillance authorities for the period required, ensures that the technical documentation can be made available on request, informs the authorities when it has reason to believe the product presents a risk, and cooperates with them.",
+          "qui_agit": "You are the Union economic operator for this product: you hold the declaration, can obtain the technical documentation on request, and answer the market surveillance authorities.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "msr-taches-importateur",
+      "titre": "Importer: tasks of the Union economic operator",
+      "acte": {
+        "nom": "Regulation (EU) 2019/1020 (market surveillance and compliance of products)",
+        "celex": "32019R1020",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "origine"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "france",
+              "ue_autre"
+            ]
+          },
+          {
+            "critere": "approvisionnement",
+            "parmi": [
+              "hors_ue"
+            ]
+          },
+          {
+            "critere": "fabricant_etabli_ue",
+            "parmi": [
+              false
+            ]
+          }
+        ]
+      },
+      "pourquoi": "You bring the product into the Union and its manufacturer is not established there: the importer is then the economic operator responsible for the Article 4(3) tasks.",
+      "base": [
+        "msr-art4-2",
+        "msr-art4-1",
+        "msr-art4-5"
+      ],
+      "obligations": [
+        {
+          "id": "msr-taches-importateur",
+          "roles": [
+            "importateur"
+          ],
+          "texte": "msr-art4-3",
+          "resume": "The Union economic operator verifies that the EU declaration of conformity and the technical documentation have been drawn up, keeps the declaration at the disposal of the market surveillance authorities for the period required, ensures that the technical documentation can be made available on request, informs the authorities when it has reason to believe the product presents a risk, and cooperates with them.",
+          "qui_agit": "You are the Union economic operator for this product: you hold the declaration, can obtain the technical documentation on request, and answer the market surveillance authorities.",
+          "preuves": [
+            {
+              "id": "declaration_ue_conformite",
+              "libelle": "EU declaration of conformity signed by the manufacturer",
+              "type": "document"
+            },
+            {
+              "id": "documentation_technique",
+              "libelle": "Technical documentation drawn up by the manufacturer (design, drawings, standards applied, test reports)",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weee-producteur-marque-propre",
+      "titre": "Waste equipment: producer selling in France under its own brand",
+      "acte": {
+        "nom": "Directive 2012/19/EU (WEEE Directive)",
+        "celex": "32012L0019",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "france"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "propre"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive covers all electrical and electronic equipment designed for a voltage not exceeding 1 000 V AC. You are established in France and market there, under your own name or trade mark, equipment you have had manufactured or that others produced: that is a producer under points (i) and (ii) of the definition.",
+      "base": [
+        "weee-art2-1-b",
+        "weee-art3-1-a",
+        "weee-art3-1-f",
+        "weee-annex3-6"
+      ],
+      "obligations": [
+        {
+          "id": "weee-marquage-marque-propre",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "weee-art14-4",
+          "resume": "Member States must ensure that producers mark the equipment placed on the market with the crossed-out wheeled bin symbol of Annex IX; the symbol goes on the packaging, the instructions and the warranty only in exceptional cases linked to the size or function of the product.",
+          "qui_agit": "You, as the producer for France, have the symbol printed on the product. The duty reaches you through the French transposition, which is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "marquage_poubelle_barree",
+              "libelle": "Crossed-out wheeled bin symbol printed visibly, legibly and indelibly on the product",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "weee-registre-marque-propre",
+          "roles": [
+            "fabricant"
+          ],
+          "texte": "weee-art16-2-a",
+          "resume": "Member States must ensure that each producer, or its authorised representative, is registered in the national register of producers and can enter online the information reflecting its activities in that Member State.",
+          "qui_agit": "You, as the producer for France, register in the French register of producers. The French procedure is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "enregistrement_registre_producteurs",
+              "libelle": "Proof of registration in the national register of producers of electrical and electronic equipment",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weee-producteur-introduction",
+      "titre": "Waste equipment: producer bringing the product into France",
+      "acte": {
+        "nom": "Directive 2012/19/EU (WEEE Directive)",
+        "celex": "32012L0019",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "france"
+            ]
+          },
+          {
+            "critere": "marque",
+            "parmi": [
+              "origine"
+            ]
+          },
+          {
+            "critere": "approvisionnement",
+            "parmi": [
+              "hors_ue",
+              "ue_autre_etat"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive covers all electrical and electronic equipment designed for a voltage not exceeding 1 000 V AC. You are established in France and place on the French market, on a professional basis, equipment from a third country or from another Member State: that is a producer under point (iii) of the definition, even under the original brand.",
+      "base": [
+        "weee-art2-1-b",
+        "weee-art3-1-a",
+        "weee-art3-1-f",
+        "weee-annex3-6"
+      ],
+      "obligations": [
+        {
+          "id": "weee-marquage-introduction",
+          "roles": [
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "weee-art14-4",
+          "resume": "Member States must ensure that producers mark the equipment placed on the market with the crossed-out wheeled bin symbol of Annex IX; the symbol goes on the packaging, the instructions and the warranty only in exceptional cases linked to the size or function of the product.",
+          "qui_agit": "You, as the producer for France, check that the symbol is on the product and have it added if it is not. The duty reaches you through the French transposition, which is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "marquage_poubelle_barree",
+              "libelle": "Crossed-out wheeled bin symbol printed visibly, legibly and indelibly on the product",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "weee-registre-introduction",
+          "roles": [
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "weee-art16-2-a",
+          "resume": "Member States must ensure that each producer, or its authorised representative, is registered in the national register of producers and can enter online the information reflecting its activities in that Member State.",
+          "qui_agit": "You, as the producer for France, register in the French register of producers. The French procedure is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "enregistrement_registre_producteurs",
+              "libelle": "Proof of registration in the national register of producers of electrical and electronic equipment",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "weee-producteur-vente-distance",
+      "titre": "Waste equipment: producer selling at a distance into France",
+      "acte": {
+        "nom": "Directive 2012/19/EU (WEEE Directive)",
+        "celex": "32012L0019",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "tension_entree",
+            "parmi": [
+              "moins_50",
+              "50_1000"
+            ]
+          },
+          {
+            "critere": "etablissement_vendeur",
+            "parmi": [
+              "ue_autre",
+              "hors_ue"
+            ]
+          },
+          {
+            "critere": "vente_a_distance",
+            "parmi": [
+              true
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The Directive covers all electrical and electronic equipment designed for a voltage not exceeding 1 000 V AC. You sell by distance communication directly to users in France and you are established in another Member State or in a third country: that is a producer under point (iv) of the definition, whatever the brand.",
+      "base": [
+        "weee-art2-1-b",
+        "weee-art3-1-a",
+        "weee-art3-1-f",
+        "weee-annex3-6",
+        "weee-art16-1"
+      ],
+      "obligations": [
+        {
+          "id": "weee-marquage-vente-distance",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "weee-art14-4",
+          "resume": "Member States must ensure that producers mark the equipment placed on the market with the crossed-out wheeled bin symbol of Annex IX; the symbol goes on the packaging, the instructions and the warranty only in exceptional cases linked to the size or function of the product.",
+          "qui_agit": "You, as the producer for France, make sure the symbol is on the product. The duty reaches you through the French transposition, which is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "marquage_poubelle_barree",
+              "libelle": "Crossed-out wheeled bin symbol printed visibly, legibly and indelibly on the product",
+              "type": "marquage"
+            }
+          ]
+        },
+        {
+          "id": "weee-registre-vente-distance",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "weee-art16-2-a",
+          "resume": "Member States must ensure that each producer, or its authorised representative, is registered in the national register of producers and can enter online the information reflecting its activities in that Member State.",
+          "qui_agit": "You, as the producer for France, register in the French register of producers. The French procedure is not in the text catalogue.",
+          "preuves": [
+            {
+              "id": "enregistrement_registre_producteurs",
+              "libelle": "Proof of registration in the national register of producers of electrical and electronic equipment",
+              "type": "document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gpsr-offre-distance",
+      "titre": "Information in an online or distance-sale offer",
+      "acte": {
+        "nom": "Regulation (EU) 2023/988 (General Product Safety Regulation)",
+        "celex": "32023R0988",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "vente_a_distance",
+            "parmi": [
+              true
+            ]
+          }
+        ]
+      },
+      "pourquoi": "For a product subject to Union harmonisation legislation, the Regulation sets aside its Chapter III, Section 1, but not Article 19, which governs offers made online or by other distance sales; a product offered that way is deemed made available on the market when the offer targets consumers in the Union. The Regulation applies from 13 December 2024.",
+      "base": [
+        "gpsr-art2-1",
+        "gpsr-art2-1-b",
+        "gpsr-art3-27",
+        "gpsr-art4",
+        "gpsr-art52"
+      ],
+      "obligations": [
+        {
+          "id": "gpsr-offre",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "gpsr-art19",
+          "resume": "Where economic operators make products available online or through other distance sales, the offer clearly and visibly indicates the manufacturer name and postal and electronic address, the responsible person where the manufacturer is not established in the Union, information identifying the product including a picture, its type and any other identifier, and any warning or safety information in the language determined by the Member State.",
+          "qui_agit": "You, as the economic operator publishing the offer, put these four items on the product page.",
+          "preuves": [
+            {
+              "id": "offre_coordonnees_fabricant",
+              "libelle": "In the offer: manufacturer name, registered trade name or trade mark, postal and electronic address",
+              "type": "information"
+            },
+            {
+              "id": "offre_personne_responsable",
+              "libelle": "In the offer, where the manufacturer is not established in the Union: name, postal and electronic address of the responsible person",
+              "type": "information"
+            },
+            {
+              "id": "offre_identification_produit",
+              "libelle": "In the offer: picture of the product, its type and any other product identifier",
+              "type": "information"
+            },
+            {
+              "id": "offre_avertissements_langue",
+              "libelle": "In the offer: warnings and safety information, in the language determined by France",
+              "type": "information"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "red-chargeur-universel",
+      "titre": "Common charger: device offered with a charging device",
+      "acte": {
+        "nom": "Directive 2014/53/EU (Radio Equipment Directive), common charger provisions",
+        "celex": "32014L0053",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+      },
+      "applicable_si": {
+        "tous": [
+          {
+            "critere": "fourniture",
+            "parmi": [
+              "avec_appareil_liste"
+            ]
+          }
+        ]
+      },
+      "pourquoi": "The charger is not radio equipment itself, but it is supplied with a radio-equipped device of a category listed in Annex Ia, Part I: the duties on unbundled offers and on the pictogram attach to the offer of that device together with a charging device. Member States apply these rules from 28 December 2024, and from 28 April 2026 for laptops.",
+      "base": [
+        "red-art2-1-1",
+        "red-art3-4",
+        "red-annex1a-1",
+        "cc-art2-1"
+      ],
+      "obligations": [
+        {
+          "id": "red-offre-sans-chargeur",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "red-art3a-1",
+          "resume": "Where an economic operator offers consumers and other end-users the possibility to acquire the listed radio equipment together with a charging device, it also offers the possibility of acquiring that equipment without any charging device.",
+          "qui_agit": "You, as the economic operator making the offer, also list the device without the charger.",
+          "preuves": [
+            {
+              "id": "offre_sans_chargeur",
+              "libelle": "Offer of the same device without any charging device",
+              "type": "information"
+            }
+          ]
+        },
+        {
+          "id": "red-pictogramme",
+          "roles": [
+            "fabricant",
+            "importateur",
+            "distributeur"
+          ],
+          "texte": "red-art3a-2",
+          "resume": "Economic operators ensure that the information on whether a charging device is included is displayed with the pictogram of Annex Ia, Part III, printed on the packaging or affixed as a sticker, visible and legible and, in distance selling, close to the price indication.",
+          "qui_agit": "You, as the economic operator making the device available, make sure the pictogram is on the packaging and next to the price on the product page.",
+          "preuves": [
+            {
+              "id": "pictogramme_chargeur",
+              "libelle": "Pictogram stating whether a charging device is included, printed or stuck on the packaging and shown close to the price in distance selling",
+              "type": "marquage"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "lacunes": [
+    "French law is not in the text catalogue (transposition of Directives 2014/35/EU, 2014/30/EU, 2011/65/EU, 2012/19/EU and 2014/53/EU; loi 94-665 on the French language; Code de l'environnement on producer registration, eco-organisation, Triman and unique identifier): every \"language determined by France\" and every WEEE duty is stated from the Directive only.",
+    "Batteries: Regulation (EU) 2023/1542 has no entry in the text catalogue, so the \"batterie\" fact drives no requirement.",
+    "Directive 2014/30/EU, Article 2(2)(a) (exclusion written as \"equipment covered by Directive 1999/5/EC\") is in the downloaded source but not in the text catalogue; the radio condition on the EMC requirement rests on it. Article 7(5), Article 18 and the importer record-keeping paragraph are not in the catalogue either.",
+    "Directive 2011/65/EU: Article 2(2) exclusions, Article 7(a), (b) and (g) and the importer verification points of Article 9 are not in the catalogue; no obligation is encoded for them.",
+    "Regulation (EU) 2019/1782: the items of the nameplate, manual and technical documentation lists (Annex II, points 2(a) to 2(c)) are quoted by their introductory words only; Annex I is limited to point 2; the definitions of the excluded device types are not in the catalogue. No ecodesign duty for a distributor could be tied to a provision.",
+    "Regulation (EU) 2025/2052: its requirements (applicable from 14 December 2028) are not extracted, so a product placed on the market from that date has no ecodesign requirement encoded.",
+    "Whether the EC declaration of conformity under Directive 2009/125/EC and the EU declaration of conformity may be one single document is not settled by a catalogued provision: they are kept as two evidence items.",
+    "An importer or distributor who MODIFIES a product already placed on the market is also treated as a manufacturer (Article 10 of Directive 2014/35/EU, Article 11 of Directives 2014/30/EU and 2011/65/EU): no criterion captures a modification.",
+    "Role definitions are quoted from Directive 2014/35/EU only; the parallel definitions of Directives 2014/30/EU and 2011/65/EU are not in the catalogue.",
+    "Directive 2012/19/EU: financing (Article 12) names no document and is not encoded; a reseller established in France who buys from a French supplier under the producer's brand has no encoded duty.",
+    "Regulation (EU) 2023/988: Article 20(3) (informing the manufacturer of an accident) is event-driven and names no document, so it is not encoded; the definition of a consumer product is not in the catalogue.",
+    "Regulation (EC) No 765/2008 (general principles of the CE marking), harmonised standards, REACH, POPs, packaging, the Cyber Resilience Act and customs formalities are not covered."
+  ]
+}

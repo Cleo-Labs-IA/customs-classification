@@ -47,7 +47,12 @@ const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
 // Message interne, reconnu tel quel par lib/applicabilite.mjs : il ne change pas.
 // Le navigateur reçoit sa version anglaise (voir handle).
 const SANS_BEDROCK = 'accès Bedrock absent';
-async function converse({ system, content, maxTokens }) {
+// One retry when the model's answer is not parseable JSON (seen intermittently on long answers).
+async function converse(args) {
+  try { return await converseUneFois(args); }
+  catch (e) { if (!/unreadable model response/.test(String(e && e.message))) throw e; return converseUneFois(args); }
+}
+async function converseUneFois({ system, content, maxTokens }) {
   const c = awsCreds();
   if (!c) throw new Error(SANS_BEDROCK);
   const host = `bedrock-runtime.${BEDROCK_REGION}.amazonaws.com`, uri = `/model/${encodeURIComponent(BEDROCK_MODEL)}/converse`;
@@ -114,7 +119,7 @@ function locate(source, quote) {
 async function lire({ description = '', fiche_technique = '', caracteristiques = {} }) {
   const t0 = Date.now();
   const facts = Object.fromEntries(Object.entries(caracteristiques).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]));
-  const parsed = await converse({ system: LIRE_SYSTEM, content: [{ text: JSON.stringify({ description, fiche_technique, caracteristiques: facts }) }], maxTokens: 2500 });
+  const parsed = await converse({ system: LIRE_SYSTEM, content: [{ text: JSON.stringify({ description, fiche_technique, caracteristiques: facts }) }], maxTokens: 6000 });
   const sources = { description, fiche_technique };
   for (const [k, v] of Object.entries(facts)) sources[`caracteristique:${k}`] = v;
   let rejected = 0;
@@ -167,7 +172,7 @@ async function lireCriteres({ pieces = {}, criteres = [] }) {
   const description = String(pieces.description || ''), fiche_technique = String(pieces.fiche_technique || '');
   const facts = Object.fromEntries(Object.entries(pieces.caracteristiques || {}).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]));
   const liste = criteres.map((c) => ({ id: c.id, question: c.question, type: c.type, valeurs: (c.valeurs || []).map((x) => x.v) }));
-  const j = await converse({ system: CRIT_SYSTEM, content: [{ text: JSON.stringify({ pieces: { description, fiche_technique, caracteristiques: facts }, criteres: liste }) }], maxTokens: 3000 });
+  const j = await converse({ system: CRIT_SYSTEM, content: [{ text: JSON.stringify({ pieces: { description, fiche_technique, caracteristiques: facts }, criteres: liste }) }], maxTokens: 6000 });
   const sources = { description, fiche_technique };
   for (const [k, v] of Object.entries(facts)) sources[`caracteristique:${k}`] = v;
   const byId = Object.fromEntries(liste.map((c) => [c.id, c]));
