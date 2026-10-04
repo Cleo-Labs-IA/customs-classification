@@ -104,6 +104,8 @@ function choixSource() {
 
 export function piecesHtml(D, ia) {
   const p = D.pieces;
+  // une fiche déjà remplie (produit de la boutique, photo, page) s'ouvre toujours sur « Upload a product »
+  if (String(p.desc || '').trim() || String(p.sku || '').trim() || p.photo || p.page) source = 'produit';
   return `<div class="page entre">
     <div class="titre"><div class="bloc"><h1>Your product record</h1><p>Give a photo of the label, a product page address or a few lines. The agent then takes the product through the six steps below, up to a code you can check and what each country requires.</p></div></div>
     ${choixSource()}
