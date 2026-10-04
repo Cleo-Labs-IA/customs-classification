@@ -1,9 +1,11 @@
-// Étape 6, diffusion : ce qui se passe une fois le code approuvé. Quatre cartes :
+// Étape 6, diffusion : ce qui se passe une fois le code approuvé. En tête, à part, les projets
+// de déclaration de conformité (declarationsCarte, le geste de fin de parcours). Puis quatre cartes :
 // l'approbation (où elle est conservée), les exports (des fichiers à importer ailleurs,
 // rien n'est publié depuis ici), la vérification du code à la demande (aucune veille
 // automatique n'est branchée) et le renvoi vers la vue monde.
 import { esc, ic, etat, nomPays, drapeau } from '../../ui.js';
 import { fmtCode } from '../../conformite.js';
+import { declarations } from '../../dossier/declaration.js';
 
 const ENTETE = 'sku,origin,destination,code,system,level,approved_by,approved_at,classification_id,review_version';
 const texte = (v) => (v === null || v === undefined ? '' : String(v));
@@ -53,6 +55,20 @@ function exportsCarte(D, dec) {
   const six = csv && /^\d{6}$/.test(texte(dec.code));
   return carte('Exports', csv ? 'Exported for import' : '', `<div style="display:flex;flex-wrap:wrap;gap:8px">${b.join('')}</div>${raison}
     ${note(`An export is a file to import elsewhere. Nothing is sent to another system from here.${six ? ' The six-digit code is a pre-classification, not a declaration code.' : ''}`)}`);
+}
+
+// Le geste de fin de parcours : un projet de déclaration de conformité par marché, rempli avec
+// ce que le dossier a établi. Ce que seul le fabricant peut attester y reste en blanc.
+export function declarationsCarte(D, dec, M) {
+  if (!M) return carte('Declarations of conformity', '', '<p class="muted" style="font-size:13px">Loading the verified requirements.</p>');
+  const liste = declarations(D, dec, M), textes = liste.reduce((n, d) => n + d.exigences.length, 0);
+  if (!liste.length) return carte('Declarations of conformity', '', `<p class="muted" style="font-size:13px">${dec && dec.code ? `No verified requirement is recorded for code ${esc(fmtCode(dec.code))}, so no declaration can be drafted. Verified requirements exist for the product families of the store.` : 'No code is retained, so no declaration can be drafted.'}</p>`);
+  return `<div class="carte" style="box-shadow:0 0 0 2px var(--ink)"><div class="carte-tete"><h3>Declarations of conformity</h3><span class="muted">${liste.length} market${liste.length === 1 ? '' : 's'}</span></div><div class="carte-corps">
+    <p style="margin:0 0 12px">One draft per market, filled with what this file established: the confirmed product, the code, the approval and ${textes} official text${textes === 1 ? '' : 's'} quoted word for word.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${liste.map((d) => `<span class="chip">${drapeau(d.marche)}${esc(d.nom)}</span>`).join('')}</div>
+    <button type="button" class="btn noir" data-action-dossier="declarations">${ic('dossier')}Generate the declarations of conformity</button>
+    ${D.valide ? '' : '<p class="muted" style="font-size:12.5px;margin-top:10px">The code is not approved yet: the drafts will say so.</p>'}
+    ${note('Address, standards applied, test reports and signature are left blank: only the manufacturer can state them. A draft does not state that the product complies.')}</div></div>`;
 }
 
 function verification(D, dec) {
