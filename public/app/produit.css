@@ -126,3 +126,11 @@
 .bascule a:not(.actif):hover { color: var(--ink); }
 .onglets.petits { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
 .onglets.petits button { white-space: nowrap; }
+
+.bascule button { padding: 7px 16px; border-radius: 9px; font-size: 13.5px; font-weight: 550; color: var(--ink-3); transition: background var(--fast), color var(--fast); }
+.bascule button.actif { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 0 0 1px var(--line); }
+.bascule button:not(.actif):hover { color: var(--ink); }
+.bascule.petite a, .bascule.petite button { padding: 5px 12px; font-size: 12.5px; }
+.carte-tete .bascule { flex: none; }
+.carte-tete { flex-wrap: wrap; row-gap: 8px; }
+.carte-tete h3 { min-width: 160px; }

@@ -8,7 +8,7 @@ import { regle, decisionsOfficielles, versionDeTravail, garderVersion } from '..
 import * as E from '../dossier/etat.js';
 import * as S from '../store.js';
 import { enteteProduit } from './produit-entete.js';
-import { grapheHtml, raisonsHtml } from '../graphe-arbre.js';
+import { grapheHtml, raisonsHtml, parcoursHtml } from '../graphe-arbre.js';
 
 export const titre = 'Interpretation tree';
 let REF = null, TEXTES = [], T = {}, DECISIONS = [], arbre = null, journal = [], pret = false, rerendreLocal = () => {};
@@ -127,15 +127,30 @@ export function rendre() {
   if (!essai.sku && !Object.keys(valeurs).length && lus.length && !rendre.fait) { rendre.fait = true; charger(lus[0].sku); return rendre(); }
   const faits = Object.fromEntries(Object.entries(cites).map(([k, x]) => [k, { kind: x.kind || (x.source === 'file' ? 'reponse' : 'pieces'), citation: x.citation, source: x.source }]));
   const tete = res.statut === 'code' ? `<span class="grand-code" style="font-size:30px">${esc(fmtCode(res.code))}</span>` : res.statut === 'information_manquante' ? etat('a_verifier', 'A fact is missing') : etat('bloque', 'Out of scope');
+  if (modeProduit && essai.sku) return vueProduit(res, faits, modifiee);
   return `<div class="page entre">
-    ${modeProduit && essai.sku ? `${enteteProduit(essai.sku, 'arbre')}${modifiee ? '<p class="note-l" style="margin:-6px 0 12px"><span class="tag sim">Working version of the rule</span> edited in the rule editor</p>' : ''}` : `<div class="titre"><div class="bloc"><h1>Rule editor</h1><p>How the customs rule is encoded, and why a product ends on its code. Each step cites the official text it applies. Edit a branch, sign it, and every official ruling is replayed.</p></div>
+    <div class="titre"><div class="bloc"><h1>Rule editor</h1><p>How the customs rule is encoded, and why a product ends on its code. Each step cites the official text it applies. Edit a branch, sign it, and every official ruling is replayed.</p></div>
       <div style="display:flex;gap:8px;align-items:center">${modifiee ? '<span class="tag sim">Working version</span><button class="btn rouge petit" data-reinit>Revert to the reference tree</button>' : '<span class="tag contour">Reference tree</span>'}</div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${lus.map((p) => `<button class="chip ${essai.sku === p.sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}<button class="chip ${essai.sku ? '' : 'actif'}" data-vider>Free-form product</button></div>`}
-    <div class="carte"><div class="carte-tete"><h3>${modeProduit && essai.sku ? 'The path through the encoded rule' : esc(essai.nom)}</h3>${modeProduit && essai.sku ? '' : tete}</div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Click a node to read or edit it.</p><div class="carte-corps"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="chip ${entier ? '' : 'actif'}" data-entier="0">This product's path</button><button class="chip ${entier ? 'actif' : ''}" data-entier="1">The whole rule (${Object.keys(arbre.noeuds).length} nodes)</button></div>${grapheHtml(arbre, { res, sel, modifie, entier })}</div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">${lus.map((p) => `<button class="chip ${essai.sku === p.sku ? 'actif' : ''}" data-produit="${esc(p.sku)}">${esc(p.nom)}</button>`).join('')}<button class="chip ${essai.sku ? '' : 'actif'}" data-vider>Free-form product</button></div>
+    <div class="carte"><div class="carte-tete"><h3>${esc(essai.nom)}</h3>${tete}</div><p class="carte-sous">${esc(arbre.nomenclature || '')}, six digits. Drafted by AI from the cited texts, not reviewed by a customs declarant. Click a node to read or edit it.</p><div class="carte-corps"><div style="display:flex;gap:8px;margin-bottom:10px"><button class="chip ${entier ? '' : 'actif'}" data-entier="0">This product's path</button><button class="chip ${entier ? 'actif' : ''}" data-entier="1">The whole rule (${Object.keys(arbre.noeuds).length} nodes)</button></div>${grapheHtml(arbre, { res, sel, modifie, entier })}</div></div>
     <div class="cols-arbre" style="margin-top:14px">
       <div class="carte"><div class="carte-tete"><h3>Why this code</h3><span class="muted">${res.chemin.length} step${res.chemin.length === 1 ? '' : 's'}</span></div><p class="carte-sous">The question asked, the answer with the passage that establishes it, and the official text that turns the answer into a consequence.</p><div class="carte-corps">${raisonsHtml(arbre, res, { faits, T })}</div></div>
       <div class="col">${editeurHtml()}<details class="carte repli" ${rendre.ouvert ? 'open' : ''} data-repli><summary class="carte-tete"><h3>Change an answer, replay official rulings</h3></summary>${essaiHtml(res)}${basHtml()}</details></div>
     </div></div>`;
+}
+
+
+// Pour un produit : son chemin dans la règle, de haut en bas, et la règle entière à la
+// demande. L'édition, les essais et le rejeu restent dans l'éditeur de la règle.
+function vueProduit(res, faits, modifiee) {
+  const p = S.lire().produits[essai.sku] || {}, source = (x) => (x === 'seller' ? 'stated by the seller' : 'read on the label' + (p.photo ? ' · photo ' + p.photo : ''));
+  const titre = res.statut === 'code' ? `How the rule reaches ${fmtCode(res.code)}` : res.statut === 'information_manquante' ? 'Where the rule stops' : 'Why the rule does not apply';
+  return `<div class="page entre">${enteteProduit(essai.sku, 'arbre')}
+    <div class="carte"><div class="carte-tete"><h3>${esc(titre)}</h3><div class="bascule petite" role="tablist"><button role="tab" data-entier="0" class="${entier ? '' : 'actif'}">This product's path</button><button role="tab" data-entier="1" class="${entier ? 'actif' : ''}">The whole rule</button></div></div>
+      <p class="carte-sous">${entier ? `All ${Object.keys(arbre.noeuds).length} nodes of the rule; the product's path is drawn in black. Scroll to explore, click a node to open it in the rule editor.` : `${res.chemin.length} question${res.chemin.length === 1 ? '' : 's'}, each answered from the label or by the seller, each tied to the official text that makes the answer a consequence.`}</p>
+      <div class="carte-corps">${entier ? grapheHtml(arbre, { res, sel, modifie, entier: true }) : parcoursHtml(arbre, res, { faits, T, source })}</div></div>
+    <p class="faint" style="font-size:12.5px;margin-top:14px;max-width:820px">${esc(arbre.nomenclature || '')}, six digits. The rule is drafted by AI from the official texts it cites and is not reviewed by a customs declarant.${modifiee ? ' <span class="tag sim">Working version</span> edited in the rule editor.' : ''} <a href="#/arbre" style="color:var(--cleo)">Open the rule editor</a> to edit a branch or replay the official rulings.</p>
+  </div>`;
 }
 
 function appliquer(racine, rerendre) {
@@ -165,7 +180,8 @@ export function brancher(racine, rerendre) {
     if (b('[data-t]')) { const x = T[b('[data-t]').dataset.t]; racine.querySelector('#texte-cite').innerHTML = x ? `<blockquote><b>${esc(x.ref)}</b>\n${esc(x.texte)}\n<a href="${urlSure(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></blockquote>` : ''; return; }
     if (b('[data-entier]')) { entier = b('[data-entier]').dataset.entier === '1'; return rerendre(); }
     if (b('[data-produit]')) { sel = null; charger(b('[data-produit]').dataset.produit); return rerendre(); }
-    if (b('[data-n]')) { sel = b('[data-n]').dataset.n; brouillon = null; msg = null; return rerendre(); }
+    // dans l'espace d'un produit, un nœud s'ouvre dans l'éditeur de la règle
+    if (b('[data-n]')) { sel = b('[data-n]').dataset.n; brouillon = null; msg = null; if (modeProduit) { location.hash = '#/arbre'; return; } return rerendre(); }
     if (b('[data-onglet]')) { onglet = b('[data-onglet]').dataset.onglet; return rerendre(); }
     if (b('tr[data-d]')) { const d = DECISIONS.find((x) => x.id === b('tr[data-d]').dataset.d); valeurs = Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, x.valeur])); cites = Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, { citation: x.citation, source: d.id + (x.appui && x.appui !== 'explicite' ? ', inferred value: ' + x.appui : '') }])); essai = { nom: d.id + ': ' + d.produit, hs6: d.hs6, moteur: null }; document.querySelector('.main')?.scrollTo({ top: 0, behavior: 'smooth' }); return rerendre(); }
     if (b('[data-reprendre]')) { entrer(new URLSearchParams('dossier=1')); return rerendre(); }

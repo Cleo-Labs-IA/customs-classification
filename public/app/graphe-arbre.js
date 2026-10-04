@@ -2,10 +2,11 @@
 // Le chemin que suit le produit est tracé ; à côté, la raison de chaque choix : la question,
 // la réponse avec le passage qui l'établit, le texte officiel qui fait de cette réponse une
 // conséquence. Pur rendu : la logique reste dans public/arbre-moteur.js.
-import { esc, urlSure } from './ui.js';
+import { esc, urlSure, ic } from './ui.js';
+import { issues } from '../arbre-moteur.js';
 import { fmtCode } from './conformite.js';
 
-const LARG_Q = 172, LARG_F = 164, HAUT = 44, PAS_X = 232, PAS_Y = 54, MARGE = 14;
+const LARG_Q = 200, LARG_F = 190, HAUT = 54, PAS_X = 262, PAS_Y = 68, MARGE = 18;
 const court = (s, n) => { const t = String(s || '').split(/[:(]/)[0].trim(); return t.length > n ? t.slice(0, n - 1).trimEnd() + '…' : t; };
 export const reponseTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' || v === true ? 'Yes' : 'No');
 
@@ -72,11 +73,55 @@ export function grapheHtml(arbreComplet, { res = null, sel = null, modifie = () 
   }
   const noeuds = Object.entries(N).filter(([id]) => pos[id]).map(([id, n]) => {
     const p = pos[id], cls = ['ga-n', n.type, surChemin(id) ? 'on' : '', id === fin ? 'fin' : '', res && res.statut === 'information_manquante' && id === fin ? 'stop' : '', sel === id ? 'sel' : '', modifie(id) ? 'mod' : ''].join(' ');
-    const corps = n.type === 'code' ? `<b>${esc(fmtCode(n.code))}</b><small>${esc(court(n.libelle, 44))}</small>` : n.type === 'hors_perimetre' ? '<b>Out of scope</b><small>this tree does not decide</small>' : `<b>${esc((C[n.critere] || {}).libelle || n.critere)}</b>${n.suite ? `<small>${n.suite} more branches, not followed</small>` : ''}`;
+    const corps = n.type === 'code' ? `<b>${esc(fmtCode(n.code))}</b><small>${esc(court(n.libelle, 60))}</small>` : n.type === 'hors_perimetre' ? '<b>Out of scope</b><small>this tree does not decide</small>' : `<b>${esc((C[n.critere] || {}).libelle || n.critere)}</b>${n.suite ? `<small>${n.suite} more branches, not followed</small>` : ''}`;
     return `<button type="button" class="${cls}" data-n="${esc(id)}" style="left:${p.x}px;top:${p.y}px;width:${p.l}px;height:${HAUT}px" title="${esc(n.type === 'question' ? (C[n.critere] || {}).question || '' : n.type === 'code' ? n.libelle || '' : n.motif || '')}">${corps}</button>`;
   }).join('');
   return `<div class="ga-cadre"><div class="ga" style="width:${largeur}px;height:${hauteur}px"><svg width="${largeur}" height="${hauteur}" aria-hidden="true">${traits}</svg>${etiquettes}${noeuds}</div></div>
     <p class="ga-legende"><span class="l on"></span>path followed by this product<span class="l"></span>other branches of the rule<span class="p stop"></span>waiting for a fact<span class="p fin"></span>conclusion</p>`;
+}
+
+// Le chemin d'un produit, lu de haut en bas : à chaque étape la question, la réponse retenue
+// avec ce qui l'établit, les autres réponses et où elles mèneraient, puis le texte officiel
+// replié. La conclusion ferme le chemin. Remplace, pour un produit, le graphe et la liste.
+const issueTxt = (arbre, cible) => {
+  const x = issues(arbre, cible);
+  if (!x.length) return '';
+  if (x.length === 1) return /^\d{6}$/.test(x[0]) ? fmtCode(x[0]) : x[0];
+  return `${x.length} codes`;
+};
+const loi = (n, T, titre) => {
+  const textes = (n.base || []).map((b) => T[b]).filter(Boolean);
+  if (!textes.length && !n.pourquoi && !n.motif) return '';
+  return `<details class="pc-loi"><summary>${ic('balance')}<span>${titre}</span>${textes.length ? `<span class="pc-n">${textes.length}</span>` : ''}</summary>
+    ${n.pourquoi ? `<p>${esc(n.pourquoi)}</p>` : ''}${textes.map((x) => `<blockquote><b>${esc(x.ref)}</b><br>${esc(x.texte)}<br><a href="${urlSure(x.url)}" target="_blank" rel="noopener">${esc(x.source || 'Official text')}${ic('lien')}</a></blockquote>`).join('')}</details>`;
+};
+export function parcoursHtml(arbre, res, { faits = {}, T = {}, source = (x) => x } = {}) {
+  if (!res) return '';
+  const N = arbre.noeuds, C = Object.fromEntries(arbre.criteres.map((c) => [c.id, c]));
+  const lus = Object.values(faits).filter((f) => f.kind !== 'reponse').length, declares = Object.values(faits).filter((f) => f.kind === 'reponse').length;
+  const depart = `<li class="pc-depart"><span class="pc-puce">${ic('fichier')}</span><div class="pc-tete"><b>What the product documents establish</b><small>${lus} fact${lus === 1 ? '' : 's'} read on the label${declares ? `, ${declares} stated by the seller` : ''}</small></div></li>`;
+  const etapes = res.chemin.map((st, i) => {
+    const n = N[st.noeud], c = C[st.critere], f = faits[st.critere];
+    const preuve = !f ? '<span class="pc-preuve main">set by hand in this screen</span>' : f.kind === 'reponse' ? '<span class="pc-preuve main">stated by the seller · no document</span>' : `<span class="pc-preuve"><q>${esc(f.citation)}</q> ${esc(source(f.source))}</span>`;
+    const alt = Object.entries(n.branches || {}).filter(([v]) => v !== String(st.valeur));
+    const autres = alt.map(([v, cible]) => `<li title="${esc(reponseTxt(c, v))}"><span>${esc(court(reponseTxt(c, v), 48))}</span><i>${esc(issueTxt(arbre, cible) || 'next question')}</i></li>`).join('');
+    const choisi = reponseTxt(c, st.valeur);
+    return `<li class="pc-etape" style="--i:${i}"><span class="pc-puce">${i + 1}</span><div class="pc-carte">
+      <span class="eyebrow">${esc(c ? c.libelle : st.critere)}</span><p class="pc-q">${esc(c ? c.question : st.critere)}</p>
+      <div class="pc-reponse"><span class="pc-choisi" title="${esc(choisi)}">${ic('check')}${esc(court(choisi, 44))}</span>${preuve}</div>
+      <div class="pc-plus">${autres ? `<details class="pc-autres"><summary>${ic('arbre')}<span>${alt.length} other answer${alt.length === 1 ? '' : 's'}</span></summary><ul>${autres}</ul></details>` : ''}${loi(n, T, 'Legal basis')}</div></div></li>`;
+  }).join('');
+  let fin = '';
+  if (res.statut === 'code') {
+    const n = N[res.noeud];
+    fin = `<li class="pc-fin ok" style="--i:${res.chemin.length}"><span class="pc-puce">${ic('check')}</span><div class="pc-carte"><span class="eyebrow">Conclusion of the rule</span><div class="pc-code">${esc(fmtCode(res.code))}</div><p class="pc-q">${esc(n.libelle || '')}</p>${n.motif ? `<p class="muted pc-motif">${esc(n.motif)}</p>` : ''}<div class="pc-plus">${loi({ base: n.base }, T, 'Legal basis of the code')}</div></div></li>`;
+  } else if (res.statut === 'information_manquante') {
+    const c = C[res.critere], n = N[res.noeud];
+    fin = `<li class="pc-fin stop"><span class="pc-puce">?</span><div class="pc-carte"><span class="eyebrow">The rule stops here · a fact is missing</span><p class="pc-q">${esc(c ? c.question : res.critere)}</p><ul class="pc-options">${Object.entries(res.options || {}).map(([v, codes]) => `<li><span>${esc(court(reponseTxt(c, v), 48))}</span><i>${esc(codes.length === 1 ? (/^\d{6}$/.test(codes[0]) ? fmtCode(codes[0]) : codes[0]) : codes.length + ' codes')}</i></li>`).join('')}</ul><div class="pc-plus">${loi(n, T, 'Legal basis')}</div></div></li>`;
+  } else if (res.statut === 'hors_perimetre') {
+    fin = `<li class="pc-fin hors"><span class="pc-puce">×</span><div class="pc-carte"><span class="eyebrow">Outside this rule</span><p class="pc-q">${esc((N[res.noeud] || {}).motif || 'The rule does not cover this product.')}</p></div></li>`;
+  }
+  return `<ol class="pc-chemin">${depart}${etapes}${fin}</ol>`;
 }
 
 // Pourquoi ce code : chaque étape du chemin, avec le fait et le texte officiel.
@@ -98,13 +143,13 @@ export function raisonsHtml(arbre, res, { faits = {}, T = {}, source = (s) => s 
 }
 
 export const CSS = `
-.ga-cadre { overflow: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--side); max-height: 720px; }
+.ga-cadre { overflow: auto; border: 1px solid var(--line); border-radius: var(--r); background: radial-gradient(circle at 1px 1px, rgba(19, 19, 18, .07) 1px, transparent 0) 0 0 / 18px 18px, var(--side); max-height: 640px; }
 .ga { position: relative; }
 .ga svg { position: absolute; inset: 0; }
 .ga svg path { fill: none; stroke: var(--line-2); stroke-width: 1.2; }
 .ga svg path.on { stroke: var(--ink); stroke-width: 2.6; }
-.ga-n { position: absolute; display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 4px 10px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); font: inherit; font-size: 12px; line-height: 1.2; text-align: left; color: var(--ink-3); cursor: pointer; overflow: hidden; }
-.ga-n b { font-weight: 550; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ga-n { position: absolute; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 12px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--panel); font: inherit; font-size: 12px; line-height: 1.25; text-align: left; color: var(--ink-3); cursor: pointer; overflow: hidden; transition: border-color var(--fast), box-shadow var(--fast); }
+.ga-n b { font-weight: 550; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .ga-n small { font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ga-n.code { border-radius: 999px; padding-left: 14px; }
 .ga-n.code b { font-family: var(--mono); }
@@ -147,6 +192,57 @@ export const CSS = `
 .ga-texte[open] summary { background: var(--ink); color: var(--panel); border-color: var(--ink); display: inline-block; }
 .ga-texte blockquote { margin: 8px 0 4px; padding: 8px 12px; border-left: 3px solid var(--ink); background: var(--sunk); border-radius: 0 8px 8px 0; font-size: 12.5px; color: var(--ink-2); }
 .ga-texte a { color: var(--cleo); font-size: 12px; }
+.pc-chemin { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; position: relative; }
+.pc-chemin > li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; position: relative; padding-bottom: 14px; }
+.pc-chemin > li::before { content: ""; position: absolute; left: 16px; top: 34px; bottom: 0; width: 2px; background: var(--ink); opacity: .85; }
+.pc-chemin > li:last-child::before { display: none; }
+.pc-chemin > li:last-child { padding-bottom: 0; }
+.pc-puce { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: #fff; font-family: var(--mono); font-size: 12.5px; font-weight: 500; position: relative; z-index: 1; box-shadow: 0 0 0 4px var(--panel); }
+.pc-puce svg { width: 15px; height: 15px; }
+.pc-depart .pc-puce { background: var(--sunk); color: var(--ink-2); box-shadow: 0 0 0 4px var(--panel), inset 0 0 0 1px var(--line-2); }
+.pc-tete { display: flex; flex-direction: column; justify-content: center; min-height: 34px; padding-bottom: 6px; }
+.pc-tete b { font-weight: 600; }
+.pc-tete small { color: var(--ink-3); font-size: 12.5px; }
+.pc-carte { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; transition: border-color var(--fast), box-shadow var(--fast); }
+.pc-carte:hover { border-color: var(--line-2); box-shadow: 0 8px 22px -16px rgba(0, 0, 0, .25); }
+.entre .pc-chemin > li { animation: entre .5s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms + .1s); }
+.pc-q { margin: 0; font-size: 15px; font-weight: 500; letter-spacing: -.01em; line-height: 1.35; }
+.pc-reponse { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pc-choisi { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 9px; border-radius: 999px; background: var(--ink); color: #fff; font-weight: 550; font-size: 13px; }
+.pc-choisi svg { width: 13px; height: 13px; }
+.pc-preuve { font-size: 12.5px; color: var(--ink-3); }
+.pc-preuve q { font-family: var(--mono); font-size: 11.5px; background: var(--sunk); border-radius: 6px; padding: 2px 7px; color: var(--ink-2); quotes: '"' '"'; }
+.pc-preuve.main { color: var(--warn); background: var(--warn-bg); border-radius: 999px; padding: 2px 9px; }
+.pc-plus { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: flex-start; padding-top: 4px; border-top: 1px dashed var(--line); margin-top: 2px; }
+.pc-plus > details { flex: 0 1 auto; min-width: 0; }
+.pc-plus > details[open] { flex-basis: 100%; }
+.pc-autres summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 500; color: var(--ink-2); }
+.pc-autres summary::-webkit-details-marker { display: none; }
+.pc-autres summary svg { width: 14px; height: 14px; color: var(--ink-3); }
+.pc-autres summary:hover { color: var(--ink); }
+.pc-autres ul, .pc-options { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+.pc-autres li, .pc-options li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; font-size: 12.5px; color: var(--ink-3); border-top: 1px solid var(--line); background: var(--panel); }
+.pc-autres li:first-child, .pc-options li:first-child { border-top: 0; }
+.pc-autres li i, .pc-options li i { font-style: normal; font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); white-space: nowrap; }
+.pc-options { margin-top: 2px; }
+.pc-n { font-family: var(--mono); font-size: 10.5px; padding: 1px 6px; border-radius: 999px; background: var(--sunk); color: var(--ink-3); }
+.pc-loi summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 500; color: var(--ink-2); }
+.pc-loi summary::-webkit-details-marker { display: none; }
+.pc-loi summary svg { width: 14px; height: 14px; color: var(--ink-3); }
+.pc-loi summary:hover { color: var(--ink); }
+.pc-loi[open] summary { margin-bottom: 6px; }
+.pc-loi p { font-size: 13px; color: var(--ink-2); margin: 0 0 8px; }
+.pc-loi blockquote { margin: 0 0 8px; padding: 10px 12px; border-left: 3px solid var(--ink); background: var(--sunk); border-radius: 0 10px 10px 0; font-size: 12.5px; color: var(--ink-2); }
+.pc-loi blockquote a { color: var(--cleo); display: inline-flex; gap: 4px; align-items: center; margin-top: 4px; text-decoration: none; font-weight: 500; }
+.pc-loi blockquote a svg { width: 12px; height: 12px; }
+.pc-fin .pc-carte { border-width: 1.5px; }
+.pc-fin.ok .pc-puce { background: var(--ok); }
+.pc-fin.ok .pc-carte { border-color: var(--ok); background: linear-gradient(180deg, var(--ok-bg), var(--panel) 70%); }
+.pc-fin.stop .pc-puce { background: var(--warn-dot); }
+.pc-fin.stop .pc-carte { border-color: var(--warn-dot); background: var(--warn-bg); }
+.pc-fin.hors .pc-puce { background: var(--bad-dot); }
+.pc-code { font-family: var(--mono); font-size: 40px; font-weight: 500; letter-spacing: -.04em; line-height: 1; color: var(--ink); }
+.pc-motif { font-size: 13px; margin: 0; }
 details.repli > summary { cursor: pointer; list-style: none; }
 details.repli > summary::-webkit-details-marker { display: none; }
 details.repli > summary h3::before { content: '+ '; color: var(--ink-4); }

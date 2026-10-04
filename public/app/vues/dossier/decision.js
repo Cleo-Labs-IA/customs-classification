@@ -2,12 +2,11 @@
 // ce qui bloque encore), l'arbitrage signé quand la règle encodée et le moteur divergent,
 // la validation signée. Puis les exigences de mise sur le marché du pays encodé.
 // La logique vit dans public/decision.js et public/exigences-moteur.js ; ici, le rendu.
-import { esc, ic, nomPays, drapeau, etat } from '../../ui.js';
+import { esc, ic, nomPays, drapeau } from '../../ui.js';
 import { fmtCode } from '../../conformite.js';
 import * as CF from '../../../conformite.js';
 import { premierRetenu, titre, libelleSource } from '../../dossier/logique.js';
 
-const TON = { keep: 'pret', warn: 'a_verifier', bad: 'bloque', out: 'en_attente' };
 const un = (n, mot) => `${n} ${mot}${n === 1 ? '' : 's'}`;
 const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
 const fmtIssue = (x) => (/^\d{6}$/.test(x) ? fmtCode(x) : x);
@@ -25,9 +24,6 @@ const CSS = `
 .dec-vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 10px 0 4px; }
 .dec-vs div { border: 1px solid var(--line-2); border-radius: var(--r-sm); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; color: var(--ink-3); }
 .dec-vs b { font-family: var(--mono); font-size: 22px; color: var(--ink); }
-.dec-bande { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
-.dec-bande div { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; font-size: 11.5px; color: var(--ink-3); }
-@media (max-width: 1100px) { .dec-bande { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .dec-etat { margin-top: 14px; padding: 12px 14px; border-radius: var(--r); background: var(--warn-bg); color: var(--warn); font-size: 13.5px; }
 .dec-etat.ok { background: var(--ok-bg); color: var(--ok); }
 .dec-etat ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink-2); }
@@ -102,16 +98,6 @@ export function decisionCarte(D, dec, R, res, qui) {
     : dec.peutValider ? `<div class="dec-etat ok"><b>The file is consistent: it can be validated.</b>${D.niveau === 'hs6' ? ' Validation covers the six-digit level; the national tariff line of the destination is not established.' : ''}</div>`
       : `<div class="dec-etat"><b>${un(dec.blocages.length, 'point')} to settle before validation</b><ul>${dec.blocages.map((b) => `<li>${esc(b.message)}</li>`).join('')}</ul>${autres.some((b) => b.id === 'question_moteur') ? '<p style="margin:6px 0 0">Answer the engine question in the rounds below.</p>' : ''}</div>`;
 
-  const ouverts = dec.blocages.filter((b) => ['question_regle', 'question_moteur', 'contradiction'].includes(b.id)).length;
-  const cout = D.oblig && D.oblig !== 'encours' && !D.oblig.erreur ? D.oblig.cout : null, inconnus = cout ? (cout.composantes || []).filter((c) => !c.connu).length : 0;
-  const BANDE = [
-    ['Product data', ouverts ? [un(ouverts, 'point') + ' open', 'warn'] : aConfirmer ? ['sufficient, ' + aConfirmer + ' to confirm', 'warn'] : ['sufficient', 'keep']],
-    ['Coverage', top && top.system !== 'hs6' ? ['national line (' + top.system + ')', 'keep'] : ['six digits only for ' + nomPays(p.dest), 'warn']],
-    ['Classification', !dec.code && !dec.codes.moteur && !dec.codes.regle ? ['no code', 'bad'] : ouverts ? ['needs information', 'warn'] : dec.blocages.some((b) => b.id === 'arbitrage') ? ['needs review: two readings', 'warn'] : ['suggested', 'keep']],
-    ['Human validation', D.valide ? ['approved by ' + D.valide.validated_by, 'keep'] : D.arbitrage && dec.origine === 'arbitrage' ? ['arbitrated, not yet approved', 'warn'] : ['not validated', 'out']],
-    ['Cost', !cout ? ['not computed', 'out'] : cout.partiel || inconnus ? ['partial, ' + un(inconnus, 'component') + ' unknown', 'warn'] : ['complete', 'keep']],
-  ];
-  const bande = `<div class="dec-bande">${BANDE.map(([k, [v, ton]]) => `<div><span>${k}</span>${etat(TON[ton], v)}</div>`).join('')}</div>`;
   const arb = D.arbitrage && dec.origine === 'arbitrage' && !D.valide ? `<p class="faint" style="margin-top:10px;font-size:13px">Arbitration recorded: ${esc(fmtCode(dec.code))}, by ${esc(D.arbitrage.qui)}. <button type="button" class="lien-detail" data-arb-rouvrir>Reopen it</button></p>` : '';
   const frappe = D.valide ? `<div class="tampon-valide ${Date.now() - Date.parse(D.valide.validated_at) < 4000 ? 'neuf' : ''}" aria-label="Validated"><span>Validated</span><small>${esc(D.valide.validated_by)} · ${esc(new Date(D.valide.validated_at).toLocaleDateString('en-GB'))}</small></div>` : '';
   const signature = D.valide
@@ -123,7 +109,7 @@ export function decisionCarte(D, dec, R, res, qui) {
       <div class="champ"><label for="dec-niveau">Validate at</label><select class="saisie" id="dec-niveau" data-niveau ${D.valide ? 'disabled' : ''}><option value="hs6" ${D.niveau === 'hs6' ? 'selected' : ''}>six-digit level</option><option value="national" ${D.niveau === 'national' ? 'selected' : ''}>national tariff line</option></select></div></div>
     <dl class="kv"><dt>Why</dt><dd>${esc(dec.code ? (pourquoi || 'No reason was returned for this code.') : 'No single reason yet: the two readings disagree, or no code is on the table.')}</dd>
       <dt>Evidence</dt><dd>${un(passages, 'quoted passage')} from the label or datasheet · ${un(textesRegle, 'official text')} on the rule's path · ${prec.length ? (verifiees.length ? verifiees.length + ' of ' + prec.length + ' similar rulings checked for comparability' : prec.length + ' similar rulings, none checked for comparability yet') : 'no similar ruling returned'}</dd></dl>
-    ${bande}${etatDossier}${D.valide ? '' : geste}${arb}${signature}</div></div>`;
+    ${etatDossier}${D.valide ? '' : geste}${arb}${signature}</div></div>`;
 }
 
 // Exigences de mise sur le marché : la liste de travail du pays encodé, jamais un avis de conformité.
