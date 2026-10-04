@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customs classification · Cleo</title>
+<link rel="stylesheet" href="/workflow.css">
+<style>
+:root{
+  --ink:#0008CF; --ink-08:rgba(0,8,207,.08); --ink-20:rgba(0,8,207,.2);
+  --paper:#F6F3EC; --card:#FFFFFF; --black:#141414; --g7:#44443F; --g5:#7B7A73; --rule:rgba(20,20,20,.13);
+  --ok:#0B7A3E; --ok-bg:#E6F3EB; --warn:#8A5A00; --warn-bg:#FBF0D9; --off:#8C8B85; --off-bg:#EEECE6; --bad:#A3261B; --bad-bg:#F8E4E1;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--paper);color:var(--black);font-size:14.5px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+header{display:flex;align-items:baseline;gap:14px;padding:18px 28px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+header h1{font-size:18px;font-weight:650;letter-spacing:-.01em}
+header p{color:var(--g5);font-size:13.5px}
+main{display:grid;grid-template-columns:360px minmax(0,1fr);gap:22px;padding:22px 24px 80px;align-items:start;max-width:1720px;margin:0 auto}
+@media(max-width:980px){main{grid-template-columns:1fr;padding:16px}}
+
+.fiche{background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.fiche section{padding:18px 20px;border-bottom:1px solid var(--rule)}
+.fiche section:last-child{border-bottom:0}
+.fiche h2{font-size:15px;font-weight:650;margin-bottom:12px}
+label{display:block;font-size:12.5px;color:var(--g7);margin:10px 0 4px}
+label small{color:var(--g5)}
+input,select,textarea{width:100%;padding:9px 10px;border:1px solid var(--rule);border-radius:7px;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--ink);box-shadow:0 0 0 3px var(--ink-08)}
+textarea{resize:vertical;min-height:74px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dims{display:grid;grid-template-columns:1fr 1fr 1fr 1.1fr;gap:8px}
+.hint{font-size:12px;color:var(--g5);margin-top:4px}
+.hscode{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px dashed var(--rule);border-radius:7px;color:var(--g5);min-height:40px;background:#FBFAF7}
+.hscode.set{border-style:solid;border-color:var(--ok);background:var(--ok-bg);color:var(--black)}
+.hscode b{font-family:var(--mono);font-size:15px}
+.photo{display:grid;grid-template-columns:92px 1fr;gap:10px;margin-top:8px;font-size:12.5px;color:var(--g7)}
+.photo img{width:92px;border-radius:7px;border:1px solid var(--rule)}
+.photo ul{padding-left:16px;margin-top:4px}
+.photo b{color:var(--black)}
+.dests{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0}
+.dests label{display:flex;align-items:center;gap:5px;margin:0;font-size:13px;color:var(--black)}
+.dests input{width:auto}
+.samples{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:11px 16px;font-weight:600;cursor:pointer;width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ok{background:var(--ok)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink-20);width:auto;padding:6px 11px;font-weight:600}
+.btn.sm{width:auto;padding:7px 12px}
+
+.graph{min-height:420px}
+.empty{border:1px dashed var(--rule);border-radius:12px;padding:56px 28px;text-align:center;color:var(--g5)}
+.empty b{display:block;color:var(--black);font-size:17px;margin-bottom:6px}
+.flow{display:flex;flex-direction:column;align-items:center}
+.link{width:2px;height:22px;background:var(--rule)}
+.tour{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);background:var(--paper);padding:2px 10px;border:1px solid var(--rule);border-radius:999px}
+.node{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:13px 16px;width:min(100%,600px);cursor:pointer;text-align:left;transition:border-color .12s, box-shadow .12s}
+.node:hover,.cand:hover{border-color:var(--ink);box-shadow:0 0 0 3px var(--ink-08)}
+.node .k{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin-bottom:4px}
+.node .t{font-weight:600}
+.node .s{color:var(--g7);font-size:13.5px;margin-top:2px}
+.node.static{cursor:default}
+.node.static:hover{border-color:var(--rule);box-shadow:none}
+.node s{color:var(--bad)}
+.facts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.fact{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;font-size:13px;border-radius:7px;padding:6px 9px;background:var(--off-bg);border:1px solid transparent;cursor:pointer}
+.fact:hover{border-color:var(--ink)}
+.fact .src{font-size:11.5px;font-weight:600;border-radius:5px;padding:1px 6px;background:#fff;color:var(--g7);white-space:nowrap}
+.fact.passage .src,.fact.photo .src{color:var(--ok)}
+.fact.reponse .src{color:var(--ink)}
+.fact.main{border:1px dashed var(--warn);background:var(--warn-bg)}
+.fact.main .src{color:var(--warn)}
+.fact .rm{border:0;background:transparent;color:var(--g5);cursor:pointer;font-size:15px;line-height:1;padding:2px 4px}
+.fact .rm:hover{color:var(--bad)}
+.addfact{display:grid;grid-template-columns:130px 1fr auto;gap:6px;margin-top:10px}
+.addfact input,.addfact select{padding:6px 8px;font-size:13px}
+.cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;width:100%;position:relative;padding-top:14px}
+.cands::before{content:"";position:absolute;top:0;left:12%;right:12%;height:2px;background:var(--rule)}
+.cand{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:12px 14px;cursor:pointer;text-align:left;position:relative}
+.cand::before{content:"";position:absolute;top:-14px;left:50%;width:2px;height:14px;background:var(--rule)}
+.cand .code{font-family:var(--mono);font-size:17px;font-weight:650}
+.cand .ttl{font-size:12.5px;color:var(--g7);margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cand.out{background:var(--off-bg);color:var(--off)}
+.cand.out .code{text-decoration:line-through}
+.cand.out .ttl{color:var(--off)}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;border-radius:5px;padding:2px 7px;margin-top:8px}
+.tag.keep{background:var(--ok-bg);color:var(--ok)}
+.tag.out{background:#E2DFD7;color:var(--g7)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.bad{background:var(--bad-bg);color:var(--bad)}
+.conf{float:right;font-size:12px;color:var(--g5);margin-top:3px}
+.q{border-left:3px solid var(--warn);background:var(--warn-bg)}
+.q .why{font-size:12.5px;color:var(--g7);margin:6px 0 8px}
+.q .qrow{margin-top:12px}
+.q .qrow:first-of-type{margin-top:6px}
+.conflict{border-left:3px solid var(--bad);background:var(--bad-bg)}
+.conflict .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+@media(max-width:600px){.conflict .pair{grid-template-columns:1fr}}
+.conflict .side{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:9px 10px;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.conflict .side q{quotes:"“" "”";font-style:normal}
+.conflict .side small{color:var(--g5)}
+.conflict .one{margin-top:14px}
+.conflict .one:first-of-type{margin-top:4px}
+.diff{background:#FBFAF7;border-style:dashed}
+.diff .chg{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;font-size:13.5px;margin-top:6px}
+.diff dt{color:var(--g5)}
+.final{border:2px solid var(--ink);cursor:default}
+.final .big{font-family:var(--mono);font-size:30px;font-weight:700;letter-spacing:.02em;margin:4px 0}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;margin-top:12px;font-size:13.5px}
+.kv dt{color:var(--g5)}
+.final a,.drawer a{color:var(--ink)}
+.valid{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:14px}
+.valid .btn{width:auto}
+.done{margin-top:12px;padding:10px 12px;border-radius:8px;background:var(--ok-bg);color:var(--ok);font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.loading{display:flex;align-items:center;gap:10px;color:var(--g7);padding:14px 0}
+.spin{width:16px;height:16px;border:2px solid var(--ink-20);border-top-color:var(--ink);border-radius:50%;animation:r 0.8s linear infinite;flex:none}
+@keyframes r{to{transform:rotate(360deg)}}
+.err{background:var(--bad-bg);color:var(--bad);border-radius:10px;padding:12px 14px;width:min(100%,600px)}
+.note{font-size:12px;color:var(--g5);max-width:600px;text-align:center;margin-top:18px}
+
+.bench{cursor:default}
+.bench h3{font-size:15px;margin-bottom:2px}
+.bench .t3{display:grid;gap:10px;margin-top:12px}
+.bench .tst{border:1px solid var(--rule);border-radius:9px;padding:10px 12px}
+.bench .tst b{display:block;margin-bottom:2px}
+.bench .tst p{font-size:12.5px;color:var(--g7);margin-bottom:8px}
+.bench .line{display:grid;grid-template-columns:1fr auto;gap:8px}
+.bench table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px;table-layout:fixed}
+.node,.cand{overflow-wrap:anywhere;min-width:0}
+.flow{min-width:0;max-width:100%}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+@media(max-width:1280px){.cols{grid-template-columns:1fr}}
+.coltitle{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--g5);font-weight:650;margin-bottom:10px;text-align:center}
+.rule{cursor:default;border:1px solid var(--ink-20)}
+.rule .ver{font-size:12px;color:var(--g5);margin-top:2px}
+.step{border:1px solid var(--rule);border-radius:9px;margin-top:10px;overflow:hidden;cursor:pointer;background:#fff;display:block;width:100%;text-align:left;padding:0}
+.step:hover{border-color:var(--ink)}
+.step .l{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:7px 11px;font-size:13px;border-top:1px solid var(--rule)}
+.step .l:first-child{border-top:0}
+.step .l>span:first-child{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--g5);padding-top:2px}
+.step .l.c{background:#F2F3FF}
+.step q{quotes:"“" "”";color:var(--g7)}
+.block{border:1px solid var(--warn);background:var(--warn-bg);border-radius:9px;padding:11px 12px;margin-top:10px}
+.block .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
+.block .opts button{border:1px solid var(--warn);background:#fff;border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left;font-size:13px}
+.block .opts button:hover{border-color:var(--ink)}
+.block .opts small{display:block;color:var(--g5)}
+.concl{border-radius:9px;padding:11px 12px;margin-top:10px;background:var(--ok-bg)}
+.concl.div{background:var(--warn-bg)}
+.concl b.c{font-family:var(--mono);font-size:19px}
+.todo{margin-top:6px;padding-left:18px;font-size:13.5px}
+.todo li{margin-bottom:3px}
+.scene{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:18px 20px;margin-bottom:18px}
+.scene .top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start}
+@media(max-width:700px){.scene .top{grid-template-columns:1fr}}
+.scene img{width:92px;border-radius:8px;border:1px solid var(--rule)}
+.scene .code{font-family:var(--mono);font-size:34px;font-weight:700;line-height:1.1}
+.scene .code small{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--g5);display:block;margin-top:3px}
+.scene .vs{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.scene .vs div{border:1px solid var(--rule);border-radius:9px;padding:8px 12px}
+.scene .vs b{font-family:var(--mono);font-size:22px;display:block}
+.scene .vs span{font-size:12px;color:var(--g5)}
+.scene .lines{display:grid;grid-template-columns:96px minmax(0,1fr);gap:7px 14px;margin-top:14px;font-size:13.5px}
+.scene .lines>span:nth-child(odd){font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);padding-top:2px}
+.scene .state{border-radius:10px;padding:11px 13px;margin-top:14px;background:var(--warn-bg)}
+.scene .state.ok{background:var(--ok-bg)}
+.scene .state ul{padding-left:18px;margin-top:4px;font-size:13.5px}
+.scene .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:14px}
+.scene .strip div{border:1px solid var(--rule);border-radius:9px;padding:7px 10px}
+.scene .strip span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin-bottom:3px}
+.scene .strip .tag{margin-top:0}
+.scene .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.scene .acts .btn{width:auto}
+.scene .arb{border:1px solid var(--warn);border-radius:10px;padding:12px 14px;margin-top:12px;background:#fff}
+.scene .arb label{margin-top:8px}
+.scene .arb .pick{display:flex;gap:8px;flex-wrap:wrap}
+.scene .arb .pick label{display:flex;gap:6px;align-items:center;border:1px solid var(--rule);border-radius:8px;padding:6px 10px;margin:0;color:var(--black);font-size:13.5px}
+.scene .arb input[type=radio],.scene .arb input[type=checkbox]{width:auto}
+.scene .arb .chk{display:flex;gap:6px 14px;flex-wrap:wrap}
+.scene .arb .chk label{display:flex;gap:5px;align-items:center;margin:0;color:var(--black)}
+details.more{margin-top:14px;border:1px solid var(--rule);border-radius:12px;background:rgba(255,255,255,.5)}
+details.more>summary{cursor:pointer;padding:12px 16px;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary span{font-weight:400;color:var(--g5);font-size:13px}
+details.more>.in{padding:4px 16px 18px}
+details.more .flow>.link:first-child{display:none}
+
+
+.prec{border-top:1px solid var(--rule);padding:7px 0}
+.prec:first-child{border-top:0;padding-top:0}
+.ob{border-top:1px solid var(--rule);padding:8px 0;font-size:13.5px}
+.ob:first-of-type{border-top:0}
+.comp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:13.5px;margin-top:6px}
+.comp .u{color:var(--warn)}
+.bench .line{grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:600px){.addfact{grid-template-columns:1fr}.valid{grid-template-columns:1fr}.bench th,.bench td{padding:6px 4px;font-size:12px}}
+.bench th,.bench td{text-align:left;padding:7px 8px;border-top:1px solid var(--rule);vertical-align:top}
+.bench th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--g5);font-weight:600;border-top:0}
+.v{font-weight:650}
+.v.ok{color:var(--ok)} .v.bad{color:var(--bad)} .v.warn{color:var(--warn)}
+
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(500px,94vw);background:var(--card);border-left:1px solid var(--rule);box-shadow:-18px 0 40px rgba(0,0,0,.08);transform:translateX(105%);transition:transform .18s;overflow:auto;padding:22px 24px 40px;z-index:20}
+.drawer.open{transform:none}
+.drawer h3{font-size:17px;margin:2px 36px 4px 0}
+.drawer h4{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin:20px 0 6px}
+.drawer h4.pro{color:var(--ok)} .drawer h4.con{color:var(--bad)} .drawer h4.unk{color:var(--warn)}
+.drawer p{margin-bottom:8px}
+.drawer .x{position:absolute;top:16px;right:18px;border:0;background:var(--off-bg);border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:16px}
+.drawer blockquote{border-left:3px solid var(--ink-20);padding:8px 12px;background:#FBFAF7;font-size:13.5px;white-space:pre-wrap;margin:6px 0}
+.drawer pre{background:#17181C;color:#E9E8E3;border-radius:8px;padding:12px;font-family:var(--mono);font-size:12px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.drawer ul{padding-left:18px}
+.drawer li{margin-bottom:6px}
+.muted{color:var(--g5)}
+code{font-family:var(--mono);font-size:12px;color:var(--g5)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Customs classification</h1>
+  <p style="flex:1;min-width:240px">One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.</p>
+  <a href="/classic-tree" style="font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--ink-20);border-radius:8px;padding:6px 11px">Interpretation tree</a>
+</header>
+<div id="fixture-banner" class="workflow-banner" hidden>Fixture preview · synthetic test data, no live classification or external publication.</div>
+<div class="workflow-shell">
+  <div id="workflow-context" class="workflow-context"></div>
+  <nav id="workflow-nav" aria-label="Product workflow"></nav>
+  <div id="workflow-notice" role="status" aria-live="polite"></div>
+</div>
+
+<main>
+  <form class="fiche" id="fiche" autocomplete="off">
+    <section>
+      <h2>Product record</h2>
+      <div class="samples" id="samples"></div>
+      <div class="row">
+        <div><label for="sku">SKU</label><input id="sku" required maxlength="48"></div>
+        <div><label for="gtin">GTIN <small>(optional)</small></label><input id="gtin" maxlength="48"></div>
+      </div>
+      <label>Dimensions and weight <small>(optional)</small></label>
+      <div class="dims">
+        <input id="dl" type="number" min="0" step="any" placeholder="L cm">
+        <input id="dw" type="number" min="0" step="any" placeholder="W cm">
+        <input id="dh" type="number" min="0" step="any" placeholder="H cm">
+        <input id="kg" type="number" min="0" step="any" placeholder="kg">
+      </div>
+    </section>
+    <section>
+      <h2>Shipping and customs</h2>
+      <label for="photo">Photo of the product or its label <small>(optional)</small></label>
+      <input id="photo" type="file" accept="image/*,.heic,.heif">
+      <div id="photobox"></div>
+      <label for="desc">Customs description</label>
+      <textarea id="desc" required maxlength="1800" placeholder="e.g. USB-C docking station for laptop"></textarea>
+      <label for="ds">Datasheet or label <small>(optional, text)</small></label>
+      <textarea id="ds" maxlength="12000" style="min-height:96px" placeholder="Connectors, functions, power supply, material…"></textarea>
+      <div class="hint">Each fact kept cites the passage it comes from.</div>
+      <div class="row">
+        <div><label for="dest">Destination</label><select id="dest"></select></div>
+        <div><label for="origin">Country of origin</label><select id="origin"></select></div>
+      </div>
+      <div class="hint">The origin stays on the record. Classification does not use it.</div>
+      <label for="asof">Effective date</label><input id="asof" type="date" required>
+      <label>Category / HS code</label>
+      <div class="hscode" id="hscode">Empty until an authorised person has validated</div>
+    </section>
+    <section>
+      <button class="btn" id="go" type="submit">Continue to identity</button>
+      <button class="btn ghost" id="save-draft" type="button">Save a browser draft</button>
+      <div class="hint" id="keystate"></div>
+    </section>
+  </form>
+
+  <div class="workflow-workspace"><section id="workflow-panel" class="workflow-panel" aria-labelledby="workflow-title"></section><div class="graph" id="graph">
+    <div class="empty"><b>The decision file appears here</b>Pick a sample or fill in the record, then run the classification. Every box opens on click.</div>
+  </div></div>
+</main>
+
+<div id="gate" style="display:none;position:fixed;inset:0;background:rgba(246,243,236,.96);z-index:50;align-items:center;justify-content:center;padding:16px">
+  <form id="gateform" class="node static" style="max-width:380px"><div class="k">Restricted access</div><div class="t">Access code</div><div class="s" id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Enter</button></form>
+</div>
+<aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
+
+<script type="module">
+import { createIdentity, createVersion, scopeKey, acknowledgeApproval, selectedCode, publishEligibility, validateCodeResponse, collectReviews, approvalStillCurrent, uncertainClassification, classificationRequestScope, collectChanges, scopeResetPatch } from './workflow.js';
+import { evaluer, cle } from './arbre-moteur.js';
+import { dossierHtml } from './dossier.js';
+import { decider, arbitrageValide } from './decision.js';
+import * as CF from './conformite.js';
+// Exemples : uniquement des fiches à soumettre. Les fiches techniques d'exemple décrivent
+// des produits fictifs. Aucun résultat n'est écrit à l'avance : tout vient des appels en direct.
+const DS_DOCK = 'Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.';
+const SAMPLES = [
+  { label: 'USB-C dock, description only', sku: 'DOCK-PRO', desc: 'USB-C docking station for laptop', dest: 'FR', origin: 'CN' },
+  { label: 'USB-C dock with datasheet', sku: 'DOCK-PRO-DS', desc: 'USB-C docking station for laptop', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
+  { label: 'Catalogue and datasheet that contradict each other', sku: 'DOCK-STAND', desc: 'USB-C charging stand for laptop, power only, no data ports, no network, no video output', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
+  { label: 'Talking toy', sku: 'TOY-FARM-01', desc: "Fisher-Price See 'n Say The Farmer Says talking animal sounds toy", dest: 'US', origin: 'CN' },
+  { label: 'Buildable clock', sku: 'CLOCK-BRICK', desc: 'LEGO buildable wall clock for kids, battery powered', dest: 'US', origin: 'CN', kg: 0.4 },
+  { label: 'Robot dog', sku: 'ROBO-DOG', desc: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', dest: 'US', origin: 'CN' },
+];
+const COUNTRIES = { FR: 'France', DE: 'Germany', ES: 'Spain', IT: 'Italy', NL: 'Netherlands', GB: 'United Kingdom', US: 'United States', CA: 'Canada', JP: 'Japan', AU: 'Australia', CH: 'Switzerland', KR: 'South Korea', CN: 'China', VN: 'Vietnam', IN: 'India', MX: 'Mexico' };
+const STATUS = {
+  classified: ['Proposal to be validated', 'keep'],
+  needs_review: ['Proposal to be reviewed', 'warn'],
+  needs_information: ['Information needed', 'warn'],
+  ambiguous: ['Several codes remain plausible', 'warn'],
+  unsupported_jurisdiction: ['No candidate kept for this destination', 'bad'],
+  stale_dataset: ['Nomenclature to refresh', 'bad'],
+};
+const CHECKS = {
+  calibrated_confidence_below_floor: 'Confidence remains below the acceptance threshold',
+  chapter_margin: 'Two chapters remain too close',
+  heading_margin: 'Two headings remain too close',
+  low_retrieval_similarity: 'The description is not close to the wording of the nomenclature',
+};
+const FACT_FR = { material: 'Material', sole_material: 'Sole material', upper_material: 'Upper material', composition: 'Composition', function: 'Function', use: 'Use', process: 'Process', dimensions: 'Dimensions', thickness_mm: 'Thickness (mm)', weight_g: 'Weight (g)', power_w: 'Power (W)', engine_displacement_cc: 'Engine displacement (cm³)', voltage_v: 'Voltage (V)', presentation: 'Presentation', audience: 'Audience' };
+const NUM_FACTS = ['thickness_mm', 'weight_g', 'power_w', 'engine_displacement_cc', 'voltage_v'];
+const ENUM_FACTS = { presentation: ['bulk', 'retail_pack', 'retail_set', 'unassembled', 'other'], audience: ['men', 'women', 'boys', 'girls', 'babies', 'unisex', 'not_applicable'] };
+const ADDABLE = ['function', 'use', 'material', 'process', 'power_w', 'voltage_v', 'weight_g'];
+const KIND = { photo: 'Photographed label', passage: 'Datasheet', fiche: 'Product record', reponse: 'Confirmed answer', main: 'No supporting document' };
+const SRC_FR = (s) => (s === 'description' ? 'Catalogue description' : s === 'fiche_technique' ? 'Datasheet' : 'Fact "' + (FACT_FR[s.split(':')[1]] || s) + '"');
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = (u) => (/^https:\/\//.test(String(u || '')) ? esc(u) : '#');
+const fmtCode = (c) => { c = String(c || ''); return c.length <= 6 ? c.replace(/^(\d{4})(\d{2})$/, '$1.$2') : c.replace(/^(\d{4})(\d{2})(.*)$/, '$1.$2.$3'); };
+const num = (n) => (typeof n === 'number' ? String(n) : 'not provided');
+const title = (c) => (c.title && (c.title.en || c.title.fr)) || '';
+const topOf = (d) => (d.candidates || []).find((c) => !c.set_aside_reason) || null;
+
+// état du dossier
+let S = null, details = [];
+const STEPS = ['Capture & match', 'Identity', 'Facts', 'Decision', 'Review', 'Distribution'];
+const W = { scene: 0, identity: null, version: null, drafts: [], notice: '', classificationId: null, reviewVersion: null, history: [], historyCursor: null, reviewText: { who: '', comment: '' }, validation: null, changeCheck: null, reviewRequired: false, apiBusy: false, reviewUncertain: false, exportReceipt: null };
+try { const stored = JSON.parse(localStorage.getItem('customs-workflow-v1') || '[]'); if (Array.isArray(stored)) W.drafts = stored; }
+catch { W.notice = 'Browser storage is unavailable or unreadable. Keep this page open and download your evidence file.'; }
+$('asof').value = new Date().toISOString().slice(0, 10);
+// La règle encodée (arbre d'interprétation, version de référence) et ses textes.
+// Absente ou incomplète : la page fonctionne sans, la colonne centrale le dit.
+let ARBRE = null, TX = {}, EXIG = null, EXIG_TX = null;
+{
+  const dir = new URLSearchParams(location.search).get('data') === 'dev' ? 'data-dev/' : 'data/';
+  const get = (f) => fetch(dir + f).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  Promise.all([get('arbre.json'), get('textes.json')]).then(([a, t]) => { if (a && a.noeuds && t) { ARBRE = a; TX = Object.fromEntries(t.map((x) => [x.id, x])); } });
+  // market-access requirements (one market encoded) and their official texts; the page works without them
+  Promise.all([get('exigences.json'), get('textes-conformite.json')]).then(([e, t]) => { if (e && e.exigences && t) { EXIG = e; EXIG_TX = t; } });
+}
+function fresh(product, facts) { return { product, facts, struck: [], conflicts: [], lecture: null, rounds: [], tests: [], others: [], crit: {}, critRejetes: 0, applic: {}, oblig: null, arbitrage: null, niveau: 'hs6', open: {}, conf: { valeurs: {}, declarees: [] }, busy: null, error: null, saved: null, pendingCause: null }; }
+let PHOTO = null;
+$('photo').addEventListener('change', async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  PHOTO = null;
+  $('photobox').innerHTML = '<div class="loading"><div class="spin"></div>Reading the photo, about fifteen seconds.</div>';
+  try {
+    const big = await toJpeg(f, 2400, 0.85), apercu = await toJpeg(big.blob, 700, 0.7);
+    const j = await post('/api/photo', { jpeg_base64: big.url.split(',')[1] });
+    PHOTO = { name: f.name, lignes: j.lignes, illisible: j.illisible, reference: j.reference, seconds: j.seconds };
+    $('ds').value = j.lignes.join('\n');
+    if (!$('desc').value.trim()) $('desc').value = j.description;
+    if (!$('sku').value.trim()) $('sku').value = (j.reference || f.name.replace(/\.[^.]+$/, '')).slice(0, 48);
+    PHOTO.apercu = apercu.url;
+    invalidateForm();
+    $('photobox').innerHTML = `<div class="photo"><img src="${apercu.url}" alt=""><div><b>${j.lignes.length} line(s) read</b>, copied below. Check and correct them before classifying.</div></div>${CF.photoTriage(PHOTO)}`;
+  } catch (err) { $('photobox').innerHTML = '<div class="hint" style="color:var(--bad)">Photo not read: ' + esc(err.message || err) + '</div>'; }
+});
+
+function fill(sel, def) { sel.innerHTML = Object.entries(COUNTRIES).map(([k, v]) => `<option value="${k}">${esc(v)} (${k})</option>`).join(''); sel.value = def; }
+fill($('dest'), 'FR'); fill($('origin'), 'CN');
+document.head.appendChild(Object.assign(document.createElement('style'), { textContent: CF.CSS }));
+$('samples').innerHTML = SAMPLES.map((s, i) => `<button type="button" class="chip" data-s="${i}">${esc(s.label)}</button>`).join('');
+$('samples').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-s]'); if (!b) return;
+  const s = SAMPLES[b.dataset.s];
+  $('sku').value = s.sku; $('desc').value = s.desc; $('ds').value = s.ds || ''; $('dest').value = s.dest; $('origin').value = s.origin;
+  PHOTO = null; $('photo').value = ''; $('photobox').innerHTML = ''; $('gtin').value = ''; $('dl').value = ''; $('dw').value = ''; $('dh').value = ''; $('kg').value = s.kg ?? '';
+  resetCode();
+  W.identity = null; W.version = null; S = null; clearApproval(); setScene(0);
+});
+fetch('/api/status', { headers: { 'X-App-Code': code() } }).then((r) => r.json()).then((s) => { if (s.code_required && !s.code_ok) askCode(''); $('fixture-banner').hidden = s.mode !== 'fixture'; $('keystate').textContent = s.mode === 'fixture' ? 'Fixture preview. No live API calls.' : s.key_present ? 'Live calls to ' + String(s.api || 'Legal API').replace('https://', '') : 'API key missing: set it in .env, then restart the server.'; }).catch(() => { $('keystate').textContent = 'Server unavailable. Your browser draft is still available; reconnect and retry.'; });
+function resetCode() { $('hscode').className = 'hscode'; $('hscode').textContent = "Empty until an authorised person has validated"; }
+
+$('fiche').addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (S?.busy || W.apiBusy) return;
+  if (!W.identity?.confirmed) { setScene(1); return; }
+  const facts = {};
+  const kg = parseFloat($('kg').value);
+  if (kg > 0) facts.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: 'Product record, "Weight" field (' + $('kg').value + ' kg)' };
+  const d = { length_mm: parseFloat($('dl').value) * 10, width_mm: parseFloat($('dw').value) * 10, height_mm: parseFloat($('dh').value) * 10 };
+  const dims = Object.fromEntries(Object.entries(d).filter(([, v]) => v > 0));
+  if (Object.keys(dims).length) facts.dimensions = { value: dims, kind: 'fiche', origin: 'Product record, "Dimensions" field' };
+  const priorFacts = S?.product.sku === $('sku').value.trim() ? S.facts : {};
+  S = fresh(readProduct(), { ...priorFacts, ...facts });
+  clearApproval(); snapshotVersion(); W.scene = 2;
+  resetCode();
+  run('First assessment');
+});
+
+// Texte réellement utilisé : la pièce moins les passages qu'une personne a déclarés faux.
+function effective(text, source) {
+  let t = text;
+  for (const k of S.struck) if (k.source === source) t = t.split(k.quote).join(' ');
+  return t.replace(/\s{2,}/g, ' ').replace(/\s+([,.;])/g, '$1').replace(/^[\s,;.]+|[\s,;]+$/g, '').trim();
+}
+const factValues = (facts) => Object.fromEntries(Object.entries(facts).map(([k, f]) => [k, f.value]));
+
+// Code d'accès de la version en ligne, gardé dans ce navigateur.
+function code() { try { return localStorage.getItem('code') || ''; } catch { return ''; } }
+function askCode(msg) {
+  $('gate').style.display = 'flex'; $('gatemsg').textContent = msg || '';
+  return new Promise((ok) => { $('gateform').onsubmit = (e) => { e.preventDefault(); try { localStorage.setItem('code', $('gatecode').value.trim()); } catch {} $('gate').style.display = 'none'; ok(); }; });
+}
+async function post(path, body) {
+  for (let n = 0; n < 3; n++) {
+    const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': code() }, body: JSON.stringify(body) });
+    if (r.status === 401) { await askCode(n ? 'Code rejected.' : ''); continue; }
+    const j = await r.json().catch(() => ({ error: 'Unreadable server response (' + r.status + ')' }));
+    if (!r.ok) { const err = new Error(typeof j.error === 'string' ? j.error : j.error?.message || 'Error ' + r.status); err.status = r.status; throw err; }
+    return j;
+  }
+  throw new Error('Access code rejected');
+}
+// Prépare la photo dans le navigateur : JPEG redimensionné. Un HEIC que le
+// navigateur ne sait pas lire est d'abord converti par la bibliothèque heic-to.
+async function toJpeg(file, max, q) {
+  let bmp;
+  try { bmp = await createImageBitmap(file); }
+  catch {
+    if (!window.HeicTo) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/heic-to@1/dist/iife/heic-to.js'; sc.onload = ok; sc.onerror = () => ko(new Error('HEIC converter unavailable')); document.head.appendChild(sc); });
+    bmp = await createImageBitmap(await window.HeicTo({ blob: file, type: 'image/jpeg', quality: 0.9 }));
+  }
+  const k = Math.min(1, max / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
+  c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+  c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  const blob = await new Promise((ok) => c.toBlob(ok, 'image/jpeg', q));
+  const url = await new Promise((ok) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.readAsDataURL(blob); });
+  return { blob, url };
+}
+async function classify(desc, facts, country, persist = false) {
+  if (persist && W.classifyUncertain) throw new Error('An earlier classification may have been saved. Check shared history before another persisted assessment.');
+  const body = { item_id: S.product.sku, description: desc, ...classificationRequestScope({ country: country || S.product.dest, asOf: S.product.asof, level: S.niveau, persist }) };
+  if (Object.keys(facts).length) body.facts = factValues(facts);
+  try {
+    const j = await post('/api/classify', body);
+    if (j.http !== 200 || !j.body?.data || (persist && !j.body.data.classification_id)) { const err = new Error('The API responded ' + (j.http || 'without a readable acknowledgement') + ': ' + JSON.stringify(j.body || j).slice(0, 300)); err.status = j.http; err.readable = Boolean(j.body?.data && (!persist || j.body.data.classification_id)); throw err; }
+    return { ...j, data: j.body.data };
+  } catch (err) {
+    if (uncertainClassification({ persist, sent: true, status: err.status, readable: err.readable !== false })) {
+      W.classifyUncertain = true; W.classHistoryFetched = false;
+      W.notice = 'The classification request may have been saved, but no reliable acknowledgement arrived. Refresh shared history and check it before submitting another classification.';
+    }
+    throw err;
+  }
+}
+const lire = (desc, facts) => post('/api/lire', { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(facts) });
+
+// Un tour : lire les pièces, s'arrêter sur une contradiction, sinon classer.
+async function run(cause) {
+  if (W.classifyUncertain) { W.notice = 'Check shared classification history before another persisted assessment.'; render(); return; }
+  clearApproval(); snapshotVersion();
+  S.error = null; S.pendingCause = cause;
+  try {
+    S.busy = 'Reading the documents: facts and contradictions.'; render();
+    const desc = effective(S.product.desc, 'description');
+    const L = await lire(desc, S.facts);
+    S.lecture = L;
+    if (!S.rounds.length) for (const c of L.caracteristiques) if (!S.facts[c.fact]) S.facts[c.fact] = S.product.photo ? { value: c.value, kind: 'photo', origin: 'Photographed label (' + S.product.photo.name + '), line read from the photo then checked by the person', quotes: c.quotes } : { value: c.value, kind: 'passage', origin: 'Datasheet, cited passage', quotes: c.quotes };
+    S.conflicts = L.contradictions;
+    if (S.conflicts.length) { S.busy = null; render(); return; }
+    S.busy = 'Classification in progress. Allow about twenty seconds.'; render();
+    // en parallèle : le moteur de l'API, et la lecture des critères de la règle encodée
+    const [r, cr] = await Promise.all([classify(desc, S.facts, undefined, true), ARBRE ? post('/api/criteres', { pieces: { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) }, criteres: ARBRE.criteres }).catch(() => null) : null]);
+    if (cr) {
+      S.critRejetes = cr.rejected;
+      const repondu = Object.fromEntries(Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse'));
+      S.crit = { ...Object.fromEntries(Object.entries(cr.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...repondu };
+    }
+    S.rounds.push({ ...r, cause, answered: null, facts: JSON.parse(JSON.stringify(S.facts)) });
+    snapshotVersion();
+    W.classificationId = r.data.classification_id || null;
+    W.reviewVersion = W.classificationId ? 0 : null;
+    if (!W.classificationId) W.notice = 'The API returned no persisted classification ID. Review cannot be saved. Check API persistence and classify again.';
+    if (EXIG && S.product.dest === EXIG.marche) {
+      const produit = EXIG.criteres.filter((c) => c.source !== 'projet');
+      const ce = await post('/api/criteres', { pieces: { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) }, criteres: produit }).catch(() => null);
+      if (ce) S.conf.valeurs = { ...Object.fromEntries(Object.entries(ce.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...Object.fromEntries(Object.entries(S.conf.valeurs).filter(([, x]) => x.kind === 'reponse')) };
+    }
+    // dossier courant, repris par la page de l'arbre d'interprétation
+    try { const t = topOf(r.data); localStorage.setItem('dossier', JSON.stringify({ sku: S.product.sku, description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts), code_moteur: t ? t.code : null })); } catch {}
+  } catch (err) { S.error = String(err.message || err); }
+  S.busy = null; saveBrowserSnapshot(); render();
+}
+
+function detail(html) { details.push(html); return details.length - 1; }
+function openDetail(i) { $('drawerBody').innerHTML = details[i]; $('drawer').classList.add('open'); }
+$('closeDrawer').onclick = () => $('drawer').classList.remove('open');
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('drawer').classList.remove('open'); });
+
+function factValue(k, v) {
+  if (k === 'dimensions') return Object.entries(v).map(([a, b]) => a.replace('_mm', '') + ' ' + b + ' mm').join(' × ');
+  if (k === 'composition') return v.map((c) => c.material + (c.percent != null ? ' ' + c.percent + ' %' : '')).join(', ');
+  return String(v);
+}
+function evidenceHtml(c) {
+  return (c.evidence || []).map((e) => `<p><b>${esc(e.ref || e.kind)}</b> · <a href="${safeUrl(e.url)}" target="_blank" rel="noopener">official text</a>${e.source_version ? ' <span class="muted">(' + esc(e.source_version) + ')</span>' : ''}</p><blockquote>${esc(e.excerpt)}</blockquote>`).join('');
+}
+const precHtml = (list) => '<ul>' + list.map((x) => `<li><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, similarity ${num(x.similarity)})</span></li>`).join('') + '</ul>';
+
+// Fiche d'un candidat : ce qui le soutient, ce qui pèse contre lui, ce qu'on ignore.
+// Chaque ligne reprend un champ de la réponse de l'API, rien n'est ajouté.
+function candDetail(c, d) {
+  const out = Boolean(c.set_aside_reason), hs6 = String(c.code).slice(0, 6);
+  const prec = (d.provenance && d.provenance.precedents) || [];
+  const same = prec.filter((x) => String(x.official_code).startsWith(hs6)), other = prec.filter((x) => !String(x.official_code).startsWith(hs6));
+  const checks = (d.provenance && d.provenance.acceptance_checks) || [], qs = d.questions || [];
+  return `<h3>${esc(fmtCode(c.code))}</h3><p class="muted">${esc(title(c))}</p>
+    <p>${out ? 'Set aside' : 'Still plausible'} · confidence returned by the API: ${num(c.confidence)}</p>
+    <h4 class="pro">What supports it</h4>
+    ${!out && c.rationale ? `<p>${esc(c.rationale)}</p>` : ''}${evidenceHtml(c) || (out ? '' : '<p class="muted">No text excerpt returned.</p>')}
+    ${same.length ? '<p>Similar official rulings classified under this code:</p>' + precHtml(same) : ''}
+    ${out && !same.length && !(c.evidence || []).length ? '<p class="muted">Nothing in the response.</p>' : ''}
+    <h4 class="con">What weighs against it</h4>
+    ${c.set_aside_reason ? `<p>${esc(c.set_aside_reason)}</p>` : ''}${out && c.rationale ? `<p>${esc(c.rationale)}</p>` : ''}
+    ${other.length ? '<p>Similar official rulings classified under another code:</p>' + precHtml(other) : ''}
+    ${!c.set_aside_reason && !other.length ? '<p class="muted">Nothing in the response.</p>' : ''}
+    <h4 class="unk">What is still unknown</h4>
+    ${qs.length ? '<ul>' + qs.map((q) => `<li><b>${esc(FACT_FR[q.fact] || q.fact)}</b>: ${esc(q.why || q.question)}</li>`).join('') + '</ul>' : ''}
+    ${checks.length ? '<ul>' + checks.map((k) => `<li>${esc(CHECKS[k] || k)} <code>${esc(k)}</code></li>`).join('') + '</ul>' : ''}
+    ${!qs.length && !checks.length ? '<p class="muted">No open question or failed check in the response.</p>' : ''}
+    <h4>Nomenclature</h4><p>${esc(c.system)} · version ${esc(c.source_version || 'not stated')}${c.valid_from ? ' · valid from ' + esc(c.valid_from) : ''}${(c.gri || []).length ? ' · ' + esc(c.gri.join(', ')) : ''}</p>`;
+}
+
+function strikeHtml(text, source) {
+  let h = esc(text);
+  for (const k of S.struck) if (k.source === source) h = h.split(esc(k.quote)).join('<s>' + esc(k.quote) + '</s>');
+  return h;
+}
+
+function render() {
+  if (!S) { renderWorkflow(); return; }
+  if (!S.busy && W.version && W.version.scopeKey !== scopeKey(currentScope())) { clearApproval(); snapshotVersion(); }
+  details = [];
+  const p = S.product, parts = [], last = S.rounds[S.rounds.length - 1];
+
+  // produit
+  parts.push(`<button class="node" data-d="${detail(`<h3>${esc(p.sku)}</h3><h4>Catalogue description</h4><p>${strikeHtml(p.desc, 'description')}</p>${p.ds ? `<h4>${p.photo ? 'Label read from the photo' : 'Datasheet'}</h4><p style="white-space:pre-wrap">${strikeHtml(p.ds, 'fiche_technique')}</p>` : ''}${p.photo && p.photo.illisible.length ? `<h4>Not read with certainty on the photo</h4><ul>${p.photo.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${S.struck.length ? '<p class="muted">Struck-through passages were declared false by a person and are no longer sent.</p>' : ''}<h4>Destination</h4><p>${esc(COUNTRIES[p.dest])} (${p.dest})</p><h4>Origin</h4><p>${esc(COUNTRIES[p.origin])} (${p.origin}). Kept on the record, not sent to classification.</p>${last ? `<h4>Last request sent</h4><pre>POST ${esc(last.endpoint)}\n${esc(JSON.stringify(last.sent, null, 1))}</pre>` : ''}`)}">
+    <div class="k">Product</div><div class="t">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div class="s">${strikeHtml(p.desc, 'description')}</div>${p.ds ? `<div class="s muted">${p.photo ? 'Label read from photo ' + esc(p.photo.name) + (p.photo.illisible.length ? ', ' + p.photo.illisible.length + ' item(s) not read' : '') : 'Datasheet attached'}</div>` : ''}</button>`);
+
+  // caractéristiques connues, avec provenance
+  const fk = Object.keys(S.facts), locked = Boolean(S.busy || S.saved);
+  parts.push('<div class="link"></div>');
+  parts.push(`<div class="node static"><div class="k">Known facts</div>
+    ${fk.length ? `<div class="facts">${fk.map((k) => { const f = S.facts[k]; return `<div class="fact ${f.kind}" data-d="${detail(`<h3>${esc(FACT_FR[k] || k)}</h3><p>${esc(factValue(k, f.value))}</p><h4>Provenance</h4><p>${esc(f.origin)}</p>${(f.quotes || []).map((q) => `<blockquote>${esc(q)}</blockquote>`).join('')}${f.kind === 'main' ? '<p>No document supports this fact. It stays flagged as such in the file.</p>' : ''}<h4>Field sent to the API</h4><pre>facts.${esc(k)} = ${esc(JSON.stringify(f.value))}</pre>`)}"><span><b>${esc(FACT_FR[k] || k)}</b>: ${esc(factValue(k, f.value))}</span><span class="src">${KIND[f.kind]}</span>${locked ? '<span></span>' : `<button type="button" class="rm" data-rm="${k}" title="Remove and reassess">×</button>`}</div>`; }).join('')}</div>`
+      : '<div class="s">Description only. No structured fact.</div>'}
+    ${S.lecture && S.lecture.rejected ? `<div class="hint">${S.lecture.rejected} item(s) set aside at reading: the cited passage was not found word for word in the document.</div>` : ''}
+    ${locked ? '' : `<form class="addfact" id="addfact"><select name="k">${ADDABLE.filter((k) => !S.facts[k]).map((k) => `<option value="${k}">${esc(FACT_FR[k])}</option>`).join('')}</select><input name="v" required placeholder="Add a fact"><button class="btn ghost" type="submit">Add</button></form>`}</div>`);
+
+  // contradictions à résoudre
+  if (S.conflicts.length && !S.busy) {
+    parts.push('<div class="link"></div>');
+    parts.push(`<div class="node static conflict"><div class="k">Contradiction to resolve before classifying</div>
+      ${S.conflicts.map((c, i) => `<div class="one"><div class="t">${esc(c.sujet)}</div><div class="s">${esc(c.pourquoi)}</div><div class="pair">
+        ${['a', 'b'].map((s) => `<div class="side"><small>${esc(SRC_FR(c[s].source))}</small><q>${esc(c[s].quote)}</q><button type="button" class="btn ghost" data-keep="${i}:${s}">This one is true</button></div>`).join('')}</div></div>`).join('')}</div>`);
+  }
+
+  if (S.rounds.length && !S.conflicts.length) parts.push(grapheHtml());
+  parts.push('<!--SPLIT-->');
+
+  // tours
+  S.rounds.forEach((r, i) => {
+    const d = r.data, cands = d.candidates || [], extra = (d.alternatives_set_aside || []).filter((a) => !cands.some((c) => c.code === a.code));
+    parts.push('<div class="link"></div>');
+    if (i > 0) {
+      const prev = S.rounds[i - 1].data, a = topOf(prev), b = topOf(d);
+      const st = (x) => (STATUS[x.status] || [x.status])[0];
+      parts.push(`<div class="node static diff"><div class="k">What changed</div><div class="t">${esc(r.cause)}</div><dl class="chg">
+        <dt>Status</dt><dd>${prev.status === d.status ? esc(st(d)) + ' (unchanged)' : esc(st(prev)) + ' → <b>' + esc(st(d)) + '</b>'}</dd>
+        <dt>Retained code</dt><dd>${(a && a.code) === (b && b.code) ? (b ? esc(fmtCode(b.code)) + ' (unchanged)' : 'none (unchanged)') : (a ? esc(fmtCode(a.code)) : 'none') + ' → <b>' + (b ? esc(fmtCode(b.code)) : 'none') + '</b>'}</dd>
+        <dt>Confidence</dt><dd>${a ? num(a.confidence) : 'n/a'} → ${b ? num(b.confidence) : 'n/a'}</dd></dl></div><div class="link"></div>`);
+    }
+    parts.push(`<span class="tour">${i === 0 ? 'First assessment' : 'New assessment'} · ${num(r.seconds)} s</span><div class="link"></div>`);
+    if (!cands.length && !extra.length) {
+      parts.push(`<div class="node static"><div class="k">Candidates</div><div class="s">The API returned no candidate in this round.${d.gate_hint ? ' Reason returned: ' + esc(d.gate_hint) : ''}</div></div>`);
+    } else {
+      parts.push('<div class="cands">' + cands.map((c) => {
+        const out = Boolean(c.set_aside_reason);
+        return `<button class="cand ${out ? 'out' : ''}" data-d="${detail(candDetail(c, d))}"><span class="conf">${num(c.confidence)}</span><div class="code">${esc(fmtCode(c.code))}</div><div class="ttl">${esc(title(c))}</div><span class="tag ${out ? 'out' : 'keep'}">${out ? 'Set aside' : 'Still plausible'}</span></button>`;
+      }).join('') + extra.map((a) => `<button class="cand out" data-d="${detail(`<h3>${esc(fmtCode(a.code))}</h3><h4 class="con">What weighs against it</h4><p>${esc(a.set_aside_reason)}</p>`)}"><div class="code">${esc(fmtCode(a.code))}</div><div class="ttl">${esc(a.set_aside_reason)}</div><span class="tag out">Set aside</span></button>`).join('') + '</div>');
+    }
+    const qs = d.questions || [];
+    if (qs.length && r.answered) {
+      parts.push(`<div class="link"></div><div class="node static"><div class="k">Question to the merchant · answer confirmed</div>${qs.map((q) => `<div class="s">${esc(q.question)}</div>`).join('')}<div class="facts">${Object.entries(r.answered).map(([k, v]) => `<div class="fact reponse" style="cursor:default"><span><b>${esc(FACT_FR[k] || k)}</b>: ${esc(factValue(k, v))}</span><span class="src">Confirmed answer</span><span></span></div>`).join('')}</div></div>`);
+    } else if (qs.length && i === S.rounds.length - 1 && !S.busy && !S.conflicts.length && !S.saved) {
+      parts.push(`<div class="link"></div><form class="node static q" id="answers"><div class="k">Missing information · question to the merchant</div>
+        ${qs.map((q) => `<div class="qrow"><div class="t">${esc(q.question)}</div><div class="why">${esc(q.why || '')}</div>${inputFor(q.fact)}</div>`).join('')}
+        <div style="margin-top:14px"><button class="btn" type="submit">Answer and reassess</button></div></form>`);
+    }
+  });
+
+  if (S.busy) parts.push(`<div class="link"></div><div class="loading"><div class="spin"></div>${esc(S.busy)}</div>`);
+  if (S.error) parts.push('<div class="link"></div><div class="err">' + esc(S.error) + '</div>');
+
+  // proposition
+  if (last && !S.busy && !S.conflicts.length) {
+    const d = last.data, st = STATUS[d.status] || [d.status, 'warn'], top = topOf(d);
+    const canValidate = top && (d.status === 'classified' || d.status === 'needs_review');
+    const pending = (d.questions || []).length && !last.answered;
+    const prec = (d.provenance && d.provenance.precedents) || [], cov = d.coverage || {};
+    const level = top ? (top.system === 'hs6' ? 'International level, 6 digits' : 'Destination nomenclature (' + esc(top.system) + ')') : 'n/a';
+    const undocumented = Object.entries(S.facts).filter(([, f]) => f.kind === 'main').map(([k]) => FACT_FR[k] || k);
+    parts.push('<div class="link"></div>');
+    parts.push(`<div class="node final"><div class="k">${pending ? 'Provisional proposal' : 'Proposal'}</div>
+      ${top ? `<div class="big">${esc(fmtCode(top.code))}</div><div class="s">${esc(title(top))}</div>` : '<div class="t">No code proposed</div>'}
+      <span class="tag ${st[1]}">${esc(st[0])}</span>
+      <dl class="kv">
+        <dt>Level</dt><dd>${level}${cov.hint ? `<br><span class="muted">${esc(cov.hint)}</span>` : ''}</dd>
+        ${top ? `<dt>Rationale</dt><dd>${esc(top.rationale || 'not provided')}</dd>
+        <dt>Sources</dt><dd>${(top.evidence || []).length ? top.evidence.map((e) => `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener">${esc(e.ref || e.kind)}</a>`).join(', ') : 'no excerpt returned'} <button type="button" class="btn ghost" style="margin-left:6px;padding:3px 9px" data-d="${detail(candDetail(top, d))}">For, against, unknown</button></dd>` : ''}
+        ${prec.length ? `<dt>Similar official rulings</dt><dd>${prec.slice(0, 3).map((x) => precHtmlLigne(x)).join('')}<span class="muted">Close by text only. A resemblance is not proof: check that they concern a comparable product.</span></dd>` : ''}
+        ${undocumented.length ? `<dt>No supporting document</dt><dd>${esc(undocumented.join(', '))}: entered by hand, no supporting document.</dd>` : ''}
+        <dt>Remaining work</dt><dd><ul class="todo" style="margin:0">${travailRestant().map((x) => `<li>${esc(x)}</li>`).join('')}</ul></dd>
+        <dt>Interpretation</dt><dd><a href="/classic-tree">Run this file through the interpretation tree</a></dd>
+        <dt>File</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" id="lisible">Open the readable file</button> <span class="muted">to print or save as PDF</span></dd>
+        <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Raw API response</h3><p class="muted">HTTP ${last.http} · ${num(last.seconds)} s${last.request_id ? ' · request ' + esc(last.request_id) : ''}</p><h4>Request</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Response</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">View the raw response</button></dd>
+      </dl>
+      <p class="hint" style="margin-top:12px">This is the engine's reading alone. The decision, its blockers and the validation are at the top of the page.</p>
+    </div>`);
+
+    parts.push('<!--TESTS-->');
+    // banc d'épreuve
+    const removable = Object.keys(S.facts);
+    parts.push(`<div class="node static bench"><div class="k">Stress-test this answer</div>
+      <div class="s">Three tests replayed live. The verdict compares the retained code and the status, before and after.</div>
+      <div class="t3">
+        <form class="tst" id="t-ref"><b>Rephrase the commercial text</b><p>Same facts, different words. The retained code must not change.</p><div class="line"><input name="v" required minlength="4" placeholder="e.g. Laptop dock with USB-C connection"><button class="btn sm" type="submit">Replay</button></div></form>
+        <form class="tst" id="t-rm"><b>Remove a piece of information</b><p>Without it, the answer must ask for the information again, or stay unchanged if it carried no weight.</p><div class="line"><select name="v" ${removable.length ? '' : 'disabled'}>${removable.length ? removable.map((k) => `<option value="${k}">${esc(FACT_FR[k] || k)}</option>`).join('') : '<option>No fact to remove</option>'}</select><button class="btn sm" type="submit" ${removable.length ? '' : 'disabled'}>Replay</button></div></form>
+        <form class="tst" id="t-con"><b>Introduce a contradiction</b><p>A sentence added to the description, contrary to the file. The document reading must flag it.</p><div class="line"><input name="v" required minlength="4" placeholder="e.g. Power only, no data ports."><button class="btn sm" type="submit">Replay</button></div></form>
+      </div>
+      ${S.tests.length ? `<table><tr><th>Test</th><th>Before → after</th><th>Verdict</th></tr>${S.tests.map((t) => `<tr><td><b>${esc(t.type)}</b><br><span class="muted">${esc(t.input)}</span></td><td>${esc(t.before)}<br>→ ${esc(t.after)}</td><td><span class="v ${t.tone}">${esc(t.verdict)}</span>${t.raw != null ? `<br><button type="button" class="btn ghost" style="padding:2px 8px;margin-top:4px" data-d="${detail(`<h3>${esc(t.type)}</h3><pre>${esc(JSON.stringify(t.raw, null, 1))}</pre>`)}">Details</button>` : ''}</td></tr>`).join('')}</table>` : ''}
+    </div>`);
+    parts.push('<!--OBLIG-->' + obligHtml() + '<!--DEST-->');
+    const rest = Object.keys(COUNTRIES).filter((c) => c !== p.dest);
+    parts.push(`<form class="node static bench" id="others"><div class="k">Six-digit pre-classification for other destinations</div>
+      <div class="s">One call per destination. Each row states the level actually obtained: national nomenclature, six digits only, or nothing.</div>
+      <div class="dests">${rest.map((c) => `<label><input type="checkbox" name="c" value="${c}" ${['US', 'GB', 'JP', 'CA'].includes(c) ? 'checked' : ''}>${esc(COUNTRIES[c])}</label>`).join('')}</div>
+      <button class="btn sm" type="submit">Assess these destinations</button>
+      ${S.others.length ? `<table><tr><th>Destination</th><th>Code</th><th>Level obtained</th><th>Status</th></tr>${S.others.map((o) => `<tr><td><b>${esc(COUNTRIES[o.country])}</b></td><td>${o.error ? '' : o.top ? `<b style="font-family:var(--mono)">${esc(fmtCode(o.top.code))}</b>` : 'none'}</td><td>${o.error ? esc(o.error) : o.top ? (o.top.system === 'hs6' ? 'Six digits only, national code not established' : 'National nomenclature (' + esc(o.top.system) + ')') : 'Nothing'}</td><td>${o.error ? '' : `<span class="v ${(STATUS[o.status] || [0, 'warn'])[1] === 'keep' ? 'ok' : (STATUS[o.status] || [0, 'warn'])[1]}">${esc((STATUS[o.status] || [o.status])[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(COUNTRIES[o.country])}</h3><p class="muted">${o.request_id ? 'request ' + esc(o.request_id) : ''}</p><pre>${esc(JSON.stringify(o.raw, null, 1))}</pre>`)}">Details</button>`}</td></tr>`).join('')}</table>` : ''}
+    </form>`);
+    parts.push('<!--END-->');
+  }
+
+  const html = parts.join(''), [centre, reste = ''] = html.split('<!--SPLIT-->');
+  const cut = (a, b) => { const i = reste.indexOf(a), j = reste.indexOf(b); return i < 0 || j < 0 ? '' : reste.slice(i + a.length, j); };
+  const droite = reste.includes('<!--TESTS-->') ? reste.slice(0, reste.indexOf('<!--TESTS-->')) : reste;
+  const ready = last && !S.busy && !S.conflicts.length, strip = (h) => h.replace(/^(<div class="link"><\/div>)+/, '');
+  const cols = `<div class="cols"><div><div class="coltitle">Documents, facts and encoded rule</div><div class="flow">${centre}</div></div><div><div class="coltitle">Engine proposal, alternatives and remaining work</div><div class="flow">${strip(droite)}</div></div></div>`;
+  const cf = ready && EXIG ? CF.conformiteHtml(EXIG, EXIG_TX, S.conf, { etiquette: (p.photo ? p.photo.lignes : effective(p.ds, 'fiche_technique').split('\n')), destination: p.dest, detail, locked: Boolean(S.saved), srcLabel: SRC_FR }) : '';
+  const cfb = ready && EXIG && p.dest === EXIG.marche ? CF.evaluer(EXIG, S.conf, []).bilan : null;
+  $('graph').innerHTML = !ready ? cols
+    : sceneHtml()
+      + more('raisonnement', 'See the reasoning', 'facts with their source, the encoded rule step by step, the engine\'s candidates and alternatives', cols)
+      + more('conformite', 'Market access requirements', cfb ? `${cfb.applicables} apply · ${cfb.a_determiner} to determine · ${cfb.preuves_manquantes} evidence items missing` : 'one market encoded', strip(cf))
+      + more('oblig', 'Duties and landed cost', 'estimate on the six-digit code, unknown components stay visible', strip(cut('<!--OBLIG-->', '<!--DEST-->')))
+      + more('tests', 'Stress tests', 'rephrase, remove a fact, introduce a contradiction', cut('<!--TESTS-->', '<!--OBLIG-->'))
+      + more('dest', 'Other destinations', 'six-digit pre-classification only, no national line', cut('<!--DEST-->', '<!--END-->'))
+      + (last.data.advisory_disclaimer ? `<p class="note" style="margin:18px auto 0">${esc(last.data.advisory_disclaimer)}</p>` : '');
+  $('graph').querySelectorAll('details.more').forEach((el) => el.addEventListener('toggle', () => { S.open[el.dataset.key] = el.open; }));
+  const on = (id, fn) => { const el = $(id); if (el) el.addEventListener('submit', fn); };
+  on('answers', onAnswer); on('validate', onValidate); on('addfact', onAddFact);
+  on('others', onOthers); on('oblig', onOblig); on('arbitrage', onArbitrage);
+  const nv = $('niveau'); if (nv) nv.addEventListener('change', () => { S.niveau = nv.value; render(); }); on('t-ref', testReformuler); on('t-rm', testRetirer); on('t-con', testContredire);
+  const dl = $('dljson'); if (dl) dl.addEventListener('click', download);
+  renderWorkflow();
+}
+
+// Exécution de la règle encodée sur les faits établis. Chaque étape montre
+// ensemble : la règle officielle, le fait vérifié sur le produit, la conséquence.
+const critVals = () => Object.fromEntries(Object.entries(S.crit).map(([k, x]) => [k, x.valeur]));
+const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
+const fmtIssue = (x) => (/^\d{6}$/.test(x) ? fmtCode(x) : x);
+function nodeName(id) { const n = ARBRE.noeuds[id]; if (!n) return id; return n.type === 'code' ? fmtCode(n.code) + ' · ' + (n.libelle || '') : n.type === 'hors_perimetre' ? 'outside the scope of the rule' : 'next question: ' + ((ARBRE.criteres.find((c) => c.id === n.critere) || {}).libelle || n.critere); }
+function regleEval() { return ARBRE ? evaluer(ARBRE, critVals()) : null; }
+function grapheHtml() {
+  const head = '<div class="link"></div>';
+  if (!ARBRE) return head + `<div class="node static rule"><div class="k">Encoded rule</div><div class="s">No encoded rule is loaded. The proposal on the right comes from the engine alone.</div></div>`;
+  const C = Object.fromEntries(ARBRE.criteres.map((c) => [c.id, c])), res = regleEval(), last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
+  const codes = new Set(Object.values(ARBRE.noeuds).filter((n) => n.type === 'code').map((n) => n.code));
+  const ver = `<div class="ver">${esc(ARBRE.titre || '')} · ${esc(ARBRE.nomenclature || '')}, 6-digit level · reference version, drafted by AI from the cited texts, not reviewed by a customs declarant. <a href="/classic-tree">Expert mode</a></div>`;
+  const couvert = Object.keys(S.crit).length || (top && codes.has(String(top.code).slice(0, 6)));
+  if (!couvert || (res.statut === 'hors_perimetre' && !res.chemin.length)) return head + `<div class="node static rule"><div class="k">Encoded rule</div><div class="t">This rule does not cover this product</div><div class="s">${esc(res.statut === 'hors_perimetre' ? (ARBRE.noeuds[res.noeud] || {}).motif || '' : 'The documents establish none of the criteria of the rule. It covers: ' + (ARBRE.perimetre || ''))}</div>${ver}</div>`;
+  const steps = res.chemin.map((s) => {
+    const n = ARBRE.noeuds[s.noeud], c = C[s.critere], f = S.crit[s.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
+    const fait = f.kind === 'reponse' ? `<b>${esc(brTxt(c, s.valeur))}</b> · answer confirmed by the merchant` : `<b>${esc(brTxt(c, s.valeur))}</b> · <q>${esc(f.citation)}</q> <span class="muted">(${esc(SRC_FR(f.source))})</span>`;
+    return `<button type="button" class="step" data-d="${detail(`<h3>${esc(c.libelle)}</h3><h4>The official rule</h4>${t.map((x) => `<p><b>${esc(x.ref)}</b> · <a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></p><blockquote>${esc(x.texte)}</blockquote>`).join('') || '<p class="muted">No text cited on this node.</p>'}<p>${esc(n.pourquoi || '')}</p><h4>The fact checked on the product</h4><p>${esc(c.question)} <b>${esc(brTxt(c, s.valeur))}</b></p>${f.kind === 'reponse' ? '<p>Answer given on this screen by the merchant. No document establishes it.</p>' : `<blockquote>${esc(f.citation)}</blockquote><p class="muted">${esc(SRC_FR(f.source))}</p>`}<h4>The consequence</h4><p>${esc(nodeName(n.branches[s.valeur]))}</p><p class="muted">Other branches: ${Object.entries(n.branches).filter(([v]) => v !== s.valeur).map(([v, cible]) => esc(brTxt(c, v)) + ' → ' + esc(nodeName(cible))).join('; ')}</p><h4>Scope</h4><p>${esc(ARBRE.nomenclature || '')}, 6-digit level, common to the countries that apply the Harmonized System. The national code of the destination is not established by this rule.</p>`)}">
+      <div class="l"><span>Rule</span><span>${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></span></div>
+      <div class="l"><span>Checked fact</span><span>${esc(c.question)} ${fait}</span></div>
+      <div class="l c"><span>Consequence</span><span>${esc(nodeName(n.branches[s.valeur]))}</span></div></button>`;
+  }).join('');
+  let fin;
+  if (res.statut === 'information_manquante') {
+    const n = ARBRE.noeuds[res.noeud], c = C[res.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
+    fin = `<div class="block"><div class="k">Blocking point · a fact is missing</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></div>
+      ${S.saved ? '' : `<div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>leads to ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div>`}</div>`;
+  } else if (res.statut === 'hors_perimetre') {
+    fin = `<div class="concl div"><div class="k">Rule conclusion</div><b>This product falls outside the scope of the rule</b><div class="s">${esc((ARBRE.noeuds[res.noeud] || {}).motif || '')}</div><div style="margin-top:6px">The rule reaches no conclusion. The engine proposal stands alone and must be verified.</div></div>`;
+  } else {
+    const n = ARBRE.noeuds[res.noeud], same = top && String(top.code).slice(0, 6) === res.code;
+    fin = `<div class="concl ${same ? '' : 'div'}"><div class="k">Rule conclusion</div><b class="c">${esc(fmtCode(res.code))}</b> ${esc(n.libelle || '')}<div class="s">${esc(n.motif || '')}</div>
+      <div style="margin-top:6px">${top ? (same ? 'The engine proposes the same code: the two lines of reasoning converge.' : `The engine proposes <b>${esc(fmtCode(String(top.code).slice(0, 6)))}</b>: the two lines of reasoning diverge, to be decided by an authorised person.`) : 'The engine kept no code for this destination.'}</div></div>`;
+  }
+  const reponses = Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse');
+  return head + `<div class="node static rule"><div class="k">Encoded rule · path followed for this product</div>${ver}${steps}${fin}
+    ${reponses.length && !S.saved ? `<div class="hint" style="margin-top:8px">${reponses.length} answer(s) given on this screen. <a href="#" data-critreset="1">Remove them</a></div>` : ''}
+    ${S.critRejetes ? `<div class="hint">${S.critRejetes} value(s) set aside at reading: cited passage not found word for word.</div>` : ''}</div>`;
+}
+
+// Une décision officielle proche, avec le résultat de la vérification d'applicabilité quand elle a été faite.
+const VERDICT = { applicable: ['Comparable to this product', 'keep'], partiellement: ['Partly comparable', 'warn'], non_applicable: ['Does not concern a comparable product', 'bad'], non_verifiable: ['Cannot be verified', 'out'] };
+function precHtmlLigne(x) {
+  const a = S.applic[x.ruling_id];
+  let etat = S.saved ? '' : `<button type="button" class="btn ghost" style="padding:2px 8px;margin-left:6px" data-applic="${esc(x.ruling_id)}">Check whether it applies</button>`;
+  if (a === 'encours') etat = ' <span class="muted">check in progress</span>';
+  else if (a && a.erreur) etat = ` <span class="tag bad">${esc(a.erreur)}</span>`;
+  else if (a) {
+    const v = VERDICT[a.verdict] || [a.verdict, 'warn'], cit = (o) => (o && o.citation ? `<blockquote>${esc(o.citation)}</blockquote>` : '<p class="muted">The product documents say nothing about it.</p>');
+    etat = ` <span class="tag ${v[1]}">${esc(v[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(x.ruling_id)}</h3><p><span class="tag ${v[1]}">${esc(v[0])}</span></p><p>${esc(a.motif || '')}</p>
+      <h4>The ruling</h4><p>${esc(a.decision.juridiction || '')} · ${esc(a.decision.date || '')} · ${a.decision.revoquee === true ? 'revoked' : a.decision.revoquee === false ? 'not revoked' : 'revocation cannot be verified'} · ${a.meme_juridiction === true ? 'same country as the destination' : a.meme_juridiction === false ? 'different country from the destination: it does not bind this customs authority' : 'destination country not compared'}</p>
+      <h4 class="pro">Common points verified</h4>${(a.points_communs || []).map((c) => `<p><b>${esc(c.aspect)}</b></p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}`).join('') || '<p class="muted">None.</p>'}
+      <h4 class="con">Differences</h4>${(a.differences || []).map((c) => `<p><b>${esc(c.aspect)}</b>${c.decisive ? ' · decisive' : ''}</p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}${c.pourquoi_ca_compte ? `<p>${esc(c.pourquoi_ca_compte)}</p>` : ''}`).join('') || '<p class="muted">None.</p>'}
+      <p class="muted">${a.rejetes || 0} item(s) set aside for lack of an exact quotation. The code of the ruling is never reused as the code of the product.</p>`)}">Details</button>`;
+  }
+  return `<div class="prec"><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, text resemblance ${num(x.similarity)})</span>${etat}</div>`;
+}
+async function verifierApplic(id) {
+  const last = S.rounds[S.rounds.length - 1], x = ((last.data.provenance || {}).precedents || []).find((q) => q.ruling_id === id);
+  if (!x) return;
+  S.applic[id] = 'encours'; render();
+  try { S.applic[id] = await post('/api/applicabilite', { produit: { description: effective(S.product.desc, 'description'), fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) }, decision: x, destination: S.product.dest }); }
+  catch (err) { S.applic[id] = { erreur: String(err.message || err).slice(0, 120) }; }
+  render();
+}
+
+// Obligations et droits pour la route : ce que l'API rend, avec ce qui est sourcé et ce qui ne l'est pas.
+function obligHtml() {
+  const dec = decision();
+  // consequences come after the decision: nothing is computed on a code that is still disputed or waiting for a fact
+  if (!dec.code || dec.blocages.some((b) => ['arbitrage', 'question_regle', 'question_moteur', 'contradiction', 'aucun_code'].includes(b.id)))
+    return `<div class="node static bench"><div class="k">Duties and landed cost</div><div class="s">Computed once the classification is usable. Still open: ${esc(dec.blocages.map((b) => b.message).join(' ') || 'no code is retained.')}</div></div>`;
+  const o = S.oblig, hs6 = dec.code;
+  let body = `<form class="line" id="oblig" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px"><input name="v" type="number" min="0" step="any" placeholder="Goods value in USD (optional)"><button class="btn sm" type="submit" ${o === 'encours' ? 'disabled' : ''}>${o === 'encours' ? 'Call in progress' : 'Query'}</button></form>`;
+  if (o && o.erreur) body += `<div class="err" style="margin-top:10px">${esc(o.erreur)}</div>`;
+  else if (o && o !== 'encours') {
+    const nonS = (o.obligations || []).filter((x) => !x.sourcee).length;
+    body += `<h4 class="k" style="margin-top:14px">Obligations (${(o.obligations || []).length})</h4>
+      ${(o.obligations || []).map((x) => `<div class="ob"><b>${esc(x.titre)}</b> <span class="tag ${x.sourcee ? 'keep' : 'warn'}">${x.sourcee ? 'source text provided' : 'inferred by a model, no source text'}</span>${x.autorite ? `<br><span class="muted">${esc(x.autorite)}</span>` : ''}${x.source_url ? ` <a href="${safeUrl(x.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>`).join('') || '<div class="muted">No obligation returned for this route.</div>'}
+      ${nonS ? `<div class="hint">${nonS} obligation(s) without an official text: leads to check, not a list of established obligations.</div>` : ''}
+      <h4 class="k" style="margin-top:14px">Customs duty</h4>
+      ${o.droits ? `<div class="ob"><b>${o.droits.taux_min === o.droits.taux_max || o.droits.taux_max == null ? num(o.droits.taux) : num(o.droits.taux_min) + ' to ' + num(o.droits.taux_max)} ${esc(o.droits.unite || '%')}</b> · ${esc(o.droits.nature || '')}<br><span class="muted">${esc(o.droits.version || '')}${o.droits.ligne_exacte_connue === false ? ' · read across ' + esc(o.droits.lignes_lues) + ' national tariff lines under ' + esc(fmtCode(hs6)) + ', the exact tariff line of the product is not established' : ''}</span>${o.droits.source_url ? ` <a href="${safeUrl(o.droits.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>` : '<div class="muted">No rate established.</div>'}
+      <h4 class="k" style="margin-top:14px">Landed cost</h4>
+      ${o.cout ? `<div class="comp">${(o.cout.composantes || []).map((c) => `<span>${esc(c.nom)}${c.taux_pct != null ? ' (' + num(c.taux_pct) + ' %)' : ''}</span><span class="${c.connu ? '' : 'u'}">${c.connu ? num(c.montant) + ' ' + esc(o.cout.devise || '') : 'unknown'}</span>`).join('')}<b>${o.cout.partiel ? 'Partial total' : 'Total'}</b><b>${o.cout.total != null ? num(o.cout.total) + ' ' + esc(o.cout.devise || '') : 'cannot be calculated'}</b></div>${o.cout.partiel ? '<div class="hint">Partial total: the unknown components are not counted in it.</div>' : ''}` : '<div class="muted">Not calculated.</div>'}
+      ${(o.manquants || []).length ? `<h4 class="k" style="margin-top:14px">What is missing</h4><ul class="todo">${o.manquants.map((m) => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}`;
+  }
+  return `<div class="link"></div><div class="node static bench"><div class="k">Obligations and duties · ${esc(COUNTRIES[S.product.origin])} → ${esc(COUNTRIES[S.product.dest])}</div>
+    <div class="s">Calculated on the six-digit code ${esc(fmtCode(hs6))}, which remains an unvalidated proposal. A national code would change the applicable rate.</div>${body}</div>`;
+}
+async function onOblig(e) {
+  e.preventDefault();
+  const dec = decision(), v = parseFloat(new FormData(e.target).get('v'));
+  if (!dec.code) return;
+  S.oblig = 'encours'; render();
+  try { S.oblig = await post('/api/obligations', { description: effective(S.product.desc, 'description'), sku: S.product.sku, hs6: dec.code, origine: S.product.origin, destination: S.product.dest, valeur_usd: v > 0 ? v : undefined }); }
+  catch (err) { S.oblig = { erreur: String(err.message || err).slice(0, 200) }; }
+  render();
+}
+
+// One decision for the file: engine and encoded rule read together, with what still blocks validation.
+function decision() {
+  const last = S.rounds[S.rounds.length - 1]; if (!last) return null;
+  const d = last.data, top = topOf(d), res = regleEval();
+  const couvert = ARBRE && (Object.keys(S.crit).length || (top && Object.values(ARBRE.noeuds).some((n) => n.type === 'code' && n.code === String(top.code).slice(0, 6))));
+  const decisionInput = {
+    conflits: S.conflicts.length,
+    moteur: { statut: d.status, code: top ? top.code : null, questions: (d.questions || []).length && !last.answered ? d.questions.length : 0 },
+    regle: res && couvert ? { statut: res.statut, code: res.code } : res && res.statut === 'hors_perimetre' ? { statut: 'hors_perimetre' } : null,
+    arbitrage: S.arbitrage, niveauRequis: S.niveau, niveauObtenu: top ? (top.system === 'hs6' ? 'hs6' : 'national') : null,
+  };
+  const preliminary = decider(decisionInput), selected = selectedCode(preliminary, d.candidates || [], S.arbitrage, S.niveau);
+  return decider({ ...decisionInput, niveauObtenu: selected.code && selected.code.length > 6 && selected.system !== 'hs6' ? 'national' : 'hs6' });
+}
+const codeLabel = (code) => { const n = ARBRE && Object.values(ARBRE.noeuds).find((x) => x.type === 'code' && x.code === code); const last = S.rounds[S.rounds.length - 1], c = last && (last.data.candidates || []).find((x) => String(x.code).slice(0, 6) === code); return (n && n.libelle) || (c && title(c)) || ''; };
+
+// The one scene: product, facts, code, why, evidence, state, actions. Everything else sits behind "See the reasoning".
+function sceneHtml() {
+  const last = S.rounds[S.rounds.length - 1], d = last.data, top = topOf(d), dec = decision(), res = regleEval(), p = S.product;
+  const nFacts = Object.keys(S.facts).length + Object.values(S.crit).filter((x) => x.kind === 'pieces').length;
+  const toConfirm = (p.photo ? p.photo.illisible.length : 0) + Object.values(S.facts).filter((f) => f.kind === 'main').length + Object.values(S.crit).filter((x) => x.kind === 'reponse').length;
+  const ruleNode = res && res.statut === 'code' ? ARBRE.noeuds[res.noeud] : null;
+  const why = dec.origine === 'convergence' || (dec.origine === 'arbitrage' && ruleNode && ruleNode.code === dec.code) ? ruleNode.motif : dec.origine === 'arbitrage' ? S.arbitrage.raison : top ? (top.rationale || '') : '';
+  const prec = (d.provenance && d.provenance.precedents) || [], checked = prec.filter((x) => S.applic[x.ruling_id] && S.applic[x.ruling_id].verdict);
+  const quotes = Object.values(S.facts).reduce((n, f) => n + (f.quotes || []).length, 0) + Object.values(S.crit).filter((x) => x.kind === 'pieces').length;
+  const ruleTexts = res ? new Set(res.chemin.flatMap((st) => ARBRE.noeuds[st.noeud].base || [])).size : 0;
+  const head = dec.code
+    ? `<div class="code">${esc(fmtCode(currentSelection().code))}<small>${esc(codeLabel(dec.code))}</small></div>`
+    : dec.codes.moteur || dec.codes.regle ? `<div class="vs">${dec.codes.moteur ? `<div><span>Engine</span><b>${esc(fmtCode(dec.codes.moteur))}</b><span>${esc(codeLabel(dec.codes.moteur)).slice(0, 60)}</span></div>` : ''}${dec.codes.regle ? `<div><span>Encoded rule</span><b>${esc(fmtCode(dec.codes.regle))}</b><span>${esc(codeLabel(dec.codes.regle)).slice(0, 60)}</span></div>` : ''}</div>`
+      : '<div class="code" style="font-size:22px">No code proposed</div>';
+  const origine = { convergence: 'Engine and encoded rule reach the same code', moteur: res && res.statut === 'information_manquante' ? 'Proposed by the engine, the encoded rule is not finished' : 'Proposed by the engine, no encoded rule covers this product', arbitrage: 'Retained by ' + (S.arbitrage ? S.arbitrage.qui : '') + ' after arbitration' }[dec.origine] || 'Two readings disagree';
+
+  // what blocks, with the action next to it
+  let action = '';
+  if (dec.blocages.some((b) => b.id === 'question_regle')) {
+    const c = ARBRE.criteres.find((x) => x.id === res.critere), n = ARBRE.noeuds[res.noeud];
+    action += `<div class="block" style="background:#fff"><div class="k">Deciding question</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')}</div><div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>leads to ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div></div>`;
+  }
+  if (dec.blocages.some((b) => b.id === 'arbitrage')) {
+    const comparables = prec.filter((x) => { const a = S.applic[x.ruling_id]; return a && (a.verdict === 'applicable' || a.verdict === 'partiellement'); });
+    const viaPrec = Object.fromEntries(comparables.map((x) => [String(x.official_code).slice(0, 6), x.ruling_id]));
+    const opts = [...new Set([dec.codes.moteur, dec.codes.regle, ...Object.keys(viaPrec)].filter(Boolean))];
+    action += `<form class="arb" id="arbitrage"><div class="k">Arbitration by a declarant</div><div class="s">${esc(dec.motif || '')} Both readings stay in the file; one code is retained, with its reason and a signature.</div>
+      <label>Code retained</label><div class="pick">${opts.map((c, i) => `<label><input type="radio" name="code" value="${c}" ${i === 0 ? 'required' : ''}><b style="font-family:var(--mono)">${esc(fmtCode(c))}</b> ${c === dec.codes.regle ? 'encoded rule' : c === dec.codes.moteur ? 'engine' : 'ruling ' + esc(viaPrec[c]) + ', checked as comparable'}</label>`).join('')}<label><input type="radio" name="code" value="autre">another code <input name="autre" maxlength="7" placeholder="0000.00" style="width:90px;padding:4px 6px"></label></div>
+      <label>Reason, as it will appear in the file</label><textarea name="raison" required minlength="20" placeholder="e.g. The station connects peripherals to the computer; its network port is one port among others, so it stays a unit of an ADP machine."></textarea>
+      <label>Elements examined</label><div class="chk">${['Label or datasheet', 'Texts cited by the encoded rule', 'Rationale of the engine', 'Similar official rulings', 'The product itself'].map((x) => `<label><input type="checkbox" name="vu" value="${x}">${x}</label>`).join('')}</div>
+      <label>Declarant</label><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px"><input name="qui" required minlength="2" placeholder="Name of the declarant who arbitrates"><button class="btn sm" type="submit">Record the arbitration</button></div></form>`;
+  }
+  const others = dec.blocages.filter((b) => !['question_regle', 'arbitrage'].includes(b.id));
+  const state = S.saved ? `<div class="state ok"><b>API approval acknowledged for ${esc(S.saved.validated_by)}.</b> Review version ${esc(W.version.approval.version)}. The shared classification keeps this approval; the extended evidence file is saved in this browser.</div>`
+    : dec.peutValider ? `<div class="state ok"><b>The file is consistent: it can be validated.</b>${S.niveau === 'hs6' ? ' Approval covers only the selected six-digit level.' + (top && top.system !== 'hs6' ? ' A national candidate is available; select national tariff line to review that full code.' : ' No national candidate was returned.') : ' Approval covers the selected national tariff line.'}</div>`
+    : `<div class="state"><b>${dec.blocages.length} point${dec.blocages.length === 1 ? '' : 's'} to settle before validation</b><ul>${dec.blocages.map((b) => `<li>${esc(b.message)}</li>`).join('')}</ul>${others.some((b) => b.id === 'question_moteur') ? '<a href="#" data-open="raisonnement">Answer the engine\'s question in the reasoning below</a>' : ''}</div>`;
+  const openQ = dec.blocages.filter((b) => ['question_regle', 'question_moteur', 'contradiction'].includes(b.id)).length;
+  const cout = S.oblig && S.oblig !== 'encours' && !S.oblig.erreur ? S.oblig.cout : null, inconnus = cout ? (cout.composantes || []).filter((c) => !c.connu).length : 0;
+  const ST = [
+    ['Product data', openQ ? [openQ + ' point' + (openQ === 1 ? '' : 's') + ' open', 'warn'] : toConfirm ? ['sufficient, ' + toConfirm + ' to confirm', 'warn'] : ['sufficient', 'keep']],
+    ['Coverage', top && top.system !== 'hs6' ? ['national line (' + top.system + ')', 'keep'] : ['six digits only for ' + COUNTRIES[p.dest], 'warn']],
+    ['Classification', !dec.code && !dec.codes.moteur && !dec.codes.regle ? ['no code', 'bad'] : openQ ? ['needs information', 'warn'] : dec.blocages.some((b) => b.id === 'arbitrage') ? ['needs review: two readings', 'warn'] : ['suggested', 'keep']],
+    ['Human validation', S.saved ? ['approved by ' + S.saved.validated_by, 'keep'] : S.arbitrage && dec.origine === 'arbitrage' ? ['arbitrated, not yet approved', 'warn'] : ['not validated', 'out']],
+    ['Cost', !cout ? ['not computed', 'out'] : cout.partiel || inconnus ? ['partial, ' + inconnus + ' component' + (inconnus === 1 ? '' : 's') + ' unknown', 'warn'] : ['complete', 'keep']],
+  ];
+  const strip = `<div class="strip">${ST.map(([k, [v, tone]]) => `<div><span>${k}</span><b class="tag ${tone}">${esc(v)}</b></div>`).join('')}</div>`;
+  const arb = S.arbitrage && dec.origine === 'arbitrage' && !S.saved ? `<div class="hint" style="margin-top:8px">Arbitration recorded: ${esc(fmtCode(dec.code))}, by ${esc(S.arbitrage.qui)}. <a href="#" data-arbreset="1">Reopen it</a></div>` : '';
+  return `<div class="scene"><div class="top">${p.photo && p.photo.apercu ? `<img src="${p.photo.apercu}" alt="">` : '<span></span>'}
+      <div><div class="k" style="font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5)">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div style="margin:2px 0 8px;color:var(--g7)">${nFacts} fact${nFacts === 1 ? '' : 's'} established from the documents · ${toConfirm} to confirm</div>${head}<div class="muted" style="font-size:13px;margin-top:4px">${esc(origine)}</div></div>
+      <div style="text-align:right"><label style="margin:0 0 3px">Validate at</label><select id="niveau" style="width:auto;padding:5px 8px;font-size:13px" ${S.saved ? 'disabled' : ''}><option value="hs6" ${S.niveau === 'hs6' ? 'selected' : ''}>six-digit level</option><option value="national" ${S.niveau === 'national' ? 'selected' : ''}>national tariff line</option></select></div></div>
+    <div class="lines"><span>Why</span><span>${esc(dec.code ? (why || 'No reason was returned for this code.') : 'No single reason yet: the two readings below disagree, or no code is on the table.')}</span>
+      <span>Evidence</span><span>${quotes} quoted passage${quotes === 1 ? '' : 's'} from the label or datasheet · ${ruleTexts} official text${ruleTexts === 1 ? '' : 's'} on the rule's path · ${prec.length ? (checked.length ? checked.length + ' of ' + prec.length + ' similar rulings checked for comparability' : prec.length + ' similar rulings, none checked for comparability yet') : 'no similar ruling returned'}</span></div>
+    ${strip}${state}${S.saved ? '' : action}${arb}
+    <div class="acts">${S.saved ? '<button type="button" class="btn ghost" id="dljson">Download extended evidence (JSON)</button>' : `<form id="validate" class="review-form"><label for="who">Reviewer</label><input id="who" required minlength="2" placeholder="Name of the authorised person" value="${esc(W.reviewText.who || (S.arbitrage && dec.origine === 'arbitrage' ? S.arbitrage.qui : ''))}"><label for="review-comment">Review rationale</label><textarea id="review-comment" required minlength="20" placeholder="Why this code follows from the evidence">${esc(W.reviewText.comment || S.arbitrage?.raison || '')}</textarea><button class="btn ok" type="submit" ${dec.peutValider && W.identity?.confirmed && W.classificationId && !W.apiBusy && !W.reviewUncertain ? '' : 'disabled'}>${W.apiBusy ? 'Saving review…' : 'Approve this version'}</button></form>`}
+      <button type="button" class="btn ghost" id="lisible">${S.saved ? 'Open extended evidence dossier' : 'Open pre-classification dossier'}</button></div></div>`;
+}
+function onArbitrage(e) {
+  e.preventDefault();
+  const f = new FormData(e.target), pick = f.get('code'), a = { code: pick === 'autre' ? String(f.get('autre') || '').replace(/\D/g, '') : pick, raison: String(f.get('raison') || '').trim(), qui: String(f.get('qui') || '').trim(), elements: f.getAll('vu'), quand: new Date().toISOString(), codes_en_presence: decision().codes };
+  if (!arbitrageValide(a)) { S.error = 'The arbitration needs a six-digit code, a reason of at least 20 characters and a name.'; return render(); }
+  S.error = null; S.arbitrage = a; render();
+}
+const more = (key, title, hint, body) => (body ? `<details class="more" data-key="${key}" ${S.open[key] ? 'open' : ''}><summary>${esc(title)}<span>${esc(hint)}</span></summary><div class="in">${body}</div></details>` : '');
+
+// Ce qu'il reste à faire avant qu'un déclarant puisse s'appuyer sur le dossier.
+function travailRestant() {
+  const last = S.rounds[S.rounds.length - 1], d = last.data, top = topOf(d), out = [], res = regleEval();
+  if ((d.questions || []).length && !last.answered) out.push('Answer the engine question: ' + d.questions.map((q) => FACT_FR[q.fact] || q.fact).join(', ') + '.');
+  if (res && res.statut === 'information_manquante') out.push('Establish the fact that blocks the encoded rule: ' + (ARBRE.criteres.find((c) => c.id === res.critere) || {}).question);
+  if (res && res.statut === 'code' && top && String(top.code).slice(0, 6) !== res.code) out.push('Resolve the divergence between the engine (' + fmtCode(String(top.code).slice(0, 6)) + ') and the encoded rule (' + fmtCode(res.code) + ').');
+  const rep = Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse').length;
+  if (rep) out.push('Document ' + rep + ' answer(s) given without a supporting document in the encoded rule.');
+  const main = Object.entries(S.facts).filter(([, f]) => f.kind === 'main').map(([k]) => FACT_FR[k] || k);
+  if (main.length) out.push('Back with a document: ' + main.join(', ') + '.');
+  if (S.product.photo && S.product.photo.illisible.length) out.push('Check on the product ' + S.product.photo.illisible.length + ' item(s) not read on the photo.');
+  if (!top) out.push('No code kept by the engine for this destination.');
+  else if (top.system === 'hs6') out.push('Establish the national code for ' + COUNTRIES[S.product.dest] + ': the proposal stops at six digits.');
+  const prec = (d.provenance && d.provenance.precedents) || [];
+  if (prec.length) out.push('Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.');
+  if (ARBRE) out.push('Have the encoded rule reviewed by a customs declarant: it is drafted by AI.');
+  if (!S.saved) out.push('Have the proposal validated by an authorised person.');
+  return out;
+}
+
+function inputFor(fact) {
+  if (ENUM_FACTS[fact]) return `<select name="${fact}" required><option value="">Choose</option>${ENUM_FACTS[fact].map((o) => `<option>${o}</option>`).join('')}</select>`;
+  if (NUM_FACTS.includes(fact)) return `<input name="${fact}" type="number" min="0" step="any" required placeholder="${esc(FACT_FR[fact])}">`;
+  if (fact === 'dimensions') return `<div class="dims" style="grid-template-columns:1fr 1fr 1fr"><input name="dimensions.length_mm" type="number" min="0" step="any" placeholder="L mm"><input name="dimensions.width_mm" type="number" min="0" step="any" placeholder="W mm"><input name="dimensions.height_mm" type="number" min="0" step="any" placeholder="H mm"></div>`;
+  if (fact === 'composition') return `<input name="composition" required placeholder="e.g. plastics 70, metal 30">`;
+  return `<input name="${fact}" required maxlength="200" placeholder="${esc(FACT_FR[fact] || fact)}">`;
+}
+function parseFact(name, v) {
+  if (name === 'composition') return v.split(',').map((x) => { const m = x.trim().match(/^(.*?)(?:\s+(\d+(?:\.\d+)?)\s*%?)?$/); return m[2] ? { material: m[1].trim(), percent: parseFloat(m[2]) } : { material: m[1].trim() }; }).filter((c) => c.material);
+  if (NUM_FACTS.includes(name)) { const n = parseFloat(String(v).replace(',', '.')); return n > 0 ? n : null; }
+  return v;
+}
+
+function onAnswer(e) {
+  e.preventDefault();
+  const answered = {};
+  for (const [name, raw] of new FormData(e.target).entries()) {
+    const v = String(raw).trim(); if (!v) continue;
+    if (name.startsWith('dimensions.')) { const n = parseFloat(v); if (n > 0) (answered.dimensions ||= {})[name.split('.')[1]] = n; }
+    else { const val = parseFact(name, v); if (val != null) answered[name] = val; }
+  }
+  if (!Object.keys(answered).length) return;
+  const n = S.rounds.length;
+  S.rounds[n - 1].answered = answered;
+  for (const k of Object.keys(answered)) S.facts[k] = { value: answered[k], kind: 'reponse', origin: 'Merchant answer to the question in round ' + n };
+  run('Merchant answer: ' + Object.keys(answered).map((k) => FACT_FR[k] || k).join(', '));
+}
+function onAddFact(e) {
+  e.preventDefault();
+  const f = new FormData(e.target), k = f.get('k'), val = parseFact(k, String(f.get('v')).trim());
+  if (!k || val == null || val === '') return;
+  S.facts[k] = { value: val, kind: 'main', origin: 'Entered by hand on this screen, no supporting document' };
+  run('Fact added without a supporting document: ' + (FACT_FR[k] || k));
+}
+function removeFact(k) {
+  delete S.facts[k];
+  run('Fact removed: ' + (FACT_FR[k] || k));
+}
+function keep(i, side) {
+  const c = S.conflicts[i], lose = c[side === 'a' ? 'b' : 'a'];
+  if (lose.source.startsWith('caracteristique:')) delete S.facts[lose.source.split(':')[1]];
+  else S.struck.push({ source: lose.source, quote: lose.quote, kept: c[side], sujet: c.sujet });
+  S.conflicts = [];
+  run('Contradiction resolved (' + c.sujet + '): "' + lose.quote + '" declared false');
+}
+
+// Les trois épreuves. Elles rejouent un appel à côté du dossier, sans le modifier.
+const snap = (d) => { const t = topOf(d); return (t ? fmtCode(t.code) : 'no code') + ', ' + (STATUS[d.status] || [d.status])[0].toLowerCase(); };
+async function bench(label, fn) {
+  S.busy = label; S.error = null; render();
+  try { S.tests.push(await fn()); } catch (err) { S.error = String(err.message || err); }
+  S.busy = null; render();
+}
+function testReformuler(e) {
+  e.preventDefault();
+  const text = new FormData(e.target).get('v').trim(), base = S.rounds[S.rounds.length - 1].data, before = decision();
+  bench('Test: rephrasing replayed on the engine and on the encoded rule.', async () => {
+    const pieces = { description: text, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) };
+    const [r, cr] = await Promise.all([classify(text, S.facts), ARBRE ? post('/api/criteres', { pieces, criteres: ARBRE.criteres }).catch(() => null) : null]);
+    // same answers from the seller, facts re-read from the documents with the new wording
+    const crit = cr ? { ...Object.fromEntries(Object.entries(cr.valeurs).map(([k, x]) => [k, { ...x, kind: 'pieces' }])), ...Object.fromEntries(Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse')) } : S.crit;
+    const res = ARBRE ? evaluer(ARBRE, Object.fromEntries(Object.entries(crit).map(([k, x]) => [k, x.valeur]))) : null, t = topOf(r.data);
+    const after = decider({ moteur: { statut: r.data.status, code: t ? t.code : null, questions: 0 }, regle: res && Object.keys(crit).length ? { statut: res.statut, code: res.code } : null, arbitrage: null });
+    const a = topOf(base), eng = (x) => (x ? fmtCode(String(x.code).slice(0, 6)) : 'no code'), dc = (x) => (x.code ? fmtCode(x.code) : x.codes.regle ? fmtCode(x.codes.regle) + ' (rule)' : 'no decision');
+    const ruleBefore = before.codes.regle, ruleAfter = after.codes.regle, engineSame = (a && String(a.code).slice(0, 6)) === (t && String(t.code).slice(0, 6));
+    const holds = ruleBefore ? ruleBefore === ruleAfter : engineSame;
+    return { type: 'Rephrasing', input: text, before: `engine ${eng(a)}, encoded rule ${ruleBefore ? fmtCode(ruleBefore) : 'not concluded'}`, after: `engine ${eng(t)}, encoded rule ${ruleAfter ? fmtCode(ruleAfter) : 'not concluded'}`,
+      tone: holds ? (engineSame ? 'ok' : 'warn') : 'bad', verdict: holds ? (engineSame ? 'Holds: neither reading changes with the wording' : 'The rule on confirmed facts holds; the engine alone changes its code with the wording') : (ruleBefore ? 'Does not hold: the encoded rule changes its conclusion' : 'Does not hold: the engine changes its code and no rule covers this product'), request_id: r.request_id, raw: r.body };
+  });
+}
+function testRetirer(e) {
+  e.preventDefault();
+  const k = new FormData(e.target).get('v'), base = S.rounds[S.rounds.length - 1].data;
+  bench('Test: call replayed without "' + (FACT_FR[k] || k) + '".', async () => {
+    const facts = { ...S.facts }; delete facts[k];
+    const r = await classify(effective(S.product.desc, 'description'), facts), a = topOf(base), b = topOf(r.data);
+    const asks = (r.data.questions || []).some((q) => q.fact === k) || (r.data.missing_attributes || []).includes(k);
+    const same = (a && a.code) === (b && b.code) && base.status === r.data.status;
+    const [tone, verdict] = asks ? ['ok', 'Holds: it asks for this information again'] : same ? ['warn', 'No effect: this information carried no weight in the decision'] : ['bad', 'Does not hold: the answer changes without asking for the information again'];
+    return { type: 'Removal', input: FACT_FR[k] || k, before: snap(base), after: snap(r.data), tone, verdict, request_id: r.request_id, raw: r.body };
+  });
+}
+function testContredire(e) {
+  e.preventDefault();
+  const text = new FormData(e.target).get('v').trim();
+  bench('Test: document reading replayed with the added sentence.', async () => {
+    const L = await lire(effective(S.product.desc, 'description') + ' ' + text, S.facts), n = L.contradictions.length;
+    return { type: 'Contradiction', input: text, before: 'no contradiction', after: n ? n + ' contradiction(s) flagged: ' + L.contradictions.map((c) => c.sujet).join(', ') : 'nothing flagged', tone: n ? 'ok' : 'bad', verdict: n ? 'Holds: contradiction flagged' : 'Does not hold: nothing flagged', raw: L };
+  });
+}
+
+async function onOthers(e) {
+  e.preventDefault();
+  const list = new FormData(e.target).getAll('c'); if (!list.length) return;
+  S.busy = 'Assessing ' + list.length + ' destination(s) in parallel.'; S.error = null; render();
+  const desc = effective(S.product.desc, 'description');
+  S.others = await Promise.all(list.map(async (country) => {
+    try { const r = await classify(desc, S.facts, country); return { country, status: r.data.status, top: topOf(r.data), request_id: r.request_id, raw: r.body }; }
+    catch (err) { return { country, error: String(err.message || err) }; }
+  }));
+  S.busy = null; render();
+}
+
+function ouvrirDossier() {
+  const d = S.saved || dossier(null), w = window.open('', '_blank');
+  if (w) { w.document.open(); w.document.write(dossierHtml(d)); w.document.close(); }
+  else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([dossierHtml(d)], { type: 'text/html' })); a.download = 'classification-file-' + d.sku + '.html'; a.click(); }
+}
+function dossier(who) {
+  const last = S.rounds[S.rounds.length - 1], dec = decision();
+  // the code of the file is the decision's; evidence and label follow the reading that produced it
+  const engineTop = topOf(last.data) || {}, same = dec.code && String(engineTop.code || '').slice(0, 6) === dec.code;
+  const res0 = regleEval(), ruleTexts = res0 ? [...new Set(res0.chemin.flatMap((st) => ARBRE.noeuds[st.noeud].base || []))].map((b) => TX[b]).filter(Boolean) : [];
+  const top = { ...(same || !dec.code ? engineTop : { code: dec.code, system: 'hs6', title: { en: codeLabel(dec.code) }, source_version: ARBRE ? ARBRE.nomenclature : null, evidence: ruleTexts.map((t) => ({ ref: t.ref, url: t.url, excerpt: t.texte, source_version: t.source })) }), ...currentSelection() };
+  return {
+    sku: S.product.sku, destination: S.product.dest, code: top.code, system: top.system, status_api: last.data.status, validated_by: who, request_id: last.request_id,
+    pieces: { description: S.product.desc, fiche_technique: S.product.ds, passages_declares_faux: S.struck },
+    caracteristiques: Object.fromEntries(Object.entries(S.facts).map(([k, f]) => [k, { valeur: f.value, provenance: KIND[f.kind], detail: f.origin, passages: f.quotes || [] }])),
+    tours: S.rounds.map((r) => ({ cause: r.cause, statut: r.data.status, code_retenu: (topOf(r.data) || {}).code || null, confiance: (topOf(r.data) || {}).confidence ?? null, request_id: r.request_id, secondes: r.seconds })),
+    preuves: (top.evidence || []).map((e) => ({ ref: e.ref, url: e.url, extrait: e.excerpt, version: e.source_version })),
+    decisions_officielles_proches: ((last.data.provenance && last.data.provenance.precedents) || []).map((x) => { const a = S.applic[x.ruling_id]; return a && a !== 'encours' && !a.erreur ? { ...x, applicabilite: a } : x; }),
+    obligations: S.oblig && S.oblig !== 'encours' && !S.oblig.erreur ? S.oblig : null,
+    photo: S.product.photo ? { fichier: S.product.photo.name, non_lu: S.product.photo.illisible } : null,
+    autres_destinations: S.others.map((o) => ({ pays: o.country, statut: o.status || null, code: o.top ? o.top.code : null, nomenclature: o.top ? o.top.system : null, request_id: o.request_id || null, erreur: o.error || null })),
+    epreuves: S.tests.map(({ raw, ...t }) => t),
+    libelle: top.code ? title(top) : '', version_nomenclature: top.source_version || null, niveau_hint: (last.data.coverage || {}).hint || null,
+    alternatives: [...(last.data.candidates || []).filter((c) => c.set_aside_reason).map((c) => ({ code: c.code, libelle: title(c), raison: c.set_aside_reason })), ...(last.data.alternatives_set_aside || []).map((a) => ({ code: a.code, libelle: '', raison: a.set_aside_reason }))].filter((a, i, all) => all.findIndex((x) => x.code === a.code) === i),
+    questions_restantes: [...(last.answered ? [] : (last.data.questions || []).map((q) => ({ question: q.question, pourquoi: q.why || '' }))), ...travailRestant().map((x) => ({ question: x, pourquoi: '' }))],
+    graphe: grapheDossier(),
+    decision: { origine: dec.origine, codes_en_presence: dec.codes, niveau_valide: S.niveau, blocages: dec.blocages.map((b) => b.message), arbitrage: S.arbitrage },
+    conformite: EXIG && S.product.dest === EXIG.marche ? CF.conformiteDossier(EXIG, S.conf, S.product.photo ? S.product.photo.lignes : []) : null,
+    avertissement: last.data.advisory_disclaimer || '',
+  };
+}
+function grapheDossier() {
+  if (!ARBRE) return null;
+  const res = regleEval(), C = Object.fromEntries(ARBRE.criteres.map((c) => [c.id, c]));
+  return {
+    version: (ARBRE.titre || '') + ' · ' + (ARBRE.nomenclature || ''), statut_version: 'reference version, drafted by AI from the cited texts, not reviewed by a customs declarant',
+    resultat: { statut: res.statut, code: res.code || null },
+    chemin: res.chemin.map((s) => { const n = ARBRE.noeuds[s.noeud], f = S.crit[s.critere]; return { question: C[s.critere].question, reponse: brTxt(C[s.critere], s.valeur), textes: (n.base || []).map((b) => TX[b]).filter(Boolean).map((x) => ({ ref: x.ref, texte: x.texte, url: x.url })), citation: f.citation || '', source: f.kind === 'reponse' ? 'merchant answer, no supporting document' : f.source }; }),
+    // « source » n'est pas affiché : c'est le jeton que dossier.js analyse (clé technique de la pièce, ou mention « no supporting document »).
+    blocage: res.statut === 'information_manquante' ? { question: C[res.critere].question, options: res.options } : null,
+  };
+}
+async function onValidate(e) {
+  e.preventDefault();
+  W.reviewText = { who: $('who').value.trim(), comment: $('review-comment').value.trim() };
+  if (!decision().peutValider || !W.identity?.confirmed || !W.classificationId || W.reviewUncertain || W.apiBusy) { W.notice = 'Resolve the open points and persist this classification before approval.'; return renderWorkflow(); }
+  if (W.version.scopeKey !== scopeKey(currentScope())) { clearApproval(); snapshotVersion(); W.notice = 'The evidence changed. Reassess before approval.'; return render(); }
+  const target = W.classificationId, selected = currentSelection(), scope = W.version.scopeKey;
+  let attemptedWrite = false;
+  W.apiBusy = true; W.notice = ''; render();
+  try {
+    // Read the actual review stream before every write; a failed read is not version zero.
+    const reviews = await allReviews(target);
+    const actualVersion = reviewVersionOf(reviews);
+    if (W.reviewVersion !== actualVersion) { W.reviewVersion = actualVersion; throw new Error('The review changed. Inspect the shared review history, then approve again with your preserved rationale.'); }
+    attemptedWrite = true;
+    const response = await api('/api/classifications/' + encodeURIComponent(target) + '/review', { method: 'POST', body: { decision: 'approved', reviewer: W.reviewText.who, comment: W.reviewText.comment, approved_code: selected.code, expected_version: actualVersion } });
+    if (scope !== scopeKey(currentScope()) || target !== W.classificationId) throw new Error('The product changed during review. The historic review is saved; reassess the current draft.');
+    W.version = acknowledgeApproval(W.version, response, { classificationId: target, code: selected.code });
+    W.reviewVersion = W.version.approval.version;
+    W.reviewRequired = false;
+    S.saved = { ...dossier(W.version.approval.reviewer), validated_at: W.version.approval.createdAt, classification_id: target, review: response.data.review, scope: W.version.scope };
+    $('hscode').className = 'hscode set';
+    $('hscode').innerHTML = `<b>${esc(fmtCode(selected.code))}</b><span>API approval acknowledged</span>`;
+    W.notice = 'Approval acknowledged by the shared API. You can now download the approved dossier.';
+    saveBrowserSnapshot();
+  } catch (err) {
+    W.notice = errorMessage(err);
+    if (err.status === 409 || !err.status || (attemptedWrite && err.status >= 500)) {
+      W.reviewUncertain = true;
+      try { const reviews = await allReviews(target); W.reviewVersion = reviewVersionOf(reviews); W.notice += ' Shared reviews refreshed. Open review history and confirm you have checked it before another approval attempt.'; }
+      catch { W.notice += ' Review refresh failed. Reconnect and refresh shared reviews before another attempt.'; }
+    }
+  } finally { W.apiBusy = false; }
+  render();
+}
+function download() {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(S.saved, null, 1)], { type: 'application/json' }));
+  a.download = 'classification-file-' + S.saved.sku + '-' + S.saved.destination + '.json'; a.click();
+}
+
+// Product workflow: local product versions, shared API classifications and reviews.
+function readProduct() {
+  return { sku: $('sku').value.trim(), gtin: $('gtin').value.trim(), desc: $('desc').value.trim(), ds: $('ds').value.trim(), dest: $('dest').value, origin: $('origin').value, asof: $('asof').value, photo: PHOTO,
+    measurements: Object.fromEntries(['dl', 'dw', 'dh', 'kg'].map(id => [id, $(id).value])) };
+}
+function currentScope() {
+  const p = S?.product || readProduct();
+  return { product: { sku: p.sku, gtin: p.gtin, desc: p.desc, ds: p.ds, measurements: p.measurements || {}, manufacturer: W.identity?.manufacturer || '', model: W.identity?.model || '', configuration: W.identity?.configuration || '', photo: p.photo || null },
+    facts: S?.facts || {}, criteria: S?.crit || {}, struck: S?.struck || [], origin: p.origin, destination: p.dest, effectiveDate: p.asof,
+    ruleVersion: ARBRE ? { version: ARBRE.version || ARBRE.nomenclature || '', content: ARBRE } : null, requiredLevel: S?.niveau || 'hs6' };
+}
+function clearApproval() {
+  if (W.version?.approval) W.version = createVersion({ previous: W.version, scope: currentScope(), id: crypto.randomUUID() });
+  if (S) { S.saved = null; S.arbitrage = null; }
+  W.classificationId = null; W.reviewVersion = null; W.reviewUncertain = false;
+  Object.assign(W, scopeResetPatch(W, S?.product.sku || $('sku').value.trim()));
+  resetCode();
+}
+function snapshotVersion() {
+  if (!W.identity) W.identity = createIdentity({ id: crypto.randomUUID(), ...readProduct() });
+  const scope = currentScope();
+  if (!W.version || W.version.scopeKey !== scopeKey(scope)) W.version = createVersion({ previous: W.version, identityId: W.identity.id, scope, id: crypto.randomUUID() });
+}
+function saveBrowserSnapshot() {
+  if (!S || !W.version) return;
+  const entry = { entryId: crypto.randomUUID(), savedAt: new Date().toISOString(), identity: W.identity, version: W.version, classificationId: W.classificationId, state: JSON.parse(JSON.stringify({ ...S, busy: null, error: null })) };
+  const last = W.drafts.at(-1);
+  if (last && scopeKey({ v: last.version, s: last.state, c: last.classificationId }) === scopeKey({ v: entry.version, s: entry.state, c: entry.classificationId })) return;
+  W.drafts.push(entry);
+  try { localStorage.setItem('customs-workflow-v1', JSON.stringify(W.drafts)); }
+  catch { W.notice = 'Browser storage is full or unavailable. This draft remains in this tab only. Download the extended evidence dossier before closing.'; }
+}
+function invalidateForm() {
+  if (S?.busy || W.apiBusy) return;
+  if (S && W.version) saveBrowserSnapshot();
+  if (W.identity) W.identity = createIdentity({ ...W.identity, confirmed: false });
+  if (S) { S = fresh(readProduct(), {}); }
+  clearApproval();
+  W.reviewRequired = true;
+  if (S) snapshotVersion();
+  render();
+}
+function setScene(index) {
+  W.scene = Math.max(0, Math.min(5, index));
+  if (S) render(); else renderWorkflow();
+  $('workflow-title')?.focus({ preventScroll: true });
+}
+function currentSelection() {
+  const last = S?.rounds.at(-1);
+  return last ? selectedCode(decision(), last.data.candidates || [], S.arbitrage, S.niveau) : { code: null, system: null };
+}
+async function allReviews(id) {
+  return collectReviews(cursor => api('/api/classifications/' + encodeURIComponent(id) + '/reviews' + (cursor !== null ? '?cursor=' + encodeURIComponent(cursor) : '')));
+}
+function reviewVersionOf(data) {
+  if (!Array.isArray(data?.reviews)) throw new Error('Shared review history could not be verified.');
+  const versions = data.reviews.map(r => r.version);
+  if (versions.some(v => !Number.isInteger(v) || v < 1)) throw new Error('The server returned an invalid review version.');
+  return versions.length ? Math.max(...versions) : 0;
+}
+function errorMessage(err) {
+  return String(err.message || err) + (err.status === 429 ? ' Check account quota, then retry after it resets. Your product draft is preserved.' : err.status === 401 || err.status === 403 ? ' Check the access code and account permissions. Your draft is preserved.' : err.status >= 500 ? ' The API is unavailable. Reconnect and refresh history before retrying a write.' : '');
+}
+async function api(path, options = {}) {
+  const r = await fetch(path, { method: options.method || 'GET', headers: { 'X-App-Code': code(), ...(options.body ? { 'Content-Type': 'application/json' } : {}) }, ...(options.body ? { body: JSON.stringify(options.body) } : {}) });
+  if (options.blob && r.ok) return r.blob();
+  const j = await r.json().catch(() => ({ error: 'Unreadable API response.' }));
+  if (!r.ok) { const err = new Error(typeof j.error === 'string' ? j.error : j.error?.message || j.message || 'API request failed (' + r.status + ').'); err.status = r.status; throw err; }
+  return j;
+}
+function downloadBlob(blob, name) {
+  const url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+async function withApi(action) {
+  if (W.apiBusy || S?.busy) return;
+  W.apiBusy = true; W.notice = ''; renderWorkflow();
+  try { await action(); } catch (err) { W.notice = errorMessage(err); }
+  finally { W.apiBusy = false; render(); }
+}
+async function fetchHistory(append = false) {
+  const sku = S?.product.sku || $('sku').value.trim();
+  if (!sku) throw new Error('Enter a SKU to find its shared classification history.');
+  if (W.historyItemId !== sku) append = false;
+  const q = new URLSearchParams({ item_id: sku, limit: '20' }); if (append && W.historyCursor) q.set('cursor', W.historyCursor);
+  const j = await api('/api/classifications?' + q);
+  if (!Array.isArray(j.data?.items)) throw new Error('The server returned no readable classification history.');
+  W.history = append ? [...W.history, ...j.data.items] : j.data.items; W.historyCursor = j.data.next_cursor || null;
+  W.historyItemId = sku;
+  if (W.classifyUncertain) W.classHistoryFetched = true;
+  W.notice = 'Shared classification history refreshed. These are API records; confirm product identity before reuse.';
+}
+function historyHtml() {
+  return `<div class="workflow-actions"><button type="button" class="btn ghost" data-action="history">Refresh shared history</button>${W.historyCursor ? '<button type="button" class="btn ghost" data-action="history-more">Load older classifications</button>' : ''}</div><div class="workflow-history">${W.history.map(h => `<article><b>${esc(h.item_id)} · ${esc(h.country)} · ${esc(h.approved_code || h.retained_code || 'No code')}</b><p>${esc(h.review_status || 'Not reviewed')} · ${esc(h.created_at)} · review ${esc(h.review_version ?? 'unknown')}</p><code>${esc(h.classification_id)}</code><div class="workflow-actions"><button type="button" class="btn ghost" data-api-reviews="${esc(h.classification_id)}">Review history</button><button type="button" class="btn ghost" data-api-dossier="${esc(h.classification_id)}">API dossier JSON</button></div></article>`).join('') || '<p class="hint">Refresh to retrieve account-scoped classifications for this SKU.</p>'}</div>`;
+}
+function browserHistoryHtml(matchesOnly = false) {
+  const sku = $('sku').value.trim(), gtin = $('gtin').value.trim();
+  const entries = W.drafts.filter(x => !matchesOnly || (sku && x.state?.product?.sku === sku) || (gtin && x.state?.product?.gtin === gtin)).slice().reverse();
+  return `<div class="workflow-history">${entries.map(x => `<article><b>${esc(x.state.product.sku)} · draft v${esc(x.version.version)}</b><p>${esc(x.state.product.origin)} → ${esc(x.state.product.dest)} · ${esc(x.state.product.asof)} · ${esc(x.identity.configuration || 'Configuration unconfirmed')}</p><p class="hint">Saved in this browser · ${esc(x.savedAt)}${x.version.approval ? ' · historical API approval' : ''}</p><div class="workflow-actions"><button type="button" class="btn ghost" data-restore="${esc(x.entryId)}">Restore as a new draft</button>${x.classificationId ? `<button type="button" class="btn ghost" data-api-reviews="${esc(x.classificationId)}">Shared reviews</button><button type="button" class="btn ghost" data-api-dossier="${esc(x.classificationId)}">API dossier</button>` : ''}</div></article>`).join('') || '<p class="hint">No matching browser draft. A shared product registry is not connected.</p>'}</div>`;
+}
+function distributionHtml() {
+  const selected = currentSelection(), eligibility = publishEligibility({ version: W.version, currentScope: currentScope(), identityConfirmed: W.identity?.confirmed, system: selected.system, validation: W.validation, blockers: S ? decision()?.blocages.map(b => b.message) || [] : [], reviewRequired: W.reviewRequired });
+  return `<p>${S?.saved ? 'Approval is recorded in the shared API. Export the approved scope and keep the evidence with it.' : 'An approved dossier becomes available after the API acknowledges the review. The pre-classification evidence file remains available.'}</p>
+    <div class="workflow-grid"><article><h3>Approved dossier</h3><p>${S?.saved ? 'Shared API approval acknowledged' : 'Awaiting API approval'}</p><button type="button" class="btn ghost" data-action="approved-json" ${S?.saved ? '' : 'disabled'}>Download approved dossier JSON</button><button type="button" class="btn ghost" data-action="approved-pdf" ${S?.saved ? '' : 'disabled'}>Download approved dossier PDF</button></article><article><h3>Extended evidence</h3><p>Local file includes the photo reading, facts, rule and arbitration. Saved in this browser.</p><button type="button" class="btn ghost" data-action="local-dossier" ${S?.rounds.length ? '' : 'disabled'}>Open ${S?.saved ? 'extended evidence' : 'pre-classification'} dossier</button></article></div>
+    <div class="workflow-grid"><article><h3>Export for import</h3><p>${W.exportReceipt ? esc(W.exportReceipt) : 'No export yet'}</p>${eligibility.eligible ? '<p>Approved national code checked for this date and destination.</p>' : '<ul>' + eligibility.reasons.map(r => '<li>' + esc(r) + '</li>').join('') + '</ul>'}<button type="button" class="btn sm" data-action="csv" ${eligibility.eligible ? '' : 'disabled'}>Export CSV for import</button></article><article><h3>Connected destinations</h3><p>Shopify · Not connected</p><p>ERP · Not connected</p><p class="hint">No delivery or publication receipt exists.</p></article></div>
+    <article class="workflow-checks"><h3>Check code and changes</h3><p>On-demand checks only. Coverage comes from the selected catalogue; cited rulings and product facts are not continuously monitored.</p><div class="workflow-actions"><button type="button" class="btn ghost" data-action="validate-code" ${selected.code ? '' : 'disabled'}>Check code validity</button><label for="changes-since">Changes since<input id="changes-since" type="date" value="${esc(S?.product.asof || $('asof').value)}"></label><button type="button" class="btn ghost" data-action="changes" ${selected.code ? '' : 'disabled'}>Check code changes</button></div><p>${W.validation ? 'Last validity check: ' + esc(W.validation.checkedAt) + ' · ' + esc(W.validation.status) + (W.validation.exists ? ' · code exists' : ' · code not confirmed') : 'Code validity has not been checked.'}</p><p>${W.changeCheck ? 'Last change check: ' + esc(W.changeCheck.checkedAt) + ' · ' + (W.changeCheck.complete === false ? 'Incomplete check; export blocked. ' + esc(W.changeCheck.error) : esc(W.changeCheck.tracked ? 'All catalogue change pages checked' : 'No tracked coverage') + ' · ' + esc(W.changeCheck.hint || '')) : 'No change check yet.'}</p>${W.changeCheck?.data?.length ? '<button type="button" class="btn ghost" data-action="change-detail">Inspect returned changes</button>' : ''}</article>
+    <div class="workflow-actions"><button type="button" class="btn ghost" data-action="reuse" ${S ? '' : 'disabled'}>Reuse verified facts in a new draft</button></div><details><summary>Browser version history</summary>${browserHistoryHtml()}</details>${historyHtml()}`;
+}
+function renderWorkflow() {
+  const p = S?.product || readProduct(), ready = Boolean(S?.rounds.length), selected = currentSelection();
+  document.body.dataset.workflowScene = String(W.scene);
+  $('workflow-nav').innerHTML = STEPS.map((name, i) => `<button type="button" data-scene="${i}" ${W.scene === i ? 'aria-current="step"' : ''}><span>${i + 1}</span>${esc(name)}</button>`).join('');
+  $('workflow-context').innerHTML = `<b>${esc(p.sku || 'New product')}</b><span>${esc(p.origin)} → ${esc(p.dest)} · ${esc(p.asof)}</span><span>${W.version ? 'Browser draft v' + esc(W.version.version) : 'Unsaved draft'}</span><span>${W.identity?.confirmed ? 'Identity confirmed' : 'Identity unconfirmed'}</span>${selected.code ? '<code>' + esc(fmtCode(selected.code)) + '</code>' : ''}`;
+  $('workflow-notice').textContent = W.notice || S?.error || ''; $('workflow-notice').hidden = !$('workflow-notice').textContent;
+  let content = '';
+  if (W.scene === 0) content = `<p>Capture the product, label and supplier sheet. A matching SKU or GTIN is a suggestion: confirm its physical configuration before reusing facts.</p><h3>Possible browser matches</h3>${browserHistoryHtml(true)}${historyHtml()}`;
+  if (W.scene === 1) content = `<p>Confirm the physical product and configuration. An alias can refer to the same product; a different configuration needs its own identity.</p><form id="identity-form"><div class="row"><div><label for="manufacturer">Manufacturer</label><input id="manufacturer" value="${esc(W.identity?.manufacturer || '')}"></div><div><label for="model">Model</label><input id="model" value="${esc(W.identity?.model || '')}"></div></div><label for="configuration">Physical configuration</label><input id="configuration" required placeholder="e.g. 12-port USB-C dock with Ethernet" value="${esc(W.identity?.configuration || '')}"><label class="workflow-check"><input id="identity-confirmed" type="checkbox" required ${W.identity?.confirmed ? 'checked' : ''}>I have checked that the SKU, photo and documents describe this physical configuration.</label><p class="hint">${W.identity ? 'Browser identity ' + esc(W.identity.id) : 'A new stable browser identity will be created.'} No shared product registry is connected.</p><button class="btn sm" type="submit">Confirm identity and assess facts</button></form>`;
+  if (W.scene === 2) content = `<p>Read each fact with its source. Resolve contradictory passages and the next decisive question before the decision can be reviewed.</p>${!S ? '<p>Capture a product and confirm its identity to begin.</p>' : S.busy ? '<p role="status">' + esc(S.busy) + '</p>' : ''}`;
+  if (W.scene === 3) content = `<p>Compare the engine with the encoded rule for ${esc(p.origin)} → ${esc(p.dest)}, effective ${esc(p.asof)}. Origin stays in this route record; the classification API does not use it.</p><p>${W.classificationId ? 'Shared classification: <code>' + esc(W.classificationId) + '</code>' : 'No current shared classification is associated with this draft.'}</p><p>${selected.code ? esc(selected.system === 'hs6' ? 'Six-digit pre-classification. A national line is still needed for declaration export.' : 'Destination nomenclature: ' + selected.system + ' · exact candidate ' + selected.code) : 'No decision yet.'}</p>${!ready ? '<p>Complete the facts assessment first.</p>' : ''}`;
+  if (W.scene === 4) content = `<p>Resolve all blockers, record any arbitration and submit a named review. Success appears only after the shared API acknowledges this exact version and code.</p><p class="hint">A typed reviewer name attributes the review; it is not independent authentication of the reviewer.</p>${W.classificationId ? '<button type="button" class="btn ghost" data-api-reviews="' + esc(W.classificationId) + '">Open current shared reviews</button>' : '<p>Persist a classification for this evidence version before approval.</p>'}${W.reviewUncertain ? '<p class="workflow-warning">A review write or conflict needs reconciliation. Check shared reviews before trying again.</p><button type="button" class="btn ghost" data-action="reconcile">Refresh reviews and confirm I have checked them</button>' : ''}${!ready ? '<p>Complete the facts assessment first.</p>' : ''}`;
+  if (W.scene === 5) content = distributionHtml();
+  const reassess = S && !S.busy && !W.classificationId && W.identity?.confirmed && ready ? '<button type="button" class="btn sm" data-action="reassess">Reassess changed evidence</button>' : '';
+  const uncertain = W.classifyUncertain ? `<div class="workflow-warning"><p>A classification write needs reconciliation. Inspect the shared records before sending another request.</p>${[0, 5].includes(W.scene) ? '' : historyHtml()}${W.classHistoryFetched ? '<button type="button" class="btn ghost" data-action="confirm-classification-history">I checked the shared history; allow a new assessment</button>' : ''}</div>` : '';
+  $('workflow-panel').innerHTML = `<div class="workflow-heading"><div><p class="workflow-eyebrow">Product decision network · ${W.scene + 1} of 6</p><h2 id="workflow-title" tabindex="-1">${esc(STEPS[W.scene])}</h2></div>${S?.saved ? '<span class="tag keep">API approval acknowledged</span>' : '<span class="tag warn">Draft · not approved</span>'}</div>${content}${uncertain}<div class="workflow-navigation"><button type="button" class="btn ghost" data-scene="${W.scene - 1}" ${W.scene === 0 ? 'disabled' : ''}>Back</button>${reassess}<button type="button" class="btn ghost" data-scene="${W.scene + 1}" ${W.scene === 5 ? 'disabled' : ''}>${W.scene < 5 ? 'Continue to ' + esc(STEPS[W.scene + 1]) : 'Distribution'}</button></div>`;
+  $('graph').hidden = [0, 1, 5].includes(W.scene) || !S;
+  if (W.scene === 2) { const reason = $('graph').querySelector('[data-key="raisonnement"]'); if (reason) reason.open = true; }
+  for (const el of $('fiche').querySelectorAll('input,select,textarea,button')) el.disabled = Boolean(S?.busy || W.apiBusy);
+  $('go').textContent = W.identity?.confirmed ? 'Assess this product' : 'Continue to identity';
+  $('workflow-panel').querySelectorAll('button,input,textarea,select').forEach(el => { if (W.apiBusy || S?.busy) el.disabled = true; });
+  const identityForm = $('identity-form'); if (identityForm) identityForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!$('sku').value.trim() || !$('desc').value.trim()) { W.notice = 'Enter the SKU and customs description in the product record first.'; setScene(0); return; }
+    const changedConfiguration = W.identity && W.identity.configuration !== $('configuration').value.trim();
+    W.identity = createIdentity({ id: changedConfiguration ? crypto.randomUUID() : W.identity?.id || crypto.randomUUID(), sku: $('sku').value.trim(), gtin: $('gtin').value.trim(), manufacturer: $('manufacturer').value.trim(), model: $('model').value.trim(), configuration: $('configuration').value.trim(), confirmed: $('identity-confirmed').checked });
+    if (changedConfiguration) { W.version = null; S = null; }
+    $('fiche').requestSubmit();
+  });
+}
+function restoreDraft(entryId) {
+  const entry = W.drafts.find(x => x.entryId === entryId); if (!entry) return;
+  const state = JSON.parse(JSON.stringify(entry.state)), p = state.product;
+  for (const id of ['sku', 'gtin', 'desc', 'ds', 'dest', 'origin', 'asof']) $(id).value = p[id] || '';
+  for (const id of ['dl', 'dw', 'dh', 'kg']) $(id).value = p.measurements?.[id] || '';
+  PHOTO = p.photo || null; $('photo').value = ''; $('photobox').textContent = PHOTO ? 'Saved photo evidence restored. Confirm the configuration before assessment.' : '';
+  W.identity = createIdentity({ ...entry.identity, confirmed: false });
+  S = { ...state, saved: null, busy: null, error: null, arbitrage: null };
+  W.version = createVersion({ previous: entry.version, scope: currentScope(), id: crypto.randomUUID() });
+  clearApproval(); W.reviewRequired = true; W.notice = 'Restored as a new browser draft. Historical approvals remain available in the version history; confirm identity and reassess this draft.'; setScene(1);
+}
+async function openReviews(id) {
+  const data = await allReviews(id);
+  const v = reviewVersionOf(data);
+  if (id === W.classificationId) W.reviewVersion = v;
+  $('drawerBody').innerHTML = `<h3>Shared review history</h3><p><code>${esc(id)}</code></p>${data.reviews.map(r => `<article class="workflow-review"><b>${esc(r.decision)} · version ${esc(r.version)}</b><p>${esc(r.reviewer)} · ${esc(r.created_at)}</p><p>${esc(r.approved_code || '')}</p><blockquote>${esc(r.comment || 'No comment')}</blockquote></article>`).join('') || '<p>No reviews have been recorded.</p>'}`;
+  $('drawer').classList.add('open'); $('closeDrawer').focus();
+}
+async function apiDossier(id, format = 'json') {
+  const path = '/api/classifications/' + encodeURIComponent(id) + '/dossier' + (format === 'pdf' ? '?format=pdf' : '');
+  const result = await api(path, { blob: format === 'pdf' });
+  downloadBlob(format === 'pdf' ? result : new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' }), 'api-classification-' + id + '.' + format);
+}
+document.addEventListener('click', e => {
+  const nav = e.target.closest('[data-scene]'); if (nav) { if (!W.apiBusy) setScene(Number(nav.dataset.scene)); return; }
+  const restore = e.target.closest('[data-restore]'); if (restore) return restoreDraft(restore.dataset.restore);
+  const reviews = e.target.closest('[data-api-reviews]'); if (reviews) return withApi(() => openReviews(reviews.dataset.apiReviews));
+  const dossierButton = e.target.closest('[data-api-dossier]'); if (dossierButton) return withApi(() => apiDossier(dossierButton.dataset.apiDossier));
+  const button = e.target.closest('[data-action]'); if (!button || button.disabled) return;
+  const action = button.dataset.action;
+  if (action === 'confirm-classification-history' && W.classHistoryFetched) { W.classifyUncertain = false; W.classHistoryFetched = false; W.notice = 'History check confirmed. A new assessment will create a separate shared classification.'; return render(); }
+  if (action === 'local-dossier') return ouvrirDossier();
+  if (action === 'reassess') { W.scene = 2; return run('Reassessment of the current evidence version'); }
+  if (action === 'reuse') {
+    saveBrowserSnapshot();
+    const verified = Object.fromEntries(Object.entries(S.facts).filter(([, f]) => ['passage', 'photo', 'fiche'].includes(f.kind)));
+    S = fresh({ ...S.product }, JSON.parse(JSON.stringify(verified)));
+    W.version = createVersion({ previous: W.version, scope: currentScope(), id: crypto.randomUUID() });
+    W.identity = createIdentity({ ...W.identity, confirmed: false }); clearApproval(); W.reviewRequired = true;
+    W.notice = 'Verified identity facts copied to a new draft. Confirm the configuration and route; approval has not been carried over.'; return setScene(1);
+  }
+  if (action === 'change-detail') { $('drawerBody').innerHTML = '<h3>Returned catalogue changes</h3><pre>' + esc(JSON.stringify(W.changeCheck, null, 2)) + '</pre>'; $('drawer').classList.add('open'); return; }
+  if (action === 'csv') {
+    return withApi(async () => {
+    const reviews = await allReviews(W.classificationId);
+    if (!approvalStillCurrent(W.version, reviews)) { W.reviewRequired = true; throw new Error('The shared review changed after this browser approval. Export is blocked; inspect the latest review and reassess the draft.'); }
+    const eligibility = publishEligibility({ version: W.version, currentScope: currentScope(), identityConfirmed: W.identity?.confirmed, system: currentSelection().system, validation: W.validation, blockers: decision()?.blocages.map(b => b.message) || [], reviewRequired: W.reviewRequired });
+    if (!eligibility.eligible) { W.notice = eligibility.reasons.join(' '); return renderWorkflow(); }
+    const cell = value => '"' + String(value ?? '').replace(/^[=+@-]/, "'$&").replace(/"/g, '""') + '"';
+    const rows = [['sku', 'origin', 'destination', 'effective_date', 'code', 'system', 'classification_id', 'review_version'], [S.product.sku, S.product.origin, S.product.dest, S.product.asof, W.version.approval.code, currentSelection().system, W.classificationId, W.version.approval.version]];
+    downloadBlob(new Blob([rows.map(row => row.map(cell).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), 'customs-import-' + S.product.sku + '.csv');
+    W.exportReceipt = 'Exported for import · ' + new Date().toISOString() + '. Import into your destination system is still required.';
+    });
+  }
+  const since = $('changes-since')?.value;
+  withApi(async () => {
+    if (action === 'history' || action === 'history-more') await fetchHistory(action === 'history-more');
+    if (action === 'approved-json' || action === 'approved-pdf') { if (!S.saved || !W.version.approval) throw new Error('API approval is required.'); await apiDossier(W.classificationId, action === 'approved-pdf' ? 'pdf' : 'json'); }
+    if (action === 'reconcile') { await openReviews(W.classificationId); W.reviewUncertain = false; W.notice = 'Shared reviews refreshed. Your reviewer and rationale are preserved. Submit a new review only after checking the history.'; }
+    if (action === 'validate-code') {
+      const selected = currentSelection(), q = new URLSearchParams({ code: selected.code, country: S.product.dest, system: selected.system, as_of: S.product.asof });
+      W.validation = null;
+      const j = await api('/api/codes/validate?' + q);
+      W.validation = validateCodeResponse(Object.fromEntries(q), j);
+      if (!W.validation.exists || W.validation.status !== 'valid') W.reviewRequired = true;
+    }
+    if (action === 'changes') {
+      const selected = currentSelection(), q = new URLSearchParams({ since: since || S.product.asof, country: S.product.dest, system: selected.system });
+      W.changeCheck = null;
+      try {
+        const j = await collectChanges(cursor => { const page = new URLSearchParams(q); if (cursor !== null) page.set('cursor', cursor); return api('/api/codes/changes?' + page); });
+        W.changeCheck = { ...j, checkedAt: new Date().toISOString() };
+        if (j.data.some(change => JSON.stringify(change).includes(selected.code))) { W.reviewRequired = true; W.notice = 'A returned catalogue change mentions this code. Review it before a new export; the historical approval is preserved.'; }
+      } catch (err) {
+        W.reviewRequired = true;
+        W.changeCheck = { complete: false, checkedAt: new Date().toISOString(), error: String(err.message || err) };
+        throw new Error('Code-change check incomplete. Export is blocked until review. ' + String(err.message || err));
+      }
+    }
+  });
+});
+$('fiche').addEventListener('change', e => { if (e.target.id !== 'photo') invalidateForm(); });
+$('save-draft').addEventListener('click', () => { if (!S) S = fresh(readProduct(), {}); snapshotVersion(); W.notice = 'Saved in this browser. Shared persistence starts with API classification and review.'; saveBrowserSnapshot(); renderWorkflow(); });
+$('graph').addEventListener('input', e => { if (e.target.id === 'who') W.reviewText.who = e.target.value; if (e.target.id === 'review-comment') W.reviewText.comment = e.target.value; });
+$('graph').addEventListener('submit', e => { if (W.apiBusy || S?.busy) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+renderWorkflow();
+
+$('graph').addEventListener('click', (e) => {
+  if (!S || W.apiBusy || S.busy) return;
+  if (EXIG && CF.onClick(e, EXIG, S.conf)) return render();
+  const op = e.target.closest('[data-open]'); if (op) { e.preventDefault(); S.open[op.dataset.open] = true; return render(); }
+  if (e.target.closest('[data-arbreset]')) { e.preventDefault(); S.arbitrage = null; return render(); }
+  const ap = e.target.closest('[data-applic]'); if (ap) return verifierApplic(ap.dataset.applic);
+  if (e.target.closest('#lisible')) return ouvrirDossier();
+  const cr = e.target.closest('[data-crit]'); if (cr) { const [k, v] = cr.dataset.crit.split(':'), c = ARBRE.criteres.find((x) => x.id === k); S.crit[k] = { valeur: c.type === 'bool' ? v === 'oui' : v, kind: 'reponse' }; return render(); }
+  const rs = e.target.closest('[data-critreset]'); if (rs) { e.preventDefault(); S.crit = Object.fromEntries(Object.entries(S.crit).filter(([, x]) => x.kind !== 'reponse')); return render(); }
+  const rm = e.target.closest('[data-rm]'); if (rm) { e.stopPropagation(); return removeFact(rm.dataset.rm); }
+  const k = e.target.closest('[data-keep]'); if (k) { const [i, s] = k.dataset.keep.split(':'); return keep(Number(i), s); }
+  const t = e.target.closest('[data-d]'); if (t) openDetail(Number(t.dataset.d));
+});
+</script>
+</body>
+</html>

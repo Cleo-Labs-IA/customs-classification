@@ -8,3 +8,5 @@ server.log
 server.mjs
 public/data-dev
 tests
+!public/data/produits/*.jpg
+!public/data/logos/*

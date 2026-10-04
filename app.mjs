@@ -6,6 +6,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import os from 'node:os';
+import { createCustomsApi, CustomsApiError } from './lib/customs-api.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const API = (process.env.CLEO_BASE_URL || 'https://api.legaldata.cleolabs.co').replace(/\/$/, '');
@@ -195,8 +196,24 @@ function allowed(req) {
 export async function handle(req, res) {
   try {
     const url = new URL(req.url, 'http://x');
-    if (req.method === 'GET' && url.pathname === '/api/status') return send(res, 200, { key_present: Boolean(KEY), api: API, code_required: Boolean(APP_CODE), code_ok: allowed(req) });
+    if (req.method === 'GET' && url.pathname === '/api/status') return send(res, 200, { key_present: Boolean(KEY), bedrock_present: Boolean(awsCreds()), api: API, code_required: Boolean(APP_CODE), code_ok: allowed(req), mode: process.env.CUSTOMS_PREVIEW_MODE === 'fixture' ? 'fixture' : 'live' });
     if (!allowed(req)) return send(res, 401, { error: 'Access code required' });
+    const customs = createCustomsApi({ baseUrl: API, key: KEY });
+    const reply = async promise => {
+      const result = await promise;
+      if (result.requestId && typeof res.setHeader === 'function') res.setHeader('X-Request-ID', result.requestId);
+      return send(res, result.status, result.body, result.contentType);
+    };
+    if (req.method === 'GET' && url.pathname === '/api/classifications') return await reply(customs.history(url.searchParams));
+    const stored = url.pathname.match(/^\/api\/classifications\/([^/]+)\/(review|reviews|dossier)$/);
+    if (stored) {
+      const [, id, action] = stored;
+      if (req.method === 'POST' && action === 'review') return await reply(customs.review(id, await readJson(req)));
+      if (req.method === 'GET' && action === 'reviews') return await reply(customs.reviews(id, url.searchParams));
+      if (req.method === 'GET' && action === 'dossier') return await reply(customs.dossier(id, url.searchParams));
+    }
+    if (req.method === 'GET' && url.pathname === '/api/codes/validate') return await reply(customs.validate(url.searchParams));
+    if (req.method === 'GET' && url.pathname === '/api/codes/changes') return await reply(customs.changes(url.searchParams));
     if (req.method === 'POST' && url.pathname === '/api/classify') {
       if (!KEY) return send(res, 500, { error: 'CLEO_API_KEY missing' });
       return send(res, 200, await classify(await readJson(req)));
@@ -207,10 +224,11 @@ export async function handle(req, res) {
     if (req.method === 'POST' && url.pathname === '/api/applicabilite') { const { applicabilite } = await import('./lib/applicabilite.mjs'); return send(res, 200, await applicabilite(await readJson(req))); }
     if (req.method === 'POST' && url.pathname === '/api/obligations') { const { obligationsEtDroits } = await import('./lib/obligations.mjs'); const { brut, ...r } = await obligationsEtDroits(await readJson(req)); return send(res, 200, r); }
     if (req.method === 'POST' && url.pathname === '/api/photo') return send(res, 200, await lirePhoto(await readJson(req)));
+    if (req.method === 'POST' && url.pathname === '/api/url') { const { lirePage } = await import('./lib/page.mjs'); return send(res, 200, await lirePage(await readJson(req, 10_000))); }
     send(res, 404, { error: 'not found' });
   } catch (e) {
     const message = String(e && e.message ? e.message : e);
-    send(res, 502, { error: message === SANS_BEDROCK ? 'Bedrock access not configured' : message });
+    send(res, e instanceof CustomsApiError ? e.status : e instanceof SyntaxError ? 400 : 502, { error: message === SANS_BEDROCK ? 'Bedrock access not configured' : message });
   }
 }
 export { send, DIR, KEY, API, converse, locate };

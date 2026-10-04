@@ -1,0 +1,700 @@
+{
+ "boutique": {
+  "nom": "Demo store",
+  "plateforme": "Shopify",
+  "devise": "EUR",
+  "origine": "CN"
+ },
+ "produits": [
+  {
+   "sku": "CHG-70W",
+   "nom": "USB-C power adapter, 70 W",
+   "description": "USB-C power adapter 70 W, external AC to DC power supply for information technology equipment, input 100-240 V AC, USB Power Delivery output 5 V to 20.6 V DC",
+   "fiche_technique": "Input: 100-240V~1.8A(1.80A) 50-60Hz\nUSB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A\n70.0W 45.0W 27.0W 15.0W\nITE Power Supply\nSalcomp (Shenzhen) Co., Ltd.\nEMC 8425\ncULus LISTED E135498\nSAA-230413-EA",
+   "origine": "CN",
+   "prix": 59,
+   "teinte": "sable",
+   "image": "/data/produits/chg-70w.jpg",
+   "photo": "IMG_1022",
+   "etiquette": [
+    "Input: 100-240V~1.8A(1.80A) 50-60Hz",
+    "USB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A",
+    "70.0W 45.0W 27.0W 15.0W",
+    "ITE Power Supply",
+    "Salcomp (Shenzhen) Co., Ltd.",
+    "EMC 8425",
+    "cULus LISTED E135498",
+    "SAA-230413-EA"
+   ],
+   "marques_vues": [
+    "CE",
+    "crossed-out wheeled bin",
+    "EAC",
+    "RCM",
+    "cULus Listed",
+    "NOM-NYCE",
+    "efficiency level VI",
+    "PSE (diamond)",
+    "Class II double square"
+   ],
+   "a_confirmer": [
+    "First output value read as 20.6V: the digits are partly blurred on the photo",
+    "Name printed inside the PSE mark: not legible",
+    "Country of origin: not printed on the visible face"
+   ],
+   "criteres": {
+    "fonction_principale": {
+     "valeur": "alimenter",
+     "kind": "pieces",
+     "citation": "ITE Power Supply"
+    },
+    "genere_electricite": {
+     "valeur": false,
+     "kind": "pieces",
+     "citation": "Input: 100-240V~1.8A(1.80A) 50-60Hz"
+    },
+    "batterie_integree": {
+     "valeur": "aucune",
+     "kind": "reponse"
+    },
+    "convertit_courant": {
+     "valeur": "convertisseur",
+     "kind": "pieces",
+     "citation": "USB PD Output: 20.6V 3.4A or 15.0V 3.0A or 9.0V 3.0A or 5.0V 3.0A"
+    },
+    "prises_secteur_sortie": {
+     "valeur": false,
+     "kind": "reponse"
+    }
+   },
+   "identite": {
+    "fabricant": "Salcomp (Shenzhen) Co., Ltd.",
+    "modele": "EMC 8425",
+    "configuration": "70 W, USB-C Power Delivery, ITE power supply"
+   }
+  },
+  {
+   "sku": "NB-M1605N",
+   "nom": "Notebook PC, model M1605N",
+   "description": "Notebook PC, model M1605N, portable computer with built-in keyboard and display, input 20 V 3.4 A 68 W, contains Wi-Fi and Bluetooth radio module MT7920",
+   "fiche_technique": "Model: M1605N\nNotebook PC\nInput: +20V 3.4A, 68W\nCEC ID: M1605N_68W\nASUSTeK Computer Inc.\nCAN ICES (B) / NMB (B)\nMade in China\nContains MT7920\nFCC ID: RAS-MT7920\nIC: 7542A-MT7920\nR-C-MD6-MT7920\nCCAF24Y10090T8\nR 217-241406\nT D240049217\nM1605NAQ-SH269W\nMFD: 2025-12",
+   "origine": "CN",
+   "prix": 749,
+   "teinte": "ardoise",
+   "image": "/data/produits/nb-m1605n.jpg",
+   "photo": "IMG_1023",
+   "etiquette": [
+    "Model: M1605N",
+    "Notebook PC",
+    "Input: +20V 3.4A, 68W",
+    "CEC ID: M1605N_68W",
+    "ASUSTeK Computer Inc.",
+    "CAN ICES (B) / NMB (B)",
+    "Made in China",
+    "Contains MT7920",
+    "FCC ID: RAS-MT7920",
+    "IC: 7542A-MT7920",
+    "R-C-MD6-MT7920",
+    "CCAF24Y10090T8",
+    "R 217-241406",
+    "T D240049217",
+    "M1605NAQ-SH269W",
+    "MFD: 2025-12"
+   ],
+   "marques_vues": [
+    "CE",
+    "FCC",
+    "EAC",
+    "UKCA",
+    "VCCI",
+    "cULus Listed",
+    "RCM (R-NZ)",
+    "KC",
+    "BSMI RoHS",
+    "NCC",
+    "Japan technical conformity mark",
+    "crossed-out wheeled bin"
+   ],
+   "a_confirmer": [
+    "Keyboard and display in the same unit: stated by the seller, a label does not show it",
+    "Weight: not printed on the label",
+    "Battery type and capacity: not printed on the label"
+   ],
+   "criteres": {
+    "fonction_principale": {
+     "valeur": "traiter_donnees",
+     "kind": "pieces",
+     "citation": "Notebook PC"
+    },
+    "programmable_librement": {
+     "valeur": true,
+     "kind": "reponse"
+    },
+    "portable_complet": {
+     "valeur": true,
+     "kind": "reponse"
+    }
+   },
+   "identite": {
+    "fabricant": "ASUSTeK Computer Inc.",
+    "modele": "M1605N",
+    "configuration": "M1605NAQ-SH269W, 68 W input, radio module MT7920"
+   }
+  }
+ ],
+ "reponses": {
+  "CHG-70W": {
+   "source": "enregistree",
+   "enregistree_le": "2026-10-04",
+   "request_id": "1893ff39-46c9-4b44-9b25-3de036aade84",
+   "secondes": 12.7,
+   "envoye": {
+    "item_id": "CHG-70W",
+    "description": "USB-C power adapter 70 W, external AC to DC power supply for information technology equipment, input 100-240 V AC, USB Power Delivery output 5 V to 20.6 V DC",
+    "country": "FR"
+   },
+   "data": {
+    "item_id": "CHG-70W",
+    "status": "needs_information",
+    "query_facts": {},
+    "missing_attributes": [
+     "function"
+    ],
+    "questions": [
+     {
+      "fact": "function",
+      "question": "What does the device do (e.g. generate or convert electric power, produce heat, or transmit or receive communications)?",
+      "why": "Headings within chapter 85 split by function (motors and generators, transformers, switching or protecting apparatus, communication apparatus, domestic appliances).",
+      "discriminates": "heading"
+     }
+    ],
+    "candidates": [
+     {
+      "id": "27b0ea16-e6c3-435b-a0a3-c860e4f52bdf",
+      "code": "850440",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "850440",
+      "chapter": 85,
+      "title": {
+       "en": "Electrical static converters"
+      },
+      "description": null,
+      "confidence": 0.45,
+      "rationale": "An AC/DC power adapter is an electrical static converter (rectifier/transformer) of subheading 8504 40. It matches precedents P1-P3 for AC 100-240 V to DC USB chargers.",
+      "similarity": 0,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [
+       {
+        "kind": "chapter_note",
+        "ref": "Chapter 85 Note 2",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+        "excerpt": "Headings 8501 to 8504 do not apply to goods described in heading 8511 , 8512 , 8540 , 8541 or 8542 .\n\nHowever, metal tank mercury arc rectifiers remain classified in heading 8504 .",
+        "source_version": "32025R1926"
+       }
+      ],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": null,
+      "ambiguous": false,
+      "reranker_confidence": 0.95
+     },
+     {
+      "id": "4963109f-7d52-4f3f-aa2d-1ad018e48862",
+      "code": "850450",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "850450",
+      "chapter": 85,
+      "title": {
+       "en": "Electrical inductors; n.e.c. in heading no. 8504"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "Heading 8504 also covers inductors, but the product's essential function is conversion of AC to DC, not inductance.",
+      "similarity": 0,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": "The product is a complete converter, not an inductor.",
+      "ambiguous": false,
+      "reranker_confidence": 0.02
+     },
+     {
+      "id": "f842829a-26ea-40a6-b532-a7d29436981c",
+      "code": "853669",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "853669",
+      "chapter": 85,
+      "title": {
+       "en": "Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "Plugs and sockets of 8536 69 cover only connecting devices, which the adapter is not. It contains conversion circuitry.",
+      "similarity": 0.345668954433881,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1"
+      ],
+      "set_aside_reason": "Precedents P4-P5 are passive plug adaptors with no conversion, unlike this active converter.",
+      "ambiguous": false,
+      "reranker_confidence": 0.012
+     },
+     {
+      "id": "eb0489e5-138d-4e65-bee7-201b89270969",
+      "code": "847141",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "847141",
+      "chapter": 84,
+      "title": {
+       "en": "Automatic data processing machines; comprising in the same housing at least a central processing unit and an input and output unit, whether or not combined, n.e.c. in item no. 8471.30"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8471 41 covers complete ADP machines, which a power supply is not.",
+      "similarity": 0,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": false,
+      "gri": [
+       "GRI 1"
+      ],
+      "set_aside_reason": "It is not a data processing machine, just an external power accessory.",
+      "ambiguous": false,
+      "reranker_confidence": 0.008
+     },
+     {
+      "id": "d2b725e3-da5e-4f26-8b44-214226cf929e",
+      "code": "853650",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "853650",
+      "chapter": 85,
+      "title": {
+       "en": "Electrical apparatus; switches n.e.c. in heading no. 8536, for a voltage not exceeding 1000 volts"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8536 50 covers switches, and the adapter performs no switching function as its principal role.",
+      "similarity": 0,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1"
+      ],
+      "set_aside_reason": "It is not a switch; conversion is its essential function.",
+      "ambiguous": false,
+      "reranker_confidence": 0.005
+     }
+    ],
+    "dataset_version": null,
+    "coverage": {
+     "level": "hs6_only",
+     "national_systems": [],
+     "via_bloc": null,
+     "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+    },
+    "gate_hint": null,
+    "provenance": {
+     "question_config_version": "2026-09-24",
+     "families": [
+      "electrical-85"
+     ],
+     "reranker": "bedrock-sonnet-5.5",
+     "reranker_fallback": false,
+     "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+     "evidence_source": "index",
+     "evidence_rejected": 0,
+     "precedents": [
+      {
+       "ruling_id": "UK600013054",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8504408390",
+       "ruling_date": "2025-05-23",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600013054",
+       "similarity": 0.474
+      },
+      {
+       "ruling_id": "UK600012125",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8504408390",
+       "ruling_date": "2025-01-20",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012125",
+       "similarity": 0.453
+      },
+      {
+       "ruling_id": "UK600012124",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8504408390",
+       "ruling_date": "2025-01-03",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012124",
+       "similarity": 0.443
+      },
+      {
+       "ruling_id": "UK600014662",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8536699099",
+       "ruling_date": "2025-12-16",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014662",
+       "similarity": 0.442
+      },
+      {
+       "ruling_id": "UK600014664",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8536699099",
+       "ruling_date": "2025-12-16",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014664",
+       "similarity": 0.439
+      }
+     ],
+     "acceptance_checks": [
+      "calibrated_confidence_below_floor",
+      "low_retrieval_similarity"
+     ]
+    },
+    "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+    "alternatives_set_aside": [
+     {
+      "code": "850450",
+      "set_aside_reason": "The product is a complete converter, not an inductor."
+     },
+     {
+      "code": "853669",
+      "set_aside_reason": "Precedents P4-P5 are passive plug adaptors with no conversion, unlike this active converter."
+     },
+     {
+      "code": "847141",
+      "set_aside_reason": "It is not a data processing machine, just an external power accessory."
+     },
+     {
+      "code": "853650",
+      "set_aside_reason": "It is not a switch; conversion is its essential function."
+     }
+    ]
+   }
+  },
+  "NB-M1605N": {
+   "source": "enregistree",
+   "enregistree_le": "2026-10-04",
+   "request_id": "a5de17f5-ddc2-41f0-803c-b952794830e7",
+   "secondes": 7.4,
+   "envoye": {
+    "item_id": "NB-M1605N",
+    "description": "Notebook PC, model M1605N, portable computer with built-in keyboard and display, input 20 V 3.4 A 68 W, contains Wi-Fi and Bluetooth radio module MT7920",
+    "country": "FR"
+   },
+   "data": {
+    "item_id": "NB-M1605N",
+    "status": "needs_information",
+    "query_facts": {},
+    "missing_attributes": [
+     "function",
+     "use"
+    ],
+    "questions": [
+     {
+      "fact": "function",
+      "question": "What does the machine do (e.g. pump liquids, compress gas, generate mechanical power, cut or shape material, refrigerate)?",
+      "why": "Headings within chapter 84 split by the machine's function (pumps, compressors, engines, refrigerating equipment, machine tools, and so on).",
+      "discriminates": "heading"
+     },
+     {
+      "fact": "use",
+      "question": "What is the machine used for, or in which application (e.g. agricultural, industrial, domestic)?",
+      "why": "National lines within many chapter 84 subheadings split further by end use or application.",
+      "discriminates": "national_line"
+     }
+    ],
+    "candidates": [
+     {
+      "id": "5f426d79-6269-4e12-8f55-23f0246a55e3",
+      "code": "847130",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "847130",
+      "chapter": 84,
+      "title": {
+       "en": "Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display"
+      },
+      "description": null,
+      "confidence": 0.89,
+      "rationale": "A notebook PC with a built-in keyboard and display that weighs under 10 kg is the textbook case for 8471.30. The ADP-machine definition is met (E3), and the Wi-Fi/Bluetooth module does not change the classification.",
+      "similarity": 0.435855465500949,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [
+       {
+        "kind": "chapter_note",
+        "ref": "Chapter 84 Note 6",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+        "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+        "source_version": "32025R1926"
+       },
+       {
+        "kind": "chapter_note",
+        "ref": "Chapter 84 Note 8",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+        "excerpt": "A machine which is used for more than one purpose is, for the purposes of classification, to be treated as if its principal purpose were its sole purpose.\n\nSubject to note 2 to this chapter and note 3 to Section XVI, a machine the principal purpose of which is not described in any heading or for which no one purpose is the principal purpose is, unless the context otherwise requires, to be classified in heading 8479 .",
+        "source_version": "32025R1926"
+       }
+      ],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": null,
+      "ambiguous": false,
+      "reranker_confidence": 0.96
+     },
+     {
+      "id": "eb0489e5-138d-4e65-bee7-201b89270969",
+      "code": "847141",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "847141",
+      "chapter": 84,
+      "title": {
+       "en": "Automatic data processing machines; comprising in the same housing at least a central processing unit and an input and output unit, whether or not combined, n.e.c. in item no. 8471.30"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8471.41 covers ADP machines with a CPU and an input/output unit in the same housing, n.e.c. in 8471.30. The portable sub-type is more specific, so this code is excluded for this product.",
+      "similarity": 0.360520331312208,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [
+       {
+        "kind": "chapter_note",
+        "ref": "Chapter 84 Note 6",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+        "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+        "source_version": "32025R1926"
+       }
+      ],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1",
+       "GRI 6"
+      ],
+      "set_aside_reason": "The portable subheading 8471.30 is the specific provision, which takes 8471.41 out of consideration.",
+      "ambiguous": false,
+      "reranker_confidence": 0.02
+     },
+     {
+      "id": "1e4ad86f-3bda-421c-8a47-9ba67b82b5dc",
+      "code": "847160",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "847160",
+      "chapter": 84,
+      "title": {
+       "en": "Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8471.60 covers input or output units presented separately. The notebook is a complete computer, not a peripheral unit.",
+      "similarity": 0.388530935784968,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [
+       {
+        "kind": "chapter_note",
+        "ref": "Chapter 84 Note 6",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+        "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+        "source_version": "32025R1926"
+       }
+      ],
+      "evidence_available": true,
+      "gri": [
+       "GRI 1"
+      ],
+      "set_aside_reason": "It is a complete ADP machine, not an input or output unit.",
+      "ambiguous": false,
+      "reranker_confidence": 0.01
+     },
+     {
+      "id": "1db90fd0-a127-4cec-9f92-ab80d2c91ff7",
+      "code": "851769",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "851769",
+      "chapter": 85,
+      "title": {
+       "en": "Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8517.69 covers wireless communication apparatus. The radio module is only an ancillary function of the computer.",
+      "similarity": 0.405415658496048,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": false,
+      "gri": [
+       "GRI 1",
+       "GRI 3(b)"
+      ],
+      "set_aside_reason": "The essential character is data processing, not communication.",
+      "ambiguous": false,
+      "reranker_confidence": 0.005
+     },
+     {
+      "id": "3d3094a2-620b-4688-b9e7-3431d8073b54",
+      "code": "852852",
+      "system": "hs6",
+      "country": null,
+      "parent_code": null,
+      "hs6_parent": "852852",
+      "chapter": 85,
+      "title": {
+       "en": "Monitors; other than cathode-ray tube; capable of directly connecting to and designed for use with an automatic data processing machine of heading 84.71"
+      },
+      "description": null,
+      "confidence": 0,
+      "rationale": "8528.52 covers monitors that connect to an ADP machine. The display here is built into the computer and is not a standalone monitor.",
+      "similarity": 0.35143539826261,
+      "valid_from": "2022-01-01",
+      "valid_to": null,
+      "source_version": "HS2022-Comtrade-2026-09-23",
+      "evidence": [],
+      "evidence_available": false,
+      "gri": [
+       "GRI 1"
+      ],
+      "set_aside_reason": "The display is integrated into the computer and is not a separate monitor.",
+      "ambiguous": false,
+      "reranker_confidence": 0.003
+     }
+    ],
+    "dataset_version": null,
+    "coverage": {
+     "level": "hs6_only",
+     "national_systems": [],
+     "via_bloc": null,
+     "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+    },
+    "gate_hint": null,
+    "provenance": {
+     "question_config_version": "2026-09-24",
+     "families": [
+      "machinery-84"
+     ],
+     "reranker": "bedrock-sonnet-5.5",
+     "reranker_fallback": false,
+     "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+     "evidence_source": "index",
+     "evidence_rejected": 0,
+     "precedents": [
+      {
+       "ruling_id": "UK600011920",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471300000",
+       "ruling_date": "2024-11-29",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011920",
+       "similarity": 0.521
+      },
+      {
+       "ruling_id": "UK600011922",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471300000",
+       "ruling_date": "2024-11-29",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011922",
+       "similarity": 0.507
+      },
+      {
+       "ruling_id": "UK600010300",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471410000",
+       "ruling_date": "2024-05-01",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600010300",
+       "similarity": 0.488
+      },
+      {
+       "ruling_id": "UK600012601",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471410000",
+       "ruling_date": "2025-04-10",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012601",
+       "similarity": 0.469
+      },
+      {
+       "ruling_id": "UK600012357",
+       "source": "UK_HMRC_ATAR",
+       "official_code": "8471300000",
+       "ruling_date": "2025-02-18",
+       "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012357",
+       "similarity": 0.45
+      }
+     ],
+     "acceptance_checks": [
+      "calibrated_confidence_below_floor",
+      "low_retrieval_similarity"
+     ]
+    },
+    "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+    "alternatives_set_aside": [
+     {
+      "code": "847141",
+      "set_aside_reason": "The portable subheading 8471.30 is the specific provision, which takes 8471.41 out of consideration."
+     },
+     {
+      "code": "847160",
+      "set_aside_reason": "It is a complete ADP machine, not an input or output unit."
+     },
+     {
+      "code": "851769",
+      "set_aside_reason": "The essential character is data processing, not communication."
+     },
+     {
+      "code": "852852",
+      "set_aside_reason": "The display is integrated into the computer and is not a separate monitor."
+     }
+    ]
+   }
+  }
+ },
+ "suites": {},
+ "depart": {
+  "libelle": "Starting state: no code validated yet. The two products are read from their photographed labels.",
+  "validations": {},
+  "attestations": {}
+ }
+}

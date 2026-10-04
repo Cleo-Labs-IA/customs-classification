@@ -1,0 +1,261 @@
+{
+ "http": 200,
+ "request_id": "1893ff39-46c9-4b44-9b25-3de036aade84",
+ "seconds": 12.7,
+ "endpoint": "https://api.legaldata.cleolabs.co/v2/customs/classifications",
+ "sent": {
+  "item_id": "CHG-70W",
+  "description": "USB-C power adapter 70 W, external AC to DC power supply for information technology equipment, input 100-240 V AC, USB Power Delivery output 5 V to 20.6 V DC",
+  "country": "FR"
+ },
+ "body": {
+  "data": {
+   "item_id": "CHG-70W",
+   "status": "needs_information",
+   "query_facts": {},
+   "missing_attributes": [
+    "function"
+   ],
+   "questions": [
+    {
+     "fact": "function",
+     "question": "What does the device do (e.g. generate or convert electric power, produce heat, or transmit or receive communications)?",
+     "why": "Headings within chapter 85 split by function (motors and generators, transformers, switching or protecting apparatus, communication apparatus, domestic appliances).",
+     "discriminates": "heading"
+    }
+   ],
+   "candidates": [
+    {
+     "id": "27b0ea16-e6c3-435b-a0a3-c860e4f52bdf",
+     "code": "850440",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "850440",
+     "chapter": 85,
+     "title": {
+      "en": "Electrical static converters"
+     },
+     "description": null,
+     "confidence": 0.45,
+     "rationale": "An AC/DC power adapter is an electrical static converter (rectifier/transformer) of subheading 8504 40. It matches precedents P1-P3 for AC 100-240 V to DC USB chargers.",
+     "similarity": 0,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [
+      {
+       "kind": "chapter_note",
+       "ref": "Chapter 85 Note 2",
+       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+       "excerpt": "Headings 8501 to 8504 do not apply to goods described in heading 8511 , 8512 , 8540 , 8541 or 8542 .\n\nHowever, metal tank mercury arc rectifiers remain classified in heading 8504 .",
+       "source_version": "32025R1926"
+      }
+     ],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1",
+      "GRI 6"
+     ],
+     "set_aside_reason": null,
+     "ambiguous": false,
+     "reranker_confidence": 0.95
+    },
+    {
+     "id": "4963109f-7d52-4f3f-aa2d-1ad018e48862",
+     "code": "850450",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "850450",
+     "chapter": 85,
+     "title": {
+      "en": "Electrical inductors; n.e.c. in heading no. 8504"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "Heading 8504 also covers inductors, but the product's essential function is conversion of AC to DC, not inductance.",
+     "similarity": 0,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1",
+      "GRI 6"
+     ],
+     "set_aside_reason": "The product is a complete converter, not an inductor.",
+     "ambiguous": false,
+     "reranker_confidence": 0.02
+    },
+    {
+     "id": "f842829a-26ea-40a6-b532-a7d29436981c",
+     "code": "853669",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "853669",
+     "chapter": 85,
+     "title": {
+      "en": "Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "Plugs and sockets of 8536 69 cover only connecting devices, which the adapter is not. It contains conversion circuitry.",
+     "similarity": 0.345668954433881,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1"
+     ],
+     "set_aside_reason": "Precedents P4-P5 are passive plug adaptors with no conversion, unlike this active converter.",
+     "ambiguous": false,
+     "reranker_confidence": 0.012
+    },
+    {
+     "id": "eb0489e5-138d-4e65-bee7-201b89270969",
+     "code": "847141",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "847141",
+     "chapter": 84,
+     "title": {
+      "en": "Automatic data processing machines; comprising in the same housing at least a central processing unit and an input and output unit, whether or not combined, n.e.c. in item no. 8471.30"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8471 41 covers complete ADP machines, which a power supply is not.",
+     "similarity": 0,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": false,
+     "gri": [
+      "GRI 1"
+     ],
+     "set_aside_reason": "It is not a data processing machine, just an external power accessory.",
+     "ambiguous": false,
+     "reranker_confidence": 0.008
+    },
+    {
+     "id": "d2b725e3-da5e-4f26-8b44-214226cf929e",
+     "code": "853650",
+     "system": "hs6",
+     "country": null,
+     "parent_code": null,
+     "hs6_parent": "853650",
+     "chapter": 85,
+     "title": {
+      "en": "Electrical apparatus; switches n.e.c. in heading no. 8536, for a voltage not exceeding 1000 volts"
+     },
+     "description": null,
+     "confidence": 0,
+     "rationale": "8536 50 covers switches, and the adapter performs no switching function as its principal role.",
+     "similarity": 0,
+     "valid_from": "2022-01-01",
+     "valid_to": null,
+     "source_version": "HS2022-Comtrade-2026-09-23",
+     "evidence": [],
+     "evidence_available": true,
+     "gri": [
+      "GRI 1"
+     ],
+     "set_aside_reason": "It is not a switch; conversion is its essential function.",
+     "ambiguous": false,
+     "reranker_confidence": 0.005
+    }
+   ],
+   "dataset_version": null,
+   "coverage": {
+    "level": "hs6_only",
+    "national_systems": [],
+    "via_bloc": null,
+    "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+   },
+   "gate_hint": null,
+   "provenance": {
+    "question_config_version": "2026-09-24",
+    "families": [
+     "electrical-85"
+    ],
+    "reranker": "bedrock-sonnet-5.5",
+    "reranker_fallback": false,
+    "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+    "evidence_source": "index",
+    "evidence_rejected": 0,
+    "precedents": [
+     {
+      "ruling_id": "UK600013054",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8504408390",
+      "ruling_date": "2025-05-23",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600013054",
+      "similarity": 0.474
+     },
+     {
+      "ruling_id": "UK600012125",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8504408390",
+      "ruling_date": "2025-01-20",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012125",
+      "similarity": 0.453
+     },
+     {
+      "ruling_id": "UK600012124",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8504408390",
+      "ruling_date": "2025-01-03",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012124",
+      "similarity": 0.443
+     },
+     {
+      "ruling_id": "UK600014662",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8536699099",
+      "ruling_date": "2025-12-16",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014662",
+      "similarity": 0.442
+     },
+     {
+      "ruling_id": "UK600014664",
+      "source": "UK_HMRC_ATAR",
+      "official_code": "8536699099",
+      "ruling_date": "2025-12-16",
+      "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014664",
+      "similarity": 0.439
+     }
+    ],
+    "acceptance_checks": [
+     "calibrated_confidence_below_floor",
+     "low_retrieval_similarity"
+    ]
+   },
+   "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+   "alternatives_set_aside": [
+    {
+     "code": "850450",
+     "set_aside_reason": "The product is a complete converter, not an inductor."
+    },
+    {
+     "code": "853669",
+     "set_aside_reason": "Precedents P4-P5 are passive plug adaptors with no conversion, unlike this active converter."
+    },
+    {
+     "code": "847141",
+     "set_aside_reason": "It is not a data processing machine, just an external power accessory."
+    },
+    {
+     "code": "853650",
+     "set_aside_reason": "It is not a switch; conversion is its essential function."
+    }
+   ]
+  },
+  "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability."
+ }
+}

@@ -1,39 +1,91 @@
-# Mini app de classification douanière
+# Stamped: customs classification and shipment compliance
 
-Une fiche produit et une destination en entrée. En sortie, un graphe de décision : candidats, candidats écartés, question au marchand, nouvelle évaluation, proposition avec ses textes et ses décisions officielles proches, puis validation par une personne habilitée et retour du code sur la fiche.
+## The demo (since 4 Oct 2026)
 
-Tout ce qui s'affiche à droite vient d'un appel en direct à `POST /v2/customs/classifications` de la Cleo Legal API. Rien n'est écrit à l'avance.
+The default store holds two real products, read from their photographed labels: a 70 W USB-C power adapter and a notebook PC (model M1605N).
+
+Navigation: **Shipments** (first view), **Products**, **Questions**, **Regulatory watch**; the rule editor sits apart, for experts.
+
+To classify a new product, drop a photo, a label, a pictogram or a product page link on the *New* zone of the first view, or anywhere in the app: a full-window drop target appears and opens the classification file (`public/app/depot.js`).
+
+- **Products** (`#/produits`): one card per product (photo, code, state, and where it stands: label read, code found, signed, evidence per market), a card to add a product (photo, label, pictogram, product page link or text), and the store's shipments in one line.
+- **A product** (`#/produit?sku=…`) opens its own space, one header and four tabs:
+  - **Overview**: what the label says, the code with the steps that lead to it, *Validate and sign*, the evidence per market (Yes / No, signed; every order to that market follows), and the orders waiting.
+  - **Why this code** (`#/arbre?sku=…`): the encoded rule drawn as a graph, each step with its question, the label passage and the official text.
+  - **World** (`#/monde?sku=…`): per country, the tariff line the engine proposes and the base duty; per market, the requirements with the official sentence behind each.
+  - **Classification file** (`#/dossier?sku=…`): the full file, started from the facts already established on the label.
+- **Shipments** (first view, `#/`): the *New* drop zone, an overview (map, deadlines) and the orders, behind one switch. Each order line is checked for its country against the verified rules, on the code of the product's single decision (engine and encoded rule read together, `public/decision.js`); a code validated by a person takes precedence.
+- **Questions**: everything still to decide, across products.
+- **Rule editor** (`#/arbre`): the free-form tree, signed edits, replay on the 87 official decisions.
+
+### Where the data comes from
+
+    node essais/monde/enregistrer.mjs        # real lookups on the Cleo Legal API, 112 countries with a national catalogue
+    node essais/monde/verifier.mjs <file>    # re-downloads each official source and looks for the quote word for word
+    node essais/monde/assembler.mjs          # public/data/monde-produits.json
+    node essais/monde/construire-veille.mjs  # public/data/veille.json, from verified entries only
+    node essais/demo/generer.mjs             # default store: the two products and their orders
+
+- Regulations: 62 requirements in 11 markets (`essais/monde/reglementation-*.json`), each with a quote found word for word in the official text. The gaps (rules that could not be checked) are listed in the `.md` file next to each JSON file.
+- The 11 rules of the former regulatory watch were audited claim by claim (`essais/monde/veille-audit.md`): 34 confirmed, 20 inexact, 6 unsupported out of 60. The watch now only applies verified rules.
+- Limits: the encoded rule is drafted by AI and not reviewed by a customs declarant; tariff lines are proposals of the engine; the requirement list is not complete; nothing states that a product is compliant.
+
+## Cockpit (home page, since 4 Oct 2026)
+
+A shop imports its orders (Shopify or Etsy CSV export, or free columns). Each product is classified once on the Cleo Legal API; each order line is then checked for its delivery country by the rules of the regulatory watch, applied to the retained code. Each status (ready, to check, blocked) points to what it rests on: the classification, an official text, a signed answer.
+
+    node server.mjs                          # http://localhost:4318 (Node 22)
+    node --test tests/conformite.test.mjs tests/csv.test.mjs tests/page.test.mjs tests/dossier.logique.test.mjs
+    node essais/demo/generer.mjs             # regenerates the demo shop
+
+- **Overview**: breakdown of the lines to ship, map of shipments (Europe inset), deadlines with a countdown, signed log.
+- **Orders**: one row per line, tabs by status, country and deadline filters. Only ready lines ship.
+- **Products**: product × destination matrix; a code is validated once, at six digits.
+- **Questions**: questions from the engine, codes to validate, documents required by a country. Before you answer, each answer shows how many lines it unblocks or blocks.
+- **Regulatory watch**: `public/data/veille.json`, 11 official texts cited (GPSR, common charger, toys, the EU's flat €3 duty, end of the US de minimis, CPSIA, FCC, Japanese PSE, Australian GST, button batteries, IATA lithium). Summaries drafted by AI, to be reviewed. "Simulate an announcement" publishes a fictional scenario (duty increase at midnight in Washington, suspension in Australia), flagged as such everywhere.
+- **Compliance engine**: `public/app/conformite.js`, pure, shared by the browser and the tests.
+- **Demo data**: the docking station replays a real API response recorded on 4 Oct 2026; without an API key, the other products use illustrative responses, marked as such. With the key, everything is classified live. Product illustrations drawn for the app; flags from the flag-icons package (MIT).
+- **Classify a product** (`#/dossier`, also from the bar of the overview): you drop a photo, a label or a pictogram (read by Claude on Bedrock), you paste the address of a product page (`POST /api/url`, `lib/page.mjs`: schema.org data, Open Graph and tables copied as they are, with no model; private hosts refused, including after a redirect; a shop that refuses robots is reported, never bypassed), or you write a few lines. Then the full journey of the historical file: reading of the documents, contradictions, engine rounds, question to the merchant, encoded rule, close decisions, tests, obligations, other destinations, readable file, signed validation that goes back up into the cockpit.
+- **Interpretation tree** (`#/arbre`): same engine (`public/arbre-moteur.js`), signed editing, replay on the 87 decisions, generated code, log. Opened from a file, it takes up that file's criteria.
+- **Offline** (without `CLEO_API_KEY`): six real responses recorded on 4 Oct 2026 (`public/data/enregistrees.json`) are replayed when the documents sent are exactly the same, and the screen says so; otherwise an illustrative response from the demo catalogue, otherwise an explicit error. Without Bedrock access, the reading of photos, documents and criteria is reported as not done.
+- The old addresses `/classer` and `/arbre` redirect to `#/dossier` and `#/arbre`.
+
+## Classification file (`/classer`)
+
+A product record and a destination as input. As output, a decision graph: candidates, candidates set aside, question to the merchant, new evaluation, proposal with its texts and its close official decisions, then validation by an authorised person and return of the code to the record.
+
+Everything displayed on the right comes from a live call to `POST /v2/customs/classifications` of the Cleo Legal API. Nothing is written in advance.
 
     node server.mjs          # http://localhost:4318
-    node sonde.mjs           # parcours complet dans un navigateur, captures sonde-*.png
+    node sonde.mjs           # full journey in a browser, screenshots sonde-*.png
 
-La clé d'API vit dans `.env` (`CLEO_API_KEY=...`), lue par le serveur, jamais envoyée au navigateur. Les validations s'écrivent dans `catalogue.json`, en local seulement : l'app n'enregistre rien dans l'API (`persist` n'est pas envoyé, la route `/review` n'est pas branchée).
+The API key lives in `.env` (`CLEO_API_KEY=...`), read by the server, never sent to the browser. Validations are written to `catalogue.json`, locally only: the app records nothing in the API (`persist` is not sent, the `/review` route is not wired).
 
-## Ce que l'écran fait de plus depuis le 04/10 (cadrage « décision vérifiable »)
+## What the screen does in addition since 4 Oct ("verifiable decision" framing)
 
-- **Photo** : `POST /api/photo` convertit l'image (sips, macOS) et fait transcrire l'étiquette par Claude sur Bedrock (aws CLI, profil de la machine). La transcription remplit le champ « Fiche technique ou étiquette », avec la liste de ce qui n'a pas pu être lu. Une personne relit avant de classer.
-- **Lecture des pièces** : `POST /api/lire` relève les caractéristiques écrites dans la fiche technique et les contradictions entre description, fiche et caractéristiques. Chaque élément cite un passage ; le serveur vérifie que le passage existe mot pour mot dans la pièce et jette le reste.
-- **Contradictions** : elles bloquent la classification tant qu'une personne n'a pas dit laquelle des deux affirmations est vraie. Le passage déclaré faux est barré et n'est plus transmis.
-- **Réévaluation traçable** : retirer, ajouter ou corriger une caractéristique relance l'appel et affiche « ce qui a changé » (statut, code retenu, confiance).
-- **Pour, contre, inconnu** par candidat, uniquement depuis les champs de la réponse de l'API.
-- **Trois épreuves** rejouées en direct : reformuler, retirer une information, introduire une contradiction. Verdict mécanique sur le code retenu et le statut.
-- **Autres destinations** : un appel par pays, avec le niveau réellement obtenu.
+- **Photo**: `POST /api/photo` converts the image (sips, macOS) and has the label transcribed by Claude on Bedrock (aws CLI, the machine's profile). The transcription fills the "Datasheet or label" field, with the list of what could not be read. A person reviews before classifying.
+- **Reading of the documents**: `POST /api/lire` picks out the characteristics written in the datasheet and the contradictions between description, datasheet and characteristics. Each item quotes a passage; the server checks that the passage exists word for word in the document and discards the rest.
+- **Contradictions**: they block the classification until a person has said which of the two statements is true. The passage declared false is struck through and is no longer transmitted.
+- **Traceable re-evaluation**: removing, adding or correcting a characteristic relaunches the call and displays "what changed" (status, retained code, confidence).
+- **For, against, unknown** per candidate, only from the fields of the API response.
+- **Three tests** replayed live: rephrase, remove a piece of information, introduce a contradiction. Mechanical verdict on the retained code and the status.
+- **Other destinations**: one call per country, with the level actually obtained.
 
     node sonde.mjs photo ~/Downloads/IMG_1022.HEIC
     node sonde.mjs contradiction
 
-## Règle encodée, arbre d'interprétation et modules (04/10/2026)
+## Encoded rule, interpretation tree and modules (4 Oct 2026)
 
-- **Règle encodée au cœur du parcours** : `public/data/arbre.json` (9 critères, 28 nœuds, chargeurs, batteries externes, stations d'accueil, hubs, adaptateurs, câbles) est exécutée sur les faits que les pièces établissent (`POST /api/criteres`, chaque valeur avec son passage). Chaque étape montre la règle officielle, le fait vérifié, la conséquence. Un fait manquant devient une question qui dit où mène chaque réponse.
-- **Mode expert** : `/arbre`. Modifier une branche demande une lecture en une phrase et une signature ; le résultat, le code généré et le rejeu sur les décisions officielles se recalculent. La version modifiée reste une version de travail dans le navigateur.
-- **Mesure** (`node essais/arbre/assembler.mjs`) : 87 décisions officielles (13 règlements de classement UE, 74 décisions CBP), 38 reproduites dont 12 sur des faits tous explicites, 1 contredite, 35 non tranchées, 13 hors périmètre. Détail et limites : `essais/arbre/bilan.md`. L'arbre et les fiches sont rédigés par IA, non relus par un déclarant.
-- **Textes** : `public/data/textes.json`, 59 passages de la NC 2026 (règlement (UE) 2025/1926), vérifiés mot pour mot par `node essais/arbre/verifier-textes.mjs` (la source de 24 Mo se retélécharge, voir `construire-textes.mjs`).
-- **Modules** : `lib/applicabilite.mjs` (une décision proche porte-t-elle sur un produit comparable), `lib/obligations.mjs` (obligations, droits, coût, avec ce qui est sourcé ou non ; mesure dans `essais/modules/obligations-mesure.md`), `public/dossier.js` (dossier lisible et imprimable).
+- **Encoded rule at the heart of the journey**: `public/data/arbre.json` (9 criteria, 28 nodes, chargers, power banks, docking stations, hubs, adapters, cables) is run on the facts that the documents establish (`POST /api/criteres`, each value with its passage). Each step shows the official rule, the verified fact, the consequence. A missing fact becomes a question that says where each answer leads.
+- **Expert mode**: `/arbre`. Editing a branch requires a reading in one sentence and a signature; the result, the generated code and the replay on the official decisions are recomputed. The edited version remains a working version in the browser.
+- **Measurement** (`node essais/arbre/assembler.mjs`): 87 official decisions (13 EU classification regulations, 74 CBP rulings), 38 reproduced of which 12 on facts all explicit, 1 contradicted, 35 undecided, 13 out of scope. Detail and limits: `essais/arbre/bilan.md`. The tree and the records are drafted by AI, not reviewed by a customs declarant.
+- **Texts**: `public/data/textes.json`, 59 passages of the CN 2026 (Regulation (EU) 2025/1926), checked word for word by `node essais/arbre/verifier-textes.mjs` (the 24 MB source is downloaded again, see `construire-textes.mjs`).
+- **Modules**: `lib/applicabilite.mjs` (does a close decision concern a comparable product), `lib/obligations.mjs` (obligations, duties, cost, with what is sourced or not; measurement in `essais/modules/obligations-mesure.md`), `public/dossier.js` (readable and printable file).
 
     node --test tests/*.test.mjs
-    node sonde-arbre.mjs                       # page /arbre, données réelles
-    node sonde-parcours.mjs dock               # parcours complet, station d'accueil
-    node sonde-parcours.mjs chargeur <photo>   # parcours complet depuis une photo
+    node sonde-arbre.mjs                       # /arbre page, real data
+    node sonde-parcours.mjs dock               # full journey, docking station
+    node sonde-parcours.mjs chargeur <photo>   # full journey from a photo
 
 ## Single decision, arbitration, market access (4 Oct 2026, app now in English)
 
