@@ -169,6 +169,10 @@ textarea{resize:vertical;min-height:74px}
 .scene .state{border-radius:10px;padding:11px 13px;margin-top:14px;background:var(--warn-bg)}
 .scene .state.ok{background:var(--ok-bg)}
 .scene .state ul{padding-left:18px;margin-top:4px;font-size:13.5px}
+.scene .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:14px}
+.scene .strip div{border:1px solid var(--rule);border-radius:9px;padding:7px 10px}
+.scene .strip span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin-bottom:3px}
+.scene .strip .tag{margin-top:0}
 .scene .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
 .scene .acts .btn{width:auto}
 .scene .arb{border:1px solid var(--warn);border-radius:10px;padding:12px 14px;margin-top:12px;background:#fff}
@@ -703,9 +707,11 @@ async function verifierApplic(id) {
 
 // Obligations et droits pour la route : ce que l'API rend, avec ce qui est sourcé et ce qui ne l'est pas.
 function obligHtml() {
-  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
-  if (!top) return '';
-  const o = S.oblig, hs6 = String(top.code).slice(0, 6);
+  const dec = decision();
+  // consequences come after the decision: nothing is computed on a code that is still disputed or waiting for a fact
+  if (!dec.code || dec.blocages.some((b) => ['arbitrage', 'question_regle', 'question_moteur', 'contradiction', 'aucun_code'].includes(b.id)))
+    return `<div class="node static bench"><div class="k">Duties and landed cost</div><div class="s">Computed once the classification is usable. Still open: ${esc(dec.blocages.map((b) => b.message).join(' ') || 'no code is retained.')}</div></div>`;
+  const o = S.oblig, hs6 = dec.code;
   let body = `<form class="line" id="oblig" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px"><input name="v" type="number" min="0" step="any" placeholder="Goods value in USD (optional)"><button class="btn sm" type="submit" ${o === 'encours' ? 'disabled' : ''}>${o === 'encours' ? 'Call in progress' : 'Query'}</button></form>`;
   if (o && o.erreur) body += `<div class="err" style="margin-top:10px">${esc(o.erreur)}</div>`;
   else if (o && o !== 'encours') {
@@ -724,9 +730,10 @@ function obligHtml() {
 }
 async function onOblig(e) {
   e.preventDefault();
-  const last = S.rounds[S.rounds.length - 1], top = topOf(last.data), v = parseFloat(new FormData(e.target).get('v'));
+  const dec = decision(), v = parseFloat(new FormData(e.target).get('v'));
+  if (!dec.code) return;
   S.oblig = 'encours'; render();
-  try { S.oblig = await post('/api/obligations', { description: effective(S.product.desc, 'description'), sku: S.product.sku, hs6: String(top.code).slice(0, 6), origine: S.product.origin, destination: S.product.dest, valeur_usd: v > 0 ? v : undefined }); }
+  try { S.oblig = await post('/api/obligations', { description: effective(S.product.desc, 'description'), sku: S.product.sku, hs6: dec.code, origine: S.product.origin, destination: S.product.dest, valeur_usd: v > 0 ? v : undefined }); }
   catch (err) { S.oblig = { erreur: String(err.message || err).slice(0, 200) }; }
   render();
 }
@@ -768,9 +775,11 @@ function sceneHtml() {
     action += `<div class="block" style="background:#fff"><div class="k">Deciding question</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')}</div><div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>leads to ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div></div>`;
   }
   if (dec.blocages.some((b) => b.id === 'arbitrage')) {
-    const opts = [...new Set([dec.codes.moteur, dec.codes.regle].filter(Boolean))];
+    const comparables = prec.filter((x) => { const a = S.applic[x.ruling_id]; return a && (a.verdict === 'applicable' || a.verdict === 'partiellement'); });
+    const viaPrec = Object.fromEntries(comparables.map((x) => [String(x.official_code).slice(0, 6), x.ruling_id]));
+    const opts = [...new Set([dec.codes.moteur, dec.codes.regle, ...Object.keys(viaPrec)].filter(Boolean))];
     action += `<form class="arb" id="arbitrage"><div class="k">Arbitration by a declarant</div><div class="s">${esc(dec.motif || '')} Both readings stay in the file; one code is retained, with its reason and a signature.</div>
-      <label>Code retained</label><div class="pick">${opts.map((c, i) => `<label><input type="radio" name="code" value="${c}" ${i === 0 ? 'required' : ''}><b style="font-family:var(--mono)">${esc(fmtCode(c))}</b> ${c === dec.codes.regle ? 'encoded rule' : 'engine'}</label>`).join('')}<label><input type="radio" name="code" value="autre">another code <input name="autre" maxlength="7" placeholder="0000.00" style="width:90px;padding:4px 6px"></label></div>
+      <label>Code retained</label><div class="pick">${opts.map((c, i) => `<label><input type="radio" name="code" value="${c}" ${i === 0 ? 'required' : ''}><b style="font-family:var(--mono)">${esc(fmtCode(c))}</b> ${c === dec.codes.regle ? 'encoded rule' : c === dec.codes.moteur ? 'engine' : 'ruling ' + esc(viaPrec[c]) + ', checked as comparable'}</label>`).join('')}<label><input type="radio" name="code" value="autre">another code <input name="autre" maxlength="7" placeholder="0000.00" style="width:90px;padding:4px 6px"></label></div>
       <label>Reason, as it will appear in the file</label><textarea name="raison" required minlength="20" placeholder="e.g. The station connects peripherals to the computer; its network port is one port among others, so it stays a unit of an ADP machine."></textarea>
       <label>Elements examined</label><div class="chk">${['Label or datasheet', 'Texts cited by the encoded rule', 'Rationale of the engine', 'Similar official rulings', 'The product itself'].map((x) => `<label><input type="checkbox" name="vu" value="${x}">${x}</label>`).join('')}</div>
       <label>Declarant</label><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px"><input name="qui" required minlength="2" placeholder="Name of the declarant who arbitrates"><button class="btn sm" type="submit">Record the arbitration</button></div></form>`;
@@ -779,13 +788,23 @@ function sceneHtml() {
   const state = S.saved ? `<div class="state ok"><b>Validated by ${esc(S.saved.validated_by)}.</b> The code is back on the product record. The file keeps the facts, the path, the evidence and the decision.</div>`
     : dec.peutValider ? `<div class="state ok"><b>The file is consistent: it can be validated.</b>${S.niveau === 'hs6' ? ' Validation covers the six-digit level; the national tariff line of the destination is not established.' : ''}</div>`
     : `<div class="state"><b>${dec.blocages.length} point${dec.blocages.length === 1 ? '' : 's'} to settle before validation</b><ul>${dec.blocages.map((b) => `<li>${esc(b.message)}</li>`).join('')}</ul>${others.some((b) => b.id === 'question_moteur') ? '<a href="#" data-open="raisonnement">Answer the engine\'s question in the reasoning below</a>' : ''}</div>`;
+  const openQ = dec.blocages.filter((b) => ['question_regle', 'question_moteur', 'contradiction'].includes(b.id)).length;
+  const cout = S.oblig && S.oblig !== 'encours' && !S.oblig.erreur ? S.oblig.cout : null, inconnus = cout ? (cout.composantes || []).filter((c) => !c.connu).length : 0;
+  const ST = [
+    ['Product data', openQ ? [openQ + ' point' + (openQ === 1 ? '' : 's') + ' open', 'warn'] : toConfirm ? ['sufficient, ' + toConfirm + ' to confirm', 'warn'] : ['sufficient', 'keep']],
+    ['Coverage', top && top.system !== 'hs6' ? ['national line (' + top.system + ')', 'keep'] : ['six digits only for ' + COUNTRIES[p.dest], 'warn']],
+    ['Classification', !dec.code && !dec.codes.moteur && !dec.codes.regle ? ['no code', 'bad'] : openQ ? ['needs information', 'warn'] : dec.blocages.some((b) => b.id === 'arbitrage') ? ['needs review: two readings', 'warn'] : ['suggested', 'keep']],
+    ['Human validation', S.saved ? ['approved by ' + S.saved.validated_by, 'keep'] : S.arbitrage && dec.origine === 'arbitrage' ? ['arbitrated, not yet approved', 'warn'] : ['not validated', 'out']],
+    ['Cost', !cout ? ['not computed', 'out'] : cout.partiel || inconnus ? ['partial, ' + inconnus + ' component' + (inconnus === 1 ? '' : 's') + ' unknown', 'warn'] : ['complete', 'keep']],
+  ];
+  const strip = `<div class="strip">${ST.map(([k, [v, tone]]) => `<div><span>${k}</span><b class="tag ${tone}">${esc(v)}</b></div>`).join('')}</div>`;
   const arb = S.arbitrage && dec.origine === 'arbitrage' && !S.saved ? `<div class="hint" style="margin-top:8px">Arbitration recorded: ${esc(fmtCode(dec.code))}, by ${esc(S.arbitrage.qui)}. <a href="#" data-arbreset="1">Reopen it</a></div>` : '';
   return `<div class="scene"><div class="top">${p.photo && p.photo.apercu ? `<img src="${p.photo.apercu}" alt="">` : '<span></span>'}
       <div><div class="k" style="font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5)">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div style="margin:2px 0 8px;color:var(--g7)">${nFacts} fact${nFacts === 1 ? '' : 's'} established from the documents · ${toConfirm} to confirm</div>${head}<div class="muted" style="font-size:13px;margin-top:4px">${esc(origine)}</div></div>
       <div style="text-align:right"><label style="margin:0 0 3px">Validate at</label><select id="niveau" style="width:auto;padding:5px 8px;font-size:13px" ${S.saved ? 'disabled' : ''}><option value="hs6" ${S.niveau === 'hs6' ? 'selected' : ''}>six-digit level</option><option value="national" ${S.niveau === 'national' ? 'selected' : ''}>national tariff line</option></select></div></div>
     <div class="lines"><span>Why</span><span>${esc(dec.code ? (why || 'No reason was returned for this code.') : 'No single reason yet: the two readings below disagree, or no code is on the table.')}</span>
       <span>Evidence</span><span>${quotes} quoted passage${quotes === 1 ? '' : 's'} from the label or datasheet · ${ruleTexts} official text${ruleTexts === 1 ? '' : 's'} on the rule's path · ${prec.length ? (checked.length ? checked.length + ' of ' + prec.length + ' similar rulings checked for comparability' : prec.length + ' similar rulings, none checked for comparability yet') : 'no similar ruling returned'}</span></div>
-    ${state}${S.saved ? '' : action}${arb}
+    ${strip}${state}${S.saved ? '' : action}${arb}
     <div class="acts">${S.saved ? '<button type="button" class="btn ghost" id="dljson">Download the file (JSON)</button>' : `<form id="validate" style="display:flex;gap:8px;flex-wrap:wrap"><input id="who" required minlength="2" placeholder="Name of the authorised person" value="${esc(S.arbitrage && dec.origine === 'arbitrage' ? S.arbitrage.qui : '')}" style="width:240px" ${dec.peutValider ? '' : 'disabled'}><button class="btn ok" type="submit" ${dec.peutValider ? '' : 'disabled'}>Validate and save</button></form>`}
       <button type="button" class="btn ghost" id="lisible">${S.saved ? 'Export the validated file' : 'Export the file as it stands'}</button></div></div>`;
 }
