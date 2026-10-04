@@ -14,16 +14,16 @@ if (mode === 'dock') await p.click('.chip:nth-child(2)');
 else { await p.setInputFiles('#photo', file); await p.waitForSelector('.photo', { timeout: 120000 }); }
 await p.click('#go'); await idle();
 const etabli = await p.locator('.step').count();
-console.log('étapes établies par les pièces seules :', etabli, (await p.locator('.step .l:nth-child(2)').allInnerTexts()).map((x) => x.replace(/\s+/g, ' ').slice(13, 150)));
+console.log('steps established by the documents alone:', etabli, (await p.locator('.step .l:nth-child(2)').allInnerTexts()).map((x) => x.replace(/\s+/g, ' ').slice(13, 150)));
 for (let i = 0; i < 8 && await p.locator('.block .opts button').count(); i++) {
   const q = (await p.locator('.block .t').innerText()).slice(0, 110), k = (await p.locator('.block .opts button').first().getAttribute('data-crit')).split(':')[0];
-  if (!REP[k]) { console.log('question sans réponse prévue :', k); break; }
-  console.log('blocage →', q, '| réponse donnée :', REP[k]);
+  if (!REP[k]) { console.log('question with no planned answer:', k); break; }
+  console.log('blocking point →', q, '| answer given:', REP[k]);
   await p.click(`[data-crit="${k}:${REP[k]}"]`); await p.waitForTimeout(150);
 }
-console.log('CONCLUSION DE LA RÈGLE :', (await p.locator('.concl, .block').last().innerText()).replace(/\s+/g, ' ').slice(0, 420));
-console.log('PROPOSITION DU MOTEUR :', await p.locator('.final .big').count() ? await p.textContent('.final .big') : 'aucune', '|', await p.textContent('.final .tag'));
-console.log('travail restant :', await p.locator('.todo li').allTextContents());
+console.log('RULE CONCLUSION:', (await p.locator('.concl, .block').last().innerText()).replace(/\s+/g, ' ').slice(0, 420));
+console.log('ENGINE PROPOSAL:', await p.locator('.final .big').count() ? await p.textContent('.final .big') : 'none', '|', await p.textContent('.final .tag'));
+console.log('remaining work:', await p.locator('.todo li').allTextContents());
 await p.screenshot({ path: `sonde-parcours-${mode}.png`, fullPage: true });
-console.log('erreurs JS :', errs.length, errs.slice(0, 3));
+console.log('JS errors:', errs.length, errs.slice(0, 3));
 await b.close();

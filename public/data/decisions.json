@@ -6,7 +6,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32018R1785",
   "code_officiel": "85444210",
   "hs6": "854442",
-  "produit": "Câbles d'empilage Ethernet pour commutateurs réseau",
+  "produit": "Ethernet stack cables for network switches",
   "description": "Insulated cables (so-called ‘stack cables’) in various lengths fitted with connectors at both ends. Each cable consists of 32 insulated single conductors for a voltage not exceeding 1 000 V, bundled into 16 sheathed pairs which are not twisted. These pairs are covered by a metal foil and metal threads. The cables connect switches that form switching stations (so-called ‘stacks’) used in telecommunication networks (Local Area Networks (LAN)). They enable the bidirectional transfer of data between switches using Ethernet technology. The cables do not have any additional functions (for example, to supply electric power). See image (*1)",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8544 , 8544 42 and 8544 42 10 . Data transfer between apparatuses using telecommunication technology, such as Ethernet, is considered telecommunication for the purposes of CN code 8544 42 10 (see Commission Implementing Regulation (EU) No 1112/2012 (1). The cables in question are designed to be used in telecommunication networks configured as LAN. Consequently, they are considered to be electrical conductors, fitted with connectors, used in telecommunication networks (see also CN Explanatory Notes to subheading 8544 42 10 ). The articles are therefore to be classified under CN code 8544 42 10 as other electric conductors for a voltage not exceeding 1 000 V, fitted with connectors, of a kind used for telecommunications.",
   "criteres": {
@@ -39,7 +39,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R1465",
   "code_officiel": "85044090",
   "hs6": "850440",
-  "produit": "Plaque de charge sans fil Qi avec adaptateur secteur",
+  "produit": "Qi wireless charging pad with mains adapter",
   "description": "A device (so-called ‘wireless charging plate’) consisting of an adapter with a cable of a length of approximately 180 cm and a charging plate. The cable has a connector to connect to the charging plate. The plate is circular shaped with a height of approximately 8 mm, a diameter of approximately 80 mm and a weight of 51 g. The adapter converts (rectifies) alternating current (AC — 240V) into direct current (DC — 12V) and transfers this to the plate. In the plate this DC is converted (inverted) into AC and then that AC is converted into an electromagnetic field. The device is designed to charge apparatus wirelessly.",
   "motifs": "Classification is determined by general rules (GIR) 1, 3(c) and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8504 , 8504 40 and 8504 40 90 . The functions of the device (current rectifying, inverting, and converting into an electromagnetic field) are covered by subheading 8504 40 . Classification under subheading 8504 50 is thus excluded. Classification under CN code 8504 40 30 as static converters of a kind used with telecommunication apparatus, automatic data-processing machines and units thereof is excluded as the AC/DC adapter is designed to provide current to a variety of electrical apparatus. As neither current rectifying, inversion nor conversion into an electromagnetic field gives the device its essential character it has to be classified applying GIR 3(c). Consequently, the device is to be classified under CN code 8504 40 90 as other static converters.",
   "criteres": {
@@ -77,7 +77,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R1166",
   "code_officiel": "85437090",
   "hs6": "854370",
-  "produit": "Convertisseur vidéo SDI vers HDMI",
+  "produit": "SDI to HDMI video converter",
   "description": "An electrical apparatus (so-called ‘video converter’), rectangular shaped, with dimensions of approximately 17 × 14 × 4 cm. The apparatus has the following sockets: — a Serial Digital Interface (SDI), — a High Definition Multimedia Interface (HDMI), — an RJ-45 interface, and — a power connector. The apparatus is designed to convert video signals from SDI format to HDMI format. The RJ-45 interface serves to connect the apparatus to the Ethernet only for the software updates and to get electric power needed for those updates (Power over Ethernet (‘PoE’)).",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature, note 3 to Section XVI and by the wording of CN codes 8543 , 8543 70 and 8543 70 90 . The RJ-45 interface (communication function via Ethernet) is ancillary to the principal function (video conversion), as it serves only to receive updates while no video signals are transmitted via that interface. Classification under heading 8517 is therefore excluded. Consequently, the apparatus is to be classified under CN code 8543 70 90 as other electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85.",
   "criteres": {
@@ -105,7 +105,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R2224",
   "code_officiel": "85176200",
   "hs6": "851762",
-  "produit": "Adaptateur Bluetooth pour enceintes ou chaîne audio",
+  "produit": "Bluetooth adapter for loudspeakers or hi-fi system",
   "description": "An electrical apparatus (so-called ‘wireless speaker adapter’) in a housing with dimensions of approximately 52 × 52 ×13 mm and a weight of 26 g. The wireless speaker adapter consists of: — a built-in rechargeable battery, — a digital/analogue converter, — a Bluetooth technology based transmitter and receiver (Advanced Audio Distribution Profile (A2DP), — a USB port for charging, and — a 3,5 mm audio port, for connection to a speaker system (not present upon presentation to customs). The apparatus allows the user to listen to music from a smartphone or similar portable device on a home audio system or via separate loudspeakers.",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8517 and 8517 62 00 . As the apparatus can only send and receive audio signals wirelessly via Bluetooth (A2DP), and does not itself generate the audio signal or produce the sound it cannot be considered a sound reproducing apparatus. Classification under heading 8519 is therefore excluded. The function of the apparatus is to receive audio data wirelessly from a device (for example a mobile phone) and to transmit those data using cables to loudspeakers. The function of receiving, converting and transmitting data is covered by the wording of CN code 8517 62 00 . The apparatus is therefore to be classified under CN code 8517 62 00 as a machine for the reception, conversion and transmission of voice or other data.",
   "criteres": {
@@ -143,7 +143,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0666",
   "code_officiel": "85044082",
   "hs6": "850440",
-  "produit": "Adaptateur secteur 12 V à câble pour décodeur",
+  "produit": "12 V mains adapter with cable for set-top box",
   "description": "A static converter in a plastic housing (a so-called ‘AC/DC adapter’) designed to convert alternating current (AC) (100-240 V) into direct current (DC) (12 V, 1,5 A). The housing is equipped with a plug to connect to the AC and with an electrical cable of 1,5 m fitted with a DC-connector which enables the AC/DC adapter to be connected to different apparatus. The AC/DC adapter is presented to supply power to a set-top box (STB). It can also be used for supplying power to a variety of other apparatus, for example, telecommunication apparatus, automatic data-processing machines, audio/video recording or reproducing apparatus, household appliances and radio navigational aid apparatus.",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8504 , 8504 40 and 8504 40 82 . Classification under CN code 8504 40 30 as static converters of a kind used with telecommunication apparatus, automatic data- processing machines and units thereof is excluded as the AC/DC adapter is designed to provide current to a variety of electrical apparatus. The AC/DC adapter is therefore to be classified under CN code 8504 40 82 as a rectifier.",
   "criteres": {
@@ -181,7 +181,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0615",
   "code_officiel": "85371099",
   "hs6": "853710",
-  "produit": "Station d'accueil pour smartphone avec écran, clavier et haut-parleurs",
+  "produit": "Docking station for smartphone with screen, keyboard and loudspeakers",
   "description": "An apparatus (so-called ‘smartphone docking station’) consisting of the following components: — a 29,5 cm colour LCD screen, — a hinged casing with two USB ports, — a keyboard with a touchpad, — a dock for a smartphone, — a power supply socket using a voltage not exceeding 1 000 V, — built-in loudspeakers. When the smartphone is docked, its battery is charged and, simultaneously, the apparatus serves as an input/output unit to perform all the functions of the docked smartphone. As the apparatus is not equipped with a signal converter, all the signals are received unaltered from the docked smartphone. The apparatus is not suitable for connection to an automatic data- processing machine.",
   "motifs": "Classification is determined by general rules 1, 3(c) and 6 for the interpretation of the Combined Nomenclature, and by the wording of CN codes 8537 , 8537 10 and 8537 10 99 . The apparatus is a composite machine capable of performing the functions of headings 8504 , 8518 , 8528 and 8537 . All the individual functions performed by its different components are included in the abovementioned headings of Chapter 85. Therefore, classification under heading 8543 as electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85, is excluded. Given its characteristics, none of the functions is considered to be the principal function of the apparatus within the meaning of note 3 to Section XVI. Consequently, it is to be classified under the heading that occurs last in numerical order. The apparatus is therefore to be classified under CN code 8537 10 99 as other boards, panels, consoles, desks, cabinets and other bases for electric control for a voltage not exceeding 1 000 V.",
   "criteres": {
@@ -214,7 +214,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32015R2319",
   "code_officiel": "85044082",
   "hs6": "850440",
-  "produit": "Adaptateur secteur (redresseur) pour console de jeux",
+  "produit": "Mains adapter (rectifier) for games console",
   "description": "An article (so-called ‘adapter’ or ‘rectifier’) designed to convert AC current (100 — 220 V) into DC current (12 V, 3,7 A); in a plastic housing with dimensions of approximately 14 × 6 × 5 cm. The article can be connected via a cable with a connector to the AC socket and via another cable with a specific connector to a specific game console of heading 9504 .",
   "motifs": "Classification is determined by general rules 1, 3(a) and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8504 , 8504 40 and 8504 40 82 . As heading 8504 covers static converters (for example, rectifiers), that heading provides the most specific description. Consequently, classification under heading 9504 as an accessory to a video game machine is excluded. The article is therefore to be classified under CN code 8504 40 82 as rectifiers.",
   "criteres": {
@@ -252,7 +252,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0457",
   "code_officiel": "85437090",
   "hs6": "854370",
-  "produit": "Répartiteur HDMI actif, une entrée et huit sorties",
+  "produit": "Active HDMI splitter, one input and eight outputs",
   "description": "A digital electronic apparatus with one High-Definition Multimedia Interface (HDMI) input and eight HDMI outputs (so-called ‘active HDMI splitter’) in a housing with dimensions of approximately 12 × 6 × 2 cm. It supports the High-bandwidth Digital Content Protection (HDCP) protocol and is supplied with 5 V DC. The apparatus is used for simultaneously splitting, without loss of quality, one HDMI input signal into eight HDMI output signals with the same technical characteristics as the original input signal. It allows a HDMI signal originating from one source (for example, a set-top box) to be simultaneously distributed to several apparatus (for example, television sets).",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8543 , 8543 70 and 8543 70 90 . The HDMI splitter is not an apparatus for making connections to or in electrical circuits or a panel for the distribution of electricity as it splits one input signal into eight output signals and simultaneously processes HDCP protocols. Consequently, classification under either heading 8536 as junction boxes or heading 8537 as boards, panels, consoles, desks, cabinets and other bases, equipped with two or more apparatus of heading 8535 or 8536 , for the distribution of electricity is excluded. As the apparatus has an individual function, which is not covered more specifically by a heading of Chapter 85, it is therefore to be classified under CN code 8543 70 90 as an electrical apparatus, having an individual function, not specified or included elsewhere in Chapter 85.",
   "criteres": {
@@ -290,7 +290,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0457",
   "code_officiel": "85437090",
   "hs6": "854370",
-  "produit": "Sélecteur HDMI actif, quatre entrées et une sortie",
+  "produit": "Active HDMI switch, four inputs and one output",
   "description": "A digital electronic apparatus with four High-Definition Multimedia Interfaces (HDMI) inputs, one HDMI output and a button for selecting the input (so-called ‘active HDMI switch’). It incorporates an amplifier for regenerating weak signals, 4 LEDs for indicating the selected input and is supplied with 5 V DC. The apparatus supports full 1080p video signals with a data transfer up to 2,5 Gbps and the High-bandwidth Digital Content Protection (HDCP) protocol. The apparatus is used for selecting one HDMI input to be connected to the HDMI output.",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8543 , 8543 70 and 8543 70 90 . The HDMI switch is not an apparatus for switching electrical circuits or for the distribution of electricity as it switches (selects) one of the HDMI inputs to be connected to the HDMI output and simultaneously amplifies the signal and processes HDCP protocols. Consequently, classification under either heading 8536 as switches or heading 8537 as boards, panels, consoles, desks, cabinets and other bases, equipped with two or more apparatus of heading 8535 or 8536 , for the distribution of electricity is excluded. As the apparatus has an individual function, which is not covered more specifically by a heading of Chapter 85, it is therefore to be classified under CN code 8543 70 90 as an electrical apparatus, having an individual function, not specified or included elsewhere in Chapter 85.",
   "criteres": {
@@ -328,7 +328,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0457",
   "code_officiel": "85365080",
   "hs6": "853650",
-  "produit": "Sélecteur HDMI passif à boutons-poussoirs, quatre entrées",
+  "produit": "Passive push-button HDMI switch, four inputs",
   "description": "An apparatus with four High-Definition Multimedia Interfaces (HDMI) inputs and one HDMI output (so-called ‘passive HDMI switch’) in a housing with dimensions of approximately 18 × 12 × 3 cm. It incorporates a so-called ‘multi-station push button switch’ with four push buttons (one per input) which are rigidly attached to each other. Upon selection of one of the inputs, the others are automatically switched off. The apparatus is used for selecting, by pushing one of the buttons, one HDMI input to be connected to the HDMI output.",
   "motifs": "Classification is determined by general rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8536 , 8536 50 and 8536 50 80 . As the apparatus only incorporates one switch for connecting one input at a time to the output, it is not a panel for the distribution of electricity. Consequently, classification under heading 8537 as boards, panels, consoles, desks, cabinets and other bases, equipped with two or more apparatus of heading 8535 or 8536 , for electric control or the distribution of electricity is excluded. As the apparatus only performs switching which is an individual electrical function identified in a heading of Chapter 85, it is therefore to be classified under CN code 8536 50 80 as other switches.",
   "criteres": {
@@ -361,7 +361,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32012R1110",
   "code_officiel": "85044090",
   "hs6": "850440",
-  "produit": "Chargeur allume-cigare à deux ports USB",
+  "produit": "Cigarette lighter charger with two USB ports",
   "description": "A charger of the direct current converter type (so-called ‘Universal dual-port car charger’) comprising a car cigarette adapter, two USB interfaces and a light indicator. The charger has a voltage input of 12 V DC, a voltage output of 5 V DC and a current output of 500 mA or 2 × 250 mA. The charger is used for supplying power to charge various apparatus, such as mobile phones, PDA, GPS, cameras, MP3 and MP4 players.",
   "motifs": "Classification is determined by General Rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8504 , 8504 40 and 8504 40 90 . The product is a static converter of the direct current converter type (see also the HS Explanatory Notes to heading 8504 , (II), point (D)). The charger can be used for charging a variety of apparatus, for example, telecommunication apparatus, automatic data-processing machines, audio/video recording or reproducing apparatus and radio navigational aid apparatus. Classification under CN code 8504 40 30 as static converters of a kind used with telecommunication apparatus, automatic data-processing machines and units thereof is therefore excluded. The charger is therefore to be classified under CN code 8504 40 90 as other static converters.",
   "criteres": {
@@ -399,7 +399,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32012R1112",
   "code_officiel": "85444290",
   "hs6": "854442",
-  "produit": "Câble USB de 1 m pour données et charge",
+  "produit": "1 m USB cable for data and charging",
   "description": "An insulated cable (so-called ‘USB cable’) with a length of 1 m which consists of insulated twisted wires and is fitted with USB connectors at both ends. The cable makes it possible to transfer data between different types of apparatus. It also makes it possible to supply electrical power to those apparatus or to charge them.",
   "motifs": "Classification is determined by General Rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN codes 8544 , 8544 42 and 8544 42 90 . Data transfer between two apparatuses where no telecommunication technology, such as Ethernet, is used is not considered telecommunication for the purpose of subheading 8544 42 10 . Consequently, classification under subheading 8544 42 10 as a cable fitted with connectors of a kind used for telecommunications is excluded (see also the CN Explanatory Notes to subheading 8544 42 10 ). The cable is therefore to be classified under CN code 8544 42 90 as other electric conductors for a voltage not exceeding 1 000 V fitted with connectors.",
   "criteres": {
@@ -427,7 +427,7 @@
   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32008R1142",
   "code_officiel": "85444290",
   "hs6": "854442",
-  "produit": "Câble audio-vidéo pour console de jeux vidéo",
+  "produit": "Audio-video cable for video games console",
   "description": "A cable, approximately 250 cm in length, of a kind used solely with a video game machine of heading 9504 . The cable is fitted with one specifically designed connector for the video game machine at one end and five connectors for connection to a monitor or a television set at the other end. Data can be transferred from the video game machine to the monitor or the television set via the cable and the data may, depending on the content, be visualised as a video game, video or still image or reproduced as sound.",
   "motifs": "Classification is determined by General Rules 1 and 6 for the interpretation of the Combined Nomenclature and by the wording of CN code 8544 , 8544 42 and 8544 42 90 . Classification under heading 9504 as an accessory of a video game machine is excluded, as heading 8544 provides the most specific description referring to cables and other electric conductors. The product is therefore to be classified under CN code 8544 42 90 as an electric conductor fitted with connectors.",
   "criteres": {
@@ -455,7 +455,7 @@
   "url": "https://rulings.cbp.gov/ruling/N363538",
   "code_officiel": "8507600090",
   "hs6": "850760",
-  "produit": "Batterie externe lithium-ion à quatre ports USB",
+  "produit": "Lithium-ion power bank with four USB ports",
   "description": "The merchandise under consideration is the Green Cell PowerPlay Ultra Power Bank, model number PBGC04, a device that features a compact rectangular case with two USB-C ports, two USB-A ports, and LED indicators. The power bank uses lithium-ion chemistry, has a combined maximum output of 128 W, a nominal capacity of 26,800 mAh, and is compatible with various fast charging technologies.",
   "motifs": "",
   "criteres": {
@@ -483,7 +483,7 @@
   "url": "https://rulings.cbp.gov/ruling/H348342",
   "code_officiel": "84718010",
   "hs6": "847180",
-  "produit": "Hub USB 3.0 à 7 ports (UH700)",
+  "produit": "7-port USB 3.0 hub (UH700)",
   "description": "The fourth item is the USB 3.0 7-Port Hub (UH700). This [device] is used to expand the number of available USB ports on a PC. It measures 6.5 inches in width, 2.6 inches in depth, and .7 inches in height. The UH700 is equipped with 7 USB 3.0 ports and has a 10x data transfer speed. It supports systems such as Windows, Mac OS X and Linux systems. A built-in surge protector keeps both your devices and data safe in the process of transferring data.",
   "motifs": "",
   "criteres": {
@@ -516,7 +516,7 @@
   "url": "https://rulings.cbp.gov/ruling/N360577",
   "code_officiel": "8517620090",
   "hs6": "851762",
-  "produit": "Ensemble chargeur porté au cou, station d'accueil et étui pour implant",
+  "produit": "Set of neck-worn charger, docking station and case for implant",
   "description": "The charger is a wireless device that is worn around the neck. It contains a rechargeable lithium-ion battery and a Bluetooth radio transceiver. The charger is used to charge the implant at home and to program the implant during clinic visits.",
   "motifs": "",
   "criteres": {
@@ -544,7 +544,7 @@
   "url": "https://rulings.cbp.gov/ruling/N359291",
   "code_officiel": "8504409580",
   "hs6": "850440",
-  "produit": "Chargeur autonome pour batterie de casque d'aviation",
+  "produit": "Standalone charger for aviation headset battery",
   "description": "The merchandise under consideration is identified as Assembly, Battery Charger, Part number 801-00002-000.A1, which is a standalone battery charger for the lithium-ion battery exclusively used in Lightspeed Delta Zulu aviation headsets. The battery charger is comprised of a main Printed Circuit Board Assembly (PCBA) responsible for battery charging control, a sub-PCBA that manages indicator status and facilitates battery interface, and a USB-C port for charging cables.",
   "motifs": "",
   "criteres": {
@@ -572,7 +572,7 @@
   "url": "https://rulings.cbp.gov/ruling/N359212",
   "code_officiel": "8504409510",
   "hs6": "850440",
-  "produit": "Adaptateur secteur 120 V vers 12 V continu pour réveil",
+  "produit": "120 V to 12 V direct current mains adapter for alarm clock",
   "description": "The merchandise under consideration is identified as an AC Adaptor, model number ACX012, which you describe as a power adapter used exclusively with the Futuristic Alarm Clock. The power adapter is designed to convert 120V AC to 12V DC with a maximum output under 50 Watts. It is comprised of a 2-prong power plug for household electrical outlets and a female output port for connecting DC power plugs. The subject adapter is intended to be used with the Futuristic Alarm Clock and an optional pillow vibrator device.",
   "motifs": "",
   "criteres": {
@@ -615,7 +615,7 @@
   "url": "https://rulings.cbp.gov/ruling/N356502",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câbles adaptateurs Lightning, USB-C et USB-A pour casque d'aviation",
+  "produit": "Lightning, USB-C and USB-A adapter cables for aviation headset",
   "description": "There are three cables at issue with this request. The first is identified as the Lightning Adaptor, part number 300-00053-000.A2. This cable consists of a length of insulated conductors with a Universal Accessory Connector (UAC) on one end and a Lightning connector on the other end. The second item is identified as the USB C Adaptor, part number 300-00054-000.A3. This cable is comprised of a length of insulated conductors with a UAC plug on one end and a USB C connector on the other end. The final item is identified as the USB A Adaptor, part number 300-00055-000.B1. The cable is composed of a length of insulated conductors with a UAC plug on one end and a USB A connector on the other end.",
   "motifs": "",
   "criteres": {
@@ -643,7 +643,7 @@
   "url": "https://rulings.cbp.gov/ruling/N356452",
   "code_officiel": "8537109170",
   "hs6": "853710",
-  "produit": "Rallonge électrique à deux prises secteur et trois ports USB",
+  "produit": "Extension lead with two mains sockets and three USB ports",
   "description": "The merchandise under consideration is identified as the USB-Charging Extension Cord, item number 81597. The subject device is comprised of a braided power cord terminated at one end with a standard electrical wall plug. At the other end of the cable is a plastic housing, which incorporates two standard AC receptacles as well as three USB charging ports. Within the enclosure are the necessary electrical components that protect and convert the electrical power signals. The device is used to power and charge various devices.",
   "motifs": "",
   "criteres": {
@@ -681,7 +681,7 @@
   "url": "https://rulings.cbp.gov/ruling/N356371",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câble audio auxiliaire jack 3,5 mm pour casque d'aviation",
+  "produit": "3.5 mm jack auxiliary audio cable for aviation headset",
   "description": "The merchandise under consideration is identified by part number 301-00002-000.A2 and is described as an auxiliary cable for use with aviation headsets. The part is comprised of a length of insulated cable with a 3.5mm audio connector at each end. You state that the cable allows the pilot to connect their smartphone or other audio inputs to the aviation headset. This allows the pilot to use the headset to make phone calls, listen to music, and receive critical alerts from navigational applications without relying on a Bluetooth connection.",
   "motifs": "",
   "criteres": {
@@ -709,7 +709,7 @@
   "url": "https://rulings.cbp.gov/ruling/N352984",
   "code_officiel": "8473305100",
   "hs6": "847330",
-  "produit": "Boîtier externe de carte graphique (eGPU) avec ports d'accueil",
+  "produit": "External graphics card enclosure (eGPU) with docking ports",
   "description": "The merchandise under consideration is identified as the AORUS RTX 5090 AI Box, model GV-N5090IXEB-32GD. The RTX 5090 is described as an external graphics processing unit (eGPU), designed to enhance the computational and graphical performance of a host desktop or laptop.",
   "motifs": "",
   "criteres": {
@@ -742,7 +742,7 @@
   "url": "https://rulings.cbp.gov/ruling/H328693",
   "code_officiel": "84718010",
   "hs6": "847180",
-  "produit": "Station d'accueil USB Dell D3100",
+  "produit": "Dell D3100 USB docking station",
   "description": "The subject merchandise is a Dell D3100 “Dockport” USB docking station (“D3100” or “docking station”). Through a single connection, the docking station allows users to connect to the Internet, external devices, and up to three additional monitors. The D3100 features one USB 3.0 Type-B port for upstream input, and the following downstream outputs: • three USB 3.0 ports; • two USB 2.0 ports; • two HDMI ports; • one DisplayPort; • one RJ45 Gigabit Ethernet port; • one combination audio port for a headphone and microphone; and • one audio line out.",
   "motifs": "",
   "criteres": {
@@ -775,7 +775,7 @@
   "url": "https://rulings.cbp.gov/ruling/H342570",
   "code_officiel": "85044095",
   "hs6": "850440",
-  "produit": "Chargeurs USB pour allume-cigare et pour prise murale",
+  "produit": "USB chargers for cigarette lighter socket and for wall socket",
   "description": "the subject merchandise consists of various car and wall chargers. The chargers are primarily plastic AC-DC static converters designed to be plugged into a standard cigarette lighter outlet in an automobile (car charger) or a standard wall outlet (wall charger). Protestant’s chargers typically feature one USB-A port or a USB-A and a USB-C port. The chargers provide a low amperage charge between 2.1-4.8 Amp.",
   "motifs": "",
   "criteres": {
@@ -808,7 +808,7 @@
   "url": "https://rulings.cbp.gov/ruling/N349898",
   "code_officiel": "8473305100",
   "hs6": "847330",
-  "produit": "Supports muraux et de bureau pour tablette, avec adaptateur réseau",
+  "produit": "Wall and desk mounts for tablet, with network adapter",
   "description": "The first item under consideration is identified as the SURFACE MOUNT System iPadA16BK, SKU 70810, which is described as an aluminum bezel that is used to encase a tablet personal computer (PC) and provide a physical mounting capability on a wall or flat surface. The SURFACE MOUNT System iPadA16BK is imported with a USB-C adapter cable and an iPort POE+ network adapter. In use, a tablet PC is placed inside the SURFACE MOUNT System iPadA16BK and secured to the wall for interaction with users. The SURFACE MOUNT System iPadA16BK is specifically designed for the tablet PC by positioning microphone/speaker holes and charging port alignments.",
   "motifs": "",
   "criteres": {
@@ -831,7 +831,7 @@
   "url": "https://rulings.cbp.gov/ruling/N349433",
   "code_officiel": "8504409510",
   "hs6": "850440",
-  "produit": "Adaptateur secteur à cordon USB-C fixe",
+  "produit": "Mains adapter with fixed USB-C cord",
   "description": "The merchandise under consideration is referred to as the Power Adapter (Adapter), Part Number 115867, which is described as an plastic housing containing circuitry to electrically convert AC to DC. The Adapter has a Type-A two-prong AC male plug on one side and a permanently affixed 6’ cord, with a male USB-C plug. In use, the Adapter is intended to be plugged into a wall outlet where the USB-C plug delivers power to various machines of the user",
   "motifs": "",
   "criteres": {
@@ -869,7 +869,7 @@
   "url": "https://rulings.cbp.gov/ruling/H337673",
   "code_officiel": "84718010",
   "hs6": "847180",
-  "produit": "Stations d'accueil universelles pour ordinateur portable et adaptateur USB vers HDMI",
+  "produit": "Universal docking stations for laptop and USB to HDMI adapter",
   "description": "The subject docking stations UD-3900H, UD-6950, and UD-6950H, and UD-6950PDH are universal laptop docking stations. The subject docking stations allow for combined audio, data, power, and video through one station. The docking stations include two USB 3.0 ports, audio in and out ports, four USB 2.0 ports, display ports, a host port, a power button, and a high-speed Gigabit Ethernet port for network connection.",
   "motifs": "",
   "criteres": {
@@ -902,7 +902,7 @@
   "url": "https://rulings.cbp.gov/ruling/N346959",
   "code_officiel": "8507600020",
   "hs6": "850760",
-  "produit": "Bloc batterie lithium-ion rechargeable pour trottinette-valise",
+  "produit": "Rechargeable lithium-ion battery pack for scooter suitcase",
   "description": "The merchandise under consideration is referred to as a rechargeable lithium-ion battery pack, model number EL-2500-PB1, which is described as a portable device for storing and supplying electricity. It consists of twelve cylindrical battery cells enclosed in a rectangular housing with a built-in USB-C cable, DC connector port, RC connector port, power button, and LED indicator lights. The battery pack has an output voltage of 5 VDC (USB-C), an output voltage of 37 VDC (DC port), a nominal capacity of 2600 mAh, and a nominal energy of 96.2 Wh. The battery pack is used to power electric luggage scooters but can also be used to power electronic devices, such as tablets and smartphones.",
   "motifs": "",
   "criteres": {
@@ -930,7 +930,7 @@
   "url": "https://rulings.cbp.gov/ruling/H343160",
   "code_officiel": "8504409550",
   "hs6": "850440",
-  "produit": "Plante artificielle en pot servant de station de charge USB",
+  "produit": "Potted artificial plant serving as a USB charging station",
   "description": "The iPP45 is an artificial succulent plant housed in a cylindrical plastic flowerpot that serves as an electric static converter with two USB-C sockets (20Watts (W) max shared)\u0002 and one 10 W USB-A socket on its side. An electrical cord extends from the bottom of the flowerpot and includes a universal 30 W power adapter.",
   "motifs": "",
   "criteres": {
@@ -963,7 +963,7 @@
   "url": "https://rulings.cbp.gov/ruling/N343619",
   "code_officiel": "8504409550",
   "hs6": "850440",
-  "produit": "Chargeur mural à deux ports USB avec veilleuse LED",
+  "produit": "Wall charger with two USB ports and LED night light",
   "description": "The merchandise under consideration is identified as the Dual USB Charger + Night Light Plug-in (Charger), SKU # 39097401, which is described as a plastic housing with LED night lights, two USB Type-A output sockets, and a two prong wall plug. In use, the Charger is plugged into a standard wall outlet where users can plug electrical devices into the USB sockets to receive converted DC power.",
   "motifs": "",
   "criteres": {
@@ -996,7 +996,7 @@
   "url": "https://rulings.cbp.gov/ruling/H341609",
   "code_officiel": "85176200",
   "hs6": "851762",
-  "produit": "Câbles cuivre à attache directe (DAC) munis d'émetteurs-récepteurs",
+  "produit": "Direct attach copper (DAC) cables fitted with transceivers",
   "description": "The DACs consist of a twin-axial copper cable with two or more small form factor pluggable (SFP) transceivers terminating the cable at each end. The DACs are fitted with two to eight octal small form factor pluggable (OSFP) or quad small form factor pluggable (QSFP) transceivers, which contain an integrated EEPROM chip, “allow[ing] the module to identify itself and the type of cable attached to it in order to allow the active equipment to operate in the proper mode.”",
   "motifs": "",
   "criteres": {
@@ -1024,7 +1024,7 @@
   "url": "https://rulings.cbp.gov/ruling/N342905",
   "code_officiel": "8506100090",
   "hs6": "850610",
-  "produit": "Bloc de secours à trois piles alcalines AAA, fiche micro-USB",
+  "produit": "Backup pack with three AAA alkaline cells, micro-USB plug",
   "description": "The Pop Charger is described as an emergency battery pack with a nominal capacity of 1000 mAh and an output voltage of 5 VDC at 0.8 A. According to your submission, the subject battery pack is marketed for Android devices, consisting of a plastic housing, a male micro-USB connector, and three non-rechargeable AAA alkaline batteries. Since the battery pack does not have a charging port, the AAA batteries need to be replaced once they are depleted.",
   "motifs": "",
   "criteres": {
@@ -1057,7 +1057,7 @@
   "url": "https://rulings.cbp.gov/ruling/N339123",
   "code_officiel": "8536698000",
   "hs6": "853669",
-  "produit": "Adaptateur modulaire DB25 mâle vers deux prises RJ45",
+  "produit": "Modular adapter, DB25 male to two RJ45 sockets",
   "description": "The merchandise under consideration is identified as the Modular Adapter, DB25 Male / Dual RJ45 (8x8) Jack (Adapter), PN RA2588M, which is described as a disassembled electrical connector having a plastic housing with two female RJ45 sockets on one side, and a male DB25 connector on the other side. Based on the information provided, the two connectors are not attached at importation as each RJ45 electrical conductor extends from the back as a wire and male pin. In use, the end user determines the desired pinout on the DB25 connector by inserting the pin into the appropriate location according to their specific design.",
   "motifs": "",
   "criteres": {
@@ -1075,7 +1075,7 @@
   "url": "https://rulings.cbp.gov/ruling/N334999",
   "code_officiel": "8536698000",
   "hs6": "853669",
-  "produit": "Adaptateur de prise en cube, une fiche et trois prises",
+  "produit": "Cube plug adapter, one plug and three sockets",
   "description": "The merchandise under consideration is identified as the Plug Adapter, PN 115825, which is described as a plastic cube having one male Type-B three-prong plug on one side, and one female Type-B electrical socket each on three corresponding sides. Internally, the Plug Adapter has electrical tabs and contacts that allow for external plugs to be inserted to receive power. We would note that there are no fuses, switches, or other electrical apparatus inside the plug",
   "motifs": "",
   "criteres": {
@@ -1123,7 +1123,7 @@
   "url": "https://rulings.cbp.gov/ruling/N332683",
   "code_officiel": "8471801000",
   "hs6": "847180",
-  "produit": "Commutateur clavier, écran et souris (KVM)",
+  "produit": "Keyboard, video and mouse (KVM) switch",
   "description": "The merchandise under consideration is identified as the Emerald DeskVue, PN EMD5004-R (KVM Switch), which is described as a plastic enclosure containing a motherboard printed circuit board assembly (PCBA), a memory PCBA, a solid-state storage drive (SSD), and a cooling fan. On the side of the KVM Switch are numerous USB ports, and on the rear of the enclosure are two RJ-45 Ethernet ports, three HDMI ports, and two coaxial connectors. The KVM Switch functions to interconnect peripherals, such as a keyboard, display, mouse, and more, to an automatic data processing machine.",
   "motifs": "",
   "criteres": {
@@ -1156,7 +1156,7 @@
   "url": "https://rulings.cbp.gov/ruling/N328742",
   "code_officiel": "8504409580",
   "hs6": "850440",
-  "produit": "Adaptateur allume-cigare 12 V à deux ports USB-A",
+  "produit": "12 V cigarette lighter adapter with two USB-A ports",
   "description": "The merchandise under consideration is identified as the Adapter, PN CAT-DC2USB-BLK, which is described as a 3.5 A DC-DC having two female USB Type-A socket connectors on one side and 12 V vehicle accessory electrical plug on the other. The subject Adapter is intended to be used in a vehicle for charging personal electronics.",
   "motifs": "",
   "criteres": {
@@ -1194,7 +1194,7 @@
   "url": "https://rulings.cbp.gov/ruling/H322074",
   "code_officiel": "85437099",
   "hs6": "854370",
-  "produit": "Chauffe-mains électriques rechargeables faisant aussi batterie externe",
+  "produit": "Rechargeable electric hand warmers also serving as power bank",
   "description": "The electric hand warmers are described as portable devices with internal warming capability and the ability to charge electronic devices. The 9S model is comprised of a 5200 mAh rechargeable lithium-ion battery, one output USB used for charging compatible devices, one input USB for charging the rechargeable lithium-ion battery, an LED light bar to show the heat setting and remaining charge in the lithium battery, a heating element, and a thermocouple wire within a handheld plastic enclosure.",
   "motifs": "",
   "criteres": {
@@ -1222,7 +1222,7 @@
   "url": "https://rulings.cbp.gov/ruling/N325987",
   "code_officiel": "8504409550",
   "hs6": "850440",
-  "produit": "Chargeur mural à deux ports USB-A",
+  "produit": "Wall charger with two USB-A ports",
   "description": "The item under consideration is referred to as the Wall Outlet USB-A Dual Port Charger (Wall Charger), SKU 33112501. The Wall Charger is described as a rectangular plastic enclosure housing a printed circuit board assembly, with a two-prong electrical plug on one side and two USB Type-A sockets on the other side. In use, the Wall Charger is plugged into a standard receptacle and rectifies/converts alternating current to direct current. You state that the Wall Charger can be utilized to charge various electronic devices, such as tablets, watches, speakers, phones, etc.",
   "motifs": "",
   "criteres": {
@@ -1260,7 +1260,7 @@
   "url": "https://rulings.cbp.gov/ruling/N323399",
   "code_officiel": "8507600020",
   "hs6": "850760",
-  "produit": "Stations d'énergie portables à batterie lithium-ion",
+  "produit": "Portable power stations with lithium-ion battery",
   "description": "The items under consideration are Yeti Portable Power Stations, model numbers 200x, 500x, 1000, 1500x, 3000x, and 6000x. Each model is functionally similar, providing backup and portable power to electronic devices through a variety of ports. The Yeti 200x Portable Power Station contains a 200 watt-hour rechargeable lithium-ion battery encased in a housing with an AC output port, an 8mm charge port, USB ports, 12V ports, and an LCD display that indicates the battery level.",
   "motifs": "",
   "criteres": {
@@ -1293,7 +1293,7 @@
   "url": "https://rulings.cbp.gov/ruling/H319416",
   "code_officiel": "85444220",
   "hs6": "854442",
-  "produit": "Câbles audio et vidéo munis de connecteurs (24 modèles)",
+  "produit": "Audio and video cables fitted with connectors (24 models)",
   "description": "The cable described as NS-HZ303 is described as a 6’ 3.5 mm Mini Audio Cable. It incorporates male 3.5mm plugs on both ends. The cable consists of two bundles of several inner conductor strands surrounded by insulation and one bundle of cotton yarn strands. The bundles are collectively surrounded by an aluminum sheath, then a spiral shield and finally a paper sheath. That collective bundle is finally surrounded by a PVC jacket.",
   "motifs": "",
   "criteres": {
@@ -1321,7 +1321,7 @@
   "url": "https://rulings.cbp.gov/ruling/N319727",
   "code_officiel": "8504409580",
   "hs6": "850440",
-  "produit": "Borne de recharge solaire pour téléphones, avec batterie",
+  "produit": "Solar charging station for phones, with battery",
   "description": "a powder coated stainless steel pole with mounting plates that incorporate a 45 W photovoltaic (PV) panel at the top.  The Charging Pole measures 106 inches in height and has a small round 28-inch steel table surrounding the pole, where users can place their electronic devices during charging.  Incorporated into the Charging Pole are a charge controller, a 30 Ah lithium-ion battery, three USB outlets, and one Qi charging pad.  \r\rIn your letter, you state that the Charging Pole does not connect to the electrical grid and functions as a stand-alone charger",
   "motifs": "",
   "criteres": {
@@ -1349,7 +1349,7 @@
   "url": "https://rulings.cbp.gov/ruling/N316909",
   "code_officiel": "8517620090",
   "hs6": "851762",
-  "produit": "Câble adaptateur USB vers DB9 (RS-232) pour ventilateur médical",
+  "produit": "USB to DB9 (RS-232) adapter cable for medical ventilator",
   "description": "This cable assembly incorporates an adapter module consisting of a custom printed circuit board assembly (PCBA), a USB male connector on one end, and a DB9 male connector on the other end. The adapter module facilitates the conversion of a USB communication signal to an RS-232 communication signal and vice versa. Additionally, the module creates an isolation barrier for both the power and communication signals. It also converts power in the form of a linear regulator, creating the 3.3 volts it needs to run.",
   "motifs": "",
   "criteres": {
@@ -1387,7 +1387,7 @@
   "url": "https://rulings.cbp.gov/ruling/N315544",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Support de téléphone combiné à un câble de charge rigide",
+  "produit": "Phone holder combined with a rigid charging cable",
   "description": "a combination cellphone stand, holder, and charging cable.  The item consists of a plastic housing and a rigid charging cable with a USB connector at one end and either a USB-C or a Micro-USB connector at the other.  The holder is attached via adhesive to the back of a cell phone and the cable is slid within.  The rigid nature allows the cable to be manipulated in the holder to function as phone stand.  The cable can also be removed from the holder and used to charge or sync the cell phone.",
   "motifs": "",
   "criteres": {
@@ -1405,7 +1405,7 @@
   "url": "https://rulings.cbp.gov/ruling/N310490",
   "code_officiel": "8504409540",
   "hs6": "850440",
-  "produit": "Alimentation régulée de 850 W pour machines de jeu",
+  "produit": "850 W regulated power supply for gaming machines",
   "description": "the Power Supply-AC, Model No. YGEB0850AM-1A00P10, which is described as a 254 mm by 152.4 mm by 76.2 mm regulated power supply that is intended to be used with gaming machines.  The power supply is equipped with two output connectors, each having multiple 24 VDC outputs, and has a maximum power output of 850 W.",
   "motifs": "",
   "criteres": {
@@ -1428,7 +1428,7 @@
   "url": "https://rulings.cbp.gov/ruling/N307285",
   "code_officiel": "8471801000",
   "hs6": "847180",
-  "produit": "Stations d'accueil USB pour ordinateur, deux écrans et périphériques",
+  "produit": "USB docking stations for computer, two displays and peripherals",
   "description": "the VT4000 Dual 4K Universal Docking Station (VT4000), Item #901005, which is described as a plastic enclosure having two HDMI ports, two DisplayPorts, audio lines in/out, one RJ45 Ethernet Port, six USB 3.0 Ports, and a single USB-C Port.  The principal function of the VT4000 is to provide users with the ability to connect an automatic data processing (ADP) machine to two display monitors, and up to eleven accessories and peripherals through a single USB-C input connection.",
   "motifs": "",
   "criteres": {
@@ -1461,7 +1461,7 @@
   "url": "https://rulings.cbp.gov/ruling/N307161",
   "code_officiel": "8504406018",
   "hs6": "850440",
-  "produit": "Bloc d'alimentation interne de 850 W pour ordinateur personnel",
+  "produit": "850 W internal power supply unit for personal computer",
   "description": "a Power Supply for a Personal Computer,  Model No. HP1-F850GD-F14C, which is described as a steel enclosure measuring 140 mm by 150 mm by 86 mm containing rectifying apparatus and having multiple output cable harnesses for connecting to various components within an automatic data processing machine.  The subject switching power supply is intended to be installed internally and has a maximum power output of 850 Watts.",
   "motifs": "",
   "criteres": {
@@ -1489,7 +1489,7 @@
   "url": "https://rulings.cbp.gov/ruling/N306841",
   "code_officiel": "8507600020",
   "hs6": "850760",
-  "produit": "Démarreur de secours avec batterie portable, et batterie externe",
+  "produit": "Jump starter with portable battery, and power bank",
   "description": "The ChargeUp Auto 12V Jump Starter and Power Pack, product number CY2075CHAUT, consists of battery terminal alligator clips with an adapter, a wall charger, a micro USB charge cable, a female 12V output adapter, and a 12V car charger and a portable battery unit that features USB ports and a connector that directly connects to the adapter of the battery terminal alligator clips. The battery unit consists of a 12,000 mAh lithium polymer battery and is designed to store and provide power to electronic devices and vehicles with an engine capacity up to 5.0L (5,000cc) petrol or 2.5L (2,500cc) diesel.",
   "motifs": "",
   "criteres": {
@@ -1517,7 +1517,7 @@
   "url": "https://rulings.cbp.gov/ruling/N307014",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câble d'extension vidéo VGA/SVGA pour écran",
+  "produit": "VGA/SVGA video extension cable for display",
   "description": "the VGA/SGA Monitor Extension Cable, Item 26845.  The cable is meant to connect an output display monitor (i.e. computer monitor, television) to a computer via the SVGA port on each.  A video signal is then transmitted from the computer to the output unit through the subject cable.  The cable can be of various lengths and is fitted with a 15-pin SVGA connector at each end.",
   "motifs": "",
   "criteres": {
@@ -1545,7 +1545,7 @@
   "url": "https://rulings.cbp.gov/ruling/N306782",
   "code_officiel": "8473305100",
   "hs6": "847330",
-  "produit": "Tapis de souris avec charge sans fil par induction",
+  "produit": "Mouse pad with wireless inductive charging",
   "description": "The PowerTrack is constructed of cellular plastic with a covering of polyester microfiber, has an embedded 10 W wireless inductive charging coil, LED status indicators, and a USB port for connecting to a power source.  In use, the PowerTrack is placed on a desk surface for the purpose of interacting with the user’s mouse, or other input unit, while also charging their personal electronic devices.",
   "motifs": "",
   "criteres": {
@@ -1573,7 +1573,7 @@
   "url": "https://rulings.cbp.gov/ruling/N305957",
   "code_officiel": "8504408500",
   "hs6": "850440",
-  "produit": "Cadre photo avec socle de charge sans fil",
+  "produit": "Photo frame with wireless charging base",
   "description": "a plastic wireless charging base having a photo display and a kick stand on the back side to allow for it to be displayed on a desk or shelf.  The wireless charging pad has a small ledge to support a user’s smart mobile device for the purpose of receiving a wireless charge.  The wireless charging pad is powered through a micro USB cable which is provided with the frame.  We would note that the subject photo frame consists of a slot where users insert a printed photo and the device does not contain any LCD/LED display or memory for the storage of pictures.",
   "motifs": "",
   "criteres": {
@@ -1601,7 +1601,7 @@
   "url": "https://rulings.cbp.gov/ruling/N305975",
   "code_officiel": "8543709960",
   "hs6": "854370",
-  "produit": "Chauffe-mains rechargeable faisant aussi batterie externe",
+  "produit": "Rechargeable hand warmer also serving as power bank",
   "description": "the Rechargeable Heat Bank, item number V36402, and is described as a rechargeable heat and power bank.  The heat and power bank is a rechargeable, pocket-sized, portable hand warmer with six heat settings that is powered by a 5200 MAh lithium-ion battery which allows for up to nine hours of heat per charge.  The heat bank uses heating elements that can warm on either one or both sides and can heat up to 120 degrees Fehrenheit. You state that, when charged, the lithium-ion battery can also be used to charge external devices, such as smart phones or tablets, via USB connection.",
   "motifs": "",
   "criteres": {
@@ -1624,7 +1624,7 @@
   "url": "https://rulings.cbp.gov/ruling/N305600",
   "code_officiel": "8504408500",
   "hs6": "850440",
-  "produit": "Rangement de bureau à tiroirs avec socle de charge sans fil",
+  "produit": "Desk organiser with drawers and wireless charging base",
   "description": "a plastic square desk caddy with 3 drawers.  The caddy contains a wireless charging base incorporated into the top for users to place their personal electronics for the purpose of wirelessly charging the device.  On the side of the caddy is a micro USB port which allows users to plug the caddy into a USB socket to receive power.  You state that the caddy is imported with the top drawer containing paper clips, the middle and bottom drawer containing assorted sticky notes, and a USB cable to connect the device to a power source.",
   "motifs": "",
   "criteres": {
@@ -1652,7 +1652,7 @@
   "url": "https://rulings.cbp.gov/ruling/N305608",
   "code_officiel": "8504409510",
   "hs6": "850440",
-  "produit": "Alimentation multi-sorties pour pédales d'effets d'instruments à cordes",
+  "produit": "Multi-output power supply for stringed instrument effects pedals",
   "description": "the RockBoard ISO Power Block V10 Multi-Power Supply, which is described as a compact power supply for use with electric string musical instrument effects pedals.  The subject power supply has eight 9 V outputs, two 18 V outputs, and is stated to provide 2,000 mA for a total output of 27 Watts.  The subject power supply is imported with the connection cables as well as a mains adapter.",
   "motifs": "",
   "criteres": {
@@ -1670,7 +1670,7 @@
   "url": "https://rulings.cbp.gov/ruling/N304715",
   "code_officiel": "8504409550",
   "hs6": "850440",
-  "produit": "Chargeurs de batteries pour concentrateurs d'oxygène portables",
+  "produit": "Battery chargers for portable oxygen concentrators",
   "description": "the Battery Charger Model BA-303, which is described as a 16.8 VDC, 45 Watt charger for batteries used exclusively with a Portable Oxygen Concentrator (POC).  The function of the battery charger is to charge lithium batteries for the Inogen G3 POC and we would note that the unit does not supply power directly to the POC machine.  The battery charger, which has two specialized connectors where users insert an Inogen G3 POC battery, is equipped with status indicators showing the charge level of the inserted battery.",
   "motifs": "",
   "criteres": {
@@ -1693,7 +1693,7 @@
   "url": "https://rulings.cbp.gov/ruling/N304573",
   "code_officiel": "8504407001",
   "hs6": "850440",
-  "produit": "Adaptateur d'alimentation par Ethernet pour machines de traitement de l'information",
+  "produit": "Power over Ethernet adapter for automatic data-processing machines",
   "description": "the ELO-KIT-POE-ADAPTER Part Number E615169 that you describe as a power over Ethernet (POE) adapter for use with automatic data processing machines.  You state that the subject POE adapter has a maximum output of 30 Watts and is packaged with mounting hardware and an instruction sheet.",
   "motifs": "",
   "criteres": {
@@ -1716,7 +1716,7 @@
   "url": "https://rulings.cbp.gov/ruling/N304253",
   "code_officiel": "8504409520",
   "hs6": "850440",
-  "produit": "Alimentation 24 V pour concentrateur d'oxygène portable",
+  "produit": "24 V power supply for portable oxygen concentrator",
   "description": "a MANGO120S-24-ING DC Power Supply that is described as a 24 VDC, 5 Amp power supply for use with a Portable Oxygen Concentrator (POC).  The subject power supply is said to provide power exclusively to a POC and is permanently embossed stating its limited use as a medical AC/DC Adapter for the Inogen POC.",
   "motifs": "",
   "criteres": {
@@ -1744,7 +1744,7 @@
   "url": "https://rulings.cbp.gov/ruling/N304098",
   "code_officiel": "8504407018",
   "hs6": "850440",
-  "produit": "Bloc d'alimentation en rack pour centres de données et serveurs",
+  "produit": "Rack power supply unit for data centres and servers",
   "description": "the Power Supply Unit (PSU), ZT Part # PS-2302-1A1U-LF, which is described as a rack mountable PSU that supplies both main output DC power as well as standby DC power.  Based in the information provided, the PSU provides 2.5kW, 12.5V / 200A for main power output and 30W, 12V / 2.5A for standby power applications.  You state that the PSU is used to supply power to data center and server equipment racks.",
   "motifs": "",
   "criteres": {
@@ -1762,7 +1762,7 @@
   "url": "https://rulings.cbp.gov/ruling/N303514",
   "code_officiel": "8536698000",
   "hs6": "853669",
-  "produit": "Adaptateur de prise secteur américaine vers européenne, sans électronique",
+  "produit": "US to European mains plug adapter, without electronics",
   "description": "the Universal Power Adapter, PN AD-00077-001 which is described as a an electrical plug having a U.S. format three-prong male plug on one side and a European two-prong female receptacle on the top.  There are no electrical components inside the adapter that converts, alters, amplifies, or conditions the applied voltage.",
   "motifs": "",
   "criteres": {
@@ -1785,7 +1785,7 @@
   "url": "https://rulings.cbp.gov/ruling/N301143",
   "code_officiel": "8471801000",
   "hs6": "847180",
-  "produit": "Concentrateurs USB 3.0 avec ports de charge",
+  "produit": "USB 3.0 hubs with charging ports",
   "description": "There are three items under consideration which are identified as USB (universal serial bus) Hubs, Model Numbers UH720, UH400, and UC430. Based on the information provided, each of the subject USB Hubs are self-contained and are connected directly to a personal computer (PC) to facilitate data transfer from various peripherals to the connected PC. The USB Hubs also provide device charging, however we are of the opinion that this is a subsidiary feature and not the principal function of the units.",
   "motifs": "",
   "criteres": {
@@ -1813,7 +1813,7 @@
   "url": "https://rulings.cbp.gov/ruling/N301141",
   "code_officiel": "8517620020",
   "hs6": "851762",
-  "produit": "Adaptateurs réseau sans fil USB et PCI-E",
+  "produit": "USB and PCI-E wireless network adapters",
   "description": "The first item concerned is the “Archer T4U AC1300” wireless network adapter. This is a USB 3.0 network adapter with a folding external dual band PIFA antenna. This antenna arm has 2 high gain transmitters built-in allowing up to a 400 Mbp transmission rate on the 2.4GHz spectrum and up to a 867 Mbp transmission rate on the 5GHz spectrum. This device is compatible with the 802.11 a/b/g/n/ac wireless standards. Transmit power is <20dBm.",
   "motifs": "",
   "criteres": {
@@ -1841,7 +1841,7 @@
   "url": "https://rulings.cbp.gov/ruling/N300708",
   "code_officiel": "8504409510",
   "hs6": "850440",
-  "produit": "Chargeur à deux ports USB avec veilleuse LED",
+  "produit": "Charger with two USB ports and LED night light",
   "description": "The item concerned is referred to as a 2 USB Port Charger + Night Light. It has a white plastic housing, and it measures 2.5 inches in diameter, and 1 inch in depth. The front of the item contains two USB ports and a button for the LED night light.",
   "motifs": "",
   "criteres": {}
@@ -1853,7 +1853,7 @@
   "url": "https://rulings.cbp.gov/ruling/N300797",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câble USB vers micro-USB gainé d'acier",
+  "produit": "Steel-sheathed USB to micro-USB cable",
   "description": "The item in question is a USB cable known as the Titan M. This cable assembly measures 39 inches in length. It is composed of insulated conductors (wire) covered in a dual layer of flexible, industrial strength steel with a permanently sealed USB connector on one end and a micro USB connector on the other end. The Titan M is used to both charge and transfer data (sync).",
   "motifs": "",
   "criteres": {
@@ -1871,7 +1871,7 @@
   "url": "https://rulings.cbp.gov/ruling/H298118",
   "code_officiel": "85076000",
   "hs6": "850760",
-  "produit": "Batterie externe lithium-ion de 4000 mAh avec lampe intégrée",
+  "produit": "4000 mAh lithium-ion power bank with built-in lamp",
   "description": "The subject power bank is a universal, portable device which stores energy and acts as power source for electronic devices, including smart cell phones that incorporate a USB connection. The power bank device consists of a lithium-ion rechargeable battery\u0002 within a housing. The power bank is packaged with a micro USB charging cable and features a built-in flashlight and an LED indicator. The power bank can be recharged via its micro USB port using the included micro USB charging cable and another USB power source.",
   "motifs": "",
   "criteres": {
@@ -1899,7 +1899,7 @@
   "url": "https://rulings.cbp.gov/ruling/N299351",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câbles USB-C et Lightning gainés de tissu",
+  "produit": "Fabric-sheathed USB-C and Lightning cables",
   "description": "The items in question are cables (Item #’s 53354-US, and 53355-US). The first item (Item # 53354-US) is a six foot fabric covered USB-C cable used for USB-C compatible devices only. This item will charge and sync USB-C equipped devices from standard USB-A equipped computers and chargers. USB 2.0 supports up to 480 Mbps transfer speeds. This device supports up to 15W charging power. The second item (Item # 53355-US) is a six foot fabric covered lightening connector cable. This item is designed to connect specifically to Apple® products, which include but are not limited to iPhones, iPads, and iPods.",
   "motifs": "",
   "criteres": {
@@ -1917,7 +1917,7 @@
   "url": "https://rulings.cbp.gov/ruling/N298750",
   "code_officiel": "8544300000",
   "hs6": "854430",
-  "produit": "Câbles USB à connecteurs automobiles, à installer dans un véhicule",
+  "produit": "USB cables with automotive connectors, to be installed in a vehicle",
   "description": "The first item concerned is a USB cable which will be installed within an automobile (Part # TYX1055). This cable incorporates 4 insulated conductors surrounded by a foil and braided wire shielding, internal strength members, an outer insulation jacket, foam padding, mounting clips and automotive spring lock type electrical connectors on each end.",
   "motifs": "",
   "criteres": {
@@ -1950,7 +1950,7 @@
   "url": "https://rulings.cbp.gov/ruling/N298752",
   "code_officiel": "8517620050",
   "hs6": "851762",
-  "produit": "Boîtiers AUX/USB pour console de véhicule",
+  "produit": "AUX/USB boxes for vehicle console",
   "description": "The first item under consideration is identified as the AUX/USB Box PN TCX-1772 which is described as a plastic enclosure containing a printed circuit board assembly (PCBA), two electrical sockets on the back, two USB sockets on the front, and an auxiliary jack on the front. The intended purpose of this assembly is to be mounted in the console of a motor vehicle to provide a USB type power outlet and data interface to the vehicle’s head unit for personal electronics such as a smart phone or tablet.",
   "motifs": "",
   "criteres": {
@@ -1973,7 +1973,7 @@
   "url": "https://rulings.cbp.gov/ruling/N298534",
   "code_officiel": "8504408500",
   "hs6": "850440",
-  "produit": "Chargeur sans fil à induction pour console centrale automobile",
+  "produit": "Wireless inductive charger for automotive centre console",
   "description": "The item concerned is referred to as a “Wireless Charge System”. It is a component of an automobile’s center console assembly. The purpose of the wireless charge system is to provide the driver or passenger with an easy means of charging smartphones or other similar devices. This power supply/charger uses wireless inductive charging technology to supply power to the internal batteries of a cellular telephone incorporating the same inductive charging technology.",
   "motifs": "",
   "criteres": {
@@ -2016,7 +2016,7 @@
   "url": "https://rulings.cbp.gov/ruling/H287462",
   "code_officiel": "85044070",
   "hs6": "850440",
-  "produit": "Étuis en plastique pour iPad avec récepteur de charge par induction",
+  "produit": "Plastic cases for iPad with inductive charging receiver",
   "description": "The subject charging sleeves are plastic iPad cases with internal electrical components that enable the sleeves to work as charging devices. The sleeves are designated as models “AM.2,” “AP.4,” “AP.3,” and “AM.5.” Each sleeve has a built-in connector that fits into the power ports of iPads, an inductor and various other electrical conditioning elements within the rear portion of the sleeves.",
   "motifs": "",
   "criteres": {
@@ -2044,7 +2044,7 @@
   "url": "https://rulings.cbp.gov/ruling/N296103",
   "code_officiel": "8544200000",
   "hs6": "854420",
-  "produit": "Câble audio/vidéo composante à cinq conducteurs coaxiaux",
+  "produit": "Component audio/video cable with five coaxial conductors",
   "description": "The merchandise in question is referred to as a component audio/video cable (item #33606). The item consists of 5 cables that are joined together down the length of the product. There are five RCA-type connectors on each end of the cable. Each of the joined cables consist of a stranded central copper conductor that is surrounded by an insulating medium, which is then surrounded by a second stranded copper conductor (coaxial construction) all of which is encased in a black insulating outer jacket. These cables are used to interconnect audio and video equipment.",
   "motifs": "",
   "criteres": {
@@ -2077,7 +2077,7 @@
   "url": "https://rulings.cbp.gov/ruling/N296304",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Adaptateur passif USB-C vers USB-A femelle sur câble",
+  "produit": "Passive USB-C to USB-A female adapter on cable",
   "description": "The item concerned is a USB-C to USB-A Female Adapter (#SWU7113A/27). This device is used to connect older USB-A items to newer USB-C computers. It consists of a 6 inch long insulated electrical cable terminated with a USB-C 3.0 plug connector on one end and a USB-A 3.0 jack connector on the opposite end. This item does not contain an IC chip, it is a passive device.",
   "motifs": "",
   "criteres": {
@@ -2110,7 +2110,7 @@
   "url": "https://rulings.cbp.gov/ruling/N296307",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Adaptateur passif DVI vers HDMI sur câble court",
+  "produit": "Passive DVI to HDMI adapter on short cable",
   "description": "The item concerned is a DVI to HDMI Pigtail Adapter (Item SWV9200H/27, Jasco #39251). This device incorporates a 6 inch long insulated cable terminated with a DVI connector on one end and a HDMI connector on the opposite end. This item does not contain an IC chip. It’s a passive device that physically changes a DVI type connection into an HDMI type connection.",
   "motifs": "",
   "criteres": {
@@ -2138,7 +2138,7 @@
   "url": "https://rulings.cbp.gov/ruling/H273383",
   "code_officiel": "85176200",
   "hs6": "851762",
-  "produit": "Câbles optiques actifs munis d'émetteurs-récepteurs",
+  "produit": "Active optical cables fitted with transceivers",
   "description": "The optical fiber cable assemblies at issue are optical fiber cables fitted with transceivers or with transceivers and connectors. Optical fiber cables allow digital data to be transmitted by rapid pulses of light through glass or plastic filament (fiber optics) and, therefore, at the speed of light. The light pulses translate into binary values that are read by a computer.",
   "motifs": "",
   "criteres": {
@@ -2166,7 +2166,7 @@
   "url": "https://rulings.cbp.gov/ruling/N292574",
   "code_officiel": "8471801000",
   "hs6": "847180",
-  "produit": "Adaptateurs de format vidéo pour ordinateur",
+  "produit": "Video format adapters for computer",
   "description": "There are five items under consideration which are described as adapters where each convert a display signal originating from an automatic data processing machine from one type of display format to another type of display format to be used with a display device. Each adapter consists of a male connector on one end and a female connector on the other end. All of the subject adapters are said to be used exclusively with ADP machines.",
   "motifs": "",
   "criteres": {
@@ -2199,7 +2199,7 @@
   "url": "https://rulings.cbp.gov/ruling/N290926",
   "code_officiel": "8544300000",
   "hs6": "854430",
-  "produit": "Câbles USB de rallonge pour faisceaux automobiles",
+  "produit": "USB extension cables for automotive wiring harnesses",
   "description": "The merchandise is identified as USB cable assemblies, part numbers 09920289, 09920290, 09920291 and 09920292. Based on the submitted samples and information that you have provided these four USB cable assemblies are automobile extension cables identical in construction except for the length of the cables and the color of the USB connectors. Each cable is constructed from insulated electric conductors within an outer jacket. There are male connectors, type USB Mini-B, on each end.",
   "motifs": "",
   "criteres": {
@@ -2232,7 +2232,7 @@
   "url": "https://rulings.cbp.gov/ruling/N290028",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câble S-Vidéo de six pieds",
+  "produit": "Six-foot S-Video cable",
   "description": "Item concerned is a six foot S-Video Cable, item # 33597. The cable has a construction of four PVC insulated copper clad steel conductors that carry or transmit luminance and color. The cable allows for the transmission on two separate channels. The S-Video cables carry standard definition video at a resolution of 480i or 576i.",
   "motifs": "",
   "criteres": {
@@ -2265,7 +2265,7 @@
   "url": "https://rulings.cbp.gov/ruling/N289786",
   "code_officiel": "8517620050",
   "hs6": "851762",
-  "produit": "Adaptateur DisplayPort vers VGA pour ordinateur Surface (décision à trois produits)",
+  "produit": "DisplayPort to VGA adapter for Surface computer (ruling covering three products)",
   "description": "The first item is referred to as the Surface USB 3.0 Ethernet Adapter (Realtek RTL81538). This adapter is a 10/100/l000M Ethernet controller that combines a triple-speed IEEE 802.3 compliant Media Access Controller with a triple-speed Ethernet transceiver, a USB 3.0 bus controller and an embedded memory. The Ethernet adapter is used to convert data from USB to Ethernet. It connects to Microsoft “Surface” computers or other devices running Windows 10 and 8.1 via USS connector. It gives the device the capability to connect to a network via an Ethernet connection. It offers data transfer rates of up to 1 Gbps.",
   "motifs": "",
   "criteres": {
@@ -2298,7 +2298,7 @@
   "url": "https://rulings.cbp.gov/ruling/N290026",
   "code_officiel": "8544429000",
   "hs6": "854442",
-  "produit": "Câble adaptateur audio en Y, jack 3,5 mm vers deux RCA",
+  "produit": "Y audio adapter cable, 3.5 mm jack to two RCA",
   "description": "The item concerned is an audio “Y” adapter cable, item # 33568. This is an insulated electric cable that is manufactured in a “Y” shaped configuration. It incorporates a 3.5mm plug on one end. A single cable exits this plug and eventually splits into two cables. At the end of each of the two split cables is an RCA connector, one red and one white. The approximate length of this cable assembly is 6 feet.",
   "motifs": "",
   "criteres": {
@@ -2326,7 +2326,7 @@
   "url": "https://rulings.cbp.gov/ruling/N288408",
   "code_officiel": "8507600020",
   "hs6": "850760",
-  "produit": "Kits de charge avec batteries externes lithium-ion",
+  "produit": "Charging kits with lithium-ion power banks",
   "description": "The Iridium Power Bank with High Speed Charging Station, item PBB102, consists of a power bank and a charging dock. The charging dock has a magnetic connector and acts as a cradle for the included power bank. The dock charges the power bank and at the base of the dock are three built in USB ports that allow for various electronic devices to be connected to the dock. The portable power bank is rectangular in shape and consists of a rechargeable lithium-ion battery that stores and provides energy to electronic devices.",
   "motifs": "",
   "criteres": {
@@ -2354,7 +2354,7 @@
   "url": "https://rulings.cbp.gov/ruling/N285505",
   "code_officiel": "8517620010",
   "hs6": "851762",
-  "produit": "Modem USB 4G LTE",
+  "produit": "4G LTE USB modem",
   "description": "The item concerned is the 4G LTE Global Modem (Model #USB730L). This electronic device is a plug and play modem which measures 83mm in height x 35mm in depth x 11.4mm in width. It incorporates an external type A USB 2.0 connector/plug with a rotator design that accommodates various USB port orientations. It also incorporates two LED indicators that signal network status and data usage. It is compatible with Windows® 7,8,10, MAC OS® x 10.6 or higher, and Linux® Ubuntu 10.4 or higher. It uses a secure 4G LTE connectivity protocol. This modem provides a personal connection to the internet with global connectivity in over 200 countries.",
   "motifs": "",
   "criteres": {
@@ -2382,7 +2382,7 @@
   "url": "https://rulings.cbp.gov/ruling/N284888",
   "code_officiel": "8544422000",
   "hs6": "854442",
-  "produit": "Câbles cuivre passifs QSFP munis de connecteurs",
+  "produit": "Passive QSFP copper cables fitted with connectors",
   "description": "These copper cable assemblies are comprised of 8 individually shielded parallel pair cables, a fully braided EMI shield and an insulating outer jacket. They incorporate a 38 position SMT mounted edge card connector on each end. The connectors incorporate a high performance printed circuit board (PCB) with gold plated contact pads.",
   "motifs": "",
   "criteres": {
@@ -2410,7 +2410,7 @@
   "url": "https://rulings.cbp.gov/ruling/N284892",
   "code_officiel": "8517620050",
   "hs6": "851762",
-  "produit": "Câbles optiques actifs QSFP+ à émetteurs-récepteurs intégrés",
+  "produit": "QSFP+ active optical cables with integrated transceivers",
   "description": "The items in question are known as Quad Small Form-factor Pluggable (QSFP+) Active Optical Cables (AOC) (Model # FCI QSFP+FDR, 56 Gb/s, and Model # FCI QSFP+QDR, 40 Gb/s). These assemblies are comprised of a fiber optic cable with optical transceivers inside both cable connectors on each end. The transceivers are optical/electrical converters that convert electrical signals into optical signals, transmit the optical signals along the length of the fiber optic cable, and then convert the optical signals back into electrical signals at the opposite end.",
   "motifs": "",
   "criteres": {
@@ -2438,7 +2438,7 @@
   "url": "https://rulings.cbp.gov/ruling/N284202",
   "code_officiel": "8471801000",
   "hs6": "847180",
-  "produit": "Organiseur de bureau à trois ports USB relié à un ordinateur",
+  "produit": "Desk organiser with three USB ports connected to a computer",
   "description": "The merchandise under consideration is referred to as a “Desktop Organizer W/3 USB” Mfg. Item #OMD19000 which consists of a printed circuit board assembly, three female USB ports, and a male USB cable in a plastic housing. The unit’s housing has multiple compartments to accommodate certain office supplies such as paper clips, pens and pencils, scissors, a notepad, and a mobile telephone.",
   "motifs": "",
   "criteres": {
@@ -2456,7 +2456,7 @@
   "url": "https://rulings.cbp.gov/ruling/N284052",
   "code_officiel": "8517620050",
   "hs6": "851762",
-  "produit": "Modem USB externe 3G et 4G LTE",
+  "produit": "External 3G and 4G LTE USB modem",
   "description": "This device is an external USB modem. It incorporates two externally accessible SIM card slots, two SMA Antenna Connection ports, a GPS antenna port, and a mini USB port. Its compatible networks include Verizon, T-Mobile, AT&T, Rogers and Sprint. It uses secure 3G or 4G LTE connectivity protocols.",
   "motifs": "",
   "criteres": {
@@ -2479,7 +2479,7 @@
   "url": "https://rulings.cbp.gov/ruling/N282038",
   "code_officiel": "8504409510",
   "hs6": "850440",
-  "produit": "Chargeur mural USB à deux ports de 36 W",
+  "produit": "36 W USB wall charger with two ports",
   "description": "this dual port USB wall charger is a static converter/rectifier that converts alternating current to direct current. It connects to a standard wall outlet and is used to power/charge various personal, USB enabled, electronic devices (i.e. cell phones, laptop computers, tablets, etc.). It is rectangular in shape with a 2-prong electrical plug on one side and two USB ports on the other side (USB-A and USB-C ports). This static converter/rectifier is rated at 36 W.",
   "motifs": "",
   "criteres": {
@@ -2512,7 +2512,7 @@
   "url": "https://rulings.cbp.gov/ruling/N281995",
   "code_officiel": "8544429090",
   "hs6": "854442",
-  "produit": "Câble USB de charge logé dans un pompon porte-clés",
+  "produit": "USB charging cable housed in a keyring tassel",
   "description": "The merchandise in question is a USB/charging cable that is embedded within a tassle and attached to a metal key ring, style number DN-1207KF. This merchandise measures 7-inches in length, 1.25-inches in width, and .5-inches in depth. The USB cable, which has connectors on both ends, can connect to a cell phone and provide battery power when the USB end is connected to a power source. The tassle has an outer suface of polyvinyl chloride plastic sheeting.",
   "motifs": "",
   "criteres": {
@@ -2545,7 +2545,7 @@
   "url": "https://rulings.cbp.gov/ruling/N282047",
   "code_officiel": "8544429090",
   "hs6": "854442",
-  "produit": "Câble USB de charge logé dans un pompon en cuir porte-clés",
+  "produit": "USB charging cable housed in a leather keyring tassel",
   "description": "It is a USB/charging cable that is embedded within a tassle and attached to a metal keychain clasp. The item measures 7 inches in length, 1.5 inches in width, and 1 inch in depth. The USB cable, which has connectors on both ends, can connect to a cell phone and provide battery power when the USB end is connected to a power source. The tassle is composed of black, silver, and purple leather strips.",
   "motifs": "",
   "criteres": {
@@ -2578,7 +2578,7 @@
   "url": "https://rulings.cbp.gov/ruling/N282039",
   "code_officiel": "8507600020",
   "hs6": "850760",
-  "produit": "Batterie externe lithium-ion de 6000 mAh avec lampe intégrée",
+  "produit": "6000 mAh lithium-ion power bank with built-in lamp",
   "description": "The iSmart is encased in an outer shell and features a USB port, a LED flashlight, and a LED indicator bar. The product is a portable charger that houses a printed circuit board and a lithium-ion battery that is re-chargeable and has a storage capacity of 6000mAh. The lithium-ion battery stores and supplies power to mobile devices, such as cell phones and tablets.",
   "motifs": "",
   "criteres": {

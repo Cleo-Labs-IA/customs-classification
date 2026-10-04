@@ -1,0 +1,713 @@
+Interpretation tree · Cleo
+Interpretation tree
+
+Power supplies and chargers for electronic devices (mains adapters, USB chargers, wireless chargers, power banks), docking stations, port replicators, USB hubs, connection adapters and cables fitted with connectors for computers and phones, for a voltage not exceeding 1 000 V. The rule is data: edit a branch and everything is recomputed.
+
+Classify a product
+Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones
+Reference tree
+Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926), six digits only, national code not established. Drafted by AI from the cited texts, not reviewed by a customs declarant. Orange bar: edited node.
+Which function do the datasheet and the packaging state first for this product?
+Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first.
+Section XVI, note 3 · Section XVI, note 5 · General rules for the interpretation of the Combined Nomenclature, rule 1 · General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence) · General rules for the interpretation of the Combined Nomenclature, rule 3(a) · General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+Supply energy to another device: power it, charge it or store electricity for it
+Does the product generate its own electricity (solar panel, dynamo, hand crank)?
+A charger that generates its own current combines a generator and other functions; note 3 to Section XVI classifies it according to the principal function, which this tree does not decide.
+Section XVI, note 3 · Heading 8504 · Heading 8507 · Chapter 85, note 2
+Yes
+Out of scope Charger that generates its own electricity (solar, hand crank): a composite machine that this tree does not decide. Note 2 to Chapter 85 excludes headings 8501 to 8504 for goods described in heading 8541; the texts of headings 8501 and 8541 are not in the repository. US ruling N319727 retains subheading 8504 40 for a solar charging station with a battery.
+No
+Does the product contain a battery or cells whose energy is delivered to the connected device, and of what type?
+Heading 8507 covers electric accumulators, including those presented with ancillary components which contribute to storing and supplying energy or protect them from damage (note 3 to Chapter 85); rule 6 then decides between subheadings at the same level according to the technology. Limit: the note cites neither a converter nor an inverter among these components, and the tree does not compare headings 8504 and 8507 for a power station with mains outputs.
+Heading 8507 · Chapter 85, note 3 · General rules for the interpretation of the Combined Nomenclature, rule 6 · Subheading 8507 60 · Subheading 8507 80 · Section XVI, note 3
+No battery or cells
+Does the product change the nature of the current (alternating to direct, direct to direct, inductive charging with rectification)?
+Heading 8504 covers electrical transformers, static converters and inductors; subheading 8504 40 takes only static converters (rule 6). A product that only connects contacts is a cable of heading 8544 or connection apparatus of heading 8536.
+Heading 8504 · Subheading 8504 40 · General rules for the interpretation of the Combined Nomenclature, rule 6 · Heading 8536 · Heading 8544
+No: the product connects contacts or conducts the current without modifying it
+How is the product without electronics constructed?
+Rule 1 classifies according to the terms of the headings: heading 8544 covers insulated wire and cable whether or not fitted with connectors, heading 8536 plugs, sockets and switches, and rule 6 then decides between subheadings at the same level.
+General rules for the interpretation of the Combined Nomenclature, rule 1 · Heading 8544 · Heading 8536 · Subheadings 8544 42 and 8544 49 (common dash) · Subheadings 8536 61 and 8536 69 (common dash) · General rules for the interpretation of the Combined Nomenclature, rule 6
+Flexible cable of insulated conductors, fitted with connectors (USB, Lightning, HDMI, jack, power)
+8544.42 Other electric conductors, for a voltage not exceeding 1 000 V, fitted with connectors
+Coaxial cable fitted with connectors (central core surrounded by a second conductor)
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Cable or wiring set designed to be fitted in a vehicle, an aircraft or a ship
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Optical fibre cable in which each fibre is individually sheathed, without a transceiver
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Rigid block of plugs and sockets with no length of cable, no switch and no fuse
+8536.69 Plugs and sockets, other, for a voltage not exceeding 1 000 V
+Box with mechanical buttons that selects an input
+Out of scope Mechanical selector without electronics: a switch of subheading 8536 50, not covered by this tree.
+Yes: alternating to direct current, direct to direct current (12 V to 5 V) or inductive charging with rectification
+Does the product also provide mains socket outlets (power strip, extension lead) in addition to its charging ports?
+A block that combines several sockets of heading 8536 to distribute the current may fall under another heading; with a converter, it is a composite machine within the meaning of note 3 to Section XVI, which this tree does not decide.
+Heading 8536 · Section XVI, note 3 · Heading 8504
+Yes
+Out of scope Power strip or extension lead with mains sockets and charging ports: a composite machine within the meaning of note 3 to Section XVI. US ruling N356452 retains 8537 10 for an extension lead with two sockets and three USB ports; the text of heading 8537 is not in the repository and this tree does not cover it.
+No
+8504.40 Static converters
+It only steps an alternating voltage down or up, without rectifying it (transformer)
+Out of scope Transformer that steps an alternating voltage down or up without rectifying it: it falls under heading 8504 but not under the static converters of subheading 8504 40. Its subheadings are not in the text repository and this tree does not cover them.
+Rechargeable lithium-ion or lithium-polymer battery
+8507.60 Lithium-ion accumulators
+Rechargeable lead-acid, nickel-cadmium or nickel-metal hydride battery
+Out of scope Pack of non-rechargeable cells, or lead-acid, nickel-cadmium or nickel-metal hydride accumulator: the product falls under neither subheading 8507 60 nor subheading 8507 80. Primary cells are not accumulators of heading 8507 (US ruling N342905 retains 8506 10) and the named accumulators have their own subheadings. None of these texts is in the repository: this tree does not cover them.
+Rechargeable battery of a technology that the nomenclature does not name (not lithium-ion, lead-acid, nickel-cadmium or nickel-metal hydride)
+8507.80 Other accumulators
+Non-rechargeable cells (alkaline)
+Out of scope Pack of non-rechargeable cells, or lead-acid, nickel-cadmium or nickel-metal hydride accumulator: the product falls under neither subheading 8507 60 nor subheading 8507 80. Primary cells are not accumulators of heading 8507 (US ruling N342905 retains 8506 10) and the named accumulators have their own subheadings. None of these texts is in the repository: this tree does not cover them.
+Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+Heading 8544 covers insulated conductors whether or not fitted with connectors, and heading 8536 the apparatus for making connections to or switching electrical circuits. A product that processes the signal is described by neither of these two heading texts and is classified according to its function.
+Heading 8544 · Heading 8536
+Yes
+Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)?
+Note 6(D)(2) to Chapter 84 excludes from heading 8471 apparatus for the transmission or reception of data when presented separately, even if it meets the conditions of note 6(C); where this function sits alongside other functions, note 3 to Section XVI takes the principal function. Reading adopted by this tree, drawn from rulings and not from the text of the note: a hub, a docking station or a display adapter without a network interface is not treated as transmission apparatus (H348342, N292574). Ruling N289786 reads the note the other way.
+Chapter 84, note 6(D) · Chapter 84, note 6(D)(2) · Section XVI, note 3 · Heading 8517
+No network or radio interface
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?
+Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states.
+Chapter 84, note 6(C), first paragraph · Chapter 84, note 6(E) · Heading 8471 · Heading 8543
+Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+8471.80 Other units of automatic data-processing machines
+Computers and also other devices (phone, television, console)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Audio or video devices in general (television, set-top box, player, camera)
+8543.70 Other electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85
+Another device only (phone, vehicle, games console, medical device)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?
+Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states.
+Chapter 84, note 6(C), first paragraph · Chapter 84, note 6(E) · Heading 8471 · Heading 8543
+Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+8471.80 Other units of automatic data-processing machines
+Computers and also other devices (phone, television, console)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Audio or video devices in general (television, set-top box, player, camera)
+8543.70 Other electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85
+Another device only (phone, vehicle, games console, medical device)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Apart from the connection to the host device, only network or communication interfaces (modem, Ethernet, Wi-Fi or Bluetooth adapter, USB to serial converter, cable with transceivers)
+8517.62 Machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+No
+How is the product without electronics constructed?
+Rule 1 classifies according to the terms of the headings: heading 8544 covers insulated wire and cable whether or not fitted with connectors, heading 8536 plugs, sockets and switches, and rule 6 then decides between subheadings at the same level.
+General rules for the interpretation of the Combined Nomenclature, rule 1 · Heading 8544 · Heading 8536 · Subheadings 8544 42 and 8544 49 (common dash) · Subheadings 8536 61 and 8536 69 (common dash) · General rules for the interpretation of the Combined Nomenclature, rule 6
+Flexible cable of insulated conductors, fitted with connectors (USB, Lightning, HDMI, jack, power)
+8544.42 Other electric conductors, for a voltage not exceeding 1 000 V, fitted with connectors
+Coaxial cable fitted with connectors (central core surrounded by a second conductor)
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Cable or wiring set designed to be fitted in a vehicle, an aircraft or a ship
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Optical fibre cable in which each fibre is individually sheathed, without a transceiver
+Out of scope Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.
+Rigid block of plugs and sockets with no length of cable, no switch and no fuse
+8536.69 Plugs and sockets, other, for a voltage not exceeding 1 000 V
+Box with mechanical buttons that selects an input
+Out of scope Mechanical selector without electronics: a switch of subheading 8536 50, not covered by this tree.
+Hold a device or serve as a surface for it (stand, wall frame, mouse pad)
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?
+Heading 8473 takes parts and accessories suitable for use solely or principally with machines of headings 8470 to 8472, other than covers and carrying cases, and subheading 8473 30 those of the machines of heading 8471. Note 2 to Section XVI applies only subject to note 1 and deals only with parts, not with accessories. Limit: the tree does not check the exclusions of note 1 (a metal stand may be a part of general use, note 1(g)).
+Heading 8473 · Subheading 8473 30 · Section XVI, note 1 · Section XVI, note 1(g) · Section XVI, note 2 (introductory sentence) · Section XVI, note 2(b)
+Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+8473.30 Parts and accessories of the machines of heading 8471
+Computers and also other devices (phone, television, console)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Audio or video devices in general (television, set-top box, player, camera)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Another device only (phone, vehicle, games console, medical device)
+Out of scope Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.
+Something else (heating, lighting, playing sound)
+Out of scope The principal function is neither power supply nor connection (hand warmer that also recharges a phone, luminaire, loudspeaker): the product is classified according to that function, under a heading that this tree does not cover.
+Several functions stated, with none placed ahead of the others in the datasheet
+Out of scope No function prevails: for a machine of Chapter 84, note 8 refers to heading 8479; otherwise, after rules 3(a) and 3(b), rule 3(c) takes the heading which occurs last among those which equally merit consideration. This tree does not make that determination.
+Product under test
+Free-form product. Change an answer: the path is redrawn in the tree.
+Reset all to unknown
+Which function do the datasheet and the packaging state first for this product?
+Unknown
+Supply energy to another device: power it, charge it or store electricity for it
+Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+Hold a device or serve as a surface for it (stand, wall frame, mouse pad)
+Something else (heating, lighting, playing sound)
+Several functions stated, with none placed ahead of the others in the datasheet
+Does the product generate its own electricity (solar panel, dynamo, hand crank)?
+Yes
+No
+Unknown
+Does the product contain a battery or cells whose energy is delivered to the connected device, and of what type?
+Unknown
+No battery or cells
+Rechargeable lithium-ion or lithium-polymer battery
+Rechargeable lead-acid, nickel-cadmium or nickel-metal hydride battery
+Rechargeable battery of a technology that the nomenclature does not name (not lithium-ion, lead-acid, nickel-cadmium or nickel-metal hydride)
+Non-rechargeable cells (alkaline)
+Does the product change the nature of the current (alternating to direct, direct to direct, inductive charging with rectification)?
+Unknown
+No: the product connects contacts or conducts the current without modifying it
+Yes: alternating to direct current, direct to direct current (12 V to 5 V) or inductive charging with rectification
+It only steps an alternating voltage down or up, without rectifying it (transformer)
+Does the product also provide mains socket outlets (power strip, extension lead) in addition to its charging ports?
+Yes
+No
+Unknown
+Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+Yes
+No
+Unknown
+How is the product without electronics constructed?
+Unknown
+Flexible cable of insulated conductors, fitted with connectors (USB, Lightning, HDMI, jack, power)
+Coaxial cable fitted with connectors (central core surrounded by a second conductor)
+Cable or wiring set designed to be fitted in a vehicle, an aircraft or a ship
+Optical fibre cable in which each fibre is individually sheathed, without a transceiver
+Rigid block of plugs and sockets with no length of cable, no switch and no fuse
+Box with mechanical buttons that selects an input
+Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)?
+Unknown
+No network or radio interface
+One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates
+Apart from the connection to the host device, only network or communication interfaces (modem, Ethernet, Wi-Fi or Bluetooth adapter, USB to serial converter, cable with transceivers)
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?
+Unknown
+Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+Computers and also other devices (phone, television, console)
+Audio or video devices in general (television, set-top box, player, camera)
+Another device only (phone, vehicle, games console, medical device)
+MISSING INFORMATION
+Which function do the datasheet and the packaging state first for this product?
+What the answer decides between:
+Supply energy to another device: power it, charge it or store electricity for it → out of scope, 8544.42, 8536.69, 8504.40, 8507.60, 8507.80
+Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle) → 8471.80, out of scope, 8543.70, 8517.62, 8544.42, 8536.69
+Hold a device or serve as a surface for it (stand, wall frame, mouse pad) → 8473.30, out of scope
+Something else (heating, lighting, playing sound) → out of scope
+Several functions stated, with none placed ahead of the others in the datasheet → out of scope
+Question q1
+Close
+Criterion examined
+Principal function
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Why this criterion decides
+Where each answer leads
+Supply energy to another device: power it, charge it or store electricity for it
+Choose
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Device it connects to
+8504.40 · Static converters
+8507.60 · Lithium-ion accumulators
+8507.80 · Other accumulators
+8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000
+8517.62 · Machines for the reception, conversion and transmission or r
+8471.80 · Other units of automatic data-processing machines
+8543.70 · Other electrical machines and apparatus, having individual f
+8473.30 · Parts and accessories of the machines of heading 8471
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+Choose
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Device it connects to
+8504.40 · Static converters
+8507.60 · Lithium-ion accumulators
+8507.80 · Other accumulators
+8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000
+8517.62 · Machines for the reception, conversion and transmission or r
+8471.80 · Other units of automatic data-processing machines
+8543.70 · Other electrical machines and apparatus, having individual f
+8473.30 · Parts and accessories of the machines of heading 8471
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Hold a device or serve as a surface for it (stand, wall frame, mouse pad)
+Choose
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Device it connects to
+8504.40 · Static converters
+8507.60 · Lithium-ion accumulators
+8507.80 · Other accumulators
+8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000
+8517.62 · Machines for the reception, conversion and transmission or r
+8471.80 · Other units of automatic data-processing machines
+8543.70 · Other electrical machines and apparatus, having individual f
+8473.30 · Parts and accessories of the machines of heading 8471
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Something else (heating, lighting, playing sound)
+Choose
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Device it connects to
+8504.40 · Static converters
+8507.60 · Lithium-ion accumulators
+8507.80 · Other accumulators
+8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000
+8517.62 · Machines for the reception, conversion and transmission or r
+8471.80 · Other units of automatic data-processing machines
+8543.70 · Other electrical machines and apparatus, having individual f
+8473.30 · Parts and accessories of the machines of heading 8471
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Several functions stated, with none placed ahead of the others in the datasheet
+Choose
+Generates its own electricity
+Battery that powers other devices
+Converts the current
+Mains socket outlets
+Active electronics on the signal
+Construction of the product without electronics
+Network or communication link
+Device it connects to
+Device it connects to
+8504.40 · Static converters
+8507.60 · Lithium-ion accumulators
+8507.80 · Other accumulators
+8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000
+8517.62 · Machines for the reception, conversion and transmission or r
+8471.80 · Other units of automatic data-processing machines
+8543.70 · Other electrical machines and apparatus, having individual f
+8473.30 · Parts and accessories of the machines of heading 8471
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Out of scope
+Legal basis
+Section XVI, note 3
+×
+Section XVI, note 5
+×
+General rules for the interpretation of the Combined Nomenclature, rule 1
+×
+General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence)
+×
+General rules for the interpretation of the Combined Nomenclature, rule 3(a)
+×
+General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+×
+Cite another text
+General rules for the interpretation of the Combined Nomenclature, rule 3(c)
+General rules for the interpretation of the Combined Nomenclature, rule 6
+Section XVI, note 1
+Section XVI, note 1(g)
+Section XVI, note 1(p)
+Section XVI, note 2 (introductory sentence)
+Section XVI, note 2(a)
+Section XVI, note 2(b)
+Section XVI, note 2(c)
+Section XVI, note 4
+Chapter 84, note 6(A)
+Chapter 84, note 6(B)
+Chapter 84, note 6(C), first paragraph
+Chapter 84, note 6(C), second paragraph
+Chapter 84, note 6(C), third paragraph
+Chapter 84, note 6(D)
+Chapter 84, note 6(D)(2)
+Chapter 84, note 6(E)
+Chapter 84, note 8, first paragraph
+Chapter 84, note 8, second paragraph
+Chapter 85, note 2
+Chapter 85, note 3
+Chapter 85, note 5
+Heading 8471
+Heading 8473
+Heading 8504
+Heading 8507
+Heading 8517
+Heading 8536
+Heading 8543
+Heading 8544
+Subheading 8471 30
+Subheadings 8471 41 and 8471 49 (common dash)
+Subheading 8471 41
+Subheading 8471 49
+Subheading 8471 50
+Subheading 8471 60
+Subheading 8471 70
+Subheading 8471 80
+Subheading 8473 30
+Subheading 8504 40
+Subheading 8507 60
+Subheading 8507 80
+Subheadings 8517 61 to 8517 69 (common dash)
+Subheading 8517 62
+Subheading 8517 69
+Subheadings 8536 61 and 8536 69 (common dash)
+Subheading 8536 69
+Subheading 8536 90
+Subheading 8543 70
+Subheadings 8544 42 and 8544 49 (common dash)
+Subheading 8544 42
+Subheading 8544 49
+Your reading, in one sentence
+Signed by
+Apply this reading
+Official decisions
+The code behind
+Interpretation log
+38/87
+decisions reproduced
+12
+of which on facts all stated in writing
+1
+contradicted
+35
+undecided (fact absent from the text)
+13
+out of scope
+Reference tree, unedited. Each edit replays the 87 decisions.
+DECISION	PRODUCT	OFFICIAL	TREE	VERDICT
+32018R1785#1
+EU classification regulation · 2018-11-15	Ethernet stack cables for network switches	8544.42	8544.42	Reproduced
+32017R1465#1
+EU classification regulation · 2017-08-09	Qi wireless charging pad with mains adapter	8504.40	8504.40	Reproduced
+32017R1166#1
+EU classification regulation · 2017-06-26	SDI to HDMI video converter	8543.70	·	Undecided
+32016R2224#1
+EU classification regulation · 2016-12-05	Bluetooth adapter for loudspeakers or hi-fi system	8517.62	8517.62	Reproduced
+32016R0666#1
+EU classification regulation · 2016-04-26	12 V mains adapter with cable for set-top box	8504.40	8504.40	Reproduced
+32016R0615#1
+EU classification regulation · 2016-04-19	Docking station for smartphone with screen, keyboard and loudspeakers	8537.10	·	Out of scope
+32015R2319#1
+EU classification regulation · 2015-12-08	Mains adapter (rectifier) for games console	8504.40	·	Undecided
+32014R0457#1
+EU classification regulation · 2014-04-29	Active HDMI splitter, one input and eight outputs	8543.70	8543.70	Reproduced
+32014R0457#2
+EU classification regulation · 2014-04-29	Active HDMI switch, four inputs and one output	8543.70	8543.70	Reproduced
+32014R0457#3
+EU classification regulation · 2014-04-29	Passive push-button HDMI switch, four inputs	8536.50	·	Out of scope
+32012R1110#1
+EU classification regulation · 2012-11-23	Cigarette lighter charger with two USB ports	8504.40	8504.40	Reproduced
+32012R1112#1
+EU classification regulation · 2012-11-23	1 m USB cable for data and charging	8544.42	8544.42	Reproduced
+32008R1142#1
+EU classification regulation · 2008-11-13	Audio-video cable for video games console	8544.42	·	Undecided
+N363538
+CBP ruling, United States · 2026-08-06	Lithium-ion power bank with four USB ports	8507.60	·	Undecided
+H348342
+CBP ruling, United States · 2026-05-08	7-port USB 3.0 hub (UH700)	8471.80	8471.80	Reproduced
+N360577
+CBP ruling, United States · 2026-04-24	Set of neck-worn charger, docking station and case for implant	8517.62	·	Out of scope
+N359291
+CBP ruling, United States · 2026-03-24	Standalone charger for aviation headset battery	8504.40	·	Undecided
+N359212
+CBP ruling, United States · 2026-03-23	120 V to 12 V direct current mains adapter for alarm clock	8504.40	8504.40	Reproduced
+N356502
+CBP ruling, United States · 2025-12-12	Lightning, USB-C and USB-A adapter cables for aviation headset	8544.42	8544.42	Reproduced
+N356452
+CBP ruling, United States · 2025-12-10	Extension lead with two mains sockets and three USB ports	8537.10	·	Out of scope
+N356371
+CBP ruling, United States · 2025-12-04	3.5 mm jack auxiliary audio cable for aviation headset	8544.42	8544.42	Reproduced
+N352984
+CBP ruling, United States · 2025-09-17	External graphics card enclosure (eGPU) with docking ports	8473.30	·	Out of scope
+H328693
+CBP ruling, United States · 2025-08-20	Dell D3100 USB docking station	8471.80	8471.80	Reproduced
+H342570
+CBP ruling, United States · 2025-07-21	USB chargers for cigarette lighter socket and for wall socket	8504.40	·	Undecided
+N349898
+CBP ruling, United States · 2025-06-27	Wall and desk mounts for tablet, with network adapter	8473.30	8473.30	Reproduced
+N349433
+CBP ruling, United States · 2025-06-10	Mains adapter with fixed USB-C cord	8504.40	8504.40	Reproduced
+H337673
+CBP ruling, United States · 2025-05-20	Universal docking stations for laptop and USB to HDMI adapter	8471.80	8471.80	Reproduced
+N346959
+CBP ruling, United States · 2025-04-01	Rechargeable lithium-ion battery pack for scooter suitcase	8507.60	·	Undecided
+H343160
+CBP ruling, United States · 2024-12-10	Potted artificial plant serving as a USB charging station	8504.40	·	Undecided
+N343619
+CBP ruling, United States · 2024-11-08	Wall charger with two USB ports and LED night light	8504.40	·	Undecided
+H341609
+CBP ruling, United States · 2024-10-21	Direct attach copper (DAC) cables fitted with transceivers	8517.62	8517.62	Reproduced
+N342905
+CBP ruling, United States · 2024-10-16	Backup pack with three AAA alkaline cells, micro-USB plug	8506.10	·	Out of scope
+N339123
+CBP ruling, United States · 2024-04-18	Modular adapter, DB25 male to two RJ45 sockets	8536.69	·	Undecided
+N334999
+CBP ruling, United States · 2023-09-08	Cube plug adapter, one plug and three sockets	8536.69	8536.69	Reproduced
+N332683
+CBP ruling, United States · 2023-05-11	Keyboard, video and mouse (KVM) switch	8471.80	8471.80	Reproduced
+N328742
+CBP ruling, United States · 2022-10-21	12 V cigarette lighter adapter with two USB-A ports	8504.40	8504.40	Reproduced
+H322074
+CBP ruling, United States · 2022-05-20	Rechargeable electric hand warmers also serving as power bank	8543.70	·	Out of scope
+N325987
+CBP ruling, United States · 2022-05-11	Wall charger with two USB-A ports	8504.40	8504.40	Reproduced
+N323399
+CBP ruling, United States · 2022-01-13	Portable power stations with lithium-ion battery	8507.60	8507.60	Reproduced
+H319416
+CBP ruling, United States · 2021-07-01	Audio and video cables fitted with connectors (24 models)	8544.42	8544.42	Reproduced
+N319727
+CBP ruling, United States · 2021-06-08	Solar charging station for phones, with battery	8504.40	·	Out of scope
+N316909
+CBP ruling, United States · 2021-01-28	USB to DB9 (RS-232) adapter cable for medical ventilator	8517.62	8517.62	Reproduced
+N315544
+CBP ruling, United States · 2020-11-10	Phone holder combined with a rigid charging cable	8544.42	·	Undecided
+N310490
+CBP ruling, United States · 2020-03-19	850 W regulated power supply for gaming machines	8504.40	·	Undecided
+N307285
+CBP ruling, United States · 2019-11-22	USB docking stations for computer, two displays and peripherals	8471.80	8471.80	Reproduced
+N307161
+CBP ruling, United States · 2019-11-21	850 W internal power supply unit for personal computer	8504.40	·	Undecided
+N306841
+CBP ruling, United States · 2019-11-12	Jump starter with portable battery, and power bank	8507.60	8507.60	Reproduced
+N307014
+CBP ruling, United States · 2019-11-06	VGA/SVGA video extension cable for display	8544.42	·	Undecided
+N306782
+CBP ruling, United States · 2019-10-31	Mouse pad with wireless inductive charging	8473.30	·	Undecided
+N305957
+CBP ruling, United States · 2019-09-17	Photo frame with wireless charging base	8504.40	·	Undecided
+N305975
+CBP ruling, United States · 2019-09-17	Rechargeable hand warmer also serving as power bank	8543.70	·	Out of scope
+N305600
+CBP ruling, United States · 2019-08-28	Desk organiser with drawers and wireless charging base	8504.40	·	Undecided
+N305608
+CBP ruling, United States · 2019-08-28	Multi-output power supply for stringed instrument effects pedals	8504.40	·	Undecided
+N304715
+CBP ruling, United States · 2019-06-24	Battery chargers for portable oxygen concentrators	8504.40	·	Undecided
+N304573
+CBP ruling, United States · 2019-06-13	Power over Ethernet adapter for automatic data-processing machines	8504.40	·	Undecided
+N304253
+CBP ruling, United States · 2019-05-21	24 V power supply for portable oxygen concentrator	8504.40	·	Undecided
+N304098
+CBP ruling, United States · 2019-05-06	Rack power supply unit for data centres and servers	8504.40	·	Undecided
+N303514
+CBP ruling, United States · 2019-03-27	US to European mains plug adapter, without electronics	8536.69	·	Undecided
+N301143
+CBP ruling, United States · 2018-11-07	USB 3.0 hubs with charging ports	8471.80	·	Undecided
+N301141
+CBP ruling, United States · 2018-11-05	USB and PCI-E wireless network adapters	8517.62	8517.62	Reproduced
+N300708
+CBP ruling, United States · 2018-10-12	Charger with two USB ports and LED night light	8504.40	·	Undecided
+N300797
+CBP ruling, United States · 2018-10-12	Steel-sheathed USB to micro-USB cable	8544.42	·	Undecided
+H298118
+CBP ruling, United States · 2018-09-25	4000 mAh lithium-ion power bank with built-in lamp	8507.60	8507.60	Reproduced
+N299351
+CBP ruling, United States · 2018-08-14	Fabric-sheathed USB-C and Lightning cables	8544.42	·	Undecided
+N298750
+CBP ruling, United States · 2018-07-27	USB cables with automotive connectors, to be installed in a vehicle	8544.30	·	Out of scope
+N298752
+CBP ruling, United States · 2018-07-27	AUX/USB boxes for vehicle console	8517.62	·	Out of scope
+N298534
+CBP ruling, United States · 2018-07-24	Wireless inductive charger for automotive centre console	8504.40	8504.40	Reproduced
+H287462
+CBP ruling, United States · 2018-06-28	Plastic cases for iPad with inductive charging receiver	8504.40	·	Undecided
+N296103
+CBP ruling, United States · 2018-05-07	Component audio/video cable with five coaxial conductors	8544.20	·	Out of scope
+N296304
+CBP ruling, United States · 2018-05-04	Passive USB-C to USB-A female adapter on cable	8544.42	8544.42	Reproduced
+N296307
+CBP ruling, United States · 2018-05-04	Passive DVI to HDMI adapter on short cable	8544.42	8544.42	Reproduced
+H273383
+CBP ruling, United States · 2018-02-27	Active optical cables fitted with transceivers	8517.62	8517.62	Reproduced
+N292574
+CBP ruling, United States · 2017-12-21	Video format adapters for computer	8471.80	8471.80	Reproduced
+N290926
+CBP ruling, United States · 2017-10-24	USB extension cables for automotive wiring harnesses	8544.30	·	Out of scope
+N290028
+CBP ruling, United States · 2017-10-03	Six-foot S-Video cable	8544.42	8544.42	Reproduced
+N289786
+CBP ruling, United States · 2017-09-27	DisplayPort to VGA adapter for Surface computer (ruling covering three products)	8517.62	8471.80	Contradicted
+N290026
+CBP ruling, United States · 2017-09-21	Y audio adapter cable, 3.5 mm jack to two RCA	8544.42	8544.42	Reproduced
+N288408
+CBP ruling, United States · 2017-08-16	Charging kits with lithium-ion power banks	8507.60	8507.60	Reproduced
+N285505
+CBP ruling, United States · 2017-05-05	4G LTE USB modem	8517.62	·	Undecided
+N284888
+CBP ruling, United States · 2017-04-18	Passive QSFP copper cables fitted with connectors	8544.42	8544.42	Reproduced
+N284892
+CBP ruling, United States · 2017-04-17	QSFP+ active optical cables with integrated transceivers	8517.62	8517.62	Reproduced
+N284202
+CBP ruling, United States · 2017-03-21	Desk organiser with three USB ports connected to a computer	8471.80	·	Undecided
+N284052
+CBP ruling, United States · 2017-03-17	External 3G and 4G LTE USB modem	8517.62	·	Undecided
+N282038
+CBP ruling, United States · 2017-01-19	36 W USB wall charger with two ports	8504.40	·	Undecided
+N281995
+CBP ruling, United States · 2017-01-12	USB charging cable housed in a keyring tassel	8544.42	·	Undecided
+N282047
+CBP ruling, United States · 2017-01-12	USB charging cable housed in a leather keyring tassel	8544.42	·	Undecided
+N282039
+CBP ruling, United States · 2017-01-11	6000 mAh lithium-ion power bank with built-in lamp	8507.60	·	Undecided
+Click a decision to load it as the product under test. Each value comes from a passage in the text of the decision. When the text does not state a fact, it stays unknown and the decision is “undecided”. Some values are inferred (an absence read from the description of what the article is made of, for example): the second figure counts only the decisions reproduced without any inference. Records annotated by AI.
+--- attrs ---
+placeholder: e.g. A docking station with a network port remains a computer unit: networking is not its principal function.
+placeholder: Name of the person interpreting
+option: Unknown
+option: Supply energy to another device: power it, charge it or store electricity for it
+option: Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+option: Hold a device or serve as a surface for it (stand, wall frame, mouse pad)
+option: Something else (heating, lighting, playing sound)
+option: Several functions stated, with none placed ahead of the others in the datasheet
+option: No battery or cells
+option: Rechargeable lithium-ion or lithium-polymer battery
+option: Rechargeable lead-acid, nickel-cadmium or nickel-metal hydride battery
+option: Rechargeable battery of a technology that the nomenclature does not name (not lithium-ion, lead-acid, nickel-cadmium or nickel-metal hydride)
+option: Non-rechargeable cells (alkaline)
+option: No: the product connects contacts or conducts the current without modifying it
+option: Yes: alternating to direct current, direct to direct current (12 V to 5 V) or inductive charging with rectification
+option: It only steps an alternating voltage down or up, without rectifying it (transformer)
+option: Flexible cable of insulated conductors, fitted with connectors (USB, Lightning, HDMI, jack, power)
+option: Coaxial cable fitted with connectors (central core surrounded by a second conductor)
+option: Cable or wiring set designed to be fitted in a vehicle, an aircraft or a ship
+option: Optical fibre cable in which each fibre is individually sheathed, without a transceiver
+option: Rigid block of plugs and sockets with no length of cable, no switch and no fuse
+option: Box with mechanical buttons that selects an input
+option: No network or radio interface
+option: One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates
+option: Apart from the connection to the host device, only network or communication interfaces (modem, Ethernet, Wi-Fi or Bluetooth adapter, USB to serial converter, cable with transceivers)
+option: Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+option: Computers and also other devices (phone, television, console)
+option: Audio or video devices in general (television, set-top box, player, camera)
+option: Another device only (phone, vehicle, games console, medical device)
+option: Principal function
+option: Generates its own electricity
+option: Battery that powers other devices
+option: Converts the current
+option: Mains socket outlets
+option: Active electronics on the signal
+option: Construction of the product without electronics
+option: Network or communication link
+option: Device it connects to
+option: Choose
+option: 8504.40 · Static converters
+option: 8507.60 · Lithium-ion accumulators
+option: 8507.80 · Other accumulators
+option: 8544.42 · Other electric conductors, for a voltage not exceeding 1 000
+option: 8536.69 · Plugs and sockets, other, for a voltage not exceeding 1 000 
+option: 8517.62 · Machines for the reception, conversion and transmission or r
+option: 8471.80 · Other units of automatic data-processing machines
+option: 8543.70 · Other electrical machines and apparatus, having individual f
+option: 8473.30 · Parts and accessories of the machines of heading 8471
+option: Out of scope
+option: Cite another text
+option: General rules for the interpretation of the Combined Nomenclature, rule 3(c)
+option: General rules for the interpretation of the Combined Nomenclature, rule 6
+option: Section XVI, note 1
+option: Section XVI, note 1(g)
+option: Section XVI, note 1(p)
+option: Section XVI, note 2 (introductory sentence)
+option: Section XVI, note 2(a)
+option: Section XVI, note 2(b)
+option: Section XVI, note 2(c)
+option: Section XVI, note 4
+option: Chapter 84, note 6(A)
+option: Chapter 84, note 6(B)
+option: Chapter 84, note 6(C), first paragraph
+option: Chapter 84, note 6(C), second paragraph
+option: Chapter 84, note 6(C), third paragraph
+option: Chapter 84, note 6(D)
+option: Chapter 84, note 6(D)(2)
+option: Chapter 84, note 6(E)
+option: Chapter 84, note 8, first paragraph
+option: Chapter 84, note 8, second paragraph
+option: Chapter 85, note 2
+option: Chapter 85, note 3
+option: Chapter 85, note 5
+option: Heading 8471
+option: Heading 8473
+option: Heading 8504
+option: Heading 8507
+option: Heading 8517
+option: Heading 8536
+option: Heading 8543
+option: Heading 8544
+option: Subheading 8471 30
+option: Subheadings 8471 41 and 8471 49 (common dash)
+option: Subheading 8471 41
+option: Subheading 8471 49
+option: Subheading 8471 50
+option: Subheading 8471 60
+option: Subheading 8471 70
+option: Subheading 8471 80
+option: Subheading 8473 30
+option: Subheading 8504 40
+option: Subheading 8507 60
+option: Subheading 8507 80
+option: Subheadings 8517 61 to 8517 69 (common dash)
+option: Subheading 8517 62
+option: Subheading 8517 69
+option: Subheadings 8536 61 and 8536 69 (common dash)
+option: Subheading 8536 69
+option: Subheading 8536 90
+option: Subheading 8543 70
+option: Subheadings 8544 42 and 8544 49 (common dash)
+option: Subheading 8544 42
+option: Subheading 8544 49
+value: Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first.
+value: Sweep probe
+lang=en

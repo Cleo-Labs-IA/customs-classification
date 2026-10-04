@@ -1,5 +1,5 @@
 {
-  "_note": "Fixture de rendu pour public/dossier.js. Inventés : le produit et ses pièces, la personne, les identifiants de requête, les tours, les épreuves et les deux décisions. Réels : les textes de nomenclature (recopiés de essais/arbre/nc2026.txt, règlement d'exécution (UE) 2025/1926), le bloc obligations (rendu de lib/obligations.mjs sur les réponses de l'API enregistrées dans essais/modules/obligations-raw/cn-fr-*.json pour le code 850440 vers FR) et l'avertissement de l'API.",
+  "_note": "Rendering fixture for public/dossier.js. Invented: the product and its documents, the person, the request identifiers, the rounds, the robustness tests and the two rulings. Real: the nomenclature texts (copied from essais/arbre/nc2026.txt, Implementing Regulation (EU) 2025/1926), the obligations block (output of lib/obligations.mjs on the API responses recorded in essais/modules/obligations-raw/cn-fr-*.json for code 850440 to FR) and the API disclaimer.",
   "exemple": true,
   "sku": "PA-65C1",
   "destination": "FR",
@@ -19,22 +19,22 @@
       {
         "source": "description",
         "quote": "Includes a built-in battery.",
-        "sujet": "Présence d'une batterie"
+        "sujet": "Presence of a battery"
       }
     ]
   },
   "photo": {
-    "fichier": "etiquette-PA-65C1.jpg",
+    "fichier": "label-PA-65C1.jpg",
     "non_lu": [
-      "Numéro de lot sous le code-barres, masqué par un reflet",
-      "Dernière ligne de l'étiquette, caractères trop petits"
+      "Batch number under the barcode, hidden by a reflection",
+      "Last line of the label, characters too small"
     ]
   },
   "caracteristiques": {
     "function": {
       "valeur": "converts mains alternating current into direct current delivered over USB-C",
-      "provenance": "Étiquette photographiée",
-      "detail": "Étiquette photographiée (etiquette-PA-65C1.jpg), lignes lues sur la photo puis relues par la personne",
+      "provenance": "Photographed label",
+      "detail": "Photographed label (label-PA-65C1.jpg), lines read on the photo then re-read by the person",
       "passages": [
         "Input: 100-240V~ 50/60Hz 1.5A",
         "Output: 5V⎓3A / 9V⎓3A / 15V⎓3A / 20V⎓3.25A"
@@ -42,54 +42,54 @@
     },
     "power_w": {
       "valeur": 65,
-      "provenance": "Étiquette photographiée",
-      "detail": "Étiquette photographiée (etiquette-PA-65C1.jpg), ligne lue sur la photo puis relue par la personne",
+      "provenance": "Photographed label",
+      "detail": "Photographed label (label-PA-65C1.jpg), line read on the photo then re-read by the person",
       "passages": [
         "Total output: 65W Max"
       ]
     },
     "use": {
       "valeur": "powers and charges laptops, tablets and phones",
-      "provenance": "Réponse confirmée",
-      "detail": "Réponse de la personne à la question posée au tour 1",
+      "provenance": "Confirmed answer",
+      "detail": "Answer given by the person to the question asked in round 1",
       "passages": [
         "Powers and charges laptops, tablets and phones."
       ]
     },
     "weight_g": {
       "valeur": 112,
-      "provenance": "Sans pièce",
-      "detail": "Saisi à la main",
+      "provenance": "No supporting document",
+      "detail": "Entered by hand",
       "passages": []
     }
   },
   "graphe": {
-    "version": "Arbre d'exemple a41c09e7 · Nomenclature combinée 2026",
-    "statut_version": "de référence, rédigée par IA, non relue par un déclarant",
+    "version": "Example tree a41c09e7 · Combined Nomenclature 2026",
+    "statut_version": "reference version, drafted by AI from the cited texts, not reviewed by a customs declarant",
     "resultat": {
       "statut": "information_manquante",
       "code": null
     },
     "chemin": [
       {
-        "question": "Le produit transforme-t-il un courant électrique en un autre (transformateur, convertisseur statique ou bobine) ?",
-        "reponse": "oui",
+        "question": "Does the product transform one electric current into another (transformer, static converter or inductor)?",
+        "reponse": "yes",
         "textes": [
           {
-            "ref": "Nomenclature combinée 2026, position 8504",
+            "ref": "Combined Nomenclature 2026, heading 8504",
             "texte": "Electrical transformers, static converters (for example, rectifiers) and inductors:",
             "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926"
           }
         ],
         "citation": "Input: 100-240V~ 50/60Hz 1.5A",
-        "source": "Fiche technique"
+        "source": "Datasheet"
       },
       {
-        "question": "De quel type d'appareil s'agit-il au sein de la position 8504 ?",
-        "reponse": "convertisseur statique",
+        "question": "Which type of apparatus is it within heading 8504?",
+        "reponse": "static converter",
         "textes": [
           {
-            "ref": "Nomenclature combinée 2026, sous-position 8504 40",
+            "ref": "Combined Nomenclature 2026, subheading 8504 40",
             "texte": "– Static converters:",
             "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926"
           }
@@ -99,15 +99,15 @@
       }
     ],
     "blocage": {
-      "question": "Le produit est-il un chargeur d'accumulateurs, ou une alimentation qui fournit du courant continu à l'appareil branché ?",
+      "question": "Is the product an accumulator charger, or a power supply that delivers direct current to the connected device?",
       "options": {
-        "chargeur d'accumulateurs": [
+        "accumulator charger": [
           "85044060"
         ],
-        "redresseur": [
+        "rectifier": [
           "85044083"
         ],
-        "autre convertisseur statique": [
+        "other static converter": [
           "85044095"
         ]
       }
@@ -117,12 +117,12 @@
     {
       "code": "850431",
       "libelle": "– – Having a power handling capacity not exceeding 1 kVA:",
-      "raison": "Sous-position des transformateurs : l'étiquette indique une sortie en courant continu, ce qu'un simple transformateur ne fournit pas."
+      "raison": "Subheading for transformers: the label states a direct current output, which a plain transformer does not deliver."
     },
     {
       "code": "850450",
       "libelle": "– Other inductors",
-      "raison": "L'appareil est un bloc d'alimentation complet, pas une bobine isolée."
+      "raison": "The device is a complete power supply unit, not a standalone inductor."
     }
   ],
   "preuves": [
@@ -141,19 +141,19 @@
   ],
   "decisions_officielles_proches": [
     {
-      "ruling_id": "EXEMPLE-0001",
-      "source": "DECISION_INVENTEE",
+      "ruling_id": "EXAMPLE-0001",
+      "source": "INVENTED_RULING",
       "official_code": "8504409550",
       "ruling_date": "2021-03-18",
-      "url": "https://example.org/decisions/exemple-0001",
+      "url": "https://example.org/rulings/example-0001",
       "similarity": 0.612,
       "applicabilite": {
         "decision": {
-          "id": "EXEMPLE-0001",
-          "source": "DECISION_INVENTEE",
+          "id": "EXAMPLE-0001",
+          "source": "INVENTED_RULING",
           "juridiction": null,
           "date": "2021-03-18",
-          "url": "https://example.org/decisions/exemple-0001",
+          "url": "https://example.org/rulings/example-0001",
           "code": "8504409550",
           "revoquee": null,
           "texte_disponible": true,
@@ -165,7 +165,7 @@
         "meme_juridiction": false,
         "points_communs": [
           {
-            "aspect": "Rôle électrique ou de données",
+            "aspect": "Electrical or data role",
             "produit": {
               "source": "fiche_technique",
               "citation": "Input: 100-240V~ 50/60Hz 1.5A"
@@ -175,7 +175,7 @@
             }
           },
           {
-            "aspect": "Fonction",
+            "aspect": "Function",
             "produit": {
               "source": "description",
               "citation": "Powers and charges laptops, tablets and phones."
@@ -187,7 +187,7 @@
         ],
         "differences": [
           {
-            "aspect": "Rôle électrique ou de données",
+            "aspect": "Electrical or data role",
             "produit": {
               "source": "fiche_technique",
               "citation": "Total output: 65W Max"
@@ -195,31 +195,31 @@
             "decision": {
               "citation": "rated output of 45 watts"
             },
-            "pourquoi_ca_compte": "Certaines nomenclatures nationales découpent la sous-position selon la puissance.",
+            "pourquoi_ca_compte": "Some national nomenclatures split the subheading by power rating.",
             "decisive": false
           },
           {
-            "aspect": "Présentation à la vente",
+            "aspect": "Presentation for sale",
             "produit": null,
             "decision": {
               "citation": "imported with a detachable power cord"
             },
-            "pourquoi_ca_compte": "Un assortiment vendu avec ses accessoires peut se classer autrement qu'un appareil seul.",
+            "pourquoi_ca_compte": "A set sold with its accessories may be classified differently from a device on its own.",
             "decisive": false
           }
         ],
         "rejetes": 1,
         "hors_criteres": 0,
         "verdict": "partiellement",
-        "motif": "2 points communs vérifiés et 2 différences à lever avant de s'appuyer sur la décision. La source ne permet pas de savoir si la décision a été révoquée. Décision d'une douane qui n'est pas celle du pays de destination : elle éclaire le raisonnement, elle ne l'engage pas."
+        "motif": "2 points in common verified and 2 differences to resolve before relying on the ruling. The source does not make it possible to know whether the ruling has been revoked. Ruling from a customs authority that is not that of the destination country: it informs the reasoning, it does not bind it."
       }
     },
     {
-      "ruling_id": "EXEMPLE-0002",
-      "source": "DECISION_INVENTEE",
+      "ruling_id": "EXAMPLE-0002",
+      "source": "INVENTED_RULING",
       "official_code": "85044060",
       "ruling_date": "2019-11-22",
-      "url": "https://example.org/decisions/exemple-0002?reference=chargeur-usb-multiport-pour-appareils-portables&langue=fr",
+      "url": "https://example.org/rulings/example-0002?reference=multiport-usb-charger-for-portable-devices&lang=en",
       "similarity": 0.498
     }
   ],
@@ -293,10 +293,10 @@
       "taux_max": 0,
       "unite": "%",
       "taux_specifique": null,
-      "nature": "taux de base, hors TVA, taxes et droits additionnels : ce n'est pas un coût complet",
+      "nature": "base rate, excluding VAT, taxes and additional duties: this is not a full cost",
       "base_legale": "eu-taric-xi",
       "source_url": "https://www.trade-tariff.service.gov.uk/xi/api/v2/commodities",
-      "version": "eu-taric-xi, en vigueur depuis le 2026-01-01",
+      "version": "eu-taric-xi, in force since 2026-01-01",
       "niveau_source": "mirror",
       "pays_du_tarif": "EU",
       "lignes_lues": 10,
@@ -304,12 +304,12 @@
     },
     "cout": null,
     "manquants": [
-      "Le catalogue Cleo ne contient aucun texte pour ce code et ce pays.",
-      "4 obligation(s) sur 4 n'ont pas de texte officiel relu (4 déduite(s) par un modèle selon l'API) : elles restent à vérifier dans le texte officiel.",
-      "Le taux de base est le même (0 %) sur 10 lignes nationales sous le code 850440 ; la ligne exacte du produit n'est pas déterminée.",
-      "Le taux de base vient d'une source miroir (eu-taric-xi), pas directement de la source officielle du pays de destination.",
-      "Les droits additionnels (antidumping, compensateurs, sauvegarde, mesures visant un pays d'origine) ne sont pas renseignés par l'API pour cette ligne : leur absence n'est pas établie.",
-      "Le coût à l'arrivée n'est pas calculé : la valeur de la marchandise n'a pas été fournie."
+      "The Cleo catalog contains no text for this code and this country.",
+      "4 of 4 obligation(s) have no reviewed official text (4 inferred by a model according to the API): they remain to be verified in the official text.",
+      "The base rate is the same (0%) on 10 national tariff lines under code 850440; the exact tariff line of the product is not determined.",
+      "The base rate comes from a mirror source (eu-taric-xi), not directly from the official source of the destination country.",
+      "Additional duties (anti-dumping, countervailing, safeguard, measures targeting a country of origin) are not provided by the API for this line: their absence is not established.",
+      "The landed cost is not calculated: the value of the goods was not supplied."
     ],
     "etapes_en_echec": [],
     "rejetes": 0,
@@ -320,17 +320,17 @@
   },
   "questions_restantes": [
     {
-      "question": "Le produit est-il vendu comme chargeur d'accumulateurs ou comme alimentation d'appareil ?",
-      "pourquoi": "La réponse départage 8504 40 60 des autres lignes à huit chiffres de la sous-position."
+      "question": "Is the product sold as an accumulator charger or as a power supply for a device?",
+      "pourquoi": "The answer separates 8504 40 60 from the other eight-digit lines of the subheading."
     },
     {
-      "question": "Quel est le pays d'origine du produit ?",
-      "pourquoi": "L'origine conditionne les mesures de défense commerciale et les préférences tarifaires."
+      "question": "What is the country of origin of the product?",
+      "pourquoi": "Origin determines trade defence measures and tariff preferences."
     }
   ],
   "tours": [
     {
-      "cause": "Première évaluation",
+      "cause": "First evaluation",
       "statut": "needs_information",
       "code_retenu": null,
       "confiance": null,
@@ -338,7 +338,7 @@
       "secondes": 7.9
     },
     {
-      "cause": "Réponse confirmée : usage",
+      "cause": "Confirmed answer: use",
       "statut": "ambiguous",
       "code_retenu": "850440",
       "confiance": 0.58,
@@ -346,7 +346,7 @@
       "secondes": 9.3
     },
     {
-      "cause": "Contradiction résolue (Présence d'une batterie) : « Includes a built-in battery. » déclaré faux",
+      "cause": "Contradiction resolved (Presence of a battery): “Includes a built-in battery.” declared false",
       "statut": "classified",
       "code_retenu": "850440",
       "confiance": 0.81,
@@ -356,30 +356,30 @@
   ],
   "epreuves": [
     {
-      "type": "Reformulation",
+      "type": "Rewording",
       "input": "65 W GaN charger with a single USB-C port",
-      "before": "8504.40, proposition à faire valider",
-      "after": "8504.40, proposition à faire valider",
+      "before": "8504.40, proposal awaiting validation",
+      "after": "8504.40, proposal awaiting validation",
       "tone": "ok",
-      "verdict": "Tient : même code retenu",
+      "verdict": "Holds: same code retained",
       "request_id": "e5a0c3f7-2b64-4d98-a1c3-0d7f5b2e8c46"
     },
     {
-      "type": "Retrait",
-      "input": "Poids (g)",
-      "before": "8504.40, proposition à faire valider",
-      "after": "8504.40, proposition à faire valider",
+      "type": "Removal",
+      "input": "Weight (g)",
+      "before": "8504.40, proposal awaiting validation",
+      "after": "8504.40, proposal awaiting validation",
       "tone": "warn",
-      "verdict": "Aucun effet : cette information ne pesait pas dans la décision",
+      "verdict": "No effect: this information carried no weight in the decision",
       "request_id": "71d2b8e4-9c05-4f3a-8e67-4a1b9d0c2f35"
     },
     {
       "type": "Contradiction",
       "input": "Passive cable only, no electronics.",
-      "before": "aucune contradiction",
-      "after": "1 contradiction(s) signalée(s) : Nature de l'appareil",
+      "before": "no contradiction",
+      "after": "1 contradiction(s) reported: Nature of the device",
       "tone": "ok",
-      "verdict": "Tient : contradiction signalée"
+      "verdict": "Holds: contradiction reported"
     }
   ],
   "autres_destinations": [
@@ -401,5 +401,5 @@
     }
   ],
   "avertissement": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
-  "note_exemple": "Sont inventés : le produit et ses pièces, la personne qui valide, les identifiants de requête, les tours, les épreuves et les deux décisions. Sont réels : les textes de la nomenclature combinée 2026, et les obligations et droits, rendus par la Cleo Legal API pour le code 8504.40 vers la France."
+  "note_exemple": "Invented: the product and its documents, the person who validates, the request identifiers, the rounds, the robustness tests and the two rulings. Real: the texts of the Combined Nomenclature 2026, and the obligations and duties, returned by the Cleo Legal API for code 8504.40 to France."
 }

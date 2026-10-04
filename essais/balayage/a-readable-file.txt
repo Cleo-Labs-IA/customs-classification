@@ -1,0 +1,543 @@
+### SCREEN readable file (readable-file)
+en | Classification file DOCK-PRO-DS
+CUSTOMS CLASSIFICATION FILE
+
+DOCK-PRO-DS
+Proposal not validated
+Product reference
+DOCK-PRO-DS
+Destination
+France (FR)
+Date
+Not provided
+Status returned by the API
+several codes remain plausible (ambiguous)
+Request identifier
+132d2a00-86d0-4aa0-8bdd-49532d1ff74c
+2. Conclusion
+Code received, not retained as a proposal
+8471.60
+Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing
+Status returned by the API: several codes remain plausible (ambiguous). The API does not present this code as a settled proposal.
+The code the interpretation tree leads to (8471.80) is not the code 8471.60 returned by the API. Both cannot be right at once: the discrepancy must be resolved before any use.
+Status returned by the API
+several codes remain plausible (ambiguous)
+Validation
+Proposal not validated
+Level reached
+Six digits only, national code not established
+Detail from the API: No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries.
+Nomenclature
+hs6
+Nomenclature version
+HS2022-Comtrade-2026-09-23
+3. Technical description and documents
+Description
+USB-C docking station for laptop
+Datasheet or label transcription
+Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.
+Photo
+
+No photo attached to this file.
+
+4. Confirmed facts
+Function: data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop
+
+Provenance: Datasheet
+Datasheet, cited passage
+
+“2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output)”
+“1 x RJ45 Gigabit Ethernet”
+“Power delivery pass-through up to 100 W to the host laptop”
+Material: aluminium
+
+Provenance: Datasheet
+Datasheet, cited passage
+
+“Aluminium housing”
+Power (W): 100
+
+Provenance: Datasheet
+Datasheet, cited passage
+
+“Power delivery pass-through up to 100 W to the host laptop”
+Voltage (V): 20
+
+Provenance: Datasheet
+Datasheet, cited passage
+
+“Input 20 V”
+Weight (g): 310
+
+Provenance: Datasheet
+Datasheet, cited passage
+
+“Net weight 310 g”
+5. Reasoning
+
+Interpretation tree, version Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones · Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926). Status of this version, copied as the application wrote it: “reference version, drafted by AI from the cited texts, not reviewed by a customs declarant”. The tree leads to code 8471.80.
+
+The code the interpretation tree leads to (8471.80) is not the code 8471.60 returned by the API. Both cannot be right at once: the discrepancy must be resolved before any use.
+Step 1. Which function do the datasheet and the packaging state first for this product?
+
+Answer: Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+
+Official text: Section XVI, note 3
+
+“Unless the context otherwise requires, composite machines consisting of two or more machines fitted together to form a whole and other machines designed for the purpose of performing two or more complementary or alternative functions are to be classified as if consisting only of that component or as being that machine which performs the principal function.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Section XVI, note 5
+
+“For the purposes of these notes, the expression ‘machine’ means any machine, machinery, plant, equipment, apparatus or appliance cited in the headings of Chapter 84 or 85.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 1
+
+“The titles of sections, chapters and sub-chapters are provided for ease of reference only; for legal purposes, classification shall be determined according to the terms of the headings and any relative section or chapter notes and, provided such headings or notes do not otherwise require, according to the following provisions.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence)
+
+“When, by application of rule 2(b) or for any other reason, goods are prima facie classifiable under two or more headings, classification shall be effected as follows:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3(a)
+
+“(a) the heading which provides the most specific description shall be preferred to headings providing a more general description. However, when two or more headings each refer to part only of the materials or substances contained in mixed or composite goods or to part only of the items in a set put up for retail sale, those headings are to be regarded as equally specific in relation to those goods, even if one of them gives a more complete or precise description of the goods;”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+
+“(b) mixtures, composite goods consisting of different materials or made up of different components, and goods put up in sets for retail sale, which cannot be classified by reference to 3(a), shall be classified as if they consisted of the material or component which gives them their essential character, in so far as this criterion is applicable;”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+What establishes it is not a passage from the documents but the confirmed fact “Function”, with value “data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop”. This fact is supported by passages from the documents, quoted in section 4.
+
+Step 2. Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+
+Answer: Yes
+
+Official text: Heading 8544
+
+“Insulated (including enamelled or anodised) wire, cable (including coaxial cable) and other insulated electric conductors, whether or not fitted with connectors; optical fibre cables, made up of individually sheathed fibres, whether or not assembled with electric conductors or fitted with connectors:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Heading 8536
+
+“Electrical apparatus for switching or protecting electrical circuits, or for making connections to or in electrical circuits (for example, switches, relays, fuses, surge suppressors, plugs, sockets, lamp holders and other connectors, junction boxes), for a voltage not exceeding 1 000 V; connectors for optical fibres, optical fibre bundles or cables:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Answer given by a person: no product document establishes it.
+
+Step 3. Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)?
+
+Answer: One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates
+
+Official text: Chapter 84, note 6(D)
+
+“Heading 8471 does not cover the following when presented separately, even if they meet all of the conditions set forth in note 6(C) above: (1) printers, copying machines, facsimile machines, whether or not combined; (2) apparatus for the transmission or reception of voice, images or other data, including apparatus for communication in a wired or wireless network (such as a local or wide area network); (3) loudspeakers and microphones; (4) television cameras, digital cameras and video camera recorders; (5) monitors and projectors, not incorporating television reception apparatus.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Chapter 84, note 6(D)(2)
+
+“(2) apparatus for the transmission or reception of voice, images or other data, including apparatus for communication in a wired or wireless network (such as a local or wide area network);”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Section XVI, note 3
+
+“Unless the context otherwise requires, composite machines consisting of two or more machines fitted together to form a whole and other machines designed for the purpose of performing two or more complementary or alternative functions are to be classified as if consisting only of that component or as being that machine which performs the principal function.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Heading 8517
+
+“Telephone sets, including smartphones and other telephones for cellular networks or for other wireless networks; other apparatus for the transmission or reception of voice, images or other data, including apparatus for communication in a wired or wireless network (such as a local or wide area network), other than transmission or reception apparatus of heading 8443 , 8525 , 8527 or 8528 :”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+What establishes it in the product documents (datasheet or label):
+
+“1 x RJ45 Gigabit Ethernet”
+Step 4. According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?
+
+Answer: Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+
+Official text: Chapter 84, note 6(C), first paragraph
+
+“Subject to paragraph (D) and (E) below, a unit is to be regarded as being a part of an automatic data-processing system if it meets all of the following conditions: (1) it is of a kind solely or principally used in an automatic data-processing system; (2) it is connectable to the central processing unit either directly or through one or more other units; and (3) it is able to accept or deliver data in a form (codes or signals) which can be used by the system.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Chapter 84, note 6(E)
+
+“Machines incorporating or working in conjunction with an automatic data-processing machine and performing a specific function other than data processing are to be classified in the headings appropriate to their respective functions or, failing that, in residual headings.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Heading 8471
+
+“Automatic data-processing machines and units thereof; magnetic or optical readers, machines for transcribing data onto data media in coded form and machines for processing such data, not elsewhere specified or included:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Heading 8543
+
+“Electrical machines and apparatus, having individual functions, not specified or included elsewhere in this chapter:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+What establishes it in the product documents (description):
+
+“USB-C docking station for laptop”
+6. Alternatives set aside
+Code	Description	Reason for setting aside
+8517.69	Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6	Its principal purpose is to extend an ADP machine, not to operate as a standalone communication apparatus.
+8517.62	Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus	The dock is not switching or routing equipment, and the networking precedent P3 differs on function.
+8536.69	Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts	It is an active multi-port device, unlike the simple passive adaptor in P4.
+8471.30	Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display	It is not a complete computer with a CPU, keyboard and display.
+7. Evidence
+
+The excerpts below are those the API returned with their reference. This document does not compare them with the official text: they are to be re-read at the address given.
+
+Chapter 84 Note 6
+“(A)
+
+For the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of
+
+(1)
+
+storing the processing program or programs and at least the data immediately necessary for the execution of the program;
+
+(2)
+
+being freely programmed in accordance with the requirements of the user;
+
+(3)
+
+performing arithmetical computations specified by the user; and
+
+(4)
+
+executing, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.”
+
+Version: 32025R1926
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+8. Close official rulings
+
+A close ruling is not proof. It concerns another product, sometimes in another jurisdiction or at another date. It informs the reasoning, it does not establish it.
+
+UK600011214 UK_HMRC_ATAR
+Ruling code
+8471.80.0000
+Ruling date
+2 September 2024
+Similarity returned by the API
+0.58
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011214
+Applicability check
+Verdict
+partially applicable
+Grounds
+3 verified common points and 2 differences to resolve before relying on the ruling. The source does not show whether the ruling has been revoked: check before relying on it. The source does not show whether the ruling has been modified since. Ruling issued by UK customs (HMRC), which is not the customs authority of the destination country: it informs the reasoning, it does not bind that authority.
+Same jurisdiction as the destination
+no
+Text read at the official source
+yes
+Revocation
+not known: the source does not make it possible to tell
+End of validity date
+1 September 2027
+Expired
+no
+Point in common	In the product documents	In the ruling
+Function	“USB-C docking station for laptop” (description)	“Connected to PC or laptop it offers 6-in-1 USB C hub.”
+Electrical or data role	“2 x USB-A 3.2 Gen 1 (5 Gbps data)” (datasheet or label)	“Data transfer up to 5GB/S using the 3 USB 3.0 ports.”
+Electrical or data role	“1 x HDMI 2.0 (4K 60 Hz video output)” (datasheet or label)	“connects multiple devices at the same time through different ports USBA/USBC/HDMI/SD slot card)”
+Difference	In the product documents	In the ruling	Why it matters
+Presentation for sale	The documents say nothing about it	“The hub comes in retail packaging.”	The ruling relies on the goods being put up for retail sale, which the product documents do not mention, so the retail presentation would need to be confirmed.
+Electrical or data role	The documents say nothing about it	“USB 3.0 ports and SD/TF card reader can be used simultaneously to transfer data to a hard drive with speeds up to 104MB/S.”	The ruling's hub includes a memory card reader that the product documents do not mention, but this is a secondary feature and does not change the principal function.
+
+The quotations from the ruling are to be re-read at the address given: the text of the ruling is not attached to this file.
+
+UK600012139 UK_HMRC_ATAR
+Ruling code
+8471.80.0000
+Ruling date
+27 January 2025
+Similarity returned by the API
+0.579
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012139
+Applicability check
+Verdict
+partially applicable
+Grounds
+2 verified common points and 2 differences to resolve before relying on the ruling. The source does not show whether the ruling has been revoked: check before relying on it. The source does not show whether the ruling has been modified since. Ruling issued by UK customs (HMRC), which is not the customs authority of the destination country: it informs the reasoning, it does not bind that authority.
+Same jurisdiction as the destination
+no
+Text read at the official source
+yes
+Revocation
+not known: the source does not make it possible to tell
+End of validity date
+26 January 2028
+Expired
+no
+Point in common	In the product documents	In the ruling
+Function	“USB-C docking station for laptop” (description)	“When connected to PC or laptop it offers 6-in-1 USB C hub.”
+Electrical or data role	“2 x USB-A 3.2 Gen 1 (5 Gbps data)” (datasheet or label)	“With data transfer up to 5GB/S using the 3 USB 3.0 ports.”
+Difference	In the product documents	In the ruling	Why it matters
+Presentation for sale	The documents say nothing about it	“The hub comes in retail packaging.”	The ruling treats the goods as put up for retail sale, while the product documents say nothing about packaging, so this is only a missing detail.
+Electrical or data role	The documents say nothing about it	“USB 3.0ports and SD/TF card reader can be used simultaneously to transfer data to a hard drive with speeds up to 104MB/S.”	The ruling's hub includes a memory card reader that the product documents do not mention, but this does not change the principal function of connecting devices and transferring data.
+
+The quotations from the ruling are to be re-read at the address given: the text of the ruling is not attached to this file.
+
+UK600013803 UK_HMRC_ATAR
+Ruling code
+8517.62.0000
+Ruling date
+23 October 2025
+Similarity returned by the API
+0.502
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600013803
+Applicability check
+Verdict
+not applicable
+Grounds
+1 verified difference bears on a criterion that decides the classification: the ruling covers different goods. The source does not show whether the ruling has been revoked: check before relying on it. The source does not show whether the ruling has been modified since. Ruling issued by UK customs (HMRC), which is not the customs authority of the destination country: it informs the reasoning, it does not bind that authority.
+Same jurisdiction as the destination
+no
+Text read at the official source
+yes
+Revocation
+not known: the source does not make it possible to tell
+End of validity date
+22 October 2028
+Expired
+no
+Items rejected
+1 comparison item rejected: its quotation could not be found word for word in the product documents or in the ruling.
+Point in common	In the product documents	In the ruling
+Electrical or data role	“1 x USB-C data” (datasheet or label)	“It has 2 USB C ports and one 10 Gb/s ethernet connector.”
+Difference	In the product documents	In the ruling	Why it matters
+Function
+decisive	“USB-C docking station for laptop” (description)	“A networking device that allows external USB drives to be shared over a network.”	A laptop docking station and a standalone network device for sharing drives over a network have different principal functions, which can lead to different classification headings.
+Electrical or data role	“1 x RJ45 Gigabit Ethernet” (datasheet or label)	“one 10 Gb/s ethernet connector”	The network interface speed differs, but both goods have an ethernet connector, so this detail alone would not change the classification.
+Electrical or data role	“Input 20 V.” (datasheet or label)	“The unit is powered by a supplied external power supply rated at 12V 60 watts.”	The electrical supply arrangements differ, but the power rating alone does not determine the kind of goods.
+Electrical or data role	“Power delivery pass-through up to 100 W to the host laptop.” (datasheet or label)	“does not need to be connected directly to a computer”	The product works as an accessory attached to a host laptop while the ruled goods operate independently on a network, which shows a different role but is not decisive by itself.
+
+The quotations from the ruling are to be re-read at the address given: the text of the ruling is not attached to this file.
+
+UK600011962 UK_HMRC_ATAR
+Ruling code
+8536.69.9099
+Ruling date
+5 December 2024
+Similarity returned by the API
+0.492
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011962
+
+Applicability check: not carried out for this ruling.
+
+N307285 US_CBP_CROSS
+Ruling code
+8471.80.1000
+Ruling date
+22 November 2019
+Similarity returned by the API
+0.484
+Address
+https://rulings.cbp.gov/ruling/N307285
+
+Applicability check: not carried out for this ruling.
+
+9. Obligations and duties
+Obligations
+EU Customs Declaration (Entry Summary Declaration) no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+declaration
+Reference
+EU Regulation 952/2013 (Union Customs Code)
+Category
+required by law
+Mandatory
+yes
+Origin of the information
+inferred by a model
+CE Marking – Electromagnetic Compatibility (EMC) no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+certification
+Reference
+Directive 2014/30/EU
+Category
+required by law
+Mandatory
+yes
+Origin of the information
+inferred by a model
+CE Marking – Electrical Safety (LVD) no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+certification
+Reference
+Directive 2014/35/EU
+Category
+required by law
+Mandatory
+yes
+Origin of the information
+inferred by a model
+CE Marking – Restriction of Hazardous Substances (RoHS) no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+certification
+Reference
+Directive 2011/65/EU (as amended by 2015/863/EU)
+Category
+required by law
+Mandatory
+yes
+Origin of the information
+inferred by a model
+WEEE Registration & Producer Responsibility no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+declaration
+Reference
+Directive 2012/19/EU (Waste Electrical and Electronic Equipment)
+Category
+required by law
+Mandatory
+yes
+Origin of the information
+inferred by a model
+Energy Labelling – Computer Servers (if applicable) no source document inferred by a model, to be verified
+Source document cited
+no
+Nature
+certification
+Reference
+EU Regulation 617/2013 (Energy-related Products Directive)
+Category
+expected by contract
+Mandatory
+no
+Origin of the information
+inferred by a model
+Customs duties
+Base rate
+0%
+Nature
+base rate, excluding VAT, taxes and additional duties: this is not a full cost
+Legal basis
+eu-taric-xi
+Source address
+https://www.trade-tariff.service.gov.uk/xi/api/v2/commodities
+Version
+eu-taric-xi, in force since 2026-01-01
+Source level
+mirror source
+Tariff country
+EU
+Tariff lines read
+2
+Exact tariff line of the product known
+no
+Cost
+Total
+1200 USD partial total
+This total does not include the components that are not known: it is not the full cost.
+Tariff line
+8471606000
+Component	Amount	Rate	Source
+goods value	1000 USD		
+freight and insurance	unknown		
+customs duty	0 USD	0%	
+VAT	200 USD	20%	https://europa.eu/youreurope/business/taxation/vat/vat-rules-rates/index_en.htm
+excise duties	unknown		
+anti-dumping duties	unknown		
+What is missing or remains unknown
+unknown 9 Cleo catalogue text(s) set aside: the catalogue links this code only to a broad product family, not to a specific product type.
+unknown 6 of 6 obligation(s) have no official source text checked (6 inferred by a model according to the API): they remain to be verified against the official text.
+unknown The base rate is the same (0%) across 2 national lines under code 847160; the exact tariff line for the product is not determined.
+unknown The base rate comes from a mirror source (eu-taric-xi), not directly from the official source of the destination country.
+unknown Additional duties (anti-dumping, countervailing, safeguard, measures targeting a country of origin) are not provided by the API for this line: their absence is not established.
+unknown Unknown component: freight and insurance (not provided: the calculation starts from the goods value alone).
+unknown Unknown component: excise duties (not provided in the API for this code and this country).
+unknown Unknown component: anti-dumping duties (not provided in the API for this code and this country).
+unknown The cost is calculated on one national line taken from 2 under code 847160; the exact tariff line for the product is not determined.
+unknown The total returned (1200 USD) is a partial total: it is the sum of the known components, it does not include freight and insurance, excise duties, anti-dumping duties.
+
+9 catalog texts set aside: empty entry or unreadable title.
+
+Conditions of the lookup
+Country of origin
+China (CN)
+Country of destination
+France (FR)
+Call path
+separate API endpoints
+Code
+847160
+Duration (s)
+7.2
+10. Open questions
+What is the machine used for, or in which application (e.g. agricultural, industrial, domestic)?
+Why it matters: National lines within many chapter 84 subheadings split further by end use or application.
+Answer the engine question: Use.
+Resolve the divergence between the engine (8471.60) and the encoded rule (8471.80).
+Document 1 answer(s) given without a supporting document in the encoded rule.
+Establish the national code for France: the proposal stops at six digits.
+Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.
+Have the encoded rule reviewed by a customs declarant: it is drafted by AI.
+Have the proposal validated by an authorised person.
+11. History
+Evaluation rounds
+#	Cause	Status	Code retained	Confidence returned by the API	Time
+1	First assessment
+Request: 132d2a00-86d0-4aa0-8bdd-49532d1ff74c
+	several codes remain plausible (ambiguous)	8471.60	0.1	16.3 s
+
+The confidence returned by the API is a score internal to the engine, copied as is. It serves to compare the rounds with one another and does not measure whether the code is right.
+
+Robustness tests
+Test	What was replayed	Before	After	Verdict
+Rephrasing	Laptop dock with USB-C connection	8471.60, several codes remain plausible	8471.60, several codes remain plausible	Holds: same code retained
+Removal	Function	8471.60, several codes remain plausible	8517.62, information needed	Holds: it asks for this information again
+Contradiction	Power only, no data ports.	no contradiction	3 contradiction(s) flagged: Data ports present or absent, Data ports absent vs Gigabit Ethernet, Declared function includes data transfer	Holds: contradiction flagged
+Other destinations evaluated
+Country	Status	Code	Nomenclature
+United Kingdom (GB)	several codes remain plausible (ambiguous)	8471.60	hs6
+United States (US)	several codes remain plausible (ambiguous)	8471.60	hs6
+Canada (CA)	several codes remain plausible (ambiguous)	8471.60	hs6
+Japan (JP)	several codes remain plausible (ambiguous)	8471.60	hs6
+12. Validation
+Proposal not validated
+
+No authorized person has approved this proposal yet. It must not be used for a declaration as it stands.
+
+API disclaimer
+These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.

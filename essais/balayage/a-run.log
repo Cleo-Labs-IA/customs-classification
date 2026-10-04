@@ -1,0 +1,52 @@
+dump a-01-landing.txt body 1349 drawer 0
+dump a-02-sample-filled.txt body 1349 drawer 0
+dump a-03-classified.txt body 8247 drawer 0
+dump a-04-drawer-product.txt body 9092 drawer 844
+dump a-05-drawer-fact-0.txt body 8786 drawer 538
+dump a-06-drawer-fact-1.txt body 8375 drawer 127
+dump a-07-drawer-fact-2.txt body 8402 drawer 154
+dump a-08-drawer-fact-3.txt body 8356 drawer 108
+dump a-09-drawer-fact-4.txt body 8362 drawer 114
+cands 5
+dump a-10-drawer-candidate-0.txt body 10128 drawer 1880
+dump a-11-drawer-candidate-1.txt body 9714 drawer 1466
+dump a-12-drawer-candidate-2.txt body 9732 drawer 1484
+dump a-13-drawer-candidate-3.txt body 9489 drawer 1241
+dump a-14-drawer-candidate-4.txt body 10071 drawer 1823
+steps 1
+dump a-15-drawer-rule-step-0.txt body 12560 drawer 4312
+dump a-16-blocking-question-0.txt body 12560 drawer 0
+blocking electronique_active -> oui
+dump a-17-rule-concluded.txt body 15352 drawer 0
+dump a-18-drawer-rule-step-after-0.txt body 15352 drawer 4312
+dump a-19-drawer-rule-step-after-1.txt body 12769 drawer 1729
+dump a-20-drawer-rule-step-after-2.txt body 14530 drawer 3490
+dump a-21-drawer-rule-step-after-3.txt body 13989 drawer 2949
+rulings 3
+dump a-22-applic-in-progress.txt body 13983 drawer 0
+dump a-23-applic-done.txt body 14015 drawer 0
+applic details 3
+dump a-24-drawer-applic-0.txt body 12881 drawer 1815
+dump a-25-drawer-applic-1.txt body 12716 drawer 1650
+dump a-26-drawer-applic-2.txt body 13115 drawer 2049
+dump a-27-drawer-for-against.txt body 12946 drawer 1880
+dump a-28-drawer-raw-response.txt body 22417 drawer 11351
+dump a-29-obligations-in-progress.txt body 22428 drawer 0
+dump a-30-obligations-done.txt body 24860 drawer 0
+dump a-31-test-rephrase-busy.txt body 19079 drawer 0
+dump a-32-test-rephrase.txt body 25049 drawer 0
+dump a-33-test-remove-busy.txt body 19081 drawer 0
+dump a-34-test-remove.txt body 25186 drawer 0
+dump a-35-test-contradict-busy.txt body 19098 drawer 0
+dump a-36-test-contradict.txt body 25421 drawer 0
+test detail 0 Rephrasing
+dump a-37-drawer-test-0.txt body 24049 drawer 9979
+test detail 1 Removal
+test detail 2 Contradiction
+dump a-38-drawer-test-2.txt body 16293 drawer 2223
+dump a-39-others-busy.txt body 9953 drawer 0
+dump a-40-others-done.txt body 16750 drawer 0
+dump a-41-drawer-other-destination.txt body 26070 drawer 11543
+readable file readable-file 27340
+no validate form
+ERRORS 0 []

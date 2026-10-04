@@ -1,0 +1,15 @@
+dump b-01-landing.txt body 1349 drawer 0
+dump b-02-contradiction-block.txt body 1782 drawer 0
+keep buttons 0 []
+STEP FAILED keep TimeoutError: locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.conflict .one').first().locator('[data-keep]').nth(1)[22m
+
+dump b-03-drawer-product-struck.txt body 2243 drawer 460
+ERRORS 3 [
+  'http 502 http://localhost:4331/api/lire',
+  'console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)',
+  'step keep: TimeoutError: locator.click: Timeout 30000ms exceeded.\n' +
+    'Call log:\n' +
+    "\x1B[2m  - waiting for locator('.conflict .one').first().locator('[data-keep]').nth(1)\x1B[22m\n"
+]

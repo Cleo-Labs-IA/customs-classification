@@ -1,0 +1,319 @@
+### SCREEN a/applic-done
+### BODY
+Customs classification
+
+One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.
+
+Interpretation tree
+Product record
+USB-C dock, description only
+USB-C dock with datasheet
+Catalogue and datasheet that contradict each other
+Talking toy
+Buildable clock
+Robot dog
+SKU
+GTIN (optional)
+Dimensions and weight (optional)
+Shipping and customs
+Photo of the product or its label (optional)
+Customs description
+Datasheet or label (optional, text)
+Each fact kept cites the passage it comes from.
+Destination
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+Country of origin
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+The origin stays on the record. Classification does not use it.
+Category / HS code
+Empty until an authorised person has validated
+Classify this product
+Live calls to api.legaldata.cleolabs.co
+DOCUMENTS, FACTS AND ENCODED RULE
+PRODUCT
+DOCK-PRO-DS → France
+USB-C docking station for laptop
+Datasheet attached
+KNOWN FACTS
+Function: data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop
+Datasheet
+×
+Material: aluminium
+Datasheet
+×
+Power (W): 100
+Datasheet
+×
+Voltage (V): 20
+Datasheet
+×
+Weight (g): 310
+Datasheet
+×
+Use
+Process
+Add
+ENCODED RULE · PATH FOLLOWED FOR THIS PRODUCT
+Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones · Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926), 6-digit level · reference version, drafted by AI from the cited texts, not reviewed by a customs declarant. Expert mode
+RULE
+Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first. Section XVI, note 3 · Section XVI, note 5 · General rules for the interpretation of the Combined Nomenclature, rule 1 · General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence) · General rules for the interpretation of the Combined Nomenclature, rule 3(a) · General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+CHECKED FACT
+Which function do the datasheet and the packaging state first for this product? Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle) · data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop (Fact "Function")
+CONSEQUENCE
+next question: Active electronics on the signal
+RULE
+Heading 8544 covers insulated conductors whether or not fitted with connectors, and heading 8536 the apparatus for making connections to or switching electrical circuits. A product that processes the signal is described by neither of these two heading texts and is classified according to its function. Heading 8544 · Heading 8536
+CHECKED FACT
+Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal? Yes · answer confirmed by the merchant
+CONSEQUENCE
+next question: Network or communication link
+RULE
+Note 6(D)(2) to Chapter 84 excludes from heading 8471 apparatus for the transmission or reception of data when presented separately, even if it meets the conditions of note 6(C); where this function sits alongside other functions, note 3 to Section XVI takes the principal function. Reading adopted by this tree, drawn from rulings and not from the text of the note: a hub, a docking station or a display adapter without a network interface is not treated as transmission apparatus (H348342, N292574). Ruling N289786 reads the note the other way. Chapter 84, note 6(D) · Chapter 84, note 6(D)(2) · Section XVI, note 3 · Heading 8517
+CHECKED FACT
+Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)? One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates · 1 x RJ45 Gigabit Ethernet (Datasheet)
+CONSEQUENCE
+next question: Device it connects to
+RULE
+Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states. Chapter 84, note 6(C), first paragraph · Chapter 84, note 6(E) · Heading 8471 · Heading 8543
+CHECKED FACT
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)? Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port) · USB-C docking station for laptop (Catalogue description)
+CONSEQUENCE
+8471.80 · Other units of automatic data-processing machines
+RULE CONCLUSION
+8471.80 Other units of automatic data-processing machines
+A hub, a docking station, a port replicator or an active display adapter that connects the computer to its peripherals is another unit of subheading 8471 80, provided that it meets the three conditions of note 6(C) and does not fall under the exclusion of note 6(D), which prevails. It neither inputs nor outputs the data itself (8471 60), does not store them (8471 70) and does not process them (8471 50). Reading adopted on the basis of rulings (H348342, N292574) and not on the text alone: ruling N289786, on the contrary, classifies display adapters under 8517 62.
+The engine proposes 8471.60: the two lines of reasoning diverge, to be decided by an authorised person.
+1 answer(s) given on this screen. Remove them
+PROPOSAL, ALTERNATIVES AND REMAINING WORK
+FIRST ASSESSMENT · 16.3 S
+0.1
+8471.60
+Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing
+Still plausible
+0.04
+8517.69
+Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6
+Set aside
+0.02
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Set aside
+0.01
+8536.69
+Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts
+Set aside
+0.01
+8471.30
+Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display
+Set aside
+MISSING INFORMATION · QUESTION TO THE MERCHANT
+What is the machine used for, or in which application (e.g. agricultural, industrial, domestic)?
+National lines within many chapter 84 subheadings split further by end use or application.
+Answer and reassess
+PROVISIONAL PROPOSAL
+8471.60
+Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing
+Several codes remain plausible
+Level
+International level, 6 digits
+No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries.
+Rationale
+A USB-C dock is an auxiliary unit used with an ADP machine (laptop), connecting peripherals and a display via one cable, so it fits heading 8471. Among the 8471 subheadings offered, 8471.60 (units of ADP machines) is the closest fit, consistent with the hub and dock precedents.
+Sources
+Chapter 84 Note 6 For, against, unknown
+Similar official rulings
+UK600011214 → 8471800000 (2024-09-02, text resemblance 0.58) Partly comparable Details
+UK600012139 → 8471800000 (2025-01-27, text resemblance 0.579) Partly comparable Details
+UK600013803 → 8517620000 (2025-10-23, text resemblance 0.502) Does not concern a comparable product Details
+Close by text only. A resemblance is not proof: check that they concern a comparable product.
+Remaining work
+Answer the engine question: Use.
+Resolve the divergence between the engine (8471.60) and the encoded rule (8471.80).
+Document 1 answer(s) given without a supporting document in the encoded rule.
+Establish the national code for France: the proposal stops at six digits.
+Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.
+Have the encoded rule reviewed by a customs declarant: it is drafted by AI.
+Have the proposal validated by an authorised person.
+Interpretation
+Run this file through the interpretation tree
+File
+Open the readable file to print or save as PDF
+Trace
+View the raw response
+
+Answer the question to get a proposal that can be validated.
+
+STRESS-TEST THIS ANSWER
+Three tests replayed live. The verdict compares the retained code and the status, before and after.
+Rephrase the commercial text
+
+Same facts, different words. The retained code must not change.
+
+Replay
+Remove a piece of information
+
+Without it, the answer must ask for the information again, or stay unchanged if it carried no weight.
+
+Function
+Material
+Power (W)
+Voltage (V)
+Weight (g)
+Replay
+Introduce a contradiction
+
+A sentence added to the description, contrary to the file. The document reading must flag it.
+
+Replay
+OBLIGATIONS AND DUTIES · CHINA → FRANCE
+Calculated on the six-digit code 8471.60, which remains an unvalidated proposal. A national code would change the applicable rate.
+Query
+SAME DOCUMENTS, OTHER DESTINATIONS
+One call per destination. Each row states the level actually obtained: national nomenclature, six digits only, or nothing.
+Germany
+Spain
+Italy
+Netherlands
+United Kingdom
+United States
+Canada
+Japan
+Australia
+Switzerland
+South Korea
+China
+Vietnam
+India
+Mexico
+Assess these destinations
+
+These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.
+
+×
+Device it connects to
+THE OFFICIAL RULE
+
+Chapter 84, note 6(C), first paragraph · Implementing Regulation (EU) 2025/1926 (CN 2026)
+
+Subject to paragraph (D) and (E) below, a unit is to be regarded as being a part of an automatic data-processing system if it meets all of the following conditions: (1) it is of a kind solely or principally used in an automatic data-processing system; (2) it is connectable to the central processing unit either directly or through one or more other units; and (3) it is able to accept or deliver data in a form (codes or signals) which can be used by the system.
+
+Chapter 84, note 6(E) · Implementing Regulation (EU) 2025/1926 (CN 2026)
+
+Machines incorporating or working in conjunction with an automatic data-processing machine and performing a specific function other than data processing are to be classified in the headings appropriate to their respective functions or, failing that, in residual headings.
+
+Heading 8471 · Implementing Regulation (EU) 2025/1926 (CN 2026)
+
+Automatic data-processing machines and units thereof; magnetic or optical readers, machines for transcribing data onto data media in coded form and machines for processing such data, not elsewhere specified or included:
+
+Heading 8543 · Implementing Regulation (EU) 2025/1926 (CN 2026)
+
+Electrical machines and apparatus, having individual functions, not specified or included elsewhere in this chapter:
+
+Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states.
+
+THE FACT CHECKED ON THE PRODUCT
+
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)? Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)
+
+USB-C docking station for laptop
+
+Catalogue description
+
+THE CONSEQUENCE
+
+8471.80 · Other units of automatic data-processing machines
+
+Other branches: Computers and also other devices (phone, television, console) → outside the scope of the rule; Audio or video devices in general (television, set-top box, player, camera) → 8543.70 · Other electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85; Another device only (phone, vehicle, games console, medical device) → outside the scope of the rule
+
+SCOPE
+
+Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926), 6-digit level, common to the countries that apply the Harmonized System. The national code of the destination is not established by this rule.
+### DRAWER (closed)
+
+### ATTRS
+L cm
+W cm
+H cm
+kg
+e.g. USB-C docking station for laptop
+Connectors, functions, power supply, material…
+Remove and reassess
+Remove and reassess
+Remove and reassess
+Remove and reassess
+Remove and reassess
+Add a fact
+Use
+e.g. Laptop dock with USB-C connection
+e.g. Power only, no data ports.
+Goods value in USD (optional)
+Close
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: Use
+option: Process
+option: Function
+option: Material
+option: Power (W)
+option: Voltage (V)
+option: Weight (g)

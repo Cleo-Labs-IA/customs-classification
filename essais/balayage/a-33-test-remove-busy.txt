@@ -1,0 +1,460 @@
+### SCREEN a/test-remove-busy
+### BODY
+Customs classification
+
+One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.
+
+Interpretation tree
+Product record
+USB-C dock, description only
+USB-C dock with datasheet
+Catalogue and datasheet that contradict each other
+Talking toy
+Buildable clock
+Robot dog
+SKU
+GTIN (optional)
+Dimensions and weight (optional)
+Shipping and customs
+Photo of the product or its label (optional)
+Customs description
+Datasheet or label (optional, text)
+Each fact kept cites the passage it comes from.
+Destination
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+Country of origin
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+The origin stays on the record. Classification does not use it.
+Category / HS code
+Empty until an authorised person has validated
+Classify this product
+Live calls to api.legaldata.cleolabs.co
+DOCUMENTS, FACTS AND ENCODED RULE
+PRODUCT
+DOCK-PRO-DS → France
+USB-C docking station for laptop
+Datasheet attached
+KNOWN FACTS
+Function: data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop
+Datasheet
+Material: aluminium
+Datasheet
+Power (W): 100
+Datasheet
+Voltage (V): 20
+Datasheet
+Weight (g): 310
+Datasheet
+ENCODED RULE · PATH FOLLOWED FOR THIS PRODUCT
+Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones · Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926), 6-digit level · reference version, drafted by AI from the cited texts, not reviewed by a customs declarant. Expert mode
+RULE
+Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first. Section XVI, note 3 · Section XVI, note 5 · General rules for the interpretation of the Combined Nomenclature, rule 1 · General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence) · General rules for the interpretation of the Combined Nomenclature, rule 3(a) · General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+CHECKED FACT
+Which function do the datasheet and the packaging state first for this product? Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle) · data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop (Fact "Function")
+CONSEQUENCE
+next question: Active electronics on the signal
+RULE
+Heading 8544 covers insulated conductors whether or not fitted with connectors, and heading 8536 the apparatus for making connections to or switching electrical circuits. A product that processes the signal is described by neither of these two heading texts and is classified according to its function. Heading 8544 · Heading 8536
+CHECKED FACT
+Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal? Yes · answer confirmed by the merchant
+CONSEQUENCE
+next question: Network or communication link
+RULE
+Note 6(D)(2) to Chapter 84 excludes from heading 8471 apparatus for the transmission or reception of data when presented separately, even if it meets the conditions of note 6(C); where this function sits alongside other functions, note 3 to Section XVI takes the principal function. Reading adopted by this tree, drawn from rulings and not from the text of the note: a hub, a docking station or a display adapter without a network interface is not treated as transmission apparatus (H348342, N292574). Ruling N289786 reads the note the other way. Chapter 84, note 6(D) · Chapter 84, note 6(D)(2) · Section XVI, note 3 · Heading 8517
+CHECKED FACT
+Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)? One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates · 1 x RJ45 Gigabit Ethernet (Datasheet)
+CONSEQUENCE
+next question: Device it connects to
+RULE
+Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states. Chapter 84, note 6(C), first paragraph · Chapter 84, note 6(E) · Heading 8471 · Heading 8543
+CHECKED FACT
+According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)? Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port) · USB-C docking station for laptop (Catalogue description)
+CONSEQUENCE
+8471.80 · Other units of automatic data-processing machines
+RULE CONCLUSION
+8471.80 Other units of automatic data-processing machines
+A hub, a docking station, a port replicator or an active display adapter that connects the computer to its peripherals is another unit of subheading 8471 80, provided that it meets the three conditions of note 6(C) and does not fall under the exclusion of note 6(D), which prevails. It neither inputs nor outputs the data itself (8471 60), does not store them (8471 70) and does not process them (8471 50). Reading adopted on the basis of rulings (H348342, N292574) and not on the text alone: ruling N289786, on the contrary, classifies display adapters under 8517 62.
+The engine proposes 8471.60: the two lines of reasoning diverge, to be decided by an authorised person.
+1 answer(s) given on this screen. Remove them
+PROPOSAL, ALTERNATIVES AND REMAINING WORK
+FIRST ASSESSMENT · 16.3 S
+0.1
+8471.60
+Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing
+Still plausible
+0.04
+8517.69
+Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6
+Set aside
+0.02
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Set aside
+0.01
+8536.69
+Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts
+Set aside
+0.01
+8471.30
+Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display
+Set aside
+Test: call replayed without "Function".
+×
+Raw API response
+
+HTTP 200 · 16.3 s · request 132d2a00-86d0-4aa0-8bdd-49532d1ff74c
+
+REQUEST
+{
+ "item_id": "DOCK-PRO-DS",
+ "description": "USB-C docking station for laptop",
+ "country": "FR",
+ "facts": {
+  "function": "data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop",
+  "material": "aluminium",
+  "power_w": 100,
+  "voltage_v": 20,
+  "weight_g": 310
+ }
+}
+RESPONSE
+{
+ "data": {
+  "item_id": "DOCK-PRO-DS",
+  "status": "ambiguous",
+  "query_facts": {
+   "material": "aluminium",
+   "function": "data transfer via USB-A and USB-C ports, Gigabit Ethernet network, HDMI 4K 60 Hz video output, power delivery pass-through to host laptop",
+   "weight_g": 310,
+   "power_w": 100,
+   "voltage_v": 20
+  },
+  "missing_attributes": [
+   "use"
+  ],
+  "questions": [
+   {
+    "fact": "use",
+    "question": "What is the machine used for, or in which application (e.g. agricultural, industrial, domestic)?",
+    "why": "National lines within many chapter 84 subheadings split further by end use or application.",
+    "discriminates": "national_line"
+   }
+  ],
+  "candidates": [
+   {
+    "id": "1e4ad86f-3bda-421c-8a47-9ba67b82b5dc",
+    "code": "847160",
+    "system": "hs6",
+    "country": null,
+    "parent_code": null,
+    "hs6_parent": "847160",
+    "chapter": 84,
+    "title": {
+     "en": "Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing"
+    },
+    "description": null,
+    "confidence": 0.1,
+    "rationale": "A USB-C dock is an auxiliary unit used with an ADP machine (laptop), connecting peripherals and a display via one cable, so it fits heading 8471. Among the 8471 subheadings offered, 8471.60 (units of ADP machines) is the closest fit, consistent with the hub and dock precedents.",
+    "similarity": 0.278370976301073,
+    "valid_from": "2022-01-01",
+    "valid_to": null,
+    "source_version": "HS2022-Comtrade-2026-09-23",
+    "evidence": [
+     {
+      "kind": "chapter_note",
+      "ref": "Chapter 84 Note 6",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+      "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+      "source_version": "32025R1926"
+     }
+    ],
+    "evidence_available": true,
+    "gri": [
+     "GRI 1",
+     "GRI 6"
+    ],
+    "set_aside_reason": null,
+    "ambiguous": false,
+    "reranker_confidence": 0.5
+   },
+   {
+    "id": "1db90fd0-a127-4cec-9f92-ab80d2c91ff7",
+    "code": "851769",
+    "system": "hs6",
+    "country": null,
+    "parent_code": null,
+    "hs6_parent": "851769",
+    "chapter": 85,
+    "title": {
+     "en": "Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6"
+    },
+    "description": null,
+    "confidence": 0.04,
+    "rationale": "The Ethernet and data-transfer functions could make it a data transmission apparatus of 8517.62/69, and 851769 is the residual subheading for such apparatus. However, the principal function is to serve the host laptop, not to act as a network device.",
+    "similarity": 0.326660340128953,
+    "valid_from": "2022-01-01",
+    "valid_to": null,
+    "source_version": "HS2022-Comtrade-2026-09-23",
+    "evidence": [],
+    "evidence_available": false,
+    "gri": [
+     "GRI 1",
+     "GRI 3(b)",
+     "GRI 6"
+    ],
+    "set_aside_reason": "Its principal purpose is to extend an ADP machine, not to operate as a standalone communication apparatus.",
+    "ambiguous": false,
+    "reranker_confidence": 0.2
+   },
+   {
+    "id": "81d1cae8-c0cc-4c89-aa2a-a5a34e617859",
+    "code": "851762",
+    "system": "hs6",
+    "country": null,
+    "parent_code": null,
+    "hs6_parent": "851762",
+    "chapter": 85,
+    "title": {
+     "en": "Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus"
+    },
+    "description": null,
+    "confidence": 0.02,
+    "rationale": "The Gigabit Ethernet port gives it some network-interface character, which could point to 8517.62 for the reception, conversion and transmission of data. The precedent P3 for this code concerned a standalone network device, which this dock is not.",
+    "similarity": 0.325388312702468,
+    "valid_from": "2022-01-01",
+    "valid_to": null,
+    "source_version": "HS2022-Comtrade-2026-09-23",
+    "evidence": [],
+    "evidence_available": false,
+    "gri": [
+     "GRI 1",
+     "GRI 6"
+    ],
+    "set_aside_reason": "The dock is not switching or routing equipment, and the networking precedent P3 differs on function.",
+    "ambiguous": false,
+    "reranker_confidence": 0.13
+   },
+   {
+    "id": "f842829a-26ea-40a6-b532-a7d29436981c",
+    "code": "853669",
+    "system": "hs6",
+    "country": null,
+    "parent_code": null,
+    "hs6_parent": "853669",
+    "chapter": 85,
+    "title": {
+     "en": "Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts"
+    },
+    "description": null,
+    "confidence": 0.01,
+    "rationale": "The dock has USB and HDMI sockets, which are connector-like features of 8536.69. It is an active multi-function device, not a simple plug or socket, so this is a weak fit.",
+    "similarity": 0.297277854233772,
+    "valid_from": "2022-01-01",
+    "valid_to": null,
+    "source_version": "HS2022-Comtrade-2026-09-23",
+    "evidence": [],
+    "evidence_available": false,
+    "gri": [
+     "GRI 1"
+    ],
+    "set_aside_reason": "It is an active multi-port device, unlike the simple passive adaptor in P4.",
+    "ambiguous": false,
+    "reranker_confidence": 0.06
+   },
+   {
+    "id": "5f426d79-6269-4e12-8f55-23f0246a55e3",
+    "code": "847130",
+    "system": "hs6",
+    "country": null,
+    "parent_code": null,
+    "hs6_parent": "847130",
+    "chapter": 84,
+    "title": {
+     "en": "Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display"
+    },
+    "description": null,
+    "confidence": 0.01,
+    "rationale": "It is related to ADP machines, but 8471.30 covers complete portable computers with a CPU, keyboard and display. The dock has none of these.",
+    "similarity": 0.339220456279541,
+    "valid_from": "2022-01-01",
+    "valid_to": null,
+    "source_version": "HS2022-Comtrade-2026-09-23",
+    "evidence": [
+     {
+      "kind": "chapter_note",
+      "ref": "Chapter 84 Note 6",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926",
+      "excerpt": "(A)\n\nFor the purposes of heading 8471 , the expression 'automatic data-processing machines' means machines, capable of\n\n(1)\n\nstoring the processing program or programs and at least the data immediately necessary for the execution of the program;\n\n(2)\n\nbeing freely programmed in accordance with the requirements of the user;\n\n(3)\n\nperforming arithmetical computations specified by the user; and\n\n(4)\n\nexecuting, without human intervention, a processing program which requires them to modify their execution, by logical decision during the processing run.",
+      "source_version": "32025R1926"
+     }
+    ],
+    "evidence_available": true,
+    "gri": [
+     "GRI 1",
+     "GRI 6"
+    ],
+    "set_aside_reason": "It is not a complete computer with a CPU, keyboard and display.",
+    "ambiguous": false,
+    "reranker_confidence": 0.04
+   }
+  ],
+  "dataset_version": null,
+  "coverage": {
+   "level": "hs6_only",
+   "national_systems": [],
+   "via_bloc": null,
+   "hint": "No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries."
+  },
+  "gate_hint": null,
+  "provenance": {
+   "question_config_version": "2026-09-24",
+   "families": [
+    "machinery-84"
+   ],
+   "reranker": "bedrock-sonnet-5.5",
+   "reranker_fallback": false,
+   "acceptance_policy": "provisional_floor_0.7+signal_agreement_v1+thresholds_sonnet_v1+cited_evidence_required",
+   "evidence_source": "index",
+   "evidence_rejected": 0,
+   "precedents": [
+    {
+     "ruling_id": "UK600011214",
+     "source": "UK_HMRC_ATAR",
+     "official_code": "8471800000",
+     "ruling_date": "2024-09-02",
+     "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011214",
+     "similarity": 0.58
+    },
+    {
+     "ruling_id": "UK600012139",
+     "source": "UK_HMRC_ATAR",
+     "official_code": "8471800000",
+     "ruling_date": "2025-01-27",
+     "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012139",
+     "similarity": 0.579
+    },
+    {
+     "ruling_id": "UK600013803",
+     "source": "UK_HMRC_ATAR",
+     "official_code": "8517620000",
+     "ruling_date": "2025-10-23",
+     "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600013803",
+     "similarity": 0.502
+    },
+    {
+     "ruling_id": "UK600011962",
+     "source": "UK_HMRC_ATAR",
+     "official_code": "8536699099",
+     "ruling_date": "2024-12-05",
+     "url": "https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011962",
+     "similarity": 0.492
+    },
+    {
+     "ruling_id": "N307285",
+     "source": "US_CBP_CROSS",
+     "official_code": "8471801000",
+     "ruling_date": "2019-11-22",
+     "url": "https://rulings.cbp.gov/ruling/N307285",
+     "similarity": 0.484
+    }
+   ],
+   "acceptance_checks": [
+    "calibrated_confidence_below_floor",
+    "low_retrieval_similarity",
+    "retrieval_disagreement"
+   ]
+  },
+  "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.",
+  "alternatives_set_aside": [
+   {
+    "code": "851769",
+    "set_aside_reason": "Its principal purpose is to extend an ADP machine, not to operate as a standalone communication apparatus."
+   },
+   {
+    "code": "851762",
+    "set_aside_reason": "The dock is not switching or routing equipment, and the networking precedent P3 differs on function."
+   },
+   {
+    "code": "853669",
+    "set_aside_reason": "It is an active multi-port device, unlike the simple passive adaptor in P4."
+   },
+   {
+    "code": "847130",
+    "set_aside_reason": "It is not a complete computer with a CPU, keyboard and display."
+   }
+  ]
+ },
+ "advisory_disclaimer": "These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability."
+}
+### DRAWER (closed)
+
+### ATTRS
+L cm
+W cm
+H cm
+kg
+e.g. USB-C docking station for laptop
+Connectors, functions, power supply, material…
+Close
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)

@@ -37,16 +37,19 @@ function send(res, status, body, type = 'application/json; charset=utf-8') {
 }
 async function readJson(req, max = 6_000_000) {
   const chunks = []; let size = 0;
-  for await (const c of req) { size += c.length; if (size > max) throw new Error('requête trop lourde'); chunks.push(c); }
+  for await (const c of req) { size += c.length; if (size > max) throw new Error('request too large'); chunks.push(c); }
   return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
 }
 
 // Appel Bedrock Converse signé à la main (SigV4), sans dépendance.
 const hmac = (k, s) => crypto.createHmac('sha256', k).update(s).digest();
 const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
+// Message interne, reconnu tel quel par lib/applicabilite.mjs : il ne change pas.
+// Le navigateur reçoit sa version anglaise (voir handle).
+const SANS_BEDROCK = 'accès Bedrock absent';
 async function converse({ system, content, maxTokens }) {
   const c = awsCreds();
-  if (!c) throw new Error('accès Bedrock absent');
+  if (!c) throw new Error(SANS_BEDROCK);
   const host = `bedrock-runtime.${BEDROCK_REGION}.amazonaws.com`, uri = `/model/${encodeURIComponent(BEDROCK_MODEL)}/converse`;
   const body = JSON.stringify({ system: [{ text: system }], messages: [{ role: 'user', content }], inferenceConfig: { maxTokens } });
   const now = new Date().toISOString().replace(/[:-]|\.\d{3}/g, ''), day = now.slice(0, 8);
@@ -59,10 +62,10 @@ async function converse({ system, content, maxTokens }) {
     headers: { 'Content-Type': 'application/json', 'X-Amz-Date': now, Authorization: `AWS4-HMAC-SHA256 Credential=${c.id}/${scope}, SignedHeaders=content-type;host;x-amz-date, Signature=${sig}` },
   });
   const j = await r.json();
-  if (!r.ok) throw new Error('Bedrock ' + r.status + ' : ' + String(j.message || JSON.stringify(j)).slice(0, 200));
+  if (!r.ok) throw new Error('Bedrock ' + r.status + ': ' + String(j.message || JSON.stringify(j)).slice(0, 200));
   const text = j.output.message.content.map((x) => x.text || '').join('');
   try { return JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)); }
-  catch { throw new Error('réponse du modèle illisible : ' + text.slice(0, 200)); }
+  catch { throw new Error('unreadable model response: ' + text.slice(0, 200)); }
 }
 
 // Relaie un POST /v2/customs/classifications et rend la réponse telle quelle,
@@ -90,7 +93,7 @@ Sources you receive: "description" (commercial text), "fiche_technique" (datashe
 
 Return ONLY a JSON object:
 {"caracteristiques":[{"fact":"function|use|material|power_w|voltage_v|weight_g","value":"...","source":"fiche_technique","quotes":["verbatim passage", "..."]}],
- "contradictions":[{"sujet":"short French label","a":{"source":"description|fiche_technique|caracteristique:<key>","quote":"verbatim"},"b":{"source":"...","quote":"verbatim"},"pourquoi":"one French sentence"}]}
+ "contradictions":[{"sujet":"short English label","a":{"source":"description|fiche_technique|caracteristique:<key>","quote":"verbatim"},"b":{"source":"...","quote":"verbatim"},"pourquoi":"one plain English sentence"}]}
 
 Rules:
 - Characteristics come ONLY from "fiche_technique" (the description is already sent as text to the classifier); if the datasheet is empty, return no characteristic. A characteristic is kept only if the datasheet states it explicitly. "quotes" are 1 to 3 passages copied character for character from the named source, each under 200 characters. No paraphrase, no ellipsis.
@@ -139,13 +142,13 @@ async function lire({ description = '', fiche_technique = '', caracteristiques =
 const PHOTO_SYSTEM = `You transcribe what is printed on a product or its rating label, for a customs file. The label may be rotated or partly hidden. You never classify and never complete a value you cannot read.
 Return ONLY a JSON object:
 {"lignes":["each printed line or marking, copied exactly as read"],
- "illisible":["short French note for each part of the label you cannot read with certainty"],
+ "illisible":["short English note for each part of the label you cannot read with certainty"],
  "description":"a short English customs-style description of the product only (what it is and what the label says it does, e.g. its printed type, input and output ratings), using only what is printed or plainly visible; no surroundings, no colour, no brand guess, no model guess",
  "reference":"model or part reference exactly as printed, or empty string"}
 Rules: copy characters as printed (units, symbols, punctuation). If a character is doubtful, leave the whole value out of "lignes" and describe it in "illisible". Certification logos are listed by their name (CE, UL Listed...) on their own line.`;
 
 async function lirePhoto({ jpeg_base64 }) {
-  if (typeof jpeg_base64 !== 'string' || jpeg_base64.length < 100) throw new Error('photo absente');
+  if (typeof jpeg_base64 !== 'string' || jpeg_base64.length < 100) throw new Error('photo missing');
   const t0 = Date.now();
   const j = await converse({ system: PHOTO_SYSTEM, content: [{ image: { format: 'jpeg', source: { bytes: jpeg_base64 } } }, { text: 'Transcribe this product photo.' }], maxTokens: 4000 });
   return { lignes: (j.lignes || []).map(String), illisible: (j.illisible || []).map(String), description: String(j.description || ''), reference: String(j.reference || ''), model: BEDROCK_MODEL, seconds: Math.round((Date.now() - t0) / 100) / 10 };
@@ -188,9 +191,9 @@ export async function handle(req, res) {
   try {
     const url = new URL(req.url, 'http://x');
     if (req.method === 'GET' && url.pathname === '/api/status') return send(res, 200, { key_present: Boolean(KEY), api: API, code_required: Boolean(APP_CODE), code_ok: allowed(req) });
-    if (!allowed(req)) return send(res, 401, { error: "Code d'accès requis" });
+    if (!allowed(req)) return send(res, 401, { error: 'Access code required' });
     if (req.method === 'POST' && url.pathname === '/api/classify') {
-      if (!KEY) return send(res, 500, { error: 'CLEO_API_KEY absente' });
+      if (!KEY) return send(res, 500, { error: 'CLEO_API_KEY missing' });
       return send(res, 200, await classify(await readJson(req)));
     }
     if (req.method === 'POST' && url.pathname === '/api/lire') return send(res, 200, await lire(await readJson(req)));
@@ -201,7 +204,8 @@ export async function handle(req, res) {
     if (req.method === 'POST' && url.pathname === '/api/photo') return send(res, 200, await lirePhoto(await readJson(req)));
     send(res, 404, { error: 'not found' });
   } catch (e) {
-    send(res, 502, { error: String(e && e.message ? e.message : e) });
+    const message = String(e && e.message ? e.message : e);
+    send(res, 502, { error: message === SANS_BEDROCK ? 'Bedrock access not configured' : message });
   }
 }
 export { send, DIR, KEY, API, converse, locate };

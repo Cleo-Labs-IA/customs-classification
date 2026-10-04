@@ -1,0 +1,992 @@
+[
+  {
+    "id": "lvd-art1",
+    "ref": "Directive 2014/35/EU, Article 1, second paragraph (scope)",
+    "texte": "This Directive shall apply to electrical equipment designed for use with a voltage rating of between 50 and 1 000 V for alternating current and between 75 and 1 500 V for direct current, other than the equipment and phenomena listed in Annex II.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art2-1",
+    "ref": "Directive 2014/35/EU, Article 2, point (1)",
+    "texte": "(1) ‘making available on the market’ means any supply of electrical equipment for distribution, consumption or use on the Union market in the course of a commercial activity, whether in return for payment or free of charge;",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art2-2",
+    "ref": "Directive 2014/35/EU, Article 2, point (2)",
+    "texte": "(2) ‘placing on the market’ means the first making available of electrical equipment on the Union market;",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art2-3",
+    "ref": "Directive 2014/35/EU, Article 2, point (3)",
+    "texte": "(3) ‘manufacturer’ means any natural or legal person who manufactures electrical equipment or has electrical equipment designed or manufactured, and markets that equipment under his name or trade mark;",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art2-5",
+    "ref": "Directive 2014/35/EU, Article 2, point (5)",
+    "texte": "(5) ‘importer’ means any natural or legal person established within the Union who places electrical equipment from a third country on the Union market;",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art2-6",
+    "ref": "Directive 2014/35/EU, Article 2, point (6)",
+    "texte": "(6) ‘distributor’ means any natural or legal person in the supply chain, other than the manufacturer or the importer, who makes electrical equipment available on the market;",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art3",
+    "ref": "Directive 2014/35/EU, Article 3, first paragraph",
+    "texte": "Electrical equipment may be made available on the Union market only if, having been constructed in accordance with good engineering practice in safety matters in force in the Union, it does not endanger the health and safety of persons and domestic animals, or property, when properly installed and maintained and used in applications for which it was made.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-1",
+    "ref": "Directive 2014/35/EU, Article 6(1)",
+    "texte": "1. When placing their electrical equipment on the market, manufacturers shall ensure that it has been designed and manufactured in accordance with the safety objectives referred to in Article 3 and set out in Annex I.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-2",
+    "ref": "Directive 2014/35/EU, Article 6(2)",
+    "texte": "2. Manufacturers shall draw up the technical documentation referred to in Annex III and carry out the conformity assessment procedure referred to in Annex III or have it carried out. Where compliance of electrical equipment with the safety objectives referred to in Article 3 and set out in Annex I has been demonstrated by the conformity assessment procedure referred to in the first subparagraph, manufacturers shall draw up an EU declaration of conformity and affix the CE marking.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-3",
+    "ref": "Directive 2014/35/EU, Article 6(3)",
+    "texte": "3. Manufacturers shall keep the technical documentation referred to in Annex III and the EU declaration of conformity for 10 years after the electrical equipment has been placed on the market.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-5",
+    "ref": "Directive 2014/35/EU, Article 6(5)",
+    "texte": "5. Manufacturers shall ensure that electrical equipment which they have placed on the market bears a type, batch or serial number or other element allowing its identification, or, where the size or nature of the electrical equipment does not allow it, that the required information is provided on its packaging or in a document accompanying the electrical equipment.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-6",
+    "ref": "Directive 2014/35/EU, Article 6(6)",
+    "texte": "6. Manufacturers shall indicate on the electrical equipment their name, registered trade name or registered trade mark and the postal address at which they can be contacted or, where that is not possible, on its packaging or in a document accompanying the electrical equipment. The address shall indicate a single point at which the manufacturer can be contacted. The contact details shall be in a language easily understood by end-users and market surveillance authorities.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art6-7",
+    "ref": "Directive 2014/35/EU, Article 6(7)",
+    "texte": "7. Manufacturers shall ensure that the electrical equipment is accompanied by instructions and safety information in a language which can be easily understood by consumers and other end-users, as determined by the Member State concerned. Such instructions and safety information, as well as any labelling, shall be clear, understandable and intelligible.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art8-2",
+    "ref": "Directive 2014/35/EU, Article 8(2), first subparagraph",
+    "texte": "2. Before placing electrical equipment on the market importers shall ensure that the appropriate conformity assessment procedure has been carried out by the manufacturer. They shall ensure that the manufacturer has drawn up the technical documentation, that the electrical equipment bears the CE marking and is accompanied by the required documents, and that the manufacturer has complied with the requirements set out in Article 6(5) and (6).",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art8-3",
+    "ref": "Directive 2014/35/EU, Article 8(3)",
+    "texte": "3. Importers shall indicate on the electrical equipment their name, registered trade name or registered trade mark and the postal address at which they can be contacted or, where that is not possible, on its packaging or in a document accompanying the electrical equipment. The contact details shall be in a language easily understood by end-users and market surveillance authorities.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art8-4",
+    "ref": "Directive 2014/35/EU, Article 8(4)",
+    "texte": "4. Importers shall ensure that the electrical equipment is accompanied by instructions and safety information in a language which can be easily understood by consumers and other end-users, as determined by the Member State concerned.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art8-8",
+    "ref": "Directive 2014/35/EU, Article 8(8)",
+    "texte": "8. Importers shall, for 10 years after the electrical equipment has been placed on the market, keep a copy of the EU declaration of conformity at the disposal of the market surveillance authorities and ensure that the technical documentation can be made available to those authorities, upon request.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art9-2",
+    "ref": "Directive 2014/35/EU, Article 9(2), first subparagraph",
+    "texte": "2. Before making electrical equipment available on the market distributors shall verify that the electrical equipment bears the CE marking, that it is accompanied by the required documents and by instructions and safety information in a language which can be easily understood by consumers and other end-users in the Member State in which the electrical equipment is to be made available on the market, and that the manufacturer and the importer have complied with the requirements set out in Article 6(5) and (6) and Article 8(3) respectively.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art10",
+    "ref": "Directive 2014/35/EU, Article 10",
+    "texte": "An importer or distributor shall be considered a manufacturer for the purposes of this Directive and he shall be subject to the obligations of the manufacturer under Article 6, where he places electrical equipment on the market under his name or trade mark or modifies electrical equipment already placed on the market in such a way that compliance with this Directive may be affected.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art15-2",
+    "ref": "Directive 2014/35/EU, Article 15(2)",
+    "texte": "2. The EU declaration of conformity shall have the model structure set out in Annex IV, shall contain the elements specified in Module A as set out in Annex III and shall be continuously updated. It shall be translated into the language or languages required by the Member State in which the electrical equipment is placed or made available on the market.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art15-3",
+    "ref": "Directive 2014/35/EU, Article 15(3)",
+    "texte": "3. Where electrical equipment is subject to more than one Union act requiring an EU declaration of conformity, a single EU declaration of conformity shall be drawn up in respect of all such Union acts. That declaration shall contain the identification of the Union acts concerned including their publication references.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art15-4",
+    "ref": "Directive 2014/35/EU, Article 15(4)",
+    "texte": "4. By drawing up the EU declaration of conformity, the manufacturer shall assume responsibility for the compliance of the electrical equipment with the requirements laid down in this Directive.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-art17-1",
+    "ref": "Directive 2014/35/EU, Article 17(1)",
+    "texte": "1. The CE marking shall be affixed visibly, legibly and indelibly to the electrical equipment or to its data plate. Where that is not possible or not warranted on account of the nature of the electrical equipment, it shall be affixed to the packaging and to the accompanying documents.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-annex2",
+    "ref": "Directive 2014/35/EU, Annex II (equipment and phenomena outside the scope)",
+    "texte": "Electrical equipment for use in an explosive atmosphere Electrical equipment for radiology and medical purposes Electrical parts for goods and passenger lifts Electricity meters Plugs and socket outlets for domestic use Electric fence controllers Radio-electrical interference Specialised electrical equipment, for use on ships, aircraft or railways, which complies with the safety provisions drawn up by international bodies in which the Member States participate. Custom built evaluation kits destined for professionals to be used solely at research and development facilities for such purposes.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-annex3-2",
+    "ref": "Directive 2014/35/EU, Annex III, Module A, point 2 (technical documentation)",
+    "texte": "2. Technical documentation The manufacturer shall establish the technical documentation. The documentation shall make it possible to assess the electrical equipment’s conformity to the relevant requirements, and shall include an adequate analysis and assessment of the risk(s). The technical documentation shall specify the applicable requirements and cover, as far as relevant for the assessment, the design, manufacture and operation of the electrical equipment. The technical documentation shall, where applicable, contain at least the following elements: (a) a general description of the electrical equipment; (b) conceptual design and manufacturing drawings and schemes of components, sub-assemblies, circuits, etc.; (c) descriptions and explanations necessary for the understanding of those drawings and schemes and the operation of the electrical equipment; (d) a list of the harmonised standards applied in full or in part the references of which have been published in the Official Journal of the European Union or international or national standards referred to in Articles 13 and 14 and, where those harmonised standards or international or national standards have not been applied, descriptions of the solutions adopted to meet the safety objectives of this Directive, including a list of other relevant technical specifications applied. In the event of partly applied harmonised standards or international or national standards referred to in Articles 13 and 14, the technical documentation shall specify the parts which have been applied; (e) results of design calculations made, examinations carried out, etc.; and (f) test reports.",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "lvd-annex4",
+    "ref": "Directive 2014/35/EU, Annex IV (model of the EU declaration of conformity), points 1 to 7",
+    "texte": "1. Product model/product (product, type, batch or serial number): 2. Name and address of the manufacturer or his authorised representative: 3. This declaration of conformity is issued under the sole responsibility of the manufacturer. 4. Object of the declaration (identification of electrical equipment allowing traceability; it may include a colour image of sufficient clarity where necessary for the identification of the electrical equipment): 5. The object of the declaration described above is in conformity with the relevant Union harmonisation legislation: 6. References to the relevant harmonised standards used or references to the other technical specifications in relation to which conformity is declared: 7. Additional information:",
+    "source": "Directive 2014/35/EU (Low Voltage Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0035",
+    "version": "02014L0035-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0035-20260530"
+  },
+  {
+    "id": "emc-art2-1",
+    "ref": "Directive 2014/30/EU, Article 2(1) (scope)",
+    "texte": "1. This Directive shall apply to equipment as defined in Article 3.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art3-1-1",
+    "ref": "Directive 2014/30/EU, Article 3(1), point (1)",
+    "texte": "(1) ‘equipment’ means any apparatus or fixed installation;",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art3-1-2",
+    "ref": "Directive 2014/30/EU, Article 3(1), point (2)",
+    "texte": "(2) ‘apparatus’ means any finished appliance or combination thereof made available on the market as a single functional unit, intended for the end-user and liable to generate electromagnetic disturbance, or the performance of which is liable to be affected by such disturbance;",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art6",
+    "ref": "Directive 2014/30/EU, Article 6",
+    "texte": "The equipment shall meet the essential requirements set out in Annex I.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art7-2",
+    "ref": "Directive 2014/30/EU, Article 7(2)",
+    "texte": "2. Manufacturers shall draw up the technical documentation referred to in Annex II or Annex III and carry out the relevant conformity assessment procedure referred to in Article 14 or have it carried out. Where compliance of apparatus with the applicable requirements has been demonstrated by that procedure, manufacturers shall draw up an EU declaration of conformity and affix the CE marking.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art7-6",
+    "ref": "Directive 2014/30/EU, Article 7(6)",
+    "texte": "6. Manufacturers shall indicate, on the apparatus, their name, registered trade name or registered trade mark and the postal address at which they can be contacted or, where that is not possible, on its packaging or in a document accompanying the apparatus. The address shall indicate a single point at which the manufacturer can be contacted. The contact details shall be in a language easily understood by end-users and market surveillance authorities.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art7-7",
+    "ref": "Directive 2014/30/EU, Article 7(7)",
+    "texte": "7. Manufacturers shall ensure that the apparatus is accompanied by instructions and the information referred to in Article 18 in a language which can be easily understood by consumers and other end-users, as determined by the Member State concerned. Such instructions and information, as well as any labelling, shall be clear, understandable and intelligible.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art9-2",
+    "ref": "Directive 2014/30/EU, Article 9(2), first subparagraph",
+    "texte": "2. Before placing apparatus on the market importers shall ensure that the appropriate conformity assessment procedure referred to in Article 14 has been carried out by the manufacturer. They shall ensure that the manufacturer has drawn up the technical documentation, that the apparatus bears the CE marking and is accompanied by the required documents, and that the manufacturer has complied with the requirements set out in Article 7(5) and (6).",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art9-3",
+    "ref": "Directive 2014/30/EU, Article 9(3)",
+    "texte": "3. Importers shall indicate on the apparatus their name, registered trade name or registered trade mark and the postal address at which they can be contacted or, where that is not possible, on its packaging or in a document accompanying the apparatus. The contact details shall be in a language easily understood by end-users and market surveillance authorities.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art10-2",
+    "ref": "Directive 2014/30/EU, Article 10(2), first subparagraph",
+    "texte": "2. Before making apparatus available on the market distributors shall verify that the apparatus bears the CE marking, that it is accompanied by the required documents and by instructions and the information referred to in Article 18 in a language which can be easily understood by consumers and other end-users in the Member State in which the apparatus is to be made available on the market and that the manufacturer and the importer have complied with the requirements set out in Article 7(5) and (6) and Article 9(3) respectively.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art11",
+    "ref": "Directive 2014/30/EU, Article 11",
+    "texte": "An importer or distributor shall be considered a manufacturer for the purposes of this Directive and he shall be subject to the obligations of the manufacturer under Article 7, where he places apparatus on the market under his name or trade mark or modifies apparatus already placed on the market in such a way that compliance with this Directive may be affected.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art14",
+    "ref": "Directive 2014/30/EU, Article 14, first paragraph",
+    "texte": "Compliance of apparatus with the essential requirements set out in Annex I shall be demonstrated by means of either of the following conformity assessment procedures: (a) internal production control set out in Annex II; (b) EU type examination that is followed by Conformity to type based on internal production control set out in Annex III.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-art15-2",
+    "ref": "Directive 2014/30/EU, Article 15(2)",
+    "texte": "2. The EU declaration of conformity shall have the model structure set out in Annex IV, shall contain the elements specified in the relevant modules set out in Annexes II and III and shall be continuously updated. It shall be translated into the language or languages required by the Member State in which the apparatus is placed or made available on the market.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "emc-annex1-1",
+    "ref": "Directive 2014/30/EU, Annex I, point 1 (general requirements)",
+    "texte": "1. General requirements Equipment shall be so designed and manufactured, having regard to the state of the art, as to ensure that: (a) the electromagnetic disturbance generated does not exceed the level above which radio and telecommunications equipment or other equipment cannot operate as intended; (b) it has a level of immunity to the electromagnetic disturbance to be expected in its intended use which allows it to operate without unacceptable degradation of its intended use.",
+    "source": "Directive 2014/30/EU (Electromagnetic Compatibility Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0030",
+    "version": "02014L0030-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0030-20260530"
+  },
+  {
+    "id": "rohs-art2-1",
+    "ref": "Directive 2011/65/EU, Article 2(1) (scope)",
+    "texte": "1. This Directive shall, subject to paragraph 2, apply to EEE falling within the categories set out in Annex I.",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art3-1",
+    "ref": "Directive 2011/65/EU, Article 3, point (1)",
+    "texte": "(1) ‘electrical and electronic equipment’ or ‘EEE’ means equipment which is dependent on electric currents or electromagnetic fields in order to work properly and equipment for the generation, transfer and measurement of such currents and fields and designed for use with a voltage rating not exceeding 1 000 volts for alternating current and 1 500 volts for direct current;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art4-1",
+    "ref": "Directive 2011/65/EU, Article 4(1)",
+    "texte": "1. Member States shall ensure that EEE placed on the market, including cables and spare parts for its repair, its reuse, updating of its functionalities or upgrading of its capacity, does not contain the substances listed in Annex II.",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art7-c",
+    "ref": "Directive 2011/65/EU, Article 7, point (c)",
+    "texte": "(c) where compliance of EEE with the applicable requirements has been demonstrated by the procedure referred to in point (b), manufacturers draw up an EU declaration of conformity and affix the CE marking on the finished product. Where other applicable Union legislation requires the application of a conformity assessment procedure which is at least as stringent, compliance with the requirements of Article 4(1) of this Directive may be demonstrated within the context of that procedure. A single technical documentation may be drawn up;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art7-d",
+    "ref": "Directive 2011/65/EU, Article 7, point (d)",
+    "texte": "(d) manufacturers keep the technical documentation and the EU declaration of conformity for 10 years after the EEE has been placed on the market;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art7-h",
+    "ref": "Directive 2011/65/EU, Article 7, point (h)",
+    "texte": "(h) manufacturers indicate their name, registered trade name or registered trade mark and the address at which they can be contacted on the EEE or, where that is not possible, on its packaging or in a document accompanying the EEE. The address must indicate a single point at which the manufacturer can be contacted. Where other applicable Union legislation contains provisions for the affixing of the manufacturer’s name and address which are at least as stringent, those provisions shall apply;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art9-d",
+    "ref": "Directive 2011/65/EU, Article 9, point (d)",
+    "texte": "(d) importers indicate their name, registered trade name or registered trade mark and the address at which they can be contacted on the EEE or, where that is not possible, on its packaging or in a document accompanying the EEE. Where other applicable Union legislation contains provisions for the affixing of the importer’s name and address which are at least as stringent, those provisions shall apply;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art9-g",
+    "ref": "Directive 2011/65/EU, Article 9, point (g)",
+    "texte": "(g) importers keep, for 10 years following the placing on the market of the EEE, a copy of the EU declaration of conformity at the disposal of the market surveillance authorities and ensure that the technical documentation can be made available to those authorities, upon request;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art10-a",
+    "ref": "Directive 2011/65/EU, Article 10, introductory words and point (a)",
+    "texte": "Member States shall ensure that: (a) when making an EEE available on the market, distributors act with due care in relation to the requirements applicable in particular by verifying that the EEE bears the CE marking, that it is accompanied by the required documents in a language which can be easily understood by consumers and other end-users in the Member State in which the EEE is to be made available on the market, and that the manufacturer and the importer have complied with the requirements set out in points (g) and (h) of Article 7 and in point (d) of Article 9;",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art11",
+    "ref": "Directive 2011/65/EU, Article 11",
+    "texte": "Member States shall ensure that an importer or distributor is considered a manufacturer for the purposes of this Directive and that he is subject to the obligations of the manufacturer under Article 7, where he places EEE on the market under his name or trademark or modifies EEE already placed on the market in such a way that compliance with the applicable requirements may be affected.",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-art13-2",
+    "ref": "Directive 2011/65/EU, Article 13(2), first subparagraph",
+    "texte": "2. The EU declaration of conformity shall have the model structure and shall contain the elements specified in Annex VI and shall be updated. It shall be translated into the language or languages required by the Member State on the market of which the product is placed or made available.",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-annex1",
+    "ref": "Directive 2011/65/EU, Annex I (categories of EEE covered)",
+    "texte": "1. Large household appliances. 2. Small household appliances. 3. IT and telecommunications equipment. 4. Consumer equipment. 5. Lighting equipment. 6. Electrical and electronic tools. 7. Toys, leisure and sports equipment. 8. Medical devices. 9. Monitoring and control instruments including industrial monitoring and control instruments. 10. Automatic dispensers. 11. Other EEE not covered by any of the categories above.",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "rohs-annex2",
+    "ref": "Directive 2011/65/EU, Annex II (restricted substances and maximum concentration values), list",
+    "texte": "Lead (0,1 %) Mercury (0,1 %) Cadmium (0,01 %) Hexavalent chromium (0,1 %) Polybrominated biphenyls (PBB) (0,1 %) Polybrominated diphenyl ethers (PBDE) (0,1 %) Bis(2-ethylhexyl) phthalate (DEHP) (0,1 %) Butyl benzyl phthalate (BBP) (0,1 %) Dibutyl phthalate (DBP) (0,1 %) Diisobutyl phthalate (DIBP) (0,1 %)",
+    "source": "Directive 2011/65/EU (RoHS Directive), consolidated version of 1 July 2026",
+    "celex": "32011L0065",
+    "version": "02011L0065-20260701",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02011L0065-20260701"
+  },
+  {
+    "id": "eps-art1-1",
+    "ref": "Regulation (EU) 2019/1782, Article 1(1) (subject matter)",
+    "texte": "1. This Regulation establishes ecodesign requirements for the placing on the market or putting into service of external power supplies.",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-art1-2",
+    "ref": "Regulation (EU) 2019/1782, Article 1(2) (exclusions)",
+    "texte": "2. This Regulation shall not apply to: (a) voltage converters; (b) uninterruptible power supplies; (c) battery chargers without power supply function; (d) lighting converters; (e) external power supplies for medical devices; (f) active power over Ethernet injectors; (g) docking stations for autonomous appliances; (h) external power supplies placed on the market before 1 April 2025 solely as a service part or spare part for replacing an identical external power supply placed on the market before 1 April 2020, under the condition that the service part or spare part, or its packaging, clearly indicate ‘External power supply to be used exclusively as spare part for’ and the primary load product(s) it is intended to be used with.",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-art2-1",
+    "ref": "Regulation (EU) 2019/1782, Article 2, point (1) (definition of external power supply)",
+    "texte": "(1) ‘external power supply’ means a device which meets all of the following criteria: (a) it is designed to convert alternating current (AC) power input from the mains power source input into one or more lower voltage direct current (DC) or AC outputs; (b) it is used with one or more separate devices that constitute the primary load; (c) it is contained in a physical enclosure separate from the device or devices that constitute the primary load; (d) it is connected to the device or devices that constitute the primary load with removable or hard-wired male/female electrical connections, cables, cords or other wirings; (e) it has nameplate output power not exceeding 250 watts; and (f) it is used with electrical and electronic household and office equipment included in Annex I;",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-art4-1",
+    "ref": "Regulation (EU) 2019/1782, Article 4(1)",
+    "texte": "1. The conformity assessment procedure referred to in Article 8 of Directive 2009/125/EC shall be the internal design control system set out in Annex IV to that Directive or the management system set out in Annex V to that Directive.",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-art4-2",
+    "ref": "Regulation (EU) 2019/1782, Article 4(2)",
+    "texte": "2. For the purposes of the conformity assessment pursuant to Article 8 of Directive 2009/125/EC, the technical documentation shall contain the declared values of parameters listed in Annex II, point 2(c).",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-art9",
+    "ref": "Regulation (EU) 2019/1782, Article 9, first and second paragraphs (entry into force and application)",
+    "texte": "This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union. It shall apply from 1 April 2020.",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex1-2",
+    "ref": "Regulation (EU) 2019/1782, Annex I, point 2",
+    "texte": "Information technology equipment, including copying and printing equipment, and set-top boxes, intended primarily for use in the domestic environment.",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex2-1a",
+    "ref": "Regulation (EU) 2019/1782, Annex II, point 1(a) (no-load power consumption; table read row by row: AC-AC, AC-DC, low voltage, multiple voltage output)",
+    "texte": "from 1 April 2020, the no-load condition power consumption shall not exceed the following values: AC-AC external power supplies, except low voltage and multiple voltage output external power supplies AC-DC external power supplies, except low voltage and multiple voltage output external power supplies Low voltage external power supplies Multiple voltage output external power supplies PO ≤ 49,0 W 0,21 W 0,10 W 0,10 W 0,30 W PO > 49,0 W 0,21 W 0,21 W 0,21 W 0,30 W",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex2-1b",
+    "ref": "Regulation (EU) 2019/1782, Annex II, point 1(b) (average active efficiency; table read row by row: AC-AC, AC-DC, low voltage, multiple voltage output)",
+    "texte": "from 1 April 2020, the average active efficiency shall be not less than the following values: AC-AC external power supplies, except low voltage and multiple voltage output external power supplies AC-DC external power supplies, except low voltage and multiple voltage output external power supplies Low voltage external power supplies Multiple voltage output external power supplies PO ≤ 1,0 W 0,5 × PO/1W+ 0,160 0,5 × PO/1W+ 0,160 0,517 × PO/1W+ 0,087 0,497 × PO/1W+ 0,067 1 W < PO ≤ 49,0 W 0,071 × ln(PO/1W) – 0,0014 × PO/1W+ 0,67 0,071 × ln(PO/1W) – 0,0014 × PO/1W+ 0,67 0,0834 × ln(PO/1W) – 0,0014 × Po/1W+ 0,609 0,075 × ln(PO/1W) + 0,561 PO > 49,0 W 0,880 0,880 0,870 0,860",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex2-2a",
+    "ref": "Regulation (EU) 2019/1782, Annex II, point 2(a) (nameplate information), introductory words",
+    "texte": "from 1 April 2020, the nameplate shall include the following information:",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex2-2b",
+    "ref": "Regulation (EU) 2019/1782, Annex II, point 2(b) (instruction manuals and free access websites), introductory words",
+    "texte": "from 1 April 2020, instruction manuals for end-users (where applicable), and free access websites of manufacturers, importers or authorised representatives shall include the following information, in the order as set out below:",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eps-annex2-2c",
+    "ref": "Regulation (EU) 2019/1782, Annex II, point 2(c) (technical documentation), introductory words",
+    "texte": "from 1 April 2020, the technical documentation for the purposes of conformity assessment pursuant to Article 4 shall contain the following elements:",
+    "source": "Commission Regulation (EU) 2019/1782 (ecodesign of external power supplies), text as published in OJ L 272, 25.10.2019",
+    "celex": "32019R1782",
+    "version": "32019R1782",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019R1782"
+  },
+  {
+    "id": "eco-art2-6",
+    "ref": "Directive 2009/125/EC, Article 2, point 6",
+    "texte": "6. ‘Manufacturer’ means the natural or legal person who manufactures products covered by this Directive and is responsible for their conformity with this Directive in view of their being placed on the market and/or put into service under the manufacturer’s own name or trademark or for the manufacturer’s own use. In the absence of a manufacturer as defined in the first sentence of this point or of an importer as defined in point 8, any natural or legal person who places on the market and/or puts into service products covered by this Directive shall be considered a manufacturer;",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-art3-1",
+    "ref": "Directive 2009/125/EC, Article 3(1)",
+    "texte": "1. Member States shall take all appropriate measures to ensure that products covered by implementing measures may be placed on the market and/or put into service only if they comply with those measures and bear the CE marking in accordance with Article 5.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-art4",
+    "ref": "Directive 2009/125/EC, Article 4 (responsibilities of the importer)",
+    "texte": "Where the manufacturer is not established within the Community and in the absence of an authorised representative, the importer shall have the following obligations: (a) to ensure that the product placed on the market and/or put into service complies with this Directive and the applicable implementing measure; and (b) to keep and make available the EC declaration of conformity and the technical documentation.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-art5-1",
+    "ref": "Directive 2009/125/EC, Article 5(1)",
+    "texte": "1. Before a product covered by implementing measures is placed on the market and/or put into service, a CE marking shall be affixed and an EC declaration of conformity issued whereby the manufacturer or its authorised representative ensures and declares that the product complies with all relevant provisions of the applicable implementing measure.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-art5-3",
+    "ref": "Directive 2009/125/EC, Article 5(3)",
+    "texte": "3. The EC declaration of conformity shall contain the elements specified in Annex VI and shall refer to the appropriate implementing measure.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-art8-3",
+    "ref": "Directive 2009/125/EC, Article 8(3)",
+    "texte": "3. After placing a product covered by implementing measures on the market and/or putting it into service, the manufacturer or its authorised representative shall keep relevant documents relating to the conformity assessment performed and declarations of conformity issued available for inspection by Member States for a period of 10 years after the last of that product has been manufactured. The relevant documents shall be made available within 10 days of receipt of a request by the competent authority of a Member State.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-annex4-2",
+    "ref": "Directive 2009/125/EC, Annex IV (internal design control), point 2",
+    "texte": "2. A technical documentation file making possible an assessment of the conformity of the product with the requirements of the applicable implementing measure must be compiled by the manufacturer. The documentation must contain, in particular: (a) a general description of the product and of its intended use; (b) the results of relevant environmental assessment studies carried out by the manufacturer, and/or references to environmental assessment literature or case studies, which are used by the manufacturer in evaluating, documenting and determining product design solutions; (c) the ecological profile, where required by the implementing measure; (d) elements of the product design specification relating to environmental design aspects of the product; (e) a list of the appropriate standards referred to in Article 10, applied in full or in part, and a description of the solutions adopted to meet the requirements of the applicable implementing measure where the standards referred to in Article 10 have not been applied or where those standards do not cover entirely the requirements of the applicable implementing measure; (f) a copy of the information concerning the environmental design aspects of the product provided in accordance with the requirements specified in Annex I, Part 2; and (g) the results of measurements on the ecodesign requirements carried out, including details of the conformity of these measurements as compared with the ecodesign requirements set out in the applicable implementing measure.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "eco-annex6",
+    "ref": "Directive 2009/125/EC, Annex VI (EC declaration of conformity)",
+    "texte": "The EC declaration of conformity must contain the following elements: 1. the name and address of the manufacturer or of its authorised representative; 2. a description of the model sufficient for its unambiguous identification; 3. where appropriate, the references of the harmonised standards applied; 4. where appropriate, the other technical standards and specifications used; 5. where appropriate, the reference to other Community legislation providing for the affixing of the CE mark that is applied; and 6. the identification and signature of the person empowered to bind the manufacturer or its authorised representative.",
+    "source": "Directive 2009/125/EC (Ecodesign Directive), consolidated version of 4 December 2012",
+    "celex": "32009L0125",
+    "version": "02009L0125-20121204",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0125-20121204"
+  },
+  {
+    "id": "espr-art79-1",
+    "ref": "Regulation (EU) 2024/1781, Article 79(1), introductory words",
+    "texte": "1. Directive 2009/125/EC is repealed with effect from 18 July 2024, with the exception of:",
+    "source": "Regulation (EU) 2024/1781 (Ecodesign for Sustainable Products Regulation), consolidated version of 28 June 2024",
+    "celex": "32024R1781",
+    "version": "02024R1781-20240628",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1781-20240628"
+  },
+  {
+    "id": "espr-art79-1-b",
+    "ref": "Regulation (EU) 2024/1781, Article 79(1), point (b)",
+    "texte": "(b) Article 1(3), Article 2, Article 3(1), Articles 4, 5 and 8, Article 9(3), Articles 10, 14 and 20 of, and Annexes IV, V and VI to, Directive 2009/125/EC in the version applicable on 17 July 2024, which, instead of Articles 1, 2, 27 and 29, Article 41(4), Article 43(2), Articles 44, 45 and 46 and Article 74 of, and Annexes IV and V to, this Regulation, shall continue to apply as regards products regulated by implementing measures that are adopted pursuant to Article 15 of that Directive until such measures are repealed or declared obsolete.",
+    "source": "Regulation (EU) 2024/1781 (Ecodesign for Sustainable Products Regulation), consolidated version of 28 June 2024",
+    "celex": "32024R1781",
+    "version": "02024R1781-20240628",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1781-20240628"
+  },
+  {
+    "id": "eps2-art1-1",
+    "ref": "Regulation (EU) 2025/2052, Article 1(1) (subject matter)",
+    "texte": "1. This Regulation lays down ecodesign requirements for the placing on the market or putting into service of external power supplies (EPS), battery chargers for portable batteries of general use, wireless chargers, wireless charging pads and USB Type-C cables.",
+    "source": "Commission Regulation (EU) 2025/2052 (ecodesign of external power supplies, applicable from 14 December 2028), text as published in the OJ of 24.11.2025",
+    "celex": "32025R2052",
+    "version": "32025R2052",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2052"
+  },
+  {
+    "id": "eps2-art8",
+    "ref": "Regulation (EU) 2025/2052, Article 8 (repeal of Regulation (EU) 2019/1782)",
+    "texte": "Regulation (EU) 2019/1782 is repealed with effect from 14 December 2028 except for the provisions laid down in Article 9 of this Regulation.",
+    "source": "Commission Regulation (EU) 2025/2052 (ecodesign of external power supplies, applicable from 14 December 2028), text as published in the OJ of 24.11.2025",
+    "celex": "32025R2052",
+    "version": "32025R2052",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2052"
+  },
+  {
+    "id": "eps2-art9-3",
+    "ref": "Regulation (EU) 2025/2052, Article 9(3)",
+    "texte": "3. EPS placed on the market between 14 December 2025 and 14 December 2028 which meet the requirements set out in this Regulation shall be considered to comply with the requirements of Regulation (EU) 2019/1782.",
+    "source": "Commission Regulation (EU) 2025/2052 (ecodesign of external power supplies, applicable from 14 December 2028), text as published in the OJ of 24.11.2025",
+    "celex": "32025R2052",
+    "version": "32025R2052",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2052"
+  },
+  {
+    "id": "eps2-art10",
+    "ref": "Regulation (EU) 2025/2052, Article 10, first and second paragraphs (entry into force and application)",
+    "texte": "This Regulation shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union. It shall apply from 14 December 2028. However, point 3 of Article 9 shall apply from 14 December 2025.",
+    "source": "Commission Regulation (EU) 2025/2052 (ecodesign of external power supplies, applicable from 14 December 2028), text as published in the OJ of 24.11.2025",
+    "celex": "32025R2052",
+    "version": "32025R2052",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R2052"
+  },
+  {
+    "id": "weee-art2-1-b",
+    "ref": "Directive 2012/19/EU, Article 2(1), point (b) (scope from 15 August 2018)",
+    "texte": "(b) from 15 August 2018, subject to paragraphs 3 and 4, to all EEE. All EEE shall be classified within the categories set out in Annex III. Annex IV contains a non-exhaustive list of EEE which falls within the categories set out in Annex III (open scope).",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art3-1-a",
+    "ref": "Directive 2012/19/EU, Article 3(1), point (a)",
+    "texte": "(a) ‘electrical and electronic equipment’ or ‘EEE’ means equipment which is dependent on electric currents or electromagnetic fields in order to work properly and equipment for the generation, transfer and measurement of such currents and fields and designed for use with a voltage rating not exceeding 1 000 volts for alternating current and 1 500 volts for direct current;",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art3-1-f",
+    "ref": "Directive 2012/19/EU, Article 3(1), point (f) (definition of producer)",
+    "texte": "(f) ‘producer’ means any natural or legal person who, irrespective of the selling technique used, including distance communication within the meaning of Directive 97/7/EC of the European Parliament and of the Council of 20 May 1997 on the protection of consumers in respect of distance contracts ( 2 ): (i) is established in a Member State and manufactures EEE under his own name or trademark, or has EEE designed or manufactured and markets it under his name or trademark within the territory of that Member State; (ii) is established in a Member State and resells within the territory of that Member State, under his own name or trademark, equipment produced by other suppliers, a reseller not being regarded as the ‘producer’ if the brand of the producer appears on the equipment, as provided for in point (i); (iii) is established in a Member State and places on the market of that Member State, on a professional basis, EEE from a third country or from another Member State; or (iv) sells EEE by means of distance communication directly to private households or to users other than private households in a Member State, and is established in another Member State or in a third country. Whoever exclusively provides financing under or pursuant to any finance agreement shall not be deemed to be a ‘producer’ unless he also acts as a producer within the meaning of points (i) to (iv);",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art12-1",
+    "ref": "Directive 2012/19/EU, Article 12(1), introductory words",
+    "texte": "1. Member States shall ensure that producers provide at least for the financing of the collection, treatment, recovery and environmentally sound disposal of WEEE from private households that has been deposited at collection facilities set up under Article 5(2) as follows:",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art14-4",
+    "ref": "Directive 2012/19/EU, Article 14(4) (marking with the crossed-out wheeled bin)",
+    "texte": "4. With a view to minimising the disposal of WEEE as unsorted municipal waste and to facilitating its separate collection, Member States shall ensure that producers appropriately mark – preferably in accordance with the European standard EN 50419:2022 – EEE placed on the market with the symbol shown in Annex IX. In exceptional cases, where this is necessary because of the size or the function of the product, the symbol shall be printed on the packaging, on the instructions for use and on the warranty of the EEE.",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art16-1",
+    "ref": "Directive 2012/19/EU, Article 16(1), first subparagraph",
+    "texte": "1. Member States shall, in accordance with paragraph 2, draw up a register of producers, including producers supplying EEE by means of distance communication. That register shall serve to monitor compliance with the requirements of this Directive.",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-art16-2-a",
+    "ref": "Directive 2012/19/EU, Article 16(2), introductory words and point (a)",
+    "texte": "2. Member States shall ensure that: (a) each producer, or each authorised representative where appointed under Article 17, is registered as required and has the possibility of entering online in their national register all relevant information reflecting that producer’s activities in that Member State;",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-annex3-6",
+    "ref": "Directive 2012/19/EU, Annex III, category 6",
+    "texte": "6. Small IT and telecommunication equipment (no external dimension more than 50 cm)",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "weee-annex9",
+    "ref": "Directive 2012/19/EU, Annex IX (symbol for the marking of EEE), first sentences",
+    "texte": "The symbol indicating separate collection for EEE consists of the crossed-out wheeled bin, as shown below. The symbol must be printed visibly, legibly and indelibly.",
+    "source": "Directive 2012/19/EU (WEEE Directive), consolidated version of 8 April 2024",
+    "celex": "32012L0019",
+    "version": "02012L0019-20240408",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02012L0019-20240408"
+  },
+  {
+    "id": "msr-art4-1",
+    "ref": "Regulation (EU) 2019/1020, Article 4(1)",
+    "texte": "1. Notwithstanding any obligations set out in applicable Union harmonisation legislation, a product subject to legislation referred to in paragraph 5 may be placed on the market only if there is an economic operator established in the Union who is responsible for the tasks set out in paragraph 3 in respect of that product.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art4-2",
+    "ref": "Regulation (EU) 2019/1020, Article 4(2)",
+    "texte": "2. For the purposes of this Article, the economic operator referred to in paragraph 1 means any of the following: (a) a manufacturer established in the Union; (b) an importer, where the manufacturer is not established in the Union; (c) an authorised representative who has a written mandate from the manufacturer designating the authorised representative to perform the tasks set out in paragraph 3 on the manufacturer's behalf; (d) a fulfilment service provider established in the Union with respect to the products it handles, where no other economic operator as mentioned in points (a), (b) and (c) is established in the Union.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art4-3",
+    "ref": "Regulation (EU) 2019/1020, Article 4(3)",
+    "texte": "3. Without prejudice to any obligations of economic operators under the applicable Union harmonisation legislation, the economic operator referred to in paragraph 1 shall perform the following tasks: (a) if the Union harmonisation legislation applicable to the product provides for an EU declaration of conformity or declaration of performance and technical documentation, verifying that the EU declaration of conformity or declaration of performance and technical documentation have been drawn up, keeping the declaration of conformity or declaration of performance at the disposal of market surveillance authorities for the period required by that legislation and ensuring that the technical documentation can be made available to those authorities upon request; (b) further to a reasoned request from a market surveillance authority, providing that authority with all information and documentation necessary to demonstrate the conformity of the product in a language which can be easily understood by that authority; (c) when having reason to believe that a product in question presents a risk, informing the market surveillance authorities thereof; (d) cooperating with the market surveillance authorities, including following a reasoned request making sure that the immediate, necessary, corrective action is taken to remedy any case of non-compliance with the requirements set out in Union harmonisation legislation applicable to the product in question, or, if that is not possible, to mitigate the risks presented by that product, when required to do so by the market surveillance authorities or on its own initiative, where the economic operator referred to in paragraph 1 considers or has reason to believe that the product in question presents a risk.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art4-4",
+    "ref": "Regulation (EU) 2019/1020, Article 4(4)",
+    "texte": "4. Without prejudice to the respective obligations of economic operators under the applicable Union harmonisation legislation, the name, registered trade name or registered trade mark, and contact details, including the postal address, of the economic operator referred to in paragraph 1 shall be indicated on the product or on its packaging, the parcel or an accompanying document.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art4-5",
+    "ref": "Regulation (EU) 2019/1020, Article 4(5) (the figures in brackets are footnote references of the source)",
+    "texte": "5. This Article applies only in relation to products that are subject to Regulations (EU) No 305/2011 ( 4 ), (EU) 2016/425 ( 5 ), (EU) 2016/426 ( 6 ), (EU) 2023/1542 ( 7 ) and (EU) 2024/1252 ( 8 ) and Directives 2000/14/EC ( 9 ), 2006/42/EC ( 10 ), 2009/48/EC ( 11 ), 2009/125/EC ( 12 ), 2011/65/EU ( 13 ), 2013/29/EU ( 14 ), 2013/53/EU ( 15 ), 2014/29/EU ( 16 ), 2014/30/EU ( 17 ), 2014/31/EU ( 18 ), 2014/32/EU ( 19 ), 2014/34/EU ( 20 ), 2014/35/EU ( 21 ), 2014/53/EU ( 22 ) and 2014/68/EU ( 23 ) of the European Parliament and of the Council.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art6",
+    "ref": "Regulation (EU) 2019/1020, Article 6 (distance sales)",
+    "texte": "Products offered for sale online or through other means of distance sales shall be deemed to be made available on the market if the offer is targeted at end users in the Union. An offer for sale shall be considered to be targeted at end users in the Union if the relevant economic operator directs, by any means, its activities to a Member State.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "msr-art44",
+    "ref": "Regulation (EU) 2019/1020, Article 44, second paragraph (application)",
+    "texte": "It shall apply from 16 July 2021. However, Articles 29, 30, 31, 32, 33 and 36 shall apply from 1 January 2021.",
+    "source": "Regulation (EU) 2019/1020 (Market Surveillance Regulation), consolidated version of 12 August 2026",
+    "celex": "32019R1020",
+    "version": "02019R1020-20260812",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02019R1020-20260812"
+  },
+  {
+    "id": "gpsr-art2-1",
+    "ref": "Regulation (EU) 2023/988, Article 2(1), first to third subparagraphs, with point (a)",
+    "texte": "1. This Regulation applies to products that are placed or made available on the market insofar as there are no specific provisions with the same objective under Union law which regulate the safety of the products concerned. Where products are subject to specific safety requirements imposed by Union law, this Regulation applies only to those aspects and risks or categories of risks which are not covered by those requirements. With regard to products subject to specific requirements imposed by Union harmonisation legislation as defined in Article 3, point (27): (a) Chapter II does not apply insofar as the risks or categories of risks covered by Union harmonisation legislation are concerned;",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art2-1-b",
+    "ref": "Regulation (EU) 2023/988, Article 2(1), third subparagraph, point (b)",
+    "texte": "(b) Chapter IIa, Chapter III, Section 1, Chapters V and VII and Chapters IX to XI do not apply.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art3-27",
+    "ref": "Regulation (EU) 2023/988, Article 3, point (27)",
+    "texte": "(27) ‘Union harmonisation legislation’ means Union legislation listed in Annex I to Regulation (EU) 2019/1020 and any other Union legislation harmonising the conditions for the marketing of products to which that Regulation applies;",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art4",
+    "ref": "Regulation (EU) 2023/988, Article 4 (distance sales)",
+    "texte": "Products offered for sale online or through other means of distance sales shall be deemed to be made available on the market if the offer is targeted at consumers in the Union. An offer for sale shall be considered to be targeted at consumers in the Union if the relevant economic operator directs, by any means, its activities to one or more Member States.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art19",
+    "ref": "Regulation (EU) 2023/988, Article 19 (information in the offer in the case of distance sales)",
+    "texte": "Where economic operators make products available on the market online or through other means of distance sales, the offer of those products shall clearly and visibly indicate at least the following information: (a) name, registered trade name or registered trade mark of the manufacturer, as well as the postal and electronic address at which they can be contacted; (b) where the manufacturer is not established in the Union, the name, postal and electronic address of the responsible person within the meaning of Article 16(1) of this Regulation or Article 4(1) of Regulation (EU) 2019/1020; (c) information allowing the identification of the product, including a picture of it, its type and any other product identifier; and (d) any warning or safety information to be affixed to the product or to the packaging or included in an accompanying document in accordance with this Regulation or the applicable Union harmonisation legislation in a language which can be easily understood by consumers, as determined by the Member State in which the product is made available on the market.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art20-3",
+    "ref": "Regulation (EU) 2023/988, Article 20(3)",
+    "texte": "3. The importers and the distributors which have knowledge of an accident caused by a product that they placed or made available on the market shall without undue delay inform the manufacturer thereof. The manufacturer shall make the notification in accordance with paragraph 1 or instruct the importer or one of the distributors to make the notification.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art21",
+    "ref": "Regulation (EU) 2023/988, Article 21 (information in electronic format)",
+    "texte": "Without prejudice to Article 9(5), (6) and (7), Article 11(3) and Article 16(3), and the relevant provisions of Union harmonisation legislation, economic operators may additionally make the information referred to in those provisions available in a digital format by means of electronic technical solutions clearly visible on the product or, where that is not possible, on its packaging or in a document accompanying the product. That information shall be in a language which can be easily understood by consumers, as determined by the Member State in which the product is made available on the market, including in accessible formats for persons with disabilities.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "gpsr-art52",
+    "ref": "Regulation (EU) 2023/988, Article 52, second paragraph (application)",
+    "texte": "It shall apply from 13 December 2024.",
+    "source": "Regulation (EU) 2023/988 (General Product Safety Regulation), consolidated version of 29 May 2026",
+    "celex": "32023R0988",
+    "version": "02023R0988-20260529",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02023R0988-20260529"
+  },
+  {
+    "id": "red-art1-4",
+    "ref": "Directive 2014/53/EU, Article 1(4)",
+    "texte": "4. Radio equipment falling within the scope of this Directive shall not be subject to Directive 2014/35/EU, except as set out in point (a) of Article 3(1) of this Directive.",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "red-art2-1-1",
+    "ref": "Directive 2014/53/EU, Article 2(1), point (1) (definition of radio equipment)",
+    "texte": "(1) ‘radio equipment’ means an electrical or electronic product, which intentionally emits and/or receives radio waves for the purpose of radio communication and/or radiodetermination, or an electrical or electronic product which must be completed with an accessory, such as antenna, so as to intentionally emit and/or receive radio waves for the purpose of radio communication and/or radiodetermination;",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "red-art3-4",
+    "ref": "Directive 2014/53/EU, Article 3(4), first subparagraph",
+    "texte": "4. Radio equipment falling within the categories or classes specified in Part I of Annex Ia shall be so constructed that it complies with the specifications relating to charging capabilities set out in that Annex for the relevant category or class of radio equipment.",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "red-art3a-1",
+    "ref": "Directive 2014/53/EU, Article 3a(1)",
+    "texte": "1. Where an economic operator offers to consumers and other end-users the possibility to acquire the radio equipment referred to in Article 3(4) together with a charging device, the economic operator shall also offer the consumers and other end-users the possibility of acquiring that radio equipment without any charging device.",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "red-art3a-2",
+    "ref": "Directive 2014/53/EU, Article 3a(2), first subparagraph",
+    "texte": "2. Economic operators shall ensure that the information on whether or not a charging device is included with the radio equipment referred to in Article 3(4) is displayed in a graphic form using a user-friendly and easily accessible pictogram as set out in Part III of Annex Ia when such radio equipment is made available to consumers and other end-users. The pictogram shall be printed on the packaging or affixed to the packaging as a sticker. When the radio equipment is made available to consumers and other end-users, the pictogram shall be displayed in a visible and legible manner and, in the case of distance selling, close to the price indication.",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "red-annex1a-1",
+    "ref": "Directive 2014/53/EU, Annex Ia, Part I, point 1 (categories of radio equipment concerned)",
+    "texte": "1. The requirements set out in points 2 and 3 of this Part shall apply to the following categories or classes of radio equipment: 1.1. handheld mobile phones; 1.2. tablets; 1.3. digital cameras; 1.4. headphones; 1.5. headsets; 1.6. handheld videogame consoles; 1.7. portable speakers; 1.8. e-readers; 1.9. keyboards; 1.10. mice; 1.11. portable navigation systems; 1.12. earbuds; 1.13. laptops.",
+    "source": "Directive 2014/53/EU (Radio Equipment Directive), consolidated version of 30 May 2026",
+    "celex": "32014L0053",
+    "version": "02014L0053-20260530",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02014L0053-20260530"
+  },
+  {
+    "id": "cc-art2-1",
+    "ref": "Directive (EU) 2022/2380, Article 2(1), second subparagraph (dates of application)",
+    "texte": "They shall apply those measures from 28 December 2024 for the categories or classes of radio equipment referred to in Part I, points 1.1 to 1.12 of Annex Ia, and from 28 April 2026 for the categories or classes of radio equipment referred to in Part I, point 1.13 of Annex Ia.",
+    "source": "Directive (EU) 2022/2380 (common charger amendment to Directive 2014/53/EU), text as published in OJ L 315, 7.12.2022",
+    "celex": "32022L2380",
+    "version": "32022L2380",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2380"
+  }
+]

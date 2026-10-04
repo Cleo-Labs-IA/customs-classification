@@ -1,0 +1,78 @@
+Interpretation tree · Cleo
+Interpretation tree
+
+Jeu d'essai. The rule is data: edit a branch and everything is recomputed.
+
+Classify a product
+Arbre jouet (essai d'écran)
+Reference tree
+SH 2022, six digits only, national code not established. Drafted by AI from the cited texts, not reviewed by a customs declarant. Orange bar: edited node.
+L'appareil convertit-il le courant du secteur en courant continu ?
+Essai.
+Règles générales pour l'interprétation de la nomenclature combinée, règle 1
+Yes
+8504.40 Convertisseurs statiques
+No
+L'appareil a-t-il un port réseau ?
+Essai.
+Règles générales pour l'interprétation de la nomenclature combinée, règle 3 (phrase introductive)
+Yes
+8517.62 Appareils de transmission de données
+No
+Quelle est la nature de l'appareil ?
+Essai.
+Câble
+8544.42 Conducteurs munis de connecteurs
+Boîtier
+Out of scope Essai.
+Product under test
+Free-form product. Change an answer: the path is redrawn in the tree.
+Reset all to unknown
+L'appareil convertit-il le courant du secteur en courant continu ?
+Yes
+No
+Unknown
+L'appareil a-t-il un port réseau ?
+Yes
+No
+Unknown
+Quelle est la nature de l'appareil ?
+Unknown
+Câble
+Boîtier
+MISSING INFORMATION
+L'appareil convertit-il le courant du secteur en courant continu ?
+What the answer decides between:
+Yes → 8504.40
+No → 8517.62, 8544.42, out of scope
+Edit the tree
+Click a node in the tree to read its legal basis and change your reading.
+Add a code
+Add a question
+Official decisions
+The code behind
+Interpretation log
+1/3
+decisions reproduced
+1
+of which on facts all stated in writing
+1
+contradicted
+1
+undecided (fact absent from the text)
+0
+out of scope
+Reference tree, unedited. Each edit replays the 3 decisions.
+DECISION	PRODUCT	OFFICIAL	TREE	VERDICT
+ESSAI-1
+CBP ruling, United States · 2025-01-01	Chargeur d'essai	8504.40	8504.40	Reproduced
+ESSAI-2
+EU classification regulation · 2024-01-01	Station d'essai	8471.80	8517.62	Contradicted
+ESSAI-3
+CBP ruling, United States · 2023-01-01	Câble d'essai	8544.42	·	Undecided
+Click a decision to load it as the product under test. Each value comes from a passage in the text of the decision. When the text does not state a fact, it stays unknown and the decision is “undecided”. Some values are inferred (an absence read from the description of what the article is made of, for example): the second figure counts only the decisions reproduced without any inference. Records annotated by AI.
+--- attrs ---
+option: Unknown
+option: Câble
+option: Boîtier
+lang=en

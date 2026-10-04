@@ -1,0 +1,333 @@
+### SCREEN c/drawer-fact-by-hand
+### BODY
+Customs classification
+
+One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.
+
+Interpretation tree
+Product record
+USB-C dock, description only
+USB-C dock with datasheet
+Catalogue and datasheet that contradict each other
+Talking toy
+Buildable clock
+Robot dog
+SKU
+GTIN (optional)
+Dimensions and weight (optional)
+Shipping and customs
+Photo of the product or its label (optional)
+Customs description
+Datasheet or label (optional, text)
+Each fact kept cites the passage it comes from.
+Destination
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+Country of origin
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+The origin stays on the record. Classification does not use it.
+Category / HS code
+Empty until an authorised person has validated
+Classify this product
+Live calls to api.legaldata.cleolabs.co
+DOCUMENTS, FACTS AND ENCODED RULE
+PRODUCT
+DOCK-PRO → France
+USB-C docking station for laptop
+KNOWN FACTS
+Function: connects peripherals, video and network to a laptop over one USB-C cable
+Confirmed answer
+×
+Use: office use
+No supporting document
+×
+Material
+Process
+Power (W)
+Voltage (V)
+Weight (g)
+Add
+ENCODED RULE · PATH FOLLOWED FOR THIS PRODUCT
+Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones · Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926), 6-digit level · reference version, drafted by AI from the cited texts, not reviewed by a customs declarant. Expert mode
+RULE
+Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first. Section XVI, note 3 · Section XVI, note 5 · General rules for the interpretation of the Combined Nomenclature, rule 1 · General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence) · General rules for the interpretation of the Combined Nomenclature, rule 3(a) · General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+CHECKED FACT
+Which function do the datasheet and the packaging state first for this product? Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle) · connects peripherals, video and network to a laptop over one USB-C cable (Fact "Function")
+CONSEQUENCE
+next question: Active electronics on the signal
+BLOCKING POINT · A FACT IS MISSING
+Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+Heading 8544 covers insulated conductors whether or not fitted with connectors, and heading 8536 the apparatus for making connections to or switching electrical circuits. A product that processes the signal is described by neither of these two heading texts and is classified according to its function. Heading 8544 · Heading 8536
+Yes
+leads to 8471.80, out of scope, 8543.70, 8517.62
+No
+leads to 8544.42, out of scope, 8536.69
+PROPOSAL, ALTERNATIVES AND REMAINING WORK
+FIRST ASSESSMENT · 8.6 S
+0.16
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Still plausible
+0.05
+8517.69
+Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6
+Set aside
+0.01
+8536.69
+Electrical apparatus; plugs and sockets, for a voltage not exceeding 1000 volts
+Set aside
+0.01
+8471.30
+Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display
+Set aside
+0.01
+8528.52
+Monitors; other than cathode-ray tube; capable of directly connecting to and designed for use with an automatic data processing machine of heading 84.71
+Set aside
+QUESTION TO THE MERCHANT · ANSWER CONFIRMED
+What does the device do (e.g. generate or convert electric power, produce heat, or transmit or receive communications)?
+Function: connects peripherals, video and network to a laptop over one USB-C cable
+Confirmed answer
+WHAT CHANGED
+Merchant answer: Function
+Status
+Information needed → Several codes remain plausible
+Retained code
+8517.62 → 8471.60
+Confidence
+0.16 → 0.07
+NEW ASSESSMENT · 15.5 S
+0.07
+8471.60
+Units of automatic data processing machines; input or output units, whether or not containing storage units in the same housing
+Still plausible
+0.06
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Set aside
+0.03
+8517.69
+Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6
+Set aside
+0.01
+8471.50
+Units of automatic data processing machines; processing units other than those of item no. 8471.41 or 8471.49, whether or not containing in the same housing one or two of the following types of unit: storage units, input units or output units
+Set aside
+0
+8471.30
+Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display
+Set aside
+WHAT CHANGED
+Fact added without a supporting document: Use
+Status
+Several codes remain plausible (unchanged)
+Retained code
+8471.60 → 8517.62
+Confidence
+0.07 → 0.21
+NEW ASSESSMENT · 8.9 S
+0.21
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Still plausible
+0.08
+8517.69
+Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6
+Set aside
+0.01
+8471.30
+Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display
+Set aside
+0.01
+8528.52
+Monitors; other than cathode-ray tube; capable of directly connecting to and designed for use with an automatic data processing machine of heading 84.71
+Set aside
+0
+8536.70
+Connectors for optical fibres, optical fibre bundles or cables
+Set aside
+PROPOSAL
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Several codes remain plausible
+Level
+International level, 6 digits
+No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries.
+Rationale
+The dock receives, converts and regenerates data, video and network signals between a laptop and peripherals, which matches the 8517.62 text. It is the closest available candidate, since the precedents point to 8471 which is not offered.
+Sources
+no excerpt returned For, against, unknown
+Similar official rulings
+N307285 → 8471801000 (2019-11-22, text resemblance 0.526)Check whether it applies
+UK600011214 → 8471800000 (2024-09-02, text resemblance 0.5)Check whether it applies
+UK600012139 → 8471800000 (2025-01-27, text resemblance 0.497)Check whether it applies
+Close by text only. A resemblance is not proof: check that they concern a comparable product.
+No supporting document
+Use: entered by hand, no supporting document.
+Remaining work
+Establish the fact that blocks the encoded rule: Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+Back with a document: Use.
+Establish the national code for France: the proposal stops at six digits.
+Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.
+Have the encoded rule reviewed by a customs declarant: it is drafted by AI.
+Have the proposal validated by an authorised person.
+Interpretation
+Run this file through the interpretation tree
+File
+Open the readable file to print or save as PDF
+Trace
+View the raw response
+
+Nothing to validate at this stage.
+
+STRESS-TEST THIS ANSWER
+Three tests replayed live. The verdict compares the retained code and the status, before and after.
+Rephrase the commercial text
+
+Same facts, different words. The retained code must not change.
+
+Replay
+Remove a piece of information
+
+Without it, the answer must ask for the information again, or stay unchanged if it carried no weight.
+
+Function
+Use
+Replay
+Introduce a contradiction
+
+A sentence added to the description, contrary to the file. The document reading must flag it.
+
+Replay
+OBLIGATIONS AND DUTIES · CHINA → FRANCE
+Calculated on the six-digit code 8517.62, which remains an unvalidated proposal. A national code would change the applicable rate.
+Query
+SAME DOCUMENTS, OTHER DESTINATIONS
+One call per destination. Each row states the level actually obtained: national nomenclature, six digits only, or nothing.
+Germany
+Spain
+Italy
+Netherlands
+United Kingdom
+United States
+Canada
+Japan
+Australia
+Switzerland
+South Korea
+China
+Vietnam
+India
+Mexico
+Assess these destinations
+
+These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.
+
+×
+Use
+
+office use
+
+PROVENANCE
+
+Entered by hand on this screen, no supporting document
+
+No document supports this fact. It stays flagged as such in the file.
+
+FIELD SENT TO THE API
+facts.use = "office use"
+### DRAWER (open)
+Use
+
+office use
+
+PROVENANCE
+
+Entered by hand on this screen, no supporting document
+
+No document supports this fact. It stays flagged as such in the file.
+
+FIELD SENT TO THE API
+facts.use = "office use"
+### ATTRS
+L cm
+W cm
+H cm
+kg
+e.g. USB-C docking station for laptop
+Connectors, functions, power supply, material…
+Remove and reassess
+Remove and reassess
+Add a fact
+e.g. Laptop dock with USB-C connection
+e.g. Power only, no data ports.
+Goods value in USD (optional)
+Close
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: Material
+option: Process
+option: Power (W)
+option: Voltage (V)
+option: Weight (g)
+option: Function
+option: Use

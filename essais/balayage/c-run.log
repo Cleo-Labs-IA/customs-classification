@@ -1,0 +1,10 @@
+dump c-01-landing.txt body 1349 drawer 0
+dump c-02-question-form.txt body 7844 drawer 0
+answers form present: 1 rows 1
+dump c-03-drawer-candidate-0.txt body 9261 drawer 1416
+dump c-04-drawer-candidate-1.txt body 9313 drawer 1468
+answered function
+dump c-05-after-answer.txt body 10953 drawer 0
+dump c-06-after-added-fact.txt body 11928 drawer 0
+dump c-07-drawer-fact-by-hand.txt body 10662 drawer 202
+ERRORS 0 []

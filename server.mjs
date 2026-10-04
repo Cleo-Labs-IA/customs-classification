@@ -15,4 +15,4 @@ http.createServer(async (req, res) => {
   if (req.method !== 'GET' || !file.startsWith(PUBLIC + path.sep)) return send(res, 404, { error: 'not found' });
   try { return send(res, 200, await readFile(file), TYPES[path.extname(file)] || 'application/octet-stream'); }
   catch { return send(res, 404, { error: 'not found' }); }
-}).listen(PORT, '127.0.0.1', () => console.log(`Classification douanière : http://localhost:${PORT}  (clé ${KEY ? 'présente' : 'ABSENTE'}, API ${API})`));
+}).listen(PORT, '127.0.0.1', () => console.log(`Customs classification: http://localhost:${PORT}  (key ${KEY ? 'present' : 'MISSING'}, API ${API})`));

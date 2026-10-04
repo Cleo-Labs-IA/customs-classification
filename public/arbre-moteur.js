@@ -13,32 +13,32 @@ export const cle = (v) => (v === true ? 'oui' : v === false ? 'non' : v == null 
 // Défauts de structure : renvoie la liste des problèmes, vide si l'arbre est jouable.
 export function verifier(arbre) {
   const pb = [], N = arbre.noeuds || {}, C = Object.fromEntries((arbre.criteres || []).map((c) => [c.id, c]));
-  if (!N[arbre.racine]) pb.push('racine absente : ' + arbre.racine);
+  if (!N[arbre.racine]) pb.push('root missing: ' + arbre.racine);
   for (const [id, n] of Object.entries(N)) {
     if (n.type === 'question') {
       const c = C[n.critere];
-      if (!c) { pb.push(`${id} : critère inconnu « ${n.critere} »`); continue; }
+      if (!c) { pb.push(`${id}: unknown criterion "${n.critere}"`); continue; }
       const attendues = c.type === 'bool' ? ['oui', 'non'] : (c.valeurs || []).map((x) => x.v);
-      for (const v of attendues) if (!(v in (n.branches || {}))) pb.push(`${id} : aucune branche pour « ${v} »`);
+      for (const v of attendues) if (!(v in (n.branches || {}))) pb.push(`${id}: no branch for "${v}"`);
       for (const [v, cible] of Object.entries(n.branches || {})) {
-        if (!attendues.includes(v)) pb.push(`${id} : branche « ${v} » hors des valeurs du critère`);
-        if (!N[cible]) pb.push(`${id} : la branche « ${v} » mène à un nœud absent (${cible})`);
+        if (!attendues.includes(v)) pb.push(`${id}: branch "${v}" is not one of the criterion's values`);
+        if (!N[cible]) pb.push(`${id}: branch "${v}" leads to a missing node (${cible})`);
       }
     } else if (n.type === 'code') {
-      if (!/^\d{6}$/.test(String(n.code || ''))) pb.push(`${id} : code à 6 chiffres attendu`);
-    } else if (n.type !== 'hors_perimetre') pb.push(`${id} : type inconnu`);
+      if (!/^\d{6}$/.test(String(n.code || ''))) pb.push(`${id}: 6-digit code expected`);
+    } else if (n.type !== 'hors_perimetre') pb.push(`${id}: unknown type`);
   }
   // un cycle rendrait l'évaluation infinie
   const vu = new Set(), pile = new Set();
   const dfs = (id) => {
-    if (pile.has(id)) { pb.push('cycle passant par ' + id); return; }
+    if (pile.has(id)) { pb.push('cycle through ' + id); return; }
     if (vu.has(id) || !N[id]) return;
     vu.add(id); pile.add(id);
     if (N[id].type === 'question') for (const c of Object.values(N[id].branches || {})) dfs(c);
     pile.delete(id);
   };
   dfs(arbre.racine);
-  for (const id of Object.keys(N)) if (!vu.has(id)) pb.push(`${id} : nœud jamais atteint`);
+  for (const id of Object.keys(N)) if (!vu.has(id)) pb.push(`${id}: node never reached`);
   return pb;
 }
 
@@ -48,7 +48,7 @@ export function issues(arbre, id, vu = new Set()) {
   if (!n || vu.has(id)) return [];
   vu.add(id);
   if (n.type === 'code') return [n.code];
-  if (n.type === 'hors_perimetre') return ['hors périmètre'];
+  if (n.type === 'hors_perimetre') return ['out of scope'];
   return [...new Set(Object.values(n.branches).flatMap((c) => issues(arbre, c, vu)))];
 }
 
@@ -58,7 +58,7 @@ export function evaluer(arbre, valeurs) {
   let id = arbre.racine;
   for (let garde = 0; garde < 200; garde++) {
     const n = arbre.noeuds[id];
-    if (!n) return { statut: 'erreur', message: 'nœud absent : ' + id, chemin };
+    if (!n) return { statut: 'erreur', message: 'missing node: ' + id, chemin };
     if (n.type === 'code') return { statut: 'code', code: n.code, noeud: id, chemin };
     if (n.type === 'hors_perimetre') return { statut: 'hors_perimetre', noeud: id, chemin };
     const v = cle(valeurs[n.critere]);
@@ -69,7 +69,7 @@ export function evaluer(arbre, valeurs) {
     chemin.push({ noeud: id, critere: n.critere, valeur: v });
     id = n.branches[v];
   }
-  return { statut: 'erreur', message: 'parcours trop long', chemin };
+  return { statut: 'erreur', message: 'path too long', chemin };
 }
 
 // Rejoue l'arbre sur les décisions officielles : combien il en reproduit au niveau 6 chiffres.
@@ -87,19 +87,19 @@ export function rejouer(arbre, decisions) {
 // Le « code derrière » : la même règle écrite comme une fonction lisible, régénérée à chaque modification.
 export function versCode(arbre) {
   const C = Object.fromEntries(arbre.criteres.map((c) => [c.id, c]));
-  const out = ['// Généré depuis l\'arbre. Ne pas modifier ici : modifier l\'arbre.', 'function classer(produit) {'];
+  const out = ['// Generated from the tree. Do not edit here: edit the tree.', 'function classify(product) {'];
   const rendu = (id, ind, vu) => {
     const n = arbre.noeuds[id], p = '  '.repeat(ind);
-    if (!n) return out.push(`${p}throw new Error('nœud absent : ${id}');`);
+    if (!n) return out.push(`${p}throw new Error('missing node: ${id}');`);
     if (n.type === 'code') return out.push(`${p}return '${n.code}'; // ${n.libelle || ''}`.trimEnd());
-    if (n.type === 'hors_perimetre') return out.push(`${p}return HORS_PERIMETRE; // ${n.motif || ''}`.trimEnd());
-    if (vu.includes(id)) return out.push(`${p}// cycle vers ${id}`);
+    if (n.type === 'hors_perimetre') return out.push(`${p}return OUT_OF_SCOPE; // ${n.motif || ''}`.trimEnd());
+    if (vu.includes(id)) return out.push(`${p}// cycle back to ${id}`);
     const c = C[n.critere] || { libelle: n.critere, type: 'bool' };
     out.push(`${p}// ${c.libelle}${(n.base || []).length ? '  [' + n.base.join(', ') + ']' : ''}`);
-    out.push(`${p}if (produit.${n.critere} == null) return demander('${n.critere}');`);
+    out.push(`${p}if (product.${n.critere} == null) return ask('${n.critere}');`);
     const br = Object.entries(n.branches);
     br.forEach(([v, cible], i) => {
-      const test = c.type === 'bool' ? (v === 'oui' ? `produit.${n.critere} === true` : `produit.${n.critere} === false`) : `produit.${n.critere} === '${v}'`;
+      const test = c.type === 'bool' ? (v === 'oui' ? `product.${n.critere} === true` : `product.${n.critere} === false`) : `product.${n.critere} === '${v}'`;
       out.push(`${p}${i ? '} else ' : ''}if (${test}) {`);
       rendu(cible, ind + 1, [...vu, id]);
     });

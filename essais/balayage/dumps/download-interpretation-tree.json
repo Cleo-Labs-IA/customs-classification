@@ -1,0 +1,563 @@
+{
+ "titre": "Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones",
+ "perimetre": "Power supplies and chargers for electronic devices (mains adapters, USB chargers, wireless chargers, power banks), docking stations, port replicators, USB hubs, connection adapters and cables fitted with connectors for computers and phones, for a voltage not exceeding 1 000 V.",
+ "niveau": "hs6",
+ "nomenclature": "Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926)",
+ "criteres": [
+  {
+   "id": "fonction_principale",
+   "libelle": "Principal function",
+   "question": "Which function do the datasheet and the packaging state first for this product?",
+   "type": "enum",
+   "valeurs": [
+    {
+     "v": "alimenter",
+     "libelle": "Supply energy to another device: power it, charge it or store electricity for it"
+    },
+    {
+     "v": "transmettre_signaux",
+     "libelle": "Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)"
+    },
+    {
+     "v": "porter_completer",
+     "libelle": "Hold a device or serve as a surface for it (stand, wall frame, mouse pad)"
+    },
+    {
+     "v": "autre",
+     "libelle": "Something else (heating, lighting, playing sound)"
+    },
+    {
+     "v": "aucune_dominante",
+     "libelle": "Several functions stated, with none placed ahead of the others in the datasheet"
+    }
+   ],
+   "aide": "Record the trade name and the first line of the datasheet. The answer is a fact of presentation; the legal conclusion (principal function, essential character) belongs to the node and to the texts it cites."
+  },
+  {
+   "id": "genere_electricite",
+   "libelle": "Generates its own electricity",
+   "question": "Does the product generate its own electricity (solar panel, dynamo, hand crank)?",
+   "type": "bool",
+   "aide": "Yes for a solar or hand-crank charger; no for a product that is recharged or powered from a mains socket, a USB port or a cigarette lighter socket."
+  },
+  {
+   "id": "batterie_integree",
+   "libelle": "Battery that powers other devices",
+   "question": "Does the product contain a battery or cells whose energy is delivered to the connected device, and of what type?",
+   "type": "enum",
+   "valeurs": [
+    {
+     "v": "aucune",
+     "libelle": "No battery or cells"
+    },
+    {
+     "v": "lithium_ion",
+     "libelle": "Rechargeable lithium-ion or lithium-polymer battery"
+    },
+    {
+     "v": "rechargeable_nommee",
+     "libelle": "Rechargeable lead-acid, nickel-cadmium or nickel-metal hydride battery"
+    },
+    {
+     "v": "autre_rechargeable",
+     "libelle": "Rechargeable battery of a technology that the nomenclature does not name (not lithium-ion, lead-acid, nickel-cadmium or nickel-metal hydride)"
+    },
+    {
+     "v": "non_rechargeable",
+     "libelle": "Non-rechargeable cells (alkaline)"
+    }
+   ],
+   "aide": "The technology and the capacity (mAh, Wh) appear on the battery label or on its safety data sheet."
+  },
+  {
+   "id": "convertit_courant",
+   "libelle": "Converts the current",
+   "question": "Does the product change the nature of the current (alternating to direct, direct to direct, inductive charging with rectification)?",
+   "type": "enum",
+   "aide": "Converter if the datasheet states a direct current output (for example input 100-240 V alternating current, output 5 V direct current; input 12 V direct current, output 5 V direct current). Transformer if the input and the output are both alternating current. No for a charging cable or a travel plug adapter without electronics.",
+   "valeurs": [
+    {
+     "v": "non",
+     "libelle": "No: the product connects contacts or conducts the current without modifying it"
+    },
+    {
+     "v": "convertisseur",
+     "libelle": "Yes: alternating to direct current, direct to direct current (12 V to 5 V) or inductive charging with rectification"
+    },
+    {
+     "v": "transformateur",
+     "libelle": "It only steps an alternating voltage down or up, without rectifying it (transformer)"
+    }
+   ]
+  },
+  {
+   "id": "prises_secteur_sortie",
+   "libelle": "Mains socket outlets",
+   "question": "Does the product also provide mains socket outlets (power strip, extension lead) in addition to its charging ports?",
+   "type": "bool",
+   "aide": "Yes for an extension lead or a power strip with USB ports; no for a charger that has only USB ports, a fixed cable or a charging surface."
+  },
+  {
+   "id": "electronique_active",
+   "libelle": "Active electronics on the signal",
+   "question": "Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?",
+   "type": "bool",
+   "aide": "No for a cable or an adapter that only connects the contacts; yes for a hub, a docking station, a video format converter, a cable with transceivers."
+  },
+  {
+   "id": "construction_passive",
+   "libelle": "Construction of the product without electronics",
+   "question": "How is the product without electronics constructed?",
+   "type": "enum",
+   "valeurs": [
+    {
+     "v": "cable_connecteurs",
+     "libelle": "Flexible cable of insulated conductors, fitted with connectors (USB, Lightning, HDMI, jack, power)"
+    },
+    {
+     "v": "cable_coaxial",
+     "libelle": "Coaxial cable fitted with connectors (central core surrounded by a second conductor)"
+    },
+    {
+     "v": "faisceau_vehicule",
+     "libelle": "Cable or wiring set designed to be fitted in a vehicle, an aircraft or a ship"
+    },
+    {
+     "v": "fibre_optique",
+     "libelle": "Optical fibre cable in which each fibre is individually sheathed, without a transceiver"
+    },
+    {
+     "v": "bloc_fiches_prises",
+     "libelle": "Rigid block of plugs and sockets with no length of cable, no switch and no fuse"
+    },
+    {
+     "v": "commutateur_mecanique",
+     "libelle": "Box with mechanical buttons that selects an input"
+    }
+   ],
+   "aide": "The cross-section of the cable and the type of connectors (automotive clips, for example) can be read from the drawing or the datasheet."
+  },
+  {
+   "id": "liaison_reseau",
+   "libelle": "Network or communication link",
+   "question": "Which network or communication interfaces does the product carry (Ethernet, Wi-Fi, Bluetooth, mobile network, serial link, transceivers on fibre or copper)?",
+   "type": "enum",
+   "valeurs": [
+    {
+     "v": "aucune",
+     "libelle": "No network or radio interface"
+    },
+    {
+     "v": "port_parmi_autres",
+     "libelle": "One or more network interfaces alongside ports for displays or peripherals (record the number of each type), or an interface reserved for updates"
+    },
+    {
+     "v": "seule_fonction",
+     "libelle": "Apart from the connection to the host device, only network or communication interfaces (modem, Ethernet, Wi-Fi or Bluetooth adapter, USB to serial converter, cable with transceivers)"
+    }
+   ],
+   "aide": "Record the ports in the datasheet, type by type, without counting the connection to the host device."
+  },
+  {
+   "id": "appareil_hote",
+   "libelle": "Device it connects to",
+   "question": "According to the datasheet, for which devices is the product stated (upstream port, drivers, compatibility)?",
+   "type": "enum",
+   "valeurs": [
+    {
+     "v": "ordinateur",
+     "libelle": "Computers or tablets, with no other device stated (Windows, macOS, Linux compatibility, USB or Thunderbolt host port)"
+    },
+    {
+     "v": "mixte",
+     "libelle": "Computers and also other devices (phone, television, console)"
+    },
+    {
+     "v": "audio_video",
+     "libelle": "Audio or video devices in general (television, set-top box, player, camera)"
+    },
+    {
+     "v": "autre",
+     "libelle": "Another device only (phone, vehicle, games console, medical device)"
+    }
+   ],
+   "aide": "The list of compatible systems and the type of upstream port appear in the product datasheet. A stated compatibility does not by itself establish the sole or principal use required by note 6(C)(1) to Chapter 84."
+  }
+ ],
+ "racine": "q1",
+ "noeuds": {
+  "q1": {
+   "type": "question",
+   "critere": "fonction_principale",
+   "pourquoi": "Where a product combines several machines or several functions, note 3 to Section XVI classifies it, unless the context otherwise requires, according to the principal function. For a composite article that is not a machine, rule 3(b) takes the component which gives the essential character, if rule 3(a) is not sufficient. Limit: rule 1 puts the terms of the headings before this test, and a single-function product (cable, block of plugs, battery alone) has no principal function to establish; the tree nevertheless asks this question of every product and takes as an indication the function that the datasheet states first.",
+   "base": [
+    "s16-n3",
+    "s16-n5",
+    "rgi-1",
+    "rgi-3",
+    "rgi-3a",
+    "rgi-3b"
+   ],
+   "branches": {
+    "alimenter": "c850440",
+    "transmettre_signaux": "q6",
+    "porter_completer": "q10",
+    "autre": "h_autre",
+    "aucune_dominante": "h_aucune"
+   }
+  },
+  "q2": {
+   "type": "question",
+   "critere": "genere_electricite",
+   "pourquoi": "A charger that generates its own current combines a generator and other functions; note 3 to Section XVI classifies it according to the principal function, which this tree does not decide.",
+   "base": [
+    "s16-n3",
+    "h8504",
+    "h8507",
+    "c85-n2"
+   ],
+   "branches": {
+    "oui": "h_generateur",
+    "non": "q3"
+   }
+  },
+  "q3": {
+   "type": "question",
+   "critere": "batterie_integree",
+   "pourquoi": "Heading 8507 covers electric accumulators, including those presented with ancillary components which contribute to storing and supplying energy or protect them from damage (note 3 to Chapter 85); rule 6 then decides between subheadings at the same level according to the technology. Limit: the note cites neither a converter nor an inverter among these components, and the tree does not compare headings 8504 and 8507 for a power station with mains outputs.",
+   "base": [
+    "h8507",
+    "c85-n3",
+    "rgi-6",
+    "sh850760",
+    "sh850780",
+    "s16-n3"
+   ],
+   "branches": {
+    "aucune": "q4",
+    "lithium_ion": "c850760",
+    "rechargeable_nommee": "h_piles",
+    "autre_rechargeable": "c850780",
+    "non_rechargeable": "h_piles"
+   }
+  },
+  "q4": {
+   "type": "question",
+   "critere": "convertit_courant",
+   "pourquoi": "Heading 8504 covers electrical transformers, static converters and inductors; subheading 8504 40 takes only static converters (rule 6). A product that only connects contacts is a cable of heading 8544 or connection apparatus of heading 8536.",
+   "base": [
+    "h8504",
+    "sh850440",
+    "rgi-6",
+    "h8536",
+    "h8544"
+   ],
+   "branches": {
+    "non": "q7",
+    "convertisseur": "q5",
+    "transformateur": "h_transformateur"
+   }
+  },
+  "q5": {
+   "type": "question",
+   "critere": "prises_secteur_sortie",
+   "pourquoi": "A block that combines several sockets of heading 8536 to distribute the current may fall under another heading; with a converter, it is a composite machine within the meaning of note 3 to Section XVI, which this tree does not decide.",
+   "base": [
+    "h8536",
+    "s16-n3",
+    "h8504"
+   ],
+   "branches": {
+    "oui": "h_multiprise",
+    "non": "c850440"
+   }
+  },
+  "q6": {
+   "type": "question",
+   "critere": "electronique_active",
+   "pourquoi": "Heading 8544 covers insulated conductors whether or not fitted with connectors, and heading 8536 the apparatus for making connections to or switching electrical circuits. A product that processes the signal is described by neither of these two heading texts and is classified according to its function.",
+   "base": [
+    "h8544",
+    "h8536"
+   ],
+   "branches": {
+    "oui": "q8",
+    "non": "q7"
+   }
+  },
+  "q7": {
+   "type": "question",
+   "critere": "construction_passive",
+   "pourquoi": "Rule 1 classifies according to the terms of the headings: heading 8544 covers insulated wire and cable whether or not fitted with connectors, heading 8536 plugs, sockets and switches, and rule 6 then decides between subheadings at the same level.",
+   "base": [
+    "rgi-1",
+    "h8544",
+    "h8536",
+    "sh85444x",
+    "sh85366x",
+    "rgi-6"
+   ],
+   "branches": {
+    "cable_connecteurs": "c854442",
+    "cable_coaxial": "h_cable",
+    "faisceau_vehicule": "h_cable",
+    "fibre_optique": "h_cable",
+    "bloc_fiches_prises": "c853669",
+    "commutateur_mecanique": "h_commutateur"
+   }
+  },
+  "q8": {
+   "type": "question",
+   "critere": "liaison_reseau",
+   "pourquoi": "Note 6(D)(2) to Chapter 84 excludes from heading 8471 apparatus for the transmission or reception of data when presented separately, even if it meets the conditions of note 6(C); where this function sits alongside other functions, note 3 to Section XVI takes the principal function. Reading adopted by this tree, drawn from rulings and not from the text of the note: a hub, a docking station or a display adapter without a network interface is not treated as transmission apparatus (H348342, N292574). Ruling N289786 reads the note the other way.",
+   "base": [
+    "c84-n6d",
+    "c84-n6d2",
+    "s16-n3",
+    "h8517"
+   ],
+   "branches": {
+    "aucune": "q9",
+    "port_parmi_autres": "q9",
+    "seule_fonction": "c851762"
+   }
+  },
+  "q9": {
+   "type": "question",
+   "critere": "appareil_hote",
+   "pourquoi": "Note 6(C) to Chapter 84 regards as a unit of heading 8471 the article that meets three conditions at once: being of a kind solely or principally used in an automatic data-processing system, being connectable to the central processing unit, and being able to accept or deliver data in a form which can be used by the system. Apparatus performing a specific function other than data processing follows note 6(E). The tree checks only the first condition, through the devices that the datasheet states.",
+   "base": [
+    "c84-n6c",
+    "c84-n6e",
+    "h8471",
+    "h8543"
+   ],
+   "branches": {
+    "ordinateur": "c847180",
+    "mixte": "h_hote",
+    "audio_video": "c854370",
+    "autre": "h_hote"
+   }
+  },
+  "q10": {
+   "type": "question",
+   "critere": "appareil_hote",
+   "pourquoi": "Heading 8473 takes parts and accessories suitable for use solely or principally with machines of headings 8470 to 8472, other than covers and carrying cases, and subheading 8473 30 those of the machines of heading 8471. Note 2 to Section XVI applies only subject to note 1 and deals only with parts, not with accessories. Limit: the tree does not check the exclusions of note 1 (a metal stand may be a part of general use, note 1(g)).",
+   "base": [
+    "h8473",
+    "sh847330",
+    "s16-n1",
+    "s16-n1g",
+    "s16-n2",
+    "s16-n2b"
+   ],
+   "branches": {
+    "ordinateur": "c847330",
+    "mixte": "h_hote",
+    "audio_video": "h_hote",
+    "autre": "h_hote"
+   }
+  },
+  "c850440": {
+   "type": "code",
+   "code": "850440",
+   "libelle": "Static converters",
+   "motif": "An appliance that converts the current it receives in order to power or charge (mains adapter, USB charger, car charger, inductive charger) is a static converter of subheading 8504 40, whatever the device it is intended for: for the computer, note 6(E) to Chapter 84 refers to the heading appropriate to the specific function.",
+   "base": [
+    "h8504",
+    "sh850440",
+    "c84-n6e",
+    "rgi-6"
+   ]
+  },
+  "c850760": {
+   "type": "code",
+   "code": "850760",
+   "libelle": "Lithium-ion accumulators",
+   "motif": "A power bank remains an electric accumulator of heading 8507 when it is presented with ancillary components which contribute to storing and supplying energy or protect it from damage (connectors, temperature control, circuit protection); its lithium-ion cells place it in subheading 8507 60.",
+   "base": [
+    "h8507",
+    "c85-n3",
+    "sh850760",
+    "rgi-6"
+   ]
+  },
+  "c850780": {
+   "type": "code",
+   "code": "850780",
+   "libelle": "Other accumulators",
+   "motif": "A rechargeable power bank whose technology is not named by any subheading of heading 8507 falls under the residual subheading for other accumulators. Lead-acid, nickel-cadmium and nickel-metal hydride have their own subheadings (8507 10, 8507 20, 8507 30 and 8507 50, read in the Combined Nomenclature 2026 but absent from the text repository) and fall outside this tree.",
+   "base": [
+    "h8507",
+    "c85-n3",
+    "sh850780",
+    "rgi-6"
+   ]
+  },
+  "c854442": {
+   "type": "code",
+   "code": "854442",
+   "libelle": "Other electric conductors, for a voltage not exceeding 1 000 V, fitted with connectors",
+   "motif": "An insulated cable fitted with connectors that only conducts the current or the signal meets the terms of heading 8544 and then of subheading 8544 42, even if it serves both data and charging.",
+   "base": [
+    "h8544",
+    "sh85444x",
+    "sh854442",
+    "rgi-6"
+   ]
+  },
+  "c853669": {
+   "type": "code",
+   "code": "853669",
+   "libelle": "Plugs and sockets, other, for a voltage not exceeding 1 000 V",
+   "motif": "An adapter without cable or electronics, whose only effect is to make a connection between two plug or socket formats, is connection apparatus of heading 8536, in the subheading for plugs and sockets.",
+   "base": [
+    "h8536",
+    "sh85366x",
+    "sh853669",
+    "rgi-6"
+   ]
+  },
+  "c851762": {
+   "type": "code",
+   "code": "851762",
+   "libelle": "Machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus",
+   "motif": "Apparatus that receives, converts and transmits data over a network or a communication link, or that regenerates them, is excluded from heading 8471 by note 6(D)(2) to Chapter 84 and meets the terms of subheading 8517 62; apparatus that only receives or only transmits falls under subheading 8517 69, outside this tree. The terms of heading 8517 also exclude the apparatus of headings 8443, 8525, 8527 and 8528.",
+   "base": [
+    "h8517",
+    "c84-n6d2",
+    "sh85176x",
+    "sh851762",
+    "sh851769",
+    "rgi-6"
+   ]
+  },
+  "c847180": {
+   "type": "code",
+   "code": "847180",
+   "libelle": "Other units of automatic data-processing machines",
+   "motif": "A hub, a docking station, a port replicator or an active display adapter that connects the computer to its peripherals is another unit of subheading 8471 80, provided that it meets the three conditions of note 6(C) and does not fall under the exclusion of note 6(D), which prevails. It neither inputs nor outputs the data itself (8471 60), does not store them (8471 70) and does not process them (8471 50). Reading adopted on the basis of rulings (H348342, N292574) and not on the text alone: ruling N289786, on the contrary, classifies display adapters under 8517 62.",
+   "base": [
+    "h8471",
+    "c84-n6c",
+    "c84-n6c-al2",
+    "c84-n6d",
+    "sh847150",
+    "sh847160",
+    "sh847170",
+    "sh847180",
+    "rgi-6"
+   ]
+  },
+  "c854370": {
+   "type": "code",
+   "code": "854370",
+   "libelle": "Other electrical machines and apparatus, having individual functions, not specified or included elsewhere in Chapter 85",
+   "motif": "An active appliance that distributes, selects or converts a signal between audio or video equipment has an individual function. Regulation (EU) No 457/2014 sets aside heading 8536 because the appliance distributes, amplifies or processes the signal instead of only connecting or switching a circuit. The tree sets aside subheading 8517 62 for lack of a network or communication interface (previous question) and heading 8471 because the datasheet does not state the appliance for a computer (note 6(C)). That leaves the residual heading 8543.",
+   "base": [
+    "h8543",
+    "sh854370",
+    "h8536",
+    "h8517",
+    "sh851762",
+    "c84-n6c",
+    "rgi-6"
+   ]
+  },
+  "c847330": {
+   "type": "code",
+   "code": "847330",
+   "libelle": "Parts and accessories of the machines of heading 8471",
+   "motif": "An article that holds a computer or a tablet, or serves as a surface for it, and that the datasheet states for no other device, is classified here as an accessory of the machines of heading 8471, if it is neither a cover nor a carrying case and if it does not fall under an exclusion of note 1 to Section XVI, which this tree does not check.",
+   "base": [
+    "h8473",
+    "sh847330",
+    "s16-n1",
+    "s16-n2b",
+    "rgi-6"
+   ]
+  },
+  "h_autre": {
+   "type": "hors_perimetre",
+   "motif": "The principal function is neither power supply nor connection (hand warmer that also recharges a phone, luminaire, loudspeaker): the product is classified according to that function, under a heading that this tree does not cover."
+  },
+  "h_aucune": {
+   "type": "hors_perimetre",
+   "motif": "No function prevails: for a machine of Chapter 84, note 8 refers to heading 8479; otherwise, after rules 3(a) and 3(b), rule 3(c) takes the heading which occurs last among those which equally merit consideration. This tree does not make that determination.",
+   "base": [
+    "c84-n8-al2",
+    "rgi-3a",
+    "rgi-3b",
+    "rgi-3c"
+   ]
+  },
+  "h_generateur": {
+   "type": "hors_perimetre",
+   "motif": "Charger that generates its own electricity (solar, hand crank): a composite machine that this tree does not decide. Note 2 to Chapter 85 excludes headings 8501 to 8504 for goods described in heading 8541; the texts of headings 8501 and 8541 are not in the repository. US ruling N319727 retains subheading 8504 40 for a solar charging station with a battery.",
+   "base": [
+    "s16-n3",
+    "c85-n2"
+   ]
+  },
+  "h_piles": {
+   "type": "hors_perimetre",
+   "motif": "Pack of non-rechargeable cells, or lead-acid, nickel-cadmium or nickel-metal hydride accumulator: the product falls under neither subheading 8507 60 nor subheading 8507 80. Primary cells are not accumulators of heading 8507 (US ruling N342905 retains 8506 10) and the named accumulators have their own subheadings. None of these texts is in the repository: this tree does not cover them.",
+   "base": [
+    "h8507",
+    "sh850780",
+    "rgi-6"
+   ]
+  },
+  "h_multiprise": {
+   "type": "hors_perimetre",
+   "motif": "Power strip or extension lead with mains sockets and charging ports: a composite machine within the meaning of note 3 to Section XVI. US ruling N356452 retains 8537 10 for an extension lead with two sockets and three USB ports; the text of heading 8537 is not in the repository and this tree does not cover it.",
+   "base": [
+    "h8536",
+    "s16-n3"
+   ]
+  },
+  "h_cable": {
+   "type": "hors_perimetre",
+   "motif": "Coaxial cable, wiring set for vehicles or optical fibre cable made up of individually sheathed fibres: the product stays in heading 8544 but outside subheadings 8544 42 and 8544 49. Subheadings 8544 20, 8544 30 and 8544 70 are not in the text repository and this tree does not cover them.",
+   "base": [
+    "h8544",
+    "sh85444x",
+    "rgi-6"
+   ]
+  },
+  "h_commutateur": {
+   "type": "hors_perimetre",
+   "motif": "Mechanical selector without electronics: a switch of subheading 8536 50, not covered by this tree."
+  },
+  "h_hote": {
+   "type": "hors_perimetre",
+   "motif": "Product stated for a phone, a vehicle, a console, a medical device, audio or video devices, or for several types of device at once, and not for the computer alone. For parts, note 2(b) to Section XVI refers to heading 8517 those of the goods of headings 8517 and 8525 to 8528 and to heading 8529 those of heading 8524; articles of Chapter 95 fall outside the section (note 1(p)). The competing headings (8517, 8522, 8529, 8537, 8543, 9504) depend on the host device and this tree does not decide between them.",
+   "base": [
+    "s16-n2b",
+    "s16-n1p",
+    "h8517",
+    "h8543"
+   ]
+  },
+  "h_transformateur": {
+   "type": "hors_perimetre",
+   "motif": "Transformer that steps an alternating voltage down or up without rectifying it: it falls under heading 8504 but not under the static converters of subheading 8504 40. Its subheadings are not in the text repository and this tree does not cover them.",
+   "base": [
+    "h8504",
+    "sh850440",
+    "rgi-6"
+   ]
+  }
+ },
+ "journal": [
+  {
+   "qui": "Sweep probe",
+   "quand": "2026-10-04 14:31",
+   "noeud": "q1 · Principal function",
+   "lecture": "Test reading: this branch leads elsewhere under my interpretation.",
+   "changement": "branches changed",
+   "avant": "38/87",
+   "apres": "49/87"
+  }
+ ]
+}

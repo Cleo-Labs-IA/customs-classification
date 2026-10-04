@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Classification douanière · Cleo</title>
+<title>Customs classification · Cleo</title>
 <style>
 :root{
   --ink:#0008CF; --ink-08:rgba(0,8,207,.08); --ink-20:rgba(0,8,207,.2);
@@ -101,7 +101,7 @@ textarea{resize:vertical;min-height:74px}
 .conflict .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 @media(max-width:600px){.conflict .pair{grid-template-columns:1fr}}
 .conflict .side{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:9px 10px;font-size:13px;display:flex;flex-direction:column;gap:6px}
-.conflict .side q{quotes:"« " " »";font-style:normal}
+.conflict .side q{quotes:"“" "”";font-style:normal}
 .conflict .side small{color:var(--g5)}
 .conflict .one{margin-top:14px}
 .conflict .one:first-of-type{margin-top:4px}
@@ -143,7 +143,7 @@ textarea{resize:vertical;min-height:74px}
 .step .l:first-child{border-top:0}
 .step .l>span:first-child{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--g5);padding-top:2px}
 .step .l.c{background:#F2F3FF}
-.step q{quotes:"« " " »";color:var(--g7)}
+.step q{quotes:"“" "”";color:var(--g7)}
 .block{border:1px solid var(--warn);background:var(--warn-bg);border-radius:9px;padding:11px 12px;margin-top:10px}
 .block .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}
 .block .opts button{border:1px solid var(--warn);background:#fff;border-radius:8px;padding:7px 11px;cursor:pointer;text-align:left;font-size:13px}
@@ -184,61 +184,61 @@ code{font-family:var(--mono);font-size:12px;color:var(--g5)}
 </head>
 <body>
 <header>
-  <h1>Classification douanière</h1>
-  <p style="flex:1;min-width:240px">Une fiche produit et une destination. En retour : ce qui est établi, ce qui se contredit, ce qui manque, puis une proposition à vérifier.</p>
-  <a href="/arbre" style="font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--ink-20);border-radius:8px;padding:6px 11px">Arbre d'interprétation</a>
+  <h1>Customs classification</h1>
+  <p style="flex:1;min-width:240px">One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.</p>
+  <a href="/arbre" style="font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink);border:1px solid var(--ink-20);border-radius:8px;padding:6px 11px">Interpretation tree</a>
 </header>
 
 <main>
   <form class="fiche" id="fiche" autocomplete="off">
     <section>
-      <h2>Fiche produit</h2>
+      <h2>Product record</h2>
       <div class="samples" id="samples"></div>
       <div class="row">
         <div><label for="sku">SKU</label><input id="sku" required maxlength="48"></div>
-        <div><label for="gtin">GTIN <small>(facultatif)</small></label><input id="gtin" maxlength="48"></div>
+        <div><label for="gtin">GTIN <small>(optional)</small></label><input id="gtin" maxlength="48"></div>
       </div>
-      <label>Dimensions et poids <small>(facultatif)</small></label>
+      <label>Dimensions and weight <small>(optional)</small></label>
       <div class="dims">
         <input id="dl" type="number" min="0" step="any" placeholder="L cm">
-        <input id="dw" type="number" min="0" step="any" placeholder="l cm">
+        <input id="dw" type="number" min="0" step="any" placeholder="W cm">
         <input id="dh" type="number" min="0" step="any" placeholder="H cm">
         <input id="kg" type="number" min="0" step="any" placeholder="kg">
       </div>
     </section>
     <section>
-      <h2>Expédition et douane</h2>
-      <label for="photo">Photo du produit ou de son étiquette <small>(facultatif)</small></label>
+      <h2>Shipping and customs</h2>
+      <label for="photo">Photo of the product or its label <small>(optional)</small></label>
       <input id="photo" type="file" accept="image/*,.heic,.heif">
       <div id="photobox"></div>
-      <label for="desc">Description pour la douane</label>
-      <textarea id="desc" required maxlength="1800" placeholder="ex. USB-C docking station for laptop"></textarea>
-      <label for="ds">Fiche technique ou étiquette <small>(facultatif, texte)</small></label>
-      <textarea id="ds" maxlength="12000" style="min-height:96px" placeholder="Connectique, fonctions, alimentation, matière…"></textarea>
-      <div class="hint">Chaque caractéristique retenue cite le passage d'où elle vient.</div>
+      <label for="desc">Customs description</label>
+      <textarea id="desc" required maxlength="1800" placeholder="e.g. USB-C docking station for laptop"></textarea>
+      <label for="ds">Datasheet or label <small>(optional, text)</small></label>
+      <textarea id="ds" maxlength="12000" style="min-height:96px" placeholder="Connectors, functions, power supply, material…"></textarea>
+      <div class="hint">Each fact kept cites the passage it comes from.</div>
       <div class="row">
         <div><label for="dest">Destination</label><select id="dest"></select></div>
-        <div><label for="origin">Pays d'origine</label><select id="origin"></select></div>
+        <div><label for="origin">Country of origin</label><select id="origin"></select></div>
       </div>
-      <div class="hint">L'origine reste sur la fiche. La classification ne l'utilise pas.</div>
-      <label>Catégorie / code douanier</label>
-      <div class="hscode" id="hscode">Vide tant qu'une personne habilitée n'a pas validé</div>
+      <div class="hint">The origin stays on the record. Classification does not use it.</div>
+      <label>Category / HS code</label>
+      <div class="hscode" id="hscode">Empty until an authorised person has validated</div>
     </section>
     <section>
-      <button class="btn" id="go" type="submit">Classer ce produit</button>
+      <button class="btn" id="go" type="submit">Classify this product</button>
       <div class="hint" id="keystate"></div>
     </section>
   </form>
 
   <div class="graph" id="graph">
-    <div class="empty"><b>Le dossier de décision s'affiche ici</b>Choisissez un exemple ou remplissez la fiche, puis lancez la classification. Chaque case s'ouvre au clic.</div>
+    <div class="empty"><b>The decision file appears here</b>Pick a sample or fill in the record, then run the classification. Every box opens on click.</div>
   </div>
 </main>
 
 <div id="gate" style="display:none;position:fixed;inset:0;background:rgba(246,243,236,.96);z-index:50;align-items:center;justify-content:center;padding:16px">
-  <form id="gateform" class="node static" style="max-width:380px"><div class="k">Accès réservé</div><div class="t">Code d'accès</div><div class="s" id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Entrer</button></form>
+  <form id="gateform" class="node static" style="max-width:380px"><div class="k">Restricted access</div><div class="t">Access code</div><div class="s" id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Enter</button></form>
 </div>
-<aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Fermer">×</button><div id="drawerBody"></div></aside>
+<aside class="drawer" id="drawer"><button class="x" id="closeDrawer" type="button" aria-label="Close">×</button><div id="drawerBody"></div></aside>
 
 <script type="module">
 import { evaluer, cle } from './arbre-moteur.js';
@@ -247,41 +247,41 @@ import { dossierHtml } from './dossier.js';
 // des produits fictifs. Aucun résultat n'est écrit à l'avance : tout vient des appels en direct.
 const DS_DOCK = 'Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.';
 const SAMPLES = [
-  { label: 'Station USB-C, description seule', sku: 'DOCK-PRO', desc: 'USB-C docking station for laptop', dest: 'FR', origin: 'CN' },
-  { label: 'Station USB-C avec fiche technique', sku: 'DOCK-PRO-DS', desc: 'USB-C docking station for laptop', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
-  { label: 'Catalogue et fiche qui se contredisent', sku: 'DOCK-STAND', desc: 'USB-C charging stand for laptop, power only, no data ports, no network, no video output', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
-  { label: 'Jouet parlant', sku: 'TOY-FARM-01', desc: "Fisher-Price See 'n Say The Farmer Says talking animal sounds toy", dest: 'US', origin: 'CN' },
-  { label: 'Horloge à construire', sku: 'CLOCK-BRICK', desc: 'LEGO buildable wall clock for kids, battery powered', dest: 'US', origin: 'CN', kg: 0.4 },
-  { label: 'Chien robot', sku: 'ROBO-DOG', desc: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', dest: 'US', origin: 'CN' },
+  { label: 'USB-C dock, description only', sku: 'DOCK-PRO', desc: 'USB-C docking station for laptop', dest: 'FR', origin: 'CN' },
+  { label: 'USB-C dock with datasheet', sku: 'DOCK-PRO-DS', desc: 'USB-C docking station for laptop', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
+  { label: 'Catalogue and datasheet that contradict each other', sku: 'DOCK-STAND', desc: 'USB-C charging stand for laptop, power only, no data ports, no network, no video output', ds: DS_DOCK, dest: 'FR', origin: 'CN' },
+  { label: 'Talking toy', sku: 'TOY-FARM-01', desc: "Fisher-Price See 'n Say The Farmer Says talking animal sounds toy", dest: 'US', origin: 'CN' },
+  { label: 'Buildable clock', sku: 'CLOCK-BRICK', desc: 'LEGO buildable wall clock for kids, battery powered', dest: 'US', origin: 'CN', kg: 0.4 },
+  { label: 'Robot dog', sku: 'ROBO-DOG', desc: 'Interactive robot dog toy, battery powered, barks and moves on motorized base', dest: 'US', origin: 'CN' },
 ];
-const COUNTRIES = { FR: 'France', DE: 'Allemagne', ES: 'Espagne', IT: 'Italie', NL: 'Pays-Bas', GB: 'Royaume-Uni', US: 'États-Unis', CA: 'Canada', JP: 'Japon', AU: 'Australie', CH: 'Suisse', KR: 'Corée du Sud', CN: 'Chine', VN: 'Vietnam', IN: 'Inde', MX: 'Mexique' };
+const COUNTRIES = { FR: 'France', DE: 'Germany', ES: 'Spain', IT: 'Italy', NL: 'Netherlands', GB: 'United Kingdom', US: 'United States', CA: 'Canada', JP: 'Japan', AU: 'Australia', CH: 'Switzerland', KR: 'South Korea', CN: 'China', VN: 'Vietnam', IN: 'India', MX: 'Mexico' };
 const STATUS = {
-  classified: ['Proposition à faire valider', 'keep'],
-  needs_review: ['Proposition à faire relire', 'warn'],
-  needs_information: ['Informations nécessaires', 'warn'],
-  ambiguous: ['Plusieurs codes restent plausibles', 'warn'],
-  unsupported_jurisdiction: ['Aucun candidat retenu pour cette destination', 'bad'],
-  stale_dataset: ['Nomenclature à rafraîchir', 'bad'],
+  classified: ['Proposal to be validated', 'keep'],
+  needs_review: ['Proposal to be reviewed', 'warn'],
+  needs_information: ['Information needed', 'warn'],
+  ambiguous: ['Several codes remain plausible', 'warn'],
+  unsupported_jurisdiction: ['No candidate kept for this destination', 'bad'],
+  stale_dataset: ['Nomenclature to refresh', 'bad'],
 };
 const CHECKS = {
-  calibrated_confidence_below_floor: "La confiance reste sous le seuil d'acceptation",
-  chapter_margin: 'Deux chapitres restent trop proches',
-  heading_margin: 'Deux positions restent trop proches',
-  low_retrieval_similarity: 'La description ressemble peu aux libellés de la nomenclature',
+  calibrated_confidence_below_floor: 'Confidence remains below the acceptance threshold',
+  chapter_margin: 'Two chapters remain too close',
+  heading_margin: 'Two headings remain too close',
+  low_retrieval_similarity: 'The description is not close to the wording of the nomenclature',
 };
-const FACT_FR = { material: 'Matière', sole_material: 'Matière de la semelle', upper_material: 'Matière de la tige', composition: 'Composition', function: 'Fonction', use: 'Usage', process: 'Procédé', dimensions: 'Dimensions', thickness_mm: 'Épaisseur (mm)', weight_g: 'Poids (g)', power_w: 'Puissance (W)', engine_displacement_cc: 'Cylindrée (cm³)', voltage_v: 'Tension (V)', presentation: 'Présentation', audience: 'Public' };
+const FACT_FR = { material: 'Material', sole_material: 'Sole material', upper_material: 'Upper material', composition: 'Composition', function: 'Function', use: 'Use', process: 'Process', dimensions: 'Dimensions', thickness_mm: 'Thickness (mm)', weight_g: 'Weight (g)', power_w: 'Power (W)', engine_displacement_cc: 'Engine displacement (cm³)', voltage_v: 'Voltage (V)', presentation: 'Presentation', audience: 'Audience' };
 const NUM_FACTS = ['thickness_mm', 'weight_g', 'power_w', 'engine_displacement_cc', 'voltage_v'];
 const ENUM_FACTS = { presentation: ['bulk', 'retail_pack', 'retail_set', 'unassembled', 'other'], audience: ['men', 'women', 'boys', 'girls', 'babies', 'unisex', 'not_applicable'] };
 const ADDABLE = ['function', 'use', 'material', 'process', 'power_w', 'voltage_v', 'weight_g'];
-const KIND = { photo: 'Étiquette photographiée', passage: 'Fiche technique', fiche: 'Fiche produit', reponse: 'Réponse confirmée', main: 'Sans pièce' };
-const SRC_FR = (s) => (s === 'description' ? 'Description du catalogue' : s === 'fiche_technique' ? 'Fiche technique' : 'Caractéristique « ' + (FACT_FR[s.split(':')[1]] || s) + ' »');
+const KIND = { photo: 'Photographed label', passage: 'Datasheet', fiche: 'Product record', reponse: 'Confirmed answer', main: 'No supporting document' };
+const SRC_FR = (s) => (s === 'description' ? 'Catalogue description' : s === 'fiche_technique' ? 'Datasheet' : 'Fact "' + (FACT_FR[s.split(':')[1]] || s) + '"');
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const safeUrl = (u) => (/^https:\/\//.test(String(u || '')) ? esc(u) : '#');
 const fmtCode = (c) => { c = String(c || ''); return c.length <= 6 ? c.replace(/^(\d{4})(\d{2})$/, '$1.$2') : c.replace(/^(\d{4})(\d{2})(.*)$/, '$1.$2.$3'); };
-const num = (n) => (typeof n === 'number' ? String(n).replace('.', ',') : 'non fournie');
-const title = (c) => (c.title && (c.title.fr || c.title.en)) || '';
+const num = (n) => (typeof n === 'number' ? String(n) : 'not provided');
+const title = (c) => (c.title && (c.title.en || c.title.fr)) || '';
 const topOf = (d) => (d.candidates || []).find((c) => !c.set_aside_reason) || null;
 
 // état du dossier
@@ -299,7 +299,7 @@ let PHOTO = null;
 $('photo').addEventListener('change', async (e) => {
   const f = e.target.files[0]; if (!f) return;
   PHOTO = null;
-  $('photobox').innerHTML = '<div class="loading"><div class="spin"></div>Lecture de la photo, une quinzaine de secondes.</div>';
+  $('photobox').innerHTML = '<div class="loading"><div class="spin"></div>Reading the photo, about fifteen seconds.</div>';
   try {
     const big = await toJpeg(f, 2400, 0.85), apercu = await toJpeg(big.blob, 700, 0.7);
     const j = await post('/api/photo', { jpeg_base64: big.url.split(',')[1] });
@@ -307,8 +307,8 @@ $('photo').addEventListener('change', async (e) => {
     $('ds').value = j.lignes.join('\n');
     if (!$('desc').value.trim()) $('desc').value = j.description;
     if (!$('sku').value.trim()) $('sku').value = (j.reference || f.name.replace(/\.[^.]+$/, '')).slice(0, 48);
-    $('photobox').innerHTML = `<div class="photo"><img src="${apercu.url}" alt=""><div><b>${j.lignes.length} ligne(s) lue(s)</b>, recopiées ci-dessous. Relisez et corrigez avant de classer.${j.illisible.length ? `<br><b>Non lu avec certitude :</b><ul>${j.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>`;
-  } catch (err) { $('photobox').innerHTML = '<div class="hint" style="color:var(--bad)">Photo non lue : ' + esc(err.message || err) + '</div>'; }
+    $('photobox').innerHTML = `<div class="photo"><img src="${apercu.url}" alt=""><div><b>${j.lignes.length} line(s) read</b>, copied below. Check and correct them before classifying.${j.illisible.length ? `<br><b>Not read with certainty:</b><ul>${j.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div></div>`;
+  } catch (err) { $('photobox').innerHTML = '<div class="hint" style="color:var(--bad)">Photo not read: ' + esc(err.message || err) + '</div>'; }
 });
 
 function fill(sel, def) { sel.innerHTML = Object.entries(COUNTRIES).map(([k, v]) => `<option value="${k}">${esc(v)} (${k})</option>`).join(''); sel.value = def; }
@@ -321,20 +321,20 @@ $('samples').addEventListener('click', (e) => {
   PHOTO = null; $('photo').value = ''; $('photobox').innerHTML = ''; $('gtin').value = ''; $('dl').value = ''; $('dw').value = ''; $('dh').value = ''; $('kg').value = s.kg ?? '';
   resetCode();
 });
-fetch('/api/status', { headers: { 'X-App-Code': code() } }).then((r) => r.json()).then((s) => { if (s.code_required && !s.code_ok) askCode(''); $('keystate').textContent = s.key_present ? 'Appels en direct sur ' + s.api.replace('https://', '') : "Clé d'API absente : la poser dans .env puis relancer le serveur."; });
-function resetCode() { $('hscode').className = 'hscode'; $('hscode').textContent = "Vide tant qu'une personne habilitée n'a pas validé"; }
+fetch('/api/status', { headers: { 'X-App-Code': code() } }).then((r) => r.json()).then((s) => { if (s.code_required && !s.code_ok) askCode(''); $('keystate').textContent = s.key_present ? 'Live calls to ' + s.api.replace('https://', '') : 'API key missing: set it in .env, then restart the server.'; });
+function resetCode() { $('hscode').className = 'hscode'; $('hscode').textContent = "Empty until an authorised person has validated"; }
 
 $('fiche').addEventListener('submit', (e) => {
   e.preventDefault();
   const facts = {};
   const kg = parseFloat($('kg').value);
-  if (kg > 0) facts.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: 'Fiche produit, champ « Poids » (' + $('kg').value + ' kg)' };
+  if (kg > 0) facts.weight_g = { value: Math.round(kg * 1000), kind: 'fiche', origin: 'Product record, "Weight" field (' + $('kg').value + ' kg)' };
   const d = { length_mm: parseFloat($('dl').value) * 10, width_mm: parseFloat($('dw').value) * 10, height_mm: parseFloat($('dh').value) * 10 };
   const dims = Object.fromEntries(Object.entries(d).filter(([, v]) => v > 0));
-  if (Object.keys(dims).length) facts.dimensions = { value: dims, kind: 'fiche', origin: 'Fiche produit, champ « Dimensions »' };
+  if (Object.keys(dims).length) facts.dimensions = { value: dims, kind: 'fiche', origin: 'Product record, "Dimensions" field' };
   S = fresh({ sku: $('sku').value.trim(), gtin: $('gtin').value.trim(), desc: $('desc').value.trim(), ds: $('ds').value.trim(), dest: $('dest').value, origin: $('origin').value, photo: PHOTO }, facts);
   resetCode();
-  run('Première évaluation');
+  run('First assessment');
 });
 
 // Texte réellement utilisé : la pièce moins les passages qu'une personne a déclarés faux.
@@ -354,12 +354,12 @@ function askCode(msg) {
 async function post(path, body) {
   for (let n = 0; n < 3; n++) {
     const r = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': code() }, body: JSON.stringify(body) });
-    if (r.status === 401) { await askCode(n ? 'Code refusé.' : ''); continue; }
-    const j = await r.json().catch(() => ({ error: 'Réponse illisible du serveur (' + r.status + ')' }));
-    if (!r.ok) throw new Error(j.error || 'Erreur ' + r.status);
+    if (r.status === 401) { await askCode(n ? 'Code rejected.' : ''); continue; }
+    const j = await r.json().catch(() => ({ error: 'Unreadable server response (' + r.status + ')' }));
+    if (!r.ok) throw new Error(j.error || 'Error ' + r.status);
     return j;
   }
-  throw new Error("Code d'accès refusé");
+  throw new Error('Access code rejected');
 }
 // Prépare la photo dans le navigateur : JPEG redimensionné. Un HEIC que le
 // navigateur ne sait pas lire est d'abord converti par la bibliothèque heic-to.
@@ -367,7 +367,7 @@ async function toJpeg(file, max, q) {
   let bmp;
   try { bmp = await createImageBitmap(file); }
   catch {
-    if (!window.HeicTo) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/heic-to@1/dist/iife/heic-to.js'; sc.onload = ok; sc.onerror = () => ko(new Error('convertisseur HEIC indisponible')); document.head.appendChild(sc); });
+    if (!window.HeicTo) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/heic-to@1/dist/iife/heic-to.js'; sc.onload = ok; sc.onerror = () => ko(new Error('HEIC converter unavailable')); document.head.appendChild(sc); });
     bmp = await createImageBitmap(await window.HeicTo({ blob: file, type: 'image/jpeg', quality: 0.9 }));
   }
   const k = Math.min(1, max / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
@@ -381,7 +381,7 @@ async function classify(desc, facts, country) {
   const body = { item_id: S.product.sku, description: desc, country: country || S.product.dest };
   if (Object.keys(facts).length) body.facts = factValues(facts);
   const j = await post('/api/classify', body);
-  if (j.http !== 200 || !j.body || !j.body.data) throw new Error("L'API a répondu " + j.http + ' : ' + JSON.stringify(j.body).slice(0, 300));
+  if (j.http !== 200 || !j.body || !j.body.data) throw new Error('The API responded ' + j.http + ': ' + JSON.stringify(j.body).slice(0, 300));
   return { ...j, data: j.body.data };
 }
 const lire = (desc, facts) => post('/api/lire', { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(facts) });
@@ -390,14 +390,14 @@ const lire = (desc, facts) => post('/api/lire', { description: desc, fiche_techn
 async function run(cause) {
   S.error = null; S.pendingCause = cause;
   try {
-    S.busy = 'Lecture des pièces : caractéristiques et contradictions.'; render();
+    S.busy = 'Reading the documents: facts and contradictions.'; render();
     const desc = effective(S.product.desc, 'description');
     const L = await lire(desc, S.facts);
     S.lecture = L;
-    if (!S.rounds.length) for (const c of L.caracteristiques) if (!S.facts[c.fact]) S.facts[c.fact] = S.product.photo ? { value: c.value, kind: 'photo', origin: 'Étiquette photographiée (' + S.product.photo.name + '), ligne lue sur la photo puis relue par la personne', quotes: c.quotes } : { value: c.value, kind: 'passage', origin: 'Fiche technique, passage cité', quotes: c.quotes };
+    if (!S.rounds.length) for (const c of L.caracteristiques) if (!S.facts[c.fact]) S.facts[c.fact] = S.product.photo ? { value: c.value, kind: 'photo', origin: 'Photographed label (' + S.product.photo.name + '), line read from the photo then checked by the person', quotes: c.quotes } : { value: c.value, kind: 'passage', origin: 'Datasheet, cited passage', quotes: c.quotes };
     S.conflicts = L.contradictions;
     if (S.conflicts.length) { S.busy = null; render(); return; }
-    S.busy = "Classification en cours. Comptez une vingtaine de secondes."; render();
+    S.busy = 'Classification in progress. Allow about twenty seconds.'; render();
     // en parallèle : le moteur de l'API, et la lecture des critères de la règle encodée
     const [r, cr] = await Promise.all([classify(desc, S.facts), ARBRE ? post('/api/criteres', { pieces: { description: desc, fiche_technique: effective(S.product.ds, 'fiche_technique'), caracteristiques: factValues(S.facts) }, criteres: ARBRE.criteres }).catch(() => null) : null]);
     if (cr) {
@@ -423,9 +423,9 @@ function factValue(k, v) {
   return String(v);
 }
 function evidenceHtml(c) {
-  return (c.evidence || []).map((e) => `<p><b>${esc(e.ref || e.kind)}</b> · <a href="${safeUrl(e.url)}" target="_blank" rel="noopener">texte officiel</a>${e.source_version ? ' <span class="muted">(' + esc(e.source_version) + ')</span>' : ''}</p><blockquote>${esc(e.excerpt)}</blockquote>`).join('');
+  return (c.evidence || []).map((e) => `<p><b>${esc(e.ref || e.kind)}</b> · <a href="${safeUrl(e.url)}" target="_blank" rel="noopener">official text</a>${e.source_version ? ' <span class="muted">(' + esc(e.source_version) + ')</span>' : ''}</p><blockquote>${esc(e.excerpt)}</blockquote>`).join('');
 }
-const precHtml = (list) => '<ul>' + list.map((x) => `<li><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, similarité ${num(x.similarity)})</span></li>`).join('') + '</ul>';
+const precHtml = (list) => '<ul>' + list.map((x) => `<li><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, similarity ${num(x.similarity)})</span></li>`).join('') + '</ul>';
 
 // Fiche d'un candidat : ce qui le soutient, ce qui pèse contre lui, ce qu'on ignore.
 // Chaque ligne reprend un champ de la réponse de l'API, rien n'est ajouté.
@@ -435,20 +435,20 @@ function candDetail(c, d) {
   const same = prec.filter((x) => String(x.official_code).startsWith(hs6)), other = prec.filter((x) => !String(x.official_code).startsWith(hs6));
   const checks = (d.provenance && d.provenance.acceptance_checks) || [], qs = d.questions || [];
   return `<h3>${esc(fmtCode(c.code))}</h3><p class="muted">${esc(title(c))}</p>
-    <p>${out ? 'Écarté' : 'Reste plausible'} · confiance rendue par l'API : ${num(c.confidence)}</p>
-    <h4 class="pro">Ce qui le soutient</h4>
-    ${!out && c.rationale ? `<p>${esc(c.rationale)}</p>` : ''}${evidenceHtml(c) || (out ? '' : '<p class="muted">Aucun extrait de texte rendu.</p>')}
-    ${same.length ? '<p>Décisions officielles proches classées sous ce code :</p>' + precHtml(same) : ''}
-    ${out && !same.length && !(c.evidence || []).length ? '<p class="muted">Rien dans la réponse.</p>' : ''}
-    <h4 class="con">Ce qui pèse contre lui</h4>
+    <p>${out ? 'Set aside' : 'Still plausible'} · confidence returned by the API: ${num(c.confidence)}</p>
+    <h4 class="pro">What supports it</h4>
+    ${!out && c.rationale ? `<p>${esc(c.rationale)}</p>` : ''}${evidenceHtml(c) || (out ? '' : '<p class="muted">No text excerpt returned.</p>')}
+    ${same.length ? '<p>Similar official rulings classified under this code:</p>' + precHtml(same) : ''}
+    ${out && !same.length && !(c.evidence || []).length ? '<p class="muted">Nothing in the response.</p>' : ''}
+    <h4 class="con">What weighs against it</h4>
     ${c.set_aside_reason ? `<p>${esc(c.set_aside_reason)}</p>` : ''}${out && c.rationale ? `<p>${esc(c.rationale)}</p>` : ''}
-    ${other.length ? '<p>Décisions officielles proches classées sous un autre code :</p>' + precHtml(other) : ''}
-    ${!c.set_aside_reason && !other.length ? '<p class="muted">Rien dans la réponse.</p>' : ''}
-    <h4 class="unk">Ce qu'on ignore encore</h4>
-    ${qs.length ? '<ul>' + qs.map((q) => `<li><b>${esc(FACT_FR[q.fact] || q.fact)}</b> : ${esc(q.why || q.question)}</li>`).join('') + '</ul>' : ''}
+    ${other.length ? '<p>Similar official rulings classified under another code:</p>' + precHtml(other) : ''}
+    ${!c.set_aside_reason && !other.length ? '<p class="muted">Nothing in the response.</p>' : ''}
+    <h4 class="unk">What is still unknown</h4>
+    ${qs.length ? '<ul>' + qs.map((q) => `<li><b>${esc(FACT_FR[q.fact] || q.fact)}</b>: ${esc(q.why || q.question)}</li>`).join('') + '</ul>' : ''}
     ${checks.length ? '<ul>' + checks.map((k) => `<li>${esc(CHECKS[k] || k)} <code>${esc(k)}</code></li>`).join('') + '</ul>' : ''}
-    ${!qs.length && !checks.length ? '<p class="muted">Aucune question ouverte ni contrôle en échec dans la réponse.</p>' : ''}
-    <h4>Nomenclature</h4><p>${esc(c.system)} · version ${esc(c.source_version || 'non indiquée')}${c.valid_from ? ' · valable depuis le ' + esc(c.valid_from) : ''}${(c.gri || []).length ? ' · ' + esc(c.gri.join(', ')) : ''}</p>`;
+    ${!qs.length && !checks.length ? '<p class="muted">No open question or failed check in the response.</p>' : ''}
+    <h4>Nomenclature</h4><p>${esc(c.system)} · version ${esc(c.source_version || 'not stated')}${c.valid_from ? ' · valid from ' + esc(c.valid_from) : ''}${(c.gri || []).length ? ' · ' + esc(c.gri.join(', ')) : ''}</p>`;
 }
 
 function strikeHtml(text, source) {
@@ -462,24 +462,24 @@ function render() {
   const p = S.product, parts = [], last = S.rounds[S.rounds.length - 1];
 
   // produit
-  parts.push(`<button class="node" data-d="${detail(`<h3>${esc(p.sku)}</h3><h4>Description du catalogue</h4><p>${strikeHtml(p.desc, 'description')}</p>${p.ds ? `<h4>${p.photo ? 'Étiquette lue sur la photo' : 'Fiche technique'}</h4><p style="white-space:pre-wrap">${strikeHtml(p.ds, 'fiche_technique')}</p>` : ''}${p.photo && p.photo.illisible.length ? `<h4>Non lu avec certitude sur la photo</h4><ul>${p.photo.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${S.struck.length ? '<p class="muted">Les passages barrés ont été déclarés faux par une personne et ne sont plus transmis.</p>' : ''}<h4>Destination</h4><p>${esc(COUNTRIES[p.dest])} (${p.dest})</p><h4>Origine</h4><p>${esc(COUNTRIES[p.origin])} (${p.origin}). Gardée sur la fiche, non envoyée à la classification.</p>${last ? `<h4>Dernière requête envoyée</h4><pre>POST ${esc(last.endpoint)}\n${esc(JSON.stringify(last.sent, null, 1))}</pre>` : ''}`)}">
-    <div class="k">Produit</div><div class="t">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div class="s">${strikeHtml(p.desc, 'description')}</div>${p.ds ? `<div class="s muted">${p.photo ? 'Étiquette lue sur la photo ' + esc(p.photo.name) + (p.photo.illisible.length ? ', ' + p.photo.illisible.length + ' élément(s) non lu(s)' : '') : 'Fiche technique jointe'}</div>` : ''}</button>`);
+  parts.push(`<button class="node" data-d="${detail(`<h3>${esc(p.sku)}</h3><h4>Catalogue description</h4><p>${strikeHtml(p.desc, 'description')}</p>${p.ds ? `<h4>${p.photo ? 'Label read from the photo' : 'Datasheet'}</h4><p style="white-space:pre-wrap">${strikeHtml(p.ds, 'fiche_technique')}</p>` : ''}${p.photo && p.photo.illisible.length ? `<h4>Not read with certainty on the photo</h4><ul>${p.photo.illisible.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${S.struck.length ? '<p class="muted">Struck-through passages were declared false by a person and are no longer sent.</p>' : ''}<h4>Destination</h4><p>${esc(COUNTRIES[p.dest])} (${p.dest})</p><h4>Origin</h4><p>${esc(COUNTRIES[p.origin])} (${p.origin}). Kept on the record, not sent to classification.</p>${last ? `<h4>Last request sent</h4><pre>POST ${esc(last.endpoint)}\n${esc(JSON.stringify(last.sent, null, 1))}</pre>` : ''}`)}">
+    <div class="k">Product</div><div class="t">${esc(p.sku)} → ${esc(COUNTRIES[p.dest])}</div><div class="s">${strikeHtml(p.desc, 'description')}</div>${p.ds ? `<div class="s muted">${p.photo ? 'Label read from photo ' + esc(p.photo.name) + (p.photo.illisible.length ? ', ' + p.photo.illisible.length + ' item(s) not read' : '') : 'Datasheet attached'}</div>` : ''}</button>`);
 
   // caractéristiques connues, avec provenance
   const fk = Object.keys(S.facts), locked = Boolean(S.busy || S.saved);
   parts.push('<div class="link"></div>');
-  parts.push(`<div class="node static"><div class="k">Caractéristiques connues</div>
-    ${fk.length ? `<div class="facts">${fk.map((k) => { const f = S.facts[k]; return `<div class="fact ${f.kind}" data-d="${detail(`<h3>${esc(FACT_FR[k] || k)}</h3><p>${esc(factValue(k, f.value))}</p><h4>Provenance</h4><p>${esc(f.origin)}</p>${(f.quotes || []).map((q) => `<blockquote>${esc(q)}</blockquote>`).join('')}${f.kind === 'main' ? "<p>Aucune pièce n'appuie cette caractéristique. Elle reste marquée comme telle dans le dossier.</p>" : ''}<h4>Champ transmis à l'API</h4><pre>facts.${esc(k)} = ${esc(JSON.stringify(f.value))}</pre>`)}"><span><b>${esc(FACT_FR[k] || k)}</b> : ${esc(factValue(k, f.value))}</span><span class="src">${KIND[f.kind]}</span>${locked ? '<span></span>' : `<button type="button" class="rm" data-rm="${k}" title="Retirer et réévaluer">×</button>`}</div>`; }).join('')}</div>`
-      : '<div class="s">Seulement la description. Aucune caractéristique structurée.</div>'}
-    ${S.lecture && S.lecture.rejected ? `<div class="hint">${S.lecture.rejected} élément(s) écarté(s) à la lecture : le passage cité n'existait pas mot pour mot dans la pièce.</div>` : ''}
-    ${locked ? '' : `<form class="addfact" id="addfact"><select name="k">${ADDABLE.filter((k) => !S.facts[k]).map((k) => `<option value="${k}">${esc(FACT_FR[k])}</option>`).join('')}</select><input name="v" required placeholder="Ajouter une caractéristique"><button class="btn ghost" type="submit">Ajouter</button></form>`}</div>`);
+  parts.push(`<div class="node static"><div class="k">Known facts</div>
+    ${fk.length ? `<div class="facts">${fk.map((k) => { const f = S.facts[k]; return `<div class="fact ${f.kind}" data-d="${detail(`<h3>${esc(FACT_FR[k] || k)}</h3><p>${esc(factValue(k, f.value))}</p><h4>Provenance</h4><p>${esc(f.origin)}</p>${(f.quotes || []).map((q) => `<blockquote>${esc(q)}</blockquote>`).join('')}${f.kind === 'main' ? '<p>No document supports this fact. It stays flagged as such in the file.</p>' : ''}<h4>Field sent to the API</h4><pre>facts.${esc(k)} = ${esc(JSON.stringify(f.value))}</pre>`)}"><span><b>${esc(FACT_FR[k] || k)}</b>: ${esc(factValue(k, f.value))}</span><span class="src">${KIND[f.kind]}</span>${locked ? '<span></span>' : `<button type="button" class="rm" data-rm="${k}" title="Remove and reassess">×</button>`}</div>`; }).join('')}</div>`
+      : '<div class="s">Description only. No structured fact.</div>'}
+    ${S.lecture && S.lecture.rejected ? `<div class="hint">${S.lecture.rejected} item(s) set aside at reading: the cited passage was not found word for word in the document.</div>` : ''}
+    ${locked ? '' : `<form class="addfact" id="addfact"><select name="k">${ADDABLE.filter((k) => !S.facts[k]).map((k) => `<option value="${k}">${esc(FACT_FR[k])}</option>`).join('')}</select><input name="v" required placeholder="Add a fact"><button class="btn ghost" type="submit">Add</button></form>`}</div>`);
 
   // contradictions à résoudre
   if (S.conflicts.length && !S.busy) {
     parts.push('<div class="link"></div>');
-    parts.push(`<div class="node static conflict"><div class="k">Contradiction à résoudre avant de classer</div>
+    parts.push(`<div class="node static conflict"><div class="k">Contradiction to resolve before classifying</div>
       ${S.conflicts.map((c, i) => `<div class="one"><div class="t">${esc(c.sujet)}</div><div class="s">${esc(c.pourquoi)}</div><div class="pair">
-        ${['a', 'b'].map((s) => `<div class="side"><small>${esc(SRC_FR(c[s].source))}</small><q>${esc(c[s].quote)}</q><button type="button" class="btn ghost" data-keep="${i}:${s}">C'est celle-ci qui est vraie</button></div>`).join('')}</div></div>`).join('')}</div>`);
+        ${['a', 'b'].map((s) => `<div class="side"><small>${esc(SRC_FR(c[s].source))}</small><q>${esc(c[s].quote)}</q><button type="button" class="btn ghost" data-keep="${i}:${s}">This one is true</button></div>`).join('')}</div></div>`).join('')}</div>`);
   }
 
   if (S.rounds.length && !S.conflicts.length) parts.push(grapheHtml());
@@ -492,27 +492,27 @@ function render() {
     if (i > 0) {
       const prev = S.rounds[i - 1].data, a = topOf(prev), b = topOf(d);
       const st = (x) => (STATUS[x.status] || [x.status])[0];
-      parts.push(`<div class="node static diff"><div class="k">Ce qui a changé</div><div class="t">${esc(r.cause)}</div><dl class="chg">
-        <dt>Statut</dt><dd>${prev.status === d.status ? esc(st(d)) + ' (inchangé)' : esc(st(prev)) + ' → <b>' + esc(st(d)) + '</b>'}</dd>
-        <dt>Code retenu</dt><dd>${(a && a.code) === (b && b.code) ? (b ? esc(fmtCode(b.code)) + ' (inchangé)' : 'aucun (inchangé)') : (a ? esc(fmtCode(a.code)) : 'aucun') + ' → <b>' + (b ? esc(fmtCode(b.code)) : 'aucun') + '</b>'}</dd>
-        <dt>Confiance</dt><dd>${a ? num(a.confidence) : 'sans objet'} → ${b ? num(b.confidence) : 'sans objet'}</dd></dl></div><div class="link"></div>`);
+      parts.push(`<div class="node static diff"><div class="k">What changed</div><div class="t">${esc(r.cause)}</div><dl class="chg">
+        <dt>Status</dt><dd>${prev.status === d.status ? esc(st(d)) + ' (unchanged)' : esc(st(prev)) + ' → <b>' + esc(st(d)) + '</b>'}</dd>
+        <dt>Retained code</dt><dd>${(a && a.code) === (b && b.code) ? (b ? esc(fmtCode(b.code)) + ' (unchanged)' : 'none (unchanged)') : (a ? esc(fmtCode(a.code)) : 'none') + ' → <b>' + (b ? esc(fmtCode(b.code)) : 'none') + '</b>'}</dd>
+        <dt>Confidence</dt><dd>${a ? num(a.confidence) : 'n/a'} → ${b ? num(b.confidence) : 'n/a'}</dd></dl></div><div class="link"></div>`);
     }
-    parts.push(`<span class="tour">${i === 0 ? 'Première évaluation' : 'Nouvelle évaluation'} · ${num(r.seconds)} s</span><div class="link"></div>`);
+    parts.push(`<span class="tour">${i === 0 ? 'First assessment' : 'New assessment'} · ${num(r.seconds)} s</span><div class="link"></div>`);
     if (!cands.length && !extra.length) {
-      parts.push(`<div class="node static"><div class="k">Candidats</div><div class="s">L'API n'a rendu aucun candidat à ce tour.${d.gate_hint ? ' Motif rendu : ' + esc(d.gate_hint) : ''}</div></div>`);
+      parts.push(`<div class="node static"><div class="k">Candidates</div><div class="s">The API returned no candidate in this round.${d.gate_hint ? ' Reason returned: ' + esc(d.gate_hint) : ''}</div></div>`);
     } else {
       parts.push('<div class="cands">' + cands.map((c) => {
         const out = Boolean(c.set_aside_reason);
-        return `<button class="cand ${out ? 'out' : ''}" data-d="${detail(candDetail(c, d))}"><span class="conf">${num(c.confidence)}</span><div class="code">${esc(fmtCode(c.code))}</div><div class="ttl">${esc(title(c))}</div><span class="tag ${out ? 'out' : 'keep'}">${out ? 'Écarté' : 'Reste plausible'}</span></button>`;
-      }).join('') + extra.map((a) => `<button class="cand out" data-d="${detail(`<h3>${esc(fmtCode(a.code))}</h3><h4 class="con">Ce qui pèse contre lui</h4><p>${esc(a.set_aside_reason)}</p>`)}"><div class="code">${esc(fmtCode(a.code))}</div><div class="ttl">${esc(a.set_aside_reason)}</div><span class="tag out">Écarté</span></button>`).join('') + '</div>');
+        return `<button class="cand ${out ? 'out' : ''}" data-d="${detail(candDetail(c, d))}"><span class="conf">${num(c.confidence)}</span><div class="code">${esc(fmtCode(c.code))}</div><div class="ttl">${esc(title(c))}</div><span class="tag ${out ? 'out' : 'keep'}">${out ? 'Set aside' : 'Still plausible'}</span></button>`;
+      }).join('') + extra.map((a) => `<button class="cand out" data-d="${detail(`<h3>${esc(fmtCode(a.code))}</h3><h4 class="con">What weighs against it</h4><p>${esc(a.set_aside_reason)}</p>`)}"><div class="code">${esc(fmtCode(a.code))}</div><div class="ttl">${esc(a.set_aside_reason)}</div><span class="tag out">Set aside</span></button>`).join('') + '</div>');
     }
     const qs = d.questions || [];
     if (qs.length && r.answered) {
-      parts.push(`<div class="link"></div><div class="node static"><div class="k">Question au marchand · réponse confirmée</div>${qs.map((q) => `<div class="s">${esc(q.question)}</div>`).join('')}<div class="facts">${Object.entries(r.answered).map(([k, v]) => `<div class="fact reponse" style="cursor:default"><span><b>${esc(FACT_FR[k] || k)}</b> : ${esc(factValue(k, v))}</span><span class="src">Réponse confirmée</span><span></span></div>`).join('')}</div></div>`);
+      parts.push(`<div class="link"></div><div class="node static"><div class="k">Question to the merchant · answer confirmed</div>${qs.map((q) => `<div class="s">${esc(q.question)}</div>`).join('')}<div class="facts">${Object.entries(r.answered).map(([k, v]) => `<div class="fact reponse" style="cursor:default"><span><b>${esc(FACT_FR[k] || k)}</b>: ${esc(factValue(k, v))}</span><span class="src">Confirmed answer</span><span></span></div>`).join('')}</div></div>`);
     } else if (qs.length && i === S.rounds.length - 1 && !S.busy && !S.conflicts.length && !S.saved) {
-      parts.push(`<div class="link"></div><form class="node static q" id="answers"><div class="k">Information manquante · question au marchand</div>
+      parts.push(`<div class="link"></div><form class="node static q" id="answers"><div class="k">Missing information · question to the merchant</div>
         ${qs.map((q) => `<div class="qrow"><div class="t">${esc(q.question)}</div><div class="why">${esc(q.why || '')}</div>${inputFor(q.fact)}</div>`).join('')}
-        <div style="margin-top:14px"><button class="btn" type="submit">Répondre et réévaluer</button></div></form>`);
+        <div style="margin-top:14px"><button class="btn" type="submit">Answer and reassess</button></div></form>`);
     }
   });
 
@@ -525,54 +525,54 @@ function render() {
     const canValidate = top && (d.status === 'classified' || d.status === 'needs_review');
     const pending = (d.questions || []).length && !last.answered;
     const prec = (d.provenance && d.provenance.precedents) || [], cov = d.coverage || {};
-    const level = top ? (top.system === 'hs6' ? 'Niveau international, 6 chiffres' : 'Nomenclature de destination (' + esc(top.system) + ')') : 'Sans objet';
+    const level = top ? (top.system === 'hs6' ? 'International level, 6 digits' : 'Destination nomenclature (' + esc(top.system) + ')') : 'n/a';
     const undocumented = Object.entries(S.facts).filter(([, f]) => f.kind === 'main').map(([k]) => FACT_FR[k] || k);
     parts.push('<div class="link"></div>');
-    parts.push(`<div class="node final"><div class="k">${pending ? 'Proposition provisoire' : 'Proposition'}</div>
-      ${top ? `<div class="big">${esc(fmtCode(top.code))}</div><div class="s">${esc(title(top))}</div>` : '<div class="t">Pas de code proposé</div>'}
+    parts.push(`<div class="node final"><div class="k">${pending ? 'Provisional proposal' : 'Proposal'}</div>
+      ${top ? `<div class="big">${esc(fmtCode(top.code))}</div><div class="s">${esc(title(top))}</div>` : '<div class="t">No code proposed</div>'}
       <span class="tag ${st[1]}">${esc(st[0])}</span>
       <dl class="kv">
-        <dt>Précision</dt><dd>${level}${cov.hint ? `<br><span class="muted">${esc(cov.hint)}</span>` : ''}</dd>
-        ${top ? `<dt>Justification</dt><dd>${esc(top.rationale || 'non fournie')}</dd>
-        <dt>Sources</dt><dd>${(top.evidence || []).length ? top.evidence.map((e) => `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener">${esc(e.ref || e.kind)}</a>`).join(', ') : 'aucun extrait rendu'} <button type="button" class="btn ghost" style="margin-left:6px;padding:3px 9px" data-d="${detail(candDetail(top, d))}">Pour, contre, inconnu</button></dd>` : ''}
-        ${prec.length ? `<dt>Décisions officielles proches</dt><dd>${prec.slice(0, 3).map((x) => precHtmlLigne(x)).join('')}<span class="muted">Proches par le texte seulement. Une ressemblance n'est pas une preuve : vérifiez qu'elles portent sur un produit comparable.</span></dd>` : ''}
-        ${undocumented.length ? `<dt>Sans pièce</dt><dd>${esc(undocumented.join(', '))} : saisie à la main, aucune pièce à l'appui.</dd>` : ''}
-        <dt>Travail restant</dt><dd><ul class="todo" style="margin:0">${travailRestant().map((x) => `<li>${esc(x)}</li>`).join('')}</ul></dd>
-        <dt>Interprétation</dt><dd><a href="/arbre">Passer ce dossier dans l'arbre d'interprétation</a></dd>
-        <dt>Dossier</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" id="lisible">Ouvrir le dossier lisible</button> <span class="muted">à imprimer ou enregistrer en PDF</span></dd>
-        <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Réponse brute de l'API</h3><p class="muted">HTTP ${last.http} · ${num(last.seconds)} s${last.request_id ? ' · requête ' + esc(last.request_id) : ''}</p><h4>Requête</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Réponse</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">Voir la réponse brute</button></dd>
+        <dt>Level</dt><dd>${level}${cov.hint ? `<br><span class="muted">${esc(cov.hint)}</span>` : ''}</dd>
+        ${top ? `<dt>Rationale</dt><dd>${esc(top.rationale || 'not provided')}</dd>
+        <dt>Sources</dt><dd>${(top.evidence || []).length ? top.evidence.map((e) => `<a href="${safeUrl(e.url)}" target="_blank" rel="noopener">${esc(e.ref || e.kind)}</a>`).join(', ') : 'no excerpt returned'} <button type="button" class="btn ghost" style="margin-left:6px;padding:3px 9px" data-d="${detail(candDetail(top, d))}">For, against, unknown</button></dd>` : ''}
+        ${prec.length ? `<dt>Similar official rulings</dt><dd>${prec.slice(0, 3).map((x) => precHtmlLigne(x)).join('')}<span class="muted">Close by text only. A resemblance is not proof: check that they concern a comparable product.</span></dd>` : ''}
+        ${undocumented.length ? `<dt>No supporting document</dt><dd>${esc(undocumented.join(', '))}: entered by hand, no supporting document.</dd>` : ''}
+        <dt>Remaining work</dt><dd><ul class="todo" style="margin:0">${travailRestant().map((x) => `<li>${esc(x)}</li>`).join('')}</ul></dd>
+        <dt>Interpretation</dt><dd><a href="/arbre">Run this file through the interpretation tree</a></dd>
+        <dt>File</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" id="lisible">Open the readable file</button> <span class="muted">to print or save as PDF</span></dd>
+        <dt>Trace</dt><dd><button type="button" class="btn ghost" style="padding:3px 9px" data-d="${detail(`<h3>Raw API response</h3><p class="muted">HTTP ${last.http} · ${num(last.seconds)} s${last.request_id ? ' · request ' + esc(last.request_id) : ''}</p><h4>Request</h4><pre>${esc(JSON.stringify(last.sent, null, 1))}</pre><h4>Response</h4><pre>${esc(JSON.stringify(last.body, null, 1))}</pre>`)}">View the raw response</button></dd>
       </dl>
-      ${S.saved ? `<div class="done"><span>Validé par ${esc(S.saved.validated_by)} et enregistré dans ce navigateur.</span><button type="button" class="btn ghost" id="dl">Télécharger le dossier</button></div>`
-        : canValidate ? `<form class="valid" id="validate"><input id="who" required placeholder="Nom de la personne habilitée"><button class="btn ok" type="submit">Valider et enregistrer</button></form>`
-        : `<p class="hint" style="margin-top:12px">${pending ? 'Répondez à la question pour obtenir une proposition validable.' : 'Rien à valider à ce stade.'}</p>`}
+      ${S.saved ? `<div class="done"><span>Validated by ${esc(S.saved.validated_by)} and saved in this browser.</span><button type="button" class="btn ghost" id="dl">Download the file</button></div>`
+        : canValidate ? `<form class="valid" id="validate"><input id="who" required placeholder="Name of the authorised person"><button class="btn ok" type="submit">Validate and save</button></form>`
+        : `<p class="hint" style="margin-top:12px">${pending ? 'Answer the question to get a proposal that can be validated.' : 'Nothing to validate at this stage.'}</p>`}
     </div>`);
 
     // banc d'épreuve
     const removable = Object.keys(S.facts);
     parts.push('<div class="link"></div>');
-    parts.push(`<div class="node static bench"><div class="k">Mettre cette réponse à l'épreuve</div>
-      <div class="s">Trois essais rejoués en direct. Le verdict compare le code retenu et le statut, avant et après.</div>
+    parts.push(`<div class="node static bench"><div class="k">Stress-test this answer</div>
+      <div class="s">Three tests replayed live. The verdict compares the retained code and the status, before and after.</div>
       <div class="t3">
-        <form class="tst" id="t-ref"><b>Reformuler le texte commercial</b><p>Mêmes caractéristiques, autres mots. Le code retenu ne doit pas changer.</p><div class="line"><input name="v" required minlength="4" placeholder="ex. Laptop dock with USB-C connection"><button class="btn sm" type="submit">Rejouer</button></div></form>
-        <form class="tst" id="t-rm"><b>Retirer une information</b><p>Sans elle, la réponse doit redemander l'information ou rester inchangée si elle ne pesait pas.</p><div class="line"><select name="v" ${removable.length ? '' : 'disabled'}>${removable.length ? removable.map((k) => `<option value="${k}">${esc(FACT_FR[k] || k)}</option>`).join('') : '<option>Aucune caractéristique à retirer</option>'}</select><button class="btn sm" type="submit" ${removable.length ? '' : 'disabled'}>Rejouer</button></div></form>
-        <form class="tst" id="t-con"><b>Introduire une contradiction</b><p>Une phrase ajoutée à la description, contraire au dossier. La lecture des pièces doit la signaler.</p><div class="line"><input name="v" required minlength="4" placeholder="ex. Power only, no data ports."><button class="btn sm" type="submit">Rejouer</button></div></form>
+        <form class="tst" id="t-ref"><b>Rephrase the commercial text</b><p>Same facts, different words. The retained code must not change.</p><div class="line"><input name="v" required minlength="4" placeholder="e.g. Laptop dock with USB-C connection"><button class="btn sm" type="submit">Replay</button></div></form>
+        <form class="tst" id="t-rm"><b>Remove a piece of information</b><p>Without it, the answer must ask for the information again, or stay unchanged if it carried no weight.</p><div class="line"><select name="v" ${removable.length ? '' : 'disabled'}>${removable.length ? removable.map((k) => `<option value="${k}">${esc(FACT_FR[k] || k)}</option>`).join('') : '<option>No fact to remove</option>'}</select><button class="btn sm" type="submit" ${removable.length ? '' : 'disabled'}>Replay</button></div></form>
+        <form class="tst" id="t-con"><b>Introduce a contradiction</b><p>A sentence added to the description, contrary to the file. The document reading must flag it.</p><div class="line"><input name="v" required minlength="4" placeholder="e.g. Power only, no data ports."><button class="btn sm" type="submit">Replay</button></div></form>
       </div>
-      ${S.tests.length ? `<table><tr><th>Essai</th><th>Avant → après</th><th>Verdict</th></tr>${S.tests.map((t) => `<tr><td><b>${esc(t.type)}</b><br><span class="muted">${esc(t.input)}</span></td><td>${esc(t.before)}<br>→ ${esc(t.after)}</td><td><span class="v ${t.tone}">${esc(t.verdict)}</span>${t.raw != null ? `<br><button type="button" class="btn ghost" style="padding:2px 8px;margin-top:4px" data-d="${detail(`<h3>${esc(t.type)}</h3><pre>${esc(JSON.stringify(t.raw, null, 1))}</pre>`)}">Détail</button>` : ''}</td></tr>`).join('')}</table>` : ''}
+      ${S.tests.length ? `<table><tr><th>Test</th><th>Before → after</th><th>Verdict</th></tr>${S.tests.map((t) => `<tr><td><b>${esc(t.type)}</b><br><span class="muted">${esc(t.input)}</span></td><td>${esc(t.before)}<br>→ ${esc(t.after)}</td><td><span class="v ${t.tone}">${esc(t.verdict)}</span>${t.raw != null ? `<br><button type="button" class="btn ghost" style="padding:2px 8px;margin-top:4px" data-d="${detail(`<h3>${esc(t.type)}</h3><pre>${esc(JSON.stringify(t.raw, null, 1))}</pre>`)}">Details</button>` : ''}</td></tr>`).join('')}</table>` : ''}
     </div>`);
     parts.push(obligHtml());
     const rest = Object.keys(COUNTRIES).filter((c) => c !== p.dest);
     parts.push('<div class="link"></div>');
-    parts.push(`<form class="node static bench" id="others"><div class="k">Mêmes pièces, autres destinations</div>
-      <div class="s">Un appel par destination. Chaque ligne dit le niveau réellement obtenu : nomenclature du pays, six chiffres seulement, ou rien.</div>
+    parts.push(`<form class="node static bench" id="others"><div class="k">Same documents, other destinations</div>
+      <div class="s">One call per destination. Each row states the level actually obtained: national nomenclature, six digits only, or nothing.</div>
       <div class="dests">${rest.map((c) => `<label><input type="checkbox" name="c" value="${c}" ${['US', 'GB', 'JP', 'CA'].includes(c) ? 'checked' : ''}>${esc(COUNTRIES[c])}</label>`).join('')}</div>
-      <button class="btn sm" type="submit">Évaluer ces destinations</button>
-      ${S.others.length ? `<table><tr><th>Destination</th><th>Code</th><th>Niveau obtenu</th><th>Statut</th></tr>${S.others.map((o) => `<tr><td><b>${esc(COUNTRIES[o.country])}</b></td><td>${o.error ? '' : o.top ? `<b style="font-family:var(--mono)">${esc(fmtCode(o.top.code))}</b>` : 'aucun'}</td><td>${o.error ? esc(o.error) : o.top ? (o.top.system === 'hs6' ? 'Six chiffres seulement, code local non établi' : 'Nomenclature du pays (' + esc(o.top.system) + ')') : 'Rien'}</td><td>${o.error ? '' : `<span class="v ${(STATUS[o.status] || [0, 'warn'])[1] === 'keep' ? 'ok' : (STATUS[o.status] || [0, 'warn'])[1]}">${esc((STATUS[o.status] || [o.status])[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(COUNTRIES[o.country])}</h3><p class="muted">${o.request_id ? 'requête ' + esc(o.request_id) : ''}</p><pre>${esc(JSON.stringify(o.raw, null, 1))}</pre>`)}">Détail</button>`}</td></tr>`).join('')}</table>` : ''}
+      <button class="btn sm" type="submit">Assess these destinations</button>
+      ${S.others.length ? `<table><tr><th>Destination</th><th>Code</th><th>Level obtained</th><th>Status</th></tr>${S.others.map((o) => `<tr><td><b>${esc(COUNTRIES[o.country])}</b></td><td>${o.error ? '' : o.top ? `<b style="font-family:var(--mono)">${esc(fmtCode(o.top.code))}</b>` : 'none'}</td><td>${o.error ? esc(o.error) : o.top ? (o.top.system === 'hs6' ? 'Six digits only, national code not established' : 'National nomenclature (' + esc(o.top.system) + ')') : 'Nothing'}</td><td>${o.error ? '' : `<span class="v ${(STATUS[o.status] || [0, 'warn'])[1] === 'keep' ? 'ok' : (STATUS[o.status] || [0, 'warn'])[1]}">${esc((STATUS[o.status] || [o.status])[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(COUNTRIES[o.country])}</h3><p class="muted">${o.request_id ? 'request ' + esc(o.request_id) : ''}</p><pre>${esc(JSON.stringify(o.raw, null, 1))}</pre>`)}">Details</button>`}</td></tr>`).join('')}</table>` : ''}
     </form>`);
     if (d.advisory_disclaimer) parts.push(`<p class="note">${esc(d.advisory_disclaimer)}</p>`);
   }
 
   const [centre, droite] = parts.join('').split('<!--SPLIT-->');
-  $('graph').innerHTML = `<div class="cols"><div><div class="coltitle">Pièces, faits et règle encodée</div><div class="flow">${centre}</div></div><div><div class="coltitle">Proposition, alternatives et travail restant</div><div class="flow">${(droite || '').replace(/^<div class="link"><\/div>/, '')}</div></div></div>`;
+  $('graph').innerHTML = `<div class="cols"><div><div class="coltitle">Documents, facts and encoded rule</div><div class="flow">${centre}</div></div><div><div class="coltitle">Proposal, alternatives and remaining work</div><div class="flow">${(droite || '').replace(/^<div class="link"><\/div>/, '')}</div></div></div>`;
   const on = (id, fn) => { const el = $(id); if (el) el.addEventListener('submit', fn); };
   on('answers', onAnswer); on('validate', onValidate); on('addfact', onAddFact);
   on('others', onOthers); on('oblig', onOblig); on('t-ref', testReformuler); on('t-rm', testRetirer); on('t-con', testContredire);
@@ -582,60 +582,60 @@ function render() {
 // Exécution de la règle encodée sur les faits établis. Chaque étape montre
 // ensemble : la règle officielle, le fait vérifié sur le produit, la conséquence.
 const critVals = () => Object.fromEntries(Object.entries(S.crit).map(([k, x]) => [k, x.valeur]));
-const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Oui' : 'Non');
+const brTxt = (c, v) => (c && c.type === 'enum' ? ((c.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
 const fmtIssue = (x) => (/^\d{6}$/.test(x) ? fmtCode(x) : x);
-function nodeName(id) { const n = ARBRE.noeuds[id]; if (!n) return id; return n.type === 'code' ? fmtCode(n.code) + ' · ' + (n.libelle || '') : n.type === 'hors_perimetre' ? 'hors du périmètre de la règle' : 'question suivante : ' + ((ARBRE.criteres.find((c) => c.id === n.critere) || {}).libelle || n.critere); }
+function nodeName(id) { const n = ARBRE.noeuds[id]; if (!n) return id; return n.type === 'code' ? fmtCode(n.code) + ' · ' + (n.libelle || '') : n.type === 'hors_perimetre' ? 'outside the scope of the rule' : 'next question: ' + ((ARBRE.criteres.find((c) => c.id === n.critere) || {}).libelle || n.critere); }
 function regleEval() { return ARBRE ? evaluer(ARBRE, critVals()) : null; }
 function grapheHtml() {
   const head = '<div class="link"></div>';
-  if (!ARBRE) return head + `<div class="node static rule"><div class="k">Règle encodée</div><div class="s">Aucune règle encodée n'est chargée. La proposition à droite vient du moteur seul.</div></div>`;
+  if (!ARBRE) return head + `<div class="node static rule"><div class="k">Encoded rule</div><div class="s">No encoded rule is loaded. The proposal on the right comes from the engine alone.</div></div>`;
   const C = Object.fromEntries(ARBRE.criteres.map((c) => [c.id, c])), res = regleEval(), last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
   const codes = new Set(Object.values(ARBRE.noeuds).filter((n) => n.type === 'code').map((n) => n.code));
-  const ver = `<div class="ver">${esc(ARBRE.titre || '')} · ${esc(ARBRE.nomenclature || '')}, niveau 6 chiffres · version de référence, rédigée par IA à partir des textes cités, non relue par un déclarant. <a href="/arbre">Mode expert</a></div>`;
+  const ver = `<div class="ver">${esc(ARBRE.titre || '')} · ${esc(ARBRE.nomenclature || '')}, 6-digit level · reference version, drafted by AI from the cited texts, not reviewed by a customs declarant. <a href="/arbre">Expert mode</a></div>`;
   const couvert = Object.keys(S.crit).length || (top && codes.has(String(top.code).slice(0, 6)));
-  if (!couvert || (res.statut === 'hors_perimetre' && !res.chemin.length)) return head + `<div class="node static rule"><div class="k">Règle encodée</div><div class="t">Cette règle ne couvre pas ce produit</div><div class="s">${esc(res.statut === 'hors_perimetre' ? (ARBRE.noeuds[res.noeud] || {}).motif || '' : "Les pièces n'établissent aucun des critères de la règle. Elle porte sur : " + (ARBRE.perimetre || ''))}</div>${ver}</div>`;
+  if (!couvert || (res.statut === 'hors_perimetre' && !res.chemin.length)) return head + `<div class="node static rule"><div class="k">Encoded rule</div><div class="t">This rule does not cover this product</div><div class="s">${esc(res.statut === 'hors_perimetre' ? (ARBRE.noeuds[res.noeud] || {}).motif || '' : 'The documents establish none of the criteria of the rule. It covers: ' + (ARBRE.perimetre || ''))}</div>${ver}</div>`;
   const steps = res.chemin.map((s) => {
     const n = ARBRE.noeuds[s.noeud], c = C[s.critere], f = S.crit[s.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
-    const fait = f.kind === 'reponse' ? `<b>${esc(brTxt(c, s.valeur))}</b> · réponse confirmée par le marchand` : `<b>${esc(brTxt(c, s.valeur))}</b> · <q>${esc(f.citation)}</q> <span class="muted">(${esc(SRC_FR(f.source))})</span>`;
-    return `<button type="button" class="step" data-d="${detail(`<h3>${esc(c.libelle)}</h3><h4>La règle officielle</h4>${t.map((x) => `<p><b>${esc(x.ref)}</b> · <a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></p><blockquote>${esc(x.texte)}</blockquote>`).join('') || '<p class="muted">Aucun texte cité sur ce nœud.</p>'}<p>${esc(n.pourquoi || '')}</p><h4>Le fait vérifié sur le produit</h4><p>${esc(c.question)} <b>${esc(brTxt(c, s.valeur))}</b></p>${f.kind === 'reponse' ? '<p>Réponse donnée dans cet écran par le marchand. Aucune pièce ne l\'établit.</p>' : `<blockquote>${esc(f.citation)}</blockquote><p class="muted">${esc(SRC_FR(f.source))}</p>`}<h4>La conséquence</h4><p>${esc(nodeName(n.branches[s.valeur]))}</p><p class="muted">Autres branches : ${Object.entries(n.branches).filter(([v]) => v !== s.valeur).map(([v, cible]) => esc(brTxt(c, v)) + ' → ' + esc(nodeName(cible))).join(' ; ')}</p><h4>Portée</h4><p>${esc(ARBRE.nomenclature || '')}, niveau 6 chiffres, commun aux pays qui appliquent le Système harmonisé. Le code national de la destination n'est pas établi par cette règle.</p>`)}">
-      <div class="l"><span>Règle</span><span>${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></span></div>
-      <div class="l"><span>Fait vérifié</span><span>${esc(c.question)} ${fait}</span></div>
-      <div class="l c"><span>Conséquence</span><span>${esc(nodeName(n.branches[s.valeur]))}</span></div></button>`;
+    const fait = f.kind === 'reponse' ? `<b>${esc(brTxt(c, s.valeur))}</b> · answer confirmed by the merchant` : `<b>${esc(brTxt(c, s.valeur))}</b> · <q>${esc(f.citation)}</q> <span class="muted">(${esc(SRC_FR(f.source))})</span>`;
+    return `<button type="button" class="step" data-d="${detail(`<h3>${esc(c.libelle)}</h3><h4>The official rule</h4>${t.map((x) => `<p><b>${esc(x.ref)}</b> · <a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></p><blockquote>${esc(x.texte)}</blockquote>`).join('') || '<p class="muted">No text cited on this node.</p>'}<p>${esc(n.pourquoi || '')}</p><h4>The fact checked on the product</h4><p>${esc(c.question)} <b>${esc(brTxt(c, s.valeur))}</b></p>${f.kind === 'reponse' ? '<p>Answer given on this screen by the merchant. No document establishes it.</p>' : `<blockquote>${esc(f.citation)}</blockquote><p class="muted">${esc(SRC_FR(f.source))}</p>`}<h4>The consequence</h4><p>${esc(nodeName(n.branches[s.valeur]))}</p><p class="muted">Other branches: ${Object.entries(n.branches).filter(([v]) => v !== s.valeur).map(([v, cible]) => esc(brTxt(c, v)) + ' → ' + esc(nodeName(cible))).join('; ')}</p><h4>Scope</h4><p>${esc(ARBRE.nomenclature || '')}, 6-digit level, common to the countries that apply the Harmonized System. The national code of the destination is not established by this rule.</p>`)}">
+      <div class="l"><span>Rule</span><span>${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></span></div>
+      <div class="l"><span>Checked fact</span><span>${esc(c.question)} ${fait}</span></div>
+      <div class="l c"><span>Consequence</span><span>${esc(nodeName(n.branches[s.valeur]))}</span></div></button>`;
   }).join('');
   let fin;
   if (res.statut === 'information_manquante') {
     const n = ARBRE.noeuds[res.noeud], c = C[res.critere], t = (n.base || []).map((b) => TX[b]).filter(Boolean);
-    fin = `<div class="block"><div class="k">Point de blocage · un fait manque</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></div>
-      ${S.saved ? '' : `<div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>mène à ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div>`}</div>`;
+    fin = `<div class="block"><div class="k">Blocking point · a fact is missing</div><div class="t">${esc(c.question)}</div><div class="s">${esc(n.pourquoi || '')} <span class="muted">${t.map((x) => esc(x.ref)).join(' · ')}</span></div>
+      ${S.saved ? '' : `<div class="opts">${Object.entries(res.options).map(([v, issues]) => `<button type="button" data-crit="${esc(res.critere)}:${esc(v)}"><b>${esc(brTxt(c, v))}</b><small>leads to ${issues.map((x) => esc(fmtIssue(x))).join(', ')}</small></button>`).join('')}</div>`}</div>`;
   } else if (res.statut === 'hors_perimetre') {
-    fin = `<div class="concl div"><div class="k">Conclusion de la règle</div><b>Ce produit sort du périmètre de la règle</b><div class="s">${esc((ARBRE.noeuds[res.noeud] || {}).motif || '')}</div><div style="margin-top:6px">La règle ne conclut pas. La proposition du moteur reste seule, à faire vérifier.</div></div>`;
+    fin = `<div class="concl div"><div class="k">Rule conclusion</div><b>This product falls outside the scope of the rule</b><div class="s">${esc((ARBRE.noeuds[res.noeud] || {}).motif || '')}</div><div style="margin-top:6px">The rule reaches no conclusion. The engine proposal stands alone and must be verified.</div></div>`;
   } else {
     const n = ARBRE.noeuds[res.noeud], same = top && String(top.code).slice(0, 6) === res.code;
-    fin = `<div class="concl ${same ? '' : 'div'}"><div class="k">Conclusion de la règle</div><b class="c">${esc(fmtCode(res.code))}</b> ${esc(n.libelle || '')}<div class="s">${esc(n.motif || '')}</div>
-      <div style="margin-top:6px">${top ? (same ? 'Le moteur propose le même code : les deux raisonnements convergent.' : `Le moteur propose <b>${esc(fmtCode(String(top.code).slice(0, 6)))}</b> : les deux raisonnements divergent, à faire trancher par une personne habilitée.`) : "Le moteur n'a retenu aucun code pour cette destination."}</div></div>`;
+    fin = `<div class="concl ${same ? '' : 'div'}"><div class="k">Rule conclusion</div><b class="c">${esc(fmtCode(res.code))}</b> ${esc(n.libelle || '')}<div class="s">${esc(n.motif || '')}</div>
+      <div style="margin-top:6px">${top ? (same ? 'The engine proposes the same code: the two lines of reasoning converge.' : `The engine proposes <b>${esc(fmtCode(String(top.code).slice(0, 6)))}</b>: the two lines of reasoning diverge, to be decided by an authorised person.`) : 'The engine kept no code for this destination.'}</div></div>`;
   }
   const reponses = Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse');
-  return head + `<div class="node static rule"><div class="k">Règle encodée · chemin suivi pour ce produit</div>${ver}${steps}${fin}
-    ${reponses.length && !S.saved ? `<div class="hint" style="margin-top:8px">${reponses.length} réponse(s) donnée(s) dans cet écran. <a href="#" data-critreset="1">Les retirer</a></div>` : ''}
-    ${S.critRejetes ? `<div class="hint">${S.critRejetes} valeur(s) écartée(s) à la lecture : passage cité introuvable mot pour mot.</div>` : ''}</div>`;
+  return head + `<div class="node static rule"><div class="k">Encoded rule · path followed for this product</div>${ver}${steps}${fin}
+    ${reponses.length && !S.saved ? `<div class="hint" style="margin-top:8px">${reponses.length} answer(s) given on this screen. <a href="#" data-critreset="1">Remove them</a></div>` : ''}
+    ${S.critRejetes ? `<div class="hint">${S.critRejetes} value(s) set aside at reading: cited passage not found word for word.</div>` : ''}</div>`;
 }
 
 // Une décision officielle proche, avec le résultat de la vérification d'applicabilité quand elle a été faite.
-const VERDICT = { applicable: ['Comparable à ce produit', 'keep'], partiellement: ['Comparable en partie', 'warn'], non_applicable: ['Ne porte pas sur un produit comparable', 'bad'], non_verifiable: ['Non vérifiable', 'out'] };
+const VERDICT = { applicable: ['Comparable to this product', 'keep'], partiellement: ['Partly comparable', 'warn'], non_applicable: ['Does not concern a comparable product', 'bad'], non_verifiable: ['Cannot be verified', 'out'] };
 function precHtmlLigne(x) {
   const a = S.applic[x.ruling_id];
-  let etat = S.saved ? '' : `<button type="button" class="btn ghost" style="padding:2px 8px;margin-left:6px" data-applic="${esc(x.ruling_id)}">Vérifier si elle s'applique</button>`;
-  if (a === 'encours') etat = ' <span class="muted">vérification en cours</span>';
+  let etat = S.saved ? '' : `<button type="button" class="btn ghost" style="padding:2px 8px;margin-left:6px" data-applic="${esc(x.ruling_id)}">Check whether it applies</button>`;
+  if (a === 'encours') etat = ' <span class="muted">check in progress</span>';
   else if (a && a.erreur) etat = ` <span class="tag bad">${esc(a.erreur)}</span>`;
   else if (a) {
-    const v = VERDICT[a.verdict] || [a.verdict, 'warn'], cit = (o) => (o && o.citation ? `<blockquote>${esc(o.citation)}</blockquote>` : '<p class="muted">Les pièces du produit n\'en disent rien.</p>');
+    const v = VERDICT[a.verdict] || [a.verdict, 'warn'], cit = (o) => (o && o.citation ? `<blockquote>${esc(o.citation)}</blockquote>` : '<p class="muted">The product documents say nothing about it.</p>');
     etat = ` <span class="tag ${v[1]}">${esc(v[0])}</span> <button type="button" class="btn ghost" style="padding:2px 8px" data-d="${detail(`<h3>${esc(x.ruling_id)}</h3><p><span class="tag ${v[1]}">${esc(v[0])}</span></p><p>${esc(a.motif || '')}</p>
-      <h4>La décision</h4><p>${esc(a.decision.juridiction || '')} · ${esc(a.decision.date || '')} · ${a.decision.revoquee === true ? 'révoquée' : a.decision.revoquee === false ? 'non révoquée' : 'révocation non vérifiable'} · ${a.meme_juridiction === true ? 'même pays que la destination' : a.meme_juridiction === false ? 'autre pays que la destination : elle n\'engage pas cette douane' : 'pays de destination non comparé'}</p>
-      <h4 class="pro">Points communs vérifiés</h4>${(a.points_communs || []).map((c) => `<p><b>${esc(c.aspect)}</b></p><p class="muted">Produit</p>${cit(c.produit)}<p class="muted">Décision</p>${cit(c.decision)}`).join('') || '<p class="muted">Aucun.</p>'}
-      <h4 class="con">Différences</h4>${(a.differences || []).map((c) => `<p><b>${esc(c.aspect)}</b>${c.decisive ? ' · décisive' : ''}</p><p class="muted">Produit</p>${cit(c.produit)}<p class="muted">Décision</p>${cit(c.decision)}${c.pourquoi_ca_compte ? `<p>${esc(c.pourquoi_ca_compte)}</p>` : ''}`).join('') || '<p class="muted">Aucune.</p>'}
-      <p class="muted">${a.rejetes || 0} élément(s) écarté(s) faute de citation exacte. Le code de la décision n'est jamais repris comme code du produit.</p>`)}">Détail</button>`;
+      <h4>The ruling</h4><p>${esc(a.decision.juridiction || '')} · ${esc(a.decision.date || '')} · ${a.decision.revoquee === true ? 'revoked' : a.decision.revoquee === false ? 'not revoked' : 'revocation cannot be verified'} · ${a.meme_juridiction === true ? 'same country as the destination' : a.meme_juridiction === false ? 'different country from the destination: it does not bind this customs authority' : 'destination country not compared'}</p>
+      <h4 class="pro">Common points verified</h4>${(a.points_communs || []).map((c) => `<p><b>${esc(c.aspect)}</b></p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}`).join('') || '<p class="muted">None.</p>'}
+      <h4 class="con">Differences</h4>${(a.differences || []).map((c) => `<p><b>${esc(c.aspect)}</b>${c.decisive ? ' · decisive' : ''}</p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}${c.pourquoi_ca_compte ? `<p>${esc(c.pourquoi_ca_compte)}</p>` : ''}`).join('') || '<p class="muted">None.</p>'}
+      <p class="muted">${a.rejetes || 0} item(s) set aside for lack of an exact quotation. The code of the ruling is never reused as the code of the product.</p>`)}">Details</button>`;
   }
-  return `<div class="prec"><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, ressemblance de texte ${num(x.similarity)})</span>${etat}</div>`;
+  return `<div class="prec"><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.ruling_id)}</a> → ${esc(x.official_code)} <span class="muted">(${esc(x.ruling_date)}, text resemblance ${num(x.similarity)})</span>${etat}</div>`;
 }
 async function verifierApplic(id) {
   const last = S.rounds[S.rounds.length - 1], x = ((last.data.provenance || {}).precedents || []).find((q) => q.ruling_id === id);
@@ -651,21 +651,21 @@ function obligHtml() {
   const last = S.rounds[S.rounds.length - 1], top = topOf(last.data);
   if (!top) return '';
   const o = S.oblig, hs6 = String(top.code).slice(0, 6);
-  let body = `<form class="line" id="oblig" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px"><input name="v" type="number" min="0" step="any" placeholder="Valeur de la marchandise en USD (facultatif)"><button class="btn sm" type="submit" ${o === 'encours' ? 'disabled' : ''}>${o === 'encours' ? 'Appel en cours' : 'Interroger'}</button></form>`;
+  let body = `<form class="line" id="oblig" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:10px"><input name="v" type="number" min="0" step="any" placeholder="Goods value in USD (optional)"><button class="btn sm" type="submit" ${o === 'encours' ? 'disabled' : ''}>${o === 'encours' ? 'Call in progress' : 'Query'}</button></form>`;
   if (o && o.erreur) body += `<div class="err" style="margin-top:10px">${esc(o.erreur)}</div>`;
   else if (o && o !== 'encours') {
     const nonS = (o.obligations || []).filter((x) => !x.sourcee).length;
     body += `<h4 class="k" style="margin-top:14px">Obligations (${(o.obligations || []).length})</h4>
-      ${(o.obligations || []).map((x) => `<div class="ob"><b>${esc(x.titre)}</b> <span class="tag ${x.sourcee ? 'keep' : 'warn'}">${x.sourcee ? 'texte source fourni' : 'déduite par un modèle, sans texte source'}</span>${x.autorite ? `<br><span class="muted">${esc(x.autorite)}</span>` : ''}${x.source_url ? ` <a href="${safeUrl(x.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>`).join('') || '<div class="muted">Aucune obligation rendue pour cette route.</div>'}
-      ${nonS ? `<div class="hint">${nonS} obligation(s) sans texte officiel : des pistes à vérifier, pas une liste d'obligations établies.</div>` : ''}
-      <h4 class="k" style="margin-top:14px">Droit de douane</h4>
-      ${o.droits ? `<div class="ob"><b>${o.droits.taux_min === o.droits.taux_max || o.droits.taux_max == null ? num(o.droits.taux) : num(o.droits.taux_min) + ' à ' + num(o.droits.taux_max)} ${esc(o.droits.unite || '%')}</b> · ${esc(o.droits.nature || '')}<br><span class="muted">${esc(o.droits.version || '')}${o.droits.ligne_exacte_connue === false ? ' · lu sur ' + esc(o.droits.lignes_lues) + ' lignes nationales du ' + esc(fmtCode(hs6)) + ', la ligne exacte du produit n\'est pas établie' : ''}</span>${o.droits.source_url ? ` <a href="${safeUrl(o.droits.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>` : '<div class="muted">Aucun taux établi.</div>'}
-      <h4 class="k" style="margin-top:14px">Coût à l'arrivée</h4>
-      ${o.cout ? `<div class="comp">${(o.cout.composantes || []).map((c) => `<span>${esc(c.nom)}${c.taux_pct != null ? ' (' + num(c.taux_pct) + ' %)' : ''}</span><span class="${c.connu ? '' : 'u'}">${c.connu ? num(c.montant) + ' ' + esc(o.cout.devise || '') : 'inconnu'}</span>`).join('')}<b>Total ${o.cout.partiel ? 'partiel' : ''}</b><b>${o.cout.total != null ? num(o.cout.total) + ' ' + esc(o.cout.devise || '') : 'non calculable'}</b></div>${o.cout.partiel ? '<div class="hint">Total partiel : les composantes inconnues n\'y sont pas comptées.</div>' : ''}` : '<div class="muted">Non calculé.</div>'}
-      ${(o.manquants || []).length ? `<h4 class="k" style="margin-top:14px">Ce qui manque</h4><ul class="todo">${o.manquants.map((m) => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}`;
+      ${(o.obligations || []).map((x) => `<div class="ob"><b>${esc(x.titre)}</b> <span class="tag ${x.sourcee ? 'keep' : 'warn'}">${x.sourcee ? 'source text provided' : 'inferred by a model, no source text'}</span>${x.autorite ? `<br><span class="muted">${esc(x.autorite)}</span>` : ''}${x.source_url ? ` <a href="${safeUrl(x.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>`).join('') || '<div class="muted">No obligation returned for this route.</div>'}
+      ${nonS ? `<div class="hint">${nonS} obligation(s) without an official text: leads to check, not a list of established obligations.</div>` : ''}
+      <h4 class="k" style="margin-top:14px">Customs duty</h4>
+      ${o.droits ? `<div class="ob"><b>${o.droits.taux_min === o.droits.taux_max || o.droits.taux_max == null ? num(o.droits.taux) : num(o.droits.taux_min) + ' to ' + num(o.droits.taux_max)} ${esc(o.droits.unite || '%')}</b> · ${esc(o.droits.nature || '')}<br><span class="muted">${esc(o.droits.version || '')}${o.droits.ligne_exacte_connue === false ? ' · read across ' + esc(o.droits.lignes_lues) + ' national tariff lines under ' + esc(fmtCode(hs6)) + ', the exact tariff line of the product is not established' : ''}</span>${o.droits.source_url ? ` <a href="${safeUrl(o.droits.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</div>` : '<div class="muted">No rate established.</div>'}
+      <h4 class="k" style="margin-top:14px">Landed cost</h4>
+      ${o.cout ? `<div class="comp">${(o.cout.composantes || []).map((c) => `<span>${esc(c.nom)}${c.taux_pct != null ? ' (' + num(c.taux_pct) + ' %)' : ''}</span><span class="${c.connu ? '' : 'u'}">${c.connu ? num(c.montant) + ' ' + esc(o.cout.devise || '') : 'unknown'}</span>`).join('')}<b>${o.cout.partiel ? 'Partial total' : 'Total'}</b><b>${o.cout.total != null ? num(o.cout.total) + ' ' + esc(o.cout.devise || '') : 'cannot be calculated'}</b></div>${o.cout.partiel ? '<div class="hint">Partial total: the unknown components are not counted in it.</div>' : ''}` : '<div class="muted">Not calculated.</div>'}
+      ${(o.manquants || []).length ? `<h4 class="k" style="margin-top:14px">What is missing</h4><ul class="todo">${o.manquants.map((m) => `<li>${esc(m)}</li>`).join('')}</ul>` : ''}`;
   }
-  return `<div class="link"></div><div class="node static bench"><div class="k">Obligations et droits · ${esc(COUNTRIES[S.product.origin])} → ${esc(COUNTRIES[S.product.dest])}</div>
-    <div class="s">Calculés sur le code à six chiffres ${esc(fmtCode(hs6))}, qui reste une proposition non validée. Un code national changerait le taux applicable.</div>${body}</div>`;
+  return `<div class="link"></div><div class="node static bench"><div class="k">Obligations and duties · ${esc(COUNTRIES[S.product.origin])} → ${esc(COUNTRIES[S.product.dest])}</div>
+    <div class="s">Calculated on the six-digit code ${esc(fmtCode(hs6))}, which remains an unvalidated proposal. A national code would change the applicable rate.</div>${body}</div>`;
 }
 async function onOblig(e) {
   e.preventDefault();
@@ -679,28 +679,28 @@ async function onOblig(e) {
 // Ce qu'il reste à faire avant qu'un déclarant puisse s'appuyer sur le dossier.
 function travailRestant() {
   const last = S.rounds[S.rounds.length - 1], d = last.data, top = topOf(d), out = [], res = regleEval();
-  if ((d.questions || []).length && !last.answered) out.push('Répondre à la question du moteur : ' + d.questions.map((q) => FACT_FR[q.fact] || q.fact).join(', ') + '.');
-  if (res && res.statut === 'information_manquante') out.push('Établir le fait qui bloque la règle encodée : ' + (ARBRE.criteres.find((c) => c.id === res.critere) || {}).question);
-  if (res && res.statut === 'code' && top && String(top.code).slice(0, 6) !== res.code) out.push('Trancher la divergence entre le moteur (' + fmtCode(String(top.code).slice(0, 6)) + ') et la règle encodée (' + fmtCode(res.code) + ').');
+  if ((d.questions || []).length && !last.answered) out.push('Answer the engine question: ' + d.questions.map((q) => FACT_FR[q.fact] || q.fact).join(', ') + '.');
+  if (res && res.statut === 'information_manquante') out.push('Establish the fact that blocks the encoded rule: ' + (ARBRE.criteres.find((c) => c.id === res.critere) || {}).question);
+  if (res && res.statut === 'code' && top && String(top.code).slice(0, 6) !== res.code) out.push('Resolve the divergence between the engine (' + fmtCode(String(top.code).slice(0, 6)) + ') and the encoded rule (' + fmtCode(res.code) + ').');
   const rep = Object.entries(S.crit).filter(([, x]) => x.kind === 'reponse').length;
-  if (rep) out.push('Documenter ' + rep + ' réponse(s) donnée(s) sans pièce dans la règle encodée.');
+  if (rep) out.push('Document ' + rep + ' answer(s) given without a supporting document in the encoded rule.');
   const main = Object.entries(S.facts).filter(([, f]) => f.kind === 'main').map(([k]) => FACT_FR[k] || k);
-  if (main.length) out.push('Appuyer par une pièce : ' + main.join(', ') + '.');
-  if (S.product.photo && S.product.photo.illisible.length) out.push('Relire sur le produit ' + S.product.photo.illisible.length + ' élément(s) non lu(s) sur la photo.');
-  if (!top) out.push("Aucun code retenu par le moteur pour cette destination.");
-  else if (top.system === 'hs6') out.push('Établir le code national de ' + COUNTRIES[S.product.dest] + ' : la proposition s\'arrête à six chiffres.');
+  if (main.length) out.push('Back with a document: ' + main.join(', ') + '.');
+  if (S.product.photo && S.product.photo.illisible.length) out.push('Check on the product ' + S.product.photo.illisible.length + ' item(s) not read on the photo.');
+  if (!top) out.push('No code kept by the engine for this destination.');
+  else if (top.system === 'hs6') out.push('Establish the national code for ' + COUNTRIES[S.product.dest] + ': the proposal stops at six digits.');
   const prec = (d.provenance && d.provenance.precedents) || [];
-  if (prec.length) out.push('Vérifier que les décisions officielles proches portent sur un produit comparable : une ressemblance de texte ne prouve rien.');
-  if (ARBRE) out.push('Faire relire la règle encodée par un déclarant : elle est rédigée par IA.');
-  if (!S.saved) out.push('Faire valider la proposition par une personne habilitée.');
+  if (prec.length) out.push('Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.');
+  if (ARBRE) out.push('Have the encoded rule reviewed by a customs declarant: it is drafted by AI.');
+  if (!S.saved) out.push('Have the proposal validated by an authorised person.');
   return out;
 }
 
 function inputFor(fact) {
-  if (ENUM_FACTS[fact]) return `<select name="${fact}" required><option value="">Choisir</option>${ENUM_FACTS[fact].map((o) => `<option>${o}</option>`).join('')}</select>`;
+  if (ENUM_FACTS[fact]) return `<select name="${fact}" required><option value="">Choose</option>${ENUM_FACTS[fact].map((o) => `<option>${o}</option>`).join('')}</select>`;
   if (NUM_FACTS.includes(fact)) return `<input name="${fact}" type="number" min="0" step="any" required placeholder="${esc(FACT_FR[fact])}">`;
-  if (fact === 'dimensions') return `<div class="dims" style="grid-template-columns:1fr 1fr 1fr"><input name="dimensions.length_mm" type="number" min="0" step="any" placeholder="L mm"><input name="dimensions.width_mm" type="number" min="0" step="any" placeholder="l mm"><input name="dimensions.height_mm" type="number" min="0" step="any" placeholder="H mm"></div>`;
-  if (fact === 'composition') return `<input name="composition" required placeholder="ex. plastics 70, metal 30">`;
+  if (fact === 'dimensions') return `<div class="dims" style="grid-template-columns:1fr 1fr 1fr"><input name="dimensions.length_mm" type="number" min="0" step="any" placeholder="L mm"><input name="dimensions.width_mm" type="number" min="0" step="any" placeholder="W mm"><input name="dimensions.height_mm" type="number" min="0" step="any" placeholder="H mm"></div>`;
+  if (fact === 'composition') return `<input name="composition" required placeholder="e.g. plastics 70, metal 30">`;
   return `<input name="${fact}" required maxlength="200" placeholder="${esc(FACT_FR[fact] || fact)}">`;
 }
 function parseFact(name, v) {
@@ -720,30 +720,30 @@ function onAnswer(e) {
   if (!Object.keys(answered).length) return;
   const n = S.rounds.length;
   S.rounds[n - 1].answered = answered;
-  for (const k of Object.keys(answered)) S.facts[k] = { value: answered[k], kind: 'reponse', origin: 'Réponse du marchand à la question du tour ' + n };
-  run('Réponse du marchand : ' + Object.keys(answered).map((k) => FACT_FR[k] || k).join(', '));
+  for (const k of Object.keys(answered)) S.facts[k] = { value: answered[k], kind: 'reponse', origin: 'Merchant answer to the question in round ' + n };
+  run('Merchant answer: ' + Object.keys(answered).map((k) => FACT_FR[k] || k).join(', '));
 }
 function onAddFact(e) {
   e.preventDefault();
   const f = new FormData(e.target), k = f.get('k'), val = parseFact(k, String(f.get('v')).trim());
   if (!k || val == null || val === '') return;
-  S.facts[k] = { value: val, kind: 'main', origin: 'Saisie à la main dans cet écran, sans pièce à l\'appui' };
-  run('Caractéristique ajoutée sans pièce : ' + (FACT_FR[k] || k));
+  S.facts[k] = { value: val, kind: 'main', origin: 'Entered by hand on this screen, no supporting document' };
+  run('Fact added without a supporting document: ' + (FACT_FR[k] || k));
 }
 function removeFact(k) {
   delete S.facts[k];
-  run('Caractéristique retirée : ' + (FACT_FR[k] || k));
+  run('Fact removed: ' + (FACT_FR[k] || k));
 }
 function keep(i, side) {
   const c = S.conflicts[i], lose = c[side === 'a' ? 'b' : 'a'];
   if (lose.source.startsWith('caracteristique:')) delete S.facts[lose.source.split(':')[1]];
   else S.struck.push({ source: lose.source, quote: lose.quote, kept: c[side], sujet: c.sujet });
   S.conflicts = [];
-  run('Contradiction résolue (' + c.sujet + ') : « ' + lose.quote + ' » déclaré faux');
+  run('Contradiction resolved (' + c.sujet + '): "' + lose.quote + '" declared false');
 }
 
 // Les trois épreuves. Elles rejouent un appel à côté du dossier, sans le modifier.
-const snap = (d) => { const t = topOf(d); return (t ? fmtCode(t.code) : 'aucun code') + ', ' + (STATUS[d.status] || [d.status])[0].toLowerCase(); };
+const snap = (d) => { const t = topOf(d); return (t ? fmtCode(t.code) : 'no code') + ', ' + (STATUS[d.status] || [d.status])[0].toLowerCase(); };
 async function bench(label, fn) {
   S.busy = label; S.error = null; render();
   try { S.tests.push(await fn()); } catch (err) { S.error = String(err.message || err); }
@@ -752,37 +752,37 @@ async function bench(label, fn) {
 function testReformuler(e) {
   e.preventDefault();
   const text = new FormData(e.target).get('v').trim(), base = S.rounds[S.rounds.length - 1].data;
-  bench('Épreuve : reformulation rejouée sur l\'API.', async () => {
+  bench('Test: rephrasing replayed on the API.', async () => {
     const r = await classify(text, S.facts), a = topOf(base), b = topOf(r.data);
     const same = (a && a.code) === (b && b.code);
-    return { type: 'Reformulation', input: text, before: snap(base), after: snap(r.data), tone: same ? 'ok' : 'bad', verdict: same ? 'Tient : même code retenu' : 'Ne tient pas : le code retenu change', request_id: r.request_id, raw: r.body };
+    return { type: 'Rephrasing', input: text, before: snap(base), after: snap(r.data), tone: same ? 'ok' : 'bad', verdict: same ? 'Holds: same code retained' : 'Does not hold: the retained code changes', request_id: r.request_id, raw: r.body };
   });
 }
 function testRetirer(e) {
   e.preventDefault();
   const k = new FormData(e.target).get('v'), base = S.rounds[S.rounds.length - 1].data;
-  bench('Épreuve : appel rejoué sans « ' + (FACT_FR[k] || k) + ' ».', async () => {
+  bench('Test: call replayed without "' + (FACT_FR[k] || k) + '".', async () => {
     const facts = { ...S.facts }; delete facts[k];
     const r = await classify(effective(S.product.desc, 'description'), facts), a = topOf(base), b = topOf(r.data);
     const asks = (r.data.questions || []).some((q) => q.fact === k) || (r.data.missing_attributes || []).includes(k);
     const same = (a && a.code) === (b && b.code) && base.status === r.data.status;
-    const [tone, verdict] = asks ? ['ok', 'Tient : il redemande cette information'] : same ? ['warn', 'Aucun effet : cette information ne pesait pas dans la décision'] : ['bad', 'Ne tient pas : la réponse change sans redemander l\'information'];
-    return { type: 'Retrait', input: FACT_FR[k] || k, before: snap(base), after: snap(r.data), tone, verdict, request_id: r.request_id, raw: r.body };
+    const [tone, verdict] = asks ? ['ok', 'Holds: it asks for this information again'] : same ? ['warn', 'No effect: this information carried no weight in the decision'] : ['bad', 'Does not hold: the answer changes without asking for the information again'];
+    return { type: 'Removal', input: FACT_FR[k] || k, before: snap(base), after: snap(r.data), tone, verdict, request_id: r.request_id, raw: r.body };
   });
 }
 function testContredire(e) {
   e.preventDefault();
   const text = new FormData(e.target).get('v').trim();
-  bench('Épreuve : lecture des pièces rejouée avec la phrase ajoutée.', async () => {
+  bench('Test: document reading replayed with the added sentence.', async () => {
     const L = await lire(effective(S.product.desc, 'description') + ' ' + text, S.facts), n = L.contradictions.length;
-    return { type: 'Contradiction', input: text, before: 'aucune contradiction', after: n ? n + ' contradiction(s) signalée(s) : ' + L.contradictions.map((c) => c.sujet).join(', ') : 'rien de signalé', tone: n ? 'ok' : 'bad', verdict: n ? 'Tient : contradiction signalée' : 'Ne tient pas : rien de signalé', raw: L };
+    return { type: 'Contradiction', input: text, before: 'no contradiction', after: n ? n + ' contradiction(s) flagged: ' + L.contradictions.map((c) => c.sujet).join(', ') : 'nothing flagged', tone: n ? 'ok' : 'bad', verdict: n ? 'Holds: contradiction flagged' : 'Does not hold: nothing flagged', raw: L };
   });
 }
 
 async function onOthers(e) {
   e.preventDefault();
   const list = new FormData(e.target).getAll('c'); if (!list.length) return;
-  S.busy = 'Évaluation de ' + list.length + ' destination(s) en parallèle.'; S.error = null; render();
+  S.busy = 'Assessing ' + list.length + ' destination(s) in parallel.'; S.error = null; render();
   const desc = effective(S.product.desc, 'description');
   S.others = await Promise.all(list.map(async (country) => {
     try { const r = await classify(desc, S.facts, country); return { country, status: r.data.status, top: topOf(r.data), request_id: r.request_id, raw: r.body }; }
@@ -794,7 +794,7 @@ async function onOthers(e) {
 function ouvrirDossier() {
   const d = S.saved || dossier(null), w = window.open('', '_blank');
   if (w) { w.document.open(); w.document.write(dossierHtml(d)); w.document.close(); }
-  else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([dossierHtml(d)], { type: 'text/html' })); a.download = 'dossier-' + d.sku + '.html'; a.click(); }
+  else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([dossierHtml(d)], { type: 'text/html' })); a.download = 'classification-file-' + d.sku + '.html'; a.click(); }
 }
 function dossier(who) {
   const last = S.rounds[S.rounds.length - 1], top = topOf(last.data) || {};
@@ -820,9 +820,10 @@ function grapheDossier() {
   if (!ARBRE) return null;
   const res = regleEval(), C = Object.fromEntries(ARBRE.criteres.map((c) => [c.id, c]));
   return {
-    version: (ARBRE.titre || '') + ' · ' + (ARBRE.nomenclature || ''), statut_version: 'de référence, rédigée par IA, non relue par un déclarant',
+    version: (ARBRE.titre || '') + ' · ' + (ARBRE.nomenclature || ''), statut_version: 'reference version, drafted by AI from the cited texts, not reviewed by a customs declarant',
     resultat: { statut: res.statut, code: res.code || null },
-    chemin: res.chemin.map((s) => { const n = ARBRE.noeuds[s.noeud], f = S.crit[s.critere]; return { question: C[s.critere].question, reponse: brTxt(C[s.critere], s.valeur), textes: (n.base || []).map((b) => TX[b]).filter(Boolean).map((x) => ({ ref: x.ref, texte: x.texte, url: x.url })), citation: f.citation || '', source: f.kind === 'reponse' ? 'réponse du marchand, sans pièce' : SRC_FR(f.source) }; }),
+    chemin: res.chemin.map((s) => { const n = ARBRE.noeuds[s.noeud], f = S.crit[s.critere]; return { question: C[s.critere].question, reponse: brTxt(C[s.critere], s.valeur), textes: (n.base || []).map((b) => TX[b]).filter(Boolean).map((x) => ({ ref: x.ref, texte: x.texte, url: x.url })), citation: f.citation || '', source: f.kind === 'reponse' ? 'merchant answer, no supporting document' : f.source }; }),
+    // « source » n'est pas affiché : c'est le jeton que dossier.js analyse (clé technique de la pièce, ou mention « no supporting document »).
     blocage: res.statut === 'information_manquante' ? { question: C[res.critere].question, options: res.options } : null,
   };
 }
@@ -833,13 +834,13 @@ async function onValidate(e) {
   try { const all = JSON.parse(localStorage.getItem('catalogue') || '[]').filter((r) => !(r.sku === entry.sku && r.destination === entry.destination)); all.push(entry); localStorage.setItem('catalogue', JSON.stringify(all)); } catch {}
   S.saved = entry;
   $('hscode').className = 'hscode set';
-  $('hscode').innerHTML = `<b>${esc(fmtCode(entry.code))}</b><span>validé par ${esc(entry.validated_by)}</span>`;
+  $('hscode').innerHTML = `<b>${esc(fmtCode(entry.code))}</b><span>validated by ${esc(entry.validated_by)}</span>`;
   render();
 }
 function download() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(S.saved, null, 1)], { type: 'application/json' }));
-  a.download = 'dossier-' + S.saved.sku + '-' + S.saved.destination + '.json'; a.click();
+  a.download = 'classification-file-' + S.saved.sku + '-' + S.saved.destination + '.json'; a.click();
 }
 
 $('graph').addEventListener('click', (e) => {

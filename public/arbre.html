@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Arbre d'interprétation · Cleo</title>
+<title>Interpretation tree · Cleo</title>
 <style>
 :root{
   --ink:#0008CF; --ink-08:rgba(0,8,207,.08); --ink-20:rgba(0,8,207,.2);
@@ -113,14 +113,14 @@ pre .chg{background:#5A4300;display:inline-block;width:100%}
 </head>
 <body>
 <header>
-  <h1>Arbre d'interprétation</h1>
-  <p id="perimetre">La règle est une donnée. Modifiez une branche : le résultat, le code derrière et l'accord avec les décisions officielles se recalculent.</p>
-  <nav><a href="/">Classer un produit</a></nav>
+  <h1>Interpretation tree</h1>
+  <p id="perimetre">The rule is data. Edit a branch: the result, the code behind and the agreement with official decisions are recomputed.</p>
+  <nav><a href="/">Classify a product</a></nav>
 </header>
 
-<main id="app"><div class="panel">Chargement de l'arbre, des textes et des décisions.</div></main>
+<main id="app"><div class="panel">Loading the tree, the texts and the decisions.</div></main>
 
-<div id="gate"><form id="gateform" class="panel" style="max-width:380px"><div class="k">Accès réservé</div><b>Code d'accès</b><div id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Entrer</button></form></div>
+<div id="gate"><form id="gateform" class="panel" style="max-width:380px"><div class="k">Restricted access</div><b>Access code</b><div id="gatemsg" style="color:var(--bad)"></div><input id="gatecode" type="password" required autocomplete="off" style="margin:10px 0"><button class="btn" type="submit">Enter</button></form></div>
 
 <script type="module">
 import { evaluer, verifier, rejouer, versCode, cle } from './arbre-moteur.js';
@@ -132,34 +132,34 @@ const fmt = (c) => String(c || '').replace(/^(\d{4})(\d{2})$/, '$1.$2');
 const store = { get: (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 
 let REF, TEXTES, DECISIONS, T = {};
-let arbre, journal, valeurs = {}, cites = {}, sel = null, tab = 'decisions', essai = { nom: 'Produit libre', hs6: null, moteur: null }, msg = null, busy = null, draft = null;
+let arbre, journal, valeurs = {}, cites = {}, sel = null, tab = 'decisions', essai = { nom: 'Free-form product', hs6: null, moteur: null }, msg = null, busy = null, draft = null;
 
 const DOSSIER_DATA = new URLSearchParams(location.search).get('data') === 'dev' ? 'data-dev/' : 'data/'; // jeu d'essai local
-const load = (f) => fetch(DOSSIER_DATA + f).then((r) => { if (!r.ok) throw new Error(f + ' absent'); return r.json(); });
+const load = (f) => fetch(DOSSIER_DATA + f).then((r) => { if (!r.ok) throw new Error(f + ' not found'); return r.json(); });
 try {
   [REF, TEXTES, DECISIONS] = await Promise.all([load('arbre.json'), load('textes.json'), load('decisions.json')]);
-} catch (e) { $('app').innerHTML = `<div class="panel">Données de l'arbre indisponibles : ${esc(e.message)}.</div>`; throw e; }
+} catch (e) { $('app').innerHTML = `<div class="panel">Tree data unavailable: ${esc(e.message)}.</div>`; throw e; }
 T = Object.fromEntries(TEXTES.map((t) => [t.id, t]));
 const saved = store.get('arbre_modifie', null);
 arbre = saved && saved.ref === JSON.stringify(REF).length ? saved.arbre : structuredClone(REF);
 journal = saved && saved.ref === JSON.stringify(REF).length ? saved.journal : [];
-if (REF.perimetre) $('perimetre').textContent = REF.perimetre + ' La règle est une donnée : modifiez une branche, tout se recalcule.';
+if (REF.perimetre) $('perimetre').textContent = REF.perimetre + ' The rule is data: edit a branch and everything is recomputed.';
 const persist = () => store.set('arbre_modifie', { ref: JSON.stringify(REF).length, arbre, journal });
 const C = () => Object.fromEntries(arbre.criteres.map((c) => [c.id, c]));
 const modifie = (id) => JSON.stringify(arbre.noeuds[id]) !== JSON.stringify(REF.noeuds[id]);
-const brLabel = (crit, v) => (crit && crit.type === 'enum' ? ((crit.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Oui' : 'Non');
+const brLabel = (crit, v) => (crit && crit.type === 'enum' ? ((crit.valeurs || []).find((x) => x.v === v) || {}).libelle || v : v === 'oui' ? 'Yes' : 'No');
 
-function nodeTitle(id) { const n = arbre.noeuds[id]; if (!n) return id + ' (absent)'; return n.type === 'code' ? fmt(n.code) + ' · ' + (n.libelle || '') : n.type === 'hors_perimetre' ? 'Hors périmètre' : (C()[n.critere] || {}).libelle || n.critere; }
+function nodeTitle(id) { const n = arbre.noeuds[id]; if (!n) return id + ' (missing)'; return n.type === 'code' ? fmt(n.code) + ' · ' + (n.libelle || '') : n.type === 'hors_perimetre' ? 'Out of scope' : (C()[n.critere] || {}).libelle || n.critere; }
 
 function renderTree(res) {
   const onPath = new Set(res.chemin.map((s) => s.noeud)), crit = C();
   const walk = (id, seen) => {
     const n = arbre.noeuds[id];
-    if (!n) return `<div class="again">nœud absent : ${esc(id)}</div>`;
-    if (seen.includes(id)) return `<div class="again">retour vers ${esc(nodeTitle(id))}</div>`;
+    if (!n) return `<div class="again">missing node: ${esc(id)}</div>`;
+    if (seen.includes(id)) return `<div class="again">back to ${esc(nodeTitle(id))}</div>`;
     const cls = ['nd', n.type === 'question' ? '' : 'code', sel === id ? 'sel' : '', modifie(id) ? 'mod' : '', onPath.has(id) || ((res.statut === 'code' || res.statut === 'hors_perimetre') && res.noeud === id) ? 'on' : '', res.statut === 'information_manquante' && res.noeud === id ? 'stop' : ''].join(' ');
     if (n.type === 'code') return `<button class="${cls}" data-n="${esc(id)}"><span class="c">${esc(fmt(n.code))}</span> <span>${esc(n.libelle || '')}</span></button>`;
-    if (n.type === 'hors_perimetre') return `<button class="${cls}" data-n="${esc(id)}"><b>Hors périmètre</b> <small>${esc(n.motif || '')}</small></button>`;
+    if (n.type === 'hors_perimetre') return `<button class="${cls}" data-n="${esc(id)}"><b>Out of scope</b> <small>${esc(n.motif || '')}</small></button>`;
     const c = crit[n.critere];
     return `<button class="${cls}" data-n="${esc(id)}"><div class="q">${esc(c ? c.question : n.critere)}</div><div class="w">${esc(n.pourquoi || '')}</div><small>${(n.base || []).map((b) => esc((T[b] || {}).ref || b)).join(' · ')}</small></button>
       <ul>${Object.entries(n.branches || {}).map(([v, cible]) => `<li><span class="br">${esc(brLabel(c, v))}</span>${walk(cible, [...seen, id])}</li>`).join('')}</ul>`;
@@ -173,54 +173,54 @@ function renderEssai(res) {
   const rows = arbre.criteres.map((c) => {
     const v = cle(valeurs[c.id]);
     const ctl = c.type === 'bool'
-      ? `<span class="seg">${[['oui', 'Oui'], ['non', 'Non'], ['', 'Inconnu']].map(([k, l]) => `<button type="button" data-v="${c.id}:${k}" class="${(v || '') === k ? 'a' : ''}">${l}</button>`).join('')}</span>`
-      : `<select data-s="${c.id}"><option value="">Inconnu</option>${(c.valeurs || []).map((x) => `<option value="${esc(x.v)}" ${v === x.v ? 'selected' : ''}>${esc(x.libelle || x.v)}</option>`).join('')}</select>`;
-    return `<div class="crit" style="${used.has(c.id) ? '' : 'opacity:.55'}"><div class="lbl">${esc(c.question)}</div>${ctl}${cites[c.id] ? `<div class="cit">« ${esc(cites[c.id].citation)} » <span class="muted">(${esc(cites[c.id].source)})</span></div>` : ''}</div>`;
+      ? `<span class="seg">${[['oui', 'Yes'], ['non', 'No'], ['', 'Unknown']].map(([k, l]) => `<button type="button" data-v="${c.id}:${k}" class="${(v || '') === k ? 'a' : ''}">${l}</button>`).join('')}</span>`
+      : `<select data-s="${c.id}"><option value="">Unknown</option>${(c.valeurs || []).map((x) => `<option value="${esc(x.v)}" ${v === x.v ? 'selected' : ''}>${esc(x.libelle || x.v)}</option>`).join('')}</select>`;
+    return `<div class="crit" style="${used.has(c.id) ? '' : 'opacity:.55'}"><div class="lbl">${esc(c.question)}</div>${ctl}${cites[c.id] ? `<div class="cit">“${esc(cites[c.id].citation)}” <span class="muted">(${esc(cites[c.id].source)})</span></div>` : ''}</div>`;
   }).join('');
   let out;
   if (res.statut === 'code') {
     const n = arbre.noeuds[res.noeud];
-    out = `<div class="result"><div class="k">Résultat de l'arbre</div><div class="big">${esc(fmt(res.code))}</div><div>${esc(n.libelle || '')}</div><div class="muted" style="font-size:13px;margin-top:4px">${esc(n.motif || '')}</div>
-      ${essai.hs6 ? `<div style="margin-top:8px">Décision officielle : <b>${esc(fmt(essai.hs6))}</b> <span class="tag ${essai.hs6 === res.code ? 'ok' : 'bad'}">${essai.hs6 === res.code ? 'Reproduite' : 'Contredite'}</span></div>` : ''}
-      ${essai.moteur ? `<div style="margin-top:8px">Proposition du moteur Cleo : <b>${esc(fmt(essai.moteur))}</b> <span class="tag ${essai.moteur.slice(0, 6) === res.code ? 'ok' : 'warn'}">${essai.moteur.slice(0, 6) === res.code ? 'Même code' : 'Code différent'}</span></div>` : ''}
-      <ol class="path">${res.chemin.map((s) => `<li>${esc((crit[s.critere] || {}).libelle || s.critere)} : <b>${esc(brLabel(crit[s.critere], s.valeur))}</b></li>`).join('')}</ol></div>`;
+    out = `<div class="result"><div class="k">Tree result</div><div class="big">${esc(fmt(res.code))}</div><div>${esc(n.libelle || '')}</div><div class="muted" style="font-size:13px;margin-top:4px">${esc(n.motif || '')}</div>
+      ${essai.hs6 ? `<div style="margin-top:8px">Official decision: <b>${esc(fmt(essai.hs6))}</b> <span class="tag ${essai.hs6 === res.code ? 'ok' : 'bad'}">${essai.hs6 === res.code ? 'Reproduced' : 'Contradicted'}</span></div>` : ''}
+      ${essai.moteur ? `<div style="margin-top:8px">Cleo engine proposal: <b>${esc(fmt(essai.moteur))}</b> <span class="tag ${essai.moteur.slice(0, 6) === res.code ? 'ok' : 'warn'}">${essai.moteur.slice(0, 6) === res.code ? 'Same code' : 'Different code'}</span></div>` : ''}
+      <ol class="path">${res.chemin.map((s) => `<li>${esc((crit[s.critere] || {}).libelle || s.critere)}: <b>${esc(brLabel(crit[s.critere], s.valeur))}</b></li>`).join('')}</ol></div>`;
   } else if (res.statut === 'information_manquante') {
     const c = crit[res.critere];
-    out = `<div class="result wait"><div class="k">Information manquante</div><b>${esc(c ? c.question : res.critere)}</b><div style="font-size:13px;margin-top:6px">Ce que la réponse départage :</div><ul class="path">${Object.entries(res.options).map(([v, codes]) => `<li><b>${esc(brLabel(c, v))}</b> → ${codes.map((x) => esc(/^\d{6}$/.test(x) ? fmt(x) : x)).join(', ')}</li>`).join('')}</ul></div>`;
+    out = `<div class="result wait"><div class="k">Missing information</div><b>${esc(c ? c.question : res.critere)}</b><div style="font-size:13px;margin-top:6px">What the answer decides between:</div><ul class="path">${Object.entries(res.options).map(([v, codes]) => `<li><b>${esc(brLabel(c, v))}</b> → ${codes.map((x) => esc(/^\d{6}$/.test(x) ? fmt(x) : x)).join(', ')}</li>`).join('')}</ul></div>`;
   } else if (res.statut === 'hors_perimetre') {
-    out = `<div class="result wait"><div class="k">Hors périmètre</div>${esc((arbre.noeuds[res.noeud] || {}).motif || '')}</div>`;
-  } else out = `<div class="err">${esc(res.message || 'Arbre non jouable')}</div>`;
+    out = `<div class="result wait"><div class="k">Out of scope</div>${esc((arbre.noeuds[res.noeud] || {}).motif || '')}</div>`;
+  } else out = `<div class="err">${esc(res.message || 'Tree cannot be evaluated')}</div>`;
   const dossier = store.get('dossier', null);
-  return `<div class="panel"><h2>Produit à l'essai</h2><div class="sub">${esc(essai.nom)}. Changez une réponse : le chemin se redessine dans l'arbre.</div>
-    <div class="bar" style="margin-bottom:8px">${dossier ? `<button class="btn ghost" id="fromDossier" ${busy ? 'disabled' : ''}>Lire le dossier en cours (${esc(dossier.sku)})</button>` : ''}<button class="btn ghost" id="clearVals">Tout remettre à inconnu</button></div>
+  return `<div class="panel"><h2>Product under test</h2><div class="sub">${esc(essai.nom)}. Change an answer: the path is redrawn in the tree.</div>
+    <div class="bar" style="margin-bottom:8px">${dossier ? `<button class="btn ghost" id="fromDossier" ${busy ? 'disabled' : ''}>Read the current file (${esc(dossier.sku)})</button>` : ''}<button class="btn ghost" id="clearVals">Reset all to unknown</button></div>
     ${busy ? `<div class="muted" style="margin-bottom:8px">${esc(busy)}</div>` : ''}${rows}${out}</div>`;
 }
 
 function renderEditor() {
-  if (!sel || !arbre.noeuds[sel]) return `<div class="panel ed"><h2>Modifier l'arbre</h2><div class="sub">Cliquez un nœud de l'arbre pour lire sa base légale et changer votre lecture.</div>
-    <div class="bar"><button class="btn ghost" id="addCode">Ajouter un code</button><button class="btn ghost" id="addQ">Ajouter une question</button></div></div>`;
+  if (!sel || !arbre.noeuds[sel]) return `<div class="panel ed"><h2>Edit the tree</h2><div class="sub">Click a node in the tree to read its legal basis and change your reading.</div>
+    <div class="bar"><button class="btn ghost" id="addCode">Add a code</button><button class="btn ghost" id="addQ">Add a question</button></div></div>`;
   const n = draft || (draft = structuredClone(arbre.noeuds[sel])), crit = C();
   const targets = Object.keys(arbre.noeuds).filter((id) => id !== sel);
   const opt = (cur) => targets.map((id) => `<option value="${esc(id)}" ${cur === id ? 'selected' : ''}>${esc(nodeTitle(id)).slice(0, 70)}</option>`).join('');
-  const base = `<label>Base légale</label><div class="base">${(n.base || []).map((b) => `<span class="b" data-t="${esc(b)}">${esc((T[b] || {}).ref || b)}<button type="button" data-rb="${esc(b)}">×</button></span>`).join('') || '<span class="muted">Aucun texte cité</span>'}</div>
-    <select id="addBase" style="margin-top:6px"><option value="">Citer un autre texte</option>${TEXTES.filter((t) => !(n.base || []).includes(t.id)).map((t) => `<option value="${esc(t.id)}">${esc(t.ref)}</option>`).join('')}</select><div id="texte"></div>`;
+  const base = `<label>Legal basis</label><div class="base">${(n.base || []).map((b) => `<span class="b" data-t="${esc(b)}">${esc((T[b] || {}).ref || b)}<button type="button" data-rb="${esc(b)}">×</button></span>`).join('') || '<span class="muted">No text cited</span>'}</div>
+    <select id="addBase" style="margin-top:6px"><option value="">Cite another text</option>${TEXTES.filter((t) => !(n.base || []).includes(t.id)).map((t) => `<option value="${esc(t.id)}">${esc(t.ref)}</option>`).join('')}</select><div id="texte"></div>`;
   let body;
   if (n.type === 'question') {
     const c = crit[n.critere];
     const vals = c ? (c.type === 'bool' ? ['oui', 'non'] : (c.valeurs || []).map((x) => x.v)) : Object.keys(n.branches || {});
-    body = `<label>Critère examiné</label><select id="edCrit">${arbre.criteres.map((x) => `<option value="${x.id}" ${x.id === n.critere ? 'selected' : ''}>${esc(x.libelle)}</option>`).join('')}</select>
-      <label>Pourquoi ce critère décide</label><textarea id="edWhy">${esc(n.pourquoi || '')}</textarea>
-      <label>Où mène chaque réponse</label>${vals.map((v) => `<div class="row"><span><span class="br">${esc(brLabel(c, v))}</span></span><select data-b="${esc(v)}"><option value="">Choisir</option>${opt((n.branches || {})[v])}</select></div>`).join('')}${base}`;
+    body = `<label>Criterion examined</label><select id="edCrit">${arbre.criteres.map((x) => `<option value="${x.id}" ${x.id === n.critere ? 'selected' : ''}>${esc(x.libelle)}</option>`).join('')}</select>
+      <label>Why this criterion decides</label><textarea id="edWhy">${esc(n.pourquoi || '')}</textarea>
+      <label>Where each answer leads</label>${vals.map((v) => `<div class="row"><span><span class="br">${esc(brLabel(c, v))}</span></span><select data-b="${esc(v)}"><option value="">Choose</option>${opt((n.branches || {})[v])}</select></div>`).join('')}${base}`;
   } else if (n.type === 'code') {
-    body = `<div class="row"><span>Code (6 chiffres)</span><input id="edCode" value="${esc(n.code || '')}" maxlength="6" inputmode="numeric"></div>
-      <label>Libellé</label><input id="edLib" value="${esc(n.libelle || '')}"><label>Motif</label><textarea id="edMotif">${esc(n.motif || '')}</textarea>${base}`;
-  } else body = `<label>Motif</label><textarea id="edMotif">${esc(n.motif || '')}</textarea>`;
+    body = `<div class="row"><span>Code (6 digits)</span><input id="edCode" value="${esc(n.code || '')}" maxlength="6" inputmode="numeric"></div>
+      <label>Description</label><input id="edLib" value="${esc(n.libelle || '')}"><label>Reason</label><textarea id="edMotif">${esc(n.motif || '')}</textarea>${base}`;
+  } else body = `<label>Reason</label><textarea id="edMotif">${esc(n.motif || '')}</textarea>`;
   const changed = JSON.stringify(n) !== JSON.stringify(arbre.noeuds[sel]);
-  return `<div class="panel ed"><div class="bar" style="justify-content:space-between"><h2>${n.type === 'question' ? 'Question' : n.type === 'code' ? 'Code' : 'Hors périmètre'} <span class="muted" style="font-weight:400">${esc(sel)}</span></h2><button class="btn ghost" id="closeEd">Fermer</button></div>
+  return `<div class="panel ed"><div class="bar" style="justify-content:space-between"><h2>${n.type === 'question' ? 'Question' : n.type === 'code' ? 'Code' : 'Out of scope'} <span class="muted" style="font-weight:400">${esc(sel)}</span></h2><button class="btn ghost" id="closeEd">Close</button></div>
     ${body}
-    <div class="sign"><label>Votre lecture, en une phrase</label><textarea id="edReason" placeholder="ex. Une station avec port réseau reste une unité d'ordinateur : le réseau n'est pas sa fonction principale."></textarea>
-      <label>Signé par</label><input id="edWho" value="${esc(store.get('signataire', ''))}" placeholder="Nom de la personne qui interprète">
-      <div class="bar" style="margin-top:10px"><button class="btn" id="apply" ${changed ? '' : 'disabled'}>Appliquer cette lecture</button>${modifie(sel) && REF.noeuds[sel] ? '<button class="btn ghost" id="revert">Revenir au texte de référence</button>' : ''}${!REF.noeuds[sel] ? '<button class="btn danger" id="delNode">Supprimer ce nœud</button>' : ''}</div></div>
+    <div class="sign"><label>Your reading, in one sentence</label><textarea id="edReason" placeholder="e.g. A docking station with a network port remains a computer unit: networking is not its principal function."></textarea>
+      <label>Signed by</label><input id="edWho" value="${esc(store.get('signataire', ''))}" placeholder="Name of the person interpreting">
+      <div class="bar" style="margin-top:10px"><button class="btn" id="apply" ${changed ? '' : 'disabled'}>Apply this reading</button>${modifie(sel) && REF.noeuds[sel] ? '<button class="btn ghost" id="revert">Revert to the reference text</button>' : ''}${!REF.noeuds[sel] ? '<button class="btn danger" id="delNode">Delete this node</button>' : ''}</div></div>
     ${msg ? `<div class="err">${esc(msg)}</div>` : ''}</div>`;
 }
 
@@ -228,65 +228,67 @@ function renderBottom(res) {
   const ref = rejouer(REF, DECISIONS), cur = rejouer(arbre, DECISIONS);
   const refBy = Object.fromEntries(ref.lignes.map((l) => [l.id, l])), flips = cur.lignes.filter((l) => l.verdict !== refBy[l.id].verdict || l.obtenu !== refBy[l.id].obtenu);
   const edited = JSON.stringify(arbre) !== JSON.stringify(REF);
-  const V = { reproduit: ['Reproduite', 'ok'], contredit: ['Contredite', 'bad'], non_tranche: ['Non tranchée', 'warn'], hors_perimetre: ['Hors périmètre', 'off'] };
+  const V = { reproduit: ['Reproduced', 'ok'], contredit: ['Contradicted', 'bad'], non_tranche: ['Undecided', 'warn'], hors_perimetre: ['Out of scope', 'off'] };
   let body;
   const D = Object.fromEntries(DECISIONS.map((d) => [d.id, d]));
   if (tab === 'decisions') {
     const order = [...cur.lignes].sort((a, b) => (flips.includes(b) - flips.includes(a)));
     // part des décisions reproduites sans aucune valeur déduite sur le chemin
     const explicites = cur.lignes.filter((l) => l.verdict === 'reproduit' && l.r.chemin.every((st) => ((D[l.id].criteres[st.critere] || {}).appui || 'explicite') === 'explicite')).length;
-    body = `<div class="score"><div><b>${cur.reproduit}/${cur.total}</b><span>décisions reproduites</span></div><div><b>${explicites}</b><span>dont sur des faits tous écrits noir sur blanc</span></div><div><b>${cur.contredit}</b><span>contredites</span></div><div><b>${cur.non_tranche}</b><span>non tranchées (fait absent du texte)</span></div><div><b>${cur.hors_perimetre}</b><span>hors périmètre</span></div></div>
-      <div class="delta ${edited ? '' : 'same'}">${edited ? `Arbre de référence : ${ref.reproduit}/${ref.total} reproduites. Votre arbre : <b>${cur.reproduit}/${cur.total}</b>. Contredites : ${ref.contredit} → <b>${cur.contredit}</b>. ${flips.length} décision(s) changent de verdict, en tête du tableau. Une règle plus grossière reproduit plus de décisions parce qu'elle demande moins de faits : regardez aussi celles qu'elle contredit.` : `Arbre de référence, non modifié. Chaque modification rejoue les ${cur.total} décisions.`}</div>
-      <div class="scroll"><table><tr><th style="width:26%">Décision</th><th>Produit</th><th style="width:13%">Officiel</th><th style="width:13%">Arbre</th><th style="width:19%">Verdict</th></tr>
-      ${order.map((l) => { const d = D[l.id], f = flips.includes(l); return `<tr class="click ${f ? 'flip' : ''}" data-d="${esc(l.id)}"><td><a href="${safeUrl(d.url)}" target="_blank" rel="noopener" data-stop>${esc(l.id)}</a><br><span class="muted">${esc(d.source === 'EU_REGLEMENT' ? 'Règlement UE' : 'CBP, États-Unis')} · ${esc(d.date)}</span></td><td>${esc(d.produit)}</td><td style="font-family:var(--mono)">${esc(fmt(l.hs6))}</td><td style="font-family:var(--mono)">${l.obtenu ? esc(fmt(l.obtenu)) : '·'}</td><td><span class="tag ${V[l.verdict][1]}">${V[l.verdict][0]}</span>${f ? `<br><span class="muted">avant : ${V[refBy[l.id].verdict][0].toLowerCase()}</span>` : ''}</td></tr>`; }).join('')}</table></div>
-      <div class="note">Cliquez une décision pour la charger comme produit à l'essai. Chaque valeur vient d'un passage du texte de la décision. Quand le texte ne dit pas un fait, il reste inconnu et la décision est « non tranchée ». Une partie des valeurs est déduite (une absence lue dans la description de ce dont l'article est fait, par exemple) : le second chiffre ne compte que les décisions reproduites sans aucune déduction. Fiches annotées par IA.</div>`;
+    body = `<div class="score"><div><b>${cur.reproduit}/${cur.total}</b><span>decisions reproduced</span></div><div><b>${explicites}</b><span>of which on facts all stated in writing</span></div><div><b>${cur.contredit}</b><span>contradicted</span></div><div><b>${cur.non_tranche}</b><span>undecided (fact absent from the text)</span></div><div><b>${cur.hors_perimetre}</b><span>out of scope</span></div></div>
+      <div class="delta ${edited ? '' : 'same'}">${edited ? `Reference tree: ${ref.reproduit}/${ref.total} reproduced. Your tree: <b>${cur.reproduit}/${cur.total}</b>. Contradicted: ${ref.contredit} → <b>${cur.contredit}</b>. ${flips.length} decision(s) change verdict, listed at the top of the table. A coarser rule reproduces more decisions because it asks for fewer facts: also look at the ones it contradicts.` : `Reference tree, unedited. Each edit replays the ${cur.total} decisions.`}</div>
+      <div class="scroll"><table><tr><th style="width:26%">Decision</th><th>Product</th><th style="width:13%">Official</th><th style="width:13%">Tree</th><th style="width:19%">Verdict</th></tr>
+      ${order.map((l) => { const d = D[l.id], f = flips.includes(l); return `<tr class="click ${f ? 'flip' : ''}" data-d="${esc(l.id)}"><td><a href="${safeUrl(d.url)}" target="_blank" rel="noopener" data-stop>${esc(l.id)}</a><br><span class="muted">${esc(d.source === 'EU_REGLEMENT' ? 'EU classification regulation' : 'CBP ruling, United States')} · ${esc(d.date)}</span></td><td>${esc(d.produit)}</td><td style="font-family:var(--mono)">${esc(fmt(l.hs6))}</td><td style="font-family:var(--mono)">${l.obtenu ? esc(fmt(l.obtenu)) : '·'}</td><td><span class="tag ${V[l.verdict][1]}">${V[l.verdict][0]}</span>${f ? `<br><span class="muted">before: ${V[refBy[l.id].verdict][0].toLowerCase()}</span>` : ''}</td></tr>`; }).join('')}</table></div>
+      <div class="note">Click a decision to load it as the product under test. Each value comes from a passage in the text of the decision. When the text does not state a fact, it stays unknown and the decision is “undecided”. Some values are inferred (an absence read from the description of what the article is made of, for example): the second figure counts only the decisions reproduced without any inference. Records annotated by AI.</div>`;
   } else if (tab === 'code') {
     const refLines = new Set(versCode(REF).split('\n'));
-    body = `<div class="sub">La même règle écrite en code. Régénéré à chaque modification ; les lignes en surbrillance diffèrent de la référence.</div><pre>${versCode(arbre).split('\n').map((l) => (refLines.has(l) ? esc(l) : `<span class="chg">${esc(l)}</span>`)).join('\n')}</pre>
-      <div class="bar" style="margin-top:10px"><button class="btn ghost" id="dlJson">Télécharger l'arbre (JSON)</button><button class="btn ghost" id="dlJs">Télécharger le code</button></div>`;
+    body = `<div class="sub">The same rule written as code. Regenerated on each edit; highlighted lines differ from the reference.</div><pre>${versCode(arbre).split('\n').map((l) => (refLines.has(l) ? esc(l) : `<span class="chg">${esc(l)}</span>`)).join('\n')}</pre>
+      <div class="bar" style="margin-top:10px"><button class="btn ghost" id="dlJson">Download the tree (JSON)</button><button class="btn ghost" id="dlJs">Download the code</button></div>`;
   } else {
-    body = journal.length ? journal.slice().reverse().map((j) => `<div class="j"><b>${esc(j.qui)}</b> <span class="muted">· ${esc(j.quand)} · ${esc(j.noeud)}</span><br>${esc(j.lecture)}<br><span class="muted">${esc(j.changement)} · décisions reproduites : ${j.avant} → ${j.apres}</span></div>`).join('')
-      : '<div class="muted">Aucune interprétation enregistrée. Chaque modification appliquée est signée, datée et gardée ici avec son effet sur les décisions.</div>';
+    body = journal.length ? journal.slice().reverse().map((j) => `<div class="j"><b>${esc(j.qui)}</b> <span class="muted">· ${esc(j.quand)} · ${esc(j.noeud)}</span><br>${esc(j.lecture)}<br><span class="muted">${esc(j.changement)} · decisions reproduced: ${j.avant} → ${j.apres}</span></div>`).join('')
+      : '<div class="muted">No interpretation recorded. Each applied edit is signed, dated and kept here with its effect on the decisions.</div>';
   }
   const pb = verifier(arbre);
-  return `<div class="panel"><div class="tabs">${[['decisions', 'Décisions officielles'], ['code', 'Le code derrière'], ['journal', 'Journal des interprétations' + (journal.length ? ' (' + journal.length + ')' : '')]].map(([k, l]) => `<button data-tab="${k}" class="${tab === k ? 'a' : ''}">${l}</button>`).join('')}</div>
-    ${pb.filter((x) => !/jamais atteint/.test(x)).length ? `<div class="err">Arbre à compléter : ${pb.filter((x) => !/jamais atteint/.test(x)).map(esc).join(' ; ')}</div>` : ''}${pb.some((x) => /jamais atteint/.test(x)) ? `<div class="note" style="margin:0 0 10px">Nœuds qu'aucune branche n'atteint plus : ${pb.filter((x) => /jamais atteint/.test(x)).map((x) => esc(x.split(' : ')[0])).join(', ')}.</div>` : ''}${body}</div>`;
+  return `<div class="panel"><div class="tabs">${[['decisions', 'Official decisions'], ['code', 'The code behind'], ['journal', 'Interpretation log' + (journal.length ? ' (' + journal.length + ')' : '')]].map(([k, l]) => `<button data-tab="${k}" class="${tab === k ? 'a' : ''}">${l}</button>`).join('')}</div>
+    ${pb.filter((x) => !/never reached/.test(x)).length ? `<div class="err">Tree to complete: ${pb.filter((x) => !/never reached/.test(x)).map(esc).join('; ')}</div>` : ''}${pb.some((x) => /never reached/.test(x)) ? `<div class="note" style="margin:0 0 10px">Nodes no branch reaches any more: ${pb.filter((x) => /never reached/.test(x)).map((x) => esc(x.split(': ')[0])).join(', ')}.</div>` : ''}${body}</div>`;
 }
 
 function render() {
   const res = evaluer(arbre, valeurs), edited = JSON.stringify(arbre) !== JSON.stringify(REF);
-  $('app').innerHTML = `<div class="col"><div class="panel"><div class="bar" style="justify-content:space-between;margin-bottom:6px"><h2>${esc(arbre.titre || 'Arbre')}</h2>${edited ? '<button class="btn danger" id="reset">Revenir à l\'arbre de référence</button>' : '<span class="tag off">Arbre de référence</span>'}</div>
-      <div class="sub">${esc(arbre.nomenclature || '')}, niveau 6 chiffres. Rédigé par IA à partir des textes cités, non relu par un déclarant en douane. Barre orange : nœud modifié.</div>${renderTree(res)}</div></div>
+  $('app').innerHTML = `<div class="col"><div class="panel"><div class="bar" style="justify-content:space-between;margin-bottom:6px"><h2>${esc(arbre.titre || 'Tree')}</h2>${edited ? '<button class="btn danger" id="reset">Revert to the reference tree</button>' : '<span class="tag off">Reference tree</span>'}</div>
+      <div class="sub">${esc(arbre.nomenclature || '')}, six digits only, national code not established. Drafted by AI from the cited texts, not reviewed by a customs declarant. Orange bar: edited node.</div>${renderTree(res)}</div></div>
     <div class="col">${renderEssai(res)}${renderEditor()}${renderBottom(res)}</div>`;
 }
 
 function setVals(v, c, e) { valeurs = v; cites = c || {}; essai = e; render(); }
 function apply() {
   const reason = $('edReason').value.trim(), who = $('edWho').value.trim();
-  if (reason.length < 10 || !who) { msg = 'Une lecture en une phrase et une signature sont nécessaires pour modifier la règle.'; return render(); }
+  if (reason.length < 10 || !who) { msg = 'A one-sentence reading and a signature are required to edit the rule.'; return render(); }
   const next = structuredClone(arbre); next.noeuds[sel] = draft;
-  const pb = verifier(next).filter((p) => !/jamais atteint/.test(p));
-  if (pb.length) { msg = 'Modification refusée : ' + pb.join(' ; '); return render(); }
+  const pb = verifier(next).filter((p) => !/never reached/.test(p));
+  if (pb.length) { msg = 'Edit refused: ' + pb.join('; '); return render(); }
   const avant = rejouer(arbre, DECISIONS).reproduit, apres = rejouer(next, DECISIONS).reproduit;
-  const old = arbre.noeuds[sel], what = draft.type === 'code' && old.code !== draft.code ? `code ${fmt(old.code)} → ${fmt(draft.code)}` : draft.type === 'question' && JSON.stringify(old.branches) !== JSON.stringify(draft.branches) ? 'branches modifiées' : draft.type === 'question' && old.critere !== draft.critere ? 'critère changé' : 'texte ou base légale modifiés';
-  journal.push({ qui: who, quand: new Date().toLocaleString('fr-FR'), noeud: sel + ' · ' + nodeTitle(sel), lecture: reason, changement: what, avant: avant + '/' + DECISIONS.length, apres: apres + '/' + DECISIONS.length });
+  const old = arbre.noeuds[sel], what = draft.type === 'code' && old.code !== draft.code ? `code ${fmt(old.code)} → ${fmt(draft.code)}` : draft.type === 'question' && JSON.stringify(old.branches) !== JSON.stringify(draft.branches) ? 'branches changed' : draft.type === 'question' && old.critere !== draft.critere ? 'criterion changed' : 'text or legal basis changed';
+  journal.push({ qui: who, quand: horodatage(), noeud: sel + ' · ' + nodeTitle(sel), lecture: reason, changement: what, avant: avant + '/' + DECISIONS.length, apres: apres + '/' + DECISIONS.length });
   arbre = next; store.set('signataire', who); msg = null; draft = null; persist(); render();
 }
+// date et heure locales, format non ambigu : 2026-10-04 14:05
+function horodatage() { const d = new Date(), z = (n) => String(n).padStart(2, '0'); return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}`; }
 function newId(p) { let i = 1; while (arbre.noeuds[p + 'x' + i]) i++; return p + 'x' + i; }
 
 async function fromDossier() {
   const d = store.get('dossier', null); if (!d) return;
-  busy = 'Lecture du dossier : une valeur par critère, avec le passage qui l\'établit.'; render();
+  busy = 'Reading the file: one value per criterion, with the passage that establishes it.'; render();
   try {
     let j;
     for (let n = 0; n < 3; n++) {
       const r = await fetch('/api/criteres', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-App-Code': localStorage.getItem('code') || '' }, body: JSON.stringify({ pieces: { description: d.description, fiche_technique: d.fiche_technique, caracteristiques: d.caracteristiques }, criteres: arbre.criteres }) });
       if (r.status === 401) { await new Promise((ok) => { $('gate').style.display = 'flex'; $('gateform').onsubmit = (e) => { e.preventDefault(); localStorage.setItem('code', $('gatecode').value.trim()); $('gate').style.display = 'none'; ok(); }; }); continue; }
-      j = await r.json(); if (!r.ok) throw new Error(j.error || 'Erreur ' + r.status); break;
+      j = await r.json(); if (!r.ok) throw new Error(j.error || 'Error ' + r.status); break;
     }
     busy = null;
-    setVals(Object.fromEntries(Object.entries(j.valeurs).map(([k, x]) => [k, x.valeur])), j.valeurs, { nom: 'Dossier ' + d.sku + ' : ' + Object.keys(j.valeurs).length + ' critère(s) établi(s) par les pièces, les autres restent inconnus', hs6: null, moteur: d.code_moteur || null });
-  } catch (e) { busy = null; msg = String(e.message || e); essai = { ...essai, nom: 'Lecture du dossier impossible : ' + msg }; render(); }
+    setVals(Object.fromEntries(Object.entries(j.valeurs).map(([k, x]) => [k, x.valeur])), j.valeurs, { nom: 'File ' + d.sku + ': ' + Object.keys(j.valeurs).length + ' criterion(criteria) established by the documents, the others stay unknown', hs6: null, moteur: d.code_moteur || null });
+  } catch (e) { busy = null; msg = String(e.message || e); essai = { ...essai, nom: 'Could not read the file: ' + msg }; render(); }
 }
 const dl = (name, text, type) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click(); };
 
@@ -298,18 +300,18 @@ $('app').addEventListener('click', (e) => {
   const tx = t.closest('[data-t]'); if (tx) { const x = T[tx.dataset.t]; $('texte').innerHTML = x ? `<blockquote><b>${esc(x.ref)}</b>\n${esc(x.texte)}\n<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a></blockquote>` : ''; return; }
   const nd = t.closest('[data-n]'); if (nd) { sel = nd.dataset.n; draft = null; msg = null; return render(); }
   const tb = t.closest('[data-tab]'); if (tb) { tab = tb.dataset.tab; return render(); }
-  const dr = t.closest('[data-d]'); if (dr) { const d = DECISIONS.find((x) => x.id === dr.dataset.d); return setVals(Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, x.valeur])), Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, { citation: x.citation, source: d.id + (x.appui && x.appui !== 'explicite' ? ', valeur déduite : ' + x.appui : '') }])), { nom: d.id + ' : ' + d.produit, hs6: d.hs6, moteur: null }); }
+  const dr = t.closest('[data-d]'); if (dr) { const d = DECISIONS.find((x) => x.id === dr.dataset.d); return setVals(Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, x.valeur])), Object.fromEntries(Object.entries(d.criteres).map(([k, x]) => [k, { citation: x.citation, source: d.id + (x.appui && x.appui !== 'explicite' ? ', inferred value: ' + x.appui : '') }])), { nom: d.id + ': ' + d.produit, hs6: d.hs6, moteur: null }); }
   if (t.id === 'apply') return apply();
   if (t.id === 'closeEd') { sel = null; draft = null; msg = null; return render(); }
-  if (t.id === 'revert') { arbre.noeuds[sel] = structuredClone(REF.noeuds[sel]); draft = null; journal.push({ qui: store.get('signataire', '') || 'non signé', quand: new Date().toLocaleString('fr-FR'), noeud: sel, lecture: 'Retour au texte de référence', changement: 'annulation', avant: '', apres: rejouer(arbre, DECISIONS).reproduit + '/' + DECISIONS.length }); persist(); return render(); }
-  if (t.id === 'delNode') { const used = Object.entries(arbre.noeuds).some(([, n]) => n.type === 'question' && Object.values(n.branches || {}).includes(sel)); if (used) { msg = 'Ce nœud est encore la destination d\'une branche.'; return render(); } delete arbre.noeuds[sel]; sel = null; draft = null; persist(); return render(); }
+  if (t.id === 'revert') { arbre.noeuds[sel] = structuredClone(REF.noeuds[sel]); draft = null; journal.push({ qui: store.get('signataire', '') || 'unsigned', quand: horodatage(), noeud: sel, lecture: 'Reverted to the reference text', changement: 'revert', avant: '', apres: rejouer(arbre, DECISIONS).reproduit + '/' + DECISIONS.length }); persist(); return render(); }
+  if (t.id === 'delNode') { const used = Object.entries(arbre.noeuds).some(([, n]) => n.type === 'question' && Object.values(n.branches || {}).includes(sel)); if (used) { msg = 'This node is still the target of a branch.'; return render(); } delete arbre.noeuds[sel]; sel = null; draft = null; persist(); return render(); }
   if (t.id === 'reset') { arbre = structuredClone(REF); journal = []; sel = null; draft = null; persist(); return render(); }
-  if (t.id === 'clearVals') return setVals({}, {}, { nom: 'Produit libre', hs6: null, moteur: null });
+  if (t.id === 'clearVals') return setVals({}, {}, { nom: 'Free-form product', hs6: null, moteur: null });
   if (t.id === 'fromDossier') return fromDossier();
   if (t.id === 'addCode') { sel = newId('c'); arbre.noeuds[sel] = { type: 'code', code: '', libelle: '', motif: '', base: [] }; draft = null; return render(); }
   if (t.id === 'addQ') { sel = newId('q'); arbre.noeuds[sel] = { type: 'question', critere: arbre.criteres[0].id, pourquoi: '', base: [], branches: {} }; draft = null; return render(); }
-  if (t.id === 'dlJson') return dl('arbre-interpretation.json', JSON.stringify({ ...arbre, journal }, null, 1), 'application/json');
-  if (t.id === 'dlJs') return dl('classer.js', versCode(arbre), 'text/javascript');
+  if (t.id === 'dlJson') return dl('interpretation-tree.json', JSON.stringify({ ...arbre, journal }, null, 1), 'application/json');
+  if (t.id === 'dlJs') return dl('classify.js', versCode(arbre), 'text/javascript');
 });
 $('app').addEventListener('change', (e) => {
   const t = e.target;

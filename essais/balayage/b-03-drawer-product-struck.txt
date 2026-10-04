@@ -1,0 +1,160 @@
+### SCREEN b/drawer-product-struck
+### BODY
+Customs classification
+
+One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.
+
+Interpretation tree
+Product record
+USB-C dock, description only
+USB-C dock with datasheet
+Catalogue and datasheet that contradict each other
+Talking toy
+Buildable clock
+Robot dog
+SKU
+GTIN (optional)
+Dimensions and weight (optional)
+Shipping and customs
+Photo of the product or its label (optional)
+Customs description
+Datasheet or label (optional, text)
+Each fact kept cites the passage it comes from.
+Destination
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+Country of origin
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+The origin stays on the record. Classification does not use it.
+Category / HS code
+Empty until an authorised person has validated
+Classify this product
+Live calls to api.legaldata.cleolabs.co
+DOCUMENTS, FACTS AND ENCODED RULE
+PRODUCT
+DOCK-STAND → France
+USB-C charging stand for laptop, power only, no data ports, no network, no video output
+Datasheet attached
+KNOWN FACTS
+Description only. No structured fact.
+Function
+Use
+Material
+Process
+Power (W)
+Voltage (V)
+Weight (g)
+Add
+PROPOSAL, ALTERNATIVES AND REMAINING WORK
+unreadable model response: {"caracteristiques":[{"fact":"function","value":"data transfer (USB-A, USB-C), video output (HDMI 4K 60 Hz), network (Gigabit Ethernet), power delivery pass-through to host laptop","source":"fiche_tec
+×
+DOCK-STAND
+CATALOGUE DESCRIPTION
+
+USB-C charging stand for laptop, power only, no data ports, no network, no video output
+
+DATASHEET
+
+Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.
+
+DESTINATION
+
+France (FR)
+
+ORIGIN
+
+China (CN). Kept on the record, not sent to classification.
+### DRAWER (open)
+DOCK-STAND
+CATALOGUE DESCRIPTION
+
+USB-C charging stand for laptop, power only, no data ports, no network, no video output
+
+DATASHEET
+
+Ports: 2 x USB-A 3.2 Gen 1 (5 Gbps data), 1 x USB-C data, 1 x HDMI 2.0 (4K 60 Hz video output), 1 x RJ45 Gigabit Ethernet. Power delivery pass-through up to 100 W to the host laptop. Aluminium housing. Net weight 310 g. Input 20 V.
+
+DESTINATION
+
+France (FR)
+
+ORIGIN
+
+China (CN). Kept on the record, not sent to classification.
+### ATTRS
+L cm
+W cm
+H cm
+kg
+e.g. USB-C docking station for laptop
+Connectors, functions, power supply, material…
+Add a fact
+Close
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: Function
+option: Use
+option: Material
+option: Process
+option: Power (W)
+option: Voltage (V)
+option: Weight (g)

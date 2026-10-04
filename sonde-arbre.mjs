@@ -12,13 +12,13 @@ if (process.env.URL_APP && existsSync(new URL('./.code-acces', import.meta.url))
 await p.goto(base + 'arbre' + (process.argv[2] === 'dev' ? '?data=dev' : ''));
 await p.waitForSelector('.tree', { timeout: 30000 });
 const score = async () => (await p.textContent('.score div b')).trim();
-console.log('nœuds affichés :', await p.locator('.nd').count(), '| décisions :', await p.locator('tr.click').count(), '| score de référence :', await score());
+console.log('nodes shown:', await p.locator('.nd').count(), '| decisions:', await p.locator('tr.click').count(), '| reference score:', await score());
 // 1. charger une décision : le chemin s'allume et le verdict s'affiche
 await p.locator('tr.click').first().click();
-console.log('décision chargée :', (await p.textContent('.panel .sub')).slice(0, 80), '| résultat :', (await p.locator('.result').innerText()).replace(/\n/g, ' ').slice(0, 140), '| nœuds sur le chemin :', await p.locator('.nd.on').count());
+console.log('decision loaded:', (await p.textContent('.panel .sub')).slice(0, 80), '| result:', (await p.locator('.result').innerText()).replace(/\n/g, ' ').slice(0, 140), '| nodes on the path:', await p.locator('.nd.on').count());
 // 2. produit libre : tout inconnu → information manquante avec ce que la réponse départage
 await p.click('#clearVals');
-console.log('tout inconnu :', (await p.locator('.result').innerText()).replace(/\n/g, ' ').slice(0, 200));
+console.log('all unknown:', (await p.locator('.result').innerText()).replace(/\n/g, ' ').slice(0, 200));
 // 3. modifier : la première question, sa première branche pointe vers un autre code
 await p.locator('.nd:not(.code)').first().click();
 const selB = p.locator('select[data-b]').first(), cur = await selB.inputValue();
@@ -26,19 +26,19 @@ const opts = await selB.locator('option').evaluateAll((os) => os.map((o) => [o.v
 const cible = opts.find(([v, t]) => v && v !== cur && /^\d{4}\.\d{2}/.test(t));
 await selB.selectOption(cible[0]);
 await p.click('#apply');
-console.log('sans signature :', (await p.locator('.ed .err').count()) ? await p.textContent('.ed .err') : 'ACCEPTÉ (défaut)');
-await p.fill('#edReason', 'Lecture d\'essai : cette branche mène ailleurs selon mon interprétation.'); await p.fill('#edWho', 'Sonde automatique');
+console.log('without signature:', (await p.locator('.ed .err').count()) ? await p.textContent('.ed .err') : 'ACCEPTED (defect)');
+await p.fill('#edReason', 'Test reading: this branch leads elsewhere under my interpretation.'); await p.fill('#edWho', 'Automated probe');
 await p.click('#apply');
-console.log('après modification → score :', await score(), '| bandeau :', (await p.textContent('.delta')).slice(0, 150), '| décisions qui basculent :', await p.locator('tr.flip').count(), '| nœuds marqués modifiés :', await p.locator('.nd.mod').count());
-await p.click('[data-tab=code]'); console.log('lignes de code changées :', await p.locator('pre .chg').count());
-await p.click('[data-tab=journal]'); console.log('journal :', (await p.locator('.j').first().innerText()).replace(/\n/g, ' ').slice(0, 200));
+console.log('after edit → score:', await score(), '| banner:', (await p.textContent('.delta')).slice(0, 150), '| decisions that flip:', await p.locator('tr.flip').count(), '| nodes marked edited:', await p.locator('.nd.mod').count());
+await p.click('[data-tab=code]'); console.log('changed code lines:', await p.locator('pre .chg').count());
+await p.click('[data-tab=journal]'); console.log('log:', (await p.locator('.j').first().innerText()).replace(/\n/g, ' ').slice(0, 200));
 await p.screenshot({ path: 'sonde-arbre-1.png', fullPage: true });
 // 4. persistance puis retour à la référence
 await p.reload(); await p.waitForSelector('.tree');
-console.log('après rechargement, nœuds modifiés :', await p.locator('.nd.mod').count());
-await p.click('#reset'); console.log('retour à la référence → score :', await score(), '| nœuds modifiés :', await p.locator('.nd.mod').count());
+console.log('after reload, edited nodes:', await p.locator('.nd.mod').count());
+await p.click('#reset'); console.log('back to reference → score:', await score(), '| edited nodes:', await p.locator('.nd.mod').count());
 await p.setViewportSize({ width: 390, height: 844 }); await p.waitForTimeout(200);
-console.log('débordement mobile (px) :', await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth));
+console.log('mobile overflow (px):', await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth));
 await p.screenshot({ path: 'sonde-arbre-2-mobile.png', fullPage: true });
-console.log('erreurs JS :', errs.length, errs.slice(0, 3));
+console.log('JS errors:', errs.length, errs.slice(0, 3));
 await b.close();

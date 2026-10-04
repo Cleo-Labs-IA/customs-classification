@@ -1,0 +1,106 @@
+### SCREEN c/landing
+### BODY
+Customs classification
+
+One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify.
+
+Interpretation tree
+Product record
+USB-C dock, description only
+USB-C dock with datasheet
+Catalogue and datasheet that contradict each other
+Talking toy
+Buildable clock
+Robot dog
+SKU
+GTIN (optional)
+Dimensions and weight (optional)
+Shipping and customs
+Photo of the product or its label (optional)
+Customs description
+Datasheet or label (optional, text)
+Each fact kept cites the passage it comes from.
+Destination
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+Country of origin
+France (FR)
+Germany (DE)
+Spain (ES)
+Italy (IT)
+Netherlands (NL)
+United Kingdom (GB)
+United States (US)
+Canada (CA)
+Japan (JP)
+Australia (AU)
+Switzerland (CH)
+South Korea (KR)
+China (CN)
+Vietnam (VN)
+India (IN)
+Mexico (MX)
+The origin stays on the record. Classification does not use it.
+Category / HS code
+Empty until an authorised person has validated
+Classify this product
+Live calls to api.legaldata.cleolabs.co
+The decision file appears here
+Pick a sample or fill in the record, then run the classification. Every box opens on click.
+×
+### DRAWER (closed)
+
+### ATTRS
+L cm
+W cm
+H cm
+kg
+e.g. USB-C docking station for laptop
+Connectors, functions, power supply, material…
+Close
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)
+option: France (FR)
+option: Germany (DE)
+option: Spain (ES)
+option: Italy (IT)
+option: Netherlands (NL)
+option: United Kingdom (GB)
+option: United States (US)
+option: Canada (CA)
+option: Japan (JP)
+option: Australia (AU)
+option: Switzerland (CH)
+option: South Korea (KR)
+option: China (CN)
+option: Vietnam (VN)
+option: India (IN)
+option: Mexico (MX)

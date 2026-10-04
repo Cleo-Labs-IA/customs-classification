@@ -1,0 +1,219 @@
+### SCREEN readable file (c)
+en | Classification file DOCK-PRO
+CUSTOMS CLASSIFICATION FILE
+
+DOCK-PRO
+Proposal not validated
+Product reference
+DOCK-PRO
+Destination
+France (FR)
+Date
+Not provided
+Status returned by the API
+several codes remain plausible (ambiguous)
+Request identifier
+7bc7970c-5469-4183-ba4b-033b8115ef4d
+2. Conclusion
+Code received, not retained as a proposal
+8517.62
+Communication apparatus (excluding telephone sets or base stations); machines for the reception, conversion and transmission or regeneration of voice, images or other data, including switching and routing apparatus
+Status returned by the API: several codes remain plausible (ambiguous). The API does not present this code as a settled proposal.
+Status returned by the API
+several codes remain plausible (ambiguous)
+Validation
+Proposal not validated
+Level reached
+Six digits only, national code not established
+Detail from the API: No national catalog is enabled for FR; lookups answer at HS6 (6 digits) only. See GET /v2/customs/coverage/countries.
+Nomenclature
+hs6
+Nomenclature version
+HS2022-Comtrade-2026-09-23
+3. Technical description and documents
+Description
+USB-C docking station for laptop
+Datasheet or label transcription
+
+Not provided
+
+Photo
+
+No photo attached to this file.
+
+4. Confirmed facts
+Function: connects peripherals, video and network to a laptop over one USB-C cable no verified passage
+
+Provenance: Confirmed answer
+Merchant answer to the question in round 1
+
+The stated provenance is not supported by any verified passage in the documents of this file.
+
+Use: office use no supporting document
+
+Provenance: No supporting document
+Entered by hand on this screen, no supporting document
+
+Fact entered by hand: no document in the file supports it.
+
+5. Reasoning
+
+Interpretation tree, version Chargers, power banks, docking stations, hubs, adapters and cables for computers and phones · Combined Nomenclature 2026 (Implementing Regulation (EU) 2025/1926). Status of this version, copied as the application wrote it: “reference version, drafted by AI from the cited texts, not reviewed by a customs declarant”. The tree stops before reaching a code: a piece of information is missing.
+
+Step 1. Which function do the datasheet and the packaging state first for this product?
+
+Answer: Carry data, video or sound between devices (cable, adapter, hub, docking station, network dongle)
+
+Official text: Section XVI, note 3
+
+“Unless the context otherwise requires, composite machines consisting of two or more machines fitted together to form a whole and other machines designed for the purpose of performing two or more complementary or alternative functions are to be classified as if consisting only of that component or as being that machine which performs the principal function.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: Section XVI, note 5
+
+“For the purposes of these notes, the expression ‘machine’ means any machine, machinery, plant, equipment, apparatus or appliance cited in the headings of Chapter 84 or 85.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 1
+
+“The titles of sections, chapters and sub-chapters are provided for ease of reference only; for legal purposes, classification shall be determined according to the terms of the headings and any relative section or chapter notes and, provided such headings or notes do not otherwise require, according to the following provisions.”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3 (introductory sentence)
+
+“When, by application of rule 2(b) or for any other reason, goods are prima facie classifiable under two or more headings, classification shall be effected as follows:”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3(a)
+
+“(a) the heading which provides the most specific description shall be preferred to headings providing a more general description. However, when two or more headings each refer to part only of the materials or substances contained in mixed or composite goods or to part only of the items in a set put up for retail sale, those headings are to be regarded as equally specific in relation to those goods, even if one of them gives a more complete or precise description of the goods;”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+Official text: General rules for the interpretation of the Combined Nomenclature, rule 3(b)
+
+“(b) mixtures, composite goods consisting of different materials or made up of different components, and goods put up in sets for retail sale, which cannot be classified by reference to 3(a), shall be classified as if they consisted of the material or component which gives them their essential character, in so far as this criterion is applicable;”
+
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32025R1926
+
+What establishes it is not a passage from the documents but the confirmed fact “Function”, with value “connects peripherals, video and network to a laptop over one USB-C cable”. This fact is not supported by any verified passage from the documents: it is not evidence drawn from the product documents.
+
+Stopping point
+
+The path stops at this question, which the documents do not answer: Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+
+What the answer decides between:
+
+If the answer is “oui”: 8471.80, out of scope, 8543.70, 8517.62
+If the answer is “non”: 8544.42, out of scope, 8536.69
+6. Alternatives set aside
+Code	Description	Reason for setting aside
+8517.69	Communication apparatus (excluding telephone sets or base stations); machines for the transmission or reception of voice, images or other data (including wired/wireless networks), n.e.c. in item no. 8517.6	8517.62 describes the conversion and regeneration function more specifically than this residual subheading.
+8471.30	Automatic data processing machines; portable, weighing not more than 10kg, consisting of at least a central processing unit, a keyboard and a display	The dock lacks a CPU, keyboard and display, so it is not a portable ADP machine.
+8528.52	Monitors; other than cathode-ray tube; capable of directly connecting to and designed for use with an automatic data processing machine of heading 84.71	The dock does not display images, so it is not a monitor.
+8536.70	Connectors for optical fibres, optical fibre bundles or cables	Note 9 limits the heading to passive optical fibre connectors, which excludes a multi-function dock.
+7. Evidence
+
+Not provided
+
+8. Close official rulings
+
+A close ruling is not proof. It concerns another product, sometimes in another jurisdiction or at another date. It informs the reasoning, it does not establish it.
+
+N307285 US_CBP_CROSS
+Ruling code
+8471.80.1000
+Ruling date
+22 November 2019
+Similarity returned by the API
+0.526
+Address
+https://rulings.cbp.gov/ruling/N307285
+
+Applicability check: not carried out for this ruling.
+
+UK600011214 UK_HMRC_ATAR
+Ruling code
+8471.80.0000
+Ruling date
+2 September 2024
+Similarity returned by the API
+0.5
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600011214
+
+Applicability check: not carried out for this ruling.
+
+UK600012139 UK_HMRC_ATAR
+Ruling code
+8471.80.0000
+Ruling date
+27 January 2025
+Similarity returned by the API
+0.497
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600012139
+
+Applicability check: not carried out for this ruling.
+
+UK600014243 UK_HMRC_ATAR
+Ruling code
+8471.70.7000
+Ruling date
+27 October 2025
+Similarity returned by the API
+0.468
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600014243
+
+Applicability check: not carried out for this ruling.
+
+UK600010593 UK_HMRC_ATAR
+Ruling code
+8471.80.0000
+Ruling date
+18 June 2024
+Similarity returned by the API
+0.454
+Address
+https://www.tax.service.gov.uk/search-for-advance-tariff-rulings/ruling/600010593
+
+Applicability check: not carried out for this ruling.
+
+10. Open questions
+Establish the fact that blocks the encoded rule: Does the product contain a chip or a circuit that converts, regenerates, distributes or switches the signal?
+Back with a document: Use.
+Establish the national code for France: the proposal stops at six digits.
+Check that the similar official rulings concern a comparable product: a text resemblance proves nothing.
+Have the encoded rule reviewed by a customs declarant: it is drafted by AI.
+Have the proposal validated by an authorised person.
+11. History
+Evaluation rounds
+#	Cause	Status	Code retained	Confidence returned by the API	Time
+1	First assessment
+Request: fa700a71-5916-4daf-a334-0d203941bc76
+	information needed (needs_information)	8517.62	0.16	8.6 s
+2	Merchant answer: Function
+Request: 66fcb853-7e09-4f75-8057-b82e3bd95dd6
+	several codes remain plausible (ambiguous)	8471.60	0.07	15.5 s
+3	Fact added without a supporting document: Use
+Request: 7bc7970c-5469-4183-ba4b-033b8115ef4d
+	several codes remain plausible (ambiguous)	8517.62	0.21	8.9 s
+
+The confidence returned by the API is a score internal to the engine, copied as is. It serves to compare the rounds with one another and does not measure whether the code is right.
+
+Robustness tests
+
+No robustness test was replayed for this file.
+
+12. Validation
+Proposal not validated
+
+No authorized person has approved this proposal yet. It must not be used for a declaration as it stands.
+
+API disclaimer
+These suggestions are informational only. Final customs classification, export licensing and product certification must be validated by a licensed broker or competent authority. Misclassification or missed dual-use controls carry legal liability.

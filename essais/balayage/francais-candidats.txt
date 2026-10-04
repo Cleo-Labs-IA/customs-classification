@@ -1,0 +1,103 @@
+
+### app.mjs (2)
+app.mjs:49: accès Bedrock absent
+app.mjs:142: You transcribe what is printed on a product or its rating label, for a customs file. The label may be rotated or partly hidden. You never classify and never complete a value you cannot read. Return ONLY a JSON object: {"lignes":["each printed line or marking, 
+
+### server.mjs (0)
+
+### lib/applicabilite.mjs (4)
+lib/applicabilite.mjs:146: You help a customs declarant check whether an official tariff ruling applies to a product. You never classify, never guess, and never state or suggest a tariff code for the product. You receive "produit" (documents: "description", "fiche_technique", and "carac
+lib/applicabilite.mjs:269: ${k} ${k > 1 ? plusieurs : un}
+lib/applicabilite.mjs:294: Ruling issued by ${nom_source}, which is not the customs authority of the destination country: it informs the reasoning, it does not bind that authority.
+lib/applicabilite.mjs:295: Destination country not given or not recognized: it cannot be said whether ${nom_source} is the customs authority of the destination country.
+
+### lib/obligations.mjs (5)
+lib/obligations.mjs:213: ${sans.length} of ${obligations.length} obligation(s) have no official source text checked${detail ? 
+lib/obligations.mjs:247: The tariff returned by the API is not that of the requested destination country: its rate is set aside.
+lib/obligations.mjs:272: The base rate comes from a mirror source (${source || 'unnamed'}), not directly from the official source of the destination country.
+lib/obligations.mjs:333: The cost returned by the API covers a different code or destination from the ones requested: it is set aside.
+lib/obligations.mjs:573: The destination country is missing or unreadable (two-letter ISO code expected).
+
+### public/arbre-moteur.js (0)
+
+### public/arbre.html (3)
+public/arbre.html:175: <span class="seg">${[['oui', 'Yes'], ['non', 'No'], ['', 'Unknown']].map(([k, l]) => 
+public/arbre.html:193: <div class="panel"><h2>Product under test</h2><div class="sub">${esc(essai.nom)}. Change an answer: the path is redrawn in the tree.</div> <div class="bar" style="margin-bottom:8px">${dossier ? 
+public/arbre.html:247: <div class="j"><b>${esc(j.qui)}</b> <span class="muted">· ${esc(j.quand)} · ${esc(j.noeud)}</span><br>${esc(j.lecture)}<br><span class="muted">${esc(j.changement)} · decisions reproduced: ${j.avant} → ${j.apres}</span></div>
+
+### public/conformite.js (3)
+public/conformite.js:41: <div class="tri"> <div><b>Observed on the photo (${lus.length} line${lus.length === 1 ? '' : 's'})</b>${lus.length ? esc(lus.slice(0, 6).join(' · ')) + (lus.length > 6 ? ' …' : '') : 'Nothing could be read.'}</div> <div class="c"><b>To confirm (${non.length + 
+public/conformite.js:43: ).join('')}${photo.reference ? '' : '<li>The model reference: none was read on the label.</li>'}</ul>${non.length ? 'A close-up photo of the rating label would settle these.' : ''}</div> <div class="x"><b>Cannot be deduced from a photo</b><ul>${NOT_FROM_PHOTO.
+public/conformite.js:58: <div class="node static cf"><div class="k">Market access requirements</div><div class="s">Requirements are encoded for one market so far: ${esc(data.marche)}. Nothing is shown for another destination rather than guessed.</div></div>
+
+### public/dossier.js (42)
+public/dossier.js:193: no candidate retained for this destination
+public/dossier.js:207: Matière
+public/dossier.js:207: Matière de la semelle
+public/dossier.js:207: Matière de la tige
+public/dossier.js:208: Procédé
+public/dossier.js:208: Épaisseur (mm)
+public/dossier.js:208: Cylindrée (cm³)
+public/dossier.js:209: Présentation
+public/dossier.js:216: description du catalogue
+public/dossier.js:218: fiche technique
+public/dossier.js:218: fiche technique ou etiquette
+public/dossier.js:219: etiquette lue sur la photo
+public/dossier.js:226: (?:caract[ée]ristique|characteristic|attribute|fact)
+public/dossier.js:228: ^${MOT_FAIT}\\s*[«“"]\\s*(.+?)\\s*[»”"]$
+public/dossier.js:268:  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0;background:#efece6;color:#1c1b19;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;overflow-wrap:anywhere} .page{max-width:210mm;margin:24px auto;bac
+public/dossier.js:346: <span class="nr">non-numeric value received, not displayed</span>
+public/dossier.js:418: Proposal validated by ${esc(qui)}${quand.ok ? 
+public/dossier.js:423: <header> <p class="sur">Customs classification file</p> <h1>${t(d.sku)}</h1> <div class="statut ${valide ? 'oui' : 'non'}">${phraseStatut}</div> <dl class="fiche"> <dt>Product reference</dt><dd>${t(d.sku)}</dd> <dt>Destination</dt><dd>${t(pays(d.destination))}
+public/dossier.js:454:  : ''} <dl class="fiche"> <dt>Status returned by the API</dt><dd>${statut(d.status_api)}</dd> <dt>Validation</dt><dd>${phraseStatut}</dd> <dt>Level reached</dt><dd><strong>${esc(niv.charAt(0).toUpperCase() + niv.slice(1))}</strong>${plat(d.niveau_hint) ? 
+public/dossier.js:467: <div class="piece">${barrer(nom)}</div>
+public/dossier.js:475: document: ${esc(p.ou.map((x) => PIECES[x]).join(', '))}
+public/dossier.js:504: The tree stops before reaching a code: a piece of information is missing.
+public/dossier.js:513: <p class="d">What establishes it in the product documents (${esc(PIECES[r.ou])}):</p>${citation(r.texte)}
+public/dossier.js:556: “${esc(r.texte)}” <span class="d">(${esc(PIECES[r.ou])})</span>
+public/dossier.js:561: <p class="note"><strong>A close ruling is not proof.</strong> It concerns another product, sometimes in another jurisdiction or at another date. It informs the reasoning, it does not establish it.</p>${decisions.map((x) => { const a = objet(x.applicabilite), a
+public/dossier.js:578: <h3>Applicability check</h3> <dl class="kv"><dt>Verdict</dt><dd><strong>${v ? esc(VERDICTS[v] || v) : NR}</strong></dd><dt>Grounds</dt><dd>${t(a.motif)}</dd><dt>Same jurisdiction as the destination</dt><dd>${typeof a.meme_juridiction === 'boolean' ? (a.meme_ju
+public/dossier.js:588: <tr><td>${t(p.aspect)}</td><td>${coteProduit(p.produit, NR)}</td><td>${cit(p.decision) ? 
+public/dossier.js:589: <tr><td>${t(p.aspect)}${p.decisive === true ? '<br><span class="etiq alerte">decisive</span>' : ''}</td><td>${coteProduit(p.produit, '<span class="nr">The documents say nothing about it</span>')}</td><td>${cit(p.decision) ? 
+public/dossier.js:607: <p>${INCONNU} The value received is a boolean: it states neither ${quoi} nor its absence.</p>
+public/dossier.js:608: <p>${INCONNU} The value received is a bare number (${esc(dec(v))}), with no unit or source: it does not read as ${quoi}.</p>
+public/dossier.js:611: <p>${INCONNU} ${enEchec(['droits', 'compliance_check', 'classification']) ? 'The duties could not be read (see the failed calls below).' : 'No duty returned for this file.'}</p>
+public/dossier.js:620: <div class="bloc"><dl class="kv"><dt>Base rate</dt><dd>${taux ? 
+public/dossier.js:623: <p>${INCONNU} ${enEchec(['cout', 'compliance_check', 'classification']) ? 'The cost could not be calculated (see the failed calls below).' : 'No cost returned for this file.'}</p>
+public/dossier.js:632: <tr><td>${t(x.nom)}</td><td>${x.connu !== false && nombre(x.montant) ? argent(x.montant) : INCONNU}</td><td>${nombre(x.taux_pct) ? esc(
+public/dossier.js:645: ${INCONNU} The obligations could not be read (see the failed calls below). Their absence is not established.
+public/dossier.js:646:  : ''} <h3>Customs duties</h3>${droitsHtml(ob.droits)} <h3>Cost</h3>${coutHtml(ob.cout)} ${manquants.length ? 
+public/dossier.js:649: <li>${INCONNU} ${t(m)}</li>
+public/dossier.js:649:  : ''} ${echecs.length || erreur ? 
+public/dossier.js:650: <li><span class="etiq alerte">failed</span> Error returned: ${esc(erreur)}</li>
+public/dossier.js:654: <dt>Country of origin</dt><dd>${t(pays(route.origine))}</dd><dt>Country of destination</dt><dd>${t(pays(route.destination))}</dd>${paires(sans(route, ['origine', 'destination']))}
+public/dossier.js:672: <tr><td>${t(pays(x.pays))}</td><td>${plat(x.erreur) ? 
+public/dossier.js:675:  <div class="statut ${valide ? 'oui' : 'non'}" style="margin:0 0 12px">${phraseStatut}</div> ${valide ? 
+
+### public/exigences-moteur.js (4)
+public/exigences-moteur.js:78: ${ou}: unknown criterion "${x.critere}"
+public/exigences-moteur.js:78: ${ou}: empty "parmi" for ${x.critere}
+public/exigences-moteur.js:79: ${ou}: no legal basis
+public/exigences-moteur.js:79: ${ou}: unknown text "${id}"
+
+### public/index.html (18)
+public/index.html:188:  One product record and one destination. In return: what is established, what conflicts, what is missing, then a proposal to verify. 
+public/index.html:263: No candidate kept for this destination
+public/index.html:471:  : '<div class="s">Description only. No structured fact.</div>'} ${S.lecture && S.lecture.rejected ? 
+public/index.html:527: Destination nomenclature (
+public/index.html:552: <div class="node static bench"><div class="k">Stress-test this answer</div> <div class="s">Three tests replayed live. The verdict compares the retained code and the status, before and after.</div> <div class="t3"> <form class="tst" id="t-ref"><b>Rephrase the c
+public/index.html:564: <form class="node static bench" id="others"><div class="k">Same documents, other destinations</div> <div class="s">One call per destination. Each row states the level actually obtained: national nomenclature, six digits only, or nothing.</div> <div class="dest
+public/index.html:614: ) : 'The engine kept no code for this destination.'}</div></div>
+public/index.html:628:  <span class="tag bad">${esc(a.erreur)}</span>
+public/index.html:632: same country as the destination
+public/index.html:632: different country from the destination: it does not bind this customs authority
+public/index.html:632: destination country not compared
+public/index.html:633: <p><b>${esc(c.aspect)}</b></p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}
+public/index.html:634: <p><b>${esc(c.aspect)}</b>${c.decisive ? ' · decisive' : ''}</p><p class="muted">Product</p>${cit(c.produit)}<p class="muted">Ruling</p>${cit(c.decision)}${c.pourquoi_ca_compte ? 
+public/index.html:654: <div class="err" style="margin-top:10px">${esc(o.erreur)}</div>
+public/index.html:659:  : ''} <h4 class="k" style="margin-top:14px">Customs duty</h4> ${o.droits ? 
+public/index.html:661:  <a href="${safeUrl(o.droits.source_url)}" target="_blank" rel="noopener">source</a>
+public/index.html:689: No code kept by the engine for this destination.
+public/index.html:784:  destination(s) in parallel.
+
+### api/index.mjs (0)
