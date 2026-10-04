@@ -13,3 +13,4 @@ essais/modules/obligations-raw/
 server.log
 essais/modules/*.pdf
 essais/modules/*.png
+!public/data/produits/*.jpg
