@@ -1,0 +1,56 @@
+Photos : iFixit (www.ifixit.com), licence CC BY-NC-SA 3.0
+https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+Usage non commercial uniquement. Image recadrée ou non, auteur et source ci-dessous.
+
+images/001_DualShock_3.jpg — Diego Figueroa — https://www.ifixit.com/Teardown/DualShock+3+Teardown/73084#s1
+images/002_GameSir_T4_Pro.jpg — Reid Quigley — https://www.ifixit.com/Teardown/GameSir+T4+Pro+Teardown/204534#s2
+images/003_Nacon_Asymmetric_Wireless_PS4_Controller.jpg — Qhixe — https://www.ifixit.com/Teardown/Nacon+Asymmetric+Wireless+PS4+Controller+Teardown/192858#s1
+images/004_Nintendo_3DS_NFC_reader.jpg — lukas baudet — https://www.ifixit.com/Teardown/Nintendo+3DS+NFC+reader+exploded+view/141989#s1
+images/005_Nintendo_64.jpg — Christian Marmolejos — https://www.ifixit.com/Teardown/Nintendo+64+Teardown/74923#s3
+images/006_Nintendo_DS_Lite.jpg — KC Harris — https://www.ifixit.com/Teardown/Nintendo+DS+Lite+Teardown/42650#s2
+images/007_Nintendo_DSi_XL.jpg — Gabriel Rendon — https://www.ifixit.com/Teardown/Nintendo+DSi+XL+Wi-fi+Board+Teardown/72749#s2
+images/008_Nintendo_Switch.jpg — Evan Noronha — https://www.ifixit.com/Teardown/Nintendo+Switch+Teardown/78263#s4
+images/009_Nintendo_Switch_Lite.jpg — Jeff Suovanen — https://www.ifixit.com/Teardown/Nintendo+Switch+Lite+Teardown/126223#s2
+images/010_R36S.jpg — Adam Lovette — https://www.ifixit.com/Teardown/R36S+Teardown/220069#s2
+images/011_Steam_Controller_2nd_Generation.jpg — Michael — https://www.ifixit.com/Teardown/Steam+Controller+(2nd+Generation)+Wireless+Puck+Teardown/217571#s1
+images/012_Xbox_Adaptive_Controller.jpg — Jeff Suovanen — https://www.ifixit.com/Teardown/Xbox+Adaptive+Controller+Teardown/125295#s3
+images/013_Xbox_One_Elite_Controller_Model_1698.jpg — Camron Corcoran — https://www.ifixit.com/Teardown/Xbox+One+Elite+Controller+(Model+1698)+teardown/157801#s2
+images/014_AirPods_Pro.jpg — Jeff Suovanen — https://www.ifixit.com/Teardown/AirPods+Pro+Teardown/127551#s5
+images/015_Apple_EarPods.jpg — Brett Hartt — https://www.ifixit.com/Teardown/Apple+EarPods+Teardown/10501#s2
+images/016_JBL_Tune_700BT.jpg — Artur Huhtaniemi — https://www.ifixit.com/Teardown/JBL+Tune+700BT+Teardown/180007#s1
+images/017_MacBook_Air_13_Retina_Display_Late_2018.jpg — Taylor Dixon — https://www.ifixit.com/Teardown/MacBook+Air+13-Inch+Retina+2018+Teardown/115201#s2
+images/018_MacBook_Pro_13_Function_Keys_Late_2016.jpg — Jeff Suovanen — https://www.ifixit.com/Teardown/MacBook+Pro+13-Inch+Function+Keys+Late+2016+Teardown/72415#s2
+images/019_MacBook_Pro_13_Touch_Bar_2018.jpg — Adam O'Camb — https://www.ifixit.com/Teardown/MacBook+Pro+13-Inch+Touch+Bar+2018+Teardown/111384#s3
+images/020_MacBook_Pro_13_Touch_Bar_Late_2016.jpg — Jeff Suovanen — https://www.ifixit.com/Teardown/MacBook+Pro+13-Inch+Touch+Bar+Teardown/73480#s2
+images/021_MacBook_Pro_13_Two_Thunderbolt_Ports_2019.jpg — Adam O'Camb — https://www.ifixit.com/Teardown/MacBook+Pro+13-Inch+Two+Thunderbolt+Ports+2019+Teardown/124676#s1
+images/022_MacBook_Pro_15_Touch_Bar_2019.jpg — Arthur Shi — https://www.ifixit.com/Teardown/MacBook+Pro+15-Inch+Touch+Bar+2019+Teardown/123653#s1
+images/023_MacBook_Pro_15_Touch_Bar_Late_2016.jpg — Evan Noronha — https://www.ifixit.com/Teardown/MacBook+Pro+15-Inch+Touch+Bar+Teardown/73395#s2
+images/024_MacBook_Pro_16_2019.jpg — Taylor Dixon — https://www.ifixit.com/Teardown/MacBook+Pro+16-Inch+2019+Teardown/128106#s1
+images/025_Retina_MacBook_2017.jpg — Blake Klein — https://www.ifixit.com/Teardown/Retina+MacBook+2017+Teardown/92172#s2
+images/026_Acer_Optical_Mouse.jpg — Oduelca — https://www.ifixit.com/Teardown/Acer+Optical+Mouse+Teardown/142745#s2
+images/027_Corsair_Dark_Core_SE.jpg — Zalmfilet — https://www.ifixit.com/Teardown/Corsair+Dark+Core+(SE)+Teardown/140213#s1
+images/028_Logitech_G915_Wireless_Clicky.jpg — Ekke Sten — https://www.ifixit.com/Teardown/Logitech+G915+TKL+Wireless+(Tactile)+Teardown/148464#s2
+images/029_Logitech_K700_Keyboard.jpg — cityzen — https://www.ifixit.com/Teardown/Logitech+K700+Keyboard+Teardown/23308#s2
+images/030_Logitech_M205.jpg — Sydnee Rodriguez — https://www.ifixit.com/Teardown/Logitech+M205+Teardown/42634#s1
+images/031_Logitech_POWERPLAY.jpg — Nozemi — https://www.ifixit.com/Teardown/Logitech+POWERPLAY+Teardown/151479#s1
+images/032_Meeting_Owl.jpg — Alexandre Demers — https://www.ifixit.com/Teardown/Meeting+Owl+(MTW100)+Teardown/209677#s2
+images/033_Microsoft_Basic_Mouse_v2_0.jpg — Nick Wrbican — https://www.ifixit.com/Teardown/Microsoft+Basic+Mouse+v2.0+Teardown/204069#s2
+images/034_Microsoft_Surface_Dial.jpg — Scott Havard — https://www.ifixit.com/Teardown/Microsoft+Surface+Dial+Teardown/74808#s2
+images/035_Redragon_K585RGB.jpg — Eclipse Nox — https://www.ifixit.com/Teardown/Redragon+K585RGB+Teardown/181387#s1
+images/036_Hitron_CODA.jpg — Kyle Westhaus — https://www.ifixit.com/Teardown/Hitron+CODA+Teardown/169712#s2
+images/037_Nighthawk_AX8_8_Stream_AX6000_WiFi_Router.jpg — Matt Zulawski — https://www.ifixit.com/Teardown/Netgear+Nighthawk+AX8+8-Stream+AX6000+WiFi+Router+Teardown/183154#s2
+images/038_Samsung_Connect_Home.jpg — Arthur Shi — https://www.ifixit.com/Teardown/Samsung+Connect+Home+Teardown/104807#s2
+images/039_StarTech_com_SFP1000ZXST_1000BASE_ZX_SFP_Transceiv.jpg — Daniel Rezaie — https://www.ifixit.com/Teardown/StarTech.com+SFP1000ZXST+1000BASE-ZX+SFP+Transceiver+Teardown/220833#s1
+images/040_Acer_Chromebook_C732.jpg — Jacob Mehnert — https://www.ifixit.com/Teardown/Acer+Chromebook+11+C732+Teardown/148451#s3
+images/041_Dell_Latitude_CP.jpg — Maya Mann — https://www.ifixit.com/Teardown/Dell+Latitude+CP+Teardown/126369#s2
+images/042_Dell_Latitude_D500.jpg — Ethan Bullen — https://www.ifixit.com/Teardown/Dell+Latitude+D500+Teardown/206534#s1
+images/043_Dell_Thunderbolt_WD19TBS.jpg — Christian Hase — https://www.ifixit.com/Teardown/%5BWork+in+Progress%5D+Dell+Thunderbolt+WD19TBS+Teardown/147773#s1
+images/044_Microsoft_Surface_Laptop_3_15.jpg — Adam O'Camb — https://www.ifixit.com/Teardown/Microsoft+Surface+Laptop+3+(15-inch)+Teardown/127277#s2
+images/045_Belkin_WeMo_Switch.jpg — Geoff Wacker — https://www.ifixit.com/Teardown/Belkin+WeMo+Switch+Teardown/77953#s2
+images/046_Echo_Dot_4_Generation.jpg — Wolfgang — https://www.ifixit.com/Teardown/Echo+Dot+4th+Generation+Teardown/147731#s1
+images/047_Google_Home.jpg — Scott Havard — https://www.ifixit.com/Teardown/Google+Home+Teardown/72684#s2
+images/048_IKEA_KALLSUP.jpg — Quanten — https://www.ifixit.com/Teardown/IKEA+KALLSUP+Teardown/228493#s2
+images/049_Oasis_Ambient.jpg — Fred Turkington — https://www.ifixit.com/Teardown/Oasis+Ambient+Teardown/221776#s2
+images/050_Oculus_Rift_Development_Kit_2.jpg — Walter Galan — https://www.ifixit.com/Teardown/Oculus+Rift+Development+Kit+2+Teardown/27613#s9
+images/051_Oculus_Touch.jpg — Sam Goldheart — https://www.ifixit.com/Teardown/Oculus+Touch+Teardown/75109#s3

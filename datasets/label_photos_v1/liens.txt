@@ -1,0 +1,51 @@
+001 | DualShock 3 | https://www.amazon.fr/Manette-PS3-Dual-Shock-noire/dp/B005MMFIOO
+002 | GameSir T4 Pro | https://www.amazon.fr/GameSir-Contr%C3%B4leur-Controller-r%C3%A9tro-%C3%A9clairage-programmable/dp/B088GQY8FH
+003 | Nacon Asymmetric Wireless PS4 Controller | https://www.amazon.fr/Nacon-Asymmetric-Wireless-Manette-Playstation/dp/B07PBXYYRK
+004 | Nintendo 3DS NFC reader | https://www.amazon.fr/Lecteur-NFC-pour-Nintendo-3DS/dp/B0112S4888
+005 | Nintendo 64 | offre Amazon.fr non trouvée
+006 | Nintendo DS Lite | offre Amazon.fr non trouvée
+007 | Nintendo DSi XL | offre Amazon.fr non trouvée
+008 | Nintendo Switch | https://www.amazon.fr/Console-Nintendo-Switch-avec-Joy/dp/B01N5OPMJW
+009 | Nintendo Switch Lite | https://www.amazon.fr/Nintendo-Switch-Lite-Gris/dp/B086XH2TX4
+010 | R36S | https://www.amazon.fr/Console-portable-r%C3%A9tro-stockage-syst%C3%A8me/dp/B0FNRX2JJZ
+011 | Steam Controller (2nd Generation) | offre Amazon.fr non trouvée
+012 | Xbox Adaptive Controller | offre Amazon.fr non trouvée
+013 | Xbox One Elite Controller (Model 1698) | https://www.amazon.fr/Manette-sans-Elite-pour-Xbox/dp/B00ZV0NH40
+014 | AirPods Pro | https://www.amazon.fr/Apple-AirPods-avec-Chargeur-MagSafe/dp/B09JQZ5DYM
+015 | Apple EarPods | https://www.amazon.fr/Apple-Ecouteurs-EarPods-Mini-Jack-3-5mm/dp/B06XDLJL26
+016 | JBL Tune 700BT | https://www.amazon.fr/JBL-Tune-700BT-Bluetooth-Autonomie/dp/B08145ZW8Y
+017 | MacBook Air 13” Retina Display Late 2018 | https://www.amazon.fr/Apple-MacBook-256Go-Retina-MRE82FN/dp/B09PPRW8VM
+018 | MacBook Pro 13" Function Keys Late 2016 | offre Amazon.fr non trouvée
+019 | MacBook Pro 13" Touch Bar 2018 | https://www.amazon.fr/Apple-MacBook-Processeur-Quadric%C5%93ur-8e-G%C3%A9n%C3%A9ration/dp/B07FLHMW3N
+020 | MacBook Pro 13" Touch Bar Late 2016 | https://www.amazon.fr/Apple-MLVP2FN-MacBook-Graphics-Reconditionn%C3%A9/dp/B07TK5CHDP
+021 | MacBook Pro 13" Two Thunderbolt Ports 2019 | https://www.amazon.fr/Nouvel-Apple-MacBook-stockage-Core-i5/dp/B07V25PYRS
+022 | MacBook Pro 15" Touch Bar 2019 | https://www.amazon.fr/Apple-MacBook-pouces-Dernier-stockage/dp/B07S33FZC2
+023 | MacBook Pro 15" Touch Bar Late 2016 | https://www.amazon.fr/Apple-MacBook-2016-TouchBar-Reconditionn%C3%A9/dp/B09GYRWVPQ
+024 | MacBook Pro 16" 2019 | https://www.amazon.fr/Apple-MacBook-16-pouces-stockage-Intel/dp/B081FZWYN1
+025 | Retina MacBook 2017 | https://www.amazon.fr/Apple-MacBook-pouces-Bic%C5%93ur-Intel/dp/B07V5798VY
+026 | Acer Optical Mouse | offre Amazon.fr non trouvée
+027 | Corsair Dark Core (SE) | https://www.amazon.fr/Corsair-Special-recharge-R%C3%A9tro%C3%A9clairage-Multicolore/dp/B078W6JNKF
+028 | Logitech G915 Wireless (Clicky) | https://www.amazon.fr/LIGHTSPEED-M%C3%A9canique-ultra-plat-LIGHTSYNC-Bluetooth/dp/B07W7K2QLG
+029 | Logitech K700 Keyboard | offre Amazon.fr non trouvée
+030 | Logitech M205 | https://www.amazon.fr/Logitech-M205-Souris-Optique-sans-fil/dp/B00266LK1Y
+031 | Logitech POWERPLAY | https://www.amazon.fr/Logitech-943-000110-Compatible-LIGHTSPEED-SUPERLIGHT/dp/B073399S1L
+032 | Meeting Owl | https://www.amazon.fr/Owl-Labs-Vid%C3%A9oconf%C3%A9rence-Automatique-linterlocuteur/dp/B07W4DWPY3
+033 | Microsoft Basic Mouse v2.0 | https://www.amazon.fr/Microsoft-Basic-Optical-Mouse-filaire/dp/B009M2P2QE
+034 | Microsoft Surface Dial | https://www.amazon.fr/MICROSOFT-SURFACE-2WR-00001-Surface-Dial/dp/B01NARIOAX
+035 | Redragon K585RGB | https://www.amazon.fr/Redragon-K585-commutateurs-professionnel-repose-poignet/dp/B07NBJVH4G
+036 | Hitron CODA | offre Amazon.fr non trouvée
+037 | Nighthawk AX8 8-Stream AX6000 WiFi Router | https://www.amazon.fr/NETGEAR-Nighthawk-intelligentes-moyennes-surfaces/dp/B01M6D9WQ7
+038 | Samsung Connect Home | https://www.amazon.fr/Samsung-Connect-Smart-Syst%C3%A8me-WV520K/dp/B06XSDFMND
+039 | StarTech.com SFP1000ZXST 1000BASE-ZX SFP Transceiver | https://www.amazon.fr/SFP-Fibre-1000Base-ZX-Conforme-Monomode/dp/B0747WZ8LZ
+040 | Acer Chromebook C732 | offre Amazon.fr non trouvée
+041 | Dell Latitude CP | offre Amazon.fr non trouvée
+042 | Dell Latitude D500 | offre Amazon.fr non trouvée
+043 | Dell Thunderbolt WD19TBS | https://www.amazon.fr/Station-daccueil-Dell-Thunderbolt-WD19TBS/dp/B08XNJLRJ1
+044 | Microsoft Surface Laptop 3 15" | https://www.amazon.fr/Microsoft-Surface-Tactile-i5-10xxx-Windows/dp/B082QS2HLJ
+045 | Belkin WeMo Switch | https://www.amazon.fr/dp/B009RJWJBI
+046 | Echo Dot 4. Generation | https://www.amazon.fr/echo-dot-4e-generation-version-internationale/dp/B085K45C3S
+047 | Google Home | offre Amazon.fr non trouvée
+048 | IKEA KALLSUP | offre Amazon.fr non trouvée
+049 | Oasis Ambient | offre Amazon.fr non trouvée
+050 | Oculus Rift Development Kit 2 | https://www.amazon.fr/Casque-r%C3%A9alit%C3%A9-virtuelle-Derni%C3%A8re-version/dp/B00NJRTGXS
+051 | Oculus Touch | https://www.amazon.fr/Oculus-301-00059-01-Touch-Controller-VR/dp/B01LSZCU6M
